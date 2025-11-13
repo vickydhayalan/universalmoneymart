@@ -214,14 +214,32 @@
     </div>
 </div>
 
-    <div id="contact" class="section" style="background-color: #e9f0f8; text-align: center;">
-        <div class="container">
-            <h2>Ready to Talk?</h2>
-            <p style="font-size: 1.1em;">Schedule a free consultation with our financial advisors today.</p>
-            <a href="mailto:info@yourdomain.com" class="cta-button" style="background-color: #004080;">Email Us Now</a>
-        </div>
-    </div>
+    <div id="contact" class="section" style="background-color: #f0f0f5; padding-bottom: 80px;">
+    <div class="container" style="max-width: 700px; text-align: left;">
+        <h2>Ready to Talk?</h2>
+        <p style="font-size: 1.1em; margin-bottom: 30px; text-align: center;">
+            Schedule a free consultation with our financial advisors today.
+        </p>
 
+        <form action="YOUR_FORMSPREE_ENDPOINT" method="POST" style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
+            <div style="margin-bottom: 15px;">
+                <label for="name" style="display: block; font-weight: 600; margin-bottom: 5px;">Vignesh Dhayalan:</label>
+                <input type="text" name="name" id="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="email" style="display: block; font-weight: 600; margin-bottom: 5px;">universalmoneymart@gmail.com:</label>
+                <input type="email" name="_replyto" id="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="message" style="display: block; font-weight: 600; margin-bottom: 5px;">Your Query:</label>
+                <textarea name="message" id="message" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+            </div>
+            <button type="submit" style="background-color: #004080; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: background-color 0.3s; width: 100%;">
+                Send Consultation Request
+            </button>
+        </form>
+    </div>
+</div>
     <footer>
         <div class="container">
             <p>&copy; 2025 Universal Money Mart | All Rights Reserved</p>
