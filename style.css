@@ -222,3 +222,10 @@ footer {
         width: 100% !important; 
     }
 }
+/* Update this entire block in your style.css */
+.whatsapp-sticky img {
+    width: 60px; /* Icon size reduced */
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
