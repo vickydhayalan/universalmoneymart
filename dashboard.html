@@ -31,6 +31,12 @@
             display: block;
             margin: auto;
         }
+        .summary-card {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            background-color: white;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -40,13 +46,38 @@
             <h1 class="text-4xl font-bold text-blue-800">Live Investment Data Dashboard</h1>
             <p class="text-gray-600 mt-2">Visualizing Mock Portfolio Performance and Allocation</p>
         </header>
+        
+        <!-- SUMMARY CARDS SECTION -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            
+            <div class="summary-card border-l-4 border-blue-500">
+                <p class="text-gray-500 text-sm font-medium">Total Portfolio Value</p>
+                <h2 class="text-3xl font-extrabold text-gray-800 mt-1">₹54,500</h2>
+                <span class="text-xs text-green-600 font-semibold">+6.5% Since Last Month</span>
+            </div>
+            
+            <div class="summary-card border-l-4 border-green-500">
+                <p class="text-gray-500 text-sm font-medium">Year-to-Date Gain (YTD)</p>
+                <h2 class="text-3xl font-extrabold text-gray-800 mt-1">₹12,500</h2>
+                <span class="text-xs text-green-600 font-semibold">+22.9% Annualized</span>
+            </div>
+            
+            <div class="summary-card border-l-4 border-red-500">
+                <p class="text-gray-500 text-sm font-medium">Risk Score (Out of 10)</p>
+                <h2 class="text-3xl font-extrabold text-gray-800 mt-1">7.5</h2>
+                <span class="text-xs text-red-600 font-semibold">High Volatility Exposure</span>
+            </div>
+
+        </div>
+        <!-- END SUMMARY CARDS SECTION -->
 
         <!-- Main Grid for Charts -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
             <!-- Chart 1: Line Chart (Monthly Performance) -->
-            <div class="lg:col-span-2">
-                <div class="chart-container">
+            <!-- Chart height fix applied here to prevent overlap with summary cards -->
+            <div class="lg:col-span-2 h-[400px]">
+                <div class="chart-container h-full">
                     <div class="chart-title ml-4 mt-2">Mock Fund Performance (Last 12 Months)</div>
                     <svg id="line-chart" class="chart-svg"></svg>
                 </div>
@@ -102,6 +133,9 @@
             { sector: "FMCG", percentage: 10 }
         ];
         
+        // Helper function for formatting currency
+        const formatCurrency = d3.format("$,.0f");
+
         // --- 2. Chart Rendering Functions ---
 
         // Function to draw the Line Chart
