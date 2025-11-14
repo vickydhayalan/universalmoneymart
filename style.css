@@ -161,3 +161,30 @@
         max-width: 90%;
     }
 }
+/* Responsive Video Grid and Embed Styling */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Two videos per row on desktop */
+    gap: 30px;
+    margin-top: 30px;
+}
+.video-responsive {
+    position: relative;
+    width: 100%;
+    /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.video-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Mobile Fix for Video (Media Query already in style.css will handle the 1fr column) */
