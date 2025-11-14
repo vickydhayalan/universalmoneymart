@@ -174,18 +174,23 @@ footer {
 
 /* Dot Navigation Logic (Manual Clicks override auto-slide) */
 .slider-container input[type="radio"] { display: none; }
+
+/* 1. Click on Dot 1 */
 #slide-radio-1:checked ~ .slides { 
     transform: translateX(0%); 
     animation-play-state: paused; 
 }
+/* 2. Click on Dot 2 */
 #slide-radio-2:checked ~ .slides { 
     transform: translateX(calc(-100% / 3)); 
     animation-play-state: paused; 
 }
+/* 3. Click on Dot 3 */
 #slide-radio-3:checked ~ .slides { 
     transform: translateX(calc(-200% / 3)); 
     animation-play-state: paused; 
 }
+/* ... rest of the code for dot color ... */
 /* Active dot color (This one is fine) */
 #slide-radio-1:checked ~ .slider-nav label:nth-child(1),
 #slide-radio-2:checked ~ .slider-nav label:nth-child(2),
