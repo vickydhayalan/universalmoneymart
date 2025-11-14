@@ -37,10 +37,10 @@
             border-bottom: 3px solid #004080;
         }
         .tab-content {
-            display: none;
+            display: none; /* Hide all tabs by default */
         }
         .tab-content.active {
-            display: block;
+            display: block; /* Show only the active tab */
         }
         .form-group {
             margin-bottom: 20px;
@@ -56,7 +56,7 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Important for padding */
             font-size: 1em;
         }
         .result-box {
@@ -74,7 +74,7 @@
         .result-box .value {
             font-size: 1.4em;
             font-weight: 700;
-            color: #28a745; 
+            color: #28a745; /* Green for profit */
         }
     </style>
 </head>
@@ -238,7 +238,7 @@
             const totalReturns = futureValue - totalInvested;
 
             document.getElementById('totalInvested').textContent = formatCurrency(totalInvested);
-            document.getElementById('totalTransaction').textContent = formatCurrency(totalInvested);
+            document.getElementById('totalTransaction').textContent = formatCurrency(totalInvested); // SIP: Transaction = Invested
             document.getElementById('totalReturns').textContent = formatCurrency(totalReturns);
             document.getElementById('totalValue').textContent = formatCurrency(futureValue);
             document.getElementById('result').style.display = 'block';
