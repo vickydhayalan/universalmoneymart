@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Money Mart | Comprehensive MF Calculator</title>
+    <title>Universal Money Mart | Comprehensive Calculator (SIP, STP, SWP, EMI)</title>
     <link rel="stylesheet" href="style.css"> 
     <style>
         /* Calculator Specific Styles for Tabs and Layout */
@@ -31,16 +31,17 @@
             color: #555;
             border-bottom: 3px solid transparent;
             transition: all 0.3s;
+            font-size: 0.9em; /* Reduced font size for 4 tabs */
         }
         .tab-controls button.active {
             color: #004080;
             border-bottom: 3px solid #004080;
         }
         .tab-content {
-            display: none; /* Hide all tabs by default */
+            display: none;
         }
         .tab-content.active {
-            display: block; /* Show only the active tab */
+            display: block;
         }
         .form-group {
             margin-bottom: 20px;
@@ -56,7 +57,7 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box; /* Important for padding */
+            box-sizing: border-box;
             font-size: 1em;
         }
         .result-box {
@@ -74,7 +75,23 @@
         .result-box .value {
             font-size: 1.4em;
             font-weight: 700;
-            color: #28a745; /* Green for profit */
+            color: #28a745; 
+        }
+
+        /* Mobile specific style for tabs */
+        @media (max-width: 600px) {
+            .tab-controls {
+                flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+            }
+            .tab-controls button {
+                flex-basis: 50%; /* Each tab takes 50% width */
+                font-size: 0.85em;
+                padding: 10px 0;
+            }
+            .calc-card {
+                margin: 20px auto;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -86,7 +103,6 @@
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="mf_calculator.html">MF Calculator</a>
-                <a href="disclaimer.html">Disclaimer</a>
                 <a href="index.html#contact">Contact</a>
             </div>
         </div>
@@ -95,97 +111,118 @@
     <div class="section" style="padding-top: 40px;">
         <div class="container">
             <h2>💰 Comprehensive Mutual Fund Calculator</h2>
-            <p>Estimate returns for SIP, STP, and SWP investments.</p>
+            <p>Estimate returns for SIP, STP, SWP, and EMI. (தமிழில்: SIP, STP, SWP, மற்றும் EMI கணக்கீடுகளை மதிப்பிடுங்கள்)</p>
             
             <div class="calc-card">
                 
-                <!-- Tab Controls -->
+                <!-- TAB CONTROLS -->
                 <div class="tab-controls">
                     <button id="tab-sip-btn" class="active" onclick="showTab('sip')">SIP Calculator</button>
                     <button id="tab-stp-btn" onclick="showTab('stp')">STP Calculator</button>
                     <button id="tab-swp-btn" onclick="showTab('swp')">SWP Calculator</button>
+                    <button id="tab-emi-btn" onclick="showTab('emi')">EMI Calculator</button>
                 </div>
                 
-                <!-- SIP CALCULATOR TAB -->
+                <!-- SIP TAB CONTENT -->
                 <div id="tab-sip" class="tab-content active">
                     <div class="form-group">
-                        <label for="sip_monthlyAmount">Monthly SIP Amount:</label>
+                        <label for="sip_monthlyAmount">Monthly SIP Amount (மாதாந்திர முதலீடு):</label>
                         <input type="number" id="sip_monthlyAmount" value="5000" min="100" required>
                     </div>
                     <div class="form-group">
-                        <label for="sip_rate">Expected Annual Return Rate (%):</label>
+                        <label for="sip_rate">Expected Annual Return Rate (வருடாந்திர வட்டி விகிதம் %):</label>
                         <input type="number" id="sip_rate" value="12" min="1" max="50" required>
                     </div>
                     <div class="form-group">
-                        <label for="sip_years">Investment Period (Years):</label>
+                        <label for="sip_years">Investment Period (வருடங்கள்):</label>
                         <input type="number" id="sip_years" value="10" min="1" max="50" required>
                     </div>
                     <button onclick="calculateSIP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
-                        Calculate SIP
+                        Calculate SIP (கணக்கிடுங்கள்)
                     </button>
                 </div>
 
-                <!-- STP CALCULATOR TAB -->
+                <!-- STP TAB CONTENT -->
                 <div id="tab-stp" class="tab-content">
                     <div class="form-group">
-                        <label for="stp_initialAmount">Initial Investment (Source Fund):</label>
+                        <label for="stp_initialAmount">Initial Investment (ஆரம்ப முதலீடு - Source Fund):</label>
                         <input type="number" id="stp_initialAmount" value="100000" min="1000" required>
                     </div>
                     <div class="form-group">
-                        <label for="stp_transferAmount">Monthly Transfer Amount:</label>
+                        <label for="stp_transferAmount">Monthly Transfer Amount (மாதாந்திர STP தொகை):</label>
                         <input type="number" id="stp_transferAmount" value="10000" min="100" required>
                     </div>
                     <div class="form-group">
-                        <label for="stp_sourceRate">Source Fund Return Rate (%):</label>
+                        <label for="stp_sourceRate">Source Fund Return Rate (Source Fund %):</label>
                         <input type="number" id="stp_sourceRate" value="7" min="1" max="20" required>
                     </div>
                     <div class="form-group">
-                        <label for="stp_targetRate">Target Fund Return Rate (%):</label>
+                        <label for="stp_targetRate">Target Fund Return Rate (Target Fund %):</label>
                         <input type="number" id="stp_targetRate" value="12" min="1" max="50" required>
                     </div>
                     <div class="form-group">
-                        <label for="stp_months">STP Period (Months):</label>
+                        <label for="stp_months">STP Period (மாதங்கள்):</label>
                         <input type="number" id="stp_months" value="10" min="1" max="60" required>
                     </div>
                     <button onclick="calculateSTP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
-                        Calculate STP
+                        Calculate STP (கணக்கிடுங்கள்)
                     </button>
                 </div>
 
-                <!-- SWP CALCULATOR TAB -->
+                <!-- SWP TAB CONTENT -->
                 <div id="tab-swp" class="tab-content">
                     <div class="form-group">
-                        <label for="swp_initialAmount">Initial Investment:</label>
+                        <label for="swp_initialAmount">Initial Investment (ஆரம்ப மொத்த முதலீடு):</label>
                         <input type="number" id="swp_initialAmount" value="500000" min="1000" required>
                     </div>
                     <div class="form-group">
-                        <label for="swp_withdrawalAmount">Monthly Withdrawal Amount:</label>
+                        <label for="swp_withdrawalAmount">Monthly Withdrawal Amount (மாதாந்திர SWP தொகை):</label>
                         <input type="number" id="swp_withdrawalAmount" value="5000" min="100" required>
                     </div>
                     <div class="form-group">
-                        <label for="swp_rate">Expected Annual Return Rate (%):</label>
+                        <label for="swp_rate">Expected Annual Return Rate (வருடாந்திர வட்டி விகிதம் %):</label>
                         <input type="number" id="swp_rate" value="8" min="1" max="20" required>
                     </div>
                     <div class="form-group">
-                        <label for="swp_years">SWP Period (Years):</label>
+                        <label for="swp_years">SWP Period (வருடங்கள்):</label>
                         <input type="number" id="swp_years" value="10" min="1" max="50" required>
                     </div>
                     <button onclick="calculateSWP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
-                        Calculate SWP
+                        Calculate SWP (கணக்கிடுங்கள்)
+                    </button>
+                </div>
+                
+                <!-- EMI TAB CONTENT -->
+                <div id="tab-emi" class="tab-content">
+                    <div class="form-group">
+                        <label for="emi_principal">Loan Principal Amount (கடன் அசல் தொகை):</label>
+                        <input type="number" id="emi_principal" value="500000" min="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emi_rate">Annual Interest Rate (வருடாந்திர வட்டி விகிதம் %):</label>
+                        <input type="number" id="emi_rate" value="10" min="1" max="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emi_years">Loan Period (வருடங்கள்):</label>
+                        <input type="number" id="emi_years" value="5" min="1" max="50" required>
+                    </div>
+                    <button onclick="calculateEMI()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                        Calculate EMI (கணக்கிடுங்கள்)
                     </button>
                 </div>
 
-                <!-- Result Box -->
+                <!-- RESULT BOX -->
                 <div id="result" class="result-box" style="display: none;">
-                    <p>Total Investment / Initial Corpus: <span id="totalInvested" class="value" style="color:#004080;">₹0</span></p>
-                    <p>Total Withdrawal / Transfer: <span id="totalTransaction" class="value" style="color:#004080;">₹0</span></p>
-                    <p>Estimated Profit / Total Income: <span id="totalReturns" class="value">₹0</span></p>
-                    <p>Final Value Remaining: <span id="totalValue" class="value" style="color:#004080;">₹0</span></p>
+                    <p>Total Investment / Initial Corpus (மொத்த முதலீடு / ஆரம்ப தொகை): <span id="totalInvested" class="value" style="color:#004080;">₹0</span></p>
+                    <p>Total Withdrawal / Total Interest (மொத்த திரும்பப் பெறுதல் / மொத்த வட்டி): <span id="totalTransaction" class="value" style="color:#004080;">₹0</span></p>
+                    <p>Estimated Profit / Monthly Payment (லாபம் / மாதாந்திர தவணை): <span id="totalReturns" class="value">₹0</span></p>
+                    <p>Final Value Remaining (மீதமுள்ள இறுதி மதிப்பு): <span id="totalValue" class="value" style="color:#004080;">₹0</span></p>
                 </div>
             </div>
 
             <div style="margin-top: 30px; text-align: center; color: #555; font-size: 0.9em;">
-                <p>Disclaimer: This is an estimation only. Actual market returns may vary.</p>
+                <p>Disclaimer: This is an estimation only. Actual returns/payments may vary. (இது தோராயமான கணக்கீடு மட்டுமே. உண்மையான வருவாய்/தவணைகள் மாறலாம்.)</p>
+                <a href="disclaimer.html" style="color: #007bff; text-decoration: none;">View Full Disclaimer</a>
             </div>
             
         </div>
@@ -220,14 +257,7 @@
             const rate = parseFloat(document.getElementById('sip_rate').value) / 100;
             const years = parseFloat(document.getElementById('sip_years').value);
 
-            if (isNaN(P) || isNaN(rate) || isNaN(years) || P <= 0 || rate <= 0 || years <= 0) {
-                document.getElementById('totalInvested').textContent = "Error";
-                document.getElementById('totalTransaction').textContent = "Error";
-                document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
-                document.getElementById('totalValue').textContent = "Error";
-                document.getElementById('result').style.display = 'block';
-                return;
-            }
+            if (P <= 0 || rate <= 0 || years <= 0 || isNaN(P) || isNaN(rate) || isNaN(years)) return;
 
             const r = rate / 12; // Monthly Rate
             const n = years * 12; // Total Months
@@ -238,9 +268,15 @@
             const totalReturns = futureValue - totalInvested;
 
             document.getElementById('totalInvested').textContent = formatCurrency(totalInvested);
-            document.getElementById('totalTransaction').textContent = formatCurrency(totalInvested); // SIP: Transaction = Invested
+            document.getElementById('totalTransaction').textContent = formatCurrency(totalInvested); // Use Total Invested as proxy for Transaction
             document.getElementById('totalReturns').textContent = formatCurrency(totalReturns);
             document.getElementById('totalValue').textContent = formatCurrency(futureValue);
+            
+            document.getElementById('totalInvested').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Total Invested (மொத்த முதலீடு): ';
+            document.getElementById('totalTransaction').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Total Interest Earned (மொத்த வட்டி): ';
+            document.getElementById('totalReturns').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Estimated Profit (மதிப்பிடப்பட்ட லாபம்): ';
+            document.getElementById('totalValue').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Final Value (இறுதி மதிப்பு): ';
+
             document.getElementById('result').style.display = 'block';
         }
 
@@ -251,14 +287,7 @@
             const rate = parseFloat(document.getElementById('swp_rate').value) / 100;
             const years = parseFloat(document.getElementById('swp_years').value);
 
-            if (isNaN(C) || isNaN(W) || isNaN(rate) || isNaN(years) || C <= 0 || W <= 0 || years <= 0) {
-                document.getElementById('totalInvested').textContent = "Error";
-                document.getElementById('totalTransaction').textContent = "Error";
-                document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
-                document.getElementById('totalValue').textContent = "Error";
-                document.getElementById('result').style.display = 'block';
-                return;
-            }
+            if (C <= 0 || W <= 0 || years <= 0 || isNaN(C) || isNaN(W) || isNaN(years) || isNaN(rate)) return;
 
             const r = rate / 12; // Monthly Rate
             const n = years * 12; // Total Months
@@ -266,24 +295,24 @@
             let remainingCorpus = C;
 
             for (let i = 0; i < n; i++) {
-                // Add interest for the month: (Corpus + Interest)
                 remainingCorpus *= (1 + r);
-                // Subtract withdrawal at the end of the month
                 remainingCorpus -= W;
             }
             
             const totalWithdrawn = W * n;
-
-            // Final Corpus should not be less than 0
             const finalValue = Math.max(0, remainingCorpus);
-
-            // Total Income is Total Withdrawn + Final Corpus - Initial Corpus
             const totalIncome = totalWithdrawn + finalValue - C;
 
-            document.getElementById('totalInvested').textContent = formatCurrency(C); // Initial Corpus
+            document.getElementById('totalInvested').textContent = formatCurrency(C); 
             document.getElementById('totalTransaction').textContent = formatCurrency(totalWithdrawn);
             document.getElementById('totalReturns').textContent = formatCurrency(totalIncome);
             document.getElementById('totalValue').textContent = formatCurrency(finalValue);
+            
+            document.getElementById('totalInvested').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Initial Corpus (ஆரம்ப தொகை): ';
+            document.getElementById('totalTransaction').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Total Withdrawal (மொத்த திரும்பப் பெறுதல்): ';
+            document.getElementById('totalReturns').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Total Income (மொத்த வருமானம்): ';
+            document.getElementById('totalValue').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Final Value Remaining (மீதமுள்ள இறுதி மதிப்பு): ';
+
             document.getElementById('result').style.display = 'block';
         }
 
@@ -295,40 +324,64 @@
             const rT = parseFloat(document.getElementById('stp_targetRate').value) / 100 / 12; // Target Monthly Rate
             const n = parseFloat(document.getElementById('stp_months').value); // Total Months
 
-            if (isNaN(I) || isNaN(T) || isNaN(rS) || isNaN(rT) || isNaN(n) || I <= 0 || T <= 0 || n <= 0) {
-                document.getElementById('totalInvested').textContent = "Error";
-                document.getElementById('totalTransaction').textContent = "Error";
-                document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
-                document.getElementById('totalValue').textContent = "Error";
-                document.getElementById('result').style.display = 'block';
-                return;
-            }
+            if (I <= 0 || T <= 0 || n <= 0 || isNaN(I) || isNaN(T) || isNaN(n) || isNaN(rS) || isNaN(rT)) return;
 
             let remainingSource = I;
             let targetFundValue = 0;
             
             for (let i = 0; i < n; i++) {
-                // 1. Source Fund grows for the month (only on remaining corpus)
                 remainingSource *= (1 + rS);
                 
-                // 2. Transfer is done at the end of the month
-                // Only transfer if source has enough money left
                 const actualTransfer = Math.min(T, remainingSource);
                 remainingSource -= actualTransfer;
 
-                // 3. Target Fund grows (including the new transfer amount)
                 targetFundValue = targetFundValue * (1 + rT) + actualTransfer;
             }
             
-            const totalTransferred = T * n; // Max possible transfer for display
             const finalValue = remainingSource + targetFundValue;
-            
-            const totalReturns = finalValue - I; // Total Value - Initial Investment
+            const totalReturns = finalValue - I; 
 
             document.getElementById('totalInvested').textContent = formatCurrency(I);
             document.getElementById('totalTransaction').textContent = formatCurrency(T * n);
             document.getElementById('totalReturns').textContent = formatCurrency(totalReturns);
             document.getElementById('totalValue').textContent = formatCurrency(finalValue);
+            
+            document.getElementById('totalInvested').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Initial Corpus (ஆரம்ப தொகை): ';
+            document.getElementById('totalTransaction').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Total Transferred (மொத்த பரிமாற்றம்): ';
+            document.getElementById('totalReturns').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Estimated Profit (மதிப்பிடப்பட்ட லாபம்): ';
+            document.getElementById('totalValue').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Final Value (இறுதி மதிப்பு): ';
+
+
+            document.getElementById('result').style.display = 'block';
+        }
+
+        // --- EMI CALCULATION LOGIC ---
+        function calculateEMI() {
+            const P = parseFloat(document.getElementById('emi_principal').value); // Principal
+            const rate = parseFloat(document.getElementById('emi_rate').value) / 100; // Annual Rate
+            const years = parseFloat(document.getElementById('emi_years').value); // Years
+
+            if (P <= 0 || rate <= 0 || years <= 0 || isNaN(P) || isNaN(rate) || isNaN(years)) return;
+
+            const r = rate / 12; // Monthly Rate
+            const n = years * 12; // Total Months
+            
+            // EMI Formula: E = P * r * (1 + r)^n / ((1 + r)^n - 1)
+            const emi = P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+            
+            const totalPayment = emi * n;
+            const totalInterest = totalPayment - P;
+
+            document.getElementById('totalInvested').textContent = formatCurrency(P);
+            document.getElementById('totalTransaction').textContent = formatCurrency(totalInterest);
+            document.getElementById('totalReturns').textContent = formatCurrency(emi);
+            document.getElementById('totalValue').textContent = formatCurrency(totalPayment);
+            
+            document.getElementById('totalInvested').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Loan Principal (கடன் அசல்): ';
+            document.getElementById('totalTransaction').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Total Interest (மொத்த வட்டி): ';
+            document.getElementById('totalReturns').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Monthly Payment (மாதாந்திர தவணை): ';
+            document.getElementById('totalValue').parentNode.querySelector('span').parentNode.childNodes[0].textContent = 'Total Payment (மொத்த செலுத்துதல்): ';
+
             document.getElementById('result').style.display = 'block';
         }
 
