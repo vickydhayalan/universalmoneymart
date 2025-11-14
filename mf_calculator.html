@@ -1,348 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Universal Money Mart | Comprehensive Calculator (SIP, STP, SWP)</title>
-<!-- We assume style.css is already linked, but add calculator-specific styles -->
-<link rel="stylesheet" href="style.css">
-<style>
-/* Calculator Specific Styles for Tabs and Layout /
-.calc-card {
-background: white;
-padding: 30px;
-border-radius: 10px;
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-max-width: 650px;
-margin: 40px auto;
-text-align: left;
-}
-.tab-controls {
-display: flex;
-margin-bottom: 25px;
-border-bottom: 2px solid #ddd;
-}
-.tab-controls button {
-flex-grow: 1;
-padding: 12px 0;
-cursor: pointer;
-border: none;
-background-color: transparent;
-font-weight: 600;
-color: #555;
-border-bottom: 3px solid transparent;
-transition: all 0.3s;
-}
-.tab-controls button.active {
-color: #004080;
-border-bottom: 3px solid #004080;
-}
-.tab-content {
-display: none; / Hide all tabs by default /
-}
-.tab-content.active {
-display: block; / Show only the active tab /
-}
-.form-group {
-margin-bottom: 20px;
-}
-.form-group label {
-display: block;
-margin-bottom: 8px;
-font-weight: 600;
-color: #004080;
-}
-.form-group input, .form-group select {
-width: 100%;
-padding: 10px;
-border: 1px solid #ccc;
-border-radius: 5px;
-box-sizing: border-box; / Important for padding /
-font-size: 1em;
-}
-.result-box {
-margin-top: 25px;
-padding: 20px;
-border-radius: 8px;
-background-color: #e6f0ff;
-border: 1px solid #007bff;
-}
-.result-box p {
-margin: 5px 0;
-font-size: 1.1em;
-font-weight: 500;
-}
-.result-box .value {
-font-size: 1.4em;
-font-weight: 700;
-color: #28a745; / Green for profit */
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Money Mart | Comprehensive MF Calculator</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* Calculator Specific Styles for Tabs and Layout */
+        .calc-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 650px;
+            margin: 40px auto;
+            text-align: left;
+        }
+        .tab-controls {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #ddd;
+        }
+        .tab-controls button {
+            flex-grow: 1;
+            padding: 12px 0;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            font-weight: 600;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .tab-controls button.active {
+            color: #004080;
+            border-bottom: 3px solid #004080;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #004080;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #e6f0ff;
+            border: 1px solid #007bff;
+        }
+        .result-box p {
+            margin: 5px 0;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        .result-box .value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #28a745; 
+        }
+    </style>
 </head>
 <body>
 
-<nav>
-  <nav>
-    <div class="container">
-        <span class="logo">Universal Money Mart</span>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <!-- This link should match the file name -->
-            <a href="sip_calculator.html">MF Calculator</a>
-            <a href="index.html#contact">Contact</a>
-        </div>
-    </div>
-</nav>
-
-<div class="section" style="padding-top: 40px;">
-    <div class="container">
-        <h2>💰 Comprehensive Mutual Fund Calculator</h2>
-        <p>Estimate returns for SIP, STP, and SWP investments.</p>
-        
-        <div class="calc-card">
-            
-            <!-- Tab Controls -->
-            <div class="tab-controls">
-                <button id="tab-sip-btn" class="active" onclick="showTab('sip')">SIP Calculator</button>
-                <button id="tab-stp-btn" onclick="showTab('stp')">STP Calculator</button>
-                <button id="tab-swp-btn" onclick="showTab('swp')">SWP Calculator</button>
-            </div>
-            
-            <!-- SIP CALCULATOR TAB -->
-            <div id="tab-sip" class="tab-content active">
-                <div class="form-group">
-                    <label for="sip_monthlyAmount">Monthly SIP Amount:</label>
-                    <input type="number" id="sip_monthlyAmount" value="5000" min="100" required>
-                </div>
-                <div class="form-group">
-                    <label for="sip_rate">Expected Annual Return Rate (%):</label>
-                    <input type="number" id="sip_rate" value="12" min="1" max="50" required>
-                </div>
-                <div class="form-group">
-                    <label for="sip_years">Investment Period (Years):</label>
-                    <input type="number" id="sip_years" value="10" min="1" max="50" required>
-                </div>
-                <button onclick="calculateSIP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
-                    Calculate SIP
-                </button>
-            </div>
-
-            <!-- STP CALCULATOR TAB -->
-            <div id="tab-stp" class="tab-content">
-                <div class="form-group">
-                    <label for="stp_initialAmount">Initial Investment (Source Fund):</label>
-                    <input type="number" id="stp_initialAmount" value="100000" min="1000" required>
-                </div>
-                <div class="form-group">
-                    <label for="stp_transferAmount">Monthly Transfer Amount:</label>
-                    <input type="number" id="stp_transferAmount" value="10000" min="100" required>
-                </div>
-                <div class="form-group">
-                    <label for="stp_sourceRate">Source Fund Return Rate (%):</label>
-                    <input type="number" id="stp_sourceRate" value="7" min="1" max="20" required>
-                </div>
-                <div class="form-group">
-                    <label for="stp_targetRate">Target Fund Return Rate (%):</label>
-                    <input type="number" id="stp_targetRate" value="12" min="1" max="50" required>
-                </div>
-                <div class="form-group">
-                    <label for="stp_months">STP Period (Months):</label>
-                    <input type="number" id="stp_months" value="10" min="1" max="60" required>
-                </div>
-                <button onclick="calculateSTP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
-                    Calculate STP
-                </button>
-            </div>
-
-            <!-- SWP CALCULATOR TAB -->
-            <div id="tab-swp" class="tab-content">
-                <div class="form-group">
-                    <label for="swp_initialAmount">Initial Investment:</label>
-                    <input type="number" id="swp_initialAmount" value="500000" min="1000" required>
-                </div>
-                <div class="form-group">
-                    <label for="swp_withdrawalAmount">Monthly Withdrawal Amount:</label>
-                    <input type="number" id="swp_withdrawalAmount" value="5000" min="100" required>
-                </div>
-                <div class="form-group">
-                    <label for="swp_rate">Expected Annual Return Rate (%):</label>
-                    <input type="number" id="swp_rate" value="8" min="1" max="20" required>
-                </div>
-                <div class="form-group">
-                    <label for="swp_years">SWP Period (Years):</label>
-                    <input type="number" id="swp_years" value="10" min="1" max="50" required>
-                </div>
-                <button onclick="calculateSWP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
-                    Calculate SWP
-                </button>
-            </div>
-
-            <!-- Result Box -->
-            <div id="result" class="result-box" style="display: none;">
-                <p>Total Investment / Initial Corpus: <span id="totalInvested" class="value" style="color:#004080;">₹0</span></p>
-                <p>Total Withdrawal / Transfer: <span id="totalTransaction" class="value" style="color:#004080;">₹0</span></p>
-                <p>Estimated Profit / Total Income: <span id="totalReturns" class="value">₹0</span></p>
-                <p>Final Value Remaining: <span id="totalValue" class="value" style="color:#004080;">₹0</span></p>
+    <nav>
+        <div class="container">
+            <span class="logo">Universal Money Mart</span>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="mf_calculator.html">MF Calculator</a>
+                <a href="disclaimer.html">Disclaimer</a>
+                <a href="index.html#contact">Contact</a>
             </div>
         </div>
+    </nav>
 
-        <div style="margin-top: 30px; text-align: center; color: #555; font-size: 0.9em;">
-            <p>Disclaimer: This is an estimation only. Actual market returns may vary.</p>
-        </div>
-        
-    </div>
-</div>
-
-<footer>
-    <div class="container">
-        <p>&copy; 2025 Universal Money Mart | All Rights Reserved</p>
-    </div>
-</footer>
-
-<script>
-    // Currency formatter
-    const formatCurrency = (amount) => {
-        return '₹' + Math.round(amount).toLocaleString('en-IN');
-    };
-
-    // --- TAB CONTROL LOGIC ---
-    function showTab(tabId) {
-        // Deactivate all
-        document.querySelectorAll('.tab-controls button').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-        
-        // Activate the clicked one
-        document.getElementById('tab-' + tabId + '-btn').classList.add('active');
-        document.getElementById('tab-'" + tabId).classList.add('active');
-        
-        document.getElementById('result').style.display = 'none'; // Clear previous result
-    }
-
-    // --- SIP CALCULATION LOGIC ---
-    function calculateSIP() {
-        const P = parseFloat(document.getElementById('sip_monthlyAmount').value);
-        const rate = parseFloat(document.getElementById('sip_rate').value) / 100;
-        const years = parseFloat(document.getElementById('sip_years').value);
-
-        if (isNaN(P) || isNaN(rate) || isNaN(years) || P <= 0 || rate <= 0 || years <= 0) {
-            // Using a simple message box instead of alert()
-            document.getElementById('totalInvested').textContent = "Error";
-            document.getElementById('totalTransaction').textContent = "Error";
-            document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
-            document.getElementById('totalValue').textContent = "Error";
-            document.getElementById('result').style.display = 'block';
-            return;
-        }
-
-        const r = rate / 12; // Monthly Rate
-        const n = years * 12; // Total Months
-        
-        // FV = P * [((1 + r)^n - 1) / r] * (1 + r)
-        const futureValue = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-        const totalInvested = P * n;
-        const totalReturns = futureValue - totalInvested;
-
-        document.getElementById('totalInvested').textContent = formatCurrency(totalInvested);
-        document.getElementById('totalTransaction').textContent = formatCurrency(totalInvested); // SIP: Transaction = Invested
-        document.getElementById('totalReturns').textContent = formatCurrency(totalReturns);
-        document.getElementById('totalValue').textContent = formatCurrency(futureValue);
-        document.getElementById('result').style.display = 'block';
-    }
-
-    // --- SWP CALCULATION LOGIC ---
-    function calculateSWP() {
-        const C = parseFloat(document.getElementById('swp_initialAmount').value); // Initial Corpus
-        const W = parseFloat(document.getElementById('swp_withdrawalAmount').value); // Monthly Withdrawal
-        const rate = parseFloat(document.getElementById('swp_rate').value) / 100;
-        const years = parseFloat(document.getElementById('swp_years').value);
-
-        if (isNaN(C) || isNaN(W) || isNaN(rate) || isNaN(years) || C <= 0 || W <= 0 || years <= 0) {
-            document.getElementById('totalInvested').textContent = "Error";
-            document.getElementById('totalTransaction').textContent = "Error";
-            document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
-            document.getElementById('totalValue').textContent = "Error";
-            document.getElementById('result').style.display = 'block';
-            return;
-        }
-
-        const r = rate / 12; // Monthly Rate
-        const n = years * 12; // Total Months
-
-        let remainingCorpus = C;
-
-        for (let i = 0; i < n; i++) {
-            // Add interest for the month: (Corpus + Interest)
-            remainingCorpus *= (1 + r);
-            // Subtract withdrawal at the end of the month
-            remainingCorpus -= W;
-        }
-        
-        const totalWithdrawn = W * n;
-
-        // Final Corpus should not be less than 0
-        const finalValue = Math.max(0, remainingCorpus);
-
-        // Total Income is Total Withdrawn + Final Corpus - Initial Corpus
-        const totalIncome = totalWithdrawn + finalValue - C;
-
-        document.getElementById('totalInvested').textContent = formatCurrency(C); // Initial Corpus
-        document.getElementById('totalTransaction').textContent = formatCurrency(totalWithdrawn);
-        document.getElementById('totalReturns').textContent = formatCurrency(totalIncome);
-        document.getElementById('totalValue').textContent = formatCurrency(finalValue);
-        document.getElementById('result').style.display = 'block';
-    }
-
-    // --- STP CALCULATION LOGIC ---
-    function calculateSTP() {
-        const I = parseFloat(document.getElementById('stp_initialAmount').value); // Initial Corpus (Source Fund)
-        const T = parseFloat(document.getElementById('stp_transferAmount').value); // Monthly Transfer Amount
-        const rS = parseFloat(document.getElementById('stp_sourceRate').value) / 100 / 12; // Source Monthly Rate
-        const rT = parseFloat(document.getElementById('stp_targetRate').value) / 100 / 12; // Target Monthly Rate
-        const n = parseFloat(document.getElementById('stp_months').value); // Total Months
-
-        if (isNaN(I) || isNaN(T) || isNaN(rS) || isNaN(rT) || isNaN(n) || I <= 0 || T <= 0 || n <= 0) {
-            document.getElementById('totalInvested').textContent = "Error";
-            document.getElementById('totalTransaction').textContent = "Error";
-            document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
-            document.getElementById('totalValue').textContent = "Error";
-            document.getElementById('result').style.display = 'block';
-            return;
-        }
-
-        let remainingSource = I;
-        let targetFundValue = 0;
-        
-        for (let i = 0; i < n; i++) {
-            // 1. Source Fund grows for the month (only on remaining corpus)
-            remainingSource *= (1 + rS);
+    <div class="section" style="padding-top: 40px;">
+        <div class="container">
+            <h2>💰 Comprehensive Mutual Fund Calculator</h2>
+            <p>Estimate returns for SIP, STP, and SWP investments.</p>
             
-            // 2. Transfer is done at the end of the month
-            // Only transfer if source has enough money left
-            const actualTransfer = Math.min(T, remainingSource);
-            remainingSource -= actualTransfer;
+            <div class="calc-card">
+                
+                <!-- Tab Controls -->
+                <div class="tab-controls">
+                    <button id="tab-sip-btn" class="active" onclick="showTab('sip')">SIP Calculator</button>
+                    <button id="tab-stp-btn" onclick="showTab('stp')">STP Calculator</button>
+                    <button id="tab-swp-btn" onclick="showTab('swp')">SWP Calculator</button>
+                </div>
+                
+                <!-- SIP CALCULATOR TAB -->
+                <div id="tab-sip" class="tab-content active">
+                    <div class="form-group">
+                        <label for="sip_monthlyAmount">Monthly SIP Amount:</label>
+                        <input type="number" id="sip_monthlyAmount" value="5000" min="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sip_rate">Expected Annual Return Rate (%):</label>
+                        <input type="number" id="sip_rate" value="12" min="1" max="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sip_years">Investment Period (Years):</label>
+                        <input type="number" id="sip_years" value="10" min="1" max="50" required>
+                    </div>
+                    <button onclick="calculateSIP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                        Calculate SIP
+                    </button>
+                </div>
 
-            // 3. Target Fund grows (including the new transfer amount)
-            targetFundValue = targetFundValue * (1 + rT) + actualTransfer;
+                <!-- STP CALCULATOR TAB -->
+                <div id="tab-stp" class="tab-content">
+                    <div class="form-group">
+                        <label for="stp_initialAmount">Initial Investment (Source Fund):</label>
+                        <input type="number" id="stp_initialAmount" value="100000" min="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stp_transferAmount">Monthly Transfer Amount:</label>
+                        <input type="number" id="stp_transferAmount" value="10000" min="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stp_sourceRate">Source Fund Return Rate (%):</label>
+                        <input type="number" id="stp_sourceRate" value="7" min="1" max="20" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stp_targetRate">Target Fund Return Rate (%):</label>
+                        <input type="number" id="stp_targetRate" value="12" min="1" max="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stp_months">STP Period (Months):</label>
+                        <input type="number" id="stp_months" value="10" min="1" max="60" required>
+                    </div>
+                    <button onclick="calculateSTP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                        Calculate STP
+                    </button>
+                </div>
+
+                <!-- SWP CALCULATOR TAB -->
+                <div id="tab-swp" class="tab-content">
+                    <div class="form-group">
+                        <label for="swp_initialAmount">Initial Investment:</label>
+                        <input type="number" id="swp_initialAmount" value="500000" min="1000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="swp_withdrawalAmount">Monthly Withdrawal Amount:</label>
+                        <input type="number" id="swp_withdrawalAmount" value="5000" min="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="swp_rate">Expected Annual Return Rate (%):</label>
+                        <input type="number" id="swp_rate" value="8" min="1" max="20" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="swp_years">SWP Period (Years):</label>
+                        <input type="number" id="swp_years" value="10" min="1" max="50" required>
+                    </div>
+                    <button onclick="calculateSWP()" style="background-color: #004080; color: white; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; width: 100%;">
+                        Calculate SWP
+                    </button>
+                </div>
+
+                <!-- Result Box -->
+                <div id="result" class="result-box" style="display: none;">
+                    <p>Total Investment / Initial Corpus: <span id="totalInvested" class="value" style="color:#004080;">₹0</span></p>
+                    <p>Total Withdrawal / Transfer: <span id="totalTransaction" class="value" style="color:#004080;">₹0</span></p>
+                    <p>Estimated Profit / Total Income: <span id="totalReturns" class="value">₹0</span></p>
+                    <p>Final Value Remaining: <span id="totalValue" class="value" style="color:#004080;">₹0</span></p>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center; color: #555; font-size: 0.9em;">
+                <p>Disclaimer: This is an estimation only. Actual market returns may vary.</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Universal Money Mart | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Currency formatter
+        const formatCurrency = (amount) => {
+            return '₹' + Math.round(amount).toLocaleString('en-IN');
+        };
+
+        // --- TAB CONTROL LOGIC ---
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-controls button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.getElementById('tab-' + tabId + '-btn').classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+            
+            document.getElementById('result').style.display = 'none'; // Clear previous result
         }
-        
-        const totalTransferred = T * n; // Max possible transfer for display
-        const finalValue = remainingSource + targetFundValue;
-        
-        const totalReturns = finalValue - I; // Total Value - Initial Investment
 
-        document.getElementById('totalInvested').textContent = formatCurrency(I);
-        document.getElementById('totalTransaction').textContent = formatCurrency(T * n);
-        document.getElementById('totalReturns').textContent = formatCurrency(totalReturns);
-        document.getElementById('totalValue').textContent = formatCurrency(finalValue);
-        document.getElementById('result').style.display = 'block';
-    }
+        // --- SIP CALCULATION LOGIC ---
+        function calculateSIP() {
+            const P = parseFloat(document.getElementById('sip_monthlyAmount').value);
+            const rate = parseFloat(document.getElementById('sip_rate').value) / 100;
+            const years = parseFloat(document.getElementById('sip_years').value);
 
-    // Initialize SIP tab
-    window.onload = function() {
-        showTab('sip');
-    };
-</script>
+            if (isNaN(P) || isNaN(rate) || isNaN(years) || P <= 0 || rate <= 0 || years <= 0) {
+                document.getElementById('totalInvested').textContent = "Error";
+                document.getElementById('totalTransaction').textContent = "Error";
+                document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
+                document.getElementById('totalValue').textContent = "Error";
+                document.getElementById('result').style.display = 'block';
+                return;
+            }
 
+            const r = rate / 12; // Monthly Rate
+            const n = years * 12; // Total Months
+            
+            // FV = P * [((1 + r)^n - 1) / r] * (1 + r)
+            const futureValue = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+            const totalInvested = P * n;
+            const totalReturns = futureValue - totalInvested;
+
+            document.getElementById('totalInvested').textContent = formatCurrency(totalInvested);
+            document.getElementById('totalTransaction').textContent = formatCurrency(totalInvested);
+            document.getElementById('totalReturns').textContent = formatCurrency(totalReturns);
+            document.getElementById('totalValue').textContent = formatCurrency(futureValue);
+            document.getElementById('result').style.display = 'block';
+        }
+
+        // --- SWP CALCULATION LOGIC ---
+        function calculateSWP() {
+            const C = parseFloat(document.getElementById('swp_initialAmount').value); // Initial Corpus
+            const W = parseFloat(document.getElementById('swp_withdrawalAmount').value); // Monthly Withdrawal
+            const rate = parseFloat(document.getElementById('swp_rate').value) / 100;
+            const years = parseFloat(document.getElementById('swp_years').value);
+
+            if (isNaN(C) || isNaN(W) || isNaN(rate) || isNaN(years) || C <= 0 || W <= 0 || years <= 0) {
+                document.getElementById('totalInvested').textContent = "Error";
+                document.getElementById('totalTransaction').textContent = "Error";
+                document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
+                document.getElementById('totalValue').textContent = "Error";
+                document.getElementById('result').style.display = 'block';
+                return;
+            }
+
+            const r = rate / 12; // Monthly Rate
+            const n = years * 12; // Total Months
+
+            let remainingCorpus = C;
+
+            for (let i = 0; i < n; i++) {
+                // Add interest for the month: (Corpus + Interest)
+                remainingCorpus *= (1 + r);
+                // Subtract withdrawal at the end of the month
+                remainingCorpus -= W;
+            }
+            
+            const totalWithdrawn = W * n;
+
+            // Final Corpus should not be less than 0
+            const finalValue = Math.max(0, remainingCorpus);
+
+            // Total Income is Total Withdrawn + Final Corpus - Initial Corpus
+            const totalIncome = totalWithdrawn + finalValue - C;
+
+            document.getElementById('totalInvested').textContent = formatCurrency(C); // Initial Corpus
+            document.getElementById('totalTransaction').textContent = formatCurrency(totalWithdrawn);
+            document.getElementById('totalReturns').textContent = formatCurrency(totalIncome);
+            document.getElementById('totalValue').textContent = formatCurrency(finalValue);
+            document.getElementById('result').style.display = 'block';
+        }
+
+        // --- STP CALCULATION LOGIC ---
+        function calculateSTP() {
+            const I = parseFloat(document.getElementById('stp_initialAmount').value); // Initial Corpus (Source Fund)
+            const T = parseFloat(document.getElementById('stp_transferAmount').value); // Monthly Transfer Amount
+            const rS = parseFloat(document.getElementById('stp_sourceRate').value) / 100 / 12; // Source Monthly Rate
+            const rT = parseFloat(document.getElementById('stp_targetRate').value) / 100 / 12; // Target Monthly Rate
+            const n = parseFloat(document.getElementById('stp_months').value); // Total Months
+
+            if (isNaN(I) || isNaN(T) || isNaN(rS) || isNaN(rT) || isNaN(n) || I <= 0 || T <= 0 || n <= 0) {
+                document.getElementById('totalInvested').textContent = "Error";
+                document.getElementById('totalTransaction').textContent = "Error";
+                document.getElementById('totalReturns').textContent = "Please enter valid positive numbers.";
+                document.getElementById('totalValue').textContent = "Error";
+                document.getElementById('result').style.display = 'block';
+                return;
+            }
+
+            let remainingSource = I;
+            let targetFundValue = 0;
+            
+            for (let i = 0; i < n; i++) {
+                // 1. Source Fund grows for the month (only on remaining corpus)
+                remainingSource *= (1 + rS);
+                
+                // 2. Transfer is done at the end of the month
+                // Only transfer if source has enough money left
+                const actualTransfer = Math.min(T, remainingSource);
+                remainingSource -= actualTransfer;
+
+                // 3. Target Fund grows (including the new transfer amount)
+                targetFundValue = targetFundValue * (1 + rT) + actualTransfer;
+            }
+            
+            const totalTransferred = T * n; // Max possible transfer for display
+            const finalValue = remainingSource + targetFundValue;
+            
+            const totalReturns = finalValue - I; // Total Value - Initial Investment
+
+            document.getElementById('totalInvested').textContent = formatCurrency(I);
+            document.getElementById('totalTransaction').textContent = formatCurrency(T * n);
+            document.getElementById('totalReturns').textContent = formatCurrency(totalReturns);
+            document.getElementById('totalValue').textContent = formatCurrency(finalValue);
+            document.getElementById('result').style.display = 'block';
+        }
+
+        // Initialize SIP tab
+        window.onload = function() {
+            showTab('sip');
+        };
+    </script>
 
 </body>
 </html>
