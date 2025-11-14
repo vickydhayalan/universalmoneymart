@@ -1,177 +1,113 @@
- /* Professional Base Styles */
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa; /* Very Light Grey */
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Container for Centering */
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 15px;
-        }
-
-        /* Navigation Bar */
-        nav {
-            background-color: #ffffff;
-            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
-            padding: 18px 0;
-        }
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.6em;
-            font-weight: 700;
-            color: #004080; /* Deep Professional Blue */
-        }
-        .nav-links a {
-            color: #555;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover {
-            color: #007bff; /* Hover Blue */
-        }
-
-        /* Hero Section */
-        .hero {
-            background-color: #e9f0f8;
-            padding: 80px 0;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 3em;
-            color: #004080;
-            margin-bottom: 10px;
-        }
-        .hero p {
-            font-size: 1.25em;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .cta-button {
-            background-color: #28a745; /* Success Green for CTA */
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        .cta-button:hover {
-            background-color: #218838;
-        }
-
-        /* Section Styling */
-        .section {
-            padding: 60px 0;
-        }
-        .section h2 {
-            text-align: center;
-            font-size: 2.2em;
-            color: #004080;
-            margin-bottom: 50px;
-        }
-
-        /* Service Cards Layout */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            text-align: left;
-        }
-        .service-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border-top: 5px solid #007bff; /* Blue accent line */
-        }
-        .service-card h3 {
-            color: #007bff;
-            margin-top: 0;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #343a40; /* Dark Footer */
-            color: white;
-            text-align: center;
-            padding: 25px 0;
-            margin-top: 40px;
-        }
-@media (max-width: 768px) {
-    /* 1. Container and Padding Adjustment */
-    .container {
-        width: 95%; /* Use more width on mobile */
-    }
-    .section {
-        padding: 40px 0; /* Reduce padding for less scroll */
-    }
-
-    /* 2. Navigation Bar Fix (Stacking) */
-    nav .container {
-        flex-direction: column; /* Logo and links stack vertically */
-        text-align: center;
-    }
-    .nav-links {
-        margin-top: 10px;
-    }
-    .nav-links a {
-        padding: 8px 10px; 
-    }
-
-    /* 3. Hero and Headings Fix */
-    .hero h1 {
-        font-size: 2em; /* Reduce large heading size */
-    }
-    .section h2 {
-        font-size: 1.8em;
-    }
-    
-    /* 4. Grid Layout Fix (Stacking Cards) */
-    .services-grid {
-        grid-template-columns: 1fr; /* Change 3 columns to 1 column */
-        gap: 30px;
-    }
-    
-    /* 5. Blog and Portfolio Metric Fixes */
-    /* Select all flex/grid children in sections and make them 100% width */
-    .section > .container > div {
-        flex-direction: column; /* Stacks portfolio metrics vertically */
-    }
-    /* Specifically target the three blog/metric divs to take full width */
-    .section > .container > div > div { 
-        width: 100% !important; /* Forces cards/metrics to full width */
-        margin-bottom: 20px;
-    }
-
-    /* Ensure Image is manageable */
-    .hero img {
-        max-width: 90%;
-    }
+/* Base Styling */
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333333;
+    line-height: 1.6;
 }
-/* Responsive Video Grid and Embed Styling */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 15px;
+}
+/* Navigation Bar */
+nav {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #004080; 
+}
+.nav-links a {
+    color: #555;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.nav-links a:hover {
+    color: #007bff;
+}
+
+/* Sections */
+.section {
+    padding: 60px 0;
+}
+.section:nth-child(even) {
+    background-color: #ffffff; 
+}
+.section h2 {
+    text-align: center;
+    font-size: 2.2em;
+    color: #004080;
+    margin-bottom: 50px;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #e9f0f8;
+    padding: 80px 0 40px; 
+    text-align: center;
+}
+.hero h1 {
+    font-size: 3em;
+    color: #004080;
+    margin-bottom: 10px;
+}
+
+/* Service Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    text-align: left;
+}
+.service-card {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #007bff; 
+}
+.service-card h3 {
+    color: #007bff;
+    margin-top: 0;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40; 
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+    margin-top: 40px;
+}
+
+/* --- VIDEO STYLING --- */
 .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Two videos per row on desktop */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
-    margin-top: 30px;
+    margin-top: 15px;
+    text-align: center;
 }
 .video-responsive {
     position: relative;
     width: 100%;
-    /* 16:9 Aspect Ratio */
     padding-bottom: 56.25%; 
     height: 0;
     overflow: hidden;
@@ -185,4 +121,97 @@
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* --- IMAGE SLIDER STYLING --- */
+.slider-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.slides {
+    display: flex;
+    width: 300%;
+    /* Auto-slide animation applied */
+    animation: slideShow 30s infinite; 
+}
+.slide {
+    width: calc(100% / 3);
+}
+.slide img {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+.slider-nav {
+    text-align: center;
+    padding: 10px 0;
+}
+.slider-nav label {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Auto Slide Animation Logic (B) */
+@keyframes slideShow {
+    0%, 30% { transform: translateX(0%); } 
+    33%, 63% { transform: translateX(calc(-100% / 3)); } 
+    66%, 99% { transform: translateX(calc(-200% / 3)); } 
+    100% { transform: translateX(0%); }
+}
+
+/* Dot Navigation Logic (Manual Clicks override auto-slide) */
+.slider-container input[type="radio"] { display: none; }
+#slide-radio-1:checked ~ .slides { 
+    transform: translateX(0%); 
+    animation-play-state: paused;
+}
+#slide-radio-2:checked ~ .slides { 
+    transform: translateX(calc(-100% / 3)); 
+    animation-play-state: paused;
+}
+#slide-radio-3:checked ~ .slides { 
+    transform: translateX(calc(-200% / 3)); 
+    animation-play-state: paused;
+}
+#slide-radio-1:checked ~ .slider-nav label:nth-child(1),
+#slide-radio-2:checked ~ .slider-nav label:nth-child(2),
+#slide-radio-3:checked ~ .slider-nav label:nth-child(3) {
+    background: #007bff;
+}
+
+/* --- RESPONSIVE FIXES (Mobile View) --- */
+@media (max-width: 768px) {
+    .container { width: 95%; }
+    .section { padding: 40px 0; }
+    
+    /* Navigation Fix */
+    nav .container { flex-direction: column; text-align: center; }
+    .nav-links { margin-top: 10px; }
+    .nav-links a { padding: 8px 10px; }
+    
+    /* Text Size */
+    .hero h1 { font-size: 2em; }
+    .section h2 { font-size: 1.8em; }
+    
+    /* Grid Layout Fix (Stacking Cards) */
+    .services-grid, .video-grid {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+    }
+    
+    /* Blog Card width fix */
+    .section > .container > div > div {
+        width: 100% !important; 
+    }
 }
