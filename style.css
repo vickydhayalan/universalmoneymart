@@ -186,12 +186,12 @@ footer {
     transform: translateX(calc(-200% / 3)); 
     animation-play-state: paused; 
 }
+/* Active dot color (This one is fine) */
 #slide-radio-1:checked ~ .slider-nav label:nth-child(1),
 #slide-radio-2:checked ~ .slider-nav label:nth-child(2),
 #slide-radio-3:checked ~ .slider-nav label:nth-child(3) {
     background: #007bff;
 }
-
 /* --- RESPONSIVE FIXES (Mobile View) --- */
 @media (max-width: 768px) {
     .container { width: 95%; }
