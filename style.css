@@ -174,29 +174,42 @@ footer {
 
 /* Dot Navigation Logic (Manual Clicks override auto-slide) */
 .slider-container input[type="radio"] { display: none; }
-
-/* 1. Click on Dot 1 */
 #slide-radio-1:checked ~ .slides { 
     transform: translateX(0%); 
     animation-play-state: paused; 
 }
-/* 2. Click on Dot 2 */
 #slide-radio-2:checked ~ .slides { 
     transform: translateX(calc(-100% / 3)); 
     animation-play-state: paused; 
 }
-/* 3. Click on Dot 3 */
 #slide-radio-3:checked ~ .slides { 
     transform: translateX(calc(-200% / 3)); 
     animation-play-state: paused; 
 }
-/* ... rest of the code for dot color ... */
-/* Active dot color (This one is fine) */
 #slide-radio-1:checked ~ .slider-nav label:nth-child(1),
 #slide-radio-2:checked ~ .slider-nav label:nth-child(2),
 #slide-radio-3:checked ~ .slider-nav label:nth-child(3) {
     background: #007bff;
 }
+
+/* Sticky WhatsApp Button */
+.whatsapp-sticky {
+    position: fixed;
+    bottom: 25px; 
+    right: 25px; 
+    z-index: 10000; 
+    transition: transform 0.3s;
+}
+.whatsapp-sticky:hover {
+    transform: scale(1.05);
+}
+.whatsapp-sticky img {
+    width: 60px; /* FIXED SIZE - FIXING THE GIANT ICON ISSUE */
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
 /* --- RESPONSIVE FIXES (Mobile View) --- */
 @media (max-width: 768px) {
     .container { width: 95%; }
@@ -221,11 +234,4 @@ footer {
     .section > .container > div > div {
         width: 100% !important; 
     }
-}
-/* Update this entire block in your style.css */
-.whatsapp-sticky img {
-    width: 60px; /* Icon size reduced */
-    height: 60px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
