@@ -30,16 +30,29 @@
             right: 25px;
             z-index: 10000;
         }
+
         /* ----------------------------------------------------- */
         /* --- MOBILE MENU/SIDEBAR STYLING (Applies to all screens for safety) --- */
         /* ----------------------------------------------------- */
-        /* Hamburger Icon - Default hidden */
         .menu-toggle {
             display: none;
             cursor: pointer;
             font-size: 1.5em;
             color: #004080;
             z-index: 1030;
+        }
+
+        /* MODAL POP-UP EFFECT: Background Overlay */
+        body.menu-open:after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+            z-index: 1010; /* Sidebar-kku kela, content-kku mela */
+            pointer-events: auto;
         }
 
         /* ----------------------------------------------------- */
@@ -69,10 +82,10 @@
             .nav-links {
                 position: fixed;
                 top: 0;
-                right: -300px; /* Hides the menu off-screen */
-                width: 250px;
+                right: -220px; /* Sidebar Width is 220px */
+                width: 220px; /* SLIMMER SIDEBAR WIDTH */
                 height: 100%;
-                background-color: #004080; /* Dark background */
+                background-color: #004080; 
                 box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
                 flex-direction: column;
                 padding-top: 60px;
@@ -83,12 +96,12 @@
 
             /* MENU OPEN STATE */
             .nav-links.active {
-                right: 0; /* Slides the menu into view */
+                right: 0; 
             }
 
             /* Styling links inside the sidebar */
             .nav-links .dropbtn, .nav-links > a {
-                color: white; /* White text on dark background */
+                color: white; 
                 padding: 12px 20px;
                 text-align: left;
                 width: 100%;
@@ -98,8 +111,8 @@
             
             /* Dropdown content now shows vertically */
             .dropdown-content {
-                position: static; /* Flows with the content */
-                background-color: #002e5b; /* Darker background for sub-links */
+                position: static; 
+                background-color: #002e5b; 
                 box-shadow: none;
                 min-width: 100%;
                 border-radius: 0;
@@ -130,7 +143,7 @@
                 display: none !important; 
             }
             .nav-links {
-                display: flex !important; /* Ensure desktop nav is visible */
+                display: flex !important; 
                 flex-wrap: nowrap !important; 
                 position: static;
                 background-color: transparent;
@@ -414,24 +427,28 @@
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
+            const body = document.body;
             const dropdowns = document.querySelectorAll('.dropdown');
 
             // 1. Sidebar Toggle Logic
             if (menuToggle && navLinks) {
                 menuToggle.addEventListener('click', () => {
-                    // Toggles the main sidebar visibility
+                    // Toggles the main sidebar visibility (navLinks.active)
                     navLinks.classList.toggle('active');
+                    // Toggles the body class for the background overlay
+                    body.classList.toggle('menu-open');
                 });
             }
-
-            // 2. Mobile Dropdown Toggle Logic (When menu is open)
+            
+            // 2. Mobile Dropdown Toggle Logic (Single Tap Fix)
             dropdowns.forEach(dropdown => {
                 const dropbtn = dropdown.querySelector('.dropbtn');
                 
                 dropbtn.addEventListener('click', function(event) {
+                    
                     // Check if we are in mobile view (sidebar is used)
                     if (window.innerWidth <= 991) {
-                        event.preventDefault(); // Stop link navigation
+                        event.preventDefault(); // CRITICAL: Stop link from navigating/scrolling to top
                         
                         // Close other open dropdowns in the sidebar
                         dropdowns.forEach(otherDropdown => {
@@ -441,19 +458,33 @@
                         });
                         
                         // Toggle the current dropdown (opens/closes sub-links vertically)
+                        // This should now correctly apply/remove the 'show' class on a single tap
                         dropdown.classList.toggle('show');
                     }
                 });
             });
 
-            // 3. Close sidebar when a link is clicked
-            document.querySelectorAll('#navLinks a').forEach(link => {
-                link.addEventListener('click', () => {
-                    // Close the sidebar when a link (top-level or sub-link) is clicked
-                    if (window.innerWidth <= 991) {
-                         // navLinks.classList.remove('active'); // Keeping it open for now, can uncomment later
+            // 3. Close sidebar and remove overlay when clicking outside or on an anchor link
+            window.addEventListener('click', function(event) {
+                if (window.innerWidth <= 991 && navLinks.classList.contains('active')) {
+                    
+                    // Logic 1: Close if user clicks outside the sidebar or toggle button
+                    if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+                        navLinks.classList.remove('active');
+                        body.classList.remove('menu-open');
+                        
+                        // Also close all dropdowns when the sidebar closes
+                        dropdowns.forEach(dropdown => {
+                            dropdown.classList.remove('show');
+                        });
                     }
-                });
+                    
+                    // Logic 2: Close if user clicks a main link that is NOT a dropdown (like Contact)
+                    if (event.target.matches('#navLinks a:not(.dropbtn)')) {
+                        navLinks.classList.remove('active');
+                        body.classList.remove('menu-open');
+                    }
+                }
             });
         });
     </script>
