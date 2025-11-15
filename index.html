@@ -8,18 +8,12 @@
     
     <style>
         /* ----------------------------------------------------- */
-        /* --- GENERAL FIXES --- */
+        /* --- GENERAL FIXES (Applies to all screens) --- */
         /* ----------------------------------------------------- */
-        /* FIX 3: MOBILE RIGHT SIDE SPACE FIX */
+        /* FIX 3: MOBILE RIGHT SIDE SPACE FIX - Ensure no content causes overflow */
         body {
             overflow-x: hidden !important; 
         }
-        /* Ensure images fit within the mobile screen without breaking layout */
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
         /* FIX 2: STICKY HEADER FIX */
         nav {
             position: sticky;
@@ -28,55 +22,64 @@
             background: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
-        /* ----------------------------------------------------- */
-        /* --- FIX 4: WhatsApp Logo Size Kammi Panna --- */
-        /* ----------------------------------------------------- */
+        /* FIX 4: WhatsApp Logo Size Kammi Panna */
         .whatsapp-sticky {
-            width: 45px !important; 
-            height: 45px !important;
+            width: 40px !important; /* Size innum konjam kammi panrom */
+            height: 40px !important;
             bottom: 25px; 
             right: 25px;
             z-index: 10000;
         }
-        .whatsapp-sticky img {
-            width: 100%;
-            height: 100%;
-        }
 
         /* ----------------------------------------------------- */
-        /* --- RESPONSIVE FIXES (Only for mobile view <= 768px) --- */
+        /* --- MOBILE/TABLET VIEW FIXES (<= 991px) --- */
         /* ----------------------------------------------------- */
-        @media (max-width: 991px) { /* 991px-kku kela idhu work aagum */
+        @media (max-width: 991px) { 
             
-            /* FIX 1: Logo Fix: UMM only on Mobile, Full on Desktop */
+            /* FIX 1: Logo Fix: UMM only on Mobile */
             .logo .logo-full { 
                 display: none !important; 
             }
             .logo .logo-short { 
                 display: inline !important; 
             }
-            /* Desktop view logo fix (for safety against style.css overrides) */
-            @media (min-width: 992px) {
-                .logo .logo-full { display: inline !important; }
-                .logo .logo-short { display: none !important; }
+
+            /* FIX 1: Nav Bar Height/Weight Kammi Panna */
+            nav {
+                padding: 10px 0 !important; /* Padding kammi panrom for slimmer look */
             }
 
             /* FIX 3/2 (Part 2): Navigation Links - Scroll Down Fix */
-            /* Links-a wrap panni, screen-oda full width-la spread panrom */
             .nav-links {
                 width: 100%;
-                margin-top: 10px;
-                flex-wrap: wrap; /* CRUCIAL: Links will wrap to the next line, fixing horizontal overflow */
+                margin-top: 5px; 
+                flex-wrap: wrap; /* Links will wrap to the next line */
                 justify-content: space-around; 
                 overflow-x: hidden;
             }
             .nav-links .dropbtn, .nav-links > a {
-                padding: 8px 6px; 
-                font-size: 0.8em; 
+                padding: 5px 4px; /* Link padding innum kammi panrom */
+                font-size: 0.75em; /* Font size innum kammi panrom to fit */
                 flex-grow: 1; 
-                max-width: 25%; /* Max width for 4 links to share space */
+                max-width: 25%;
                 box-sizing: border-box;
+            }
+        }
+
+        /* ----------------------------------------------------- */
+        /* --- DESKTOP VIEW FIXES (>= 992px) --- */
+        /* --- FIX 2: Desktop Nav/Logo Position --- */
+        /* ----------------------------------------------------- */
+        @media (min-width: 992px) {
+            .logo .logo-full { 
+                display: inline !important; /* FULL LOGO must show */
+            }
+            .logo .logo-short { 
+                display: none !important; /* UMM must be hidden */
+            }
+            /* Nav links normal-a irukkanum */
+            .nav-links {
+                flex-wrap: nowrap !important; /* Wrap a disable panrom */
             }
         }
     </style>
