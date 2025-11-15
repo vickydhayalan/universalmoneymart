@@ -255,60 +255,60 @@ footer {
     .container { width: 95%; }
     .section { padding: 40px 0; }
     
-    /* FIX 1: Navigation Flexbox switches to vertical stack and center alignment */
+    /* FIX 1: Navigation Container Flow (Logo Left, Links Scrollable Right) */
     nav .container { 
-        flex-direction: column; 
-        text-align: center; 
+        flex-direction: row; /* Keep elements side-by-side */
+        justify-content: space-between; /* Logo left, Nav-links right */
         align-items: center; 
+        padding: 0; /* Remove horizontal padding that breaks flow */
+        width: 100%;
     }
+    
+    /* FIX 2: Logo and Main Nav Link Wrapper */
+    nav .logo {
+        padding: 15px; /* Add padding back to logo */
+        flex-shrink: 0; /* Prevent logo from shrinking */
+    }
+
+    /* FIX 3: Horizontal Scroll for Nav Links */
     .nav-links { 
-        flex-direction: column; 
-        width: 100%;
-        margin-top: 10px;
-        /* Ensure the entire dropdown area is block-level to take full width */
-        display: block !important; 
-    }
-    
-    /* FIX 2: Dropdown buttons should be full width and centered */
-    .dropdown {
-        display: block;
-        width: 100%;
-        border-bottom: 1px solid #eee;
+        display: flex; 
+        flex-direction: row; 
+        overflow-x: auto; /* Enables horizontal scrolling */
+        -webkit-overflow-scrolling: touch; 
+        white-space: nowrap; /* Ensures links stay in one line */
         margin-top: 0;
+        padding: 0 15px;
     }
+    
+    /* FIX 4: Individual Dropdown/Link Styling in Mobile Scroll */
+    .dropdown {
+        display: inline-block; /* Aligns them horizontally */
+        border-bottom: none; /* Remove border from sticky nav */
+        flex-shrink: 0; /* Keep items from shrinking */
+    }
+    .dropdown a.dropbtn, .nav-links > a {
+        padding: 10px 15px; /* Standard link padding */
+        text-align: center;
+        font-size: 0.95em; /* Smaller font for horizontal fit */
+        background-color: transparent; /* Remove background color */
+        border-right: 1px solid #eee; /* Separator between main links */
+    }
+    .dropdown:last-child a.dropbtn, .nav-links > a:last-child {
+        border-right: none;
+    }
+    
+    /* Dropdown content should still stack vertically and be full width inside the small dropdown menu */
     .dropdown-content {
-        position: relative; 
+        position: absolute; 
         left: 0;
-        box-shadow: none;
-        border-radius: 0;
         width: 100%;
-        /* Ensures sub-links are centered on mobile */
-        text-align: center; 
+        min-width: 180px; 
+        text-align: center;
+        /* Dropdown content on hover still works for alignment if needed */
     }
-    
-    /* FIX 3: Top-level links (Services, Tools, Learning, Contact) look like buttons */
-    .dropdown a.dropbtn, .nav-links > a.dropbtn {
-        display: block;
-        padding: 15px 0; /* Increased vertical padding */
-        cursor: pointer;
-        font-weight: 600;
-        color: #004080;
-        background-color: #fafafa;
-        text-align: center; 
-        font-size: 1.1em; /* Clear visibility */
-        border-radius: 0;
-    }
-    
-    /* Sub-links look like clean separators */
-    .dropdown-content a {
-        padding: 8px 20px;
-        font-size: 0.9em;
-        background-color: #f4f4f4;
-        text-align: center; 
-        border-top: 1px solid #ddd; 
-        font-weight: normal; 
-    }
-    
+
+
     /* Hero Heading Fix */
     .hero h1 { font-size: 2em; }
     .section h2 { font-size: 1.8em; }
