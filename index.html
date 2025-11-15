@@ -24,7 +24,7 @@
         }
         /* FIX 4: WhatsApp Logo Size Kammi Panna */
         .whatsapp-sticky {
-            width: 40px !important; /* Size innum konjam kammi panrom */
+            width: 40px !important; 
             height: 40px !important;
             bottom: 25px; 
             right: 25px;
@@ -46,44 +46,68 @@
 
             /* FIX 1: Nav Bar Height/Weight Kammi Panna */
             nav {
-                padding: 10px 0 !important; /* Padding kammi panrom for slimmer look */
+                padding: 10px 0 !important; 
             }
 
             /* FIX 3/2 (Part 2): Navigation Links - Scroll Down Fix */
             .nav-links {
                 width: 100%;
                 margin-top: 5px; 
-                flex-wrap: wrap; /* Links will wrap to the next line */
+                flex-wrap: wrap; 
                 justify-content: space-around; 
                 overflow-x: hidden;
             }
             .nav-links .dropbtn, .nav-links > a {
-                padding: 5px 4px; /* Link padding innum kammi panrom */
-                font-size: 0.75em; /* Font size innum kammi panrom to fit */
+                padding: 5px 4px; 
+                font-size: 0.75em; 
                 flex-grow: 1; 
-                max-width: 25%;
+                max-width: 25%; 
                 box-sizing: border-box;
+            }
+            
+            /* MOBILE DROP-DOWN FIX: Desktop hover effect-a mobile-kku disable panrom */
+            .dropdown-content {
+                display: none; /* By default hidden */
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 150px; 
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+                z-index: 10;
+                border-radius: 6px;
+                overflow: hidden;
+                left: 0; 
+                top: 100%; 
+            }
+            /* Desktop hover-a mobile-la remove panrom */
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+            /* JS will control the 'show' class */
+            .dropdown.show .dropdown-content {
+                display: block !important;
             }
         }
 
         /* ----------------------------------------------------- */
         /* --- DESKTOP VIEW FIXES (>= 992px) --- */
-        /* --- FIX 2: Desktop Nav/Logo Position --- */
         /* ----------------------------------------------------- */
         @media (min-width: 992px) {
             .logo .logo-full { 
-                display: inline !important; /* FULL LOGO must show */
+                display: inline !important; 
             }
             .logo .logo-short { 
-                display: none !important; /* UMM must be hidden */
+                display: none !important; 
             }
-            /* Nav links normal-a irukkanum */
             .nav-links {
-                flex-wrap: nowrap !important; /* Wrap a disable panrom */
+                flex-wrap: nowrap !important; 
+            }
+            /* Desktop hover must work */
+            .dropdown:hover .dropdown-content {
+                display: block;
             }
         }
     </style>
-    </head>
+</head>
 <body>
 
     <nav>
@@ -355,23 +379,42 @@
 
         // Add a class to show the menu when needed (CSS handles the rest)
         document.addEventListener('DOMContentLoaded', () => {
-            const menuIcon = document.querySelector('.mobile-menu-icon');
-            if (menuIcon) {
-                menuIcon.addEventListener('click', () => {
-                    const navLinks = document.querySelector('#mobile-nav-links');
-                    navLinks.classList.toggle('active');
-                });
-            }
+            
+            // --- Mobile Dropdown Touch Support FIX ---
+            const dropdowns = document.querySelectorAll('.dropdown');
 
-            // Ensure dropdowns collapse when a link is clicked on mobile
-            document.querySelectorAll('#mobile-nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    const navLinks = document.querySelector('#mobile-nav-links');
-                    if (navLinks.classList.contains('active')) {
-                        // navLinks.classList.remove('active'); // Keep menu open for ease of use
-                    }
-                });
+            dropdowns.forEach(dropdown => {
+                const dropbtn = dropdown.querySelector('.dropbtn');
+                
+                // Check if the screen is likely a touch device (less than 992px width)
+                if (window.innerWidth <= 991) {
+                    dropbtn.addEventListener('click', function(event) {
+                        
+                        // Prevent navigation (default link action)
+                        event.preventDefault(); 
+                        
+                        // Close other open dropdowns
+                        dropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                otherDropdown.classList.remove('show');
+                            }
+                        });
+                        
+                        // Toggle the current dropdown
+                        dropdown.classList.toggle('show');
+                    });
+                }
             });
+            
+            // Close dropdowns if user clicks outside
+            window.addEventListener('click', function(event) {
+                if (!event.target.matches('.dropbtn') && window.innerWidth <= 991) {
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('show');
+                    });
+                }
+            });
+
         });
     </script>
 </body>
