@@ -9,45 +9,13 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
     <style>
-        /* Custom Styles for Chart Containers */
-        .chart-container {
-            height: 350px;
-            width: 100%;
-            margin: 20px auto;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            background-color: white;
-            padding: 10px;
-        }
-        .chart-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 10px;
-        }
-        /* Style for D3 SVGs to ensure they are centered and visible */
-        .chart-svg {
-            display: block;
-            margin: auto;
-        }
-        .summary-card {
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            background-color: white;
-            transition: transform 0.3s;
-        }
-        .summary-card:hover {
-            transform: translateY(-3px);
-        }
-
         /* ----------------------------------------------------- */
-        /* --- NAVIGATION / STICKY HEADER FIXES --- */
+        /* --- GENERAL FIXES (Applies to all screens) --- */
         /* ----------------------------------------------------- */
         body {
             overflow-x: hidden !important; 
         }
+        /* FIX 2: STICKY HEADER FIX */
         nav {
             position: sticky;
             top: 0;
@@ -55,37 +23,18 @@
             background: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        nav .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* FIX 4: WhatsApp Logo Size Kammi Panna */
+        .whatsapp-sticky {
+            width: 40px !important; 
+            height: 40px !important;
+            bottom: 25px; 
+            right: 25px;
+            z-index: 10000;
         }
-        .logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #004080; 
-        }
-        .nav-links {
-            display: flex; 
-            align-items: center; 
-        }
-        .nav-links a {
-            text-decoration: none;
-            padding: 10px 10px;
-            font-weight: 500;
-            transition: color 0.3s;
-            white-space: nowrap;
-            display: block;
-            font-size: 0.95em; 
-            color: #555;
-        }
-        .nav-links a:hover {
-            color: #007bff;
-        }
+
+        /* ----------------------------------------------------- */
+        /* --- MOBILE MENU/SIDEBAR STYLING --- */
+        /* ----------------------------------------------------- */
         /* Hamburger Icon - Default hidden */
         .menu-toggle {
             display: none;
@@ -94,26 +43,12 @@
             color: #004080;
             z-index: 1030;
         }
-        /* Mobile Logo Default */
-        .logo .logo-full { display: inline; }
-        .logo .logo-short { display: none; }
-        .whatsapp-sticky {
-            position: fixed;
-            width: 40px !important; 
-            height: 40px !important;
-            bottom: 25px; 
-            right: 25px;
-            z-index: 10000;
-        }
-        .whatsapp-sticky img {
-            width: 100%;
-            height: 100%;
-        }
 
         /* ----------------------------------------------------- */
         /* --- MOBILE/TABLET VIEW FIXES (<= 991px) --- */
         /* ----------------------------------------------------- */
         @media (max-width: 991px) { 
+            
             /* Logo/Nav Bar Height/Weight Fixes */
             .logo .logo-full { display: none !important; }
             .logo .logo-short { display: inline !important; }
@@ -121,7 +56,7 @@
             
             /* SHOW HAMBURGER ICON */
             .menu-toggle { display: block; }
-            
+
             /* SIDEBAR STYLE (Transparent/White) */
             .nav-links {
                 position: fixed;
@@ -136,9 +71,15 @@
                 transition: right 0.3s ease-in-out;
                 z-index: 1020;
                 overflow-y: auto;
+                /* Hiding the desktop flex properties */
+                display: flex !important; 
             }
+
+            /* MENU OPEN STATE */
             .nav-links.active { right: 0; }
-            .nav-links a {
+
+            /* Styling links inside the sidebar */
+            .nav-links .dropbtn, .nav-links > a {
                 color: #004080; 
                 padding: 12px 20px;
                 text-align: left;
@@ -148,8 +89,26 @@
                 font-weight: 500;
             }
             
-            /* Hide the dropdown content as it is a flat menu now */
-            .dropdown, .dropdown-content { display: none !important; } 
+            /* DROPDOWN FIXES FOR SIDEBAR */
+            .dropdown {
+                display: block; /* Ensure dropdown containers are visible in sidebar */
+            }
+            .dropdown-content {
+                position: static; /* Flows vertically in sidebar */
+                background-color: #f0f0f5; /* Light grey for sub-links */
+                box-shadow: none;
+                min-width: 100%;
+                border-radius: 0;
+                display: none; /* Hidden by default, JS toggles */
+            }
+            .dropdown-content a {
+                color: #555;
+                padding: 8px 30px;
+                border-bottom: none;
+            }
+            .dropdown.show .dropdown-content {
+                display: block !important;
+            }
         }
 
         /* ----------------------------------------------------- */
@@ -158,6 +117,35 @@
         @media (min-width: 992px) {
             .logo .logo-full { display: inline !important; }
             .logo .logo-short { display: none !important; }
+            
+            /* SHOW DESKTOP NAV LINKS (Original horizontal layout) */
+            .nav-links {
+                display: flex !important; 
+                position: static !important;
+                background-color: transparent !important;
+                width: auto !important;
+                height: auto !important;
+                box-shadow: none !important;
+                padding-top: 0 !important;
+                flex-direction: row !important;
+            }
+            
+            /* Restore normal dropdown hover for desktop */
+            .dropdown-content {
+                 display: none;
+                 position: absolute;
+                 background-color: #f9f9f9;
+                 min-width: 220px; 
+                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+                 z-index: 10;
+                 border-radius: 6px;
+                 overflow: hidden;
+                 left: 0; 
+                 top: 100%; 
+            }
+            .dropdown:hover .dropdown-content {
+                display: block !important; 
+            }
         }
     </style>
 </head>
