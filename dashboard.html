@@ -41,165 +41,52 @@
         .summary-card:hover {
             transform: translateY(-3px);
         }
-
+        /* --- LIVE MARKET CARD COLORS --- */
+        .live-card {
+            background-color: #f0f9ff;
+        }
+        .live-card:hover {
+            background-color: #e0f2fe;
+            transform: translateY(-2px);
+        }
         /* ----------------------------------------------------- */
         /* --- NAVIGATION / STICKY HEADER FIXES (Consistent with Index.html) --- */
         /* ----------------------------------------------------- */
-        body {
-            overflow-x: hidden !important; 
-        }
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1020; 
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        nav .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-            padding: 0 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #004080; 
-        }
-        .nav-links {
-            display: flex; 
-            align-items: center; 
-        }
-        .nav-links a {
-            text-decoration: none;
-            padding: 10px 10px;
-            font-weight: 500;
-            transition: color 0.3s;
-            white-space: nowrap;
-            display: block;
-            font-size: 0.95em; 
-            color: #555;
-        }
-        .nav-links a:hover {
-            color: #007bff;
-        }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            padding: 0; 
-        }
-        .dropdown-content {
-             display: none;
-             position: absolute;
-             background-color: #f9f9f9;
-             min-width: 220px; 
-             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-             z-index: 10;
-             border-radius: 6px;
-             overflow: hidden;
-             left: 0; 
-             top: 100%; 
-        }
-        .dropdown-content a {
-            color: #333;
-            padding: 10px 16px;
-            text-decoration: none;
-            display: block;
-            font-weight: 500;
-            white-space: nowrap;
-            border-bottom: none !important;
-        }
-        .dropdown-content a:hover {
-            background-color: #e2e8f0;
-            color: #004080;
-        }
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5em;
-            color: #004080;
-            z-index: 1030;
-        }
+        body { overflow-x: hidden !important; }
+        nav { position: sticky; top: 0; z-index: 1020; background: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        nav .container { width: 90%; max-width: 1100px; margin: auto; padding: 0 15px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5em; font-weight: 700; color: #004080; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; padding: 10px 10px; font-weight: 500; transition: color 0.3s; white-space: nowrap; display: block; font-size: 0.95em; color: #555; }
+        .nav-links a:hover { color: #007bff; }
+        .dropdown { position: relative; display: inline-block; padding: 0; }
+        .dropdown-content { display: none; position: absolute; background-color: #f9f9f9; min-width: 220px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); z-index: 10; border-radius: 6px; overflow: hidden; left: 0; top: 100%; }
+        .dropdown-content a { color: #333; padding: 10px 16px; text-decoration: none; display: block; font-weight: 500; white-space: nowrap; border-bottom: none !important; }
+        .dropdown-content a:hover { background-color: #e2e8f0; color: #004080; }
+        .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; color: #004080; z-index: 1030; }
         .logo .logo-full { display: inline; }
         .logo .logo-short { display: none; }
-        .whatsapp-sticky {
-            position: fixed;
-            width: 40px !important; 
-            height: 40px !important;
-            bottom: 25px; 
-            right: 25px;
-            z-index: 10000;
-        }
+        .whatsapp-sticky { position: fixed; width: 40px !important; height: 40px !important; bottom: 25px; right: 25px; z-index: 10000; }
 
-        /* ----------------------------------------------------- */
-        /* --- MOBILE/TABLET VIEW FIXES (<= 991px) --- */
-        /* ----------------------------------------------------- */
+        /* --- MOBILE/TABLET VIEW FIXES --- */
         @media (max-width: 991px) { 
             .logo .logo-full { display: none !important; }
             .logo .logo-short { display: inline !important; }
             nav { padding: 10px 0 !important; }
             .menu-toggle { display: block; }
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -220px; 
-                width: 220px; 
-                height: 100%;
-                background-color: rgba(255, 255, 255, 0.95) !important;
-                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-                flex-direction: column;
-                padding-top: 60px;
-                transition: right 0.3s ease-in-out;
-                z-index: 1020;
-                overflow-y: auto;
-                display: flex !important; 
-            }
+            .nav-links { position: fixed; top: 0; right: -220px; width: 220px; height: 100%; background-color: rgba(255, 255, 255, 0.95) !important; box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); flex-direction: column; padding-top: 60px; transition: right 0.3s ease-in-out; z-index: 1020; overflow-y: auto; display: flex !important; }
             .nav-links.active { right: 0; }
-            .nav-links .dropbtn, .nav-links > a {
-                color: #004080; 
-                padding: 12px 20px;
-                text-align: left;
-                width: 100%;
-                border-bottom: 1px solid #ddd;
-                font-size: 1em;
-                font-weight: 500;
-            }
-            .dropdown-content {
-                position: static; 
-                background-color: #f0f0f5; 
-                box-shadow: none;
-                min-width: 100%;
-                border-radius: 0;
-                display: none;
-            }
-            .dropdown-content a {
-                color: #555;
-                padding: 8px 30px;
-                border-bottom: none !important;
-            }
+            .nav-links .dropbtn, .nav-links > a { color: #004080; padding: 12px 20px; text-align: left; width: 100%; border-bottom: 1px solid #ddd; font-size: 1em; font-weight: 500; }
+            .dropdown-content { position: static; background-color: #f0f0f5; box-shadow: none; min-width: 100%; border-radius: 0; display: none; }
+            .dropdown-content a { color: #555; padding: 8px 30px; border-bottom: none !important; }
             .dropdown.show .dropdown-content { display: block !important; }
         }
 
-        /* ----------------------------------------------------- */
-        /* --- DESKTOP VIEW FIXES (>= 992px) --- */
-        /* ----------------------------------------------------- */
+        /* --- DESKTOP VIEW FIXES --- */
         @media (min-width: 992px) {
             .logo .logo-full { display: inline !important; }
             .logo .logo-short { display: none !important; }
-            .nav-links {
-                display: flex !important; 
-                flex-wrap: nowrap !important; 
-                position: static !important;
-                background-color: transparent !important;
-                width: auto !important;
-                height: auto !important;
-                box-shadow: none !important;
-                padding-top: 0 !important;
-                flex-direction: row !important;
-            }
+            .nav-links { display: flex !important; flex-wrap: nowrap !important; position: static !important; background-color: transparent !important; width: auto !important; height: auto !important; box-shadow: none !important; padding-top: 0 !important; flex-direction: row !important; }
             .dropdown:hover .dropdown-content { display: block !important; }
         }
     </style>
@@ -248,12 +135,43 @@
             </div>
         </div>
     </nav>
-    <div class="container mx-auto p-4 md:p-8">
+    <div class="container mx-auto p-4 md:p-8 pt-0">
         <header class="text-center py-6 bg-white shadow-md rounded-lg mb-8">
             <h1 class="text-4xl font-bold text-blue-800">Live Investment Data Dashboard</h1>
             <p class="text-gray-600 mt-2">Visualizing Mock Portfolio Performance and Allocation</p>
         </header>
         
+        
+        <div class="text-2xl font-bold text-gray-700 mb-4 mt-8">
+            <i class="fas fa-chart-line text-green-500 mr-2"></i>Live Market Watch (via API)
+        </div>
+        
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            
+            <div class="summary-card live-card border-l-4 border-red-600">
+                <p class="text-sm font-medium text-gray-500">NIFTY 50</p>
+                <h2 id="nifty-price" class="text-2xl font-extrabold mt-1 text-red-600">--.--</h2>
+                <span id="nifty-change" class="text-xs font-semibold text-gray-600">Loading API data...</span>
+            </div>
+            
+            <div class="summary-card live-card border-l-4 border-blue-600">
+                <p class="text-sm font-medium text-gray-500">SENSEX</p>
+                <h2 id="sensex-price" class="text-2xl font-extrabold mt-1 text-blue-600">--.--</h2>
+                <span id="sensex-change" class="text-xs font-semibold text-gray-600">Loading API data...</span>
+            </div>
+            
+            <div class="summary-card live-card border-l-4 border-yellow-600">
+                <p class="text-sm font-medium text-gray-500">Gold (10g / INR)</p>
+                <h2 id="gold-price" class="text-2xl font-extrabold mt-1 text-yellow-600">--.--</h2>
+                <span id="gold-change" class="text-xs font-semibold text-gray-600">Loading API data...</span>
+            </div>
+
+            <div class="summary-card live-card border-l-4 border-green-600">
+                <p class="text-sm font-medium text-gray-500">USD/INR Rate</p>
+                <h2 id="usdinr-price" class="text-2xl font-extrabold mt-1 text-green-600">--.--</h2>
+                <span id="usdinr-change" class="text-xs font-semibold text-gray-600">Loading API data...</span>
+            </div>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             
             <div class="summary-card border-l-4 border-blue-500">
@@ -325,36 +243,55 @@
     </footer>
     
     <script>
-        // --- 1. Mock Data --- (Kept original data)
+        // --- 1. Mock Data --- 
         const lineData = [
-            { month: "Jan", value: 42000 },
-            { month: "Feb", value: 43500 },
-            { month: "Mar", value: 41000 },
-            { month: "Apr", value: 45000 },
-            { month: "May", value: 47500 },
-            { month: "Jun", value: 46000 },
-            { month: "Jul", value: 48500 },
-            { month: "Aug", value: 51000 },
-            { month: "Sep", value: 49500 },
-            { month: "Oct", value: 52000 },
-            { month: "Nov", value: 54500 },
-            { month: "Dec", value: 56000 }
+            { month: "Jan", value: 42000 }, { month: "Feb", value: 43500 }, { month: "Mar", value: 41000 }, 
+            { month: "Apr", value: 45000 }, { month: "May", value: 47500 }, { month: "Jun", value: 46000 }, 
+            { month: "Jul", value: 48500 }, { month: "Aug", value: 51000 }, { month: "Sep", value: 49500 }, 
+            { month: "Oct", value: 52000 }, { month: "Nov", value: 54500 }, { month: "Dec", value: 56000 }
         ];
         const pieData = [
-            { asset: "Equity", value: 65 },
-            { asset: "Debt", value: 25 },
-            { asset: "Gold", value: 10 }
+            { asset: "Equity", value: 65 }, { asset: "Debt", value: 25 }, { asset: "Gold", value: 10 }
         ];
         const barData = [
-            { sector: "Tech", percentage: 25 },
-            { sector: "Finance", percentage: 20 },
-            { sector: "Pharma", percentage: 15 },
-            { sector: "Auto", percentage: 12 },
-            { sector: "FMCG", percentage: 10 }
+            { sector: "Tech", percentage: 25 }, { sector: "Finance", percentage: 20 }, { sector: "Pharma", percentage: 15 }, 
+            { sector: "Auto", percentage: 12 }, { sector: "FMCG", percentage: 10 }
         ];
         const formatCurrency = d3.format("$,.0f");
 
-        // --- 2. Chart Rendering Functions --- (Kept original functions)
+
+        // -----------------------------------------------------
+        // --- 2. LIVE DATA FETCHING FUNCTION (PLACEHOLDERS) ---
+        // -----------------------------------------------------
+        function fetchLiveData() {
+            // NOTE: Add your real API fetching logic here!
+            // Example Placeholder Logic (Update this section with your API calls):
+            
+            document.getElementById('nifty-price').textContent = '19,540.25';
+            document.getElementById('nifty-change').innerHTML = '<i class="fas fa-arrow-up"></i> +0.45% (API)';
+
+            document.getElementById('sensex-price').textContent = '65,400.12';
+            document.getElementById('sensex-change').innerHTML = '<i class="fas fa-arrow-down"></i> -0.15% (API)';
+
+            document.getElementById('gold-price').textContent = '₹62,500';
+            document.getElementById('gold-change').innerHTML = 'From Metals API (Mock)';
+            
+            document.getElementById('usdinr-price').textContent = '83.50';
+            document.getElementById('usdinr-change').innerHTML = 'From Forex API (Mock)';
+
+             // You can use a library like Axios or the native 'fetch' API here.
+             /*
+             fetch('YOUR_NIFTY_API_ENDPOINT')
+                 .then(response => response.json())
+                 .then(data => {
+                     document.getElementById('nifty-price').textContent = data.price;
+                     // ... update change ...
+                 })
+                 .catch(error => console.error('Error fetching Nifty:', error));
+             */
+        }
+        
+        // --- 3. Chart Rendering Functions (Kept original functions) ---
         function drawLineChart() {
             const container = document.querySelector(".lg\\:col-span-2.h-\\[400px\\] .chart-container");
             const margin = { top: 30, right: 30, bottom: 50, left: 60 };
@@ -373,39 +310,15 @@
             svg.append("g")
                 .attr("transform", `translate(0,${height})`)
                 .call(d3.axisBottom(x).tickSizeOuter(0))
-                .selectAll("text")
-                .style("font-size", "12px");
+                .selectAll("text").style("font-size", "12px");
             const y = d3.scaleLinear()
                 .domain([d3.min(lineData, d => d.value) - 1000, d3.max(lineData, d => d.value) + 1000])
                 .range([height, 0]);
-            svg.append("g")
-                .call(d3.axisLeft(y).tickFormat(d3.format("~s")))
-                .selectAll("text")
-                .style("font-size", "12px");
-            const line = d3.line()
-                .x(d => x(d.month))
-                .y(d => y(d.value))
-                .curve(d3.curveMonotoneX);
-            svg.append("path")
-                .datum(lineData)
-                .attr("fill", "none")
-                .attr("stroke", "#007bff")
-                .attr("stroke-width", 3)
-                .attr("d", line);
-            svg.selectAll("dot")
-                .data(lineData)
-                .enter()
-                .append("circle")
-                .attr("cx", d => x(d.month))
-                .attr("cy", d => y(d.value))
-                .attr("r", 5)
-                .attr("fill", "#004080");
-            svg.append("text")
-                .attr("x", width / 2)
-                .attr("y", -5)
-                .attr("text-anchor", "middle")
-                .style("font-size", "14px")
-                .text("Portfolio Value Trend");
+            svg.append("g").call(d3.axisLeft(y).tickFormat(d3.format("~s"))).selectAll("text").style("font-size", "12px");
+            const line = d3.line().x(d => x(d.month)).y(d => y(d.value)).curve(d3.curveMonotoneX);
+            svg.append("path").datum(lineData).attr("fill", "none").attr("stroke", "#007bff").attr("stroke-width", 3).attr("d", line);
+            svg.selectAll("dot").data(lineData).enter().append("circle").attr("cx", d => x(d.month)).attr("cy", d => y(d.value)).attr("r", 5).attr("fill", "#004080");
+            svg.append("text").attr("x", width / 2).attr("y", -5).attr("text-anchor", "middle").style("font-size", "14px").text("Portfolio Value Trend");
         }
         function drawPieChart() {
             const container = document.getElementById("pie-chart").parentNode;
@@ -414,36 +327,13 @@
             const height = container.clientHeight - margin;
             const radius = Math.min(width, height) / 2.5;
             d3.select("#pie-chart").html(""); 
-            const svg = d3.select("#pie-chart")
-                .attr("width", width + margin)
-                .attr("height", height + margin)
-                .append("g")
-                .attr("transform", `translate(${width / 2 + margin / 2}, ${height / 2 + margin / 2})`);
-            const color = d3.scaleOrdinal()
-                .domain(pieData.map(d => d.asset))
-                .range(["#4299e1", "#38b2ac", "#ecc94b"]); 
-            const pie = d3.pie()
-                .value(d => d.value);
+            const svg = d3.select("#pie-chart").attr("width", width + margin).attr("height", height + margin).append("g").attr("transform", `translate(${width / 2 + margin / 2}, ${height / 2 + margin / 2})`);
+            const color = d3.scaleOrdinal().domain(pieData.map(d => d.asset)).range(["#4299e1", "#38b2ac", "#ecc94b"]); 
+            const pie = d3.pie().value(d => d.value);
             const data_ready = pie(pieData);
-            const arc = d3.arc()
-                .innerRadius(radius * 0.5) 
-                .outerRadius(radius);
-            svg.selectAll('slices')
-                .data(data_ready)
-                .enter()
-                .append('path')
-                .attr('d', arc)
-                .attr('fill', d => color(d.data.asset))
-                .attr("stroke", "white")
-                .style("stroke-width", "2px");
-            svg.selectAll('labels')
-                .data(data_ready)
-                .enter()
-                .append('text')
-                .text(d => d.data.asset + " (" + d.data.value + "%)")
-                .attr("transform", d => `translate(${d3.arc().innerRadius(radius * 0.8).outerRadius(radius).centroid(d)})`)
-                .style("text-anchor", "middle")
-                .style("font-size", "12px");
+            const arc = d3.arc().innerRadius(radius * 0.5).outerRadius(radius);
+            svg.selectAll('slices').data(data_ready).enter().append('path').attr('d', arc).attr('fill', d => color(d.data.asset)).attr("stroke", "white").style("stroke-width", "2px");
+            svg.selectAll('labels').data(data_ready).enter().append('text').text(d => d.data.asset + " (" + d.data.value + "%)").attr("transform", d => `translate(${d3.arc().innerRadius(radius * 0.8).outerRadius(radius).centroid(d)})`).style("text-anchor", "middle").style("font-size", "12px");
         }
         function drawBarChart() {
             const container = document.getElementById("bar-chart").parentNode;
@@ -451,119 +341,54 @@
             const width = container.clientWidth - margin.left - margin.right;
             const height = container.clientHeight - margin.top - margin.bottom;
             d3.select("#bar-chart").html(""); 
-            const svg = d3.select("#bar-chart")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", `translate(${margin.left},${margin.top})`);
-            const x = d3.scaleBand()
-                .range([0, width])
-                .domain(barData.map(d => d.sector))
-                .padding(0.2);
-            svg.append("g")
-                .attr("transform", `translate(0,${height})`)
-                .call(d3.axisBottom(x))
-                .selectAll("text")
-                .style("font-size", "12px");
-            const y = d3.scaleLinear()
-                .domain([0, d3.max(barData, d => d.percentage) + 5])
-                .range([height, 0]);
-            svg.append("g")
-                .call(d3.axisLeft(y).tickFormat(d => d + "%"))
-                .selectAll("text")
-                .style("font-size", "12px");
-            svg.selectAll("bar")
-                .data(barData)
-                .enter()
-                .append("rect")
-                .attr("x", d => x(d.sector))
-                .attr("y", d => y(d.percentage))
-                .attr("width", x.bandwidth())
-                .attr("height", d => height - y(d.percentage))
-                .attr("fill", "#f56565"); 
-            svg.selectAll(".bar-label")
-                .data(barData)
-                .enter()
-                .append("text")
-                .attr("class", "bar-label")
-                .attr("x", d => x(d.sector) + x.bandwidth() / 2)
-                .attr("y", d => y(d.percentage) - 5)
-                .attr("text-anchor", "middle")
-                .text(d => d.percentage + "%")
-                .style("font-size", "12px")
-                .style("fill", "#1f2937");
+            const svg = d3.select("#bar-chart").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+            const x = d3.scaleBand().range([0, width]).domain(barData.map(d => d.sector)).padding(0.2);
+            svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x)).selectAll("text").style("font-size", "12px");
+            const y = d3.scaleLinear().domain([0, d3.max(barData, d => d.percentage) + 5]).range([height, 0]);
+            svg.append("g").call(d3.axisLeft(y).tickFormat(d => d + "%")).selectAll("text").style("font-size", "12px");
+            svg.selectAll("bar").data(barData).enter().append("rect").attr("x", d => x(d.sector)).attr("y", d => y(d.percentage)).attr("width", x.bandwidth()).attr("height", d => height - y(d.percentage)).attr("fill", "#f56565"); 
+            svg.selectAll(".bar-label").data(barData).enter().append("text").attr("class", "bar-label").attr("x", d => x(d.sector) + x.bandwidth() / 2).attr("y", d => y(d.percentage) - 5).attr("text-anchor", "middle").text(d => d.percentage + "%").style("font-size", "12px").style("fill", "#1f2937");
         }
 
-        // --- 3. Navigation JS ---
+        // --- 4. Initial Load and Resize Handler (Updated to include Live Data) --- 
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
             const body = document.body;
             const dropdowns = document.querySelectorAll('.dropdown');
 
-            // 1. Sidebar Toggle Logic
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                    body.classList.toggle('menu-open');
-                });
-            }
-            
-            // 2. Mobile Dropdown Toggle Logic (Single Tap Fix)
+            // --- Navigation JS Logic (from index.html) ---
+            if (menuToggle && navLinks) { menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); body.classList.toggle('menu-open'); }); }
             dropdowns.forEach(dropdown => {
                 const dropbtn = dropdown.querySelector('.dropbtn');
-                
                 dropbtn.addEventListener('click', function(event) {
-                    
-                    // Only run this logic on mobile screen sizes
                     if (window.innerWidth <= 991) {
                         event.preventDefault(); 
-                        
-                        // Close other open dropdowns
-                        dropdowns.forEach(otherDropdown => {
-                            if (otherDropdown !== dropdown) {
-                                otherDropdown.classList.remove('show');
-                            }
-                        });
-                        
-                        // Toggle the current dropdown
+                        dropdowns.forEach(otherDropdown => { if (otherDropdown !== dropdown) { otherDropdown.classList.remove('show'); } });
                         dropdown.classList.toggle('show');
                     }
                 });
             });
-
-            // 3. Close sidebar when clicking outside or on an anchor link
             window.addEventListener('click', function(event) {
                 if (window.innerWidth <= 991 && navLinks.classList.contains('active')) {
-                    
-                    // Logic 1: Close if user clicks outside the sidebar or toggle button
                     if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
-                        navLinks.classList.remove('active');
-                        body.classList.remove('menu-open');
-                        
-                        // Close all dropdowns when the sidebar closes
-                        dropdowns.forEach(dropdown => {
-                            dropdown.classList.remove('show');
-                        });
+                        navLinks.classList.remove('active'); body.classList.remove('menu-open');
+                        dropdowns.forEach(dropdown => { dropdown.classList.remove('show'); });
                     }
-                    
-                    // Logic 2: Close if user clicks any link inside the sidebar
-                    if (event.target.matches('#navLinks a')) {
-                        navLinks.classList.remove('active');
-                        body.classList.remove('menu-open');
-                    }
+                    if (event.target.matches('#navLinks a')) { navLinks.classList.remove('active'); body.classList.remove('menu-open'); }
                 }
             });
 
-            // --- 4. Initial Load and Resize Handler --- 
-            function renderAllCharts() {
+            // --- Chart & Data Rendering ---
+            function renderAll() {
+                fetchLiveData();
                 drawLineChart();
                 drawPieChart();
                 drawBarChart();
             }
 
-            window.addEventListener('load', renderAllCharts);
-            window.addEventListener('resize', renderAllCharts);
+            window.addEventListener('load', renderAll);
+            window.addEventListener('resize', renderAll);
         });
     </script>
 </body>
