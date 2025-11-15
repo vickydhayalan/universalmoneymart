@@ -6,7 +6,7 @@ body {
     background-color: #f8f9fa;
     color: #333333;
     line-height: 1.6;
-    /* overflow-x: hidden removed here as it's now in index.html for guaranteed fix */
+    /* overflow-x: hidden is now in index.html */
 }
 .container {
     width: 90%;
@@ -34,9 +34,9 @@ nav .container {
     color: #004080; 
 }
 
-/* FIX 1: Logo display is now fully managed by the <style> block in index.html */
-.logo .logo-full { display: inline; } /* Desktop Default */
-.logo .logo-short { display: none; } /* Mobile Default (will be overridden) */
+/* Logo display is now fully managed by the <style> block in index.html */
+.logo .logo-full { display: inline; } 
+.logo .logo-short { display: none; } 
 
 
 /* Desktop Links */
@@ -104,11 +104,11 @@ nav .container {
     margin-top: 0;
 }
 
-/* 🚀 PROFESSIONAL POLISH: STATS SECTION (Personal Portfolio Success) 🚀 */
+/* 🚀 PROFESSIONAL POLISH: STATS SECTION 🚀 */
 #portfolio h3 {
     font-size: 2.5em !important; 
     font-weight: 700;
-    color: #FF5722 !important; /* Accent Color */
+    color: #FF5722 !important; 
     margin-bottom: 0;
 }
 #portfolio p {
@@ -129,7 +129,7 @@ nav .container {
 /* 🚀 PROFESSIONAL POLISH: CTA Hover Effects 🚀 */
 a[style*="background-color: #25D366"]:hover, 
 a[style*="background-color: #FF5722"]:hover, 
-a[style*="background-color: #FF0000"]:hover, /* Youtube Subscribe */
+a[style*="background-color: #FF0000"]:hover, 
 button[type="submit"]:hover {
     opacity: 0.9;
     transform: translateY(-2px);
@@ -158,7 +158,7 @@ footer {
 .video-responsive {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%; 
     height: 0;
     overflow: hidden;
     border-radius: 8px;
@@ -173,7 +173,7 @@ footer {
     border: none;
 }
 
-/* --- IMAGE SLIDER STYLING --- (No changes) */
+/* --- IMAGE SLIDER STYLING --- */
 .slider-container {
     width: 100%;
     max-width: 900px;
@@ -273,7 +273,6 @@ footer {
 /* Sticky WhatsApp Button */
 .whatsapp-sticky {
     position: fixed;
-    /* FIX 4: SIZE IS MANAGED BY INDEX.HTML, keeping general placement */
     bottom: 25px; 
     right: 25px; 
     z-index: 10000; 
@@ -283,7 +282,6 @@ footer {
     transform: scale(1.05);
 }
 .whatsapp-sticky img {
-    /* FIX 4: SIZE IS MANAGED BY INDEX.HTML, keeping general styling */
     width: 100%; 
     height: 100%;
     border-radius: 50%;
@@ -291,19 +289,18 @@ footer {
 }
 
 /* --- RESPONSIVE FIXES (Mobile View) --- */
+/* Mobile/Tablet responsive fixes are now in index.html for guaranteed override. */
 @media (max-width: 768px) {
     .container { width: 95%; }
     .section { padding: 40px 0; }
     
-    /* FIX 1 & 2: Logo/Nav link display is now managed by the <style> block in index.html */
-    
-    /* Grid Layout Fix (Stacking Cards) - No Change Needed */
+    /* Grid Layout Fix (Stacking Cards) */
     .services-grid, .video-grid {
         grid-template-columns: 1fr; 
         gap: 30px;
     }
     
-    /* Blog Card width fix - No Change Needed */
+    /* Blog Card width fix */
     .section > .container > div[style*="justify-content: center"] > div {
         width: 100% !important; 
         margin-bottom: 20px;
