@@ -31,16 +31,10 @@
             z-index: 10000;
         }
 
-        /* MODAL POP-UP EFFECT: Background Overlay (REMOVED: User wants transparent) */
-        body.menu-open:after {
-            /* Removing the dark overlay */
-            background: transparent !important;
-            z-index: 1010;
-        }
-
         /* ----------------------------------------------------- */
         /* --- MOBILE MENU/SIDEBAR STYLING --- */
         /* ----------------------------------------------------- */
+        /* Hamburger Icon - Default hidden */
         .menu-toggle {
             display: none;
             cursor: pointer;
@@ -58,42 +52,62 @@
             .logo .logo-full { display: none !important; }
             .logo .logo-short { display: inline !important; }
             nav { padding: 10px 0 !important; }
+            
+            /* SHOW HAMBURGER ICON */
             .menu-toggle { display: block; }
 
-            /* HIDE DESKTOP LINKS & MAKE IT A SIDEBAR */
+            /* SIDEBAR STYLE (Transparent/White) */
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: -220px; 
                 width: 220px; 
                 height: 100%;
-                /* 🎨 Aesthetic FIX: Transparent/White Background */
-                background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly transparent white */
+                background-color: rgba(255, 255, 255, 0.95) !important;
                 box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
                 flex-direction: column;
                 padding-top: 60px;
                 transition: right 0.3s ease-in-out;
                 z-index: 1020;
                 overflow-y: auto;
+                /* Hiding the desktop flex properties */
+                display: flex !important; 
             }
 
             /* MENU OPEN STATE */
-            .nav-links.active {
-                right: 0; 
-            }
+            .nav-links.active { right: 0; }
 
-            /* Styling links inside the sidebar (FLAT LINKS) */
-            .nav-links a {
-                color: #004080; /* Blue text for contrast on white background */
+            /* Styling links inside the sidebar */
+            .nav-links .dropbtn, .nav-links > a {
+                color: #004080; 
                 padding: 12px 20px;
                 text-align: left;
                 width: 100%;
-                border-bottom: 1px solid #ddd; /* Light separator line */
+                border-bottom: 1px solid #ddd;
                 font-size: 1em;
                 font-weight: 500;
             }
-            /* Remove all dropdown specific CSS for mobile */
-            .dropdown, .dropdown-content { display: none !important; } 
+            
+            /* DROPDOWN FIXES FOR SIDEBAR */
+            .dropdown {
+                display: block; /* Ensure dropdown containers are visible in sidebar */
+            }
+            .dropdown-content {
+                position: static; /* Flows vertically in sidebar */
+                background-color: #f0f0f5; /* Light grey for sub-links */
+                box-shadow: none;
+                min-width: 100%;
+                border-radius: 0;
+                display: none; /* Hidden by default, JS toggles */
+            }
+            .dropdown-content a {
+                color: #555;
+                padding: 8px 30px;
+                border-bottom: none;
+            }
+            .dropdown.show .dropdown-content {
+                display: block !important;
+            }
         }
 
         /* ----------------------------------------------------- */
@@ -102,15 +116,32 @@
         @media (min-width: 992px) {
             .logo .logo-full { display: inline !important; }
             .logo .logo-short { display: none !important; }
+            
+            /* SHOW DESKTOP NAV LINKS (Original horizontal layout) */
             .nav-links {
                 display: flex !important; 
-                flex-wrap: nowrap !important; 
-                position: static;
-                background-color: transparent;
-                width: auto;
-                height: auto;
+                position: static !important;
+                background-color: transparent !important;
+                width: auto !important;
+                height: auto !important;
+                box-shadow: none !important;
+                padding-top: 0 !important;
+                flex-direction: row !important;
             }
-            /* Desktop links should still show sub-links on hover */
+            
+            /* Restore normal dropdown hover for desktop */
+            .dropdown-content {
+                 display: none;
+                 position: absolute;
+                 background-color: #f9f9f9;
+                 min-width: 220px; 
+                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+                 z-index: 10;
+                 border-radius: 6px;
+                 overflow: hidden;
+                 left: 0; 
+                 top: 100%; 
+            }
             .dropdown:hover .dropdown-content {
                 display: block !important; 
             }
@@ -132,24 +163,36 @@
             
             <div class="nav-links" id="navLinks">
                 
-                <a href="#services">Services (All)</a>
-                <a href="#services">Financial Services</a>
-                <a href="#portfolio">Personal Portfolio</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Services</a>
+                    <div class="dropdown-content">
+                        <a href="#services">Financial Services</a>
+                        <a href="#portfolio">Personal Portfolio</a>
+                    </div>
+                </div>
 
-                <a href="#" class="dropbtn">Tools (All)</a>
-                <a href="mf_calculator.html">Calculator (SIP/STP/SWP/EMI)</a>
-                <a href="retirement_planner.html">Retirement Planner</a>
-                <a href="dashboard.html">Data Dashboard</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Tools</a>
+                    <div class="dropdown-content">
+                        <a href="mf_calculator.html">Calculator (SIP/STP/SWP/EMI)</a>
+                        <a href="retirement_planner.html">Retirement Planner</a>
+                        <a href="dashboard.html">Data Dashboard</a>
+                    </div>
+                </div>
 
-                <a href="#" class="dropbtn">Learning (All)</a>
-                <a href="#blog">Blog & Insights</a>
-                <a href="videos.html">Video Library</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Learning</a>
+                    <div class="dropdown-content">
+                        <a href="#blog">Blog & Insights</a>
+                        <a href="videos.html">Video Library</a>
+                    </div>
+                </div>
                 
-                <a href="#contact">Contact</a>
+                <a href="#contact" class="dropbtn">Contact</a>
             </div>
         </div>
     </nav>
-    
+
     <div class="hero">
     <div class="container">
         <h1>Your Trusted Partner for Wealth Creation</h1>
@@ -377,8 +420,9 @@
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
             const body = document.body;
+            const dropdowns = document.querySelectorAll('.dropdown');
 
-            // 1. Sidebar Toggle Logic (Works on single tap)
+            // 1. Sidebar Toggle Logic
             if (menuToggle && navLinks) {
                 menuToggle.addEventListener('click', () => {
                     navLinks.classList.toggle('active');
@@ -386,7 +430,30 @@
                 });
             }
             
-            // 2. Close sidebar when clicking outside or on an anchor link
+            // 2. Mobile Dropdown Toggle Logic (Single Tap Fix)
+            dropdowns.forEach(dropdown => {
+                const dropbtn = dropdown.querySelector('.dropbtn');
+                
+                dropbtn.addEventListener('click', function(event) {
+                    
+                    // Only run this logic on mobile screen sizes
+                    if (window.innerWidth <= 991) {
+                        event.preventDefault(); // CRITICAL: Stop link from navigating/scrolling to top
+                        
+                        // Close other open dropdowns
+                        dropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                otherDropdown.classList.remove('show');
+                            }
+                        });
+                        
+                        // Toggle the current dropdown
+                        dropdown.classList.toggle('show');
+                    }
+                });
+            });
+
+            // 3. Close sidebar when clicking outside or on an anchor link
             window.addEventListener('click', function(event) {
                 if (window.innerWidth <= 991 && navLinks.classList.contains('active')) {
                     
@@ -394,6 +461,11 @@
                     if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
                         navLinks.classList.remove('active');
                         body.classList.remove('menu-open');
+                        
+                        // Close all dropdowns when the sidebar closes
+                        dropdowns.forEach(dropdown => {
+                            dropdown.classList.remove('show');
+                        });
                     }
                     
                     // Logic 2: Close if user clicks any link inside the sidebar
