@@ -52,12 +52,18 @@
         </header>
         
         <!-- SUMMARY CARDS SECTION -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             
             <div class="summary-card border-l-4 border-blue-500">
                 <p class="text-gray-500 text-sm font-medium">Total Portfolio Value</p>
                 <h2 class="text-3xl font-extrabold text-gray-800 mt-1">₹54,500</h2>
                 <span class="text-xs text-green-600 font-semibold">+6.5% Since Last Month</span>
+            </div>
+            
+            <div class="summary-card border-l-4 border-yellow-500">
+                <p class="text-gray-500 text-sm font-medium">Latest NAV</p>
+                <h2 class="text-3xl font-extrabold text-gray-800 mt-1">₹32.45</h2>
+                <span class="text-xs text-green-600 font-semibold">↑ 0.15% (Today)</span>
             </div>
             
             <div class="summary-card border-l-4 border-green-500">
@@ -156,7 +162,7 @@
             const container = document.querySelector(".lg\\:col-span-2.h-\\[400px\\] .chart-container");
             const margin = { top: 30, right: 30, bottom: 50, left: 60 };
             const width = container.clientWidth - margin.left - margin.right;
-            const height = container.clientHeight - margin.top - margin.bottom;
+            const height = container.clientHeight - margin.top - margin.bottom - 40; // Adjusted for CTA button space
 
             d3.select("#line-chart").html(""); // Clear SVG
             
