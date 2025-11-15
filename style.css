@@ -272,7 +272,7 @@ footer {
         padding: 15px 0;
         flex-shrink: 0;
     }
-    .logo .logo-full { display: none; }
+    .logo .logo-full { display: none; } /* Hide full logo on mobile */
     .logo .logo-short { display: inline; } /* Ensure UMM is shown on mobile */
 
     /* FIX 3: Horizontal Fit for Nav Links (MUST FIT ON ONE LINE) */
