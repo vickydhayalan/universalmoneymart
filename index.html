@@ -8,43 +8,11 @@
     
     <style>
         /* ----------------------------------------------------- */
-        /* --- 1. Logo Fix: UMM (Mobile only) and Full (Desktop only) --- */
+        /* --- GENERAL FIXES --- */
         /* ----------------------------------------------------- */
-        /* Default: Mobile View */
-        .logo-full { 
-            display: none; /* Mobile-la full name-a hide pannuvom */
-        }
-        .logo-short { 
-            display: inline; /* Mobile-la short name (UMM)-a kaattuvom */
-        }
-
-        /* Desktop View: (992px width-kku mela) */
-        @media (min-width: 992px) {
-            .logo-full { 
-                display: inline; /* Desktop-la full logo kaattanum */
-            }
-            .logo-short { 
-                display: none; /* Desktop-la short logo maraikanum */
-            }
-        }
-        
-        /* ----------------------------------------------------- */
-        /* --- 2. Navigation Fix: Sticky Header --- */
-        /* ----------------------------------------------------- */
-        /* <nav> element-a mela freeze pannanum */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1020; /* High z-index koduthu, mela stick aagardha ensure panrom */
-            background: white; /* Unga actual nav bar background color */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* ----------------------------------------------------- */
-        /* --- 3. Mobile View - Right Side Extra Space Fix Panna --- */
-        /* ----------------------------------------------------- */
+        /* FIX 3: MOBILE RIGHT SIDE SPACE FIX */
         body {
-            overflow-x: hidden; /* Horizontal scrolling-a block pannum */
+            overflow-x: hidden !important; 
         }
         /* Ensure images fit within the mobile screen without breaking layout */
         img {
@@ -52,21 +20,64 @@
             height: auto;
         }
 
-
-        /* ----------------------------------------------------- */
-        /* --- 4. WhatsApp Logo Size Kammi Panna --- */
-        /* ----------------------------------------------------- */
-        .whatsapp-sticky {
-            width: 45px; /* Size kammi panrom */
-            height: 45px;
-            bottom: 20px; /* Position check panrom */
-            right: 20px;
+        /* FIX 2: STICKY HEADER FIX */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1020; 
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* WhatsApp icon-kku ulla irukkura image-a size-kku fit pannanum */
+        /* ----------------------------------------------------- */
+        /* --- FIX 4: WhatsApp Logo Size Kammi Panna --- */
+        /* ----------------------------------------------------- */
+        .whatsapp-sticky {
+            width: 45px !important; 
+            height: 45px !important;
+            bottom: 25px; 
+            right: 25px;
+            z-index: 10000;
+        }
         .whatsapp-sticky img {
             width: 100%;
             height: 100%;
+        }
+
+        /* ----------------------------------------------------- */
+        /* --- RESPONSIVE FIXES (Only for mobile view <= 768px) --- */
+        /* ----------------------------------------------------- */
+        @media (max-width: 991px) { /* 991px-kku kela idhu work aagum */
+            
+            /* FIX 1: Logo Fix: UMM only on Mobile, Full on Desktop */
+            .logo .logo-full { 
+                display: none !important; 
+            }
+            .logo .logo-short { 
+                display: inline !important; 
+            }
+            /* Desktop view logo fix (for safety against style.css overrides) */
+            @media (min-width: 992px) {
+                .logo .logo-full { display: inline !important; }
+                .logo .logo-short { display: none !important; }
+            }
+
+            /* FIX 3/2 (Part 2): Navigation Links - Scroll Down Fix */
+            /* Links-a wrap panni, screen-oda full width-la spread panrom */
+            .nav-links {
+                width: 100%;
+                margin-top: 10px;
+                flex-wrap: wrap; /* CRUCIAL: Links will wrap to the next line, fixing horizontal overflow */
+                justify-content: space-around; 
+                overflow-x: hidden;
+            }
+            .nav-links .dropbtn, .nav-links > a {
+                padding: 8px 6px; 
+                font-size: 0.8em; 
+                flex-grow: 1; 
+                max-width: 25%; /* Max width for 4 links to share space */
+                box-sizing: border-box;
+            }
         }
     </style>
     </head>
