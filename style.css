@@ -17,17 +17,15 @@ body {
 nav {
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 0; /* REMOVED vertical padding from NAV wrapper */
+    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 nav .container {
-    /* Desktop: Logo Left, Nav Right */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0; /* ADDED vertical padding back to container */
 }
 .logo {
     font-size: 1.5em;
@@ -106,7 +104,7 @@ footer {
     margin-top: 40px;
 }
 
-/* --- VIDEO AND SLIDER STYLING (Unchanged) --- */
+/* --- VIDEO STYLING --- */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -132,7 +130,75 @@ footer {
     border: none;
 }
 
-/* --- DROPDOWN NAVIGATION STYLING (Unchanged) --- */
+/* --- IMAGE SLIDER STYLING --- */
+.slider-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.slides {
+    display: flex;
+    width: 300%;
+    animation: slideShow 30s infinite; 
+    transition: transform 0.5s ease-in-out; 
+}
+.slide {
+    width: calc(100% / 3);
+    /* Mobile fix will override this on small screens */
+}
+.slide img {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+.slider-nav {
+    text-align: center;
+    padding: 10px 0;
+}
+.slider-nav label {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Auto Slide Animation Logic */
+@keyframes slideShow {
+    0%, 30% { transform: translateX(0%); } 
+    33%, 63% { transform: translateX(calc(-100% / 3)); } 
+    66%, 99% { transform: translateX(calc(-200% / 3)); } 
+    100% { transform: translateX(0%); }
+}
+
+/* Dot Navigation Logic (Manual Clicks override auto-slide) */
+.slider-container input[type="radio"] { display: none; }
+#slide-radio-1:checked ~ .slides { 
+    transform: translateX(0%); 
+    animation-play-state: paused; 
+}
+#slide-radio-2:checked ~ .slides { 
+    transform: translateX(calc(-100% / 3)); 
+    animation-play-state: paused; 
+}
+#slide-radio-3:checked ~ .slides { 
+    transform: translateX(calc(-200% / 3)); 
+    animation-play-state: paused; 
+}
+#slide-radio-1:checked ~ .slider-nav label:nth-child(1),
+#slide-radio-2:checked ~ .slider-nav label:nth-child(2),
+#slide-radio-3:checked ~ .slider-nav label:nth-child(3) {
+    background: #007bff;
+}
+
+/* --- DROPDOWN NAVIGATION STYLING --- */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -162,11 +228,12 @@ footer {
     background-color: #e2e8f0;
     color: #004080;
 }
+/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Sticky WhatsApp Button (Unchanged) */
+/* Sticky WhatsApp Button */
 .whatsapp-sticky {
     position: fixed;
     bottom: 25px; 
@@ -187,59 +254,68 @@ footer {
 /* --- RESPONSIVE FIXES (Mobile View) --- */
 @media (max-width: 768px) {
     .container { width: 95%; }
+    .section { padding: 40px 0; }
     
-    /* FIX 1: Navigation Structure Change */
-    nav {
-        padding: 0; /* Remove padding from NAV */
-    }
-    nav .container {
-        /* Line 1: Logo and Main Nav Link Wrapper */
-        flex-direction: row; 
-        justify-content: space-between; 
+    /* FIX 1: Navigation Container Flow (Logo Left, Links Scrollable Right) */
+    nav .container { 
+        flex-direction: column; 
+        text-align: center; 
         align-items: center; 
-        padding: 10px 15px 0 15px; /* Added padding here */
-        width: 100%;
+        padding: 10px 15px;
     }
-    
-    /* FIX 2: Links Wrapper for Horizontal Scroll */
-    .nav-links-wrapper { 
-        /* NEW WRAPPER - This handles the second line below the logo */
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        border-top: 1px solid #eee;
-        padding: 5px 0;
-        box-shadow: inset 0 -3px 5px -5px rgba(0,0,0,0.1); /* Subtle shadow for scroll indication */
-    }
-    
-    /* FIX 3: Horizontal Flow for Links */
     .nav-links { 
-        display: flex; 
-        flex-direction: row; 
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: center;
-        width: fit-content; /* Critical: Allows horizontal scrolling */
+        flex-direction: column; 
+        width: 100%;
+        margin-top: 10px;
+        display: block; 
+    }
+    
+    /* FIX 2: Mobile Dropdown Button Alignment */
+    .dropdown {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #eee;
         margin-top: 0;
     }
-    
-    /* FIX 4: Shrink Links */
-    .nav-links .dropbtn, .nav-links > a {
-        padding: 5px 8px; /* Reduced padding */
-        font-size: 0.75em; /* Smaller font size */
-        font-weight: 600;
-        color: #004080; 
+    .dropdown-content {
+        position: relative;
+        left: 0;
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
         text-align: center;
-        flex-shrink: 0; /* Prevents shrinking */
     }
     
-    /* FIX 5: Dropdown Menu Fix (Must be visible on hover/touch) */
-    .dropdown-content {
-        position: absolute; 
-        left: auto; 
-        right: 0; 
-        min-width: 150px;
-        text-align: right; /* Aligns content away from logo */
+    .dropdown a.dropbtn {
+        display: block;
+        padding: 15px 0; 
+        cursor: pointer;
+        font-weight: 600;
+        color: #004080;
+        background-color: #fafafa;
+        text-align: center; 
+        font-size: 1.1em;
+    }
+    .dropdown-content a {
+        padding: 8px 20px;
+        font-size: 0.9em;
+        background-color: #f4f4f4;
+        text-align: center; 
+        border-top: 1px dashed #ddd;
+    }
+    
+    /* FIX 3: SLIDER STACKING FIX - Overrides the default block stacking on Mobile */
+    .slider-container {
+        overflow: hidden;
+    }
+    .slides {
+        display: flex !important; /* Force flex to keep images horizontal */
+        width: 300%;
+        animation: slideShow 30s infinite;
+    }
+    .slide {
+        width: 33.3333%; /* Ensure each slide takes 1/3rd space */
+        flex-shrink: 0; /* Prevents images from trying to shrink */
     }
 
 
