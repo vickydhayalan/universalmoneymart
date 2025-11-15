@@ -258,38 +258,57 @@
             { sector: "Auto", percentage: 12 }, { sector: "FMCG", percentage: 10 }
         ];
         const formatCurrency = d3.format("$,.0f");
+// --- LIVE DATA FETCHING FUNCTION (PLACEHOLDERS) ---
+function fetchLiveData() {
+    // 🛑 Ippo idhu dhaan run aaguthu, indha numbers mattum dhaan varum:
+    
+    document.getElementById('nifty-price').textContent = '19,540.25';
+    document.getElementById('nifty-change').innerHTML = '<i class="fas fa-arrow-up"></i> +0.45% (Mock)';
 
+    document.getElementById('sensex-price').textContent = '65,400.12';
+    document.getElementById('sensex-change').innerHTML = '<i class="fas fa-arrow-down"></i> -0.15% (Mock)';
 
-        // -----------------------------------------------------
-        // --- 2. LIVE DATA FETCHING FUNCTION (PLACEHOLDERS) ---
-        // -----------------------------------------------------
-        function fetchLiveData() {
-            // NOTE: Add your real API fetching logic here!
-            // Example Placeholder Logic (Update this section with your API calls):
-            
-            document.getElementById('nifty-price').textContent = '19,540.25';
-            document.getElementById('nifty-change').innerHTML = '<i class="fas fa-arrow-up"></i> +0.45% (API)';
+    document.getElementById('gold-price').textContent = '₹62,500';
+    document.getElementById('gold-change').innerHTML = 'From API (Mock)';
+    
+    document.getElementById('usdinr-price').textContent = '83.50';
+    document.getElementById('usdinr-change').innerHTML = 'From API (Mock)';
 
-            document.getElementById('sensex-price').textContent = '65,400.12';
-            document.getElementById('sensex-change').innerHTML = '<i class="fas fa-arrow-down"></i> -0.15% (API)';
+    // -----------------------------------------------------------------------
+    // ✅ UNGA REAL LOGIC INGA START AAGANUM (Fetch API Call)
+    // -----------------------------------------------------------------------
 
-            document.getElementById('gold-price').textContent = '₹62,500';
-            document.getElementById('gold-change').innerHTML = 'From Metals API (Mock)';
-            
-            document.getElementById('usdinr-price').textContent = '83.50';
-            document.getElementById('usdinr-change').innerHTML = 'From Forex API (Mock)';
+    /*
+    // EXAMPLE: API Call Logic (Replace API_KEY and ENDPOINTS)
+    
+    const API_KEY = "YOUR_ALPHA_VANTAGE_KEY_HERE";
 
-             // You can use a library like Axios or the native 'fetch' API here.
-             /*
-             fetch('YOUR_NIFTY_API_ENDPOINT')
-                 .then(response => response.json())
-                 .then(data => {
-                     document.getElementById('nifty-price').textContent = data.price;
-                     // ... update change ...
-                 })
-                 .catch(error => console.error('Error fetching Nifty:', error));
-             */
-        }
+    // 1. Fetch Nifty/Sensex (requires real-time index data)
+    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=BSE.BOM&apikey=${API_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+            const quote = data['Global Quote'];
+            if (quote) {
+                const price = parseFloat(quote['05. price']).toFixed(2);
+                const change = parseFloat(quote['09. change']).toFixed(2);
+                const changePercent = parseFloat(quote['10. change percent']).replace('%', '');
+
+                document.getElementById('sensex-price').textContent = price;
+                document.getElementById('sensex-change').innerHTML = `${change > 0 ? '<i class="fas fa-arrow-up"></i>' : '<i class="fas fa-arrow-down"></i>'} ${changePercent}%`;
+            }
+        }).catch(err => console.log('Sensex API Error'));
+
+    // 2. Fetch USD/INR (Example for Forex Rate)
+    fetch(`https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=INR&apikey=${API_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+            const rate = data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
+            document.getElementById('usdinr-price').textContent = parseFloat(rate).toFixed(2);
+        }).catch(err => console.log('Forex API Error'));
+    */
+    
+    // Gold/Silver data kku vera API venum (e.g., metals-api.com)
+}
         
         // --- 3. Chart Rendering Functions (Kept original functions) ---
         function drawLineChart() {
