@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Money Mart | Financial Services, Portfolio & Blog</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
     
     <style>
         /* ----------------------------------------------------- */
         /* --- GENERAL FIXES (Applies to all screens) --- */
         /* ----------------------------------------------------- */
-        /* FIX 3: MOBILE RIGHT SIDE SPACE FIX - Ensure no content causes overflow */
         body {
             overflow-x: hidden !important; 
         }
@@ -30,6 +30,17 @@
             right: 25px;
             z-index: 10000;
         }
+        /* ----------------------------------------------------- */
+        /* --- MOBILE MENU/SIDEBAR STYLING (Applies to all screens for safety) --- */
+        /* ----------------------------------------------------- */
+        /* Hamburger Icon - Default hidden */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #004080;
+            z-index: 1030;
+        }
 
         /* ----------------------------------------------------- */
         /* --- MOBILE/TABLET VIEW FIXES (<= 991px) --- */
@@ -48,43 +59,63 @@
             nav {
                 padding: 10px 0 !important; 
             }
-
-            /* FIX 3/2 (Part 2): Navigation Links - Scroll Down Fix */
-            .nav-links {
-                width: 100%;
-                margin-top: 5px; 
-                flex-wrap: wrap; 
-                justify-content: space-around; 
-                overflow-x: hidden;
+            
+            /* SHOW HAMBURGER ICON */
+            .menu-toggle {
+                display: block;
             }
+
+            /* HIDE DESKTOP LINKS & MAKE IT A SIDEBAR */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -300px; /* Hides the menu off-screen */
+                width: 250px;
+                height: 100%;
+                background-color: #004080; /* Dark background */
+                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+                flex-direction: column;
+                padding-top: 60px;
+                transition: right 0.3s ease-in-out;
+                z-index: 1020;
+                overflow-y: auto;
+            }
+
+            /* MENU OPEN STATE */
+            .nav-links.active {
+                right: 0; /* Slides the menu into view */
+            }
+
+            /* Styling links inside the sidebar */
             .nav-links .dropbtn, .nav-links > a {
-                padding: 5px 4px; 
-                font-size: 0.75em; 
-                flex-grow: 1; 
-                max-width: 25%; 
-                box-sizing: border-box;
+                color: white; /* White text on dark background */
+                padding: 12px 20px;
+                text-align: left;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                font-size: 1em;
             }
             
-            /* MOBILE DROP-DOWN FIX: Desktop hover effect-a mobile-kku disable panrom */
+            /* Dropdown content now shows vertically */
             .dropdown-content {
-                display: none; /* By default hidden */
-                position: absolute;
-                background-color: #f9f9f9;
-                min-width: 150px; 
-                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-                z-index: 10;
-                border-radius: 6px;
-                overflow: hidden;
-                left: 0; 
-                top: 100%; 
-            }
-            /* Desktop hover-a mobile-la remove panrom */
-            .dropdown:hover .dropdown-content {
+                position: static; /* Flows with the content */
+                background-color: #002e5b; /* Darker background for sub-links */
+                box-shadow: none;
+                min-width: 100%;
+                border-radius: 0;
                 display: none;
             }
-            /* JS will control the 'show' class */
+            .dropdown-content a {
+                padding: 10px 30px;
+                color: #ccc;
+            }
+            /* Show dropdown when the 'show' class is toggled by JS */
             .dropdown.show .dropdown-content {
                 display: block !important;
+            }
+            /* Hides the desktop hover on mobile */
+            .dropdown:hover .dropdown-content {
+                display: none !important;
             }
         }
 
@@ -99,11 +130,16 @@
                 display: none !important; 
             }
             .nav-links {
+                display: flex !important; /* Ensure desktop nav is visible */
                 flex-wrap: nowrap !important; 
+                position: static;
+                background-color: transparent;
+                width: auto;
+                height: auto;
             }
             /* Desktop hover must work */
             .dropdown:hover .dropdown-content {
-                display: block;
+                display: block !important; 
             }
         }
     </style>
@@ -117,7 +153,11 @@
                 <span class="logo-short">UMM</span>
             </div>
             
-            <div class="nav-links">
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
                 <div class="dropdown">
                     <a href="#" class="dropbtn">Services</a>
                     <div class="dropdown-content">
@@ -371,50 +411,50 @@
     </footer>
 
     <script>
-        // JS to toggle the mobile menu (Hamburger functionality)
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-nav-links');
-            menu.classList.toggle('active');
-        }
-
-        // Add a class to show the menu when needed (CSS handles the rest)
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- Mobile Dropdown Touch Support FIX ---
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
             const dropdowns = document.querySelectorAll('.dropdown');
 
+            // 1. Sidebar Toggle Logic
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    // Toggles the main sidebar visibility
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            // 2. Mobile Dropdown Toggle Logic (When menu is open)
             dropdowns.forEach(dropdown => {
                 const dropbtn = dropdown.querySelector('.dropbtn');
                 
-                // Check if the screen is likely a touch device (less than 992px width)
-                if (window.innerWidth <= 991) {
-                    dropbtn.addEventListener('click', function(event) {
+                dropbtn.addEventListener('click', function(event) {
+                    // Check if we are in mobile view (sidebar is used)
+                    if (window.innerWidth <= 991) {
+                        event.preventDefault(); // Stop link navigation
                         
-                        // Prevent navigation (default link action)
-                        event.preventDefault(); 
-                        
-                        // Close other open dropdowns
+                        // Close other open dropdowns in the sidebar
                         dropdowns.forEach(otherDropdown => {
                             if (otherDropdown !== dropdown) {
                                 otherDropdown.classList.remove('show');
                             }
                         });
                         
-                        // Toggle the current dropdown
+                        // Toggle the current dropdown (opens/closes sub-links vertically)
                         dropdown.classList.toggle('show');
-                    });
-                }
-            });
-            
-            // Close dropdowns if user clicks outside
-            window.addEventListener('click', function(event) {
-                if (!event.target.matches('.dropbtn') && window.innerWidth <= 991) {
-                    dropdowns.forEach(dropdown => {
-                        dropdown.classList.remove('show');
-                    });
-                }
+                    }
+                });
             });
 
+            // 3. Close sidebar when a link is clicked
+            document.querySelectorAll('#navLinks a').forEach(link => {
+                link.addEventListener('click', () => {
+                    // Close the sidebar when a link (top-level or sub-link) is clicked
+                    if (window.innerWidth <= 991) {
+                         // navLinks.classList.remove('active'); // Keeping it open for now, can uncomment later
+                    }
+                });
+            });
         });
     </script>
 </body>
