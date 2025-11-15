@@ -6,6 +6,8 @@ body {
     background-color: #f8f9fa;
     color: #333333;
     line-height: 1.6;
+    /* FIX 3: MOBILE RIGHT SIDE SPACE FIX */
+    overflow-x: hidden; 
 }
 .container {
     width: 90%;
@@ -18,9 +20,10 @@ nav {
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 15px 0;
+    /* FIX 2: STICKY HEADER FIX (Already correct, just guaranteeing z-index is high) */
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1020; 
 }
 nav .container {
     display: flex;
@@ -97,6 +100,39 @@ nav .container {
     margin-top: 0;
 }
 
+/* 🚀 PROFESSIONAL POLISH: STATS SECTION 🚀 */
+/* This targets the 92%, 15+, $10M+ numbers for emphasis */
+#portfolio h3 {
+    font-size: 2.5em !important; 
+    font-weight: 700;
+    color: #FF5722 !important; /* Use orange/accent color for impact */
+    margin-bottom: 0;
+}
+#portfolio p {
+    font-size: 1em;
+    color: #004080; 
+    font-weight: 500;
+}
+/* 🚀 PROFESSIONAL POLISH: TESTIMONIALS 🚀 */
+#testimonials .service-card p {
+    font-size: 1.05em;
+    line-height: 1.6;
+    color: #444;
+    font-style: italic;
+    /* Added padding for a cleaner quote look */
+    padding: 0 10px; 
+}
+/* PROFESSIONAL POLISH: Button Hover Effect */
+/* This will affect buttons in index.html like WhatsApp Now, Start Investing, Send Request */
+a[style*="background-color: #25D366"]:hover, 
+a[style*="background-color: #FF5722"]:hover, 
+button[type="submit"]:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
 /* Footer */
 footer {
     background-color: #343a40; 
@@ -106,7 +142,7 @@ footer {
     margin-top: 40px;
 }
 
-/* --- VIDEO AND SLIDER STYLING --- */
+/* --- VIDEO AND SLIDER STYLING (No change here) --- */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -132,7 +168,7 @@ footer {
     border: none;
 }
 
-/* --- IMAGE SLIDER STYLING --- */
+/* --- IMAGE SLIDER STYLING (No change here) --- */
 .slider-container {
     width: 100%;
     max-width: 900px;
@@ -170,7 +206,6 @@ footer {
     cursor: pointer;
     transition: background 0.3s;
 }
-
 /* Auto Slide Animation Logic */
 @keyframes slideShow {
     0%, 30% { transform: translateX(0%); } 
@@ -178,7 +213,6 @@ footer {
     66%, 99% { transform: translateX(calc(-200% / 3)); } 
     100% { transform: translateX(0%); }
 }
-
 /* Dot Navigation Logic (Manual Clicks override auto-slide) */
 .slider-container input[type="radio"] { display: none; }
 #slide-radio-1:checked ~ .slides { 
@@ -199,7 +233,7 @@ footer {
     background: #007bff;
 }
 
-/* --- DROPDOWN NAVIGATION STYLING --- */
+/* --- DROPDOWN NAVIGATION STYLING (No change here) --- */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -237,6 +271,9 @@ footer {
 /* Sticky WhatsApp Button */
 .whatsapp-sticky {
     position: fixed;
+    /* FIX 4: WHATSAPP SIZE FIX */
+    width: 45px; /* Size kammi panrom */
+    height: 45px;
     bottom: 25px; 
     right: 25px; 
     z-index: 10000; 
@@ -246,8 +283,9 @@ footer {
     transform: scale(1.05);
 }
 .whatsapp-sticky img {
-    width: 60px; 
-    height: 60px;
+    /* FIX 4: WHATSAPP IMAGE FIT */
+    width: 100%; 
+    height: 100%;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
@@ -257,7 +295,7 @@ footer {
     .container { width: 95%; }
     .section { padding: 40px 0; }
     
-    /* FIX 1: Navigation Container (Logo Left, Links Right) */
+    /* FIX 1: Navigation Container (Logo Left, Links Right) - No Change Needed */
     nav .container { 
         flex-direction: row; 
         justify-content: space-between; 
@@ -266,23 +304,27 @@ footer {
         width: 100%;
     }
     
-    /* FIX 2: Logo Shrink/Change */
+    /* FIX 2: Logo Shrink/Change - No Change Needed (already fixed in index.html, but keeping mobile rules) */
     .logo { 
         font-size: 1.3em;
         padding: 15px 0;
         flex-shrink: 0;
     }
-    .logo .logo-full { display: none; } /* Hide full logo on mobile */
-    .logo .logo-short { display: inline; } /* Ensure UMM is shown on mobile */
+    .logo .logo-full { display: none !important; } 
+    .logo .logo-short { display: inline !important; } 
 
-    /* FIX 3: Horizontal Fit for Nav Links (MUST FIT ON ONE LINE) */
+    /* FIX 3: Horizontal Fit for Nav Links - Mobile Scroll Down Fix is here */
     .nav-links { 
+        /* The original user code makes this horizontal. To fix vertical scroll: */
+        /* If you intended a full-screen side menu: you need a menu toggle button in HTML */
+        /* Sticking to the horizontal links fix: */
         flex-direction: row; 
-        width: auto; /* Take only required space */
+        width: auto; 
         margin-top: 0;
         flex-wrap: nowrap; /* CRUCIAL: Keeps links horizontal */
-        justify-content: flex-end; /* Pushes links to the right */
-        overflow-x: hidden; /* Hides any overflow outside */
+        justify-content: flex-end; 
+        /* The original overflow-x: hidden here caused issues, use overflow-x: auto if you want scroll */
+        /* Since the links were minimized, we assume they fit */
     }
     
     /* FIX 4: Shrink and Simplify links for horizontal fit */
@@ -292,20 +334,20 @@ footer {
         border-bottom: none;
     }
     .dropdown a.dropbtn, .nav-links > a {
-        padding: 8px 4px; /* Very small padding */
-        font-size: 0.75em; /* SMALLER TEXT SIZE */
+        padding: 8px 4px; 
+        font-size: 0.75em; 
         font-weight: 600;
         text-align: center;
         color: #004080;
         background-color: transparent;
-        border-right: none; /* Remove vertical separators */
+        border-right: none; 
     }
 
     /* FIX 5: Dropdown content alignment (Submenus stack right-aligned) */
     .dropdown-content {
         position: absolute; 
         left: auto; 
-        right: 0; /* Aligns dropdown content to the right edge of the nav bar */
+        right: 0; 
         min-width: 150px;
         text-align: right;
     }
@@ -327,7 +369,13 @@ footer {
     }
     
     /* Blog Card width fix */
-    .section > .container > div > div {
+    /* This targets the three blog preview cards */
+    .section > .container > div[style*="justify-content: center"] > div {
         width: 100% !important; 
+        margin-bottom: 20px; /* Add space between stacked cards */
+    }
+    .section > .container > div[style*="justify-content: center"] {
+        flex-direction: column; /* Stack the cards vertically */
+        gap: 0 !important;
     }
 }
