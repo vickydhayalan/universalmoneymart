@@ -259,12 +259,14 @@ footer {
     nav .container { 
         flex-direction: column; 
         text-align: center; 
-        align-items: center; /* FIX */
+        align-items: center; 
     }
     .nav-links { 
         flex-direction: column; 
         width: 100%;
         margin-top: 10px;
+        /* Ensures the whole nav links area is block */
+        display: block !important; 
     }
     
     /* FIX 2: Mobile Dropdown Button Alignment */
@@ -288,9 +290,10 @@ footer {
         padding: 10px 0;
         cursor: pointer;
         font-weight: 600;
+        /* FIX: Ensures the whole area is clickable and centered */
+        text-align: center; 
         color: #004080;
         background-color: #fafafa;
-        text-align: center; /* Ensures text is centered in the button */
     }
     /* Ensure sub-links are visible on mobile */
     .dropdown-content a {
@@ -298,6 +301,7 @@ footer {
         font-size: 0.9em;
         background-color: #f4f4f4;
         text-align: center; /* Centers the sub-links too */
+        border-top: 1px dashed #ddd; /* Separator for sub-links */
     }
 
     /* Text Size */
