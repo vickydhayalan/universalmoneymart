@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Money Mart | Financial Services, Portfolio & Blog</title>
     <link rel="stylesheet" href="style.css">
@@ -21,73 +21,49 @@
 
     <nav>
         <div class="container">
-            <!-- Logo (Show UMM on Mobile, Full on Desktop) -->
             <div class="logo">
                 <span class="logo-full">Universal Money Mart</span>
                 <span class="logo-short">UMM</span>
             </div>
-            
-            <!-- Hamburger Icon (Mobile Only) -->
             <div class="mobile-menu-icon" onclick="toggleMenu()">
                 &#9776; <!-- Hamburger Icon -->
             </div>
+           <div class="nav-links">
+    <!-- GROUP 1: SERVICES (Hover to show sub-links) -->
+    <div class="dropdown">
+        <a href="#" class="dropbtn">Services</a>
+        <div class="dropdown-content">
+            <a href="#services">Financial Services</a>
+            <a href="#portfolio">Personal Portfolio</a>
+        </div>
+    </div>
 
-            <!-- DESKTOP Navigation Links (Hidden on Mobile) -->
-            <div class="nav-links">
-                <!-- GROUP 1: SERVICES -->
-                <div class="dropdown">
-                    <a href="#" class="dropbtn">Services</a>
-                    <div class="dropdown-content">
-                        <a href="#services">Financial Services</a>
-                        <a href="#portfolio">Personal Portfolio</a>
-                    </div>
-                </div>
+    <!-- GROUP 2: TOOLS (Hover to show Calculators/Dashboards) -->
+    <div class="dropdown">
+        <a href="#" class="dropbtn">Tools</a>
+        <div class="dropdown-content">
+            <a href="mf_calculator.html">Calculator (SIP/SWP/EMI)</a>
+            <a href="retirement_planner.html">Retirement Planner</a>
+            <a href="dashboard.html">Data Dashboard</a>
+        </div>
+    </div>
 
-                <!-- GROUP 2: TOOLS -->
-                <div class="dropdown">
-                    <a href="#" class="dropbtn">Tools</a>
-                    <div class="dropdown-content">
-                        <a href="mf_calculator.html">Calculator (SIP/STP/SWP/EMI)</a>
-                        <a href="retirement_planner.html">Retirement Planner</a>
-                        <a href="dashboard.html">Data Dashboard</a>
-                    </div>
-                </div>
-
-                <!-- GROUP 3: LEARNING -->
-                <div class="dropdown">
-                    <a href="#" class="dropbtn">Learning</a>
-                    <div class="dropdown-content">
-                        <a href="#blog">Blog & Insights</a>
-                        <a href="videos.html">Video Library</a>
-                    </div>
-                </div>
-                
-                <!-- CONTACT LINK -->
-                <a href="#contact" class="dropbtn">Contact</a>
-            </div>
+    <!-- GROUP 3: LEARNING (Hover to show Blog/Videos) -->
+    <div class="dropdown">
+        <a href="#" class="dropbtn">Learning</a>
+        <div class="dropdown-content">
+            <a href="#blog">Blog & Insights</a>
+            <a href="videos.html">Video Library</a>
+        </div>
+    </div>
+    
+    <!-- CONTACT LINK (Always separate) -->
+    <a href="#contact" class="dropbtn">Contact</a>
+</div>
+    </div>
+</div>
         </div>
     </nav>
-    
-    <!-- MOBILE MENU (Hidden on Desktop, Full Stack Menu) -->
-    <div id="mobile-menu">
-        
-        <!-- SERVICES -->
-        <a href="#services" onclick="toggleMenu()">Services</a>
-        <a href="#portfolio" onclick="toggleMenu()">Personal Portfolio</a>
-        
-        <!-- TOOLS -->
-        <a href="mf_calculator.html" onclick="toggleMenu()">MF Calculator</a>
-        <a href="retirement_planner.html" onclick="toggleMenu()">Retirement Planner</a>
-        <a href="dashboard.html" onclick="toggleMenu()">Data Dashboard</a>
-
-        <!-- LEARNING -->
-        <a href="#blog" onclick="toggleMenu()">Blog & Insights</a>
-        <a href="videos.html" onclick="toggleMenu()">Video Library</a>
-        
-        <!-- CONTACT LINK -->
-        <a href="#contact" onclick="toggleMenu()">Contact Us</a>
-        
-    </div>
 
     <!-- Hero Section -->
     <div class="hero">
@@ -138,31 +114,184 @@
     </div>
 </div>
 
-<!-- Placeholder for remaining sections to maintain structure -->
-<div id="services" class="section">...</div>
-<div id="portfolio" class="section">...</div>
-<div id="testimonials" class="section">...</div>
-<div id="blog" class="section">...</div>
-<div id="contact" class="section">...</div>
-
-
-<a href="https://wa.me/917200752628" target="_blank" class="whatsapp-sticky">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Chat">
-</a>
-<footer>
-    <div class="container">
-        <p>&copy; 2025 Universal Money Mart | All Rights Reserved</p>
+    <div id="services" class="section">
+        <div class="container">
+            <h2>Our Core Services</h2>
+            <p>We offer tailored solutions to meet every financial goal.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Goal-Oriented Investment</h3>
+                    <p>We build customized portfolios aligned with your major life goals (e.g., house, child's education, retirement) using disciplined investing strategies.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Tax-Efficient Portfolio Structuring</h3>
+                    <p>Minimize your tax liabilities and maximize returns through intelligent tax planning and investment vehicle selection, legally saving your wealth.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Dedicated Portfolio Monitoring</h3>
+                    <p>Receive continuous, active management and rebalancing of your portfolio to ensure it stays on track, regardless of market volatility.</p>
+                </div>
+            </div>
+        </div>
     </div>
-</footer>
 
-<script>
-    // Placeholder for smooth scrolling, etc.
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            // Ensure menu closes after clicking a link
-            document.getElementById('mobile-menu').classList.remove('active');
-        });
-    });
-</script>
+    <div id="portfolio" class="section" style="background-color: #f0f0f5;">
+    <div class="container">
+        <h2>Personal Portfolio Success</h2>
+        <p style="font-size: 1.1em; max-width: 800px; margin: 10px auto 30px;">
+            We don't just invest; we strategize. Our focus is on achieving risk-adjusted returns through disciplined asset allocation tailored to your unique financial milestones.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 30px;">
+            <div style="text-align: center;">
+                <h3 style="color: #007bff; font-size: 2em; margin-bottom: 5px;">92%</h3>
+                <p style="color: #555;">Client Retention Rate</p>
+            </div>
+            <div style="text-align: center;">
+                <h3 style="color: #007bff; font-size: 2em; margin-bottom: 5px;">15+</h3>
+                <p style="color: #555;">Years of Combined Experience</p>
+            </div>
+            <div style="text-align: center;">
+                <h3 style="color: #007bff; font-size: 2em; margin-bottom: 5px;">$10M+</h3>
+                <p style="color: #555;">Assets Under Advisory</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="testimonials" class="section" style="background-color: #f8f9fa;">
+        <div class="container" style="max-width: 900px;">
+            <h2>What Our Investors Say</h2>
+            <p>Real success stories from our trusted clients. (வாடிக்கையாளர்களின் வெற்றிக் கதைகள்)</p>
+
+            <div class="services-grid" style="grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                
+                <div class="service-card" style="border-top: 5px solid #28a745;">
+                    <p style="font-style: italic;">"Vignesh's guidance helped me start my SIP planning for my child's education. The strategy was clear and easy to follow. Highly recommend Universal Money Mart!"</p>
+                    <h4 style="margin-top: 15px; color: #333;">- Rahul S. (IT Professional)</h4>
+                </div>
+
+                <div class="service-card" style="border-top: 5px solid #ffc107;">
+                    <p style="font-style: italic;">"I was confused about tax saving. Vignesh showed me the best options under ELSS and helped me save significant tax this year. Excellent personalized service."</p>
+                    <h4 style="margin-top: 15px; color: #333;">- Priya V. (Business Owner)</h4>
+                </div>
+            </div>
+            <a href="#contact" style="margin-top: 30px; display: inline-block; color: #007bff;">Share Your Success Story →</a>
+        </div>
+    </div>
+
+    <div id="blog" class="section">
+    <div class="container">
+            <h2>Latest Market Insights & Blog</h2>
+            <p style="font-size: 1.1em; max-width: 800px; margin: 10px auto 40px;">
+                Stay updated with our expert articles on market trends, taxation, and personal finance tips.
+            </p>
+            
+            <div style="text-align: left; margin-bottom: 40px;">
+                <h3 style="color: #004080; margin-bottom: 15px; text-align: center;">Featured Video Tutorials (Tamil)</h3>
+                <div class="video-grid">
+                    
+                    <div>
+                        <div class="video-responsive">
+                            <iframe 
+                                src="https://www.youtube.com/embed/dZQ35Rac40M?modestbranding=1" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <p style="font-size: 0.95em; margin-top: 10px; font-weight: 600;">Mutual Funds என்றால் என்ன? | Beginner Guide</p>
+                    </div>
+
+                    <div>
+                        <div class="video-responsive">
+                            <iframe 
+                                src="https://www.youtube.com/embed/V5VxBfEBWAo?modestbranding=1" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <p style="font-size: 0.95em; margin-top: 10px; font-weight: 600;">Mutual Fund Types Explained | Equity, Debt, Hybrid</p>
+                    </div>
+                    
+                    <div>
+                        <div class="video-responsive">
+                            <iframe 
+                                src="https://www.youtube.com/embed/LfdPw5FtvHY?modestbranding=1" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <p style="font-size: 0.95em; margin-top: 10px; font-weight: 600;">SIP என்ன? | Mutual Fund SIP Explained in Tamil</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; margin-bottom: 50px; display: flex; justify-content: center; gap: 20px;">
+                <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA?sub_confirmation=1" target="_blank" style="background-color: #FF0000; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; display: inline-block; transition: background-color 0.3s;">
+                    ▶️ Subscribe Now
+                </a>
+                <a href="videos.html" style="background-color: #007bff; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; display: inline-block; transition: background-color 0.3s;">
+                    View All Video Library →
+                </a>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 20px; text-align: left;">
+    <!-- Tax Planning Guide -->
+    <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+        <h3 style="color: #007bff; margin-top: 0;">2025 Tax Planning Guide</h3>
+        <p style="font-size: 0.9em; color: #666;">How to legally optimize your portfolio for maximum tax savings this fiscal year.</p>
+        <a href="blog_tax.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
+    </div>
+    
+    <!-- Market Volatility Decoded -->
+    <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+        <h3 style="color: #007bff; margin-top: 0;">Market Volatility Decoded</h3>
+        <p style="font-size: 0.9em; color: #666;">Expert insights on navigating recent market swings and maintaining a balanced portfolio.</p>
+        <a href="blog_volatility.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
+    </div>
+    
+    <!-- 5 Steps to Early Retirement -->
+    <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+        <h3 style="color: #007bff; margin-top: 0;">5 Steps to Early Retirement</h3>
+        <p style="font-size: 0.9em; color: #666;">A simple, effective roadmap to accelerate your savings and achieve financial independence sooner.</p>
+        <a href="blog_retirement.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
+    </div>
+</div>
+
+    <div id="contact" class="section" style="background-color: #f0f0f5; padding-bottom: 80px;">
+    <div class="container" style="max-width: 700px; text-align: left;">
+        <h2>Ready to Talk?</h2>
+        <p style="font-size: 1.1em; margin-bottom: 30px; text-align: center;">
+            Schedule a free consultation with our financial advisors today.
+        </p>
+
+        <form action="https://formspree.io/f/xqawebje" method="POST" style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
+            <div style="margin-bottom: 15px;">
+                <label for="name" style="display: block; font-weight: 600; margin-bottom: 5px;">Full Name:</label>
+                <input type="text" name="name" id="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="email" style="display: block; font-weight: 600; margin-bottom: 5px;">Email:</label>
+                <input type="email" name="_replyto" id="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="message" style="display: block; font-weight: 600; margin-bottom: 5px;">Your Query:</label>
+                <textarea name="message" id="message" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+            </div>
+            <button type="submit" style="background-color: #004080; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: background-color 0.3s; width: 100%;">
+                Send Consultation Request
+            </button>
+        </form>
+    </div>
+</div>
+    
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-sticky">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Chat">
+    </a>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Universal Money Mart | All Rights Reserved</p>
+        </div>
+    </footer>
+
 </body>
 </html>
