@@ -31,8 +31,15 @@
             z-index: 10000;
         }
 
+        /* MODAL POP-UP EFFECT: Background Overlay (REMOVED: User wants transparent) */
+        body.menu-open:after {
+            /* Removing the dark overlay */
+            background: transparent !important;
+            z-index: 1010;
+        }
+
         /* ----------------------------------------------------- */
-        /* --- MOBILE MENU/SIDEBAR STYLING (Applies to all screens for safety) --- */
+        /* --- MOBILE MENU/SIDEBAR STYLING --- */
         /* ----------------------------------------------------- */
         .menu-toggle {
             display: none;
@@ -42,50 +49,26 @@
             z-index: 1030;
         }
 
-        /* MODAL POP-UP EFFECT: Background Overlay */
-        body.menu-open:after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
-            z-index: 1010; /* Sidebar-kku kela, content-kku mela */
-            pointer-events: auto;
-        }
-
         /* ----------------------------------------------------- */
         /* --- MOBILE/TABLET VIEW FIXES (<= 991px) --- */
         /* ----------------------------------------------------- */
         @media (max-width: 991px) { 
             
-            /* FIX 1: Logo Fix: UMM only on Mobile */
-            .logo .logo-full { 
-                display: none !important; 
-            }
-            .logo .logo-short { 
-                display: inline !important; 
-            }
-
-            /* FIX 1: Nav Bar Height/Weight Kammi Panna */
-            nav {
-                padding: 10px 0 !important; 
-            }
-            
-            /* SHOW HAMBURGER ICON */
-            .menu-toggle {
-                display: block;
-            }
+            /* Logo/Nav Bar Height/Weight Fixes */
+            .logo .logo-full { display: none !important; }
+            .logo .logo-short { display: inline !important; }
+            nav { padding: 10px 0 !important; }
+            .menu-toggle { display: block; }
 
             /* HIDE DESKTOP LINKS & MAKE IT A SIDEBAR */
             .nav-links {
                 position: fixed;
                 top: 0;
-                right: -220px; /* Sidebar Width is 220px */
-                width: 220px; /* SLIMMER SIDEBAR WIDTH */
+                right: -220px; 
+                width: 220px; 
                 height: 100%;
-                background-color: #004080; 
+                /* 🎨 Aesthetic FIX: Transparent/White Background */
+                background-color: rgba(255, 255, 255, 0.95) !important; /* Slightly transparent white */
                 box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
                 flex-direction: column;
                 padding-top: 60px;
@@ -99,49 +82,26 @@
                 right: 0; 
             }
 
-            /* Styling links inside the sidebar */
-            .nav-links .dropbtn, .nav-links > a {
-                color: white; 
+            /* Styling links inside the sidebar (FLAT LINKS) */
+            .nav-links a {
+                color: #004080; /* Blue text for contrast on white background */
                 padding: 12px 20px;
                 text-align: left;
                 width: 100%;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                border-bottom: 1px solid #ddd; /* Light separator line */
                 font-size: 1em;
+                font-weight: 500;
             }
-            
-            /* Dropdown content now shows vertically */
-            .dropdown-content {
-                position: static; 
-                background-color: #002e5b; 
-                box-shadow: none;
-                min-width: 100%;
-                border-radius: 0;
-                display: none;
-            }
-            .dropdown-content a {
-                padding: 10px 30px;
-                color: #ccc;
-            }
-            /* Show dropdown when the 'show' class is toggled by JS */
-            .dropdown.show .dropdown-content {
-                display: block !important;
-            }
-            /* Hides the desktop hover on mobile */
-            .dropdown:hover .dropdown-content {
-                display: none !important;
-            }
+            /* Remove all dropdown specific CSS for mobile */
+            .dropdown, .dropdown-content { display: none !important; } 
         }
 
         /* ----------------------------------------------------- */
         /* --- DESKTOP VIEW FIXES (>= 992px) --- */
         /* ----------------------------------------------------- */
         @media (min-width: 992px) {
-            .logo .logo-full { 
-                display: inline !important; 
-            }
-            .logo .logo-short { 
-                display: none !important; 
-            }
+            .logo .logo-full { display: inline !important; }
+            .logo .logo-short { display: none !important; }
             .nav-links {
                 display: flex !important; 
                 flex-wrap: nowrap !important; 
@@ -150,7 +110,7 @@
                 width: auto;
                 height: auto;
             }
-            /* Desktop hover must work */
+            /* Desktop links should still show sub-links on hover */
             .dropdown:hover .dropdown-content {
                 display: block !important; 
             }
@@ -171,36 +131,25 @@
             </div>
             
             <div class="nav-links" id="navLinks">
-                <div class="dropdown">
-                    <a href="#" class="dropbtn">Services</a>
-                    <div class="dropdown-content">
-                        <a href="#services">Financial Services</a>
-                        <a href="#portfolio">Personal Portfolio</a>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <a href="#" class="dropbtn">Tools</a>
-                    <div class="dropdown-content">
-                        <a href="mf_calculator.html">Calculator (SIP/STP/SWP/EMI)</a>
-                        <a href="retirement_planner.html">Retirement Planner</a>
-                        <a href="dashboard.html">Data Dashboard</a>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <a href="#" class="dropbtn">Learning</a>
-                    <div class="dropdown-content">
-                        <a href="#blog">Blog & Insights</a>
-                        <a href="videos.html">Video Library</a>
-                    </div>
-                </div>
                 
-                <a href="#contact" class="dropbtn">Contact</a>
+                <a href="#services">Services (All)</a>
+                <a href="#services">Financial Services</a>
+                <a href="#portfolio">Personal Portfolio</a>
+
+                <a href="#" class="dropbtn">Tools (All)</a>
+                <a href="mf_calculator.html">Calculator (SIP/STP/SWP/EMI)</a>
+                <a href="retirement_planner.html">Retirement Planner</a>
+                <a href="dashboard.html">Data Dashboard</a>
+
+                <a href="#" class="dropbtn">Learning (All)</a>
+                <a href="#blog">Blog & Insights</a>
+                <a href="videos.html">Video Library</a>
+                
+                <a href="#contact">Contact</a>
             </div>
         </div>
     </nav>
-
+    
     <div class="hero">
     <div class="container">
         <h1>Your Trusted Partner for Wealth Creation</h1>
@@ -428,43 +377,16 @@
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
             const body = document.body;
-            const dropdowns = document.querySelectorAll('.dropdown');
 
-            // 1. Sidebar Toggle Logic
+            // 1. Sidebar Toggle Logic (Works on single tap)
             if (menuToggle && navLinks) {
                 menuToggle.addEventListener('click', () => {
-                    // Toggles the main sidebar visibility (navLinks.active)
                     navLinks.classList.toggle('active');
-                    // Toggles the body class for the background overlay
                     body.classList.toggle('menu-open');
                 });
             }
             
-            // 2. Mobile Dropdown Toggle Logic (Single Tap Fix)
-            dropdowns.forEach(dropdown => {
-                const dropbtn = dropdown.querySelector('.dropbtn');
-                
-                dropbtn.addEventListener('click', function(event) {
-                    
-                    // Check if we are in mobile view (sidebar is used)
-                    if (window.innerWidth <= 991) {
-                        event.preventDefault(); // CRITICAL: Stop link from navigating/scrolling to top
-                        
-                        // Close other open dropdowns in the sidebar
-                        dropdowns.forEach(otherDropdown => {
-                            if (otherDropdown !== dropdown) {
-                                otherDropdown.classList.remove('show');
-                            }
-                        });
-                        
-                        // Toggle the current dropdown (opens/closes sub-links vertically)
-                        // This should now correctly apply/remove the 'show' class on a single tap
-                        dropdown.classList.toggle('show');
-                    }
-                });
-            });
-
-            // 3. Close sidebar and remove overlay when clicking outside or on an anchor link
+            // 2. Close sidebar when clicking outside or on an anchor link
             window.addEventListener('click', function(event) {
                 if (window.innerWidth <= 991 && navLinks.classList.contains('active')) {
                     
@@ -472,15 +394,10 @@
                     if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
                         navLinks.classList.remove('active');
                         body.classList.remove('menu-open');
-                        
-                        // Also close all dropdowns when the sidebar closes
-                        dropdowns.forEach(dropdown => {
-                            dropdown.classList.remove('show');
-                        });
                     }
                     
-                    // Logic 2: Close if user clicks a main link that is NOT a dropdown (like Contact)
-                    if (event.target.matches('#navLinks a:not(.dropbtn)')) {
+                    // Logic 2: Close if user clicks any link inside the sidebar
+                    if (event.target.matches('#navLinks a')) {
                         navLinks.classList.remove('active');
                         body.classList.remove('menu-open');
                     }
