@@ -83,26 +83,6 @@
                 <div class="chart-container h-full">
                     <div class="chart-title ml-4 mt-2">Mock Fund Performance (Last 12 Months)</div>
                     <svg id="line-chart" class="chart-svg"></svg>
-                    
-                    <!-- GEMINI ANALYSIS BUTTON -->
-                    <div class="mt-4 text-center">
-                        <button id="analyze-btn" onclick="runGeminiAnalysis()" 
-                                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150 shadow-md">
-                            ✨ Get Expert Analysis (Tamil)
-                        </button>
-                    </div>
-                    <!-- ANALYSIS RESULT BOX (Initial state is HIDDEN) -->
-                    <div id="analysis-result-container" class="mt-4 p-4 text-sm bg-yellow-100 border border-yellow-300 text-gray-700 rounded-lg hidden">
-                        <p id="analysis-text" class="font-semibold"></p>
-                        <div id="analysis-loading" class="text-center hidden">
-                            <svg class="animate-spin h-5 w-5 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            <p class="text-xs mt-1">Analyzing...</p>
-                        </div>
-                    </div>
-                    
                 </div>
             </div>
 
@@ -158,91 +138,8 @@
         
         // Helper function for formatting currency
         const formatCurrency = d3.format("$,.0f");
-        const apiKey = ""; // API key is provided by the canvas environment
 
-        // --- 2. Gemini API Call Logic ---
-        async function runGeminiAnalysis() {
-            // Updated ID for the result box
-            const resultContainer = document.getElementById('analysis-result-container'); 
-            const resultText = document.getElementById('analysis-text');
-            const loading = document.getElementById('analysis-loading');
-            const analyzeBtn = document.getElementById('analyze-btn');
-
-            analyzeBtn.disabled = true;
-            loading.classList.remove('hidden');
-            resultContainer.classList.remove('hidden'); // Ensure container is visible
-            resultText.textContent = 'Analysis starting...';
-
-            const dataSummary = `
-                Monthly Value Trend: ${lineData.map(d => `${d.month}: ${d.value}`).join(', ')}. 
-                Initial Value (Jan): ${lineData[0].value}. 
-                Final Value (Dec): ${lineData[lineData.length - 1].value}.
-                Asset Allocation: Equity ${pieData.find(d => d.asset === 'Equity').value}%, Debt ${pieData.find(d => d.asset === 'Debt').value}%, Gold ${pieData.find(d => d.asset === 'Gold').value}%.
-                Top Sector Exposure: Tech ${barData[0].percentage}%, Finance ${barData[1].percentage}%.
-            `;
-
-            const systemPrompt = "Act as a conservative financial advisor specializing in Mutual Funds. Provide a brief, single-paragraph analysis of the provided investment data. Use encouraging and advisory tone. The entire response MUST be in Tamil (Latin Script - Tanglish).";
-            
-            const userQuery = `Analyze this mock portfolio performance data: ${dataSummary}. Give feedback on the risk profile and performance trend, specifically mentioning the asset allocation and trend from Jan to Dec.`;
-
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: {
-                    parts: [{ text: systemPrompt }]
-                },
-            };
-            
-            // Retry logic with exponential backoff (max 3 retries)
-            const maxRetries = 3;
-            let response;
-
-            for (let i = 0; i < maxRetries; i++) {
-                try {
-                    response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (response.ok) {
-                        break; // Success
-                    } else if (response.status === 429) {
-                        // Too many requests - retry with backoff
-                        const delay = Math.pow(2, i) * 1000;
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                        if (i === maxRetries - 1) throw new Error("API rate limit exceeded after all retries.");
-                    } else {
-                        // Other error - stop retrying
-                        throw new Error(`API error: ${response.statusText}`);
-                    }
-                } catch (error) {
-                    console.error("Fetch attempt failed:", error);
-                    if (i === maxRetries - 1) {
-                        resultText.textContent = "Analysis failed. Please try again later. (Technical Error)";
-                        loading.classList.add('hidden');
-                        analyzeBtn.disabled = false;
-                        return;
-                    }
-                }
-            }
-
-            try {
-                const result = await response.json();
-                const text = result.candidates?.[0]?.content?.parts?.[0]?.text || "No analysis found.";
-                resultText.textContent = text;
-            } catch (e) {
-                resultText.textContent = "Error processing the analysis response.";
-                console.error("Error processing Gemini response:", e);
-            }
-            
-            loading.classList.add('hidden');
-            analyzeBtn.disabled = false;
-        }
-
-
-        // --- 3. Chart Rendering Functions ---
+        // --- 2. Chart Rendering Functions ---
 
         // Function to draw the Line Chart
         function drawLineChart() {
