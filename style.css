@@ -33,19 +33,18 @@ nav .container {
     color: #004080; 
 }
 .nav-links {
-    /* Ensures nav-links container uses Flexbox on Desktop */
     display: flex; 
     align-items: center; 
 }
-/* This style applies to the top-level group buttons */
+/* Top-level links (includes dropdown button style) */
 .nav-links .dropbtn, .nav-links > a {
     color: #555;
     text-decoration: none;
     padding: 10px 15px;
     font-weight: 500;
     transition: color 0.3s;
-    white-space: nowrap; /* Prevents wrapping */
-    display: block; /* Ensures padding works */
+    white-space: nowrap;
+    display: block;
 }
 .nav-links a:hover {
     color: #007bff;
@@ -105,7 +104,7 @@ footer {
     margin-top: 40px;
 }
 
-/* --- VIDEO STYLING --- */
+/* --- VIDEO AND SLIDER STYLING --- */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -213,8 +212,8 @@ footer {
     z-index: 10;
     border-radius: 6px;
     overflow: hidden;
-    left: 0; /* FIX: Aligning dropdown content to start exactly below the parent link */
-    top: 100%; /* Ensure it drops down cleanly */
+    left: 0; 
+    top: 100%; 
 }
 .dropdown-content a {
     color: #333;
@@ -256,15 +255,19 @@ footer {
     .container { width: 95%; }
     .section { padding: 40px 0; }
     
-    /* FIX: Navigation switches to vertical stack */
-    nav .container { flex-direction: column; text-align: center; }
+    /* FIX 1: Navigation Flexbox switches to vertical stack and center alignment */
+    nav .container { 
+        flex-direction: column; 
+        text-align: center; 
+        align-items: center; /* FIX */
+    }
     .nav-links { 
         flex-direction: column; 
         width: 100%;
         margin-top: 10px;
     }
     
-    /* Dropdown Mobile Fixes */
+    /* FIX 2: Mobile Dropdown Button Alignment */
     .dropdown {
         display: block;
         width: 100%;
@@ -278,6 +281,8 @@ footer {
         border-radius: 0;
         width: 100%;
     }
+    
+    /* FIX 3: Button Look and Center Text */
     .dropdown a.dropbtn {
         display: block;
         padding: 10px 0;
@@ -285,11 +290,28 @@ footer {
         font-weight: 600;
         color: #004080;
         background-color: #fafafa;
+        text-align: center; /* Ensures text is centered in the button */
     }
     /* Ensure sub-links are visible on mobile */
     .dropdown-content a {
         padding: 8px 20px;
         font-size: 0.9em;
         background-color: #f4f4f4;
+        text-align: center; /* Centers the sub-links too */
+    }
+
+    /* Text Size */
+    .hero h1 { font-size: 2em; }
+    .section h2 { font-size: 1.8em; }
+    
+    /* Grid Layout Fix (Stacking Cards) */
+    .services-grid, .video-grid {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+    }
+    
+    /* Blog Card width fix */
+    .section > .container > div > div {
+        width: 100% !important; 
     }
 }
