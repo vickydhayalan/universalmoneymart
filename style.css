@@ -280,9 +280,9 @@ footer {
         flex-direction: row; 
         width: auto; /* Take only required space */
         margin-top: 0;
-        flex-wrap: nowrap; 
-        justify-content: flex-end; 
-        overflow-x: hidden; 
+        flex-wrap: nowrap; /* CRUCIAL: Keeps links horizontal */
+        justify-content: flex-end; /* Pushes links to the right */
+        overflow-x: hidden; /* Hides any overflow outside */
     }
     
     /* FIX 4: Shrink and Simplify links for horizontal fit */
@@ -291,13 +291,14 @@ footer {
         display: inline-block;
         border-bottom: none;
     }
-    .dropdown a.dropbtn, .nav-links > a.dropbtn {
+    .dropdown a.dropbtn, .nav-links > a {
         padding: 8px 4px; /* Very small padding */
         font-size: 0.75em; /* SMALLER TEXT SIZE */
         font-weight: 600;
         text-align: center;
         color: #004080;
         background-color: transparent;
+        border-right: none; /* Remove vertical separators */
     }
 
     /* FIX 5: Dropdown content alignment (Submenus stack right-aligned) */
