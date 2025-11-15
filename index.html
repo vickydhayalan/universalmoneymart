@@ -1,67 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Money Mart | Financial Services, Portfolio & Blog</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        // Simple function to toggle the mobile menu visibility
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('active')) {
-                menu.classList.remove('active');
-            } else {
-                menu.classList.add('active');
-            }
-        }
-    </script>
 </head>
 <body>
 
     <nav>
         <div class="container">
+            <!-- LOGO FIX: Show UMM on Mobile, Full on Desktop -->
             <div class="logo">
                 <span class="logo-full">Universal Money Mart</span>
                 <span class="logo-short">UMM</span>
             </div>
-            <div class="mobile-menu-icon" onclick="toggleMenu()">
-                &#9776; <!-- Hamburger Icon -->
+            
+            <div class="nav-links">
+                <!-- GROUP 1: SERVICES (Hover to show sub-links) -->
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Services</a>
+                    <div class="dropdown-content">
+                        <a href="#services">Financial Services</a>
+                        <a href="#portfolio">Personal Portfolio</a>
+                    </div>
+                </div>
+
+                <!-- GROUP 2: TOOLS (Hover to show Calculators/Dashboards) -->
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Tools</a>
+                    <div class="dropdown-content">
+                        <a href="mf_calculator.html">Calculator (SIP/STP/SWP/EMI)</a>
+                        <a href="retirement_planner.html">Retirement Planner</a>
+                        <a href="dashboard.html">Data Dashboard</a>
+                    </div>
+                </div>
+
+                <!-- GROUP 3: LEARNING & CONTACT (Hover to show Blog/Videos) -->
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Learning</a>
+                    <div class="dropdown-content">
+                        <a href="#blog">Blog & Insights</a>
+                        <a href="videos.html">Video Library</a>
+                    </div>
+                </div>
+                
+                <!-- CONTACT LINK (Always separate) -->
+                <a href="#contact" class="dropbtn">Contact</a>
             </div>
-           <div class="nav-links">
-    <!-- GROUP 1: SERVICES (Hover to show sub-links) -->
-    <div class="dropdown">
-        <a href="#" class="dropbtn">Services</a>
-        <div class="dropdown-content">
-            <a href="#services">Financial Services</a>
-            <a href="#portfolio">Personal Portfolio</a>
-        </div>
-    </div>
-
-    <!-- GROUP 2: TOOLS (Hover to show Calculators/Dashboards) -->
-    <div class="dropdown">
-        <a href="#" class="dropbtn">Tools</a>
-        <div class="dropdown-content">
-            <a href="mf_calculator.html">Calculator (SIP/SWP/EMI)</a>
-            <a href="retirement_planner.html">Retirement Planner</a>
-            <a href="dashboard.html">Data Dashboard</a>
-        </div>
-    </div>
-
-    <!-- GROUP 3: LEARNING (Hover to show Blog/Videos) -->
-    <div class="dropdown">
-        <a href="#" class="dropbtn">Learning</a>
-        <div class="dropdown-content">
-            <a href="#blog">Blog & Insights</a>
-            <a href="videos.html">Video Library</a>
-        </div>
-    </div>
-    
-    <!-- CONTACT LINK (Always separate) -->
-    <a href="#contact" class="dropbtn">Contact</a>
-</div>
-    </div>
-</div>
         </div>
     </nav>
 
@@ -88,7 +74,6 @@
         </div>
         
         <div class="slider-container">
-            
             <input type="radio" name="slider" id="slide-radio-1">
             <input type="radio" name="slider" id="slide-radio-2">
             <input type="radio" name="slider" id="slide-radio-3">
@@ -112,8 +97,9 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 
+    <!-- Financial Services Section -->
     <div id="services" class="section">
         <div class="container">
             <h2>Our Core Services</h2>
@@ -135,6 +121,7 @@
         </div>
     </div>
 
+    <!-- Personal Portfolio Section -->
     <div id="portfolio" class="section" style="background-color: #f0f0f5;">
     <div class="container">
         <h2>Personal Portfolio Success</h2>
@@ -158,6 +145,7 @@
     </div>
 </div>
 
+    <!-- Testimonials Section -->
     <div id="testimonials" class="section" style="background-color: #f8f9fa;">
         <div class="container" style="max-width: 900px;">
             <h2>What Our Investors Say</h2>
@@ -179,6 +167,7 @@
         </div>
     </div>
 
+    <!-- Blog Section -->
     <div id="blog" class="section">
     <div class="container">
             <h2>Latest Market Insights & Blog</h2>
@@ -186,10 +175,12 @@
                 Stay updated with our expert articles on market trends, taxation, and personal finance tips.
             </p>
             
+            <!-- FEATURED VIDEO SECTION START -->
             <div style="text-align: left; margin-bottom: 40px;">
                 <h3 style="color: #004080; margin-bottom: 15px; text-align: center;">Featured Video Tutorials (Tamil)</h3>
                 <div class="video-grid">
                     
+                    <!-- Video 1: Mutual Funds என்றால் என்ன? -->
                     <div>
                         <div class="video-responsive">
                             <iframe 
@@ -201,6 +192,7 @@
                         <p style="font-size: 0.95em; margin-top: 10px; font-weight: 600;">Mutual Funds என்றால் என்ன? | Beginner Guide</p>
                     </div>
 
+                    <!-- Video 2: Mutual Fund Types Explained -->
                     <div>
                         <div class="video-responsive">
                             <iframe 
@@ -212,6 +204,7 @@
                         <p style="font-size: 0.95em; margin-top: 10px; font-weight: 600;">Mutual Fund Types Explained | Equity, Debt, Hybrid</p>
                     </div>
                     
+                    <!-- Video 3: SIP என்ன? -->
                     <div>
                         <div class="video-responsive">
                             <iframe 
@@ -224,6 +217,7 @@
                     </div>
                 </div>
             </div>
+            <!-- FEATURED VIDEO SECTION END -->
 
             <div style="text-align: center; margin-top: 30px; margin-bottom: 50px; display: flex; justify-content: center; gap: 20px;">
                 <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA?sub_confirmation=1" target="_blank" style="background-color: #FF0000; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; display: inline-block; transition: background-color 0.3s;">
@@ -234,29 +228,28 @@
                 </a>
             </div>
 
+            <!-- Blog Preview Cards -->
             <div style="display: flex; justify-content: center; gap: 20px; text-align: left;">
-    <!-- Tax Planning Guide -->
-    <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
-        <h3 style="color: #007bff; margin-top: 0;">2025 Tax Planning Guide</h3>
-        <p style="font-size: 0.9em; color: #666;">How to legally optimize your portfolio for maximum tax savings this fiscal year.</p>
-        <a href="blog_tax.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
+                <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+                    <h3 style="color: #007bff; margin-top: 0;">2025 Tax Planning Guide</h3>
+                    <p style="font-size: 0.9em; color: #666;">How to legally optimize your portfolio for maximum tax savings this fiscal year.</p>
+                    <a href="blog_tax.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
+                </div>
+                <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+                    <h3 style="color: #007bff; margin-top: 0;">Market Volatility Decoded</h3>
+                    <p style="font-size: 0.9em; color: #666;">Expert insights on navigating recent market swings and maintaining a balanced portfolio.</p>
+                    <a href="blog_volatility.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
+                </div>
+                <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+                    <h3 style="color: #007bff; margin-top: 0;">5 Steps to Early Retirement</h3>
+                    <p style="font-size: 0.9em; color: #666;">A simple, effective roadmap to accelerate your savings and achieve financial independence sooner.</p>
+                    <a href="blog_retirement.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <!-- Market Volatility Decoded -->
-    <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
-        <h3 style="color: #007bff; margin-top: 0;">Market Volatility Decoded</h3>
-        <p style="font-size: 0.9em; color: #666;">Expert insights on navigating recent market swings and maintaining a balanced portfolio.</p>
-        <a href="blog_volatility.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
-    </div>
-    
-    <!-- 5 Steps to Early Retirement -->
-    <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
-        <h3 style="color: #007bff; margin-top: 0;">5 Steps to Early Retirement</h3>
-        <p style="font-size: 0.9em; color: #666;">A simple, effective roadmap to accelerate your savings and achieve financial independence sooner.</p>
-        <a href="blog_retirement.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
-    </div>
-</div>
 
+    <!-- Contact Section -->
     <div id="contact" class="section" style="background-color: #f0f0f5; padding-bottom: 80px;">
     <div class="container" style="max-width: 700px; text-align: left;">
         <h2>Ready to Talk?</h2>
@@ -293,5 +286,33 @@
         </div>
     </footer>
 
+    <script>
+        // JS to toggle the mobile menu (Hamburger functionality)
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-nav-links');
+            menu.classList.toggle('active');
+        }
+
+        // Add a class to show the menu when needed (CSS handles the rest)
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuIcon = document.querySelector('.mobile-menu-icon');
+            if (menuIcon) {
+                menuIcon.addEventListener('click', () => {
+                    const navLinks = document.querySelector('#mobile-nav-links');
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            // Ensure dropdowns collapse when a link is clicked on mobile
+            document.querySelectorAll('#mobile-nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    const navLinks = document.querySelector('#mobile-nav-links');
+                    if (navLinks.classList.contains('active')) {
+                        // navLinks.classList.remove('active'); // Keep menu open for ease of use
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
