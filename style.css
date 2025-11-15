@@ -265,10 +265,11 @@ footer {
         flex-direction: column; 
         width: 100%;
         margin-top: 10px;
+        /* Ensure the entire dropdown area is block-level to take full width */
         display: block !important; 
     }
     
-    /* FIX 2: Mobile Dropdown Styling (Center Text, Full Width) */
+    /* FIX 2: Dropdown buttons should be full width and centered */
     .dropdown {
         display: block;
         width: 100%;
@@ -276,36 +277,38 @@ footer {
         margin-top: 0;
     }
     .dropdown-content {
-        position: relative; /* Stacks correctly inside the parent */
+        position: relative; 
         left: 0;
         box-shadow: none;
         border-radius: 0;
         width: 100%;
-        /* FIX: Ensure sub-links are centered on mobile */
+        /* Ensures sub-links are centered on mobile */
         text-align: center; 
     }
     
-    /* FIX 3: Button Look and Center Text */
-    .dropdown a.dropbtn {
+    /* FIX 3: Top-level links (Services, Tools, Learning, Contact) look like buttons */
+    .dropdown a.dropbtn, .nav-links > a.dropbtn {
         display: block;
-        padding: 10px 0;
+        padding: 15px 0; /* Increased vertical padding */
         cursor: pointer;
         font-weight: 600;
         color: #004080;
         background-color: #fafafa;
-        text-align: center; /* Ensures text is centered in the button */
-        font-size: 1.1em; /* Make text slightly smaller */
+        text-align: center; 
+        font-size: 1.1em; /* Clear visibility */
+        border-radius: 0;
     }
-    /* Ensure sub-links are visible on mobile */
+    
+    /* Sub-links look like clean separators */
     .dropdown-content a {
         padding: 8px 20px;
         font-size: 0.9em;
         background-color: #f4f4f4;
-        text-align: center; /* Centers the sub-links too */
-        border-top: 1px dashed #ddd; /* Separator for sub-links */
-        font-weight: normal; /* Less bold than main link */
+        text-align: center; 
+        border-top: 1px solid #ddd; 
+        font-weight: normal; 
     }
-
+    
     /* Hero Heading Fix */
     .hero h1 { font-size: 2em; }
     .section h2 { font-size: 1.8em; }
