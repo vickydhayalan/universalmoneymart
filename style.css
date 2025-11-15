@@ -9,7 +9,8 @@ body {
 }
 .container {
     width: 90%;
-    max-width: 1100px;
+    /* FIX: Increased max width for Desktop view to use more screen space */
+    max-width: 1250px; 
     margin: auto;
     padding: 0 15px;
 }
@@ -260,51 +261,55 @@ footer {
         flex-direction: column; 
         text-align: center; 
         align-items: center; 
+        padding: 10px 0; 
+    }
+    .logo {
+        margin-bottom: 5px;
     }
     .nav-links { 
         flex-direction: column; 
         width: 100%;
-        margin-top: 10px;
-        /* Ensures the whole nav links area is block */
+        margin-top: 5px;
         display: block !important; 
     }
     
-    /* FIX 2: Mobile Dropdown Button Alignment */
+    /* FIX 2: Mobile Dropdown Button Alignment and Size */
     .dropdown {
         display: block;
         width: 100%;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #eee; 
         margin-top: 0;
     }
     .dropdown-content {
-        position: relative; /* Stacks correctly inside the parent */
+        position: relative; 
         left: 0;
         box-shadow: none;
         border-radius: 0;
         width: 100%;
+        display: block; 
     }
     
-    /* FIX 3: Button Look and Center Text */
+    /* FIX 3: Button Look and Center Text (Ensures good touch targets) */
     .dropdown a.dropbtn {
         display: block;
-        padding: 10px 0;
+        padding: 12px 0; 
         cursor: pointer;
         font-weight: 600;
-        /* FIX: Ensures the whole area is clickable and centered */
-        text-align: center; 
+        font-size: 1.1em; 
         color: #004080;
         background-color: #fafafa;
+        text-align: center;
     }
-    /* Ensure sub-links are visible on mobile */
+    /* Sub-links in the dropdown */
     .dropdown-content a {
         padding: 8px 20px;
         font-size: 0.9em;
         background-color: #f4f4f4;
-        text-align: center; /* Centers the sub-links too */
-        border-top: 1px dashed #ddd; /* Separator for sub-links */
+        text-align: center;
+        border-top: 1px dashed #ddd; 
     }
-
-    /* Text Size */
+    
+    /* Ensure overall readability */
     .hero h1 { font-size: 2em; }
     .section h2 { font-size: 1.8em; }
     
