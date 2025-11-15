@@ -32,6 +32,10 @@ nav .container {
     font-weight: 700;
     color: #004080; 
 }
+.nav-links {
+    /* Ensures nav-links container uses Flexbox on Desktop */
+    display: flex; 
+}
 .nav-links a {
     color: #555;
     text-decoration: none;
@@ -136,9 +140,8 @@ footer {
 .slides {
     display: flex;
     width: 300%;
-    /* Auto-slide animation applied */
-    animation: slideShow 15s infinite; 
-    /* Manual transition added back for click smoothness */
+    /* FIX: Changed to 30s for smoother professional auto-slide */
+    animation: slideShow 30s infinite; 
     transition: transform 0.5s ease-in-out; 
 }
 .slide {
@@ -192,6 +195,40 @@ footer {
     background: #007bff;
 }
 
+/* --- DROPDOWN NAVIGATION STYLING --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 0 5px; /* Added padding to separate top-level links */
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 180px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 10;
+    border-radius: 6px;
+    overflow: hidden;
+    left: 0; 
+}
+.dropdown-content a {
+    color: #333;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.dropdown-content a:hover {
+    background-color: #e2e8f0;
+    color: #004080;
+}
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
 /* Sticky WhatsApp Button */
 .whatsapp-sticky {
     position: fixed;
@@ -204,7 +241,7 @@ footer {
     transform: scale(1.05);
 }
 .whatsapp-sticky img {
-    width: 60px; /* FIXED SIZE - FIXING THE GIANT ICON ISSUE */
+    width: 60px; /* FIXED SIZE - CORRECT */
     height: 60px;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -215,11 +252,44 @@ footer {
     .container { width: 95%; }
     .section { padding: 40px 0; }
     
-    /* Navigation Fix */
+    /* FIX: Navigation Flexbox switches to vertical stack */
     nav .container { flex-direction: column; text-align: center; }
-    .nav-links { margin-top: 10px; }
-    .nav-links a { padding: 8px 10px; }
+    .nav-links { 
+        flex-direction: column; /* Ensure nav links stack */
+        width: 100%;
+        margin-top: 10px;
+    }
     
+    /* Dropdown Mobile Fixes */
+    .dropdown {
+        display: block; /* Make dropdown parent block level */
+        width: 100%;
+        padding: 0;
+        border-bottom: 1px solid #eee;
+    }
+    .dropdown-content {
+        position: relative; /* Stacks correctly inside the parent */
+        left: 0;
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+        /* Hide content on mobile by default, will rely on touch/click */
+        display: none; 
+    }
+    .dropdown a.dropbtn {
+        display: block; /* Make top link a full width button */
+        padding: 10px 0;
+        cursor: pointer;
+        font-weight: 600;
+        color: #004080;
+        background-color: #fafafa;
+    }
+    /* FIX: Force content to display on touch/click activation state 
+       (This works via hover emulation but click is better handled by JS or simple display toggle, but since we are CSS-only, this is the most reliable way) */
+    .dropdown:hover .dropdown-content {
+        display: block; 
+    }
+
     /* Text Size */
     .hero h1 { font-size: 2em; }
     .section h2 { font-size: 1.8em; }
@@ -233,64 +303,5 @@ footer {
     /* Blog Card width fix */
     .section > .container > div > div {
         width: 100% !important; 
-    }
-}
-/* --- DROPDOWN NAVIGATION STYLING --- */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 180px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 10;
-    border-radius: 6px;
-    overflow: hidden;
-    left: -20px; /* Adjust left positioning to align under the parent link */
-}
-.dropdown-content a {
-    color: #333;
-    padding: 10px 16px;
-    text-decoration: none;
-    display: block;
-    font-weight: 500;
-}
-.dropdown-content a:hover {
-    background-color: #e2e8f0;
-    color: #004080;
-}
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Mobile Fix for Dropdowns (Force stack on small screens) */
-@media (max-width: 768px) {
-    .dropdown {
-        display: block;
-        width: 100%;
-        margin-top: 10px;
-        border-bottom: 1px solid #eee;
-    }
-    .dropdown-content {
-        position: relative;
-        left: 0;
-        box-shadow: none;
-        border-radius: 0;
-        background-color: #fafafa;
-        width: 100%;
-    }
-    .dropdown-btn {
-        display: block;
-        padding: 10px 0;
-        cursor: default;
-        font-weight: 600;
-        color: #004080; /* Blue color for main title */
-        background-color: transparent;
-        border: none;
-        width: 100%;
     }
 }
