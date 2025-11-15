@@ -1,126 +1,394 @@
-<script>
-    // --- 1. Mock Data --- 
-    const lineData = [
-        { month: "Jan", value: 42000 }, { month: "Feb", value: 43500 }, { month: "Mar", value: 41000 }, 
-        { month: "Apr", value: 45000 }, { month: "May", value: 47500 }, { month: "Jun", value: 46000 }, 
-        { month: "Jul", value: 48500 }, { month: "Aug", value: 51000 }, { month: "Sep", value: 49500 }, 
-        { month: "Oct", value: 52000 }, { month: "Nov", value: 54500 }, { month: "Dec", value: 56000 }
-    ];
-    const pieData = [
-        { asset: "Equity", value: 65 }, { asset: "Debt", value: 25 }, { asset: "Gold", value: 10 }
-    ];
-    const barData = [
-        { sector: "Tech", percentage: 25 }, { sector: "Finance", percentage: 20 }, { sector: "Pharma", percentage: 15 }, 
-        { sector: "Auto", percentage: 12 }, { sector: "FMCG", percentage: 10 }
-    ];
-    const formatCurrency = d3.format("$,.0f");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Visualization Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <style>
+        /* Custom Styles for Chart Containers */
+        .chart-container {
+            height: 350px;
+            width: 100%;
+            margin: 20px auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            padding: 10px;
+        }
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+        /* Style for D3 SVGs to ensure they are centered and visible */
+        .chart-svg {
+            display: block;
+            margin: auto;
+        }
+        .summary-card {
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            background-color: white;
+            transition: transform 0.3s;
+        }
+        .summary-card:hover {
+            transform: translateY(-3px);
+        }
+        /* --- LIVE MARKET CARD COLORS --- */
+        .live-card {
+            background-color: #f0f9ff;
+        }
+        .live-card:hover {
+            background-color: #e0f2fe;
+            transform: translateY(-2px);
+        }
+        /* ----------------------------------------------------- */
+        /* --- NAVIGATION / STICKY HEADER FIXES (Consistent with Index.html) --- */
+        /* ----------------------------------------------------- */
+        body { overflow-x: hidden !important; }
+        nav { position: sticky; top: 0; z-index: 1020; background: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        nav .container { width: 90%; max-width: 1100px; margin: auto; padding: 0 15px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5em; font-weight: 700; color: #004080; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; padding: 10px 10px; font-weight: 500; transition: color 0.3s; white-space: nowrap; display: block; font-size: 0.95em; color: #555; }
+        .nav-links a:hover { color: #007bff; }
+        .dropdown { position: relative; display: inline-block; padding: 0; }
+        .dropdown-content { display: none; position: absolute; background-color: #f9f9f9; min-width: 220px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); z-index: 10; border-radius: 6px; overflow: hidden; left: 0; top: 100%; }
+        .dropdown-content a { color: #333; padding: 10px 16px; text-decoration: none; display: block; font-weight: 500; white-space: nowrap; border-bottom: none !important; }
+        .dropdown-content a:hover { background-color: #e2e8f0; color: #004080; }
+        .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; color: #004080; z-index: 1030; }
+        .logo .logo-full { display: inline; }
+        .logo .logo-short { display: none; }
+        .whatsapp-sticky { position: fixed; width: 40px !important; height: 40px !important; bottom: 25px; right: 25px; z-index: 10000; }
 
-    // -----------------------------------------------------
-    // --- LIVE DATA FETCHING FUNCTION (API Calls) ---
-    // -----------------------------------------------------
-    function fetchLiveData() {
-        const API_KEY = "JPPFNZHKQSM6FV98"; 
+        /* --- MOBILE/TABLET VIEW FIXES --- */
+        @media (max-width: 991px) { 
+            .logo .logo-full { display: none !important; }
+            .logo .logo-short { display: inline !important; }
+            nav { padding: 10px 0 !important; }
+            .menu-toggle { display: block; }
+            .nav-links { position: fixed; top: 0; right: -220px; width: 220px; height: 100%; background-color: rgba(255, 255, 255, 0.95) !important; box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); flex-direction: column; padding-top: 60px; transition: right 0.3s ease-in-out; z-index: 1020; overflow-y: auto; display: flex !important; }
+            .nav-links.active { right: 0; }
+            .nav-links .dropbtn, .nav-links > a { color: #004080; padding: 12px 20px; text-align: left; width: 100%; border-bottom: 1px solid #ddd; font-size: 1em; font-weight: 500; }
+            .dropdown-content { position: static; background-color: #f0f0f5; box-shadow: none; min-width: 100%; border-radius: 0; display: none; }
+            .dropdown-content a { color: #555; padding: 8px 30px; border-bottom: none !important; }
+            .dropdown.show .dropdown-content { display: block !important; }
+        }
 
-        const updateCard = (id, price, change, isPositive) => {
-            document.getElementById(`${id}-price`).textContent = price;
-            const changeElement = document.getElementById(`${id}-change`);
-            const arrow = isPositive ? '<i class="fas fa-arrow-up"></i>' : '<i class="fas fa-arrow-down"></i>';
-            changeElement.innerHTML = `${arrow} ${change}`;
-            changeElement.className = `text-xs font-semibold ${isPositive ? 'text-green-600' : 'text-red-600'}`;
-        };
-
-        // --- Mock data for safety (will be overwritten if API works) ---
-        document.getElementById('nifty-price').textContent = '---';
-        document.getElementById('sensex-price').textContent = '---';
-        document.getElementById('gold-price').textContent = '---';
-        document.getElementById('usdinr-price').textContent = '---';
-
-        // 1. Fetch SENSEX Price (BSE.BOM) - This request MUST show in Network tab now
-        fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=BSE.BOM&apikey=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data['Global Quote']) {
-                    const quote = data['Global Quote'];
-                    const price = parseFloat(quote['05. price']).toFixed(2);
-                    const changePercent = parseFloat(quote['10. change percent'].replace('%', ''));
-                    updateCard('sensex', `₹${price}`, `${changePercent}%`, changePercent >= 0);
-                } else {
-                    // Display error if API limits hit
-                    document.getElementById('sensex-price').textContent = 'Limit Hit';
-                }
-            })
-            .catch(err => {
-                console.error('Sensex Fetch Error:', err);
-                document.getElementById('sensex-price').textContent = 'Net Fail';
-            });
+        /* --- DESKTOP VIEW FIXES --- */
+        @media (min-width: 992px) {
+            .logo .logo-full { display: inline !important; }
+            .logo .logo-short { display: none !important; }
+            .nav-links { display: flex !important; flex-wrap: nowrap !important; position: static !important; background-color: transparent !important; width: auto !important; height: auto !important; box-shadow: none !important; padding-top: 0 !important; flex-direction: row !important; }
+            .dropdown:hover .dropdown-content { display: block !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    
+    <nav id="main-nav">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-full">Universal Money Mart</span>
+                <span class="logo-short">UMM</span>
+            </div>
             
-        // 2. Fetch USD/INR Rate
-        fetch(`https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=INR&apikey=${API_KEY}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data['Realtime Currency Exchange Rate']) {
-                    const rate = parseFloat(data['Realtime Currency Exchange Rate']['5. Exchange Rate']).toFixed(2);
-                    updateCard('usdinr', rate, `Forex Rate`, true); 
-                }
-            })
-            .catch(err => {
-                 document.getElementById('usdinr-price').textContent = 'Net Fail';
-            });
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Services</a>
+                    <div class="dropdown-content">
+                        <a href="index.html#services">Financial Services</a>
+                        <a href="index.html#portfolio">Personal Portfolio</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Tools</a>
+                    <div class="dropdown-content">
+                        <a href="mf_calculator.html">Calculator (SIP/STP/SWP/EMI)</a>
+                        <a href="retirement_planner.html">Retirement Planner</a>
+                        <a href="dashboard.html">Data Dashboard</a>
+                    </div>
+                </div>
+
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Learning</a>
+                    <div class="dropdown-content">
+                        <a href="index.html#blog">Blog & Insights</a>
+                        <a href="videos.html">Video Library</a>
+                    </div>
+                </div>
+                
+                <a href="index.html#contact" class="dropbtn">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto p-4 md:p-8 pt-0">
+        <header class="text-center py-6 bg-white shadow-md rounded-lg mb-8">
+            <h1 class="text-4xl font-bold text-blue-800">Live Investment Data Dashboard</h1>
+            <p class="text-gray-600 mt-2">Visualizing Mock Portfolio Performance and Allocation</p>
+        </header>
         
-        // Nifty/Gold placeholders remain until API symbols are confirmed
-    }
+        
+        <div class="text-2xl font-bold text-gray-700 mb-4 mt-8">
+            <i class="fas fa-chart-line text-green-500 mr-2"></i>Live Market Watch (via API)
+        </div>
+        
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            
+            <div class="summary-card live-card border-l-4 border-red-600">
+                <p class="text-sm font-medium text-gray-500">NIFTY 50</p>
+                <h2 id="nifty-price" class="text-2xl font-extrabold mt-1 text-red-600">---</h2>
+                <span id="nifty-change" class="text-xs font-semibold text-gray-600">Loading API data...</span>
+            </div>
+            
+            <div class="summary-card live-card border-l-4 border-blue-600">
+                <p class="text-sm font-medium text-gray-500">SENSEX</p>
+                <h2 id="sensex-price" class="text-2xl font-extrabold mt-1 text-blue-600">---</h2>
+                <span id="sensex-change" class="text-xs font-semibold text-gray-600">Loading API data...</span>
+            </div>
+            
+            <div class="summary-card live-card border-l-4 border-yellow-600">
+                <p class="text-sm font-medium text-gray-500">Gold (10g / INR)</p>
+                <h2 id="gold-price" class="text-2xl font-extrabold mt-1 text-yellow-600">---</h2>
+                <span id="gold-change" class="text-xs font-semibold text-gray-600">Loading API data...</span>
+            </div>
+
+            <div class="summary-card live-card border-l-4 border-green-600">
+                <p class="text-sm font-medium text-gray-500">USD/INR Rate</p>
+                <h2 id="usdinr-price" class="text-2xl font-extrabold mt-1 text-green-600">---</h2>
+                <span id="usdinr-change" class="text-xs font-semibold text-gray-600">Loading API data...</span>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            
+            <div class="summary-card border-l-4 border-blue-500">
+                <p class="text-gray-500 text-sm font-medium">Total Portfolio Value</p>
+                <h2 class="text-3xl font-extrabold text-gray-800 mt-1">₹54,500</h2>
+                <span class="text-xs text-green-600 font-semibold">+6.5% Since Last Month</span>
+            </div>
+            
+            <div class="summary-card border-l-4 border-yellow-500">
+                <p class="text-gray-500 text-sm font-medium">Latest NAV</p>
+                <h2 class="text-3xl font-extrabold text-gray-800 mt-1">₹32.45</h2>
+                <span class="text-xs text-green-600 font-semibold">↑ 0.15% (Today)</span>
+            </div>
+            
+            <div class="summary-card border-l-4 border-green-500">
+                <p class="text-gray-500 text-sm font-medium">Year-to-Date Gain (YTD)</p>
+                <h2 class="text-3xl font-extrabold text-gray-800 mt-1">₹12,500</h2>
+                <span class="text-xs text-green-600 font-semibold">+22.9% Annualized</span>
+            </div>
+            
+            <div class="summary-card border-l-4 border-red-500">
+                <p class="text-gray-500 text-sm font-medium">Risk Score (Out of 10)</p>
+                <h2 class="text-3xl font-extrabold text-gray-800 mt-1">7.5</h2>
+                <span class="text-xs text-red-600 font-semibold">High Volatility Exposure</span>
+            </div>
+
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <div class="lg:col-span-2 h-[400px]">
+                <div class="chart-container h-full">
+                    <div class="chart-title ml-4 mt-2">Mock Fund Performance (Last 12 Months)</div>
+                    <svg id="line-chart" class="chart-svg"></svg>
+                    
+                    <div class="mt-4 text-center">
+                        <a href="index.html#contact"
+                                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-150 shadow-md">
+                            Request Detailed Portfolio Report
+                        </a>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="chart-container h-full">
+                    <div class="chart-title ml-4 mt-2">Current Asset Allocation</div>
+                    <svg id="pie-chart" class="chart-svg"></svg>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3">
+                <div class="chart-container h-[400px]">
+                    <div class="chart-title ml-4 mt-2">Sector Exposure (Top 5)</div>
+                    <svg id="bar-chart" class="chart-svg"></svg>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-sticky">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Chat">
+    </a>
+    
+    <footer class="mt-8">
+        <div class="container mx-auto text-center py-6 bg-gray-700 text-white rounded-lg">
+            <p>&copy; 2025 Universal Money Mart | All Rights Reserved</p>
+        </div>
+    </footer>
+    
+    <script>
+        // --- 1. Mock Data --- 
+        const lineData = [
+            { month: "Jan", value: 42000 }, { month: "Feb", value: 43500 }, { month: "Mar", value: 41000 }, 
+            { month: "Apr", value: 45000 }, { month: "May", value: 47500 }, { month: "Jun", value: 46000 }, 
+            { month: "Jul", value: 48500 }, { month: "Aug", value: 51000 }, { month: "Sep", value: 49500 }, 
+            { month: "Oct", value: 52000 }, { month: "Nov", value: 54500 }, { month: "Dec", value: 56000 }
+        ];
+        const pieData = [
+            { asset: "Equity", value: 65 }, { asset: "Debt", value: 25 }, { asset: "Gold", value: 10 }
+        ];
+        const barData = [
+            { sector: "Tech", percentage: 25 }, { sector: "Finance", percentage: 20 }, { sector: "Pharma", percentage: 15 }, 
+            { sector: "Auto", percentage: 12 }, { sector: "FMCG", percentage: 10 }
+        ];
+        const formatCurrency = d3.format("$,.0f");
+
+        // -----------------------------------------------------
+        // --- LIVE DATA FETCHING FUNCTION (API Calls) ---
+        // -----------------------------------------------------
+        function fetchLiveData() {
+            const API_KEY = "JPPFNZHKQSM6FV98"; 
+
+            const updateCard = (id, price, change, isPositive) => {
+                document.getElementById(`${id}-price`).textContent = price;
+                const changeElement = document.getElementById(`${id}-change`);
+                const arrow = isPositive ? '<i class="fas fa-arrow-up"></i>' : '<i class="fas fa-arrow-down"></i>';
+                changeElement.innerHTML = `${arrow} ${change}`;
+                changeElement.className = `text-xs font-semibold ${isPositive ? 'text-green-600' : 'text-red-600'}`;
+            };
+
+            // --- Mock data for safety (will be overwritten if API works) ---
+            document.getElementById('nifty-price').textContent = 'Loading...';
+            document.getElementById('sensex-price').textContent = 'Loading...';
+            document.getElementById('gold-price').textContent = 'Loading...';
+            document.getElementById('usdinr-price').textContent = 'Loading...';
+
+            // 1. Fetch SENSEX Price (BSE.BOM) - This request MUST show in Network tab now
+            fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=BSE.BOM&apikey=${API_KEY}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data['Global Quote']) {
+                        const quote = data['Global Quote'];
+                        const price = parseFloat(quote['05. price']).toFixed(2);
+                        const changePercent = parseFloat(quote['10. change percent'].replace('%', ''));
+                        updateCard('sensex', `₹${price}`, `${changePercent}%`, changePercent >= 0);
+                    } else {
+                        document.getElementById('sensex-price').textContent = 'Limit Hit/Invalid Symb.';
+                        console.error("API Fetch Error: Sensex data not found in response.", data);
+                    }
+                })
+                .catch(err => {
+                    console.error('Sensex Fetch Error:', err);
+                    document.getElementById('sensex-price').textContent = 'Net Fail';
+                });
+                
+            // 2. Fetch USD/INR Rate
+            fetch(`https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=INR&apikey=${API_KEY}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data['Realtime Currency Exchange Rate']) {
+                        const rate = parseFloat(data['Realtime Currency Exchange Rate']['5. Exchange Rate']).toFixed(2);
+                        updateCard('usdinr', rate, `Forex Rate`, true); 
+                    } else {
+                        document.getElementById('usdinr-price').textContent = 'Limit Hit/Invalid Symb.';
+                    }
+                })
+                .catch(err => {
+                     document.getElementById('usdinr-price').textContent = 'Net Fail';
+                });
+        }
 
 
-    // --- 3. Chart Rendering Functions (D3) --- 
-    function drawLineChart() {
-        const container = document.querySelector(".lg\\:col-span-2.h-\\[400px\\] .chart-container");
-        const margin = { top: 30, right: 30, bottom: 50, left: 60 };
-        const width = container.clientWidth - margin.left - margin.right;
-        const height = container.clientHeight - margin.top - margin.bottom - 40; 
-        d3.select("#line-chart").html(""); 
-        const svg = d3.select("#line-chart").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-        const x = d3.scalePoint().domain(lineData.map(d => d.month)).range([0, width]).padding(0.5);
-        svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).tickSizeOuter(0)).selectAll("text").style("font-size", "12px");
-        const y = d3.scaleLinear().domain([d3.min(lineData, d => d.value) - 1000, d3.max(lineData, d => d.value) + 1000]).range([height, 0]);
-        svg.append("g").call(d3.axisLeft(y).tickFormat(d3.format("~s"))).selectAll("text").style("font-size", "12px");
-        const line = d3.line().x(d => x(d.month)).y(d => y(d.value)).curve(d3.curveMonotoneX);
-        svg.append("path").datum(lineData).attr("fill", "none").attr("stroke", "#007bff").attr("stroke-width", 3).attr("d", line);
-        svg.selectAll("dot").data(lineData).enter().append("circle").attr("cx", d => x(d.month)).attr("cy", d => y(d.value)).attr("r", 5).attr("fill", "#004080");
-        svg.append("text").attr("x", width / 2).attr("y", -5).attr("text-anchor", "middle").style("font-size", "14px").text("Portfolio Value Trend");
-    }
-    function drawPieChart() {
-        const container = document.getElementById("pie-chart").parentNode;
-        const margin = 20;
-        const width = container.clientWidth - margin;
-        const height = container.clientHeight - margin;
-        const radius = Math.min(width, height) / 2.5;
-        d3.select("#pie-chart").html(""); 
-        const svg = d3.select("#pie-chart").attr("width", width + margin).attr("height", height + margin).append("g").attr("transform", `translate(${width / 2 + margin / 2}, ${height / 2 + margin / 2})`);
-        const color = d3.scaleOrdinal().domain(pieData.map(d => d.asset)).range(["#4299e1", "#38b2ac", "#ecc94b"]); 
-        const pie = d3.pie().value(d => d.value);
-        const data_ready = pie(pieData);
-        const arc = d3.arc().innerRadius(radius * 0.5).outerRadius(radius);
-        svg.selectAll('slices').data(data_ready).enter().append('path').attr('d', arc).attr('fill', d => color(d.data.asset)).attr("stroke", "white").style("stroke-width", "2px");
-        svg.selectAll('labels').data(data_ready).enter().append('text').text(d => d.data.asset + " (" + d.data.value + "%)").attr("transform", d => `translate(${d3.arc().innerRadius(radius * 0.8).outerRadius(radius).centroid(d)})`).style("text-anchor", "middle").style("font-size", "12px");
-    }
-    function drawBarChart() {
-        const container = document.getElementById("bar-chart").parentNode;
-        const margin = { top: 30, right: 30, bottom: 50, left: 60 };
-        const width = container.clientWidth - margin.left - margin.right;
-        const height = container.clientHeight - margin.top - margin.bottom;
-        d3.select("#bar-chart").html(""); 
-        const svg = d3.select("#bar-chart").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-        const x = d3.scaleBand().range([0, width]).domain(barData.map(d => d.sector)).padding(0.2);
-        svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x)).selectAll("text").style("font-size", "12px");
-        const y = d3.scaleLinear().domain([0, d3.max(barData, d => d.percentage) + 5]).range([height, 0]);
-        svg.append("g").call(d3.axisLeft(y).tickFormat(d => d + "%"))].selectAll("text").style("font-size", "12px");
-        svg.selectAll("bar").data(barData).enter().append("rect").attr("x", d => x(d.sector)).attr("y", d => y(d.percentage)).attr("width", x.bandwidth()).attr("height", d => height - y(d.percentage)).attr("fill", "#f56565"); 
-        svg.selectAll(".bar-label").data(barData).enter().append("text").attr("class", "bar-label").attr("x", d => x(d.sector) + x.bandwidth() / 2).attr("y", d => y(d.percentage) - 5).attr("text-anchor", "middle").text(d => d.percentage + "%").style("font-size", "12px").style("fill", "#1f2937");
+        // --- 4. Chart Rendering Functions (D3) --- 
+        function drawLineChart() {
+            const container = document.querySelector(".lg\\:col-span-2.h-\\[400px\\] .chart-container");
+            const margin = { top: 30, right: 30, bottom: 50, left: 60 };
+            const width = container.clientWidth - margin.left - margin.right;
+            const height = container.clientHeight - margin.top - margin.bottom - 40; 
+            d3.select("#line-chart").html(""); 
+            const svg = d3.select("#line-chart").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+            const x = d3.scalePoint().domain(lineData.map(d => d.month)).range([0, width]).padding(0.5);
+            svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x).tickSizeOuter(0)).selectAll("text").style("font-size", "12px");
+            const y = d3.scaleLinear().domain([d3.min(lineData, d => d.value) - 1000, d3.max(lineData, d => d.value) + 1000]).range([height, 0]);
+            svg.append("g").call(d3.axisLeft(y).tickFormat(d3.format("~s"))).selectAll("text").style("font-size", "12px");
+            const line = d3.line().x(d => x(d.month)).y(d => y(d.value)).curve(d3.curveMonotoneX);
+            svg.append("path").datum(lineData).attr("fill", "none").attr("stroke", "#007bff").attr("stroke-width", 3).attr("d", line);
+            svg.selectAll("dot").data(lineData).enter().append("circle").attr("cx", d => x(d.month)).attr("cy", d => y(d.value)).attr("r", 5).attr("fill", "#004080");
+            svg.append("text").attr("x", width / 2).attr("y", -5).attr("text-anchor", "middle").style("font-size", "14px").text("Portfolio Value Trend");
+        }
+        function drawPieChart() {
+            const container = document.getElementById("pie-chart").parentNode;
+            const margin = 20;
+            const width = container.clientWidth - margin;
+            const height = container.clientHeight - margin;
+            const radius = Math.min(width, height) / 2.5;
+            d3.select("#pie-chart").html(""); 
+            const svg = d3.select("#pie-chart").attr("width", width + margin).attr("height", height + margin).append("g").attr("transform", `translate(${width / 2 + margin / 2}, ${height / 2 + margin / 2})`);
+            const color = d3.scaleOrdinal().domain(pieData.map(d => d.asset)).range(["#4299e1", "#38b2ac", "#ecc94b"]); 
+            const pie = d3.pie().value(d => d.value);
+            const data_ready = pie(pieData);
+            const arc = d3.arc().innerRadius(radius * 0.5).outerRadius(radius);
+            svg.selectAll('slices').data(data_ready).enter().append('path').attr('d', arc).attr('fill', d => color(d.data.asset)).attr("stroke", "white").style("stroke-width", "2px");
+            svg.selectAll('labels').data(data_ready).enter().append('text').text(d => d.data.asset + " (" + d.data.value + "%)").attr("transform", d => `translate(${d3.arc().innerRadius(radius * 0.8).outerRadius(radius).centroid(d)})`).style("text-anchor", "middle").style("font-size", "12px");
+        }
+        function drawBarChart() {
+            const container = document.getElementById("bar-chart").parentNode;
+            const margin = { top: 30, right: 30, bottom: 50, left: 60 };
+            const width = container.clientWidth - margin.left - margin.right;
+            const height = container.clientHeight - margin.top - margin.bottom;
+            d3.select("#bar-chart").html(""); 
+            const svg = d3.select("#bar-chart").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+            const x = d3.scaleBand().range([0, width]).domain(barData.map(d => d.sector)).padding(0.2);
+            svg.append("g").attr("transform", `translate(0,${height})`).call(d3.axisBottom(x)).selectAll("text").style("font-size", "12px");
+            const y = d3.scaleLinear().domain([0, d3.max(barData, d => d.percentage) + 5]).range([height, 0]);
+            svg.append("g").call(d3.axisLeft(y).tickFormat(d => d + "%"))].selectAll("text").style("font-size", "12px");
+            svg.selectAll("bar").data(barData).enter().append("rect").attr("x", d => x(d.sector)).attr("y", d => y(d.percentage)).attr("width", x.bandwidth()).attr("height", d => height - y(d.percentage)).attr("fill", "#f56565"); 
+            svg.selectAll(".bar-label").data(barData).enter().append("text").attr("class", "bar-label").attr("x", d => x(d.sector) + x.bandwidth() / 2).attr("y", d => y(d.percentage) - 5).attr("text-anchor", "middle").text(d => d.percentage + "%").style("font-size", "12px").style("fill", "#1f2937");
     }
 
     // --- Initial Load and Resize Handler --- 
     document.addEventListener('DOMContentLoaded', () => {
-        // Since we removed the complex nav, we only need to render charts and fetch data
+        // Navigation JS Logic
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const body = document.body;
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        if (menuToggle && navLinks) { menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); body.classList.toggle('menu-open'); }); }
+        dropdowns.forEach(dropdown => {
+            const dropbtn = dropdown.querySelector('.dropbtn');
+            dropbtn.addEventListener('click', function(event) {
+                if (window.innerWidth <= 991) {
+                    event.preventDefault(); 
+                    dropdowns.forEach(otherDropdown => { if (otherDropdown !== dropdown) { otherDropdown.classList.remove('show'); } });
+                    dropdown.classList.toggle('show');
+                }
+            });
+        });
+        window.addEventListener('click', function(event) {
+            if (window.innerWidth <= 991 && navLinks.classList.contains('active')) {
+                if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) { navLinks.classList.remove('active'); body.classList.remove('menu-open'); dropdowns.forEach(dropdown => { dropdown.classList.remove('show'); }); }
+                if (event.target.matches('#navLinks a')) { navLinks.classList.remove('active'); body.classList.remove('menu-open'); }
+            }
+        });
+
+        // Chart & Data Rendering
         function renderAll() {
             fetchLiveData(); 
             drawLineChart();
