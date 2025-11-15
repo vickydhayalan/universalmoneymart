@@ -91,7 +91,8 @@
                             ✨ Get Expert Analysis (Tamil)
                         </button>
                     </div>
-                    <div id="analysis-result" class="mt-4 p-4 text-sm bg-yellow-100 border border-yellow-300 text-gray-700 rounded-lg hidden">
+                    <!-- ANALYSIS RESULT BOX (Initial state is HIDDEN) -->
+                    <div id="analysis-result-container" class="mt-4 p-4 text-sm bg-yellow-100 border border-yellow-300 text-gray-700 rounded-lg hidden">
                         <p id="analysis-text" class="font-semibold"></p>
                         <div id="analysis-loading" class="text-center hidden">
                             <svg class="animate-spin h-5 w-5 text-blue-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -161,15 +162,16 @@
 
         // --- 2. Gemini API Call Logic ---
         async function runGeminiAnalysis() {
-            const resultDiv = document.getElementById('analysis-result');
+            // Updated ID for the result box
+            const resultContainer = document.getElementById('analysis-result-container'); 
             const resultText = document.getElementById('analysis-text');
             const loading = document.getElementById('analysis-loading');
             const analyzeBtn = document.getElementById('analyze-btn');
 
             analyzeBtn.disabled = true;
             loading.classList.remove('hidden');
-            resultDiv.classList.remove('hidden');
-            resultText.textContent = '';
+            resultContainer.classList.remove('hidden'); // Ensure container is visible
+            resultText.textContent = 'Analysis starting...';
 
             const dataSummary = `
                 Monthly Value Trend: ${lineData.map(d => `${d.month}: ${d.value}`).join(', ')}. 
