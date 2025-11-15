@@ -6,8 +6,7 @@ body {
     background-color: #f8f9fa;
     color: #333333;
     line-height: 1.6;
-    /* FIX 3: MOBILE RIGHT SIDE SPACE FIX */
-    overflow-x: hidden; 
+    /* overflow-x: hidden removed here as it's now in index.html for guaranteed fix */
 }
 .container {
     width: 90%;
@@ -20,10 +19,9 @@ nav {
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 15px 0;
-    /* FIX 2: STICKY HEADER FIX (Already correct, just guaranteeing z-index is high) */
     position: sticky;
     top: 0;
-    z-index: 1020; 
+    z-index: 1000;
 }
 nav .container {
     display: flex;
@@ -35,6 +33,12 @@ nav .container {
     font-weight: 700;
     color: #004080; 
 }
+
+/* FIX 1: Logo display is now fully managed by the <style> block in index.html */
+.logo .logo-full { display: inline; } /* Desktop Default */
+.logo .logo-short { display: none; } /* Mobile Default (will be overridden) */
+
+
 /* Desktop Links */
 .nav-links {
     display: flex; 
@@ -100,12 +104,11 @@ nav .container {
     margin-top: 0;
 }
 
-/* 🚀 PROFESSIONAL POLISH: STATS SECTION 🚀 */
-/* This targets the 92%, 15+, $10M+ numbers for emphasis */
+/* 🚀 PROFESSIONAL POLISH: STATS SECTION (Personal Portfolio Success) 🚀 */
 #portfolio h3 {
     font-size: 2.5em !important; 
     font-weight: 700;
-    color: #FF5722 !important; /* Use orange/accent color for impact */
+    color: #FF5722 !important; /* Accent Color */
     margin-bottom: 0;
 }
 #portfolio p {
@@ -113,25 +116,27 @@ nav .container {
     color: #004080; 
     font-weight: 500;
 }
+
 /* 🚀 PROFESSIONAL POLISH: TESTIMONIALS 🚀 */
 #testimonials .service-card p {
     font-size: 1.05em;
     line-height: 1.6;
     color: #444;
     font-style: italic;
-    /* Added padding for a cleaner quote look */
-    padding: 0 10px; 
+    padding: 0 10px;
 }
-/* PROFESSIONAL POLISH: Button Hover Effect */
-/* This will affect buttons in index.html like WhatsApp Now, Start Investing, Send Request */
+
+/* 🚀 PROFESSIONAL POLISH: CTA Hover Effects 🚀 */
 a[style*="background-color: #25D366"]:hover, 
 a[style*="background-color: #FF5722"]:hover, 
+a[style*="background-color: #FF0000"]:hover, /* Youtube Subscribe */
 button[type="submit"]:hover {
     opacity: 0.9;
     transform: translateY(-2px);
     transition: all 0.2s ease-in-out;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
+
 
 /* Footer */
 footer {
@@ -142,7 +147,7 @@ footer {
     margin-top: 40px;
 }
 
-/* --- VIDEO AND SLIDER STYLING (No change here) --- */
+/* --- VIDEO AND SLIDER STYLING --- */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -168,7 +173,7 @@ footer {
     border: none;
 }
 
-/* --- IMAGE SLIDER STYLING (No change here) --- */
+/* --- IMAGE SLIDER STYLING --- (No changes) */
 .slider-container {
     width: 100%;
     max-width: 900px;
@@ -206,14 +211,12 @@ footer {
     cursor: pointer;
     transition: background 0.3s;
 }
-/* Auto Slide Animation Logic */
 @keyframes slideShow {
     0%, 30% { transform: translateX(0%); } 
     33%, 63% { transform: translateX(calc(-100% / 3)); } 
     66%, 99% { transform: translateX(calc(-200% / 3)); } 
     100% { transform: translateX(0%); }
 }
-/* Dot Navigation Logic (Manual Clicks override auto-slide) */
 .slider-container input[type="radio"] { display: none; }
 #slide-radio-1:checked ~ .slides { 
     transform: translateX(0%); 
@@ -233,7 +236,7 @@ footer {
     background: #007bff;
 }
 
-/* --- DROPDOWN NAVIGATION STYLING (No change here) --- */
+/* --- DROPDOWN NAVIGATION STYLING --- */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -263,7 +266,6 @@ footer {
     background-color: #e2e8f0;
     color: #004080;
 }
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -271,9 +273,7 @@ footer {
 /* Sticky WhatsApp Button */
 .whatsapp-sticky {
     position: fixed;
-    /* FIX 4: WHATSAPP SIZE FIX */
-    width: 45px; /* Size kammi panrom */
-    height: 45px;
+    /* FIX 4: SIZE IS MANAGED BY INDEX.HTML, keeping general placement */
     bottom: 25px; 
     right: 25px; 
     z-index: 10000; 
@@ -283,7 +283,7 @@ footer {
     transform: scale(1.05);
 }
 .whatsapp-sticky img {
-    /* FIX 4: WHATSAPP IMAGE FIT */
+    /* FIX 4: SIZE IS MANAGED BY INDEX.HTML, keeping general styling */
     width: 100%; 
     height: 100%;
     border-radius: 50%;
@@ -295,87 +295,21 @@ footer {
     .container { width: 95%; }
     .section { padding: 40px 0; }
     
-    /* FIX 1: Navigation Container (Logo Left, Links Right) - No Change Needed */
-    nav .container { 
-        flex-direction: row; 
-        justify-content: space-between; 
-        align-items: center; 
-        padding: 0 10px; 
-        width: 100%;
-    }
+    /* FIX 1 & 2: Logo/Nav link display is now managed by the <style> block in index.html */
     
-    /* FIX 2: Logo Shrink/Change - No Change Needed (already fixed in index.html, but keeping mobile rules) */
-    .logo { 
-        font-size: 1.3em;
-        padding: 15px 0;
-        flex-shrink: 0;
-    }
-    .logo .logo-full { display: none !important; } 
-    .logo .logo-short { display: inline !important; } 
-
-    /* FIX 3: Horizontal Fit for Nav Links - Mobile Scroll Down Fix is here */
-    .nav-links { 
-        /* The original user code makes this horizontal. To fix vertical scroll: */
-        /* If you intended a full-screen side menu: you need a menu toggle button in HTML */
-        /* Sticking to the horizontal links fix: */
-        flex-direction: row; 
-        width: auto; 
-        margin-top: 0;
-        flex-wrap: nowrap; /* CRUCIAL: Keeps links horizontal */
-        justify-content: flex-end; 
-        /* The original overflow-x: hidden here caused issues, use overflow-x: auto if you want scroll */
-        /* Since the links were minimized, we assume they fit */
-    }
-    
-    /* FIX 4: Shrink and Simplify links for horizontal fit */
-    .dropdown {
-        flex-shrink: 0;
-        display: inline-block;
-        border-bottom: none;
-    }
-    .dropdown a.dropbtn, .nav-links > a {
-        padding: 8px 4px; 
-        font-size: 0.75em; 
-        font-weight: 600;
-        text-align: center;
-        color: #004080;
-        background-color: transparent;
-        border-right: none; 
-    }
-
-    /* FIX 5: Dropdown content alignment (Submenus stack right-aligned) */
-    .dropdown-content {
-        position: absolute; 
-        left: auto; 
-        right: 0; 
-        min-width: 150px;
-        text-align: right;
-    }
-    .dropdown-content a {
-        padding: 8px 10px;
-        font-size: 0.85em;
-        text-align: right;
-        border-top: 1px dashed #ddd; 
-    }
-    
-    /* Hero Heading Fix */
-    .hero h1 { font-size: 2em; }
-    .section h2 { font-size: 1.8em; }
-    
-    /* Grid Layout Fix (Stacking Cards) */
+    /* Grid Layout Fix (Stacking Cards) - No Change Needed */
     .services-grid, .video-grid {
         grid-template-columns: 1fr; 
         gap: 30px;
     }
     
-    /* Blog Card width fix */
-    /* This targets the three blog preview cards */
+    /* Blog Card width fix - No Change Needed */
     .section > .container > div[style*="justify-content: center"] > div {
         width: 100% !important; 
-        margin-bottom: 20px; /* Add space between stacked cards */
+        margin-bottom: 20px;
     }
     .section > .container > div[style*="justify-content: center"] {
-        flex-direction: column; /* Stack the cards vertically */
+        flex-direction: column; 
         gap: 0 !important;
     }
 }
