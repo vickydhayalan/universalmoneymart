@@ -9,6 +9,17 @@
     --color-bg-light: #f5f8fa; /* Very Light Grey-Blue */
     --color-nav-link: #495057; /* Greyish link color */
 }
+/* ----------------------------------------------------- */
+/* --- TESTIMONIAL STAR RATING STYLES --- */
+/* ----------------------------------------------------- */
+.star-rating {
+    color: var(--color-secondary); /* Gold color for stars */
+    font-size: 1.1em;
+    margin: 10px 0 15px; /* Spacing above and below the stars */
+}
+.star-rating i {
+    margin: 0 1px;
+}
 
 body {
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
