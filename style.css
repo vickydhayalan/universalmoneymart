@@ -187,32 +187,123 @@ nav .container {
 }
 
 /* ----------------------------------------------------- */
-/* --- ADVISOR SECTION STYLES (CORRECTION #3) --- */
+/* --- ADVISOR SECTION STYLES (PROFESSIONAL FIX) --- */
 /* ----------------------------------------------------- */
-.advisor-section { padding: 60px 0; text-align: left; background-color: var(--color-bg-light); }
-.advisor-flex { display: flex; align-items: center; gap: 60px; max-width: 1000px; margin: 0 auto; }
-.advisor-photo { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid white; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); margin-bottom: 15px; }
-.advisor-role { color: var(--color-secondary); font-weight: 600; font-size: 1.1em; margin-bottom: 20px; }
+.advisor-section { 
+    padding: 80px 0; 
+    background-color: var(--color-bg-light); 
+}
+.advisor-flex { 
+    display: flex; 
+    align-items: center; 
+    gap: 40px; /* Reduced gap */
+    max-width: 1000px; 
+    margin: 0 auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Added shadow for professionalism */
+    border-left: 8px solid var(--color-primary);
+}
 
-/* CORRECTION #3: ARN Info Centering */
+.advisor-proofs {
+    text-align: center;
+    flex-shrink: 0; /* Ensures this part doesn't shrink */
+    max-width: 200px; /* Constrain width */
+}
+
+.advisor-photo { 
+    width: 140px; /* Slightly reduced size */
+    height: 140px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 5px solid var(--color-secondary); /* Accent border color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); 
+    margin-bottom: 15px; 
+}
+.advisor-role { 
+    color: var(--color-success); /* Changed role color to success green */
+    font-weight: 700; 
+    font-size: 1em; 
+    margin-bottom: 15px; 
+}
+.arn-number { 
+    display: block; 
+    font-size: 0.95em; 
+    font-weight: 600; 
+    color: var(--color-text-dark); 
+    margin-top: 5px; 
+}
 .proof-info { 
     text-align: center; 
     margin-top: 15px; 
-    min-width: 200px;
-    max-width: 250px;
-    width: 100%; /* Ensure it takes full width for centering */
 }
-.arn-number { display: block; font-size: 1em; font-weight: 700; color: var(--color-primary); margin-bottom: 5px; }
 .proof-links { 
     display: flex; 
     justify-content: center; 
-    gap: 15px; 
-    margin-top: 10px; 
+    gap: 10px; 
+    margin-top: 5px;
+    font-size: 0.9em; 
+}
+.proof-links a {
+    color: var(--color-primary);
+    font-weight: 600;
 }
 
-.whatsapp-contact-advisor { margin-top: 30px; }
-.whatsapp-contact-advisor a { display: inline-flex; align-items: center; background-color: #25D366; color: white; padding: 12px 25px; border-radius: 50px; font-weight: 700; font-size: 1.1em; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.5); transition: background-color 0.3s; }
-.whatsapp-contact-advisor a:hover { background-color: #128C7E; }
+
+.advisor-details {
+    text-align: left; /* Text aligns left for readability */
+    flex-grow: 1;
+}
+
+.advisor-details h2 {
+    color: var(--color-primary); 
+    margin-bottom: 5px; 
+    font-size: 2em; /* Ensure heading size is prominent */
+    text-align: left;
+}
+.advisor-bio { 
+    color: #555; 
+    font-size: 1.1em;
+    font-style: italic;
+    border-left: 3px solid var(--color-secondary);
+    padding-left: 15px;
+    margin-top: 25px;
+}
+.whatsapp-contact-advisor { 
+    margin-top: 30px; 
+    text-align: left; /* Button aligns left */
+}
+
+
+/* --- RESPONSIVE FIX FOR ADVISOR SECTION (Mobile) --- */
+@media (max-width: 991px) {
+    .advisor-flex { 
+        flex-direction: column; 
+        text-align: center; 
+        padding: 20px;
+        border-left: none; /* Remove side border on mobile */
+        border-top: 5px solid var(--color-primary); /* Add top border instead */
+    }
+    .advisor-proofs {
+        max-width: 100%;
+    }
+    .advisor-details {
+        text-align: center; /* Center details on mobile */
+    }
+    .advisor-details h2 {
+        text-align: center;
+    }
+    .advisor-bio {
+        border-left: none; 
+        padding-left: 0;
+        text-align: center;
+        margin: 20px 0;
+    }
+    .whatsapp-contact-advisor {
+        text-align: center; /* Center button on mobile */
+    }
+}
 
 /* ----------------------------------------------------- */
 /* --- BLOG ARTICLES STYLES (CORRECTION #8: Horizontal) --- */
