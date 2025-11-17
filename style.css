@@ -659,6 +659,9 @@ footer {
     }
     
     /* Why UMM Grid Mobile Fix */
+    .why-umm-full-width {
+        padding: 0;
+    }
     @media (max-width: 550px) {
         .why-umm-grid {
             grid-template-columns: 1fr; 
