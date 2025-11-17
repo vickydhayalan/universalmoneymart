@@ -64,13 +64,12 @@
             z-index: 1020; 
             background: #ffffff;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
-            padding: 10px 0;
+            padding: 10px 0; /* Slightly reduced padding */
         }
         nav .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            /* Ensure alignment for perfect centering */
             min-height: 50px; 
         }
         /* Logo Styling */
@@ -80,13 +79,12 @@
             font-size: 1.8em;
             font-weight: 900; 
             color: var(--color-primary);
-            /* Reset specific padding to let nav container handle it */
             padding: 0;
         }
         .logo img {
-            width: 30px; 
-            height: 30px;
-            margin-right: 10px;
+            width: 35px; /* Slightly increased logo size */
+            height: 35px;
+            margin-right: 12px; /* Increased spacing */
             object-fit: contain;
         }
         .logo .logo-short { display: none !important; }
@@ -106,11 +104,11 @@
             transition: all 0.3s;
             border-radius: 6px; 
             font-size: 0.95em;
-            display: flex; /* Flex to center icon and text */
+            display: flex; 
             align-items: center;
         }
         .nav-links .dropbtn i, .nav-links > a i {
-             margin-right: 5px; /* Spacing between icon and text */
+             margin-right: 5px; 
         }
         .nav-links .dropbtn:hover, .nav-links > a:hover {
             color: var(--color-primary); 
@@ -277,7 +275,7 @@
             bottom: 30px; 
             right: 30px; 
             z-index: 10000; 
-            width: 55px; /* Slightly larger size */
+            width: 55px; 
             height: 55px;
             transition: transform 0.3s;
             border-radius: 50%;
