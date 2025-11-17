@@ -39,12 +39,12 @@ a { text-decoration: none; color: var(--color-primary); transition: color 0.3s; 
 a:hover { color: var(--color-secondary); }
 
 /* ----------------------------------------------------- */
-/* --- TESTIMONIAL STAR RATING STYLES (NEW) --- */
+/* --- TESTIMONIAL STAR RATING STYLES (New Feature) --- */
 /* ----------------------------------------------------- */
 .star-rating {
-    color: var(--color-secondary); /* Gold color for stars */
+    color: var(--color-secondary); 
     font-size: 1.1em;
-    margin: 10px 0 15px; /* Spacing above and below the stars */
+    margin: 10px 0 15px; 
 }
 .star-rating i {
     margin: 0 1px;
@@ -76,7 +76,6 @@ nav .container {
     color: var(--color-primary);
     padding: 0;
 }
-/* LOGO SIZE FIXES */
 .logo img {
     width: 40px; 
     height: 40px; 
@@ -86,13 +85,12 @@ nav .container {
 .logo .logo-full { display: inline !important; }
 .logo .logo-short { display: none !important; }
 
-/* Desktop Links Container */
+/* Desktop Links Container - Default for all sizes before media query */
 .nav-links {
     display: flex;
     gap: 15px; 
     align-items: center;
 }
-/* Top-level links (Pill-style hover) */
 .nav-links .dropbtn, .nav-links > a {
     color: var(--color-nav-link);
     text-decoration: none;
@@ -117,7 +115,6 @@ nav .container {
     background-color: var(--color-bg-light);
     color: var(--color-primary);
 }
-/* Simple Dropdown Content */
 .dropdown { position: relative; } 
 .dropdown-content {
     display: none;
@@ -144,7 +141,6 @@ nav .container {
     background-color: var(--color-bg-light);
     color: var(--color-primary);
 }
-/* Mobile toggle class */
 .dropdown.show .dropdown-content {
     display: block !important;
 }
@@ -178,7 +174,7 @@ nav .container {
 }
 
 /* ----------------------------------------------------- */
-/* --- ADVISOR SECTION STYLES (PROFESSIONAL FIX) --- */
+/* --- ADVISOR SECTION STYLES (FIXED) --- */
 /* ----------------------------------------------------- */
 .advisor-section { 
     padding: 80px 0; 
@@ -311,7 +307,7 @@ nav .container {
 /* Video Responsive Container */
 .video-responsive {
     overflow: hidden;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%; 
     position: relative;
     height: 0;
 }
@@ -552,7 +548,7 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
 }
 
 /* ----------------------------------------------------- */
-/* --- DESKTOP VIEW FIXES (>= 992px) --- */
+/* --- DESKTOP VIEW FIXES (>= 992px) (Final Nav Alignment Fix) --- */
 /* ----------------------------------------------------- */
 @media (min-width: 992px) {
     
@@ -576,7 +572,7 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
         gap: 15px !important; 
     }
     
-    /* 3. Reset Inner Mobile Drawer Container (This holds the links on desktop) */
+    /* 3. Reset Inner Mobile Drawer Container (Fixes horizontal flow) */
     .nav-links-inner {
         display: flex !important; 
         align-items: center !important;
@@ -589,7 +585,7 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
         box-shadow: none !important;
     }
     
-    /* 4. Reset Links inside Inner Container */
+    /* 4. Reset Links inside Inner Container to Desktop Style */
     .nav-links-inner .dropbtn, .nav-links-inner > a {
         padding: 8px 12px !important;
         font-weight: 600 !important;
