@@ -581,51 +581,66 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
 /* --- DESKTOP VIEW FIXES (>= 992px) --- */
 /* ----------------------------------------------------- */
 @media (min-width: 992px) {
-    /* FIX: Hide mobile toggle and restore full logo */
+    
+    /* 1. Toggle & Logo Reset */
     .menu-toggle { display: none !important; }
     .logo .logo-full { display: inline !important; }
     .logo .logo-short { display: none !important; }
     
-    /* FIX: Reset Nav Links container properties for desktop */
+    /* 2. Reset Main Nav Container */
     .nav-links { 
-        all: initial; /* CRITICAL: Resets all inherited properties from mobile */
-        display: flex !important; /* Force display flex */
+        position: static !important; 
+        display: flex !important; /* Force desktop layout */
+        width: auto !important; 
+        height: auto !important; 
+        transform: none !important; /* Remove mobile drawer shift */
+        background-color: transparent !important; 
+        padding-top: 0 !important;
+        box-shadow: none !important;
+        flex-direction: row !important;
         align-items: center;
-        gap: 15px; /* Re-apply desktop gap */
-        /* Re-apply desktop link container properties */
+        gap: 15px; /* Keep desktop gap */
     }
     
-    /* FIX: Reset Inner Mobile Drawer Container */
+    /* 3. Reset Inner Mobile Drawer Container (This holds the links on desktop) */
     .nav-links-inner {
-        all: initial; /* CRITICAL: Resets all mobile-specific properties */
-        display: flex !important; /* Forces horizontal layout */
+        all: unset; /* Aggressive Reset */
+        display: flex !important; /* Force horizontal layout */
         align-items: center;
-        gap: 15px; /* Use the same gap as parent */
+        gap: 15px;
+        /* Revert link container back to inline flow */
+        background-color: transparent !important;
+        height: auto !important;
+        width: auto !important;
+        float: none !important;
+        padding-top: 0 !important;
     }
     
-    /* FIX: Reapply desktop styles for links */
+    /* 4. Reset Links inside Inner Container */
     .nav-links-inner .dropbtn, .nav-links-inner > a {
-        color: var(--color-nav-link);
-        padding: 8px 12px; 
-        font-weight: 600;
-        transition: all 0.3s;
-        border-radius: 6px; 
-        font-size: 0.95em;
-        display: flex;
-        align-items: center;
-        background-color: transparent !important;
+        /* Re-apply desktop link styling */
+        padding: 8px 12px !important;
+        font-weight: 600 !important;
+        font-size: 0.95em !important;
+        color: var(--color-nav-link) !important;
         border-bottom: none !important;
+        background-color: transparent !important;
+        width: auto !important;
+        display: flex !important;
     }
     .nav-links-inner .dropbtn:hover, .nav-links-inner > a:hover {
-        color: var(--color-primary); 
-        background-color: var(--color-bg-light); 
+        background-color: var(--color-bg-light) !important; 
+        color: var(--color-primary) !important;
     }
     
-    /* FIX: Dropdown container reset */
-    .dropdown { position: relative; } 
+    /* 5. Dropdown Fixes */
     .dropdown:hover .dropdown-content { display: block !important; }
-    .dropdown-content { display: none; }
-    
-    /* Ensure only the original logo CSS applies */
-    .nav-links .logo { display: none !important; }
+    .dropdown-content { 
+        display: none; 
+        /* Reset positioning for desktop dropdown */
+        position: absolute;
+        left: 50%; 
+        transform: translateX(-50%);
+        top: calc(100% + 10px); 
+    }
 }
