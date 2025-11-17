@@ -139,7 +139,7 @@
                  display: none;
                  position: absolute;
                  background-color: #f9f9f9;
-                 min-width: 220px; 
+                 min-width: 250px; /* Matched CSS file update */
                  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
                  z-index: 10;
                  border-radius: 6px;
@@ -151,216 +151,6 @@
                 display: block !important; 
             }
         }
-        
-        /* ====================================================== */
-        /* FINANCE PROFESSIONAL STYLE - NEW STYLES INTEGRATED HERE */
-        /* ====================================================== */
-
-        /* 1. Typography and General Styling */
-        body {
-            font-family: 'Poppins', sans-serif; /* Use a clean, modern font if possible */
-        }
-        h1, h2, h3 {
-            color: #004080; /* Deep Blue for Headings */
-        }
-        a {
-            transition: color 0.3s;
-        }
-
-        /* 2. Professional Style Hero Section */
-        .hero-finance {
-            padding: 80px 0; /* Ensures ample vertical space */
-            background-color: #F8F9FA; /* Light background for contrast */
-            text-align: center;
-        }
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto 50px auto;
-        }
-        .hero-finance h1 {
-            font-size: 3em; 
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-        .hero-finance .subtitle {
-            font-size: 1.3em;
-            color: #555;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* 3. Call to Action Button */
-        .cta-button {
-            display: inline-block;
-            background-color: #28A745; /* Prominent Green for CTA (Success/Growth) */
-            color: white;
-            padding: 15px 35px;
-            border-radius: 8px;
-            font-size: 1.25em;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
-        .cta-button:hover {
-            background-color: #1F7A35;
-            box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
-        }
-
-        /* 4. Trust Bar (Data Visualization) */
-        .trust-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            padding: 30px 0;
-            border-top: 1px solid #E9ECEF;
-            border-bottom: 1px solid #E9ECEF;
-            margin-top: 30px;
-        }
-        .trust-item {
-            text-align: center;
-            flex-basis: 30%;
-        }
-        .trust-number {
-            font-size: 2.2em;
-            font-weight: 700;
-            color: #007BFF; /* Bright Blue for emphasis */
-            margin-bottom: 5px;
-        }
-        .trust-label {
-            font-size: 1em;
-            color: #6C757D;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .trust-separator {
-            width: 1px;
-            height: 60px;
-            background-color: #E9ECEF;
-        }
-
-        /* 5. Advisor Section (New Section) */
-        .advisor-section {
-            padding: 60px 0;
-            text-align: left;
-        }
-        .advisor-flex {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .advisor-details {
-            flex: 2;
-            min-width: 300px;
-        }
-        .advisor-proofs {
-            flex: 1;
-            text-align: center;
-            min-width: 250px;
-        }
-        .advisor-photo {
-            width: 100%;
-            max-width: 250px;
-            height: auto;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
-        }
-        .advisor-name {
-            font-size: 2em;
-            margin-bottom: 5px;
-        }
-        .advisor-role {
-            color: #28A745;
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 20px;
-        }
-        .advisor-bio {
-            font-style: italic;
-            color: #555;
-            margin-bottom: 30px;
-        }
-        .proof-links a {
-            display: inline-block;
-            font-size: 0.9em;
-            margin: 0 10px;
-            color: #007BFF;
-            text-decoration: underline;
-        }
-
-        .contact-buttons-small {
-            display: flex;
-            gap: 15px;
-        }
-        .small-cta {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            transition: opacity 0.3s;
-        }
-        .whatsapp-cta {
-            background-color: #25D366;
-            color: white;
-        }
-        .contact-cta {
-            background-color: #007BFF;
-            color: white;
-        }
-        .small-cta i {
-            margin-right: 8px;
-        }
-
-        /* Responsive Fixes for Trust Bar */
-        @media (max-width: 768px) {
-            .hero-finance h1 {
-                font-size: 2em;
-            }
-            .hero-finance .subtitle {
-                font-size: 1em;
-            }
-            .trust-bar {
-                flex-direction: column;
-                gap: 20px;
-                padding: 20px 0;
-            }
-            .trust-separator {
-                display: none;
-            }
-            .trust-item {
-                flex-basis: 100%;
-            }
-            .advisor-flex {
-                flex-direction: column;
-                text-align: center;
-            }
-            .advisor-details {
-                order: 2;
-            }
-            .advisor-proofs {
-                order: 1;
-            }
-            .contact-buttons-small {
-                justify-content: center;
-            }
-        }
-
-        /* Ensure existing section class is wide */
-        .section {
-            padding: 40px 0; 
-            text-align: center;
-        }
-
     </style>
 </head>
 <body>
@@ -425,8 +215,10 @@
         </div>
     </nav>
 
+    <!-- START OF NEW HERO SECTION - Professional Finance Look -->
     <div class="hero-finance">
         <div class="container">
+            <!-- 1. MAIN HEADLINE & CTA -->
             <div class="hero-content">
                 <h1>Start Your Journey Towards Financial Freedom.</h1>
                 <p class="subtitle">Invest in Mutual Funds, SIP, and Financial Planning with expert guidance and a trusted platform.</p>
@@ -434,6 +226,7 @@
                 <a href="#contact" class="cta-button">🚀 Start Investing Now - Get Free Consultation</a>
             </div>
 
+            <!-- 2. TRUST/DATA BAR (Professional Look) -->
             <div class="trust-bar">
                 <div class="trust-item">
                     <h3 class="trust-number">3000+</h3>
@@ -453,6 +246,9 @@
             
         </div>
     </div>
+    <!-- END OF NEW HERO SECTION -->
+
+    <!-- Advisor Info (Moved to a separate section for professional look) -->
     <div id="advisor-intro" class="section advisor-section">
         <div class="container">
             <div class="advisor-flex">
@@ -649,6 +445,7 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Sticky Icon (If you want to keep it) -->
     <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-sticky" style="position: fixed; bottom: 25px; right: 25px;">
         <img src="whatsapp_logo.png" alt="WhatsApp" style="width: 100%; height: 100%;">
     </a>
