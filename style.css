@@ -586,42 +586,46 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
     .logo .logo-full { display: inline !important; }
     .logo .logo-short { display: none !important; }
     
-    /* FIX: Reset Nav Links container to horizontal flex and remove mobile properties */
+    /* FIX: Reset Nav Links container properties for desktop */
     .nav-links { 
-        display: flex !important; 
-        position: static !important; 
-        width: auto !important; 
-        height: auto !important; 
-        box-shadow: none !important; 
-        padding-top: 0 !important; 
-        flex-direction: row !important; 
-        transform: none !important; 
-        background-color: transparent !important; 
+        all: initial; /* CRITICAL: Resets all inherited properties from mobile */
+        display: flex !important; /* Force display flex */
+        align-items: center;
+        gap: 15px; /* Re-apply desktop gap */
+        /* Re-apply desktop link container properties */
     }
     
-    /* FIX: Reset Inner Mobile Drawer Container - MUST use display: flex for horizontal menu */
+    /* FIX: Reset Inner Mobile Drawer Container */
     .nav-links-inner {
-        display: flex !important; /* Forces horizontal layout for desktop links */
-        width: auto;
-        padding-top: 0;
-        float: none;
-        box-shadow: none;
-        height: auto;
-        background-color: transparent;
+        all: initial; /* CRITICAL: Resets all mobile-specific properties */
+        display: flex !important; /* Forces horizontal layout */
+        align-items: center;
+        gap: 15px; /* Use the same gap as parent */
     }
     
-    /* FIX: Reapply desktop styles for links inside the inner container */
+    /* FIX: Reapply desktop styles for links */
     .nav-links-inner .dropbtn, .nav-links-inner > a {
+        color: var(--color-nav-link);
         padding: 8px 12px; 
         font-weight: 600;
-        border-bottom: none; 
-        background-color: transparent; 
-        /* Reset other mobile specific styling */
-        width: auto;
+        transition: all 0.3s;
+        border-radius: 6px; 
+        font-size: 0.95em;
         display: flex;
+        align-items: center;
+        background-color: transparent !important;
+        border-bottom: none !important;
+    }
+    .nav-links-inner .dropbtn:hover, .nav-links-inner > a:hover {
+        color: var(--color-primary); 
+        background-color: var(--color-bg-light); 
     }
     
-    /* FIX: Ensure Dropdown content is hidden by default and shown only on hover */
+    /* FIX: Dropdown container reset */
+    .dropdown { position: relative; } 
     .dropdown:hover .dropdown-content { display: block !important; }
-    .dropdown-content { display: none; } /* Re-establish default hide state for desktop */
+    .dropdown-content { display: none; }
+    
+    /* Ensure only the original logo CSS applies */
+    .nav-links .logo { display: none !important; }
 }
