@@ -1,12 +1,14 @@
-/* Base Styling */
+/* ---------------------------------------------------------------- */
+/* --- Base Styling (Updated for Professional Finance Look) --- */
+/* ---------------------------------------------------------------- */
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Font style is now managed by the <style> block in index.html for specific sections */
     margin: 0;
     padding: 0;
     background-color: #f8f9fa;
     color: #333333;
     line-height: 1.6;
-    /* overflow-x: hidden is now in index.html */
 }
 .container {
     width: 90%;
@@ -14,6 +16,13 @@ body {
     margin: auto;
     padding: 0 15px;
 }
+h1, h2, h3 {
+    color: #004080; /* Consistent Deep Blue */
+}
+a {
+    transition: color 0.3s;
+}
+
 /* Navigation Bar */
 nav {
     background-color: #ffffff;
@@ -73,7 +82,9 @@ nav .container {
     margin-bottom: 50px;
 }
 
-/* Hero Section */
+/* NOTE: .hero styles are for the old section structure. 
+   The new structure uses .hero-finance which is styled below.
+*/
 .hero {
     background-color: #e9f0f8;
     padding: 80px 0 40px; 
@@ -147,7 +158,9 @@ footer {
     margin-top: 40px;
 }
 
-/* --- VIDEO AND SLIDER STYLING --- */
+/* ---------------------------------------------------------------- */
+/* --- VIDEO AND SLIDER STYLING (Kept from original file) --- */
+/* ---------------------------------------------------------------- */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -174,6 +187,7 @@ footer {
 }
 
 /* --- IMAGE SLIDER STYLING --- */
+/* NOTE: Slider HTML was removed from index.html, but keeping CSS in case it's used elsewhere. */
 .slider-container {
     width: 100%;
     max-width: 900px;
@@ -288,12 +302,205 @@ footer {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* --- RESPONSIVE FIXES (Mobile View) --- */
-/* Mobile/Tablet responsive fixes are now in index.html for guaranteed override. */
+/* ---------------------------------------------------------------- */
+/* --- NEW PROFESSIONAL FINANCE SECTIONS STYLES --- */
+/* ---------------------------------------------------------------- */
+
+/* Hero Section */
+.hero-finance {
+    padding: 80px 0; 
+    background-color: #F8F9FA; 
+    text-align: center;
+}
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+}
+.hero-finance h1 {
+    font-size: 3em; 
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+.hero-finance .subtitle {
+    font-size: 1.3em;
+    color: #555;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Call to Action Button */
+.cta-button {
+    display: inline-block;
+    background-color: #28A745; /* Prominent Green for CTA (Success/Growth) */
+    color: white;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-size: 1.25em;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.cta-button:hover {
+    background-color: #1F7A35;
+    box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
+}
+
+/* Trust Bar (Data Visualization) */
+.trust-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 30px 0;
+    border-top: 1px solid #E9ECEF;
+    border-bottom: 1px solid #E9ECEF;
+    margin-top: 30px;
+}
+.trust-item {
+    text-align: center;
+    flex-basis: 30%;
+}
+.trust-number {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #007BFF; /* Bright Blue for emphasis */
+    margin-bottom: 5px;
+}
+.trust-label {
+    font-size: 1em;
+    color: #6C757D;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.trust-separator {
+    width: 1px;
+    height: 60px;
+    background-color: #E9ECEF;
+}
+
+/* Advisor Section */
+.advisor-section {
+    padding: 60px 0;
+    text-align: left;
+}
+.advisor-flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.advisor-details {
+    flex: 2;
+    min-width: 300px;
+}
+.advisor-proofs {
+    flex: 1;
+    text-align: center;
+    min-width: 250px;
+}
+.advisor-photo {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+.advisor-name {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+.advisor-role {
+    color: #28A745;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+.advisor-bio {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 30px;
+}
+.proof-links a {
+    display: inline-block;
+    font-size: 0.9em;
+    margin: 0 10px;
+    color: #007BFF;
+    text-decoration: underline;
+}
+
+.contact-buttons-small {
+    display: flex;
+    gap: 15px;
+}
+.small-cta {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.3s;
+}
+.whatsapp-cta {
+    background-color: #25D366;
+    color: white;
+}
+.contact-cta {
+    background-color: #007BFF;
+    color: white;
+}
+.small-cta i {
+    margin-right: 8px;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* --- RESPONSIVE FIXES (Mobile View) - Combined Section --- */
+/* ---------------------------------------------------------------- */
 @media (max-width: 768px) {
     .container { width: 95%; }
     .section { padding: 40px 0; }
     
+    /* NEW HERO SECTION RESPONSIVE FIXES */
+    .hero-finance h1 {
+        font-size: 2em;
+    }
+    .hero-finance .subtitle {
+        font-size: 1em;
+    }
+    .trust-bar {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0;
+    }
+    .trust-separator {
+        display: none;
+    }
+    .trust-item {
+        flex-basis: 100%;
+    }
+    .advisor-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    .advisor-details {
+        order: 2;
+    }
+    .advisor-proofs {
+        order: 1;
+    }
+    .contact-buttons-small {
+        justify-content: center;
+    }
+    
+    /* Original Responsive Fixes */
     /* Grid Layout Fix (Stacking Cards) */
     .services-grid, .video-grid {
         grid-template-columns: 1fr; 
