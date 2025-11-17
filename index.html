@@ -10,7 +10,7 @@
       crossorigin="anonymous"></script>
     
     <link rel="icon" type="image/png" href="/logo.png">
-    <!-- Font Awesome for Icons (Required for WhatsApp, Products, Labs icons) -->
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <style>
@@ -132,7 +132,7 @@
             z-index: 10;
             border-radius: 8px; 
             overflow: hidden;
-            /* CORRECTION #2: Dropdown opens under the button by removing left/right constraints */
+            /* CORRECTION #2: Dropdown opens under the link, using min-width to prevent overflow */
             left: 0; /* Align dropdown left edge to button left edge */
             top: calc(100% + 10px); 
             border-top: 3px solid var(--color-secondary);
@@ -267,10 +267,10 @@
         /* ----------------------------------------------------- */
         @media (max-width: 991px) { 
             
-            /* Correction #2: Mobile Logo Size Increase */
+            /* CORRECTION #1: Mobile UMM TEXT SIZE SMALLER */
             .logo .logo-full { display: none !important; }
-            .logo .logo-short { display: inline !important; font-size: 2.2em; } /* UMM text size */
-            .logo img { width: 45px; height: 45px; } /* CORRECTION #1 (Logo Icon Size) */
+            .logo .logo-short { display: inline !important; font-size: 1.8em; } /* Text size reduced */
+            .logo img { width: 45px; height: 45px; } /* Logo icon size remains large */
 
             /* Correction #1: Mobile Menu Display */
             .menu-toggle { display: block; font-size: 1.8em; color: var(--color-primary); z-index: 1030; }
@@ -569,7 +569,7 @@
     </div>
 
 
-    <!-- CORRECTION #4: OLD CONTACT SECTION RESTORED (#contact) -->
+    <!-- CORRECTION #4: CONTACT SECTION RESTORED (#contact) -->
     <div id="contact" class="section" style="background-color: var(--color-primary); color: white;">
     <div class="container" style="max-width: 800px;">
         <h2>Ready to Start Your Financial Journey?</h2>
