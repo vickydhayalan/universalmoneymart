@@ -198,7 +198,7 @@ nav .container {
 }
 
 /* ----------------------------------------------------- */
-/* --- ADVISOR SECTION STYLES (FINAL FIXED ALIGNMENT) --- */
+/* --- ADVISOR SECTION STYLES (PROFESSIONAL FIX) --- */
 /* ----------------------------------------------------- */
 .advisor-section { 
     padding: 80px 0; 
@@ -207,28 +207,112 @@ nav .container {
 .advisor-flex { 
     display: flex; 
     align-items: center; 
-    gap: 40px; 
+    gap: 40px; /* Reduced gap */
     max-width: 1000px; 
     margin: 0 auto;
     padding: 30px;
     background: #fff;
     border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); 
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Added shadow for professionalism */
     border-left: 8px solid var(--color-primary);
 }
+
+.advisor-proofs {
+    text-align: center;
+    flex-shrink: 0; /* Ensures this part doesn't shrink */
+    max-width: 200px; /* Constrain width */
+}
+
+.advisor-photo { 
+    width: 140px; /* Slightly reduced size */
+    height: 140px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 5px solid var(--color-secondary); /* Accent border color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); 
+    margin-bottom: 15px; 
+}
+.advisor-role { 
+    color: var(--color-success); /* Changed role color to success green */
+    font-weight: 700; 
+    font-size: 1em; 
+    margin-bottom: 15px; 
+}
+.arn-number { 
+    display: block; 
+    font-size: 0.95em; 
+    font-weight: 600; 
+    color: var(--color-text-dark); 
+    margin-top: 5px; 
+}
+.proof-info { 
+    text-align: center; 
+    margin-top: 15px; 
+}
+.proof-links { 
+    display: flex; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-top: 5px;
+    font-size: 0.9em; 
+}
+.proof-links a {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+
 .advisor-details {
-    text-align: left; 
+    text-align: left; /* Text aligns left for readability */
     flex-grow: 1;
 }
-/* ... (Other existing advisor styles like photo, role, ARN) ... */
 
-/* Mobile Fix for Advisor Details */
+.advisor-details h2 {
+    color: var(--color-primary); 
+    margin-bottom: 5px; 
+    font-size: 2em; /* Ensure heading size is prominent */
+    text-align: left;
+}
+.advisor-bio { 
+    color: #555; 
+    font-size: 1.1em;
+    font-style: italic;
+    border-left: 3px solid var(--color-secondary);
+    padding-left: 15px;
+    margin-top: 25px;
+}
+.whatsapp-contact-advisor { 
+    margin-top: 30px; 
+    text-align: left; /* Button aligns left */
+}
+
+
+/* --- RESPONSIVE FIX FOR ADVISOR SECTION (Mobile) --- */
 @media (max-width: 991px) {
-    .advisor-details {
+    .advisor-flex { 
+        flex-direction: column; 
         text-align: center; 
+        padding: 20px;
+        border-left: none; /* Remove side border on mobile */
+        border-top: 5px solid var(--color-primary); /* Add top border instead */
+    }
+    .advisor-proofs {
+        max-width: 100%;
+    }
+    .advisor-details {
+        text-align: center; /* Center details on mobile */
     }
     .advisor-details h2 {
         text-align: center;
+    }
+    .advisor-bio {
+        border-left: none; 
+        padding-left: 0;
+        text-align: center;
+        margin: 20px 0;
+    }
+    .whatsapp-contact-advisor {
+        text-align: center; /* Center button on mobile */
     }
 }
 
@@ -535,62 +619,6 @@ footer {
     }
     .footer-links-group a {
         padding: 5px 0;
-    }
-    
-}
-/* ----------------------------------------------------- */
-/* --- WHY UMM GRID STYLES (NEW SECTION) --- */
-/* ----------------------------------------------------- */
-
-/* 1. New Wrapper for Full-Width Grid */
-.why-umm-full-width {
-    max-width: 1000px; 
-    margin: 40px auto 0; /* Advisor section ku kela space kudukka */
-    padding: 0 20px; 
-}
-
-/* 2. Grid Structure */
-.why-umm-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-    gap: 20px;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px dashed #ddd; /* Advisor section ku kela oru line kaatta */
-}
-
-/* 3. Card Styling */
-.why-umm-card {
-    text-align: center;
-    padding: 20px 15px;
-    border: 1px solid var(--color-bg-light);
-    border-radius: 10px;
-    transition: box-shadow 0.3s;
-    height: 100%; /* Height equal ah irukka */
-}
-
-.why-umm-card:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-color: #ddd;
-}
-
-.why-umm-card i {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.why-umm-card h4 {
-    color: var(--color-primary);
-    font-size: 1.1em;
-    font-weight: 700;
-    margin: 10px 0 5px;
-}
-
-/* Mobile Fix for Grid */
-@media (max-width: 550px) {
-    .why-umm-grid {
-        grid-template-columns: 1fr; /* Mobile la oru column ah stack aaga */
     }
 }
 
