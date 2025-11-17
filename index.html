@@ -589,85 +589,119 @@
 </head>
 <body>
 
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <span class="logo-full">Universal Money Mart</span>
-                <span class="logo-short">UMM</span>
-            </div>
+   <nav>
+    <div class="container">
+        <div class="logo">
+            <span class="logo-full">Universal Money Mart</span>
+            <span class="logo-short">UMM</span>
+        </div>
         
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <div class="nav-links" id="navLinks">
             
-            <div class="nav-links" id="navLinks">
-                
-                <a href="#hero-finance" class="dropbtn">Home</a>
-                
-                <div class="dropdown">
-                    <a href="#" class="dropbtn">Services</a>
-                    <div class="dropdown-content">
-                        <a href="#services">Financial Services</a>
-                        <a href="#portfolio">Personal Portfolio</a>
-                    </div>
-                </div>
-
-                <div class="dropdown mega-dropdown">
-                    <a href="#" class="dropbtn"><i class="fas fa-flask"></i> UMM Labs</a>
-                    <div class="mega-dropdown-content">
-                        <div class="mega-content-grid">
-                            
-                            <div>
-                                <h3 class="mega-column-heading"><i class="fas fa-calculator"></i> MF Calculators</h3>
-                                <div class="mega-link-list">
-                                    <a href="mf_calculator.html">SIP & STP Planner</a>
-                                    <a href="mf_calculator.html">SWP Planner</a>
-                                    <a href="mf_calculator.html">CAGR / XIRR Calculator</a>
-                                    <a href="mf_calculator.html">Lumpsum Investments</a>
-                                    <a href="mf_calculator.html">ELSS Tax Saving Planner</a>
-                                </div>
+            <a href="#hero-finance" class="dropbtn">Home</a>
+            
+            <div class="dropdown mega-dropdown">
+                <a href="#" class="dropbtn"><i class="fas fa-hand-holding-usd"></i> Products & Services</a>
+                <div class="mega-dropdown-content">
+                    <div class="mega-content-grid" style="grid-template-columns: 1.5fr 1fr 1fr;"> 
+                        
+                        <div class="mega-card-group mega-exclusive-card">
+                            <h3 class="mega-column-heading"><i class="fas fa-piggy-bank"></i> Core Investment Products</h3>
+                            <div class="mega-link-list">
+                                <a href="#services">Mutual Funds (SIP/Lumpsum)</a>
+                                <a href="elss.html">ELSS - Tax Saving</a>
+                                <a href="nps.html">National Pension System (NPS)</a>
+                                <a href="deposit.html">Fixed Deposits & Bonds</a>
                             </div>
+                        </div>
 
-                            <div>
-                                <h3 class="mega-column-heading"><i class="fas fa-piggy-bank"></i> Retirement & Savings</h3>
-                                <div class="mega-link-list">
-                                    <a href="retirement_planner.html">Retirement Planner</a>
-                                    <a href="deposit_calculator.html">Fixed & Recurring Deposit</a>
-                                    <a href="ppf_calc.html">PPF / EPF Planner</a>
-                                    <a href="tax_calculator.html">Income Tax Calculator</a>
-                                    <a href="hra_calculator.html">HRA Calculator</a>
-                                </div>
+                        <div class="mega-card-group">
+                            <h3 class="mega-column-heading"><i class="fas fa-chart-line"></i> Portfolio Management</h3>
+                            <div class="mega-link-list">
+                                <a href="#portfolio">Personal Portfolio Tracking</a>
+                                <a href="rebalancing.html">Asset Allocation & Rebalancing</a>
+                                <a href="goal_planning.html">Goal Planning & Review</a>
+                                <a href="tax_planning.html">Capital Gains & Tax Guidance</a>
                             </div>
-                            
-                            <div>
-                                <h3 class="mega-column-heading"><i class="fas fa-graduation-cap"></i> NISM Exam Prep</h3>
-                                <div class="mega-link-list">
-                                    <a href="nism-va-mf-distributor.html">Series V-A: Mutual Fund Distributors</a>
-                                    <a href="nism-xv-research-analyst.html">Series XV: Research Analyst</a>
-                                    <a href="nism-xa-investment-adviser.html">Series X-A: Investment Adviser</a>
-                                    <a href="blog.html">All Certifications</a>
-                                </div>
-                                <div class="mega-link-highlight">
-                                    <i class="fab fa-youtube"></i> <a href="http://www.youtube.com/watch?v=5qcgTray10M" target="_blank">Watch V-A Free Video</a>
-                                </div>
+                        </div>
+                        
+                        <div class="mega-card-group" style="border-top-color: var(--color-secondary);">
+                            <h3 class="mega-column-heading"><i class="fas fa-lightbulb"></i> Resources & Learning</h3>
+                            <div class="mega-link-list">
+                                <a href="dashboard.html">Market Dashboard</a>
+                                <a href="blog.html">Blog & Insights</a>
+                                <a href="videos.html">Video Library (Tamil)</a>
                             </div>
-
-                            <div>
-                                <h3 class="mega-column-heading"><i class="fas fa-book-open"></i> Learning & Insights</h3>
-                                <div class="mega-link-list">
-                                    <a href="blog.html">Blog & Market Insights</a>
-                                    <a href="videos.html">Video Library (Tamil)</a>
-                                    <a href="dashboard.html">Data Dashboard</a>
-                                </div>
+                            <div class="mega-link-highlight">
+                                <i class="fas fa-arrow-right"></i> <a href="#tools">View All Calculators (UMM Labs)</a>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-                <a href="#advisor-intro" class="dropbtn">Our Advisor</a>
-                
-                <a href="#contact-professional" class="dropbtn">Contact</a>
             </div>
+
+            <div class="dropdown mega-dropdown">
+                <a href="#tools" class="dropbtn"><i class="fas fa-flask"></i> UMM Labs</a>
+                <div class="mega-dropdown-content">
+                    <div class="mega-content-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr;"> 
+                        
+                        <div class="mega-card-group">
+                            <h3 class="mega-column-heading"><i class="fas fa-calculator"></i> MF Planning Tools</h3>
+                            <div class="mega-link-list">
+                                <a href="mf_calculator.html">SIP & STP Planner</a>
+                                <a href="mf_calculator.html">SWP Planner</a>
+                                <a href="mf_calculator.html">Lumpsum & CAGR</a>
+                                <a href="mf_calculator.html">Target SIP Calculator</a>
+                            </div>
+                        </div>
+
+                        <div class="mega-card-group">
+                            <h3 class="mega-column-heading"><i class="fas fa-user-friends"></i> Retirement Planning</h3>
+                            <div class="mega-link-list">
+                                <a href="retirement_planner.html">Retirement Corpus Goal</a>
+                                <a href="ppf_calc.html">PPF / EPF Planner</a>
+                                <a href="nps_calc.html">NPS Calculator</a>
+                                <a href="inflation_calc.html">Inflation Impact</a>
+                            </div>
+                        </div>
+                        
+                        <div class="mega-card-group">
+                            <h3 class="mega-column-heading"><i class="fas fa-file-invoice-dollar"></i> Tax & Deposit Tools</h3>
+                            <div class="mega-link-list">
+                                <a href="tax_calculator.html">Income Tax Calculator</a>
+                                <a href="hra_calculator.html">HRA Calculator</a>
+                                <a href="deposit_calculator.html">Fixed Deposit</a>
+                                <a href="deposit_calculator.html">Recurring Deposit</a>
+                            </div>
+                        </div>
+
+                        <div class="mega-card-group">
+                            <h3 class="mega-column-heading"><i class="fas fa-graduation-cap"></i> Support & Prep</h3>
+                            <div class="mega-link-list">
+                                <a href="nism-va-mf-distributor.html">NISM Exam Prep (V-A)</a>
+                                <a href="faq.html">FAQ & Help Center</a>
+                                <a href="onboarding.html">Client Onboarding Guide</a>
+                            </div>
+                            <div class="mega-link-highlight">
+                                <i class="fab fa-youtube"></i> <a href="http://www.youtube.com/watch?v=5qcgTray10M" target="_blank">Watch Free Tutorials</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <a href="#advisor-intro" class="dropbtn">About Us</a>
+            
+            <a href="#contact-professional" class="dropbtn">Contact</a>
         </div>
-    </nav>
+        
+    </div>
+</nav>
 
     <div id="hero-finance" class="hero-finance">
         <div class="container">
@@ -930,72 +964,65 @@
 
 
     <script>
-        // JS for Hamburger Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
+    // JS for Hamburger Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Optional: Close menu when a link is clicked (for mobile)
+    navLinks.querySelectorAll('.dropbtn, a:not(.dropdown-content a)').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 991 && !link.parentElement.classList.contains('dropdown')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+    
+    // JS for Dropdown toggles on Mobile (Handles both simple and mega menus)
+    navLinks.querySelectorAll('.dropdown > .dropbtn').forEach(dropbtn => {
+        dropbtn.addEventListener('click', function(e) {
+            if (window.innerWidth <= 991) {
+                e.preventDefault(); 
+                const dropdown = this.parentElement;
+                // Close all other dropdowns
+                document.querySelectorAll('.dropdown.show').forEach(openDropdown => {
+                    if (openDropdown !== dropdown) {
+                        openDropdown.classList.remove('show');
+                    }
+                });
+                // Toggle the clicked dropdown
+                dropdown.classList.toggle('show');
+            }
+        });
+    });
+    
+    // ** MEGA MENU DESKTOP STABILITY FIX **
+    // This script manually manages the display property on hover for stability.
+    const megaDropdowns = document.querySelectorAll('.mega-dropdown');
+
+    megaDropdowns.forEach(megaDropdown => {
+        const megaContent = megaDropdown.querySelector('.mega-dropdown-content');
+        let timeout;
+
+        megaDropdown.addEventListener('mouseenter', () => {
+            clearTimeout(timeout);
+            if (window.innerWidth >= 992) {
+                megaContent.style.display = 'block'; 
+            }
         });
 
-        // Optional: Close menu when a link is clicked (for mobile)
-        navLinks.querySelectorAll('.dropbtn, a:not(.dropdown-content a)').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 991 && !link.parentElement.classList.contains('dropdown')) {
-                    navLinks.classList.remove('active');
-                }
-            });
+        megaDropdown.addEventListener('mouseleave', () => {
+            if (window.innerWidth >= 992) {
+                timeout = setTimeout(() => {
+                    megaContent.style.display = 'none';
+                }, 100); 
+            }
         });
-        
-        // JS for Dropdown toggles on Mobile (Handles both simple and mega menus)
-        navLinks.querySelectorAll('.dropdown > .dropbtn').forEach(dropbtn => {
-            dropbtn.addEventListener('click', function(e) {
-                if (window.innerWidth <= 991) {
-                    e.preventDefault(); 
-                    const dropdown = this.parentElement;
-                    // Close all other dropdowns
-                    document.querySelectorAll('.dropdown.show').forEach(openDropdown => {
-                        if (openDropdown !== dropdown) {
-                            openDropdown.classList.remove('show');
-                        }
-                    });
-                    // Toggle the clicked dropdown
-                    dropdown.classList.toggle('show');
-                }
-            });
-        });
-        
-        // **NEW FIX FOR MEGA MENU INSTABILITY ON DESKTOP**
-        // Since CSS :hover handles the simple dropdowns fine, 
-        // we mainly ensure that the general hover behavior is clean.
-        // The issue is likely due to the browser struggling with the static position 
-        // and large size. The CSS fix above and the standard hover should be sufficient 
-        // if the structure is correct. Let's add a JS fallback for the mega menu 
-        // to prevent immediate closing if CSS :hover fails on complex elements.
-        
-        const megaDropdown = document.querySelector('.mega-dropdown');
-        const megaContent = document.querySelector('.mega-dropdown-content');
-
-        if (megaDropdown) {
-             let timeout;
-
-             megaDropdown.addEventListener('mouseenter', () => {
-                 clearTimeout(timeout);
-                 if (window.innerWidth >= 992) {
-                     megaContent.style.display = 'block';
-                 }
-             });
-
-             megaDropdown.addEventListener('mouseleave', () => {
-                 if (window.innerWidth >= 992) {
-                     // Introduce a slight delay before closing to allow moving mouse over gap
-                     timeout = setTimeout(() => {
-                         megaContent.style.display = 'none';
-                     }, 100); 
-                 }
-             });
-        }
-        
-    </script>
+    });
+    
+</script>
 </body>
 </html>
