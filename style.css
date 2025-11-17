@@ -2,15 +2,44 @@
 /* --- GLOBAL STYLES & COLOR PALETTE --- */
 /* ----------------------------------------------------- */
 :root {
-    --color-primary: #003366; /* Dark Corporate Blue */
-    --color-secondary: #FFC72C; /* Gold Accent (Wealth) */
-    --color-success: #28A745; /* Green CTA */
-    --color-text-dark: #333333;
-    --color-bg-light: #f5f8fa; /* Very Light Grey-Blue */
-    --color-nav-link: #495057; /* Greyish link color */
+    --color-primary: #003366; /* Dark Corporate Blue */
+    --color-secondary: #FFC72C; /* Gold Accent (Wealth) */
+    --color-success: #28A745; /* Green CTA */
+    --color-text-dark: #333333;
+    --color-bg-light: #f5f8fa; /* Very Light Grey-Blue */
+    --color-nav-link: #495057; /* Greyish link color */
 }
+
+body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: var(--color-text-dark);
+    overflow-x: hidden !important; 
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+h1 { font-size: 3em; font-weight: 800; color: var(--color-primary); margin-bottom: 20px; }
+h2 { font-size: 2.2em; color: var(--color-primary); margin-bottom: 40px; font-weight: 700;}
+h3 { font-size: 1.5em; color: var(--color-text-dark); }
+p { line-height: 1.6; color: #555; }
+a { text-decoration: none; color: var(--color-primary); transition: color 0.3s; }
+a:hover { color: var(--color-secondary); }
+
 /* ----------------------------------------------------- */
-/* --- TESTIMONIAL STAR RATING STYLES --- */
+/* --- TESTIMONIAL STAR RATING STYLES (NEW) --- */
 /* ----------------------------------------------------- */
 .star-rating {
     color: var(--color-secondary); /* Gold color for stars */
@@ -21,180 +50,131 @@
     margin: 0 1px;
 }
 
-body {
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    color: var(--color-text-dark);
-    overflow-x: hidden !important; 
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.section {
-    padding: 80px 0;
-    text-align: center;
-}
-
-h1 { font-size: 3em; font-weight: 800; color: var(--color-primary); margin-bottom: 20px; }
-h2 { font-size: 2.2em; color: var(--color-primary); margin-bottom: 40px; font-weight: 700;}
-h3 { font-size: 1.5em; color: var(--color-text-dark); }
-p { line-height: 1.6; color: #555; }
-a { text-decoration: none; color: var(--color-primary); transition: color 0.3s; }
-a:hover { color: var(--color-secondary); }
-
-
 /* ----------------------------------------------------- */
-/* --- NAVIGATION / HEADER STYLES (FINAL PREMIUM LOOK) --- */
+/* --- NAVIGATION / HEADER STYLES --- */
 /* ----------------------------------------------------- */
 nav {
-    position: sticky;
-    top: 0;
-    z-index: 1020; 
-    background: #ffffff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
-    padding: 10px 0; 
+    position: sticky;
+    top: 0;
+    z-index: 1020; 
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+    padding: 10px 0; 
 }
 nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 50px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 50px; 
 }
 /* Logo Styling */
 .logo {
-    display: flex;
-    align-items: center;
-    font-size: 1.8em;
-    font-weight: 900; 
-    color: var(--color-primary);
-    padding: 0;
+    display: flex;
+    align-items: center;
+    font-size: 1.8em;
+    font-weight: 900; 
+    color: var(--color-primary);
+    padding: 0;
 }
-/* CORRECTION: LOGO ICON SIZE INCREASE */
+/* LOGO SIZE FIXES */
 .logo img {
-    width: 40px; 
-    height: 40px; 
-    margin-right: 12px; 
-    object-fit: contain;
+    width: 40px; 
+    height: 40px; 
+    margin-right: 12px; 
+    object-fit: contain;
 }
 .logo .logo-full { display: inline !important; }
 .logo .logo-short { display: none !important; }
 
 /* Desktop Links Container */
 .nav-links {
-    display: flex;
-    gap: 15px; 
-    align-items: center;
+    display: flex;
+    gap: 15px; 
+    align-items: center;
 }
 /* Top-level links (Pill-style hover) */
 .nav-links .dropbtn, .nav-links > a {
-    color: var(--color-nav-link);
-    text-decoration: none;
-    padding: 8px 12px; 
-    font-weight: 600;
-    transition: all 0.3s;
-    border-radius: 6px; 
-    font-size: 0.95em;
-    display: flex; 
-    align-items: center;
+    color: var(--color-nav-link);
+    text-decoration: none;
+    padding: 8px 12px; 
+    font-weight: 600;
+    transition: all 0.3s;
+    border-radius: 6px; 
+    font-size: 0.95em;
+    display: flex; 
+    align-items: center;
 }
 .nav-links .dropbtn i {
-     margin-right: 5px; 
-     font-size: 1.1em; 
+     margin-right: 5px; 
+     font-size: 1.1em; 
 }
 .nav-links .dropbtn:hover, .nav-links > a:hover {
-    color: var(--color-primary); 
-    background-color: var(--color-bg-light); 
-    border-bottom: none; 
+    color: var(--color-primary); 
+    background-color: var(--color-bg-light); 
+    border-bottom: none; 
 }
 .dropdown:hover > .dropbtn {
-    background-color: var(--color-bg-light);
-    color: var(--color-primary);
+    background-color: var(--color-bg-light);
+    color: var(--color-primary);
 }
 /* Simple Dropdown Content */
-.dropdown { position: relative; } /* Added relative position for simple dropdown */
+.dropdown { position: relative; } 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ffffff;
-    min-width: 250px; 
-    box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15); 
-    z-index: 10;
-    border-radius: 8px; 
-    overflow: hidden;
-    /* FIX #2: Dropdown opens relative to the button (left: 0;) */
-    left: 50%; 
-    transform: translateX(-50%);
-    top: calc(100% + 10px); 
-    border-top: 3px solid var(--color-secondary);
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 250px; 
+    box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15); 
+    z-index: 10;
+    border-radius: 8px; 
+    overflow: hidden;
+    left: 50%; 
+    transform: translateX(-50%);
+    top: calc(100% + 10px); 
+    border-top: 3px solid var(--color-secondary);
 }
 .dropdown-content a {
-    color: var(--color-text-dark);
-    padding: 12px 16px; 
-    text-align: left;
-    display: block;
-    border-bottom: 1px solid #eee;
+    color: var(--color-text-dark);
+    padding: 12px 16px; 
+    text-align: left;
+    display: block;
+    border-bottom: 1px solid #eee;
 }
 .dropdown-content a:hover {
-    background-color: var(--color-bg-light);
-    color: var(--color-primary);
-}
-/* Hover effect for desktop handled by CSS class */
-@media (min-width: 992px) {
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
+    background-color: var(--color-bg-light);
+    color: var(--color-primary);
 }
 /* Mobile toggle class */
 .dropdown.show .dropdown-content {
-    display: block !important;
+    display: block !important;
 }
-
-/* MEGA MENU STYLES - Not currently in HTML, but kept for future use */
-/* .mega-dropdown { position: static; } 
-.mega-dropdown-content { display: none; position: absolute; width: 100%; left: 0; right: 0; top: 100%; background-color: #ffffff; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); z-index: 1010; padding: 30px 40px; border-top: 3px solid var(--color-secondary); }
-.mega-content-grid { display: grid; gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0; text-align: left; }
-.mega-card-group { background: var(--color-bg-light); padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); border-top: 5px solid var(--color-primary); transition: all 0.2s; height: 100%; }
-.mega-exclusive-card { background: linear-gradient(135deg, #e0f8ff 0%, var(--color-bg-light) 100%); border-top-color: var(--color-secondary); }
-.mega-column-heading { color: var(--color-primary); font-size: 1.1em; font-weight: 700; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px; display: flex; align-items: center; }
-.mega-column-heading i { margin-right: 10px; color: var(--color-secondary); font-size: 1.3em; }
-.mega-link-list a { padding: 8px 5px; color: var(--color-text-dark); display: block; font-size: 0.95em; font-weight: 500; transition: all 0.2s; border-radius: 4px; }
-.mega-link-list a:hover { color: var(--color-primary); background-color: white; transform: none; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); }
-.mega-link-highlight { margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee; text-align: center; }
-.mega-link-highlight a { color: #FF0000; font-weight: 700; } */
 
 
 /* ----------------------------------------------------- */
 /* --- FLOATING WHATSAPP BUTTON --- */
 /* ----------------------------------------------------- */
 .whatsapp-float {
-    position: fixed;
-    width: 55px; 
-    height: 55px;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25D366;
-    color: #FFF;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 28px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.3s;
+    position: fixed;
+    width: 55px; 
+    height: 55px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 28px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
 }
 .whatsapp-float:hover {
-    background-color: #128C7E;
-    transform: scale(1.1);
+    background-color: #128C7E;
+    transform: scale(1.1);
 }
 
 /* ----------------------------------------------------- */
@@ -207,33 +187,32 @@ nav .container {
 .advisor-flex { 
     display: flex; 
     align-items: center; 
-    gap: 40px; /* Reduced gap */
+    gap: 40px; 
     max-width: 1000px; 
     margin: 0 auto;
     padding: 30px;
     background: #fff;
     border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Added shadow for professionalism */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); 
     border-left: 8px solid var(--color-primary);
 }
 
 .advisor-proofs {
     text-align: center;
-    flex-shrink: 0; /* Ensures this part doesn't shrink */
-    max-width: 200px; /* Constrain width */
+    flex-shrink: 0; 
 }
 
 .advisor-photo { 
-    width: 140px; /* Slightly reduced size */
+    width: 140px; 
     height: 140px;
     border-radius: 50%; 
     object-fit: cover; 
-    border: 5px solid var(--color-secondary); /* Accent border color */
+    border: 5px solid var(--color-secondary); 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); 
     margin-bottom: 15px; 
 }
 .advisor-role { 
-    color: var(--color-success); /* Changed role color to success green */
+    color: var(--color-success); 
     font-weight: 700; 
     font-size: 1em; 
     margin-bottom: 15px; 
@@ -261,16 +240,15 @@ nav .container {
     font-weight: 600;
 }
 
-
 .advisor-details {
-    text-align: left; /* Text aligns left for readability */
+    text-align: left; 
     flex-grow: 1;
 }
 
 .advisor-details h2 {
     color: var(--color-primary); 
     margin-bottom: 5px; 
-    font-size: 2em; /* Ensure heading size is prominent */
+    font-size: 2em; 
     text-align: left;
 }
 .advisor-bio { 
@@ -283,66 +261,36 @@ nav .container {
 }
 .whatsapp-contact-advisor { 
     margin-top: 30px; 
-    text-align: left; /* Button aligns left */
-}
-
-
-/* --- RESPONSIVE FIX FOR ADVISOR SECTION (Mobile) --- */
-@media (max-width: 991px) {
-    .advisor-flex { 
-        flex-direction: column; 
-        text-align: center; 
-        padding: 20px;
-        border-left: none; /* Remove side border on mobile */
-        border-top: 5px solid var(--color-primary); /* Add top border instead */
-    }
-    .advisor-proofs {
-        max-width: 100%;
-    }
-    .advisor-details {
-        text-align: center; /* Center details on mobile */
-    }
-    .advisor-details h2 {
-        text-align: center;
-    }
-    .advisor-bio {
-        border-left: none; 
-        padding-left: 0;
-        text-align: center;
-        margin: 20px 0;
-    }
-    .whatsapp-contact-advisor {
-        text-align: center; /* Center button on mobile */
-    }
-}
-
-/* ----------------------------------------------------- */
-/* --- BLOG ARTICLES STYLES (CORRECTION #8: Horizontal) --- */
-/* ----------------------------------------------------- */
-.blog-cards-flex {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
     text-align: left; 
 }
+
+/* ----------------------------------------------------- */
+/* --- BLOG ARTICLES STYLES (Horizontal) --- */
+/* ----------------------------------------------------- */
+.blog-cards-flex {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    text-align: left; 
+}
 .blog-card {
-    flex: 1; 
-    max-width: 380px; 
-    width: 100%; 
-    background: white; 
-    padding: 20px; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    border-left: 5px solid var(--color-primary);
-    transition: box-shadow 0.3s;
+    flex: 1; 
+    max-width: 380px; 
+    width: 100%; 
+    background: white; 
+    padding: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid var(--color-primary);
+    transition: box-shadow 0.3s;
 }
 .blog-card:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* ----------------------------------------------------- */
-/* --- GENERAL SECTIONS (Retained/Polished CSS) --- */
+/* --- GENERAL SECTIONS --- */
 /* ----------------------------------------------------- */
 .hero-finance { background: linear-gradient(135deg, #f5faff 0%, #ffffff 100%); padding: 120px 0; text-align: center; }
 .hero-finance h1 { font-size: 4em; line-height: 1.1; max-width: 900px; margin: 0 auto 25px; }
@@ -362,129 +310,129 @@ nav .container {
 
 /* Video Responsive Container */
 .video-responsive {
-    overflow: hidden;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    position: relative;
-    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    position: relative;
+    height: 0;
 }
 .video-responsive iframe {
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .cta-subscribe {
-    background-color: #FF0000; 
-    color: white; 
-    padding: 12px 25px; 
-    border-radius: 5px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    display: inline-block; 
-    transition: background-color 0.3s;
+    background-color: #FF0000; 
+    color: white; 
+    padding: 12px 25px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    display: inline-block; 
+    transition: background-color 0.3s;
 }
 .cta-view-all {
-    background-color: var(--color-primary); 
-    color: white; 
-    padding: 12px 25px; 
-    border-radius: 5px; 
-    text-decoration: none; 
-    font-weight: 600; 
-    display: inline-block; 
-    transition: background-color 0.3s;
+    background-color: var(--color-primary); 
+    color: white; 
+    padding: 12px 25px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    display: inline-block; 
+    transition: background-color 0.3s;
 }
 
 /* ----------------------------------------------------- */
-/* --- PROFESSIONAL CONTACT SECTION STYLES (RESTORED) --- */
+/* --- PROFESSIONAL CONTACT SECTION STYLES --- */
 /* ----------------------------------------------------- */
 #contact-professional {
-    background-color: #ffffff;
-    color: var(--color-text-dark);
-    padding: 80px 0;
+    background-color: #ffffff;
+    color: var(--color-text-dark);
+    padding: 80px 0;
 }
 
 .contact-flex {
-    display: flex;
-    gap: 50px;
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: left;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
+    display: flex;
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
 }
 
 .contact-form-area {
-    flex: 1;
-    padding: 40px;
-    background-color: var(--color-primary); 
-    color: white;
+    flex: 1;
+    padding: 40px;
+    background-color: var(--color-primary); 
+    color: white;
 }
 .contact-form-area h2 {
-    color: white;
-    margin-top: 0;
-    font-size: 1.8em;
+    color: white;
+    margin-top: 0;
+    font-size: 1.8em;
 }
 .contact-form-area input, .contact-form-area textarea {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: none;
-    padding: 12px; 
-    border-radius: 5px; 
-    margin-bottom: 15px;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box;
-    color: var(--color-text-dark); /* Ensure text is visible */
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 12px; 
+    border-radius: 5px; 
+    margin-bottom: 15px;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--color-text-dark); 
 }
 .contact-form-area button[type="submit"] {
-    background-color: var(--color-secondary); 
-    color: var(--color-text-dark); 
-    padding: 15px; 
-    border: none; 
-    border-radius: 5px; 
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: background-color 0.3s;
-    width: 100%;
+    background-color: var(--color-secondary); 
+    color: var(--color-text-dark); 
+    padding: 15px; 
+    border: none; 
+    border-radius: 5px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+    width: 100%;
 }
 .contact-form-area button[type="submit"]:hover {
-    background-color: #e6b800; /* Darker secondary on hover */
+    background-color: #e6b800; 
 }
 
 .contact-info-area {
-    flex: 1;
-    padding: 40px;
-    background-color: #ffffff;
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
 }
 .contact-info-area h3 {
-    color: var(--color-primary);
-    font-size: 1.5em;
-    border-bottom: 2px solid var(--color-secondary);
-    padding-bottom: 10px;
-    margin-top: 0;
-    margin-bottom: 25px;
+    color: var(--color-primary);
+    font-size: 1.5em;
+    border-bottom: 2px solid var(--color-secondary);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 25px;
 }
 .contact-info-area .detail-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.1em;
 }
 .contact-info-area .detail-item i {
-    color: var(--color-secondary);
-    font-size: 1.5em;
-    width: 30px;
+    color: var(--color-secondary);
+    font-size: 1.5em;
+    width: 30px;
 }
 .contact-info-area .detail-item p {
-    margin: 0;
-    color: var(--color-text-dark);
-    font-weight: 500;
+    margin: 0;
+    color: var(--color-text-dark);
+    font-weight: 500;
 }
 
 /* Footer */
@@ -498,28 +446,28 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
     
     /* FIX #1: Mobile Logo Size and Positioning (More Compact) */
     .logo { 
-        font-size: 1.5em; /* Reduced size */
+        font-size: 1.5em; 
     }
     .logo img { 
-        width: 35px; /* Reduced icon size */
+        width: 35px; 
         height: 35px;
-        margin-right: 8px; /* Reduced margin */
+        margin-right: 8px; 
     }
     .logo .logo-full { display: none !important; }
     .logo .logo-short { display: inline !important; }
 
     /* FIX #2: Hero Heading Spacing - More Compact on Mobile */
     .hero-finance h1 { 
-        font-size: 2.2em; /* Reduced from 2.5em to 2.2em for better space */
+        font-size: 2.2em; 
         line-height: 1.2;
-        margin-bottom: 15px; /* Reduced bottom margin */
+        margin-bottom: 15px; 
     }
     .subtitle {
         font-size: 1.2em;
-        margin-bottom: 30px; /* Reduced bottom margin */
+        margin-bottom: 30px; 
     }
     .section {
-        padding: 60px 0; /* Reduced general section padding */
+        padding: 60px 0; 
     }
     
     /* FIX #3: Menu Overlay/Overlap Issue FIX */
@@ -530,27 +478,27 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
         position: fixed; 
         top: 0; 
         left: 0; 
-        width: 100%; /* Full width */
-        height: 100vh; /* Full viewport height */
-        background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background for overlay effect */
+        width: 100%; 
+        height: 100vh; 
+        background-color: rgba(0, 0, 0, 0.7); 
         flex-direction: column; 
         padding-top: 0; 
         transition: transform 0.3s ease-in-out; 
         z-index: 1020; 
         overflow-y: auto; 
         display: block !important; 
-        transform: translateX(100%); /* Hides it off-screen initially */
+        transform: translateX(100%); 
     }
-    .nav-links.active { transform: translateX(0%); } /* Brings it into view */
+    .nav-links.active { transform: translateX(0%); } 
     
     /* New: Inner container for the actual menu content to look like a clean drawer */
     .nav-links-inner {
         background-color: white; 
-        width: 80%; /* Takes 80% of screen */
+        width: 80%; 
         min-width: 250px; 
         max-width: 350px; 
-        height: 100%; /* Important for drawer effect */
-        float: right; /* Slides in from the right */
+        height: 100%; 
+        float: right; 
         padding-top: 20px;
         box-shadow: -5px 0 15px rgba(0,0,0,0.2);
     }
@@ -586,6 +534,21 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
     .blog-cards-flex { flex-direction: column; }
     .blog-card { width: 100% !important; margin-bottom: 20px; max-width: none; }
     .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 25px; }
+
+    /* Advisor Section Mobile Styles (from fix) */
+    .advisor-flex { 
+        border-left: none; /* Remove side border on mobile */
+        border-top: 5px solid var(--color-primary); /* Add top border instead */
+    }
+    .advisor-details {
+        text-align: center; /* Center details on mobile */
+    }
+    .advisor-details h2 {
+        text-align: center;
+    }
+    .whatsapp-contact-advisor {
+        text-align: center; /* Center button on mobile */
+    }
 }
 
 /* ----------------------------------------------------- */
@@ -601,35 +564,33 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
     /* 2. Reset Main Nav Container */
     .nav-links { 
         position: static !important; 
-        display: flex !important; /* Force desktop layout */
+        display: flex !important; 
         width: auto !important; 
         height: auto !important; 
-        transform: none !important; /* Remove mobile drawer shift */
+        transform: none !important; 
         background-color: transparent !important; 
         padding-top: 0 !important;
         box-shadow: none !important;
         flex-direction: row !important;
-        align-items: center;
-        gap: 15px; /* Keep desktop gap */
+        align-items: center !important;
+        gap: 15px !important; 
     }
     
     /* 3. Reset Inner Mobile Drawer Container (This holds the links on desktop) */
     .nav-links-inner {
-        all: unset; /* Aggressive Reset */
-        display: flex !important; /* Force horizontal layout */
-        align-items: center;
-        gap: 15px;
-        /* Revert link container back to inline flow */
+        display: flex !important; 
+        align-items: center !important;
+        gap: 15px !important;
         background-color: transparent !important;
         height: auto !important;
         width: auto !important;
         float: none !important;
         padding-top: 0 !important;
+        box-shadow: none !important;
     }
     
     /* 4. Reset Links inside Inner Container */
     .nav-links-inner .dropbtn, .nav-links-inner > a {
-        /* Re-apply desktop link styling */
         padding: 8px 12px !important;
         font-weight: 600 !important;
         font-size: 0.95em !important;
@@ -648,10 +609,9 @@ footer { background-color: #2c3e50; color: white; text-align: center; padding: 2
     .dropdown:hover .dropdown-content { display: block !important; }
     .dropdown-content { 
         display: none; 
-        /* Reset positioning for desktop dropdown */
-        position: absolute;
-        left: 50%; 
-        transform: translateX(-50%);
-        top: calc(100% + 10px); 
+        position: absolute !important;
+        left: 50% !important; 
+        transform: translateX(-50%) !important;
+        top: calc(100% + 10px) !important; 
     }
 }
