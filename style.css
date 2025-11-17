@@ -487,9 +487,88 @@ nav .container {
     font-weight: 500;
 }
 
-/* Footer */
-footer { background-color: #2c3e50; color: white; text-align: center; padding: 25px 0; margin-top: 40px; font-size: 0.9em; }
+/* ----------------------------------------------------- */
+/* --- FOOTER STYLES (PROFESSIONAL FIX) --- */
+/* ----------------------------------------------------- */
+footer { 
+    background-color: #243447; /* Slightly darker, deep corporate blue/grey */
+    color: #F8F9FA; /* Light off-white text */
+    padding: 40px 0; /* Increased padding */
+    font-size: 0.9em; 
+    text-align: center;
+}
 
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Spacing between main blocks */
+}
+
+.footer-copyright {
+    font-size: 1em;
+    font-weight: 500;
+    margin: 0;
+    color: #CED4DA; /* Subtler color */
+}
+
+.footer-links-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.footer-links-group a {
+    color: var(--color-secondary); /* Gold accent for policy links */
+    font-weight: 600;
+    transition: color 0.3s;
+    padding: 0 5px; /* Small padding for click area */
+    border-bottom: 1px solid transparent;
+}
+
+.footer-links-group a:hover {
+    color: white; /* Brighter white on hover */
+    border-bottom: 1px solid var(--color-secondary);
+}
+
+.footer-links-group span {
+    color: #777; /* Separator color */
+    font-size: 0.8em; /* Smaller separator */
+}
+
+.footer-disclosure {
+    margin-top: 15px;
+}
+
+.disclosure-heading {
+    font-weight: 700;
+    color: var(--color-secondary); /* Heading in Gold */
+    margin: 0 0 5px 0;
+    font-size: 0.9em;
+}
+
+.disclosure-text {
+    font-size: 0.8em; /* Smallest text size for compliance */
+    color: #ADB5BD; /* Light grey for easy reading */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Mobile Fix for Footer (Stacking Links) */
+@media (max-width: 600px) {
+    .footer-links-group {
+        flex-direction: column;
+        gap: 0;
+        align-items: center;
+    }
+    .footer-links-group span {
+        display: none; /* Hide vertical separators on small screens */
+    }
+    .footer-links-group a {
+        padding: 5px 0;
+    }
+}
 
 /* ----------------------------------------------------- */
 /* --- RESPONSIVE FIXES (Mobile View) --- */
