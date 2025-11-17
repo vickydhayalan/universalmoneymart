@@ -57,15 +57,15 @@ nav .container {
 .nav-links .dropbtn, .nav-links > a {
     color: #555;
     text-decoration: none;
-    padding: 10px 10px;
-    font-weight: 500;
+    padding: 10px 15px; /* FundsIndia look: Increased padding for cleaner spacing */
+    font-weight: 600; /* Made navigation links slightly bolder */
     transition: color 0.3s;
     white-space: nowrap;
     display: block;
     font-size: 0.95em; 
 }
 .nav-links a:hover {
-    color: #007bff;
+    color: #004080; /* Hover color changed to deep brand blue */
 }
 
 /* Sections */
@@ -260,7 +260,7 @@ footer {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 220px; 
+    min-width: 250px; /* Increased width for clarity */
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 10;
     border-radius: 6px;
@@ -270,14 +270,14 @@ footer {
 }
 .dropdown-content a {
     color: #333;
-    padding: 10px 16px;
+    padding: 12px 16px; /* Increased vertical padding */
     text-decoration: none;
     display: block;
     font-weight: 500;
     white-space: nowrap;
 }
 .dropdown-content a:hover {
-    background-color: #e2e8f0;
+    background-color: #e9f0f8; /* Light blue background for hover */
     color: #004080;
 }
 .dropdown:hover .dropdown-content {
