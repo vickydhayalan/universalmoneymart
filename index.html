@@ -70,6 +70,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            /* Ensure alignment for perfect centering */
+            min-height: 50px; 
         }
         /* Logo Styling */
         .logo {
@@ -78,11 +80,14 @@
             font-size: 1.8em;
             font-weight: 900; 
             color: var(--color-primary);
+            /* Reset specific padding to let nav container handle it */
+            padding: 0;
         }
         .logo img {
-            width: 30px; /* Logo size */
+            width: 30px; 
             height: 30px;
             margin-right: 10px;
+            object-fit: contain;
         }
         .logo .logo-short { display: none !important; }
 
@@ -101,6 +106,11 @@
             transition: all 0.3s;
             border-radius: 6px; 
             font-size: 0.95em;
+            display: flex; /* Flex to center icon and text */
+            align-items: center;
+        }
+        .nav-links .dropbtn i, .nav-links > a i {
+             margin-right: 5px; /* Spacing between icon and text */
         }
         .nav-links .dropbtn:hover, .nav-links > a:hover {
             color: var(--color-primary); 
@@ -260,6 +270,30 @@
         }
 
         /* ----------------------------------------------------- */
+        /* --- WHATSAPP STICKY ICON --- */
+        /* ----------------------------------------------------- */
+        .whatsapp-sticky {
+            position: fixed;
+            bottom: 30px; 
+            right: 30px; 
+            z-index: 10000; 
+            width: 55px; /* Slightly larger size */
+            height: 55px;
+            transition: transform 0.3s;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+        .whatsapp-sticky:hover {
+            transform: scale(1.1);
+        }
+        .whatsapp-sticky img {
+            width: 100%; 
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* ----------------------------------------------------- */
         /* --- GENERAL SECTIONS (Reused CSS) --- */
         /* ----------------------------------------------------- */
         .advisor-section { padding: 60px 0; text-align: left; background-color: var(--color-bg-light); }
@@ -327,6 +361,14 @@
             .services-grid, .video-grid, #testimonials .services-grid { grid-template-columns: 1fr; }
             .blog-cards-flex { flex-direction: column; }
             .blog-card { width: 100% !important; margin-bottom: 20px; }
+
+            /* WhatsApp Sticky Fix */
+            .whatsapp-sticky {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
         
         /* ----------------------------------------------------- */
