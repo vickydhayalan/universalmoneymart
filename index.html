@@ -151,6 +151,216 @@
                 display: block !important; 
             }
         }
+        
+        /* ====================================================== */
+        /* FINANCE PROFESSIONAL STYLE - NEW STYLES INTEGRATED HERE */
+        /* ====================================================== */
+
+        /* 1. Typography and General Styling */
+        body {
+            font-family: 'Poppins', sans-serif; /* Use a clean, modern font if possible */
+        }
+        h1, h2, h3 {
+            color: #004080; /* Deep Blue for Headings */
+        }
+        a {
+            transition: color 0.3s;
+        }
+
+        /* 2. Professional Style Hero Section */
+        .hero-finance {
+            padding: 80px 0; /* Ensures ample vertical space */
+            background-color: #F8F9FA; /* Light background for contrast */
+            text-align: center;
+        }
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+        }
+        .hero-finance h1 {
+            font-size: 3em; 
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        .hero-finance .subtitle {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 3. Call to Action Button */
+        .cta-button {
+            display: inline-block;
+            background-color: #28A745; /* Prominent Green for CTA (Success/Growth) */
+            color: white;
+            padding: 15px 35px;
+            border-radius: 8px;
+            font-size: 1.25em;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #1F7A35;
+            box-shadow: 0 7px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        /* 4. Trust Bar (Data Visualization) */
+        .trust-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 30px 0;
+            border-top: 1px solid #E9ECEF;
+            border-bottom: 1px solid #E9ECEF;
+            margin-top: 30px;
+        }
+        .trust-item {
+            text-align: center;
+            flex-basis: 30%;
+        }
+        .trust-number {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #007BFF; /* Bright Blue for emphasis */
+            margin-bottom: 5px;
+        }
+        .trust-label {
+            font-size: 1em;
+            color: #6C757D;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .trust-separator {
+            width: 1px;
+            height: 60px;
+            background-color: #E9ECEF;
+        }
+
+        /* 5. Advisor Section (New Section) */
+        .advisor-section {
+            padding: 60px 0;
+            text-align: left;
+        }
+        .advisor-flex {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .advisor-details {
+            flex: 2;
+            min-width: 300px;
+        }
+        .advisor-proofs {
+            flex: 1;
+            text-align: center;
+            min-width: 250px;
+        }
+        .advisor-photo {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+        .advisor-name {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        .advisor-role {
+            color: #28A745;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        .advisor-bio {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .proof-links a {
+            display: inline-block;
+            font-size: 0.9em;
+            margin: 0 10px;
+            color: #007BFF;
+            text-decoration: underline;
+        }
+
+        .contact-buttons-small {
+            display: flex;
+            gap: 15px;
+        }
+        .small-cta {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+        .whatsapp-cta {
+            background-color: #25D366;
+            color: white;
+        }
+        .contact-cta {
+            background-color: #007BFF;
+            color: white;
+        }
+        .small-cta i {
+            margin-right: 8px;
+        }
+
+        /* Responsive Fixes for Trust Bar */
+        @media (max-width: 768px) {
+            .hero-finance h1 {
+                font-size: 2em;
+            }
+            .hero-finance .subtitle {
+                font-size: 1em;
+            }
+            .trust-bar {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 0;
+            }
+            .trust-separator {
+                display: none;
+            }
+            .trust-item {
+                flex-basis: 100%;
+            }
+            .advisor-flex {
+                flex-direction: column;
+                text-align: center;
+            }
+            .advisor-details {
+                order: 2;
+            }
+            .advisor-proofs {
+                order: 1;
+            }
+            .contact-buttons-small {
+                justify-content: center;
+            }
+        }
+
+        /* Ensure existing section class is wide */
+        .section {
+            padding: 40px 0; 
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -215,66 +425,60 @@
         </div>
     </nav>
 
-    <div class="hero">
-    <div class="container">
-        <h1>Your Trusted Partner for Wealth Creation</h1>
-        <p>Learn, invest, and grow with expert financial guidance tailored for you.</p>
-        
-        <img src="vigneshphoto.jpg" alt="Universal Money Mart Advisor" style="width: 100%; max-width: 700px; height: auto; margin-top: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
-        
-        <div style="text-align: center; margin-top: 15px; margin-bottom: 20px;">
-            <h3 style="margin: 5px 0; color: #004080; font-size: 1.5em;">VIGNESH DHAYALAN</h3>
-            <p style="margin: 0; color: #555; font-size: 1.1em; font-weight: 500;">AMFI Registered: Mutual Fund Distributor</p>
-
-            <div style="display: flex; justify-content: center; gap: 25px; margin-top: 25px;">
-                <a href="arn_card.jpg" target="_blank" style="text-decoration: none;">
-                    <img src="arn_card_thumb.jpg" alt="MFD ARN Card Proof" style="width: 100px; height: auto; border: 2px solid #007bff; border-radius: 4px; opacity: 0.9;">
-                    <p style="font-size: 0.75em; color: #007bff; font-weight: 600; margin-top: 4px;">View ARN Certificate</p>
-                </a>
+    <div class="hero-finance">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Start Your Journey Towards Financial Freedom.</h1>
+                <p class="subtitle">Invest in Mutual Funds, SIP, and Financial Planning with expert guidance and a trusted platform.</p>
                 
-                <a href="nism_certificate.jpg" target="_blank" style="text-decoration: none;">
-                    <img src="nism_certificate_thumb.jpg" alt="NISM Certification Proof" style="width: 100px; height: auto; border: 2px solid #007bff; border-radius: 4px; opacity: 0.9;">
-                    <p style="font-size: 0.75em; color: #007bff; font-weight: 600; margin-top: 4px;">View NISM Cert</p>
-                </a>
+                <a href="#contact" class="cta-button">🚀 Start Investing Now - Get Free Consultation</a>
             </div>
-            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
-                </div>
 
-            
-            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
-                <a href="https://wa.me/917200752628" target="_blank" style="background-color: #25D366; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    📞 WhatsApp Now
-                </a>
-                <a href="#contact" style="background-color: #FF5722; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 600; display: inline-block; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                    🚀 Start Investing
-                </a>
-            </div>
-        </div>
-        
-        <div class="slider-container">
-            <input type="radio" name="slider" id="slide-radio-1">
-            <input type="radio" name="slider" id="slide-radio-2">
-            <input type="radio" name="slider" id="slide-radio-3">
-            
-            <div class="slides">
-                <div class="slide">
-                    <img src="slide1.jpg" alt="Investment Planning Slide 1">
+            <div class="trust-bar">
+                <div class="trust-item">
+                    <h3 class="trust-number">3000+</h3>
+                    <p class="trust-label">Trusted Investors</p>
                 </div>
-                <div class="slide">
-                    <img src="slide2.jpg" alt="Retirement Solutions Slide 2">
+                <div class="trust-separator"></div>
+                <div class="trust-item">
+                    <h3 class="trust-number">₹10 Cr+</h3>
+                    <p class="trust-label">Assets Under Advice</p>
                 </div>
-                <div class="slide">
-                    <img src="slide3.jpg" alt="Wealth Growth Slide 3">
+                <div class="trust-separator"></div>
+                <div class="trust-item">
+                    <h3 class="trust-number">5+ Yrs</h3>
+                    <p class="trust-label">Track Record of Trust</p>
                 </div>
             </div>
             
-            <div class="slider-nav">
-                <label for="slide-radio-1"></label>
-                <label for="slide-radio-2"></label>
-                <label for="slide-radio-3"></label>
-            </div>
         </div>
     </div>
+    <div id="advisor-intro" class="section advisor-section">
+        <div class="container">
+            <div class="advisor-flex">
+                <div class="advisor-details">
+                    <h2 class="advisor-name">Vignesh Dhayalan</h2>
+                    <p class="advisor-role">AMFI Registered: Mutual Fund Distributor</p>
+                    <p class="advisor-bio">"Our mission is to simplify wealth creation for every Indian. Get personalized, unbiased advice tailored for your goals."</p>
+
+                    <div class="contact-buttons-small">
+                        <a href="https://wa.me/917200752628" target="_blank" class="small-cta whatsapp-cta">
+                            <i class="fab fa-whatsapp"></i> Chat Now
+                        </a>
+                        <a href="#contact" class="small-cta contact-cta">
+                            Book a Meeting
+                        </a>
+                    </div>
+                </div>
+                <div class="advisor-proofs">
+                    <img src="vigneshphoto.jpg" alt="Vignesh Dhayalan" class="advisor-photo">
+                    <div class="proof-links">
+                        <a href="arn_card.jpg" target="_blank">View ARN Certificate</a>
+                        <a href="nism_certificate.jpg" target="_blank">View NISM Cert</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="services" class="section">
@@ -404,138 +608,81 @@
                 </div>
                 <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
                     <h3 style="color: #007bff; margin-top: 0;">Market Volatility Decoded</h3>
-                    <p style="font-size: 0.9em; color: #666;">Expert insights on navigating recent market swings and maintaining a balanced portfolio.</p>
-                    <a href="blog_volatility.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
+                    <p style="font-size: 0.9em; color: #666;">Understand market movements and how to hedge your investments against risks.</p>
+                    <a href="blog_market.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
                 </div>
                 <div style="width: 30%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
-                    <h3 style="color: #007bff; margin-top: 0;">5 Steps to Early Retirement</h3>
-                    <p style="font-size: 0.9em; color: #666;">A simple, effective roadmap to accelerate your savings and achieve financial independence sooner.</p>
+                    <h3 style="color: #007bff; margin-top: 0;">Retirement Planning Basics</h3>
+                    <p style="font-size: 0.9em; color: #666;">A comprehensive guide to building a corpus that secures your life after work.</p>
                     <a href="blog_retirement.html" style="color: #004080; text-decoration: none; font-weight: 600;">Read More →</a>
                 </div>
             </div>
+            
         </div>
     </div>
 
-    <div id="contact" class="section" style="background-color: #f0f0f5; padding-bottom: 80px;">
-    <div class="container" style="max-width: 700px; text-align: left;">
-        <h2>Ready to Talk?</h2>
-        <p style="font-size: 1.1em; margin-bottom: 30px; text-align: center;">
-            Schedule a free consultation with our financial advisors today.
-        </p>
 
-        <form action="https://formspree.io/f/xqawebje" method="POST" style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
-            <div style="margin-bottom: 15px;">
-                <label for="name" style="display: block; font-weight: 600; margin-bottom: 5px;">Full Name:</label>
-                <input type="text" name="name" id="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="email" style="display: block; font-weight: 600; margin-bottom: 5px;">Email:</label>
-                <input type="email" name="_replyto" id="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label for="message" style="display: block; font-weight: 600; margin-bottom: 5px;">Your Query:</label>
-                <textarea name="message" id="message" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-            </div>
-            <button type="submit" style="background-color: #004080; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; transition: background-color 0.3s; width: 100%;">
-                Send Consultation Request
-            </button>
+    <div id="contact" class="section" style="background-color: #004080; color: white;">
+    <div class="container" style="max-width: 800px;">
+        <h2>Ready to Start Your Financial Journey?</h2>
+        <p style="font-size: 1.1em; margin-bottom: 30px;">Get in touch with us for personalized advice or to book a free consultation.</p>
+        
+        <form style="display: flex; flex-direction: column; gap: 15px;">
+            <input type="text" placeholder="Your Name" required style="padding: 12px; border-radius: 5px; border: none;">
+            <input type="email" placeholder="Your Email" required style="padding: 12px; border-radius: 5px; border: none;">
+            <input type="tel" placeholder="Your Phone Number" style="padding: 12px; border-radius: 5px; border: none;">
+            <textarea placeholder="How can we help you?" rows="4" style="padding: 12px; border-radius: 5px; border: none;"></textarea>
+            <button type="submit" style="background-color: #28A745; color: white; padding: 12px; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; transition: background-color 0.3s;">Send Message</button>
         </form>
+        
+        <div style="margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.3); padding-top: 20px;">
+            <p style="margin: 5px 0; font-size: 0.9em;">📞 **Call/WhatsApp:** +91 72007 52628</p>
+            <p style="margin: 5px 0; font-size: 0.9em;">📧 **Email:** support@universalmoneymart.com</p>
+        </div>
     </div>
 </div>
-    
-    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-sticky">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Chat">
+
+    <footer>
+        <div class="container" style="text-align: center; padding: 20px 0; color: #666; font-size: 0.85em;">
+            &copy; 2025 Universal Money Mart. All rights reserved. <br>
+            <span style="font-weight: 600; color: #004080;">ARN/RIA Disclosure:</span> Investments in mutual funds are subject to market risks. Please read the offer document carefully before investing.
+        </div>
+    </footer>
+
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-sticky" style="position: fixed; bottom: 25px; right: 25px;">
+        <img src="whatsapp_logo.png" alt="WhatsApp" style="width: 100%; height: 100%;">
     </a>
- <footer class="bg-gray-800 text-white py-8 mt-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="md:flex md:justify-between md:items-center">
-            <div class="text-center md:text-left mb-4 md:mb-0">
-                <h3 class="text-xl font-bold text-blue-400">Universal Money Mart</h3>
-                <p class="text-sm mt-1">MFD Reg No: <b>ARN-288927</b></p>
-                <p class="text-sm">Operating in: Bengaluru (560 033) & Tamilnadu (606 803)</p>
-            </div>
 
-            <div class="text-center space-x-4 mb-4 md:mb-0">
-                <a href="privacy.html" class="text-sm hover:text-blue-400">Privacy Policy</a>
-                <span class="text-gray-600">|</span>
-                <a href="terms.html" class="text-sm hover:text-blue-400">Terms & Conditions</a>
-                <span class="text-gray-600">|</span>
-                <a href="contact.html" class="text-sm hover:text-blue-400">Contact Us</a>
-            </div>
-        </div>
-
-        <div class="mt-6 pt-4 border-t border-gray-700 text-center">
-            <p class="text-xs text-gray-400">
-                © 2025 Universal Money Mart | All Rights Reserved
-            </p>
-            <p class="text-xs text-red-400 mt-2">
-                ⚠️ <b>Mandatory SEBI Disclaimer:</b> Mutual Fund investments are subject to market risks. Read all scheme related documents carefully.
-            </p>
-        </div>
-    </div>
-</footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuToggle = document.getElementById('menuToggle');
-            const navLinks = document.getElementById('navLinks');
-            const body = document.body;
-            const dropdowns = document.querySelectorAll('.dropdown');
+        // JS for Hamburger Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
 
-            // 1. Sidebar Toggle Logic
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                    body.classList.toggle('menu-open');
-                });
-            }
-            
-            // 2. Mobile Dropdown Toggle Logic (Single Tap Fix)
-            dropdowns.forEach(dropdown => {
-                const dropbtn = dropdown.querySelector('.dropbtn');
-                
-                dropbtn.addEventListener('click', function(event) {
-                    
-                    // Only run this logic on mobile screen sizes
-                    if (window.innerWidth <= 991) {
-                        event.preventDefault(); // CRITICAL: Stop link from navigating/scrolling to top
-                        
-                        // Close other open dropdowns
-                        dropdowns.forEach(otherDropdown => {
-                            if (otherDropdown !== dropdown) {
-                                otherDropdown.classList.remove('show');
-                            }
-                        });
-                        
-                        // Toggle the current dropdown
-                        dropdown.classList.toggle('show');
-                    }
-                });
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Optional: Close menu when a link is clicked (for mobile)
+        navLinks.querySelectorAll('.dropbtn, a:not(.dropdown-content a)').forEach(link => {
+            link.addEventListener('click', () => {
+                 if (window.innerWidth <= 991) {
+                     navLinks.classList.remove('active');
+                 }
             });
-
-            // 3. Close sidebar when clicking outside or on an anchor link
-            window.addEventListener('click', function(event) {
-                if (window.innerWidth <= 991 && navLinks.classList.contains('active')) {
-                    
-                    // Logic 1: Close if user clicks outside the sidebar or toggle button
-                    if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
-                        navLinks.classList.remove('active');
-                        body.classList.remove('menu-open');
-                        
-                        // Close all dropdowns when the sidebar closes
-                        dropdowns.forEach(dropdown => {
-                            dropdown.classList.remove('show');
-                        });
-                    }
-                    
-                    // Logic 2: Close if user clicks any link inside the sidebar
-                    if (event.target.matches('#navLinks a')) {
-                        navLinks.classList.remove('active');
-                        body.classList.remove('menu-open');
-                    }
+        });
+        
+        // JS for Dropdown toggles on Mobile
+        navLinks.querySelectorAll('.dropdown > .dropbtn').forEach(dropbtn => {
+            dropbtn.addEventListener('click', function(e) {
+                if (window.innerWidth <= 991) {
+                    e.preventDefault(); // Prevent navigating if it's a mobile toggle
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('show');
                 }
             });
         });
+
     </script>
 </body>
 </html>
