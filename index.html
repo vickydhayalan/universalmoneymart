@@ -127,27 +127,30 @@
             display: block;
         }
         
-        /* ----------------------------------------------------- */
-        /* --- MEGA MENU STYLES (UMM Labs) --- */
-        /* ----------------------------------------------------- */
-        .mega-dropdown {
-            position: static; 
-        }
-        .mega-dropdown-content {
-            display: none;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            right: 0;
-            top: 100%; 
-            background-color: #ffffff;
-            box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15);
-            z-index: 999; 
-            padding: 20px 0;
-            border-top: 3px solid var(--color-secondary);
-        }
-        .mega-dropdown:hover .mega-dropdown-content {
-            display: block;
+/* ----------------------------------------------------- */
+/* --- MEGA MENU STYLES (UMM Labs) --- */
+/* ----------------------------------------------------- */
+.mega-dropdown {
+    position: static; 
+}
+.mega-dropdown-content {
+    display: none;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 100%; 
+    background-color: #ffffff;
+    box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15);
+    z-index: 1010; /* Changed z-index to be slightly lower than nav but higher than others */
+    padding: 20px 0;
+    border-top: 3px solid var(--color-secondary);
+}
+.mega-dropdown:hover .mega-dropdown-content {
+    display: block;
+}
+
+/* ... (Remaining CSS styles retained) ... */
         }
         .mega-content-grid {
             display: grid;
@@ -964,7 +967,38 @@
                 }
             });
         });
+        
+        // **NEW FIX FOR MEGA MENU INSTABILITY ON DESKTOP**
+        // Since CSS :hover handles the simple dropdowns fine, 
+        // we mainly ensure that the general hover behavior is clean.
+        // The issue is likely due to the browser struggling with the static position 
+        // and large size. The CSS fix above and the standard hover should be sufficient 
+        // if the structure is correct. Let's add a JS fallback for the mega menu 
+        // to prevent immediate closing if CSS :hover fails on complex elements.
+        
+        const megaDropdown = document.querySelector('.mega-dropdown');
+        const megaContent = document.querySelector('.mega-dropdown-content');
 
+        if (megaDropdown) {
+             let timeout;
+
+             megaDropdown.addEventListener('mouseenter', () => {
+                 clearTimeout(timeout);
+                 if (window.innerWidth >= 992) {
+                     megaContent.style.display = 'block';
+                 }
+             });
+
+             megaDropdown.addEventListener('mouseleave', () => {
+                 if (window.innerWidth >= 992) {
+                     // Introduce a slight delay before closing to allow moving mouse over gap
+                     timeout = setTimeout(() => {
+                         megaContent.style.display = 'none';
+                     }, 100); 
+                 }
+             });
+        }
+        
     </script>
 </body>
 </html>
