@@ -81,9 +81,10 @@
             color: var(--color-primary);
             padding: 0;
         }
+        /* CORRECTION #1: LOGO ICON SIZE INCREASE */
         .logo img {
-            width: 40px; /* CORRECTION #1: LOGO ICON SIZE INCREASE */
-            height: 40px; /* CORRECTION #1: LOGO ICON SIZE INCREASE */
+            width: 40px; 
+            height: 40px; 
             margin-right: 12px; 
             object-fit: contain;
         }
@@ -108,7 +109,6 @@
             display: flex; 
             align-items: center;
         }
-        /* Correction #3: Icon size increase for desktop navigation */
         .nav-links .dropbtn i {
              margin-right: 5px; 
              font-size: 1.1em; 
@@ -118,7 +118,6 @@
             background-color: var(--color-bg-light); 
             border-bottom: none; 
         }
-        /* Active Link (or Hovering Dropdown Parent) */
         .dropdown:hover > .dropbtn {
             background-color: var(--color-bg-light);
             color: var(--color-primary);
@@ -133,9 +132,8 @@
             z-index: 10;
             border-radius: 8px; 
             overflow: hidden;
-            /* CORRECTION #2: Dropdown opens under the link, not full left edge */
-            left: auto; 
-            right: 0; 
+            /* CORRECTION #2: Dropdown opens under the button by removing left/right constraints */
+            left: 0; /* Align dropdown left edge to button left edge */
             top: calc(100% + 10px); 
             border-top: 3px solid var(--color-secondary);
         }
@@ -153,7 +151,8 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        /* MEGA MENU STYLES - Left/Right alignment is fine for full width */
+
+        /* MEGA MENU STYLES - Need full width, so left: 0; right: 0; is required. */
         .mega-dropdown { position: static; } 
         .mega-dropdown-content { display: none; position: absolute; width: 100%; left: 0; right: 0; top: 100%; background-color: #ffffff; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); z-index: 1010; padding: 30px 40px; border-top: 3px solid var(--color-secondary); }
         .mega-content-grid { display: grid; gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0; text-align: left; }
