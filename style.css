@@ -788,9 +788,11 @@ footer {
     }
     
     /* 5. Dropdown Fixes */
-    .dropdown:hover .dropdown-content { display: block !important; }
-    .dropdown-content { 
-        display: none; 
+   .dropdown:hover .dropdown-content { 
+        display: block !important; 
+    }
+   .dropdown-content { 
+        position: absolute !important;
         /* Reset positioning for desktop dropdown */
         position: absolute;
         left: 50%; 
