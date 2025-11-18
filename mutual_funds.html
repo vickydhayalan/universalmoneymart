@@ -14,7 +14,7 @@
     
     <style>
         /* ----------------------------------------------------- */
-        /* --- MUTUAL FUNDS PAGE SPECIFIC STYLES (Kept for reference) --- */
+        /* --- MUTUAL FUNDS PAGE SPECIFIC STYLES & FIXES --- */
         /* ----------------------------------------------------- */
         :root {
             --color-primary: #003366; 
@@ -30,17 +30,29 @@
         }
         .product-hero h1 {
             color: white;
-            font-size: 3.5em;
+            font-size: 3.5em; /* Desktop size */
+        }
+        
+        /* FIX: MOBILE HEADING SIZE CORRECTION (Heading is too big on mobile) */
+        @media (max-width: 768px) {
+            .product-hero h1 {
+                font-size: 2.2em; /* Reduced size for better mobile viewing */
+                line-height: 1.2;
+            }
+            .product-hero p.subtitle {
+                font-size: 1em;
+            }
         }
         
         .content-section {
-            padding: 60px 0;
+            padding: 50px 0; /* Reduced padding for more content space */
+            text-align: left;
         }
         .content-section h2 {
             text-align: center;
         }
         
-        /* 1. VISUAL CARDS */
+        /* 1. INFO CARDS */
         .info-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -59,6 +71,12 @@
             font-size: 2em;
             color: var(--color-primary);
             margin-bottom: 15px;
+        }
+        .adv-disadv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
         }
 
         /* 2. COMPARISON TABLE & VISUALS */
@@ -129,7 +147,7 @@
             border-bottom: 1px solid #eee;
         }
         .accordion:after {
-            content: '\25B6'; /* Right arrow */
+            content: '\25B6'; 
             font-size: 0.8em;
             color: #777;
             float: right;
@@ -138,7 +156,7 @@
             transition: transform 0.3s;
         }
         .accordion.active:after {
-            content: '\25BC'; /* Down arrow */
+            content: '\25BC'; 
             transform: rotate(360deg);
         }
     </style>
@@ -160,37 +178,92 @@
         </div>
     </div>
 
-    <div id="explained" class="content-section">
+    <div id="mf-basics" class="content-section" style="padding-top: 30px;">
         <div class="container" style="max-width: 900px;">
-            <h2>Understanding Mutual Funds & The Value of Advisory</h2>
+            <h2 style="margin-bottom: 40px;">Mutual Funds: The Basics You Must Know</h2>
+            
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="color: var(--color-primary); margin-top: 0;"><i class="fas fa-filter"></i> Main Fund Categories</h3>
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li><i class="fas fa-arrow-up" style="color: #007bff; margin-right: 8px;"></i> **Equity Funds:** For long-term goals (5+ years). Suitable for aggressive to moderate risk takers.</li>
+                        <li><i class="fas fa-credit-card" style="color: #28a745; margin-right: 8px;"></i> **Debt Funds:** For short-term needs and capital preservation. Suitable for low-risk investors.</li>
+                        <li><i class="fas fa-balance-scale" style="color: #ffc107; margin-right: 8px;"></i> **Hybrid Funds:** Balance of equity and debt. Suitable for moderate risk takers.</li>
+                        <li><i class="fas fa-piggy-bank" style="color: #dc3545; margin-right: 8px;"></i> **Solution-Oriented:** For specific goals like retirement or children's future.</li>
+                    </ul>
+                </div>
+
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="color: var(--color-primary); margin-top: 0;"><i class="fas fa-users"></i> Who Should Invest? (Suitability)</h3>
+                    <p style="font-size: 1em;">Mutual Funds are ideal for disciplined investors focused on long-term wealth creation. They are perfect for:</p>
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li><i class="fas fa-user-check" style="color: var(--color-secondary); margin-right: 8px;"></i> Investors lacking time for direct market research.</li>
+                        <li><i class="fas fa-wallet" style="color: var(--color-secondary); margin-right: 8px;"></i> Individuals saving for specific future goals.</li>
+                        <li><i class="fas fa-umbrella" style="color: var(--color-secondary); margin-right: 8px;"></i> Anyone seeking professional fund management.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 style="color: var(--color-primary); text-align: center; margin-top: 40px;">Advantages and Disadvantages of Mutual Funds</h3>
+            
+            <div class="adv-disadv-grid">
+                 <div class="info-card" style="border-top-color: var(--color-success);">
+                    <i class="fas fa-plus-circle" style="color: var(--color-success);"></i>
+                    <h4>Advantages (Pros)</h4>
+                    <ul style="padding-left: 15px;">
+                        <li>Professional Fund Management & Research</li>
+                        <li>High Diversification (Spreading risk)</li>
+                        <li>Liquidity (Easy withdrawal for most funds)</li>
+                        <li>Tax Benefits (ELSS funds)</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card" style="border-top-color: #dc3545;">
+                    <i class="fas fa-minus-circle" style="color: #dc3545;"></i>
+                    <h4>Disadvantages (Cons)</h4>
+                    <ul style="padding-left: 15px;">
+                        <li>Market Risk Exposure (Prices fluctuate)</li>
+                        <li>Expense Ratio (Cost of fund management)</li>
+                        <li>No Direct Control over stock picking</li>
+                        <li>Exit Load (Penalties for early withdrawal)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="explained" class="content-section" style="background-color: var(--color-bg-light);">
+        <div class="container" style="max-width: 900px;">
+            <h2 style="margin-bottom: 40px;">The Value of Investing via a Distributor (Regular Plans)</h2>
             <p style="font-size: 1.1em; text-align: center; max-width: 700px; margin: 0 auto 40px;">
-                Mutual Funds are the trusted route to market exposure. We partner with you for the **entire investment journey**, providing the continuous support needed to reach your financial goals.
+                You pay a slightly higher expense ratio in **Regular Plans**, but you gain continuous expert support and guidance throughout your long-term investment journey.
             </p>
             
             <div class="info-cards-grid">
                 <div class="info-card">
                     <i class="fas fa-handshake-angle"></i>
-                    <h4>The Power of Regular Plans (Advisory)</h4>
-                    <p>We provide **Regular Plans** where our distributor commission helps fund continuous advisory, goal-monitoring, and portfolio rebalancing services.</p>
+                    <h4>Personalized Selection</h4>
+                    <p>We filter thousands of funds to select the exact schemes that align with your unique risk appetite and life goals.</p>
                 </div>
                 <div class="info-card">
                     <i class="fas fa-bullseye"></i>
-                    <h4>Discipline & Monitoring</h4>
-                    <p>We ensure you stay the course, reminding you of SIPs, advising on market changes, and helping avoid emotional mistakes.</p>
+                    <h4>Goal Monitoring & Rebalancing</h4>
+                    <p>We actively monitor your portfolio against market changes and advise when to rebalance to keep your goals on track.</p>
                 </div>
                 <div class="info-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h4>Your Personal Helpdesk</h4>
-                    <p>Need help with documentation, transactions, or account statements? You get a dedicated partner (Vignesh Dhayalan) for quick resolution.</p>
+                    <i class="fas fa-user-shield"></i>
+                    <h4>Dedicated Support</h4>
+                    <p>Access your personal distributor, Vignesh Dhayalan, for help with transactions, statements, and financial queries—a true helpdesk.</p>
                 </div>
             </div>
             
         </div>
     </div>
-
-    <div id="comparison" class="content-section" style="background-color: var(--color-bg-light);">
+    
+    <div id="comparison" class="content-section">
         <div class="container">
-            <h2>Top Recommended Funds by Category</h2>
+            <h2>Top Recommended Regular Plans</h2>
             <p style="text-align: center;">Our research focuses on funds with strong management, consistent performance, and proven strategies.</p>
             
             <table class="comparison-table">
@@ -239,7 +312,7 @@
         </div>
     </div>
     
-    <div id="faq" class="content-section" style="padding-top: 30px;">
+    <div id="faq" class="content-section" style="padding-top: 30px; background-color: var(--color-bg-light);">
         <div class="container" style="max-width: 800px; text-align: left;">
             <h2>Common Mutual Fund Questions</h2>
 
