@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invest in Mutual Funds | Direct & Advisory Services | Universal Money Mart</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* ----------------------------------------------------- */
+        /* --- MUTUAL FUNDS PAGE SPECIFIC STYLES --- */
+        /* ----------------------------------------------------- */
+        :root {
+            --color-primary: #003366; 
+            --color-secondary: #FFC72C; 
+            --color-success: #28A745;
+            --color-bg-light: #f5f8fa;
+        }
+
+        .product-hero {
+            background: linear-gradient(135deg, var(--color-primary), #004d9c);
+            color: white;
+            padding: 100px 0 50px;
+        }
+        .product-hero h1 {
+            color: white;
+            font-size: 3.5em;
+        }
+        
+        .content-section {
+            padding: 60px 0;
+        }
+        .content-section h2 {
+            text-align: center;
+        }
+        
+        /* ----------------------------------------------------- */
+        /* 1. VISUAL CARDS */
+        /* ----------------------------------------------------- */
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .info-card {
+            text-align: left;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--color-secondary);
+            background: white;
+        }
+        .info-card i {
+            font-size: 2em;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+
+        /* ----------------------------------------------------- */
+        /* 2. COMPARISON TABLE & VISUALS */
+        /* ----------------------------------------------------- */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #eee;
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 1em;
+        }
+        .comparison-table th {
+            background-color: var(--color-primary);
+            color: white;
+            font-weight: 600;
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--color-bg-light);
+        }
+        .return-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 700;
+            color: white;
+            background-color: var(--color-success); /* Green for positive returns */
+        }
+        .risk-badge {
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85em;
+        }
+        .risk-low { background-color: #d4edda; color: #155724; }
+        .risk-medium { background-color: #fff3cd; color: #856404; }
+        .risk-high { background-color: #f8d7da; color: #721c24; }
+        
+        /* ----------------------------------------------------- */
+        /* 3. ACCORDION (FAQ) */
+        /* ----------------------------------------------------- */
+        .accordion {
+            background-color: #fff;
+            color: var(--color-text-dark);
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1em;
+            transition: 0.4s;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+        }
+        .accordion:hover {
+            background-color: var(--color-bg-light);
+        }
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border-bottom: 1px solid #eee;
+        }
+        .accordion:after {
+            content: '\25B6'; /* Right arrow */
+            font-size: 0.8em;
+            color: #777;
+            float: right;
+            margin-left: 5px;
+            transform: rotate(0deg);
+            transition: transform 0.3s;
+        }
+        .accordion.active:after {
+            content: '\25BC'; /* Down arrow */
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>...</nav>
+
+    <div class="product-hero">
+        <div class="container">
+            <h1>Start Your Mutual Fund Investment Journey</h1>
+            <p class="subtitle" style="color: #eee;">Zero Commission Direct Plans. Built for Long-Term Wealth Creation.</p>
+        </div>
+    </div>
+    
+    <div style="background-color: #fff3cd; color: #856404; padding: 15px; text-align: center; border-bottom: 1px solid #ffeeba;">
+        <div class="container">
+            <i class="fas fa-exclamation-triangle"></i> **Statutory Warning:** Mutual Fund investments are subject to market risks. Read all scheme related documents carefully.
+        </div>
+    </div>
+
+    <div id="explained" class="content-section">
+        <div class="container">
+            <h2>The Power of Professional Investing</h2>
+            
+            <div class="info-cards-grid">
+                <div class="info-card">
+                    <i class="fas fa-search-dollar"></i>
+                    <h4>The SIP Advantage</h4>
+                    <p>Invest small amounts regularly to benefit from rupee-cost averaging, reducing market timing risk over the long term.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-chart-pie"></i>
+                    <h4>Instant Diversification</h4>
+                    <p>Access a wide portfolio of stocks and bonds with a small investment, something difficult to achieve on your own.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-user-shield"></i>
+                    <h4>Expert Management</h4>
+                    <p>Your money is managed by professional fund managers who conduct detailed research and take decisions on your behalf.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="sip_calculator.html" class="cta-button" style="background-color: var(--color-primary);">Calculate Your SIP Returns →</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="comparison" class="content-section" style="background-color: var(--color-bg-light);">
+        <div class="container">
+            <h2>Top Recommended Direct Plans</h2>
+            <p style="text-align: center;">Our research focuses on funds with strong management, low expense ratios (Direct Plans), and consistent long-term performance.</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Scheme Name</th>
+                        <th>Category</th>
+                        <th>3Y Avg Return</th>
+                        <th>Risk Profile</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Parag Parikh Flexi Cap Fund</td>
+                        <td>Flexi Cap Equity</td>
+                        <td><span class="return-badge">19.5%</span></td>
+                        <td><span class="risk-badge risk-medium">Moderately High</span></td>
+                        <td><a href="index.html#contact-professional">Invest Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>ICICI Prudential Savings Fund</td>
+                        <td>Short Duration Debt</td>
+                        <td><span class="return-badge">6.8%</span></td>
+                        <td><span class="risk-badge risk-low">Low</span></td>
+                        <td><a href="index.html#contact-professional">Invest Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>Quant Small Cap Fund</td>
+                        <td>Small Cap Equity</td>
+                        <td><span class="return-badge">26.1%</span></td>
+                        <td><span class="risk-badge risk-high">Very High</span></td>
+                        <td><a href="index.html#contact-professional">Invest Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>HDFC Balanced Advantage Fund</td>
+                        <td>Dynamic Asset Allocation</td>
+                        <td><span class="return-badge">15.2%</span></td>
+                        <td><span class="risk-badge risk-medium">Moderate</span></td>
+                        <td><a href="index.html#contact-professional">Invest Now</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p style="margin-top: 30px; font-size: 0.9em; text-align: center;">*Returns are based on historical performance and are not indicative of future results.</p>
+        </div>
+    </div>
+    
+    <div id="faq" class="content-section" style="padding-top: 30px;">
+        <div class="container" style="max-width: 800px; text-align: left;">
+            <h2>Common Mutual Fund Questions</h2>
+
+            <button class="accordion">Is Mutual Fund Investment Risky?</button>
+            <div class="panel">
+              <p>All market-linked investments carry risk. However, MFs are managed by professionals, and risk can be minimized through diversification and long-term SIP discipline. Your risk profile determines the type of fund we recommend.</p>
+            </div>
+
+            <button class="accordion">Is SIP mandatory?</button>
+            <div class="panel">
+              <p>No. You can invest via Lumpsum (one-time investment) or SIP. However, SIP is recommended for most investors as it averages out your purchase cost over time (Rupee-Cost Averaging).</p>
+            </div>
+
+            <button class="accordion">Can I withdraw money anytime?</button>
+            <div class="panel">
+              <p>Yes, most open-ended funds allow withdrawal anytime. Tax-saving ELSS funds have a lock-in period of 3 years. We will clarify the exit rules for every fund before you invest.</p>
+            </div>
+            
+            <div class="contact-cta-about" style="text-align: center; margin-top: 40px;">
+                <a href="index.html#contact-professional" class="cta-button">Still have questions? Connect with Advisor!</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>...</footer>
+
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <script>
+        // JS for Accordion Functionality
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+          });
+        }
+    </script>
+    <script src="script.js"></script> 
+</body>
+</html>
