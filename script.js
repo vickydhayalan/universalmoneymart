@@ -36,35 +36,13 @@ navLinks.querySelectorAll('.dropdown > .dropbtn').forEach(dropbtn => {
             // Toggle the clicked dropdown
             dropdown.classList.toggle('show');
         }
+        // Fix: Prevent default action on desktop click, but allow CSS hover to take over
+        if (window.innerWidth >= 992) {
+             e.preventDefault(); 
+        }
     });
 });
- 
-// ** MEGA MENU DESKTOP STABILITY FIX **
-// NOTE: For simple dropdowns, the CSS hover state is sufficient, but this JS adds extra stability.
-const dropdowns = document.querySelectorAll('.dropdown');
 
-dropdowns.forEach(dropdown => {
-    const dropdownContent = dropdown.querySelector('.dropdown-content');
-    
-    if (dropdownContent) {
-        let timeout;
-
-        dropdown.addEventListener('mouseenter', () => {
-            clearTimeout(timeout);
-            if (window.innerWidth >= 992) {
-                // Not strictly necessary due to CSS, but ensures it stays open
-                // For Mega Menu logic, we'd use this. For simple dropdowns, CSS handles it.
-            }
-        });
-
-        dropdown.addEventListener('mouseleave', () => {
-            if (window.innerWidth >= 992) {
-                // This JS prevents the menu from closing immediately if the mouse leaves for a second.
-                timeout = setTimeout(() => {
-                    // We don't need to manually hide it here because the CSS :hover state handles it.
-                    // This is more for complex mega menus that might use JS to show/hide.
-                }, 100); 
-            }
-        });
-    }
-});
+// NOTE: The previous MEGA MENU DESKTOP STABILITY FIX block has been removed!
+// Reason: CSS :hover handles desktop dropdown stability much better without JS conflicts.
+// The code is now cleaner and more stable.
