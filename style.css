@@ -734,11 +734,10 @@ footer {
 }
 
 /* ----------------------------------------------------- */
-/* --- DESKTOP VIEW FIXES (>= 992px) --- */
+/* --- DESKTOP VIEW FIXES (>= 992px) (FINAL ALIGNMENT FIX) --- */
 /* ----------------------------------------------------- */
 @media (min-width: 992px) {
     
-    /* 1. Toggle & Logo Reset */
     .menu-toggle { display: none !important; }
     .logo .logo-full { display: inline !important; }
     .logo .logo-short { display: none !important; }
@@ -746,36 +745,34 @@ footer {
     /* 2. Reset Main Nav Container */
     .nav-links { 
         position: static !important; 
-        display: flex !important; /* Force desktop layout */
+        display: flex !important; 
         width: auto !important; 
         height: auto !important; 
-        transform: none !important; /* Remove mobile drawer shift */
+        transform: none !important; 
         background-color: transparent !important; 
         padding-top: 0 !important;
         box-shadow: none !important;
         flex-direction: row !important;
-        align-items: center;
-        gap: 15px; /* Keep desktop gap */
+        align-items: center !important;
+        gap: 10px !important; /* REDUCED GAP */
     }
     
-    /* 3. Reset Inner Mobile Drawer Container (This holds the links on desktop) */
+    /* 3. Reset Inner Mobile Drawer Container (Fixes horizontal flow) */
     .nav-links-inner {
-        all: unset; /* Aggressive Reset */
-        display: flex !important; /* Force horizontal layout */
-        align-items: center;
-        gap: 15px;
-        /* Revert link container back to inline flow */
+        display: flex !important; 
+        align-items: center !important;
+        gap: 10px !important; /* REDUCED GAP */
         background-color: transparent !important;
         height: auto !important;
         width: auto !important;
         float: none !important;
         padding-top: 0 !important;
+        box-shadow: none !important;
     }
     
-    /* 4. Reset Links inside Inner Container */
+    /* 4. Reset Links inside Inner Container to Desktop Style */
     .nav-links-inner .dropbtn, .nav-links-inner > a {
-        /* Re-apply desktop link styling */
-        padding: 8px 12px !important;
+        padding: 8px 10px !important; /* REDUCED HORIZONTAL PADDING (12px -> 10px) */
         font-weight: 600 !important;
         font-size: 0.95em !important;
         color: var(--color-nav-link) !important;
@@ -790,18 +787,12 @@ footer {
     }
     
     /* 5. Dropdown Fixes */
-   .dropdown:hover .dropdown-content { 
-        display: block !important; 
-    }
-   .dropdown-content { 
+    .dropdown:hover .dropdown-content { display: block !important; }
+    .dropdown-content { 
+        display: none; 
         position: absolute !important;
-        /* Reset positioning for desktop dropdown */
-        position: absolute;
-        left: 50%; 
-        transform: translateX(-50%);
-        top: 100% !important;
-       .dropdown {
-        position: relative !important; /* Re-enforce relative position */
-    }
+        left: 50% !important; 
+        transform: translateX(-50%) !important;
+        top: 100% !important; 
     }
 }
