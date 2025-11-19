@@ -216,16 +216,58 @@
 
     <footer>...</footer>
 
-    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+   <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
     
     <script src="script.js"></script>
     
     <script>
-        function calculateSIP() {
-            alert("Calculation logic will be added here! Results will update dynamically.");
+        // Final SIP Calculation Logic (Paste the code from above here)
+        
+        // Function to format numbers with Indian rupee style
+        const formatter = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+        });
+
+        function updateCalculations() {
+            // 1. Get Input Values
+            const sipAmount = parseFloat(document.getElementById('sipAmount').value);
+            const tenureYears = parseFloat(document.getElementById('tenure').value);
+            const annualRate = parseFloat(document.getElementById('rate').value);
+
+            // Convert annual rate to monthly rate and tenure to months
+            const monthlyRate = annualRate / 100 / 12;
+            const tenureMonths = tenureYears * 12;
+
+            // 2. Calculation Logic (SIP Future Value Formula)
+            
+            // Calculate the future value factor
+            const futureValueFactor = (Math.pow(1 + monthlyRate, tenureMonths) - 1) / monthlyRate;
+            
+            // Calculate the final estimated maturity value (Future Value)
+            const maturityValue = sipAmount * futureValueFactor * (1 + monthlyRate);
+
+            // 3. Calculate Invested Amount and Interest Gained
+            const investedAmount = sipAmount * tenureMonths;
+            const interestGained = maturityValue - investedAmount;
+
+            // 4. Update the Output Area (Dynamic Results)
+            document.getElementById('investedAmount').innerText = formatter.format(investedAmount);
+            document.getElementById('maturityValue').innerText = formatter.format(maturityValue);
+            document.getElementById('interestGained').innerText = formatter.format(interestGained);
         }
+
+        // Run calculation once on load to show initial dummy value
+        updateCalculations(); 
+
+        // Attach the function to all input changes (sliders)
+        document.getElementById('sipAmount').addEventListener('input', updateCalculations);
+        document.getElementById('tenure').addEventListener('input', updateCalculations);
+        document.getElementById('rate').addEventListener('input', updateCalculations);
+
     </script>
 </body>
 </html>
