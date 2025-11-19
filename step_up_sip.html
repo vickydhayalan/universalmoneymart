@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step Up SIP Calculator | Future Value Estimation | UMM Labs</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* ----------------------------------------------------- */
+        /* --- CALCULATOR PAGE SPECIFIC STYLES (SIP Base) --- */
+        /* ----------------------------------------------------- */
+        
+        .calculator-hero {
+            background: linear-gradient(135deg, #00509e, var(--color-primary));
+            color: white;
+            padding: 80px 0 30px;
+        }
+        .calculator-hero h1 {
+            color: white;
+            font-size: 3em;
+        }
+
+        .calc-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 1. INPUT SIDE */
+        .calc-input-area {
+            flex: 1;
+            min-width: 350px;
+            padding-right: 20px;
+            position: static; /* Ensure natural flow */
+        }
+        .calc-input-area h2 {
+            margin-bottom: 25px;
+        }
+        
+        /* Inputs common styles */
+        .input-group {
+            margin-bottom: 25px;
+            padding-right: 0; 
+            width: 100%; 
+        }
+        
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .input-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            margin: 10px 0;
+        }
+        .input-value {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9em;
+        }
+        .display-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--color-success);
+        }
+        
+        /* 2. OUTPUT SIDE */
+        .calc-output-area {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: var(--color-bg-light);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .output-result {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .output-result:last-child {
+            border-bottom: none;
+        }
+        .output-label {
+            font-size: 1em;
+            color: var(--color-text-dark);
+            font-weight: 500;
+        }
+        .output-value {
+            font-size: 2em;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin-top: 5px;
+        }
+        .output-value.profit {
+            color: var(--color-success);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .calc-container {
+                flex-direction: column;
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .calc-input-area, .calc-output-area {
+                min-width: 100%;
+            }
+            .calc-output-area {
+                margin-top: 30px;
+            }
+            .cta-advisor-card-wrapper {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>...</nav>
+
+    <div class="calculator-hero">
+        <div class="container" style="text-align: center;">
+            <h1>Step Up SIP Calculator</h1>
+            <p class="subtitle" style="color: #eee;">Estimate how increasing your investment annually can boost your wealth.</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="calc-container">
+            
+            <div class="calc-input-area">
+                <h2>Calculate Potential Returns</h2>
+                
+                <div class="input-group">
+                    <label for="sipAmount">Initial Monthly SIP (₹)</label>
+                    <input type="range" id="sipAmount" min="500" max="50000" step="500" value="5000" oninput="document.getElementById('displayAmount').innerText = this.value; updateStepUpCalculations()">
+                    <div class="input-value">
+                        <span>Min: ₹500</span>
+                        <span id="displayAmount" class="display-value">5000</span>
+                        <span>Max: ₹50,000</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="tenure">Investment Period (Years)</label>
+                    <input type="range" id="tenure" min="5" max="30" step="1" value="15" oninput="document.getElementById('displayTenure').innerText = this.value + ' Yrs'; updateStepUpCalculations()">
+                    <div class="input-value">
+                        <span>Min: 5 Yrs</span>
+                        <span id="displayTenure" class="display-value">15 Yrs</span>
+                        <span>Max: 30 Yrs</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="rate">Expected Annual Return (%)</label>
+                    <input type="range" id="rate" min="6" max="20" step="0.5" value="12" oninput="document.getElementById('displayRate').innerText = this.value + ' %'; updateStepUpCalculations()">
+                    <div class="input-value">
+                        <span>Min: 6 %</span>
+                        <span id="displayRate" class="display-value">12 %</span>
+                        <span>Max: 20 %</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="stepUpRate">Annual Step-Up (%)</label>
+                    <input type="range" id="stepUpRate" min="0" max="20" step="1" value="10" oninput="document.getElementById('displayStepUpRate').innerText = this.value + ' %'; updateStepUpCalculations()">
+                    <div class="input-value">
+                        <span>Min: 0 %</span>
+                        <span id="displayStepUpRate" class="display-value">10 %</span>
+                        <span>Max: 20 %</span>
+                    </div>
+                </div>
+                <div class="cta-advisor-card-wrapper" style="width: 100%; margin-top: 30px;">
+                    <div class="cta-advisor-card" style="padding: 20px; border: 2px solid var(--color-secondary); border-radius: 8px; text-align: center; background-color: white;">
+                        <h4 style="color: var(--color-primary); margin-top: 0; margin-bottom: 10px;"><i class="fas fa-headset"></i> Plan Your Stepped Investments?</h4>
+                        <p style="font-size: 0.9em; color: #555; margin-bottom: 15px;">
+                            We help you align your Step-Up percentage with your salary growth and long-term goals.
+                        </p>
+                        <a href="index.html#contact-professional" class="cta-button" style="padding: 10px 20px; font-size: 1em; background-color: var(--color-primary);">
+                            Book Your Free Consultation
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="calc-output-area">
+                <h2>Estimated Results</h2>
+                <div id="results">
+                    <div class="output-result">
+                        <div class="output-label">Total Amount Invested</div>
+                        <div class="output-value" id="investedAmount">₹ 9,00,000</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Total Estimated Value</div>
+                        <div class="output-value profit" id="maturityValue">₹ 21,39,000</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Total Interest Gained</div>
+                        <div class="output-value" id="interestGained">₹ 12,39,000</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <i class="fas fa-rocket" style="color: var(--color-secondary); font-size: 2em;"></i>
+                    <p style="font-size: 0.85em; color: #777;">*Calculations are complex estimates and do not guarantee future returns.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>...</footer>
+
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <script src="script.js"></script>
+    
+    <script>
+        const formatter = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+        });
+
+        function updateStepUpCalculations() {
+            // 1. Get Input Values
+            let P_monthly = parseFloat(document.getElementById('sipAmount').value);
+            const T_years = parseFloat(document.getElementById('tenure').value);
+            const annualRate = parseFloat(document.getElementById('rate').value);
+            const stepUpRate = parseFloat(document.getElementById('stepUpRate').value);
+
+            // Convert rates to decimals
+            const R_annual = annualRate / 100;
+            const G_annual = stepUpRate / 100;
+            const r_monthly = R_annual / 12;
+
+            let totalInvested = 0;
+            let maturityValue = 0;
+            
+            // 2. Iterative Calculation Logic (Loop through each year)
+            for (let year = 1; year <= T_years; year++) {
+                
+                // --- Investment and Compounding for the current year (P_monthly) ---
+                
+                // Calculate FV of this year's 12 SIPs compounded for remaining (T - Y) years
+                
+                // Calculate the monthly SIP series for 1 year (12 months)
+                const futureValueFactor_monthly = (Math.pow(1 + r_monthly, 12) - 1) / r_monthly;
+                let FV_current_year_end = P_monthly * futureValueFactor_monthly * (1 + r_monthly);
+                
+                // Compound this annual FV for the remaining years (T - year)
+                let FV_total_end = FV_current_year_end * Math.pow(1 + R_annual, T_years - year);
+                
+                maturityValue += FV_total_end;
+
+                // --- Update Investment and Step-Up ---
+                totalInvested += (P_monthly * 12);
+                P_monthly *= (1 + G_annual); // Step up the monthly amount for the next year
+
+            }
+
+            const interestGained = maturityValue - totalInvested;
+
+            // 3. Update the Output Area (Dynamic Results)
+            document.getElementById('investedAmount').innerText = formatter.format(totalInvested);
+            document.getElementById('maturityValue').innerText = formatter.format(maturityValue);
+            document.getElementById('interestGained').innerText = formatter.format(interestGained);
+        }
+
+        // 4. Initial Call & Event Listeners
+        // Run calculation once on load to show initial value
+        updateStepUpCalculations(); 
+
+        // Attach the function to all input changes (sliders)
+        document.getElementById('sipAmount').addEventListener('input', updateStepUpCalculations);
+        document.getElementById('tenure').addEventListener('input', updateStepUpCalculations);
+        document.getElementById('rate').addEventListener('input', updateStepUpCalculations);
+        document.getElementById('stepUpRate').addEventListener('input', updateStepUpCalculations); // New listener for Step Up Rate
+    </script>
+</body>
+</html>
