@@ -3,295 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retirement Goal Planner</title>
+    <title>Retirement Planner | Calculate Your Required Corpus & SIP | UMM Calculators</title>
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
-     crossorigin="anonymous"></script>
-    <!-- Tailwind CSS and React Libraries -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css"> 
     
     <style>
-        /* Base styles from the main site */
-        body {
-            font-family: 'Inter', sans-serif;
+        /* ----------------------------------------------------- */
+        /* --- CALCULATOR PAGE SPECIFIC STYLES (SIP Base) --- */
+        /* ----------------------------------------------------- */
+        
+        .calculator-hero {
+            background: linear-gradient(135deg, #00509e, var(--color-primary));
+            color: white;
+            padding: 80px 0 30px;
         }
-        /* Custom styles for React components */
-        .input-field {
-            width: 100%;
-            padding: 0.6rem;
-            border: 1px solid #ccc;
-            border-radius: 0.375rem;
-            transition: border-color 0.2s;
+        .calculator-hero h1 {
+            color: white;
+            font-size: 3em;
         }
-        .input-field:focus {
-            border-color: #3b82f6; /* Blue-500 */
-            outline: none;
+
+        .calc-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
         }
-        .input-label {
+
+        /* 1. INPUT SIDE */
+        .calc-input-area {
+            flex: 1;
+            min-width: 350px;
+            padding-right: 20px;
+            position: static; 
+        }
+        .calc-input-area h2 {
+            margin-bottom: 25px;
+        }
+        
+        /* Inputs common styles */
+        .input-group {
+            margin-bottom: 25px;
+            padding-right: 0; 
+            width: 100%; 
+        }
+        
+        .input-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: #374151; /* Gray-700 */
+            color: var(--color-primary);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .input-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            margin: 10px 0;
+        }
+        .input-value {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9em;
+        }
+        .display-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--color-success);
+        }
+        
+        /* 2. OUTPUT SIDE */
+        .calc-output-area {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: var(--color-bg-light);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .output-result {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .output-result:last-child {
+            border-bottom: none;
+        }
+        .output-label {
+            font-size: 1em;
+            color: var(--color-text-dark);
+            font-weight: 500;
+        }
+        .output-value {
+            font-size: 2em;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin-top: 5px;
+        }
+        .output-value.profit {
+            color: var(--color-success);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .calc-container {
+                flex-direction: column;
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .calc-input-area, .calc-output-area {
+                min-width: 100%;
+            }
+            .calc-output-area {
+                margin-top: 30px;
+            }
         }
     </style>
-
 </head>
-<body class="bg-gray-100">
+<body>
 
-    <div id="root"></div>
+    <nav>...</nav>
 
-    <script type="text/babel">
-        const { useState, useMemo } = React;
-
-        // Currency formatter for Indian Rupees
-        const formatCurrency = (amount) => {
-            return '₹' + Math.round(amount).toLocaleString('en-IN');
-        };
-
-        const App = () => {
-            // 1. Input States
-            const [currentAge, setCurrentAge] = useState(30);
-            const [retirementAge, setRetirementAge] = useState(55);
-            const [monthlyNeed, setMonthlyNeed] = useState(50000);
-            const [currentSavings, setCurrentSavings] = useState(500000);
-            const [inflationRate, setInflationRate] = useState(6);
-            const [expectedReturn, setExpectedReturn] = useState(12);
-
-            // Helper to calculate compounded future value (FV) and required SIP
-            const calculationResults = useMemo(() => {
-                const yearsToRetire = retirementAge - currentAge;
+    <div class="calculator-hero">
+        <div class="container" style="text-align: center;">
+            <h1>Retirement Planner</h1>
+            <p class="subtitle" style="color: #eee;">Calculate the corpus and monthly SIP required to achieve financial independence.</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="calc-container">
+            
+            <div class="calc-input-area">
+                <h2>Estimate Retirement Needs</h2>
                 
-                if (yearsToRetire <= 0 || currentAge < 18 || retirementAge > 80) {
-                    return {
-                        status: 'error',
-                        message: 'Retirement Age must be greater than Current Age. Please check inputs.'
-                    };
-                }
-
-                // --- Core Calculations ---
-                
-                // 1. Future Value of Monthly Need at Retirement (considering inflation)
-                const monthlyNeedInflated = monthlyNeed * Math.pow(1 + inflationRate / 100, yearsToRetire);
-                
-                // 2. Total Corpus Required at Retirement (using Safe Withdrawal Rate - e.g., 4%)
-                const withdrawalRate = 0.04; // 4% SWR (Safe Withdrawal Rate)
-                const annualNeedInflated = monthlyNeedInflated * 12;
-                const totalCorpusRequired = annualNeedInflated / withdrawalRate; 
-                
-                // 3. Future Value of Current Savings (Corpus)
-                const currentCorpusFutureValue = currentSavings * Math.pow(1 + expectedReturn / 100, yearsToRetire);
-
-                // 4. SIP Target: Corpus we still need to save through SIP
-                const targetCorpusViaSIP = Math.max(0, totalCorpusRequired - currentCorpusFutureValue);
-
-                // 5. Required Monthly SIP Calculation (Reverse FV of Annuity Formula)
-                const monthlyRate = expectedReturn / 100 / 12;
-                const totalMonths = yearsToRetire * 12;
-                
-                // M = FV / [ ( (1+r)^n - 1 ) / r ] * (1+r) - Reverse of SIP FV formula
-                const requiredMonthlySIP = targetCorpusViaSIP / 
-                    (
-                        ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate) * (1 + monthlyRate)
-                    );
-
-                return {
-                    status: 'success',
-                    yearsToRetire,
-                    monthlyNeedInflated: formatCurrency(monthlyNeedInflated),
-                    totalCorpusRequired: formatCurrency(totalCorpusRequired),
-                    currentCorpusFutureValue: formatCurrency(currentCorpusFutureValue),
-                    requiredMonthlySIP: formatCurrency(requiredMonthlySIP),
-                    targetCorpusViaSIP: formatCurrency(targetCorpusViaSIP),
-                };
-            }, [currentAge, retirementAge, monthlyNeed, currentSavings, inflationRate, expectedReturn]);
-
-            // Handle input change globally
-            const handleInputChange = (setter) => (e) => {
-                setter(Number(e.target.value));
-            };
-
-            const isSuccess = calculationResults.status === 'success';
-
-            return (
-                <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-                    <div className="bg-white shadow-2xl rounded-xl w-full max-w-4xl p-6 md:p-10">
-                        <h1 className="text-3xl md:text-4xl font-extrabold text-blue-800 text-center mb-2">
-                            Retirement Goal Planner
-                        </h1>
-                        <p className="text-center text-gray-600 mb-8">
-                            Calculate the corpus and SIP needed for a comfortable retirement.
-                        </p>
-
-                        {/* Main Grid for Inputs */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            
-                            {/* Left Column: Personal Goals */}
-                            <div className="space-y-4 p-4 border border-gray-200 rounded-lg bg-blue-50">
-                                <h2 className="text-xl font-bold text-blue-700">1. Personal & Financial Goals</h2>
-                                
-                                <div className="form-group">
-                                    <label className="input-label" htmlFor="currentAge">Current Age (Years)</label>
-                                    <input 
-                                        id="currentAge" 
-                                        type="number" 
-                                        min="18" 
-                                        max="70" 
-                                        value={currentAge} 
-                                        onChange={handleInputChange(setCurrentAge)} 
-                                        className="input-field" 
-                                    />
-                                </div>
-                                
-                                <div className="form-group">
-                                    <label className="input-label" htmlFor="retirementAge">Target Retirement Age</label>
-                                    <input 
-                                        id="retirementAge" 
-                                        type="number" 
-                                        min={currentAge + 1} 
-                                        max="80" 
-                                        value={retirementAge} 
-                                        onChange={handleInputChange(setRetirementAge)} 
-                                        className="input-field" 
-                                    />
-                                </div>
-                                
-                                <div className="form-group">
-                                    <label className="input-label" htmlFor="monthlyNeed">Monthly Expense Today (₹)</label>
-                                    <input 
-                                        id="monthlyNeed" 
-                                        type="number" 
-                                        min="1000" 
-                                        value={monthlyNeed} 
-                                        onChange={handleInputChange(setMonthlyNeed)} 
-                                        className="input-field" 
-                                    />
-                                </div>
-                            </div>
-                            
-                            {/* Right Column: Investment Assumptions */}
-                            <div className="space-y-4 p-4 border border-gray-200 rounded-lg bg-green-50">
-                                <h2 className="text-xl font-bold text-green-700">2. Investment Assumptions (%)</h2>
-                                
-                                <div className="form-group">
-                                    <label className="input-label" htmlFor="currentSavings">Current Retirement Savings (₹)</label>
-                                    <input 
-                                        id="currentSavings" 
-                                        type="number" 
-                                        min="0" 
-                                        value={currentSavings} 
-                                        onChange={handleInputChange(setCurrentSavings)} 
-                                        className="input-field" 
-                                    />
-                                </div>
-                                
-                                <div className="form-group">
-                                    <label className="input-label" htmlFor="inflationRate">Expected Inflation Rate (%)</label>
-                                    <input 
-                                        id="inflationRate" 
-                                        type="number" 
-                                        min="2" 
-                                        max="15" 
-                                        value={inflationRate} 
-                                        onChange={handleInputChange(setInflationRate)} 
-                                        className="input-field" 
-                                    />
-                                </div>
-                                
-                                <div className="form-group">
-                                    <label className="input-label" htmlFor="expectedReturn">Expected Annual Return (%)</label>
-                                    <input 
-                                        id="expectedReturn" 
-                                        type="number" 
-                                        min="5" 
-                                        max="20" 
-                                        value={expectedReturn} 
-                                        onChange={handleInputChange(setExpectedReturn)} 
-                                        className="input-field" 
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* --- Results Section --- */}
-                        <div className="mt-8">
-                            <h2 className="text-2xl font-extrabold text-gray-800 border-b pb-2 mb-4">
-                                Retirement Plan Summary
-                            </h2>
-                            
-                            {calculationResults.status === 'error' && (
-                                <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md">
-                                    <p className="font-semibold">{calculationResults.message}</p>
-                                </div>
-                            )}
-
-                            {isSuccess && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    
-                                    {/* Card 1: Inflated Monthly Need */}
-                                    <ResultCard 
-                                        label="Monthly Expense at Retirement" 
-                                        value={calculationResults.monthlyNeedInflated}
-                                        description={`(After ${calculationResults.yearsToRetire} years of inflation)`}
-                                        color="blue"
-                                    />
-
-                                    {/* Card 2: Total Corpus Required */}
-                                    <ResultCard 
-                                        label="Total Corpus Target" 
-                                        value={calculationResults.totalCorpusRequired}
-                                        description="(The total fund needed on Day 1 of retirement)"
-                                        color="purple"
-                                    />
-
-                                    {/* Card 3: Future Value of Existing Savings */}
-                                    <ResultCard 
-                                        label="Future Value of Current Savings" 
-                                        value={calculationResults.currentCorpusFutureValue}
-                                        description={`(Current Savings growing at ${expectedReturn}%)`}
-                                        color="teal"
-                                    />
-                                    
-                                    {/* Card 4: Required Monthly SIP (The Goal) */}
-                                    <ResultCard 
-                                        label="Required Monthly SIP to Achieve Goal" 
-                                        value={calculationResults.requiredMonthlySIP}
-                                        description={`(To fill the gap of ${calculationResults.targetCorpusViaSIP})`}
-                                        color="green"
-                                        isHighlight={true}
-                                    />
-                                    
-                                </div>
-                            )}
-                        </div>
-                        
-                        {/* Contact CTA */}
-                        <div className="mt-8 pt-4 border-t text-center">
-                            <p className="text-gray-700 mb-4">
-                                Need personalized portfolio advice for your retirement goal?
-                            </p>
-                            <a href="https://wa.me/917200752628" target="_blank" className="bg-red-500 hover:bg-red-600 text-white font-extrabold py-3 px-6 rounded-lg transition duration-150 inline-flex items-center shadow-lg">
-                                Book a Free Strategy Call 📞
-                            </a>
-                        </div>
-
+                <div class="input-group">
+                    <label for="currentAge">Your Current Age (Years)</label>
+                    <input type="range" id="currentAge" min="20" max="55" step="1" value="30" oninput="document.getElementById('displayCurrentAge').innerText = this.value; updateRetirementCalculations()">
+                    <div class="input-value">
+                        <span>Min: 20</span>
+                        <span id="displayCurrentAge" class="display-value">30</span>
+                        <span>Max: 55</span>
                     </div>
                 </div>
-            );
-        };
 
-        // Reusable Result Card Component
-        const ResultCard = ({ label, value, description, color, isHighlight = false }) => (
-            <div className={`p-4 border-l-4 ${isHighlight ? 'bg-yellow-100 border-red-500' : 'bg-gray-50 border-gray-300'}`}>
-                <p className={`text-sm font-medium ${isHighlight ? 'text-red-700' : 'text-gray-500'}`}>{label}</p>
-                <h3 className={`text-2xl font-extrabold mt-1 ${isHighlight ? 'text-red-600' : 'text-gray-800'}`}>{value}</h3>
-                <p className="text-xs text-gray-500 mt-1">{description}</p>
+                <div class="input-group">
+                    <label for="retirementAge">Target Retirement Age (Years)</label>
+                    <input type="range" id="retirementAge" min="50" max="65" step="1" value="60" oninput="document.getElementById('displayRetirementAge').innerText = this.value; updateRetirementCalculations()">
+                    <div class="input-value">
+                        <span>Min: 50</span>
+                        <span id="displayRetirementAge" class="display-value">60</span>
+                        <span>Max: 65</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="monthlyExpense">Expected Monthly Expense Today (₹)</label>
+                    <input type="range" id="monthlyExpense" min="10000" max="100000" step="5000" value="40000" oninput="document.getElementById('displayMonthlyExpense').innerText = this.value; updateRetirementCalculations()">
+                    <div class="input-value">
+                        <span>Min: ₹10K</span>
+                        <span id="displayMonthlyExpense" class="display-value">40000</span>
+                        <span>Max: ₹1L</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="inflationRate">Expected Inflation Rate (%)</label>
+                    <input type="range" id="inflationRate" min="4" max="10" step="0.5" value="6" oninput="document.getElementById('displayInflationRate').innerText = this.value + ' %'; updateRetirementCalculations()">
+                    <div class="input-value">
+                        <span>Min: 4 %</span>
+                        <span id="displayInflationRate" class="display-value">6 %</span>
+                        <span>Max: 10 %</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="returnRate">Expected Post-Tax Annual Return (%)</label>
+                    <input type="range" id="returnRate" min="8" max="15" step="0.5" value="12" oninput="document.getElementById('displayReturnRate').innerText = this.value + ' %'; updateRetirementCalculations()">
+                    <div class="input-value">
+                        <span>Min: 8 %</span>
+                        <span id="displayReturnRate" class="display-value">12 %</span>
+                        <span>Max: 15 %</span>
+                    </div>
+                </div>
+
+                <div class="cta-advisor-card-wrapper" style="width: 100%; margin-top: 30px;">
+                    <div class="cta-advisor-card" style="padding: 20px; border: 2px solid var(--color-secondary); border-radius: 8px; text-align: center; background-color: white;">
+                        <h4 style="color: var(--color-primary); margin-top: 0; margin-bottom: 10px;"><i class="fas fa-headset"></i> Plan Your Retirement Strategy?</h4>
+                        <p style="font-size: 0.9em; color: #555; margin-bottom: 15px;">
+                            Get personalized advice on the exact SIP required and fund allocation.
+                        </p>
+                        <a href="index.html#contact-professional" class="cta-button" style="padding: 10px 20px; font-size: 1em; background-color: var(--color-primary);">
+                            Book Your Free Consultation
+                        </a>
+                    </div>
+                </div>
             </div>
-        );
+            
+            <div class="calc-output-area">
+                <h2>Your Financial Goal</h2>
+                <div id="results">
+                    <div class="output-result">
+                        <div class="output-label">Years to Retirement</div>
+                        <div class="output-value" id="yearsToRetirement">30 Yrs</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Future Monthly Expense</div>
+                        <div class="output-value" id="futureMonthlyExpense">₹ 2,30,800</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Required Retirement Corpus</div>
+                        <div class="output-value profit" id="requiredCorpus">₹ 6.92 Cr</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Monthly SIP Required Today</div>
+                        <div class="output-value" id="monthlySIPRequired">₹ 55,000</div>
+                    </div>
+                </div>
 
-        ReactDOM.render(<App />, document.getElementById('root'));
+                <div style="text-align: center; margin-top: 20px;">
+                    <i class="fas fa-umbrella-beach" style="color: var(--color-secondary); font-size: 2em;"></i>
+                    <p style="font-size: 0.85em; color: #777;">*Calculations are estimates. Start early for lower SIP requirements.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>...</footer>
+
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <script src="script.js"></script>
+    
+    <script>
+        const formatter = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+        });
+
+        function updateRetirementCalculations() {
+            // 1. Get Input Values
+            const currentAge = parseFloat(document.getElementById('currentAge').value);
+            const retirementAge = parseFloat(document.getElementById('retirementAge').value);
+            const monthlyExpenseToday = parseFloat(document.getElementById('monthlyExpense').value);
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+            const annualReturnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+            
+            // 2. Derive Core Variables
+            const yearsToRetirement = retirementAge - currentAge;
+            const yearsPostRetirement = 25; // Assuming life expectancy of 85 (60+25)
+            
+            if (yearsToRetirement <= 0) {
+                // Handle invalid ages visually
+                document.getElementById('yearsToRetirement').innerText = "0 Yrs";
+                document.getElementById('futureMonthlyExpense').innerText = "N/A";
+                document.getElementById('requiredCorpus').innerText = "N/A";
+                document.getElementById('monthlySIPRequired').innerText = "N/A";
+                return;
+            }
+
+            // 3. Calculation Steps (Forward Inflation, Reverse SIP)
+
+            // Step 3.1: Calculate Future Monthly Expense (after inflation)
+            // Formula: FV = PV * (1 + inflation)^N
+            const futureMonthlyExpense = monthlyExpenseToday * Math.pow(1 + inflationRate, yearsToRetirement);
+
+            // Step 3.2: Calculate Future Value of Annual Corpus required for withdrawal
+            // A simple approximation for the required corpus using the rule of thumb (25x annual expense)
+            // Or, using a capital needs formula for sustainable withdrawal (more accurate):
+            const safeWithdrawalRate = annualReturnRate - inflationRate;
+            let corpusFactor;
+
+            if (safeWithdrawalRate <= 0) {
+                // If return == inflation, corpus must cover total withdrawal (future expense * 12 * years)
+                 corpusFactor = (futureMonthlyExpense * 12 * yearsPostRetirement); 
+            } else {
+                // Required Corpus = Future Annual Expense / (Safe Withdrawal Rate)
+                corpusFactor = (futureMonthlyExpense * 12) / safeWithdrawalRate;
+            }
+            
+            const requiredCorpus = corpusFactor; // Total corpus needed at retirement age
+
+            // Step 3.3: Calculate Required Monthly SIP to hit the target Corpus
+            // Use reverse FV formula to find the necessary monthly SIP (P)
+            // Formula: P = FV / [ ((1 + i)^n - 1) / i ] / (1 + i)  (i = monthly return rate)
+            
+            const monthlyReturnRate = annualReturnRate / 12;
+            const totalInvestmentMonths = yearsToRetirement * 12;
+
+            const FV_Factor = (Math.pow(1 + monthlyReturnRate, totalInvestmentMonths) - 1) / monthlyReturnRate;
+            const monthlySIPRequired = requiredCorpus / (FV_Factor * (1 + monthlyReturnRate));
+            
+            // 4. Update the Output Area (Dynamic Results)
+            document.getElementById('yearsToRetirement').innerText = `${yearsToRetirement} Yrs`;
+            document.getElementById('futureMonthlyExpense').innerText = formatter.format(futureMonthlyExpense);
+            document.getElementById('requiredCorpus').innerText = formatter.format(requiredCorpus);
+            document.getElementById('monthlySIPRequired').innerText = formatter.format(monthlySIPRequired);
+        }
+
+        // 5. Initial Call & Event Listeners
+        updateRetirementCalculations(); 
+
+        document.getElementById('currentAge').addEventListener('input', updateRetirementCalculations);
+        document.getElementById('retirementAge').addEventListener('input', updateRetirementCalculations);
+        document.getElementById('monthlyExpense').addEventListener('input', updateRetirementCalculations);
+        document.getElementById('inflationRate').addEventListener('input', updateRetirementCalculations);
+        document.getElementById('returnRate').addEventListener('input', updateRetirementCalculations);
     </script>
-
 </body>
 </html>
