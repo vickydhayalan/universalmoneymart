@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWP Calculator | Systematic Withdrawal Plan Returns | UMM Labs</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* ----------------------------------------------------- */
+        /* --- SWP CALCULATOR PAGE SPECIFIC STYLES (SIP/STP Base) --- */
+        /* ----------------------------------------------------- */
+        
+        .calculator-hero {
+            background: linear-gradient(135deg, #00509e, var(--color-primary));
+            color: white;
+            padding: 80px 0 30px;
+        }
+        .calculator-hero h1 {
+            color: white;
+            font-size: 3em;
+        }
+
+        .calc-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 1. INPUT SIDE */
+        .calc-input-area {
+            flex: 1;
+            min-width: 350px;
+            padding-right: 20px;
+        }
+        .input-group {
+            margin-bottom: 25px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .input-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            margin: 10px 0;
+        }
+        .input-value {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9em;
+        }
+        .display-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--color-success);
+        }
+        
+        /* 2. OUTPUT SIDE */
+        .calc-output-area {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: var(--color-bg-light);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .output-result {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .output-result:last-child {
+            border-bottom: none;
+        }
+        .output-label {
+            font-size: 1em;
+            color: var(--color-text-dark);
+            font-weight: 500;
+        }
+        .output-value {
+            font-size: 2em;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin-top: 5px;
+        }
+        .output-value.profit {
+            color: var(--color-success);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .calc-container {
+                flex-direction: column;
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .calc-input-area, .calc-output-area {
+                min-width: 100%;
+            }
+            .calc-output-area {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>...</nav>
+
+    <div class="calculator-hero">
+        <div class="container" style="text-align: center;">
+            <h1>SWP Calculator (Systematic Withdrawal Plan)</h1>
+            <p class="subtitle" style="color: #eee;">Estimate the longevity of your corpus while taking regular income.</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="calc-container">
+            
+            <div class="calc-input-area">
+                <h2>Calculate Income Longevity</h2>
+                
+                <div class="input-group">
+                    <label for="initialCorpus">Initial Investment Corpus (₹)</label>
+                    <input type="range" id="initialCorpus" min="100000" max="20000000" step="100000" value="5000000" oninput="document.getElementById('displayCorpus').innerText = this.value">
+                    <div class="input-value">
+                        <span>Min: ₹1L</span>
+                        <span id="displayCorpus" class="display-value">5000000</span>
+                        <span>Max: ₹2Cr</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="withdrawalAmount">Monthly Withdrawal Amount (₹)</label>
+                    <input type="range" id="withdrawalAmount" min="5000" max="150000" step="5000" value="30000" oninput="document.getElementById('displayWithdrawalAmount').innerText = this.value">
+                    <div class="input-value">
+                        <span>Min: ₹5K</span>
+                        <span id="displayWithdrawalAmount" class="display-value">30000</span>
+                        <span>Max: ₹1.5L</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="tenure">Withdrawal Tenure (Years)</label>
+                    <input type="range" id="tenure" min="5" max="30" step="1" value="15" oninput="document.getElementById('displayTenure').innerText = this.value + ' Yrs'">
+                    <div class="input-value">
+                        <span>Min: 5 Yrs</span>
+                        <span id="displayTenure" class="display-value">15 Yrs</span>
+                        <span>Max: 30 Yrs</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="rate">Expected Annual Return (%)</label>
+                    <input type="range" id="rate" min="6" max="12" step="0.5" value="8" oninput="document.getElementById('displayRate').innerText = this.value + ' %'">
+                    <div class="input-value">
+                        <span>Min: 6 %</span>
+                        <span id="displayRate" class="display-value">8 %</span>
+                        <span>Max: 12 %</span>
+                    </div>
+                </div>
+
+                <div class="cta-advisor-card-wrapper" style="width: 100%; margin-top: 30px;">
+                    <div class="cta-advisor-card" style="padding: 20px; border: 2px solid var(--color-secondary); border-radius: 8px; text-align: center; background-color: white;">
+                        <h4 style="color: var(--color-primary); margin-top: 0; margin-bottom: 10px;"><i class="fas fa-headset"></i> Need Personalized SWP Strategy?</h4>
+                        <p style="font-size: 0.9em; color: #555; margin-bottom: 15px;">
+                            Plan your retirement income strategy with expert advice for fund selection and tax efficiency.
+                        </p>
+                        <a href="index.html#contact-professional" class="cta-button" style="padding: 10px 20px; font-size: 1em; background-color: var(--color-primary);">
+                            Book Your Free Consultation
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="calc-output-area">
+                <h2>Estimated Results</h2>
+                <div id="results">
+                    <div class="output-result">
+                        <div class="output-label">Total Withdrawn Amount</div>
+                        <div class="output-value" id="totalWithdrawn">₹ 54,00,000</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Remaining Corpus Value</div>
+                        <div class="output-value profit" id="remainingCorpus">₹ 15,20,000</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Corpus Lifetime (Years)</div>
+                        <div class="output-value" id="corpusLifetime">18.5 Yrs</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <i class="fas fa-umbrella-beach" style="color: var(--color-secondary); font-size: 2em;"></i>
+                    <p style="font-size: 0.85em; color: #777;">*Calculations are estimates only. The actual corpus lifetime depends on market performance.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>...</footer>
+
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <script src="script.js"></script>
+    
+    <script>
+        const formatter = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+        });
+
+        function updateSWPCalculations() {
+            // NOTE: Accurate SWP calculation requires iteration or a complex financial formula.
+            // This is a simple approximation for UI testing.
+            
+            const initialCorpus = parseFloat(document.getElementById('initialCorpus').value);
+            const withdrawalAmount = parseFloat(document.getElementById('withdrawalAmount').value);
+            const tenureYears = parseFloat(document.getElementById('tenure').value);
+            const annualRate = parseFloat(document.getElementById('rate').value);
+            
+            const monthlyRate = annualRate / 100 / 12;
+            const tenureMonths = tenureYears * 12;
+            
+            const totalWithdrawal = withdrawalAmount * tenureMonths;
+            
+            // --- APPROXIMATION FOR DEMO ---
+            let balance = initialCorpus;
+            let currentMonth = 0;
+            let lifetimeMonths = 0;
+
+            while (balance > 0 && currentMonth < 360) { // Cap at 30 years
+                currentMonth++;
+                
+                // Add growth for the month
+                balance *= (1 + monthlyRate);
+                
+                // Deduct withdrawal
+                balance -= withdrawalAmount;
+                
+                if (balance > 0) {
+                    lifetimeMonths = currentMonth;
+                }
+            }
+
+            const lifetimeYears = lifetimeMonths / 12;
+            const remainingCorpus = lifetimeYears >= tenureYears ? balance : 0;
+            const finalWithdrawnAmount = withdrawalAmount * Math.min(lifetimeMonths, tenureMonths);
+            
+            // --- UI Update (Using estimated values) ---
+            document.getElementById('totalWithdrawn').innerText = formatter.format(finalWithdrawnAmount);
+            document.getElementById('remainingCorpus').innerText = formatter.format(remainingCorpus);
+            document.getElementById('corpusLifetime').innerText = `${lifetimeYears.toFixed(1)} Yrs`;
+
+        }
+
+        // Run calculation once on load 
+        updateSWPCalculations(); 
+
+        // Attach the function to all input changes (sliders)
+        document.getElementById('initialCorpus').addEventListener('input', updateSWPCalculations);
+        document.getElementById('withdrawalAmount').addEventListener('input', updateSWPCalculations);
+        document.getElementById('tenure').addEventListener('input', updateSWPCalculations);
+        document.getElementById('rate').addEventListener('input', updateSWPCalculations);
+
+    </script>
+</body>
+</html>
