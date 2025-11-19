@@ -130,7 +130,7 @@ nav .container {
     overflow: hidden;
     left: 50%; 
     transform: translateX(-50%);
-    top: calc(100% + 1px); 
+    top: 100%;
     padding-bottom: 0px;
     padding-top: 0px;
     margin-bottom: 0px;
