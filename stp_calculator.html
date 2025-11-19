@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STP Calculator | Systematic Transfer Plan Returns | UMM Labs</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* ----------------------------------------------------- */
+        /* --- STP CALCULATOR PAGE SPECIFIC STYLES (Same as SIP for consistency) --- */
+        /* ----------------------------------------------------- */
+        
+        .calculator-hero {
+            background: linear-gradient(135deg, #00509e, var(--color-primary));
+            color: white;
+            padding: 80px 0 30px;
+        }
+        .calculator-hero h1 {
+            color: white;
+            font-size: 3em;
+        }
+
+        .calc-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 1. INPUT SIDE */
+        .calc-input-area {
+            flex: 1;
+            min-width: 350px;
+            padding-right: 20px;
+        }
+        .input-group {
+            margin-bottom: 25px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        .input-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            margin: 10px 0;
+        }
+        .input-value {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9em;
+        }
+        .display-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--color-success);
+        }
+        
+        /* 2. OUTPUT SIDE */
+        .calc-output-area {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background-color: var(--color-bg-light);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .output-result {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .output-result:last-child {
+            border-bottom: none;
+        }
+        .output-label {
+            font-size: 1em;
+            color: var(--color-text-dark);
+            font-weight: 500;
+        }
+        .output-value {
+            font-size: 2em;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin-top: 5px;
+        }
+        .output-value.profit {
+            color: var(--color-success);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .calc-container {
+                flex-direction: column;
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .calc-input-area, .calc-output-area {
+                min-width: 100%;
+            }
+            .calc-output-area {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>...</nav>
+
+    <div class="calculator-hero">
+        <div class="container" style="text-align: center;">
+            <h1>STP Calculator (Systematic Transfer Plan)</h1>
+            <p class="subtitle" style="color: #eee;">Estimate the potential returns when transferring from Debt/Liquid to Equity.</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="calc-container">
+            
+            <div class="calc-input-area">
+                <h2>Calculate Potential Returns</h2>
+                
+                <div class="input-group">
+                    <label for="initialAmount">Initial Lump Sum Capital (₹)</label>
+                    <input type="range" id="initialAmount" min="50000" max="5000000" step="50000" value="500000" oninput="document.getElementById('displayInitialAmount').innerText = this.value">
+                    <div class="input-value">
+                        <span>Min: ₹50K</span>
+                        <span id="displayInitialAmount" class="display-value">500000</span>
+                        <span>Max: ₹50L</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="transferAmount">Monthly Transfer Amount (₹)</label>
+                    <input type="range" id="transferAmount" min="5000" max="100000" step="500" value="10000" oninput="document.getElementById('displayTransferAmount').innerText = this.value">
+                    <div class="input-value">
+                        <span>Min: ₹5K</span>
+                        <span id="displayTransferAmount" class="display-value">10000</span>
+                        <span>Max: ₹1L</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="tenure">Transfer Period (Months)</label>
+                    <input type="range" id="tenure" min="6" max="60" step="1" value="12" oninput="document.getElementById('displayTenure').innerText = this.value + ' Months'">
+                    <div class="input-value">
+                        <span>Min: 6 Months</span>
+                        <span id="displayTenure" class="display-value">12 Months</span>
+                        <span>Max: 60 Months</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="rate">Expected Equity Annual Return (%)</label>
+                    <input type="range" id="rate" min="6" max="20" step="0.5" value="12" oninput="document.getElementById('displayRate').innerText = this.value + ' %'">
+                    <div class="input-value">
+                        <span>Min: 6 %</span>
+                        <span id="displayRate" class="display-value">12 %</span>
+                        <span>Max: 20 %</span>
+                    </div>
+                </div>
+
+                <div class="cta-advisor-card" style="margin-top: 30px; padding: 20px; border: 2px solid var(--color-secondary); border-radius: 8px; text-align: center; background-color: white;">
+                    <h4 style="color: var(--color-primary); margin-top: 0; margin-bottom: 10px;"><i class="fas fa-headset"></i> Need Personalized STP Strategy?</h4>
+                    <p style="font-size: 0.9em; color: #555; margin-bottom: 15px;">
+                        Connect with Vignesh Dhayalan for expert advice on choosing the right source and target funds.
+                    </p>
+                    <a href="index.html#contact-professional" class="cta-button" style="padding: 10px 20px; font-size: 1em; background-color: var(--color-primary);">
+                        Book Your Free Consultation
+                    </a>
+                </div>
+            </div>
+            
+            <div class="calc-output-area">
+                <h2>Estimated Results</h2>
+                <div id="results">
+                    <div class="output-result">
+                        <div class="output-label">Initial Invested Capital</div>
+                        <div class="output-value" id="initialInvested">₹ 5,00,000</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Total Estimated Value</div>
+                        <div class="output-value profit" id="maturityValue">₹ 5,30,000</div>
+                    </div>
+                    <div class="output-result">
+                        <div class="output-label">Total Estimated Gain</div>
+                        <div class="output-value" id="interestGained">₹ 30,000</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <i class="fas fa-chart-line" style="color: var(--color-secondary); font-size: 2em;"></i>
+                    <p style="font-size: 0.85em; color: #777;">*Calculations are estimates only and do not guarantee future returns. STP helps manage risk.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>...</footer>
+
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <script src="script.js"></script>
+    
+    <script>
+        const formatter = new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0,
+        });
+
+        function updateSTPCalculations() {
+            // Placeholder Logic for STP:
+            // Real STP calculation is complex (combines compounding on remaining debt fund + SIP-like compounding on equity)
+            
+            const initialAmount = parseFloat(document.getElementById('initialAmount').value);
+            const transferAmount = parseFloat(document.getElementById('transferAmount').value);
+            const tenureMonths = parseFloat(document.getElementById('tenure').value);
+            const annualRate = parseFloat(document.getElementById('rate').value);
+
+            // Simple Estimation (Invested capital + assumed average return on capital)
+            const investedCapital = initialAmount; 
+            const estimatedGrowthFactor = (1 + (annualRate / 100)) / (12 / tenureMonths); // Simplified non-accurate estimate
+            const estimatedValue = investedCapital * estimatedGrowthFactor;
+
+            const totalEstimatedValue = isNaN(estimatedValue) ? 0 : estimatedValue;
+            const totalGain = totalEstimatedValue - investedCapital;
+
+            // Output Update (Using simple estimates initially)
+            document.getElementById('initialInvested').innerText = formatter.format(investedCapital);
+            document.getElementById('maturityValue').innerText = formatter.format(totalEstimatedValue);
+            document.getElementById('interestGained').innerText = formatter.format(totalGain);
+        }
+
+        // Run calculation once on load to show initial dummy value
+        updateSTPCalculations(); 
+
+        // Attach the function to all input changes (sliders)
+        document.getElementById('initialAmount').addEventListener('input', updateSTPCalculations);
+        document.getElementById('transferAmount').addEventListener('input', updateSTPCalculations);
+        document.getElementById('tenure').addEventListener('input', updateSTPCalculations);
+        document.getElementById('rate').addEventListener('input', updateSTPCalculations);
+
+    </script>
+</body>
+</html>
