@@ -799,7 +799,7 @@ footer {
         position: absolute;
         left: 50%; 
         transform: translateX(-50%);
-        top: calc(100% + 10px); 
+        top: 100% !important;
        .dropdown {
         position: relative !important; /* Re-enforce relative position */
     }
