@@ -131,9 +131,9 @@ nav .container {
     left: 50%; 
     transform: translateX(-50%);
     top: 100%;
-    padding-bottom: 0px;
-    padding-top: 0px;
-    margin-bottom: 0px;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 0 !important;
     border-top: 3px solid var(--color-secondary);
 }
 .dropdown-content a {
