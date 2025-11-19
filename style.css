@@ -125,15 +125,15 @@ nav .container {
     background-color: #ffffff;
     min-width: 250px; 
     box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15); 
-    z-index: 1010; /* Z-index increased for stability */
+    z-index: 1050; /* Z-index increased for stability */
     border-radius: 8px; 
     overflow: hidden;
     left: 50%; 
     transform: translateX(-50%);
-    top: calc(100% + 3px); 
-    padding-bottom: 10px;
-    padding-top: 10px;
-    margin-bottom: -10px;
+    top: calc(100% + 1px); 
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-bottom: 0px;
     border-top: 3px solid var(--color-secondary);
 }
 .dropdown-content a {
