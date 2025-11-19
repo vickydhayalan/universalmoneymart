@@ -130,7 +130,10 @@ nav .container {
     overflow: hidden;
     left: 50%; 
     transform: translateX(-50%);
-    top: calc(100% + 10px); 
+    top: calc(100% + 3px); 
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: -10px;
     border-top: 3px solid var(--color-secondary);
 }
 .dropdown-content a {
