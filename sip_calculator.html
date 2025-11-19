@@ -43,6 +43,10 @@
             flex: 1;
             min-width: 350px;
             padding-right: 20px;
+            position: relative; /* Needed for floating child elements */
+        }
+        .calc-input-area h2 {
+            clear: right; /* FIX: Ensure the main heading doesn't go next to the card */
         }
         .input-group {
             margin-bottom: 25px;
@@ -71,22 +75,15 @@
             font-weight: 700;
             color: var(--color-success);
         }
-        .calculate-button {
-            width: 100%;
-            background-color: var(--color-success);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .calculate-button:hover {
-            background-color: #218838;
-        }
 
+        /* FIX: CTA CARD FLOATING AND ALIGNMENT */
+        .cta-advisor-card-wrapper {
+            float: right; /* FIX: Float the card to the right on desktop */
+            width: 250px; 
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
         /* 2. OUTPUT SIDE */
         .calc-output-area {
             flex: 1;
@@ -135,6 +132,11 @@
             .calc-output-area {
                 margin-top: 30px;
             }
+            .cta-advisor-card-wrapper {
+                float: none; /* Disable floating on mobile */
+                width: 100%;
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -155,6 +157,17 @@
             <div class="calc-input-area">
                 <h2>Calculate Potential Returns</h2>
                 
+                <div class="cta-advisor-card-wrapper">
+                    <div class="cta-advisor-card" style="padding: 20px; border: 2px solid var(--color-secondary); border-radius: 8px; text-align: center; background-color: white;">
+                        <h4 style="color: var(--color-primary); margin-top: 0; margin-bottom: 10px;"><i class="fas fa-headset"></i> Need a Personalized Plan?</h4>
+                        <p style="font-size: 0.9em; color: #555; margin-bottom: 15px;">
+                            Connect with Vignesh Dhayalan for expert advice on choosing the right fund for your goals.
+                        </p>
+                        <a href="index.html#contact-professional" class="cta-button" style="padding: 10px 20px; font-size: 1em; background-color: var(--color-primary);">
+                            Book Your Free Consultation
+                        </a>
+                    </div>
+                </div>
                 <div class="input-group">
                     <label for="sipAmount">Monthly SIP Amount (₹)</label>
                     <input type="range" id="sipAmount" min="500" max="50000" step="500" value="5000" oninput="document.getElementById('displayAmount').innerText = this.value">
@@ -184,17 +197,9 @@
                         <span>Max: 20 %</span>
                     </div>
                 </div>
+
             </div>
-            <div class="cta-advisor-card" style="margin-top: 30px; padding: 20px; border: 2px solid var(--color-secondary); border-radius: 8px; text-align: center; background-color: white;">
-    <h4 style="color: var(--color-primary); margin-top: 0; margin-bottom: 10px;"><i class="fas fa-headset"></i> Need a Personalized Plan?</h4>
-    <p style="font-size: 0.9em; color: #555; margin-bottom: 15px;">
-        Connect with Vignesh Dhayalan for expert advice on choosing the right fund for your goals.
-    </p>
-    <a href="index.html#contact-professional" class="cta-button" style="padding: 10px 20px; font-size: 1em; background-color: var(--color-primary);">
-        Book Your Free Consultation
-    </a>
-</div>
-           
+            
             <div class="calc-output-area">
                 <h2>Estimated Results</h2>
                 <div id="results">
@@ -223,16 +228,13 @@
 
     <footer>...</footer>
 
-   <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
     
     <script src="script.js"></script>
     
     <script>
-        // Final SIP Calculation Logic (Paste the code from above here)
-        
-        // Function to format numbers with Indian rupee style
         const formatter = new Intl.NumberFormat('en-IN', {
             style: 'currency',
             currency: 'INR',
@@ -240,34 +242,25 @@
         });
 
         function updateCalculations() {
-            // 1. Get Input Values
             const sipAmount = parseFloat(document.getElementById('sipAmount').value);
             const tenureYears = parseFloat(document.getElementById('tenure').value);
             const annualRate = parseFloat(document.getElementById('rate').value);
 
-            // Convert annual rate to monthly rate and tenure to months
             const monthlyRate = annualRate / 100 / 12;
             const tenureMonths = tenureYears * 12;
 
-            // 2. Calculation Logic (SIP Future Value Formula)
-            
-            // Calculate the future value factor
             const futureValueFactor = (Math.pow(1 + monthlyRate, tenureMonths) - 1) / monthlyRate;
-            
-            // Calculate the final estimated maturity value (Future Value)
             const maturityValue = sipAmount * futureValueFactor * (1 + monthlyRate);
 
-            // 3. Calculate Invested Amount and Interest Gained
             const investedAmount = sipAmount * tenureMonths;
             const interestGained = maturityValue - investedAmount;
 
-            // 4. Update the Output Area (Dynamic Results)
             document.getElementById('investedAmount').innerText = formatter.format(investedAmount);
             document.getElementById('maturityValue').innerText = formatter.format(maturityValue);
             document.getElementById('interestGained').innerText = formatter.format(interestGained);
         }
 
-        // Run calculation once on load to show initial dummy value
+        // Run calculation once on load 
         updateCalculations(); 
 
         // Attach the function to all input changes (sliders)
