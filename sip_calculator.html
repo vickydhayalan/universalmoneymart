@@ -43,14 +43,28 @@
             flex: 1;
             min-width: 350px;
             padding-right: 20px;
-            position: relative; /* Needed for floating child elements */
+            position: relative; /* CRITICAL: Setting context for Absolute Card */
         }
         .calc-input-area h2 {
-            clear: right; /* FIX: Ensure the main heading doesn't go next to the card */
-        }
-        .input-group {
+            clear: none; 
             margin-bottom: 25px;
         }
+        
+        /* FIX: CTA CARD ABSOLUTE POSITIONING */
+        .cta-advisor-card-wrapper {
+            position: absolute; /* FIX: Take the card out of normal flow */
+            right: 0; /* Align to the right edge of input area */
+            top: 25px; /* Position below the main H2 */
+            width: 250px; 
+            z-index: 10;
+        }
+        
+        /* FIX: Push Input Groups to the Left to make space for the Card */
+        .input-group {
+            margin-bottom: 25px;
+            padding-right: 270px; /* Card width (250px) + margin (20px) = 270px */
+        }
+        
         .input-group label {
             display: block;
             font-weight: 600;
@@ -75,16 +89,8 @@
             font-weight: 700;
             color: var(--color-success);
         }
-
-        /* FIX: CTA CARD FLOATING AND ALIGNMENT */
-        .cta-advisor-card-wrapper {
-            float: right; /* FIX: Float the card to the right on desktop */
-            width: 250px; 
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
         
-        /* 2. OUTPUT SIDE */
+        /* 2. OUTPUT SIDE (Output side remains unchanged) */
         .calc-output-area {
             flex: 1;
             min-width: 300px;
@@ -128,14 +134,20 @@
             }
             .calc-input-area, .calc-output-area {
                 min-width: 100%;
+                padding-right: 20px; /* Restore right padding */
             }
             .calc-output-area {
                 margin-top: 30px;
             }
+            /* FIX: Disable absolute positioning and restore full width on mobile */
             .cta-advisor-card-wrapper {
-                float: none; /* Disable floating on mobile */
+                position: static; 
                 width: 100%;
-                margin-left: 0;
+                margin-bottom: 20px;
+                top: auto;
+            }
+            .input-group {
+                padding-right: 0; /* Remove padding offset on mobile */
             }
         }
     </style>
