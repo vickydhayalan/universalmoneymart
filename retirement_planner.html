@@ -258,73 +258,79 @@
         });
 
         function updateRetirementCalculations() {
-            // 1. Get Input Values
-            const currentAge = parseFloat(document.getElementById('currentAge').value);
-            const retirementAge = parseFloat(document.getElementById('retirementAge').value);
-            const monthlyExpenseToday = parseFloat(document.getElementById('monthlyExpense').value);
-            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
-            const annualReturnRate = parseFloat(document.getElementById('returnRate').value) / 100;
-            
-            // 2. Derive Core Variables
-            const yearsToRetirement = retirementAge - currentAge;
-            const yearsPostRetirement = 25; // Assuming life expectancy of 85 (60+25)
-            
-            if (yearsToRetirement <= 0) {
-                // Handle invalid ages visually
-                document.getElementById('yearsToRetirement').innerText = "0 Yrs";
-                document.getElementById('futureMonthlyExpense').innerText = "N/A";
-                document.getElementById('requiredCorpus').innerText = "N/A";
-                document.getElementById('monthlySIPRequired').innerText = "N/A";
-                return;
-            }
+          // Final Retirement Calculation Logic (Incorporating Inflation and Time Value)
 
-            // 3. Calculation Steps (Forward Inflation, Reverse SIP)
+const formatter = new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+});
 
-            // Step 3.1: Calculate Future Monthly Expense (after inflation)
-            // Formula: FV = PV * (1 + inflation)^N
-            const futureMonthlyExpense = monthlyExpenseToday * Math.pow(1 + inflationRate, yearsToRetirement);
+function updateRetirementCalculations() {
+    // 1. Get Input Values
+    const currentAge = parseFloat(document.getElementById('currentAge').value);
+    const retirementAge = parseFloat(document.getElementById('retirementAge').value);
+    const monthlyExpenseToday = parseFloat(document.getElementById('monthlyExpense').value);
+    const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+    const annualReturnRate = parseFloat(document.getElementById('returnRate').value) / 100;
+    
+    // Core Variables
+    const yearsToRetirement = retirementAge - currentAge;
+    const yearsPostRetirement = 25; // Standard assumption
+    
+    if (yearsToRetirement <= 0 || retirementAge <= currentAge) {
+        // Handle invalid ages visually
+        document.getElementById('yearsToRetirement').innerText = "0 Yrs";
+        document.getElementById('futureMonthlyExpense').innerText = "N/A";
+        document.getElementById('requiredCorpus').innerText = "N/A";
+        document.getElementById('monthlySIPRequired').innerText = "N/A";
+        return;
+    }
 
-            // Step 3.2: Calculate Future Value of Annual Corpus required for withdrawal
-            // A simple approximation for the required corpus using the rule of thumb (25x annual expense)
-            // Or, using a capital needs formula for sustainable withdrawal (more accurate):
-            const safeWithdrawalRate = annualReturnRate - inflationRate;
-            let corpusFactor;
+    // --- STEP 1: Calculate Future Monthly Expense (at retirement age) ---
+    // Formula: FV = PV * (1 + inflation)^N
+    const futureMonthlyExpense = monthlyExpenseToday * Math.pow(1 + inflationRate, yearsToRetirement);
 
-            if (safeWithdrawalRate <= 0) {
-                // If return == inflation, corpus must cover total withdrawal (future expense * 12 * years)
-                 corpusFactor = (futureMonthlyExpense * 12 * yearsPostRetirement); 
-            } else {
-                // Required Corpus = Future Annual Expense / (Safe Withdrawal Rate)
-                corpusFactor = (futureMonthlyExpense * 12) / safeWithdrawalRate;
-            }
-            
-            const requiredCorpus = corpusFactor; // Total corpus needed at retirement age
+    // --- STEP 2: Calculate Required Corpus at Retirement (Corpus Factor) ---
+    // Sustainable Withdrawal Calculation: Capital Needs = Future Annual Expense / (Safe Withdrawal Rate)
+    // Safe Withdrawal Rate = Annual Return Rate - Inflation Rate (A complex approximation)
+    
+    const safeWithdrawalRate = annualReturnRate - inflationRate;
+    let requiredCorpus;
+    
+    if (safeWithdrawalRate <= 0.01) { // If return rate is close to or less than inflation (Handle low/zero growth post-retirement)
+        // Corpus needed to cover total expenses for 25 years (less optimal scenario)
+        requiredCorpus = futureMonthlyExpense * 12 * yearsPostRetirement; 
+    } else {
+        // Required Corpus = Future Annual Expense / Safe Withdrawal Rate
+        requiredCorpus = (futureMonthlyExpense * 12) / safeWithdrawalRate;
+    }
+    
+    // --- STEP 3: Calculate Required Monthly SIP to hit the target Corpus ---
+    // Formula: SIP = FV / [ (((1 + i)^n - 1) / i ) * (1 + i) ] 
+    
+    const monthlyReturnRate = annualReturnRate / 12;
+    const totalInvestmentMonths = yearsToRetirement * 12;
 
-            // Step 3.3: Calculate Required Monthly SIP to hit the target Corpus
-            // Use reverse FV formula to find the necessary monthly SIP (P)
-            // Formula: P = FV / [ ((1 + i)^n - 1) / i ] / (1 + i)  (i = monthly return rate)
-            
-            const monthlyReturnRate = annualReturnRate / 12;
-            const totalInvestmentMonths = yearsToRetirement * 12;
+    const FV_Factor = (Math.pow(1 + monthlyReturnRate, totalInvestmentMonths) - 1) / monthlyReturnRate;
+    let monthlySIPRequired = requiredCorpus / (FV_Factor * (1 + monthlyReturnRate));
+    
+    // Handle very large SIP requirements (e.g., if target is too close)
+    if (monthlySIPRequired > 1000000) { 
+        monthlySIPRequired = 999999; // Cap for visual representation
+    }
 
-            const FV_Factor = (Math.pow(1 + monthlyReturnRate, totalInvestmentMonths) - 1) / monthlyReturnRate;
-            const monthlySIPRequired = requiredCorpus / (FV_Factor * (1 + monthlyReturnRate));
-            
-            // 4. Update the Output Area (Dynamic Results)
-            document.getElementById('yearsToRetirement').innerText = `${yearsToRetirement} Yrs`;
-            document.getElementById('futureMonthlyExpense').innerText = formatter.format(futureMonthlyExpense);
-            document.getElementById('requiredCorpus').innerText = formatter.format(requiredCorpus);
-            document.getElementById('monthlySIPRequired').innerText = formatter.format(monthlySIPRequired);
-        }
+    // 4. Update the Output Area (Dynamic Results)
+    document.getElementById('yearsToRetirement').innerText = `${yearsToRetirement} Yrs`;
+    document.getElementById('futureMonthlyExpense').innerText = formatter.format(futureMonthlyExpense);
+    document.getElementById('requiredCorpus').innerText = formatter.format(requiredCorpus);
+    document.getElementById('monthlySIPRequired').innerText = formatter.format(monthlySIPRequired);
+}
 
-        // 5. Initial Call & Event Listeners
-        updateRetirementCalculations(); 
+// 5. Initial Call & Event Listeners (Ensure these are correctly set up in the HTML)
+updateRetirementCalculations(); 
 
-        document.getElementById('currentAge').addEventListener('input', updateRetirementCalculations);
-        document.getElementById('retirementAge').addEventListener('input', updateRetirementCalculations);
-        document.getElementById('monthlyExpense').addEventListener('input', updateRetirementCalculations);
-        document.getElementById('inflationRate').addEventListener('input', updateRetirementCalculations);
-        document.getElementById('returnRate').addEventListener('input', updateRetirementCalculations);
+// NOTE: Event listeners are assumed to be correctly wired in the HTML attributes (oninput="updateRetirementCalculations()")
     </script>
 </body>
 </html>
