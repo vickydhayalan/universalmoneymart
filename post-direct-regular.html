@@ -3,118 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Direct vs Regular Plan: Why You Need a Mutual Fund Distributor? | Universal Money Mart</title>
+    <title>Direct vs Regular Plan: Why Advisory Value is Essential for Long-Term Wealth | Universal Money Mart</title>
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
-     crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css"> 
     
     <style>
-        /* 🟢 FONT FIX APPLIED */
-        body { font-family: 'Poppins', sans-serif; } 
+        /* Article specific layout */
+        .article-body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 40px;
+        }
+        .article-body h2 {
+            font-size: 2em;
+            color: var(--color-primary);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--color-secondary);
+            padding-bottom: 5px;
+        }
+        .article-body h3 {
+            font-size: 1.5em;
+            color: var(--color-success);
+            margin-top: 30px;
+        }
+        .article-body p {
+            line-height: 1.8;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        .table-of-value {
+             width: 100%;
+             border-collapse: collapse;
+             margin-top: 20px;
+        }
+        .table-of-value th {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 10px;
+        }
+        .table-of-value td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
         
-        .article-content h2 { font-size: 1.875rem; font-weight: 700; color: #1e3a8a; margin-top: 1.5rem; margin-bottom: 0.75rem; border-left: 4px solid #f56565; padding-left: 0.75rem; }
-        .article-content h3 { font-size: 1.5rem; font-weight: 600; color: #2563eb; margin-top: 1.25rem; margin-bottom: 0.5rem; }
-        .key-takeaway { border-left: 4px solid #38a169; background-color: #e6fffa; padding: 1rem; border-radius: 0.5rem; margin-top: 1.5rem; }
-        /* Box for Examples/Charts/Tables */
-        .visual-box { background-color: #f0f9ff; border: 1px solid #bae6fd; padding: 1.5rem; border-radius: 0.75rem; margin-top: 1rem; }
-        /* Sticky WhatsApp icon style */
-        .whatsapp-sticky { position: fixed; width: 40px; height: 40px; bottom: 25px; right: 25px; z-index: 10000; }
-        .whatsapp-sticky img { width: 100%; height: 100%; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }
+        /* Tailwind styles for the new minimal nav (requires matching CSS in style.css) */
+        .custom-nav {
+            position: sticky; top: 0; z-index: 1020; background: #ffffff; 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link-item {
+             color: #495057; 
+             padding: 10px 10px;
+             font-weight: 500;
+             transition: all 0.3s;
+             font-size: 0.95em;
+        }
+        .nav-link-item:hover {
+             color: var(--color-primary); 
+             background-color: var(--color-bg-light); 
+             border-radius: 6px;
+        }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body>
 
-    <div class="bg-white shadow-md p-4 sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="index.html" class="text-xl font-bold text-blue-800">Universal Money Mart</a>
+    <nav class="custom-nav">
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="UMM Logo">
+                <span class="logo-full">Universal Money Mart</span>
+                <span class="logo-short">UMM</span>
             </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                <div class="nav-links-inner"> 
+                    
+                    <a href="index.html" class="nav-link-item">Home</a>
+                    <a href="videos.html" class="nav-link-item">Videos</a>
+                    <a href="index.html#advisor-intro" class="nav-link-item">Why UMM</a>
+                    <a href="blog.html" class="nav-link-item">Blog</a>
+                    <a href="about.html" class="nav-link-item">About Us</a> 
+                    <a href="index.html#contact-professional" class="dropbtn">Contact</a>
+                </div> 
+            </div>
+        </div>
+    </nav>
+    <div class="section" style="padding-bottom: 20px;">
+        <div class="container" style="max-width: 900px;">
+            <p style="text-align: left; color: #555; margin-bottom: 10px;"><i class="fas fa-calendar-alt"></i> Nov 20, 2025 | <i class="fas fa-tag"></i> MFD Value, Strategy</p>
+            <h1 style="font-size: 3em; color: var(--color-primary); text-align: left; line-height: 1.2;">
+                Direct vs Regular Plan: Why Advisory Value is Essential for Long-Term Wealth
+            </h1>
+            <img src="img_mf_pitch.jpg" alt="Direct vs Regular Plan" style="width: 100%; height: auto; border-radius: 12px; margin-top: 20px;">
+        </div>
+    </div>
+
+    <div class="article-body">
+        <div class="container">
+
+            <p>Mutual Fund investments la, Direct Plan is lower cost, but it's not truly 'free.' Regular Plan is slightly costlier, but it brings the essential human element—the advisor (MFD). <b>Enna differences</b> and <b>unga money-kku entha plan best</b> nu detail ah paakalaam.</p>
+
+            <h2 style="text-align: center;">What is the Key Difference? (The Expense Ratio)</h2>
+
+            <p>Simple ah sollanum na, oru mutual fund manage panna, Fund House oru small annual fee edukkum. Adhudhaan <b>Expense Ratio (ER)</b>.</p>
+            
+            <table class="table-of-value" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="width: 33%;">Feature</th>
+                        <th style="width: 33%; background-color: var(--color-success);">Regular Plan</th>
+                        <th style="width: 33%; background-color: #f0f0f0; color: #333;">Direct Plan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Expense Ratio (ER)</b></td>
+                        <td class="tax-benefit">Higher (E.g., 1.5%)</td>
+                        <td>Lower (E.g., 1.0%)</td>
+                    </tr>
+                    <tr>
+                        <td><b>Who Gets the Difference?</b></td>
+                        <td style="color: var(--color-primary);">Distributor Commission (for advisory service)</td>
+                        <td>Fund House (Savings stay with the scheme)</td>
+                    </tr>
+                    <tr>
+                        <td><b>Service Included</b></td>
+                        <td class="tax-benefit">Personalized Selection, Monitoring, Support</td>
+                        <td>Nil (DIY - Do It Yourself)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>The 'Cost' of Convenience: Regular Plan</h3>
+            <p>Regular Plan la, ER difference (e.g., 0.5%) unga MFD ku commission ah pogum. Adhukku badhila, neenga **personalized service** and **ongoing guidance** ah peruveenga. <b>Beginners and busy professionals</b> ku idhu dhaan best choice.</p>
+
+            <h3>Defining the 'DIY' Path: Direct Plan</h3>
+            <p>Direct Plan la ER low ah irukkuradhunaala, returns konjam athigama irukkum. Aana, neenga **ella decisions-um** (selection, timing, rebalancing, taxation) **thania panna vendum**. Oru thappu panna kooda, andha ER savings-ai vida **periya loss** vara chance irukku.</p>
+
+            <h2>The 5 Critical Services an MFD Provides (Why Regular Plan Value is Essential)</h2>
+            <p>Your MFD's value is not just in selecting a fund, but in preventing you from making expensive, emotional mistakes.</p>
+            
+            <ul style="padding-left: 20px; font-size: 1.1em; line-height: 1.8;">
+                <li><i class="fas fa-bullseye" style="color: var(--color-success); margin-right: 10px;"></i> <b>Goal Mapping and Selection:</b> Your MFD ensures your investment tenure and risk profile match the fund category. (Example: Don't put retirement money in a Small Cap fund).</li>
+                <li><i class="fas fa-undo-alt" style="color: var(--color-success); margin-right: 10px;"></i> <b>Portfolio Review and Rebalancing:</b> Market conditions change. Your MFD advises you when to shift from Debt to Equity or vice-versa, keeping your portfolio healthy.</li>
+                <li><i class="fas fa-user-shield" style="color: var(--color-success); margin-right: 10px;"></i> <b>Behavioral Coaching:</b> When the market crashes 30% (like in 2020), your MFD stops you from panic selling—this single service is worth more than decades of lower ER savings.</li>
+                <li><i class="fas fa-file-invoice-dollar" style="color: var(--color-success); margin-right: 10px;"></i> <b>Tax Efficiency:</b> Guiding you on ELSS funds for 80C and managing LTCG/STCG implications.</li>
+                <li><i class="fas fa-headset" style="color: var(--color-success); margin-right: 10px;"></i> <b>Paperwork & Claim Assistance:</b> All your service requests, KYC, and complex paperwork are handled instantly by a single point of contact.</li>
+            </ul>
+
+
+            <h2>Conclusion: The True Cost of DIY Mistakes (Compliance Focus)</h2>
+            <p style="font-weight: 600;">Ultimately, choosing a Direct Plan saves a small fraction in commission, but it leaves you alone against market volatility and complex tax/compliance rules. The true value of a Regular Plan lies in preventing a single, large, emotional mistake that could wipe out years of savings.</p>
+            
+            <div style="text-align: center; margin-top: 50px; background-color: var(--color-bg-light); padding: 30px; border-radius: 12px;">
+                <h3 style="color: var(--color-primary); border-bottom: none;"><i class="fas fa-calculator"></i> Ready for Personalized Advisory?</h3>
+                <p>Don't just invest—invest right. Let an expert guide your long-term wealth creation journey.</p>
+                <a href="index.html#contact-professional" class="cta-button" style="margin-right: 15px;">Book a Free Consultation</a>
+                <a href="sip_calculator.html" class="cta-button">Try Our Calculators</a>
+            </div>
+            
+        </div>
     </div>
     
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-        <header class="text-center mb-10">
-            <span class="inline-block bg-pink-100 text-pink-800 text-sm px-3 py-1 rounded-full font-semibold tracking-wide uppercase mb-2">MFD Value & Strategy</span>
-            <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl leading-tight">Direct vs Regular Plan: Why You Need a Mutual Fund Distributor?</h1>
-            <p class="mt-4 text-gray-500">By <b>Vignesh Dhayalan</b> (AMFI Registered MFD) | Nov 15, 2025 | 6 min read</p>
-        </header>
-
-        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-8 rounded-lg" role="alert">
-            <p class="font-bold">⚠️ முக்கிய நிதித்துறை அறிவிப்பு (Disclaimer)</p>
-            <p class="text-sm">Investing in the securities market is subject to market risks. Read all the related documents carefully before investing. இந்த கட்டுரை <b>கல்வி நோக்கங்களுக்காக மட்டுமே</b>. இது நிதி ஆலோசனை அல்ல।</p>
-        </div>
-
-        <div class="article-content bg-white p-6 sm:p-10 rounded-xl shadow-lg">
-
-            <h2>I. 🎯 Introduction: MFD (Distributor)-oda Velai Enna?</h2>
-            <p class="text-gray-700 mt-4">
-                Mutual Funds-la <b>invest</b> panna varum bodhu, <b>Direct</b> and <b>Regular</b> nu <b>rendu plan</b> irukkum. Rendum <b>same fund</b> dhaan, aana <b>expense</b> (charge) dhaan different.
-            </p>
-            <p class="text-gray-700 mt-3">
-                <b>Direct Plan</b>-a vida <b>Regular Plan</b>-kku <b>expense</b> konjam jaasthi irukkum. Adhu dhaan <b>MFD</b> (Mutual Fund Distributor)-oda <b>commission</b>-kku pogum. Ippo <b>oru MFD</b> (like Vignesh) <b>ungalukku ethuku venum</b> nu paakalaam.
-            </p>
-
-            <h2>II. 💰 Direct Plan: Expense Ratio Kammi, Aana Guidance Illai</h2>
-            <p class="text-gray-700 mt-4">
-                <b>Direct Plan</b> dhaan <b>Expense Ratio</b> (fund management charge) <b>romba kammi</b>. Yen? Adhula <b>Distributor</b>-kku <b>commission</b> illa.
-            </p>
-            
-            <h3>DIY Route: Risk Romba Jaasthi</h3>
-            <p class="text-gray-700 mt-2">
-                <b>Direct Plan</b>-la nee <b>invest</b> panninaa, <b>full research</b>-a nee dhaan pannanum. <b>5000 funds</b>-la irundhu unga <b>goal</b>-kku ethu <b>best</b> nu <b>select</b> panradhu <b>romba kastam</b> da.
-            </p>
-            <p class="text-gray-700 mt-2">
-                <b>Market crash</b> aagum bodhu, <b>emotional decision</b> edutha, unga <b>loss</b> <b>romba perusa</b> irukkum. Adhukku <b>advice</b> thara <b>yaarume</b> irukka maattanga.
-            </p>
-
-            <h2>III. 🤝 Regular Plan: Expert Guidance and Portfolio Monitoring</h2>
-            <p class="text-gray-700 mt-4">
-                <b>Regular Plan</b>-la <b>Expense Ratio</b> konjam jaasthi irukkum. Aana <b>adhukku mela</b> ungalukku <b>periya value</b> kidaikkum.
-            </p>
-
-            <h3>The MFD Value Proposition</h3>
-            <p class="text-gray-700 mt-2">
-                <b>Vignesh</b> maadhiri oru <b>MFD</b> dhaan ungalukku <b>rendu main help</b> pannuvanga:
-            </p>
-            <ul class="list-disc ml-6 text-gray-700 mt-2">
-                <li><b>Goal Alignment:</b> Unga <b>financial goal</b> (e.g., Retirement, Child Education) and <b>risk capacity</b>-a paaththu <b>right funds</b>-a select panni tharuvanga.</li>
-                <li><b>Portfolio Monitoring:</b> Unga <b>funds</b> <b>nalla perform</b> pannala-na, adha <b>review</b> panni, <b>exit</b> panna <b>advice</b> kuduppanga.</li>
-                <li><b>Market Crash Management:</b> <b>Bayam</b> varum bodhu, <b>panic</b> pannaama, <b>long-term vision</b>-a maintain panna <b>motivation</b> kuduppanga.</li>
-            </ul>
-            
-            <h2>IV. 📊 Comparison: MFD Commission Vs. Correct Advice Value</h2>
-            <p class="text-gray-700 mt-4">
-                <b>Expense Ratio</b>-la irukkura chinna <b>difference</b>-kku, <b>periya value</b>-a <b>sacrifice</b> panna koodadhu.
-            </p>
-
-            <h3>The Small Fee vs. The Big Loss</h3>
-            <p class="text-gray-700 mt-2">
-                <b>MFD commission</b> (Expense Ratio difference) varushathukku <b>0.5% to 1%</b> dhaan irukkum. Aana <b>wrong decision</b> (e.g., <b>bad fund</b> select panradhu, <b>panic sell</b> panradhu) eduthaa, unga <b>portfolio</b>-la <b>10% to 20%</b> varaiக்கும் <b>loss</b> vara chance irukku.
-            </p>
-            <p class="text-gray-700 mt-2">
-                <b>MFD Charge</b> oru <b>Doctor Fees</b> maadhiri dhaan. <b>Vignesh</b> dhaan unga <b>20-year investment journey</b>-kku <b>guide</b> panna ready-a irukkaaru.
-            </p>
-            
-            <div class="key-takeaway">
-                <h3 class="text-xl font-bold text-green-700 mb-2">✅ Quick Verdict (Why Regular is Best for Beginners)</h3>
-                <ul class="list-disc ml-6 text-gray-700">
-                    <li><b>Direct Plan:</b> <b>Experienced</b> investors-kku dhaan best.</li>
-                    <li><b>Regular Plan:</b> <b>Beginners</b>, <b>time illaadhavangalukku</b>, and <b>Goal</b>-a **nalla monitor** panna venum-na, <b>MFD guidance</b> dhaan <b>best</b>.</li>
-                </ul>
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <footer>
+        <div class="container footer-content"> 
+            <p class="footer-copyright">&copy; 2025 Universal Money Mart. All rights reserved.</p>
+            <div class="footer-links-group">
+                <a href="privacy.html">Privacy Policy</a>
+                <span>|</span>
+                <a href="terms.html">Terms & Conditions</a>
+                <span>|</span>
+                <a href="disclaimer.html">Disclaimer</a>
             </div>
-
-            <h2>V. 📺 Video Call-to-Action</h2>
-            <p class="text-gray-700 mt-4">
-                <b>Direct Plan</b> and <b>Regular Plan</b>-oda <b>differences</b>-a <b>innum clear-a</b> purinjikka, nanga panna <b>Video No. 9</b>-a paakkinga. <b>MFD-oda value</b> pathi details-a solliruppom!
-            </p>
-            <div class="mt-4 text-center">
-                <a href="videos.html#mf-distributor-value" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                    <i class="fas fa-video mr-3"></i> Watch Our Full Video Guide Now
-                </a>
+            <div class="footer-disclosure">
+                <p class="disclosure-heading">ARN/RIA Disclosure:</p>
+                <p class="disclosure-text">Investments in mutual funds are subject to market risks. Please read the offer document carefully before investing.</p>
             </div>
         </div>
-
-    </main>
+    </footer>
+    
+    <script src="script.js"></script> 
 </body>
 </html>
