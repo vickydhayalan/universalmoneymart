@@ -46,7 +46,7 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--color-secondary);
+            border-bottom: 4px solid var(--color-secondary); 
             background: white;
             transition: transform 0.3s;
         }
@@ -55,7 +55,7 @@
         }
         .coverage-card i {
             font-size: 2.5em;
-            color: var(--color-success);
+            color: var(--color-primary);
             margin-bottom: 15px;
         }
         .coverage-card h3 {
@@ -107,6 +107,13 @@
         .claim-assistance h2 {
             color: var(--color-primary);
         }
+        
+        /* TAX TABLE SPECIFIC */
+        .highlight-rate {
+            color: var(--color-success);
+            font-weight: 700;
+            font-size: 1.1em;
+        }
     </style>
 </head>
 <body>
@@ -122,7 +129,7 @@
     
     <div style="background-color: #fff3cd; color: #856404; padding: 15px; text-align: center; border-bottom: 1px solid #ffeeba;">
         <div class="container">
-            <i class="fas fa-exclamation-triangle"></i> **IRDAI Disclosure:** Insurance is the subject matter of solicitation. Please read the offer document carefully.
+            <i class="fas fa-exclamation-triangle"></i> <b>IRDAI Disclosure:</b> Insurance is the subject matter of solicitation. Please read the offer document carefully.
         </div>
     </div>
 
@@ -152,8 +159,45 @@
             </div>
         </div>
     </div>
+    
+    <div id="tax-benefit" class="content-section" style="padding-top: 30px; background-color: var(--color-bg-light);">
+        <div class="container" style="max-width: 900px;">
+            <h2>Maximize Your Tax Savings with Health Insurance (Sec 80D)</h2>
+            <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">
+                Paying your health insurance premium is eligible for tax deduction, reducing your taxable income.
+            </p>
 
-    <div id="comparison" class="content-section" style="background-color: var(--color-bg-light);">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Maximum Deduction</th>
+                        <th>Total Maximum Benefit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; font-weight: 600;">Self, Spouse, Children</td>
+                        <td class="check-icon">₹25,000</td>
+                        <td rowspan="2" class="highlight-rate" style="font-size: 1.5em; color: var(--color-primary);">₹1,00,000</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; font-weight: 600;">Parents (Senior Citizens - 60+)</td>
+                        <td class="check-icon">₹50,000</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; font-weight: 600;">Prevention Health Check-up</td>
+                        <td colspan="2">₹5,000 (Included in the above limits)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p style="text-align: center; font-size: 0.9em; margin-top: 20px;">
+                <b>Note:</b> Tax benefits are subject to payment being made by any mode other than cash.
+            </p>
+        </div>
+    </div>
+    <div id="comparison" class="content-section" style="padding-top: 30px;">
         <div class="container">
             <h2>Compare Core Features of Top Plans</h2>
             <p style="text-align: center;">Choosing the right plan means understanding the trade-off between premium and benefits. 
@@ -214,17 +258,50 @@
         </div>
     </div>
     
-    <div id="contact-quote" class="content-section">
+    <div id="claim-guide" class="content-section" style="padding-bottom: 30px; background-color: var(--color-bg-light);">
+        <div class="container" style="max-width: 900px;">
+            <h2>How We Assist You During Claims (Cashless & Reimbursement)</h2>
+            <p style="text-align: center; font-size: 1.1em; margin-bottom: 40px;">
+                We guide you through the two types of claims to ensure a smooth and quick settlement process.
+            </p>
+
+            <div class="coverage-cards-grid" style="margin-top: 0;">
+                <div class="coverage-card" style="border-bottom-color: #007bff; border-top: 4px solid #007bff;">
+                    <i class="fas fa-money-bill-alt"></i>
+                    <h3>Cashless Claim Process</h3>
+                    <ol style="padding-left: 15px; font-size: 0.95em;">
+                        <li>Inform the insurer/TPA 48 hours before planned admission.</li>
+                        <li>Submit the pre-authorization form at the network hospital.</li>
+                        <li>Hospital and Insurer handle settlement directly.</li>
+                        <li><b>UMM's Role:</b> We monitor the approval status to prevent delays.</li>
+                    </ol>
+                </div>
+                
+                <div class="coverage-card" style="border-bottom-color: var(--color-secondary); border-top: 4px solid var(--color-secondary);">
+                    <i class="fas fa-file-invoice"></i>
+                    <h3>Reimbursement Claim Process</h3>
+                    <ol style="padding-left: 15px; font-size: 0.95em;">
+                        <li>Pay all hospital bills yourself upon discharge.</li>
+                        <li>Collect all original bills, reports, and discharge summary.</li>
+                        <li>Submit all documentation to the insurer within the specified timeframe.</li>
+                        <li><b>UMM's Role:</b> We assist in compiling and submitting the correct documentation to ensure zero rejection.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact-quote" class="content-section" style="padding-top: 40px;">
         <div class="container" style="max-width: 800px;">
             <div class="claim-assistance">
                 <h2>Our Dedicated Claim Assistance</h2>
                 <p style="font-size: 1.1em; max-width: 600px; margin: 20px auto 30px;">
-                    We don't just sell policies; we help you when you need it most. Get **dedicated, personal assistance** from Vignesh Dhayalan during the entire claim process.
+                    We don't just sell policies; we help you when you need it most. Get <b>dedicated, personal assistance</b> from Vignesh Dhayalan during the entire claim process.
                 </p>
                 <a href="index.html#contact-professional" class="cta-button">Request Personalized Health Quote!</a>
             </div>
         </div>
     </div>
+
 
     <footer>...</footer>
 
