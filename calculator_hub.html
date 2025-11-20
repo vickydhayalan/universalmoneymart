@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMM Calculators Hub | All Financial Tools in One Place | Universal Money Mart</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* ----------------------------------------------------- */
+        /* --- CALCULATOR HUB PAGE SPECIFIC STYLES --- */
+        /* ----------------------------------------------------- */
+        .hub-hero {
+            background: linear-gradient(135deg, #f5faff 0%, #ffffff 100%);
+            padding: 80px 0 40px;
+            border-bottom: 3px solid var(--color-primary);
+        }
+        .hub-hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .tool-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid var(--color-secondary);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .tool-card i {
+            font-size: 2.5em;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+        .tool-card h3 {
+            color: var(--color-primary);
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+        .tool-card p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .go-button {
+             background-color: var(--color-success);
+             color: white;
+             padding: 10px 20px;
+             border-radius: 50px;
+             font-weight: 700;
+             text-decoration: none;
+             transition: background-color 0.3s;
+             display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>...</nav>
+
+    <div class="hub-hero">
+        <div class="container" style="text-align: center;">
+            <h1>UMM Calculators Hub</h1>
+            <p class="subtitle">Find the right financial tool for your SIP, Retirement, and Withdrawal planning.</p>
+        </div>
+    </div>
+    
+    <div id="calculator-list" class="section" style="padding-top: 40px;">
+        <div class="container">
+            <div class="tool-grid">
+
+                <a href="sip_calculator.html" class="tool-card">
+                    <div>
+                        <i class="fas fa-calculator"></i>
+                        <h3>SIP Calculator</h3>
+                        <p>Calculate the estimated maturity value of your monthly Systematic Investment Plan.</p>
+                    </div>
+                    <span class="go-button">Start Calculation →</span>
+                </a>
+
+                <a href="step_up_sip.html" class="tool-card">
+                    <div>
+                        <i class="fas fa-rocket"></i>
+                        <h3>Step Up SIP Calculator</h3>
+                        <p>See how increasing your SIP contribution annually can accelerate your long-term wealth.</p>
+                    </div>
+                    <span class="go-button">Start Calculation →</span>
+                </a>
+                
+                 <a href="retirement_planner.html" class="tool-card">
+                    <div>
+                        <i class="fas fa-umbrella-beach"></i>
+                        <h3>Retirement Planner</h3>
+                        <p>Determine the total corpus and monthly SIP required to achieve your financial independence goals.</p>
+                    </div>
+                    <span class="go-button">Start Calculation →</span>
+                </a>
+
+                <a href="swp_calculator.html" class="tool-card">
+                    <div>
+                        <i class="fas fa-piggy-bank"></i>
+                        <h3>SWP Calculator</h3>
+                        <p>Estimate the longevity of your retirement corpus while taking regular monthly income.</p>
+                    </div>
+                    <span class="go-button">Start Calculation →</span>
+                </a>
+                
+                <a href="stp_calculator.html" class="tool-card">
+                    <div>
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>STP Calculator</h3>
+                        <p>Plan risk mitigation strategies by transferring funds gradually from Debt to Equity schemes.</p>
+                    </div>
+                    <span class="go-button">Start Calculation →</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; padding-bottom: 60px;">
+        <a href="index.html#contact-professional" class="cta-button" style="background-color: var(--color-primary);">Need a Personalized Plan? Connect with Advisor!</a>
+    </div>
+
+    <footer>...</footer>
+
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <script src="script.js"></script> 
+</body>
+</html>
