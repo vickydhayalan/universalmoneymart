@@ -8,15 +8,13 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
         crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
     
     <link rel="stylesheet" href="style.css"> 
     
     <style>
-        /* ----------------------------------------------------- */
-        /* --- TAILWIND UTILITIES (Based on Global Vars) --- */
-        /* ----------------------------------------------------- */
+        /* --- CUSTOM TAILWIND UTILITIES (Based on Global Vars) --- */
+        /* Note: Tailwind requires custom classes for non-standard layouts */
         .post-card {
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: transform 0.3s, box-shadow 0.3s;
@@ -27,19 +25,59 @@
         }
         .post-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.08); 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.08); /* Stronger lift */
         }
-        /* Blog-specific colors used here for consistency */
+        
+        /* --- NAVIGATION STYLES (Matching Global Theme) --- */
+        /* CRITICAL FIX: Overriding Tailwind for global colors/spacing */
+        .custom-nav {
+             position: sticky; top: 0; z-index: 1020; background: #ffffff; 
+             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link-item {
+             color: #495057; /* var(--color-nav-link) */
+             padding: 10px 12px;
+             font-weight: 500;
+             transition: all 0.3s;
+             font-size: 0.95rem;
+        }
+        .nav-link-item:hover {
+             color: #003366; /* var(--color-primary) */
+             background-color: #f5f8fa; /* var(--color-bg-light) */
+             border-radius: 6px;
+        }
+
+        /* --- Footer consistency --- */
         .custom-footer {
-             background-color: #243447; 
+             background-color: #243447; /* Consistent with footer background */
              color: #CED4DA;
         }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
     
-    <nav>
-        </nav>
+    <nav class="custom-nav">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div class="flex items-center space-x-3">
+                <img src="logo.png" alt="UMM Logo" class="h-8 w-auto">
+                <a href="index.html" class="text-xl font-extrabold text-blue-800">Universal Money Mart</a>
+            </div>
+
+            <div class="hidden md:flex space-x-1 items-center">
+                
+                <a href="index.html" class="nav-link-item">Home</a>
+                <a href="videos.html" class="nav-link-item">Videos</a>
+                <a href="index.html#advisor-intro" class="nav-link-item">Why UMM</a>
+                <a href="blog.html" class="nav-link-item font-bold border-b-2 border-blue-600">Blog</a>
+                <a href="about.html" class="nav-link-item">About Us</a>
+                <a href="index.html#contact-professional" class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-full hover:bg-blue-700 transition">Contact</a>
+            </div>
+            
+            <div class="md:hidden">
+                <button class="text-gray-600 hover:text-blue-800"><i class="fas fa-bars text-xl"></i></button>
+            </div>
+        </div>
+    </nav>
     <header class="bg-blue-50 py-16 mb-10 border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-4xl font-extrabold text-blue-800 sm:text-5xl">Financial Insights & Blog</h1>
@@ -102,7 +140,7 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="bg-white rounded-xl post-card" data-category="risk strategy" data-keywords="common mistakes panic sell market timing past returns">
                 <img class="h-48 w-full object-cover rounded-t-xl" src="img_common_mistakes.jpg" alt="Investing Mistakes">
                 <div class="p-6">
@@ -129,15 +167,15 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl post-card" data-category="mutual-funds strategy" data-keywords="large cap mid cap small cap equity risk return">
-                <img class="h-48 w-full object-cover rounded-t-xl" src="img_cap_types.jpg" alt="Equity Market Capitalization">
+            <div class="bg-white rounded-xl post-card" data-category="mutual-funds core" data-keywords="mf mutual fund basics nav fund manager buffet analogy">
+                <img class="h-48 w-full object-cover rounded-t-xl" src="img_mutualfunds_basics.jpg" alt="Mutual Funds Basics Guide">
                 <div class="p-6">
-                    <span class="inline-block bg-orange-200 text-orange-800 text-xs px-2 rounded-full font-semibold tracking-wide uppercase">Fund Selection</span>
-                    <a href="post-cap-types.html" class="block mt-2 text-xl leading-tight font-semibold text-gray-900 hover:text-blue-600">Large Cap, Mid Cap, Small Cap: Which is Right for Your Portfolio?</a>
-                    <p class="mt-2 text-gray-500 text-sm">Company size-kku ethu risk and return? Beginner's guide for fund selection.</p>
+                    <span class="inline-block bg-green-200 text-green-800 text-xs px-2 rounded-full font-semibold tracking-wide uppercase">Mutual Funds | Core</span>
+                    <a href="post-mf-basics.html" class="block mt-2 text-xl leading-tight font-semibold text-gray-900 hover:text-blue-600">The Ultimate Guide to Mutual Funds for Beginners</a>
+                    <p class="mt-2 text-gray-500 text-sm">Mutual Fund என்றால் என்ன? The simple buffet analogy explained in Tanglish.</p>
                     <div class="mt-4 flex justify-between items-center">
                         <span class="text-sm text-gray-500">Nov 15, 2025</span>
-                        <a href="videos.html#cap-types" class="text-purple-600 font-semibold hover:text-purple-800 text-sm"><i class="fas fa-video mr-1"></i>Watch Video</a>
+                        <a href="https://youtu.be/dZQ35Rac40M?si=LSmu9Ezxg8b_iOuZ" class="text-purple-600 font-semibold hover:text-purple-800 text-sm"><i class="fas fa-video mr-1"></i>Watch Video</a>
                     </div>
                 </div>
             </div>
@@ -150,7 +188,10 @@
     </a>
 
     <footer class="custom-footer py-6 mt-8">
-        </footer>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 Universal Money Mart | All Rights Reserved</p>
+        </div>
+    </footer>
 
 
     <script>
@@ -216,6 +257,7 @@
             });
             
             // Initial filter (to show all topics on load)
+            // Note: The count for 'All Topics' needs to be manually updated if the number of cards changes.
             performFilter('all');
         });
     </script>
