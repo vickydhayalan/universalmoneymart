@@ -84,18 +84,62 @@
             background-color: #e0fff2; /* Very light success color for correct choice */
             border: 1px solid var(--color-success);
         }
+        .selected-wrong {
+            background-color: #f8d7da !important; /* Light Red */
+            border: 1px solid #f5c6cb;
+        }
         .disabled-after-submit {
              pointer-events: none; /* Disables options after submission */
+        }
+        /* Result Area (Removed final score board as per user request) */
+        
+        .submit-button {
+            width: 100%;
+            background-color: var(--color-success);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
 
-    <nav>...</nav>
-
+    <nav class="custom-nav">
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="UMM Logo">
+                <span class="logo-full">Universal Money Mart</span>
+                <span class="logo-short">UMM</span>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                <div class="nav-links-inner"> 
+                    
+                    <a href="index.html" class="nav-link-item">Home</a>
+                    <a href="videos.html" class="nav-link-item">Videos</a>
+                    <a href="index.html#advisor-intro" class="nav-link-item">Why UMM</a>
+                    <a href="blog.html" class="nav-link-item">Blog</a>
+                    <a href="about.html" class="nav-link-item">About Us</a> 
+                    <a href="index.html#contact-professional" class="dropbtn">Contact</a>
+                </div> 
+            </div>
+        </div>
+    </nav>
     <div class="test-hero">
         <div class="container" style="text-align: center;">
-            <h1>NISM V-A Practice Test</h1>
+            <h1>NISM V-A Sample Questions</h1>
             <p class="subtitle" style="color: #eee;"><b>Instant Feedback Mode:</b> Choose your answer, and receive immediate results and explanation.</p>
         </div>
     </div>
@@ -155,7 +199,7 @@
                 <div class="feedback-area" id="q3-feedback" style="display: none;"></div>
             </div>
 
-            <p style="text-align: center; margin-top: 40px; font-weight: 600;">(Add more compliant questions here. There is no final score calculation in this mode.)</p>
+            <p style="text-align: center; margin-top: 40px; font-weight: 600;">(Add more compliant questions here.)</p>
 
         </div>
     </div>
@@ -164,7 +208,22 @@
         <a href="index.html#contact-professional" class="cta-button" style="background-color: var(--color-primary);">Book Exam Strategy Consultation</a>
     </div>
 
-    <footer>...</footer>
+    <footer>
+        <div class="container footer-content"> 
+            <p class="footer-copyright">&copy; 2025 Universal Money Mart. All rights reserved.</p>
+            <div class="footer-links-group">
+                <a href="privacy.html">Privacy Policy</a>
+                <span>|</span>
+                <a href="terms.html">Terms & Conditions</a>
+                <span>|</span>
+                <a href="disclaimer.html">Disclaimer</a>
+            </div>
+            <div class="footer-disclosure">
+                <p class="disclosure-heading">ARN/RIA Disclosure:</p>
+                <p class="disclosure-text">Investments in mutual funds are subject to market risks. Please read the offer document carefully before investing.</p>
+            </div>
+        </div>
+    </footer>
 
     <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
         <i class="fa-brands fa-whatsapp"></i>
@@ -184,45 +243,43 @@
             
             if (!selectedOption) return;
 
-            // 1. Disable all options in this card immediately
+            // 1. Disable all options in this card instantly and remove hover effects
             card.querySelectorAll('input[type="radio"]').forEach(radio => {
                 radio.disabled = true;
+                radio.parentElement.classList.remove('option-group:hover');
             });
             card.classList.add('disabled-after-submit');
 
-            // 2. Determine Correctness
-            let isCorrect = (selectedOption.value === correctAnswer);
-
-            // 3. Apply Visual Feedback & Display Explanation
+            // 2. Determine Correctness & Apply Visual Feedback
             let message = '';
             
             card.querySelectorAll('label').forEach(label => {
                 const input = label.querySelector('input[type="radio"]');
                 
                 if (input.value === correctAnswer) {
-                    // Highlight the correct answer
+                    // Highlight the correct answer in light green
                     label.classList.add('correct-answer-highlight');
                 }
             });
 
-            if (isCorrect) {
-                message = '<i class="fas fa-check-circle"></i> <b>Correct!</b> This is the right regulatory body.';
+            // 3. Set the Feedback Message and Class
+            if (selectedOption.value === correctAnswer) {
+                message = '<i class="fas fa-check-circle"></i> <b>Correct!</b> ' + 'You chose the right option.';
                 feedbackDiv.classList.add('feedback-correct');
+                feedbackDiv.classList.remove('feedback-wrong');
             } else {
-                message = '<i class="fas fa-times-circle"></i> <b>Wrong Answer.</b> ' + explanation;
-                // Highlight user's wrong selection in red (optional, but helpful)
+                // Highlight user's wrong selection in red
                 selectedOption.parentElement.classList.add('selected-wrong');
+                message = '<i class="fas fa-times-circle"></i> <b>Wrong Answer.</b> ' + explanation;
                 feedbackDiv.classList.add('feedback-wrong');
+                feedbackDiv.classList.remove('feedback-correct');
             }
 
             feedbackDiv.innerHTML = message;
             feedbackDiv.style.display = 'block';
             
-            // Scroll to the next question for better UX (optional)
-            const nextCard = card.nextElementSibling;
-            if (nextCard && nextCard.classList.contains('question-card')) {
-                 nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            // 4. Scroll to the next card for better UX
+            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     </script>
 </body>
