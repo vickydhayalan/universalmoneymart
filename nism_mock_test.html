@@ -108,6 +108,77 @@
         .submit-button:hover {
             background-color: #218838;
         }
+        /* Add these styles inside your <style> tag */
+
+/* Modal (Pop-up) Background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    padding-top: 60px;
+    backdrop-filter: blur(3px); /* Optional: nice blur effect */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h3 {
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.modal-content p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+/* The Close Button */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.reset-button {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #cc0000;
+}
     </style>
 </head>
 <body>
@@ -279,55 +350,117 @@
     <script src="script.js"></script>
     
     <script>
-        function checkAnswer(cardId) {
-            const card = document.getElementById(cardId);
-            const correctAnswer = card.getAttribute('data-correct-answer');
-            const explanation = card.getAttribute('data-explanation');
-            const feedbackDiv = document.getElementById(cardId.replace('-card', '-feedback'));
-            
-            // Get the currently selected option
-            const selectedOption = card.querySelector('input[name="' + cardId.replace('-card', '') + '"]:checked');
-            
-            if (!selectedOption) return;
+       /* Replace the existing <script> content with this */
 
-            // 1. Disable all options in this card instantly and remove hover effects
-            card.querySelectorAll('input[type="radio"]').forEach(radio => {
-                radio.disabled = true;
-                radio.parentElement.classList.remove('option-group:hover');
-            });
-            card.classList.add('disabled-after-submit');
+let correctAnswersCount = 0;
+let totalAnsweredCount = 0;
+const totalQuestions = document.querySelectorAll('.question-card').length;
+let answeredQuestions = new Set(); // To ensure a question is counted only once
 
-            // 2. Determine Correctness & Apply Visual Feedback
-            let message = '';
-            
-            card.querySelectorAll('label').forEach(label => {
-                const input = label.querySelector('input[type="radio"]');
-                
-                if (input.value === correctAnswer) {
-                    // Highlight the correct answer in light green
-                    label.classList.add('correct-answer-highlight');
-                }
-            });
+// Get the modal elements
+const modal = document.getElementById("scoreboard-modal");
+const btn = document.getElementById("open-scoreboard-btn");
+const span = document.getElementsByClassName("close-button")[0];
 
-            // 3. Set the Feedback Message and Class
-            if (selectedOption.value === correctAnswer) {
-                message = '<i class="fas fa-check-circle"></i> <b>Correct!</b> ' + 'You chose the right option.';
-                feedbackDiv.classList.add('feedback-correct');
-                feedbackDiv.classList.remove('feedback-wrong');
-            } else {
-                // Highlight user's wrong selection in red
-                selectedOption.parentElement.classList.add('selected-wrong');
-                message = '<i class="fas fa-times-circle"></i> <b>Wrong Answer.</b> ' + explanation;
-                feedbackDiv.classList.add('feedback-wrong');
-                feedbackDiv.classList.remove('feedback-correct');
-            }
+// Function to update the score display in the modal
+function updateScoreboard() {
+    const scorePercentage = totalAnsweredCount > 0 ? ((correctAnswersCount / totalAnsweredCount) * 100).toFixed(0) : 0;
+    document.getElementById('total-answered').textContent = totalAnsweredCount;
+    document.getElementById('correct-count').textContent = correctAnswersCount;
+    document.getElementById('score-percentage').textContent = scorePercentage + '%';
+}
 
-            feedbackDiv.innerHTML = message;
-            feedbackDiv.style.display = 'block';
-            
-            // 4. Scroll to the next card for better UX
-            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+    updateScoreboard();
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+// Modified checkAnswer function to update the live score
+function checkAnswer(cardId) {
+    const card = document.getElementById(cardId);
+    const questionNumber = cardId.replace('q', '').replace('-card', '');
+    const correctAnswer = card.getAttribute('data-correct-answer');
+    const explanation = card.getAttribute('data-explanation');
+    const feedbackDiv = document.getElementById(cardId.replace('-card', '-feedback'));
+    
+    // Get the currently selected option
+    const selectedOption = card.querySelector('input[name="' + cardId.replace('-card', '') + '"]:checked');
+    
+    if (!selectedOption) return;
+
+    // --- SCORE LOGIC START ---
+    if (!answeredQuestions.has(questionNumber)) {
+        totalAnsweredCount++;
+        answeredQuestions.add(questionNumber);
+        
+        if (selectedOption.value === correctAnswer) {
+            correctAnswersCount++;
         }
+    }
+    // --- SCORE LOGIC END ---
+
+    // 1. Disable all options in this card instantly and remove hover effects
+    card.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.disabled = true;
+        radio.parentElement.classList.remove('option-group:hover');
+    });
+    card.classList.add('disabled-after-submit');
+
+    // 2. Determine Correctness & Apply Visual Feedback
+    let message = '';
+    
+    card.querySelectorAll('label').forEach(label => {
+        const input = label.querySelector('input[type="radio"]');
+        
+        if (input.value === correctAnswer) {
+            // Highlight the correct answer in light green
+            label.classList.add('correct-answer-highlight');
+        }
+    });
+
+    // 3. Set the Feedback Message and Class
+    if (selectedOption.value === correctAnswer) {
+        message = '<i class="fas fa-check-circle"></i> <b>Correct!</b> ' + 'You chose the right option.';
+        feedbackDiv.classList.add('feedback-correct');
+        feedbackDiv.classList.remove('feedback-wrong');
+    } else {
+        // Highlight user's wrong selection in red
+        selectedOption.parentElement.classList.add('selected-wrong');
+        message = '<i class="fas fa-times-circle"></i> <b>Wrong Answer.</b> ' + explanation;
+        feedbackDiv.classList.add('feedback-wrong');
+        feedbackDiv.classList.remove('feedback-correct');
+    }
+
+    feedbackDiv.innerHTML = message;
+    feedbackDiv.style.display = 'block';
+    
+    // 4. Scroll to the next card for better UX
+    // Find the next question card
+    const currentCardIndex = Array.from(document.querySelectorAll('.question-card')).indexOf(card);
+    const nextCard = document.querySelectorAll('.question-card')[currentCardIndex + 1];
+
+    if (nextCard) {
+        // Scroll to the next card
+        nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+        // If it's the last question, scroll to the score button
+        btn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
     </script>
 </body>
 </html>
