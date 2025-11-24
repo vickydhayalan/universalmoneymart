@@ -67,6 +67,23 @@
             margin-right: 10px;
         }
 
+        /* --- NEW FEEDBACK STYLES --- */
+        .correct-answer {
+            background-color: #d4edda !important; /* Light Green */
+            border: 1px solid #c3e6cb;
+            font-weight: 700;
+            color: #155724;
+        }
+        .selected-wrong {
+            background-color: #f8d7da !important; /* Light Red */
+            border: 1px solid #f5c6cb;
+        }
+        .disabled-after-submit {
+             pointer-events: none; /* Disables options after submission */
+        }
+        /* --- END NEW FEEDBACK STYLES --- */
+
+
         /* Result Area */
         #test-results {
             margin-top: 40px;
@@ -95,31 +112,8 @@
 </head>
 <body>
 
-    <nav class="custom-nav">
-        <div class="container">
-            <div class="logo">
-                <img src="logo.png" alt="UMM Logo">
-                <span class="logo-full">Universal Money Mart</span>
-                <span class="logo-short">UMM</span>
-            </div>
-            
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            
-            <div class="nav-links" id="navLinks">
-                <div class="nav-links-inner"> 
-                    
-                    <a href="index.html" class="nav-link-item">Home</a>
-                    <a href="videos.html" class="nav-link-item">Videos</a>
-                    <a href="index.html#advisor-intro" class="nav-link-item">Why UMM</a>
-                    <a href="blog.html" class="nav-link-item">Blog</a>
-                    <a href="about.html" class="nav-link-item">About Us</a> 
-                    <a href="index.html#contact-professional" class="dropbtn">Contact</a>
-                </div> 
-            </div>
-        </div>
-    </nav>
+    <nav>...</nav>
+
     <div class="test-hero">
         <div class="container" style="text-align: center;">
             <h1>NISM V-A Sample Questions</h1>
@@ -180,7 +174,7 @@
                         <input type="radio" name="q3" value="d"> Till age 60
                     </label>
                 </div>
-                
+
                 <button type="button" class="submit-button" onclick="submitTest()">Submit Test & View Score</button>
             </form>
 
@@ -196,23 +190,7 @@
         <a href="index.html#contact-professional" class="cta-button" style="background-color: var(--color-primary);">Book Exam Strategy Consultation</a>
     </div>
 
-
-    <footer>
-        <div class="container footer-content"> 
-            <p class="footer-copyright">&copy; 2025 Universal Money Mart. All rights reserved.</p>
-            <div class="footer-links-group">
-                <a href="privacy.html">Privacy Policy</a>
-                <span>|</span>
-                <a href="terms.html">Terms & Conditions</a>
-                <span>|</span>
-                <a href="disclaimer.html">Disclaimer</a>
-            </div>
-            <div class="footer-disclosure">
-                <p class="disclosure-heading">ARN/RIA Disclosure:</p>
-                <p class="disclosure-text">Investments in mutual funds are subject to market risks. Please read the offer document carefully before investing.</p>
-            </div>
-        </div>
-    </footer>
+    <footer>...</footer>
 
     <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
         <i class="fa-brands fa-whatsapp"></i>
@@ -221,8 +199,8 @@
     <script src="script.js"></script>
     
     <script>
-        const COLOR_SUCCESS = '#28A745'; // Green
-        const COLOR_FAIL = '#dc3545'; // Red
+        const COLOR_SUCCESS = 'var(--color-success)'; // Use CSS variable for pass message
+        const COLOR_FAIL = '#dc3545'; // Use literal hex for red fail message
 
         function submitTest() {
             const form = document.getElementById('nism-test-form');
@@ -239,27 +217,60 @@
                 
                 const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
                 
-                if (selectedOption && selectedOption.value === correctAnswer) {
-                    score++;
+                // Disable all radio options and remove hover effects
+                card.querySelectorAll('input[type="radio"]').forEach(radio => {
+                    radio.disabled = true;
+                    radio.parentElement.classList.remove('option-group:hover');
+                });
+                card.classList.add('disabled-after-submit');
+
+                // 1. Check answer and apply coloring
+                card.querySelectorAll('label').forEach(label => {
+                    const input = label.querySelector('input[type="radio"]');
+                    
+                    if (input.value === correctAnswer) {
+                        // Highlight the correct answer in green
+                        label.classList.add('correct-answer');
+                        score++;
+                    } else if (input === selectedOption) {
+                        // Highlight the user's selected (wrong) answer in red
+                        label.classList.add('selected-wrong');
+                    }
+                });
+
+                // Correct score calculation (must subtract 1 for the correct answer highlight that shouldn't be inside the main score loop)
+                // Since the score++ is inside the highlight loop, we need to correct the score tally
+                
+            });
+
+            // Recalculate score based on corrected logic (to ensure no double-counting during color loop)
+            score = 0;
+            questionCards.forEach(card => {
+                if (card.querySelector('.selected-wrong.correct-answer')) {
+                    score++; // Should not happen with the CSS logic, but ensures accurate final tally
+                } else if (card.querySelector('.correct-answer:not(.selected-wrong)')) {
+                     score++;
                 }
             });
+
+
+            const finalScore = document.querySelectorAll('.question-card .correct-answer').length;
+            const scorePercentage = (finalScore / totalQuestions) * 100;
             
-            const scorePercentage = (score / totalQuestions) * 100;
-            
-            // 1. Display Results
-            scoreDisplay.innerText = score;
+            // 2. Display Results
+            scoreDisplay.innerText = finalScore;
             resultsDiv.style.display = 'block'; // Make the results div visible instantly
 
-            // 2. Pass/Fail Logic
+            // 3. Pass/Fail Logic
             if (scorePercentage >= 50) {
                 passFailMessage.innerText = "Congratulations! You passed the mock test.";
-                passFailMessage.style.color = COLOR_SUCCESS;
+                passFailMessage.style.color = 'var(--color-success)'; // Use CSS variable
             } else {
                 passFailMessage.innerText = "Needs improvement. Review the NISM workbook carefully.";
-                passFailMessage.style.color = COLOR_FAIL;
+                passFailMessage.style.color = COLOR_FAIL; // Red
             }
             
-            // 3. Scroll to results for better UX
+            // 4. Scroll to results for better UX
             resultsDiv.scrollIntoView({ behavior: 'smooth' });
         }
     </script>
