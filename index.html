@@ -381,54 +381,6 @@
     </a>
 
 
-    <script>
-    // Global colors for JS check (derived from user's style.css)
-    const COLOR_SUCCESS = '#28A745'; 
-    const COLOR_FAIL = '#dc3545';
-    const COLOR_PRIMARY = '#003366';
-
-    document.getElementById('nism-test-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        let score = 0;
-        // Collect all question cards
-        const questionCards = document.querySelectorAll('.question-card');
-        const totalQuestions = questionCards.length;
-        const resultsDiv = document.getElementById('test-results');
-        const scoreDisplay = document.getElementById('score-display');
-        const passFailMessage = document.getElementById('pass-fail-message');
-        
-        // 1. Calculate Score
-        questionCards.forEach(card => {
-            const questionName = card.querySelector('input[type="radio"]').name;
-            const correctAnswer = card.getAttribute('data-correct-answer');
-            
-            const selectedOption = this.querySelector(`input[name="${questionName}"]:checked`);
-            
-            // Check if an answer was selected and if it's correct
-            if (selectedOption && selectedOption.value === correctAnswer) {
-                score++;
-            }
-        });
-        
-        const scorePercentage = (score / totalQuestions) * 100;
-        
-        // 2. Display Results
-        scoreDisplay.innerText = score;
-        resultsDiv.style.display = 'block'; // CRITICAL FIX: Make the results div visible
-
-        // 3. Pass/Fail Logic (NISM V-A passing is 50%)
-        if (scorePercentage >= 50) {
-            passFailMessage.innerText = "Congratulations! You passed the mock test.";
-            passFailMessage.style.color = COLOR_SUCCESS; // Using fixed hex code
-        } else {
-            passFailMessage.innerText = "Needs improvement. Review the NISM workbook carefully.";
-            passFailMessage.style.color = COLOR_FAIL; // Using fixed hex code
-        }
-        
-        // 4. Scroll to results for better UX
-        resultsDiv.scrollIntoView({ behavior: 'smooth' });
-    });
-</script>
+     <script src="script.js"></script> 
 </body>
 </html>
