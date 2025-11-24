@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NISM V-A Practice Test | Mutual Fund Distributor Sample Questions | UMM Labs</title>
+    <title>NISM V-A Practice Test | Instant Feedback Mode | UMM Labs</title>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
         crossorigin="anonymous"></script>
@@ -60,53 +60,32 @@
             border-radius: 4px;
             transition: background-color 0.2s;
         }
-        .option-group:hover {
-            background-color: #e0eaf3;
-        }
         .option-group input[type="radio"] {
             margin-right: 10px;
         }
-
-        /* --- NEW FEEDBACK STYLES --- */
-        .correct-answer {
-            background-color: #d4edda !important; /* Light Green */
-            border: 1px solid #c3e6cb;
-            font-weight: 700;
+        
+        /* Feedback Styling */
+        .feedback-area {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+        .feedback-correct {
+            background-color: #d4edda; /* Light Green */
             color: #155724;
         }
-        .selected-wrong {
-            background-color: #f8d7da !important; /* Light Red */
-            border: 1px solid #f5c6cb;
+        .feedback-wrong {
+            background-color: #f8d7da; /* Light Red */
+            color: #721c24;
+        }
+        .correct-answer-highlight {
+            background-color: #e0fff2; /* Very light success color for correct choice */
+            border: 1px solid var(--color-success);
         }
         .disabled-after-submit {
              pointer-events: none; /* Disables options after submission */
-        }
-        /* --- END NEW FEEDBACK STYLES --- */
-
-
-        /* Result Area */
-        #test-results {
-            margin-top: 40px;
-            padding: 25px;
-            border: 2px solid var(--color-primary);
-            border-radius: 10px;
-            text-align: center;
-            display: none; /* Hidden by default */
-        }
-        .submit-button {
-            width: 100%;
-            background-color: var(--color-success);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .submit-button:hover {
-            background-color: #218838;
         }
     </style>
 </head>
@@ -116,73 +95,68 @@
 
     <div class="test-hero">
         <div class="container" style="text-align: center;">
-            <h1>NISM V-A Sample Questions</h1>
-            <p class="subtitle" style="color: #eee;">Practice multiple-choice questions for the Mutual Fund Distributors Certification Exam (Series V-A).</p>
+            <h1>NISM V-A Practice Test</h1>
+            <p class="subtitle" style="color: #eee;"><b>Instant Feedback Mode:</b> Choose your answer, and receive immediate results and explanation.</p>
         </div>
     </div>
     
     <div class="container">
         <div class="test-container">
-            <h2>Start Practice Session</h2>
+            <h2>Start Practice Session (NISM V-A)</h2>
             
-            <form id="nism-test-form" onsubmit="return false;">
-                
-                <div class="question-card" data-correct-answer="b">
-                    <p>1. Mutual Funds-ai India la regulate panra primary institution yaar?</p>
-                    <label class="option-group">
-                        <input type="radio" name="q1" value="a"> RBI (Reserve Bank of India)
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q1" value="b"> SEBI (Securities and Exchange Board of India)
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q1" value="c"> IRDAI (Insurance Regulatory Authority)
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q1" value="d"> AMFI (Association of Mutual Funds in India)
-                    </label>
-                </div>
-
-                <div class="question-card" data-correct-answer="d">
-                    <p>2. What does NAV (Net Asset Value) represent?</p>
-                    <label class="option-group">
-                        <input type="radio" name="q2" value="a"> The fund's debt ratio
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q2" value="b"> The daily share price
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q2" value="c"> The total AUM
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q2" value="d"> The market value of one unit of the scheme
-                    </label>
-                </div>
-
-                <div class="question-card" data-correct-answer="c">
-                    <p>3. What is the minimum lock-in period for an ELSS (Equity-Linked Savings Scheme)?</p>
-                    <label class="option-group">
-                        <input type="radio" name="q3" value="a"> 1 year
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q3" value="b"> 5 years
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q3" value="c"> 3 years
-                    </label>
-                    <label class="option-group">
-                        <input type="radio" name="q3" value="d"> Till age 60
-                    </label>
-                </div>
-
-                <button type="button" class="submit-button" onclick="submitTest()">Submit Test & View Score</button>
-            </form>
-
-            <div id="test-results" style="display: none;">
-                <h3 style="color: var(--color-primary);">Your Score: <span id="score-display"></span> / 3</h3>
-                <p id="pass-fail-message" style="font-size: 1.2em; font-weight: 700;"></p>
-                <p style="margin-top: 15px; font-size: 0.9em;">(Passing score for NISM V-A is 50% or 50/100 marks)</p>
+            <div class="question-card" id="q1-card" data-correct-answer="b" data-explanation="SEBI is the primary market regulator for Mutual Funds in India. RBI regulates banks, and AMFI is the industry association.">
+                <p>1. Mutual Funds-ai India la regulate panra primary institution yaar?</p>
+                <label class="option-group">
+                    <input type="radio" name="q1" value="a" onchange="checkAnswer('q1-card')"> RBI (Reserve Bank of India)
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q1" value="b" onchange="checkAnswer('q1-card')"> SEBI (Securities and Exchange Board of India)
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q1" value="c" onchange="checkAnswer('q1-card')"> IRDAI (Insurance Regulatory Authority)
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q1" value="d" onchange="checkAnswer('q1-card')"> AMFI (Association of Mutual Funds in India)
+                </label>
+                <div class="feedback-area" id="q1-feedback" style="display: none;"></div>
             </div>
+
+            <div class="question-card" id="q2-card" data-correct-answer="d" data-explanation="NAV represents the scheme's per-unit value after accounting for assets and liabilities. It's the price you buy/sell units at the end of the day.">
+                <p>2. What does NAV (Net Asset Value) represent?</p>
+                <label class="option-group">
+                    <input type="radio" name="q2" value="a" onchange="checkAnswer('q2-card')"> The fund's debt ratio
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q2" value="b" onchange="checkAnswer('q2-card')"> The total AUM
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q2" value="c" onchange="checkAnswer('q2-card')"> The fund's daily share price
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q2" value="d" onchange="checkAnswer('q2-card')"> The market value of one unit of the scheme
+                </label>
+                <div class="feedback-area" id="q2-feedback" style="display: none;"></div>
+            </div>
+
+            <div class="question-card" id="q3-card" data-correct-answer="c" data-explanation="ELSS funds have the shortest mandatory lock-in period among all tax-saving investments under Section 80C.">
+                <p>3. What is the minimum lock-in period for an ELSS (Equity-Linked Savings Scheme)?</p>
+                <label class="option-group">
+                    <input type="radio" name="q3" value="a" onchange="checkAnswer('q3-card')"> 1 year
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q3" value="b" onchange="checkAnswer('q3-card')"> 5 years
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q3" value="c" onchange="checkAnswer('q3-card')"> 3 years
+                </label>
+                <label class="option-group">
+                    <input type="radio" name="q3" value="d" onchange="checkAnswer('q3-card')"> Till age 60
+                </label>
+                <div class="feedback-area" id="q3-feedback" style="display: none;"></div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; font-weight: 600;">(Add more compliant questions here. There is no final score calculation in this mode.)</p>
+
         </div>
     </div>
     <div style="text-align: center; padding-bottom: 60px;">
@@ -199,82 +173,57 @@
     <script src="script.js"></script>
     
     <script>
-    const COLOR_SUCCESS = 'var(--color-success)'; 
-    const COLOR_FAIL = '#dc3545';
-
-    function submitTest() {
-        const form = document.getElementById('nism-test-form');
-        let score = 0; // Final correct score count
-        const questionCards = document.querySelectorAll('.question-card');
-        const totalQuestions = questionCards.length;
-        const resultsDiv = document.getElementById('test-results');
-        const scoreDisplay = document.getElementById('score-display');
-        const passFailMessage = document.getElementById('pass-fail-message');
-        
-        // Disable the button to prevent double-submission
-        document.querySelector('.submit-button').disabled = true;
-
-        // Reset display colors from previous run (if any)
-        questionCards.forEach(card => {
-            card.classList.add('disabled-after-submit');
-            card.querySelectorAll('label').forEach(label => {
-                 label.classList.remove('correct-answer', 'selected-wrong');
-                 label.querySelector('input').disabled = true;
-            });
-        });
-
-
-        // 1. Calculate Score and Apply Coloring Simultaneously
-        questionCards.forEach(card => {
-            const questionName = card.querySelector('input[type="radio"]').name;
+        function checkAnswer(cardId) {
+            const card = document.getElementById(cardId);
             const correctAnswer = card.getAttribute('data-correct-answer');
-            const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
+            const explanation = card.getAttribute('data-explanation');
+            const feedbackDiv = document.getElementById(cardId.replace('-card', '-feedback'));
             
-            let isCorrectlyAnswered = false;
+            // Get the currently selected option
+            const selectedOption = card.querySelector('input[name="' + cardId.replace('-card', '') + '"]:checked');
+            
+            if (!selectedOption) return;
 
-            // Loop through all options to apply visual feedback
+            // 1. Disable all options in this card immediately
+            card.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.disabled = true;
+            });
+            card.classList.add('disabled-after-submit');
+
+            // 2. Determine Correctness
+            let isCorrect = (selectedOption.value === correctAnswer);
+
+            // 3. Apply Visual Feedback & Display Explanation
+            let message = '';
+            
             card.querySelectorAll('label').forEach(label => {
                 const input = label.querySelector('input[type="radio"]');
                 
                 if (input.value === correctAnswer) {
-                    // Highlight the correct answer in green
-                    label.classList.add('correct-answer');
-                } 
-                
-                if (input === selectedOption) {
-                    // Check if the user selected the correct answer
-                    if (input.value === correctAnswer) {
-                        isCorrectlyAnswered = true;
-                    } else {
-                        // Highlight the user's selected (wrong) answer in red
-                        label.classList.add('selected-wrong');
-                    }
+                    // Highlight the correct answer
+                    label.classList.add('correct-answer-highlight');
                 }
             });
 
-            // 2. Final Score Tally (CRITICAL: Increment score only once per question)
-            if (isCorrectlyAnswered) {
-                score++;
+            if (isCorrect) {
+                message = '<i class="fas fa-check-circle"></i> <b>Correct!</b> This is the right regulatory body.';
+                feedbackDiv.classList.add('feedback-correct');
+            } else {
+                message = '<i class="fas fa-times-circle"></i> <b>Wrong Answer.</b> ' + explanation;
+                // Highlight user's wrong selection in red (optional, but helpful)
+                selectedOption.parentElement.classList.add('selected-wrong');
+                feedbackDiv.classList.add('feedback-wrong');
             }
-        });
 
-        // 3. Display Results
-        const scorePercentage = (score / totalQuestions) * 100;
-        
-        scoreDisplay.innerText = score;
-        resultsDiv.style.display = 'block'; 
-
-        // 4. Pass/Fail Logic
-        if (scorePercentage >= 50) {
-            passFailMessage.innerText = "Congratulations! You passed the mock test.";
-            passFailMessage.style.color = 'var(--color-success)'; 
-        } else {
-            passFailMessage.innerText = "Needs improvement. Review the NISM workbook carefully.";
-            passFailMessage.style.color = COLOR_FAIL;
+            feedbackDiv.innerHTML = message;
+            feedbackDiv.style.display = 'block';
+            
+            // Scroll to the next question for better UX (optional)
+            const nextCard = card.nextElementSibling;
+            if (nextCard && nextCard.classList.contains('question-card')) {
+                 nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
-        
-        resultsDiv.scrollIntoView({ behavior: 'smooth' });
-    }
-</script>
+    </script>
 </body>
 </html>
