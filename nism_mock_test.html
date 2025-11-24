@@ -199,80 +199,82 @@
     <script src="script.js"></script>
     
     <script>
-        const COLOR_SUCCESS = 'var(--color-success)'; // Use CSS variable for pass message
-        const COLOR_FAIL = '#dc3545'; // Use literal hex for red fail message
+    const COLOR_SUCCESS = 'var(--color-success)'; 
+    const COLOR_FAIL = '#dc3545';
 
-        function submitTest() {
-            const form = document.getElementById('nism-test-form');
-            let score = 0;
-            const questionCards = document.querySelectorAll('.question-card');
-            const totalQuestions = questionCards.length;
-            const resultsDiv = document.getElementById('test-results');
-            const scoreDisplay = document.getElementById('score-display');
-            const passFailMessage = document.getElementById('pass-fail-message');
+    function submitTest() {
+        const form = document.getElementById('nism-test-form');
+        let score = 0; // Final correct score count
+        const questionCards = document.querySelectorAll('.question-card');
+        const totalQuestions = questionCards.length;
+        const resultsDiv = document.getElementById('test-results');
+        const scoreDisplay = document.getElementById('score-display');
+        const passFailMessage = document.getElementById('pass-fail-message');
+        
+        // Disable the button to prevent double-submission
+        document.querySelector('.submit-button').disabled = true;
+
+        // Reset display colors from previous run (if any)
+        questionCards.forEach(card => {
+            card.classList.add('disabled-after-submit');
+            card.querySelectorAll('label').forEach(label => {
+                 label.classList.remove('correct-answer', 'selected-wrong');
+                 label.querySelector('input').disabled = true;
+            });
+        });
+
+
+        // 1. Calculate Score and Apply Coloring Simultaneously
+        questionCards.forEach(card => {
+            const questionName = card.querySelector('input[type="radio"]').name;
+            const correctAnswer = card.getAttribute('data-correct-answer');
+            const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
             
-            questionCards.forEach(card => {
-                const questionName = card.querySelector('input[type="radio"]').name;
-                const correctAnswer = card.getAttribute('data-correct-answer');
-                
-                const selectedOption = form.querySelector(`input[name="${questionName}"]:checked`);
-                
-                // Disable all radio options and remove hover effects
-                card.querySelectorAll('input[type="radio"]').forEach(radio => {
-                    radio.disabled = true;
-                    radio.parentElement.classList.remove('option-group:hover');
-                });
-                card.classList.add('disabled-after-submit');
+            let isCorrectlyAnswered = false;
 
-                // 1. Check answer and apply coloring
-                card.querySelectorAll('label').forEach(label => {
-                    const input = label.querySelector('input[type="radio"]');
-                    
+            // Loop through all options to apply visual feedback
+            card.querySelectorAll('label').forEach(label => {
+                const input = label.querySelector('input[type="radio"]');
+                
+                if (input.value === correctAnswer) {
+                    // Highlight the correct answer in green
+                    label.classList.add('correct-answer');
+                } 
+                
+                if (input === selectedOption) {
+                    // Check if the user selected the correct answer
                     if (input.value === correctAnswer) {
-                        // Highlight the correct answer in green
-                        label.classList.add('correct-answer');
-                        score++;
-                    } else if (input === selectedOption) {
+                        isCorrectlyAnswered = true;
+                    } else {
                         // Highlight the user's selected (wrong) answer in red
                         label.classList.add('selected-wrong');
                     }
-                });
-
-                // Correct score calculation (must subtract 1 for the correct answer highlight that shouldn't be inside the main score loop)
-                // Since the score++ is inside the highlight loop, we need to correct the score tally
-                
-            });
-
-            // Recalculate score based on corrected logic (to ensure no double-counting during color loop)
-            score = 0;
-            questionCards.forEach(card => {
-                if (card.querySelector('.selected-wrong.correct-answer')) {
-                    score++; // Should not happen with the CSS logic, but ensures accurate final tally
-                } else if (card.querySelector('.correct-answer:not(.selected-wrong)')) {
-                     score++;
                 }
             });
 
-
-            const finalScore = document.querySelectorAll('.question-card .correct-answer').length;
-            const scorePercentage = (finalScore / totalQuestions) * 100;
-            
-            // 2. Display Results
-            scoreDisplay.innerText = finalScore;
-            resultsDiv.style.display = 'block'; // Make the results div visible instantly
-
-            // 3. Pass/Fail Logic
-            if (scorePercentage >= 50) {
-                passFailMessage.innerText = "Congratulations! You passed the mock test.";
-                passFailMessage.style.color = 'var(--color-success)'; // Use CSS variable
-            } else {
-                passFailMessage.innerText = "Needs improvement. Review the NISM workbook carefully.";
-                passFailMessage.style.color = COLOR_FAIL; // Red
+            // 2. Final Score Tally (CRITICAL: Increment score only once per question)
+            if (isCorrectlyAnswered) {
+                score++;
             }
-            
-            // 4. Scroll to results for better UX
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // 3. Display Results
+        const scorePercentage = (score / totalQuestions) * 100;
+        
+        scoreDisplay.innerText = score;
+        resultsDiv.style.display = 'block'; 
+
+        // 4. Pass/Fail Logic
+        if (scorePercentage >= 50) {
+            passFailMessage.innerText = "Congratulations! You passed the mock test.";
+            passFailMessage.style.color = 'var(--color-success)'; 
+        } else {
+            passFailMessage.innerText = "Needs improvement. Review the NISM workbook carefully.";
+            passFailMessage.style.color = COLOR_FAIL;
         }
-    </script>
+        
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 </body>
 </html>
