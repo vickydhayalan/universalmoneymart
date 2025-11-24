@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NISM V-A Practice Test | Mutual Fund Distributor Sample Questions | UMM Labs</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
+        crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* ----------------------------------------------------- */
+        /* --- MOCK TEST PAGE SPECIFIC STYLES --- */
+        /* ----------------------------------------------------- */
+        
+        .test-hero {
+            background: linear-gradient(135deg, #00509e, var(--color-primary));
+            color: white;
+            padding: 80px 0 30px;
+        }
+        .test-hero h1 {
+            color: white;
+            font-size: 3em;
+        }
+
+        .test-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Question Card Styling */
+        .question-card {
+            background-color: var(--color-bg-light);
+            border-left: 5px solid var(--color-secondary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        .question-card p {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+
+        /* Option Styling */
+        .option-group {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .option-group:hover {
+            background-color: #e0eaf3;
+        }
+        .option-group input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        /* Result Area */
+        #test-results {
+            margin-top: 40px;
+            padding: 25px;
+            border: 2px solid var(--color-primary);
+            border-radius: 10px;
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+        .submit-button {
+            width: 100%;
+            background-color: var(--color-success);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>...</nav>
+
+    <div class="test-hero">
+        <div class="container" style="text-align: center;">
+            <h1>NISM V-A Sample Questions</h1>
+            <p class="subtitle" style="color: #eee;">Practice multiple-choice questions for the Mutual Fund Distributors Certification Exam (Series V-A).</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="test-container">
+            <h2>Start Practice Session</h2>
+            
+            <form id="nism-test-form">
+                
+                <div class="question-card" data-correct-answer="b">
+                    <p>1. The primary regulator for Mutual Funds in India is:</p>
+                    <label class="option-group">
+                        <input type="radio" name="q1" value="a"> RBI
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q1" value="b"> SEBI
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q1" value="c"> IRDAI
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q1" value="d"> AMFI
+                    </label>
+                </div>
+
+                <div class="question-card" data-correct-answer="d">
+                    <p>2. What does NAV (Net Asset Value) represent?</p>
+                    <label class="option-group">
+                        <input type="radio" name="q2" value="a"> The fund's debt ratio
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q2" value="b"> The daily share price
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q2" value="c"> The total AUM
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q2" value="d"> The market value of one unit of the scheme
+                    </label>
+                </div>
+
+                <div class="question-card" data-correct-answer="c">
+                    <p>3. What is the minimum lock-in period for an ELSS (Equity-Linked Savings Scheme)?</p>
+                    <label class="option-group">
+                        <input type="radio" name="q3" value="a"> 1 year
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q3" value="b"> 5 years
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q3" value="c"> 3 years
+                    </label>
+                    <label class="option-group">
+                        <input type="radio" name="q3" value="d"> Till age 60
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">Submit Test & View Score</button>
+            </form>
+
+            <div id="test-results">
+                <h3 style="color: var(--color-primary);">Your Score: <span id="score-display"></span> / 3</h3>
+                <p id="pass-fail-message" style="font-size: 1.2em; font-weight: 700;"></p>
+                <p style="margin-top: 15px; font-size: 0.9em;">(Passing score for NISM V-A is 50% or 50/100 marks)</p>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; padding-bottom: 60px;">
+        <p style="font-weight: 600;">Need guidance on these topics? Contact the MFD who passed this exam!</p>
+        <a href="index.html#contact-professional" class="cta-button" style="background-color: var(--color-primary);">Book Exam Strategy Consultation</a>
+    </div>
+
+    <footer>...</footer>
+
+    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
+    <script src="script.js"></script>
+    
+    <script>
+        document.getElementById('nism-test-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let score = 0;
+            const totalQuestions = document.querySelectorAll('.question-card').length;
+            const resultsDiv = document.getElementById('test-results');
+            const passFailMessage = document.getElementById('pass-fail-message');
+            
+            document.querySelectorAll('.question-card').forEach(card => {
+                const questionName = card.querySelector('input[type="radio"]').name;
+                const correctAnswer = card.getAttribute('data-correct-answer');
+                
+                const selectedOption = this.querySelector(`input[name="${questionName}"]:checked`);
+                
+                // Check if an answer was selected and if it's correct
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    score++;
+                }
+            });
+            
+            const scorePercentage = (score / totalQuestions) * 100;
+            
+            // Display Results
+            document.getElementById('score-display').innerText = score;
+            resultsDiv.style.display = 'block';
+
+            // Pass/Fail Logic (NISM V-A passing is 50%)
+            if (scorePercentage >= 50) {
+                passFailMessage.innerText = "Congratulations! You passed the mock test.";
+                passFailMessage.style.color = var(--color-success);
+            } else {
+                passFailMessage.innerText = "Needs improvement. Review the NISM workbook carefully.";
+                passFailMessage.style.color = '#dc3545'; // Red
+            }
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
