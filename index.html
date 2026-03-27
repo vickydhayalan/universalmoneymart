@@ -1,386 +1,1076 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Money Mart | Financial Services, Portfolio & Blog</title>
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
-        crossorigin="anonymous"></script>
-    
-    <link rel="icon" type="image/png" href="/logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <link rel="stylesheet" href="style.css"> 
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Universal Money Mart – Expert Guidance for Mutual Fund & Wealth Creation</title>
+<meta name="description" content="Vignesh Dhayalan (ARN-288927) – AMFI Registered Mutual Fund Distributor. Tamil-language financial guidance, SIP planning, goal-based investing."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --gold: #C8963E;
+  --gold-light: #F0C97A;
+  --gold-pale: #FDF6E9;
+  --dark: #0F1A14;
+  --dark2: #1A2B21;
+  --dark3: #243B2E;
+  --green: #1D6B44;
+  --green-light: #2A9660;
+  --text: #1A1A1A;
+  --text2: #4A5568;
+  --text3: #718096;
+  --white: #FFFFFF;
+  --off-white: #FAFAF8;
+  --border: #E8E4DC;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 48px rgba(0,0,0,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.25; }
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; height: auto; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ── NAVBAR ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; max-width: 1100px; margin: 0 auto;
+}
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700; color: var(--dark);
+  display: flex; align-items: center; gap: 8px;
+}
+.logo span { color: var(--gold); }
+.logo-badge {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 500;
+  background: var(--gold-pale); color: var(--gold);
+  border: 1px solid var(--gold-light);
+  padding: 2px 8px; border-radius: 20px;
+  white-space: nowrap;
+}
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--text2);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green); }
+.nav-cta {
+  background: var(--green); color: var(--white) !important;
+  padding: 10px 20px; border-radius: 8px; font-size: 14px;
+  font-weight: 600; transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: var(--green-light) !important; transform: translateY(-1px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.hamburger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, var(--dark3) 100%);
+  color: var(--white);
+  padding: 100px 24px 80px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(200,150,62,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1100px; margin: 0 auto; position: relative; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(200,150,62,0.15); border: 1px solid rgba(200,150,62,0.4);
+  color: var(--gold-light); font-size: 12px; font-weight: 500;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--gold-light); border-radius: 50%; }
+.hero h1 { font-size: clamp(32px, 4vw, 52px); font-weight: 700; margin-bottom: 20px; line-height: 1.15; }
+.hero h1 span { color: var(--gold-light); }
+.hero p { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 480px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: var(--dark);
+  padding: 14px 28px; border-radius: 10px;
+  font-weight: 600; font-size: 15px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(200,150,62,0.35);
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,150,62,0.4); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  padding: 14px 28px; border-radius: 10px;
+  font-weight: 500; font-size: 15px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+.hero-stats { display: flex; gap: 36px; margin-top: 48px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.12); }
+.stat-item { text-align: left; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold-light); }
+.stat-label { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+.hero-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  backdrop-filter: blur(8px);
+}
+.hero-card-title { font-size: 13px; color: var(--gold-light); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+.cert-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.cert-item:last-child { border-bottom: none; padding-bottom: 0; }
+.cert-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: rgba(200,150,62,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.cert-text { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 500; }
+.cert-sub { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+/* ── ABOUT ── */
+.about { padding: 80px 24px; background: var(--off-white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: 12px; font-weight: 600; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+.about h2 { font-size: 36px; margin-bottom: 20px; }
+.about p { color: var(--text2); font-size: 16px; margin-bottom: 20px; }
+.cert-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+.cert-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 10px 16px; font-size: 13px; font-weight: 500; color: var(--text2);
+  transition: border-color 0.2s, color 0.2s;
+}
+.cert-link:hover { border-color: var(--green); color: var(--green); }
+.about-features { display: flex; flex-direction: column; gap: 16px; }
+.feature-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px 24px;
+  display: flex; align-items: flex-start; gap: 16px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.feature-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.feature-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.feature-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.feature-desc { font-size: 13px; color: var(--text3); }
+
+/* ── SERVICES ── */
+.services { padding: 80px 24px; background: var(--white); }
+.section-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+.section-header h2 { font-size: 38px; margin-bottom: 14px; }
+.section-header p { color: var(--text2); font-size: 16px; }
+.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+.service-card {
+  background: var(--off-white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 28px 24px;
+  text-align: center; transition: all 0.25s; cursor: default;
+}
+.service-card:hover { background: var(--dark); border-color: var(--dark); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.service-card:hover .service-title, .service-card:hover .service-desc { color: var(--white); }
+.service-card:hover .service-icon-wrap { background: rgba(200,150,62,0.2); }
+.service-icon-wrap {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: rgba(29,107,68,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin: 0 auto 18px;
+  transition: background 0.25s;
+}
+.service-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; transition: color 0.25s; }
+.service-desc { font-size: 13px; color: var(--text3); transition: color 0.25s; }
+
+/* ── COURSES ── */
+.courses { padding: 80px 24px; background: var(--off-white); }
+.courses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 1100px; margin: 0 auto; }
+.course-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.course-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.course-header {
+  padding: 28px 28px 20px;
+  background: var(--dark);
+  color: var(--white);
+}
+.course-badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  background: rgba(200,150,62,0.25); color: var(--gold-light);
+  border: 1px solid rgba(200,150,62,0.4);
+  padding: 4px 10px; border-radius: 20px; margin-bottom: 12px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.course-header h3 { font-size: 22px; margin-bottom: 8px; }
+.course-header p { font-size: 14px; color: rgba(255,255,255,0.65); }
+.course-body { padding: 24px 28px 28px; }
+.course-list { list-style: none; margin-bottom: 24px; }
+.course-list li {
+  font-size: 14px; color: var(--text2); padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.course-list li:last-child { border-bottom: none; }
+.course-list li::before { content: '✔'; color: var(--green); font-size: 13px; flex-shrink: 0; }
+.btn-enroll {
+  display: block; text-align: center;
+  background: var(--green); color: var(--white);
+  padding: 14px; border-radius: 10px;
+  font-weight: 600; font-size: 15px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-enroll:hover { background: var(--green-light); transform: translateY(-1px); }
+
+/* ── ARTICLES ── */
+.articles { padding: 80px 24px; background: var(--white); }
+.articles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1100px; margin: 0 auto 36px; }
+.article-card {
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  overflow: hidden; background: var(--white);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.article-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+.article-img {
+  width: 100%; height: 180px; object-fit: cover;
+  background: linear-gradient(135deg, var(--dark2), var(--dark3));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+}
+.article-body { padding: 20px 22px 24px; }
+.article-tag {
+  font-size: 11px; font-weight: 600; color: var(--green);
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
+}
+.article-body h3 { font-size: 17px; margin-bottom: 10px; line-height: 1.35; }
+.article-body p { font-size: 13px; color: var(--text3); margin-bottom: 16px; }
+.article-meta { font-size: 12px; color: var(--text3); margin-bottom: 14px; }
+.read-more { font-size: 13px; font-weight: 600; color: var(--green); display: inline-flex; align-items: center; gap: 4px; }
+.read-more:hover { gap: 8px; }
+.view-all-wrap { text-align: center; }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1.5px solid var(--green); color: var(--green);
+  padding: 12px 28px; border-radius: 10px;
+  font-weight: 600; font-size: 14px;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-outline:hover { background: var(--green); color: var(--white); }
+
+/* ── ONBOARDING ── */
+.onboarding { padding: 80px 24px; background: var(--dark); color: var(--white); }
+.onboarding .section-header h2, .onboarding .section-header p { color: var(--white); }
+.onboarding .section-header p { color: rgba(255,255,255,0.6); }
+.steps-row { display: flex; align-items: flex-start; gap: 0; max-width: 1000px; margin: 0 auto 40px; }
+.step-item { flex: 1; text-align: center; position: relative; }
+.step-item:not(:last-child)::after {
+  content: ''; position: absolute;
+  top: 24px; left: calc(50% + 24px); right: calc(-50% + 24px);
+  height: 1px; background: rgba(200,150,62,0.35);
+}
+.step-num {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(200,150,62,0.15); border: 1.5px solid rgba(200,150,62,0.4);
+  color: var(--gold-light); font-weight: 700; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+}
+.step-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.step-desc { font-size: 12px; color: rgba(255,255,255,0.5); }
+.onboarding-note {
+  text-align: center; font-size: 13px; color: rgba(255,255,255,0.45);
+  max-width: 500px; margin: 0 auto 40px;
+}
+.onboarding-cta { text-align: center; }
+
+/* ── TESTIMONIAL ── */
+.testimonial { padding: 72px 24px; background: var(--gold-pale); }
+.testimonial-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+.quote-mark { font-size: 64px; line-height: 1; color: var(--gold); font-family: 'Playfair Display', serif; margin-bottom: -10px; }
+.testimonial p { font-size: 18px; line-height: 1.7; color: var(--text); font-style: italic; margin-bottom: 28px; }
+.testimonial-author { font-weight: 600; font-size: 15px; }
+.testimonial-role { font-size: 13px; color: var(--text3); }
+
+/* ── FAQ ── */
+.faq { padding: 80px 24px; background: var(--white); }
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-question {
+  width: 100%; text-align: left; background: none; border: none;
+  cursor: pointer; padding: 22px 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: var(--text);
+}
+.faq-icon { font-size: 20px; color: var(--green); transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer { overflow: hidden; max-height: 0; transition: max-height 0.35s ease, padding 0.3s; }
+.faq-answer p { font-size: 15px; color: var(--text2); padding-bottom: 20px; line-height: 1.75; }
+
+/* ── VIDEOS ── */
+.videos { padding: 80px 24px; background: var(--off-white); }
+.videos-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 1100px; margin: 0 auto 36px; }
+.video-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.video-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+.video-thumb {
+  width: 100%; height: 160px;
+  background: var(--dark2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; cursor: pointer;
+}
+.play-btn {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(200,150,62,0.9);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+.video-thumb:hover .play-btn { transform: scale(1.1); background: var(--gold); }
+.play-icon { width: 0; height: 0; border-style: solid; border-width: 9px 0 9px 18px; border-color: transparent transparent transparent var(--dark); margin-left: 3px; }
+.video-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); position: absolute; top: 12px; left: 12px; background: rgba(15,26,20,0.8); padding: 3px 10px; border-radius: 4px; }
+.video-body { padding: 18px 20px 20px; }
+.video-body h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; line-height: 1.35; }
+.video-body p { font-size: 12px; color: var(--text3); }
+.subscribe-wrap { text-align: center; }
+.btn-yt {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #FF0000; color: var(--white);
+  padding: 14px 28px; border-radius: 10px;
+  font-weight: 600; font-size: 15px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-yt:hover { background: #CC0000; transform: translateY(-1px); }
+
+/* ── CONTACT ── */
+.contact { padding: 80px 24px; background: var(--white); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; max-width: 1100px; margin: 0 auto; align-items: start; }
+.contact-info h2 { font-size: 34px; margin-bottom: 14px; }
+.contact-info p { color: var(--text2); margin-bottom: 32px; }
+.contact-methods { display: flex; flex-direction: column; gap: 16px; }
+.contact-method {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--off-white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px;
+  transition: border-color 0.2s;
+}
+.contact-method:hover { border-color: var(--green); }
+.cm-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.cm-icon.green { background: rgba(29,107,68,0.1); }
+.cm-icon.wa { background: rgba(37,211,102,0.1); }
+.cm-icon.map { background: rgba(200,150,62,0.1); }
+.cm-label { font-size: 12px; color: var(--text3); }
+.cm-val { font-size: 14px; font-weight: 600; color: var(--text); }
+.contact-form { background: var(--off-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px; }
+.contact-form h3 { font-size: 22px; margin-bottom: 6px; }
+.contact-form > p { font-size: 14px; color: var(--text3); margin-bottom: 28px; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 6px; }
+.form-group input, .form-group textarea {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text);
+  background: var(--white); outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--green); }
+.form-group textarea { min-height: 100px; resize: vertical; }
+.btn-wa {
+  width: 100%; padding: 14px;
+  background: #25D366; color: var(--white);
+  border: none; border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-wa:hover { background: #1EBE5A; transform: translateY(-1px); }
+
+/* ── DISCLAIMER ── */
+.disclaimer {
+  background: var(--gold-pale); border-top: 1px solid rgba(200,150,62,0.3);
+  padding: 24px;
+}
+.disclaimer-inner { max-width: 1100px; margin: 0 auto; }
+.disclaimer h4 { font-size: 14px; font-weight: 600; color: var(--gold); margin-bottom: 8px; font-family: 'DM Sans', sans-serif; }
+.disclaimer p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* ── FOOTER ── */
+footer { background: var(--dark); color: var(--white); padding: 56px 24px 0; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto 40px; }
+.footer-brand h3 { font-size: 20px; margin-bottom: 12px; }
+.footer-brand p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 20px; }
+.footer-arn { font-size: 12px; color: var(--gold-light); font-weight: 500; }
+.footer-col h4 { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--gold-light); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding: 20px 0; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.35); }
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { font-size: 12px; color: rgba(255,255,255,0.4); transition: color 0.2s; }
+.footer-legal a:hover { color: var(--white); }
+
+/* ── FLOATING WHATSAPP ── */
+.float-wa {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: pulse-wa 2.5s ease-in-out infinite;
+}
+.float-wa:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.65); animation: none; }
+.float-wa svg { width: 28px; height: 28px; fill: white; }
+@keyframes pulse-wa {
+  0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+  50% { box-shadow: 0 4px 32px rgba(37,211,102,0.75), 0 0 0 8px rgba(37,211,102,0.12); }
+}
+
+/* ── SCROLL TO TOP ── */
+#scrollTop {
+  position: fixed; bottom: 92px; right: 28px; z-index: 998;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--dark); border: 1px solid rgba(255,255,255,0.15);
+  color: var(--white); font-size: 16px; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+#scrollTop:hover { background: var(--dark3); }
+#scrollTop.visible { display: flex; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-card { display: none; }
+  .services-grid { grid-template-columns: repeat(2,1fr); }
+  .courses-grid, .articles-grid, .videos-grid { grid-template-columns: 1fr; }
+  .steps-row { flex-wrap: wrap; gap: 24px; }
+  .step-item::after { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); padding: 20px 24px; gap: 16px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 30px !important; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+.hero-left > * { opacity: 0; animation: fadeUp 0.6s ease forwards; }
+.hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-left > *:nth-child(2) { animation-delay: 0.25s; }
+.hero-left > *:nth-child(3) { animation-delay: 0.4s; }
+.hero-left > *:nth-child(4) { animation-delay: 0.55s; }
+.hero-left > *:nth-child(5) { animation-delay: 0.7s; }
+</style>
 </head>
 <body>
 
-    <nav>
-    <div class="container">
-        <div class="logo">
-            <img src="logo.png" alt="UMM Logo">
-            <span class="logo-full">Universal Money Mart</span>
-            <span class="logo-short">UMM</span>
-        </div>
-        
-        <div class="menu-toggle" id="menuToggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        
-        <div class="nav-links" id="navLinks">
-    <div class="nav-links-inner"> 
-        
-        <div class="dropdown">
-            <a href="#" class="dropbtn"><i class="fas fa-hand-holding-usd"></i> Products</a>
-            <div class="dropdown-content">
-                <a href="mutual_funds.html">Mutual Funds</a>
-                <a href="sip.html">SIP</a>
-                <a href="health_insurance.html">Health Insurance</a>
-                <a href="term_insurance.html">Term Insurance</a>
-                <a href="fixed_deposit.html">Fixed Deposit</a>
-                <a href="nps.html">NPS</a>
-                <a href="loans.html">Loans</a>
-            </div>
-        </div>
-
-        <div class="dropdown">
-            <a href="#" class="dropbtn"><i class="fas fa-calculator"></i> UMM Calculators</a>
-            <div class="dropdown-content">
-                <a href="sip_calculator.html">SIP Calculator</a>
-                <a href="stp_calculator.html">STP Calculator</a>
-                <a href="swp_calculator.html">SWP Calculator</a>
-                <a href="step_up_sip.html">Step Up SIP Calculator</a>
-                <a href="retirement_planner.html">Retirement Plan</a>
-            </div>
-        </div>
-        
-        <div class="dropdown">
-            <a href="#" class="dropbtn"><i class="fas fa-book-open"></i> Resources</a>
-            <div class="dropdown-content">
-                <a href="videos.html">Video Library</a>
-                <a href="nism_exam_prep.html">NISM Exam Preparation</a>
-                 <a href="nism_mock_test.html">NISM V-A Mock Test</a>
-            </div>
-        </div>
-
-        <a href="#advisor-intro" class="dropbtn">Why UMM</a>
-
-        <a href="blog.html" class="dropbtn">Blog</a>
-
-        <a href="about.html" class="dropbtn">About Us</a> 
-
-        <a href="#contact-professional" class="dropbtn">Contact</a>
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      Universal <span>Money</span> Mart
+      <span class="logo-badge">ARN-288927</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#articles">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://wa.me/917200752628?text=Hi%20Vignesh%2C%20I%20want%20to%20Start%20Investing" class="nav-cta" target="_blank">Start Investing</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
     </div>
-</div>
-        </div>
+  </div>
 </nav>
 
-    <div id="hero-finance" class="hero-finance">
-    <div class="container">
-        <div class="hero-content">
-            <h1>Start Your Journey Towards Financial Freedom.</h1>
-            <p class="subtitle">Invest in Mutual Funds, SIP, and Financial Planning with expert guidance and a trusted platform.</p>
-            
-            <a href="#contact-professional" class="cta-button">🚀 Start Investing Now - Get Free Consultation</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-badge">Vignesh Dhayalan | AMFI Registered MFD</div>
+      <h1>Expert Guidance To <span>Secure Your Financial Future</span> & Grow Your Wealth.</h1>
+      <p>Tamil-language simplified financial education for mutual funds, share markets & wealth creation. SEBI & AMFI compliant guidance.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/917200752628?text=Hi%20Vignesh%2C%20I%20saw%20your%20website%20Universal%20Money%20Mart.%20I%20want%20to%20Start%20Investing%20and%20need%20your%20expert%20guidance." target="_blank" class="btn-primary">
+          💬 Start Investing Today
+        </a>
+        <a href="#services" class="btn-secondary">Our Services →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">AMFI</div>
+          <div class="stat-label">Registered Distributor</div>
         </div>
-
-        <div class="trust-bar">
-            <div class="trust-item">
-                <h3 class="trust-number">30+</h3>
-                <p class="trust-label">Trusted Investors</p>
-            </div>
-            <div class="trust-separator"></div>
-            <div class="trust-item">
-                <h3 class="trust-number">₹20 Lakhs+</h3>
-                <p class="trust-label">Assets Under Advice</p>
-            </div>
-            <div class="trust-separator"></div>
-            <div class="trust-item">
-                <h3 class="trust-number">2+ Yrs</h3>
-                <p class="trust-label">Track Record of Trust</p>
-            </div>
+        <div class="stat-item">
+          <div class="stat-num">SEBI</div>
+          <div class="stat-label">Compliant Guidance</div>
         </div>
+        <div class="stat-item">
+          <div class="stat-num">Tamil</div>
+          <div class="stat-label">Language Education</div>
+        </div>
+      </div>
     </div>
+    <div class="hero-card">
+      <div class="hero-card-title">Verified Credentials</div>
+      <div class="cert-item">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-text">AMFI Registration</div>
+          <div class="cert-sub">ARN-288927 | Active</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🎓</div>
+        <div>
+          <div class="cert-text">NISM Certified</div>
+          <div class="cert-sub">Series V-A: Mutual Fund Distributor</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">📊</div>
+        <div>
+          <div class="cert-text">Goal-Based Investing</div>
+          <div class="cert-sub">Retirement, Education, Wealth</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🔒</div>
+        <div>
+          <div class="cert-text">SEBI Compliant</div>
+          <div class="cert-sub">100% regulated guidance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">About Us</div>
+      <h2>Simplifying Mutual Fund Investments for Everyone.</h2>
+      <p>At Universal Money Mart, we're dedicated to simplifying mutual fund investments for everyone. With years of experience and a deep understanding of financial markets, <strong>Vignesh Dhayalan (ARN-288927)</strong> leads our mission to provide transparent and goal-based investment solutions.</p>
+      <p>We help you navigate the world of mutual funds and share markets with ease — in Tamil language, from basics to advanced.</p>
+      <div class="cert-links">
+        <a href="https://universalmoneymart.com/wp-content/uploads/2026/02/nism_certificate.jpg.png" target="_blank" class="cert-link">📜 NISM Certification</a>
+        <a href="https://universalmoneymart.com/wp-content/uploads/2026/02/arn_card.jpg.jpg" target="_blank" class="cert-link">🪪 AMFI Certificate (ARN-288927)</a>
+      </div>
+    </div>
+    <div class="about-features">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <div>
+          <div class="feature-title">Mutual Fund Investment</div>
+          <div class="feature-desc">Goal-based mutual fund selection, SIP planning & long-term wealth creation guidance.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div>
+          <div class="feature-title">Financial Planning</div>
+          <div class="feature-desc">Personalized financial planning to achieve retirement, education & life goals.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <div>
+          <div class="feature-title">Portfolio Review</div>
+          <div class="feature-desc">Existing portfolio analysis & performance review to optimize returns and reduce risk.</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎓</div>
+        <div>
+          <div class="feature-title">Investment Education</div>
+          <div class="feature-desc">Tamil language investment courses & YouTube guidance for beginners and investors.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Our Services</div>
+      <h2>💼 What We Offer</h2>
+      <p>Universal Money Mart provides trusted financial guidance and investment solutions in Tamil.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon-wrap">📊</div>
+        <div class="service-title">Mutual Fund Investment</div>
+        <div class="service-desc">Goal-based mutual fund selection, SIP planning & long-term wealth creation.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">🎯</div>
+        <div class="service-title">Financial Planning</div>
+        <div class="service-desc">Personalized plans for retirement, education & life goals.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">📈</div>
+        <div class="service-title">Portfolio Review</div>
+        <div class="service-desc">Portfolio analysis & performance review to optimize returns.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">🎓</div>
+        <div class="service-title">Investment Education</div>
+        <div class="service-desc">Tamil language courses & YouTube guidance for beginners.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="courses" id="courses">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Online Courses – Tamil</div>
+      <h2>Master Investing in Tamil</h2>
+      <p>Structured, practical courses designed from basics to advanced — in simple Tamil.</p>
+    </div>
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-header">
+          <div class="course-badge">Online Course – Tamil</div>
+          <h3>Mutual Fund Master Course</h3>
+          <p>Mutual Fund basics irunthu advanced level varai, complete practical explanation Tamil la structured ah design pannina powerful course.</p>
+        </div>
+        <div class="course-body">
+          <ul class="course-list">
+            <li>SIP & Lump Sum investment strategies</li>
+            <li>Fund selection method (Large, Mid, Small Cap)</li>
+            <li>Risk management & portfolio building</li>
+            <li>Lifetime access + Easy explanation</li>
+          </ul>
+          <a href="https://universalmoneymart.com/mutual-fund-master-course-in-tamil/" target="_blank" class="btn-enroll">🚀 Enroll Now</a>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-header">
+          <div class="course-badge">Online Course – Tamil</div>
+          <h3>Stock Market Master Course</h3>
+          <p>Stock market basics irunthu advanced technical & long-term investing strategies varai, structured ah Tamil la design pannina complete practical course.</p>
+        </div>
+        <div class="course-body">
+          <ul class="course-list">
+            <li>Fundamental & Technical Analysis full clarity</li>
+            <li>Chart reading & entry-exit strategies</li>
+            <li>Risk management & capital protection methods</li>
+            <li>Long-term wealth building blueprint</li>
+          </ul>
+          <a href="https://universalmoneymart.com/stock-market-master-course-in-tamil/" target="_blank" class="btn-enroll">📈 Enroll Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section class="articles" id="articles">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Latest Articles</div>
+      <h2>📰 Insights & Guides</h2>
+      <p>Mutual Funds, Goal Planning & Retirement strategies in Tamil.</p>
+    </div>
+    <div class="articles-grid">
+      <div class="article-card">
+        <div class="article-img">🎯</div>
+        <div class="article-body">
+          <div class="article-tag">Goal Planning</div>
+          <h3>Goal Based Investment – Smart Wealth Planning</h3>
+          <div class="article-meta">By Vignesh Dhayalan | 2026</div>
+          <p>Child education, house purchase, retirement madhiri goals ku separate investment plan epdi set panna? Practical Tamil guide.</p>
+          <a href="https://universalmoneymart.com/goal-based-investing/" target="_blank" class="read-more">Read More →</a>
+        </div>
+      </div>
+      <div class="article-card">
+        <div class="article-img">📊</div>
+        <div class="article-body">
+          <div class="article-tag">SIP Guide</div>
+          <h3>SIP vs Lump Sum – Which is Better?</h3>
+          <div class="article-meta">By Vignesh Dhayalan | 2026</div>
+          <p>Long-term wealth creation ku SIP best ah? Illa lump sum invest panna better ah? Complete comparison guide.</p>
+          <a href="https://universalmoneymart.com/sip-vs-lumpsum/" target="_blank" class="read-more">Read More →</a>
+        </div>
+      </div>
+      <div class="article-card">
+        <div class="article-img">🏖️</div>
+        <div class="article-body">
+          <div class="article-tag">Retirement Planning</div>
+          <h3>Retirement Planning – Secure Your Future</h3>
+          <div class="article-meta">By Vignesh Dhayalan | 2026</div>
+          <p>Early ah retirement corpus build panna epdi start panna? Safe income stream create panna smart strategies.</p>
+          <a href="https://universalmoneymart.com/retirement-planning/" target="_blank" class="read-more">Read More →</a>
+        </div>
+      </div>
+    </div>
+    <div class="view-all-wrap">
+      <a href="https://universalmoneymart.com/blog/" target="_blank" class="btn-outline">View All Articles →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ONBOARDING -->
+<section class="onboarding">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label" style="color:rgba(200,150,62,0.8)">Get Started</div>
+      <h2>Our 10-Minute Promise</h2>
+      <p>Seamless digital onboarding. Simple. Secure. Fast.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-title">PAN Details</div>
+        <div class="step-desc">Enter your valid PAN information securely.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-title">KYC Verification</div>
+        <div class="step-desc">Complete Aadhaar based digital KYC instantly.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-title">Add Nominee</div>
+        <div class="step-desc">Secure your investments by assigning a nominee.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-title">Link Bank Account</div>
+        <div class="step-desc">Connect your bank securely for transactions.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-title">Address Details</div>
+        <div class="step-desc">Confirm your residential information.</div>
+      </div>
+    </div>
+    <p class="onboarding-note">✔ Keep PAN, Aadhaar & Bank details ready. Account activation may take up to 72 hours depending on KRA processing timelines.</p>
+    <div class="onboarding-cta">
+      <a href="https://wa.me/917200752628?text=Hi%20Vignesh%2C%20I%20want%20to%20Start%20Investing" target="_blank" class="btn-primary">Start Investing Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testimonial-inner">
+    <div class="quote-mark">"</div>
+    <p>Universal Money Mart provides the most simplified financial education I've ever come across. Vignesh Dhayalan's expert guidance helped me understand the basics of Mutual Funds and the Share Market with ease. Their focus on SEBI compliance and clear, beginner-friendly explanations makes them a trusted partner for any new investor.</p>
+    <div class="testimonial-author">Arvind Kumar</div>
+    <div class="testimonial-role">Long-term Investor</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">FAQ</div>
+      <h2>Frequently Asked Questions</h2>
+      <p>Find answers to commonly asked questions about our services and investment strategies.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          1. What types of financial education do you offer?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>At Universal Money Mart, we offer a wide range of learning resources tailored for every investor. Our curriculum includes beginner-friendly guides on Mutual Fund basics, advanced Share Market strategies, and step-by-step tutorials for essential Government & Banking services. Our goal is to empower you with the knowledge needed to navigate the financial world confidently.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          2. How do your investment guidance services work?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>As an AMFI Registered Mutual Fund Distributor (ARN-288927), we follow a goal-based approach. We help you understand your risk appetite and suggest suitable investment paths. Whether you're planning for retirement, your child's education, or wealth creation, we provide transparent and SEBI-compliant guidance to align your portfolio with your life goals.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          3. How can I get support for my investment queries?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>We offer direct and personalized support to all our visitors. You can reach out to us 24/7 via our dedicated WhatsApp button on the website (+91 72007 52628). Whether you have a doubt about a specific Mutual Fund scheme or need help with a PAN card correction, our team is here to provide clear and error-free assistance.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          4. Is the information provided on this site reliable?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Absolutely. Every article and video on Universal Money Mart is created with extreme care to ensure clarity and accuracy. We strictly adhere to SEBI and AMFI rules and regulations. Our content is specifically designed for beginners, using simple examples, tables, and charts to make complex financial topics easy to understand.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="videos" id="videos">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">YouTube</div>
+      <h2>🎥 Latest Videos by Vignesh Dhayalan</h2>
+      <p>Finance, Investment Tips & Travel Experiences – All in Tamil.</p>
+    </div>
+    <div class="videos-grid">
+      <div class="video-card">
+        <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA" target="_blank">
+          <div class="video-thumb">
+            <span class="video-tag">Mutual Funds</span>
+            <div class="play-btn"><div class="play-icon"></div></div>
+          </div>
+        </a>
+        <div class="video-body">
+          <h3>Best Mid Cap Mutual Funds 2026 🚀</h3>
+          <p>2026 la wealth build panna best mid cap mutual funds list, risk level & long-term growth potential clear analysis.</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA" target="_blank">
+          <div class="video-thumb">
+            <span class="video-tag">PF / EPF Guide</span>
+            <div class="play-btn"><div class="play-icon"></div></div>
+          </div>
+        </a>
+        <div class="video-body">
+          <h3>PF Kaasu 5 Minutes la Withdraw Panna Easy Way!</h3>
+          <p>UMANG app use panni EPF withdrawal full online process step-by-step Tamil explanation.</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA" target="_blank">
+          <div class="video-thumb">
+            <span class="video-tag">Travel Vlog</span>
+            <div class="play-btn"><div class="play-icon"></div></div>
+          </div>
+        </a>
+        <div class="video-body">
+          <h3>Bangalore to Rameshwaram by Train 🌊</h3>
+          <p>Dhanushkodi trip, Pamban Bridge experience & train journey complete travel vlog.</p>
+        </div>
+      </div>
+    </div>
+    <div class="subscribe-wrap">
+      <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA?sub_confirmation=1" target="_blank" class="btn-yt">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+        🔔 Subscribe for More Updates
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Contact Us</div>
+      <h2>📞 Get in Touch</h2>
+      <p>Mutual Fund investment related doubts irundha, direct ah contact pannunga. Namma team unga ku proper guidance kudukkum.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Let's Talk Finance</h2>
+        <p>Have questions about Mutual Funds or Government e-Services? Our team will get back to you with clear, simplified solutions.</p>
+        <div class="contact-methods">
+          <a href="mailto:service@universalmoneymart.com" class="contact-method">
+            <div class="cm-icon green">📧</div>
+            <div>
+              <div class="cm-label">Email</div>
+              <div class="cm-val">service@universalmoneymart.com</div>
+            </div>
+          </a>
+          <a href="https://wa.me/917200752628" target="_blank" class="contact-method">
+            <div class="cm-icon wa">💬</div>
+            <div>
+              <div class="cm-label">WhatsApp</div>
+              <div class="cm-val">+91 72007 52628</div>
+            </div>
+          </a>
+          <a href="https://universalmoneymart.com/contact/" target="_blank" class="contact-method">
+            <div class="cm-icon map">📍</div>
+            <div>
+              <div class="cm-label">Location</div>
+              <div class="cm-val">Bangalore, Karnataka</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>💬 Contact Us on WhatsApp</h3>
+        <p>Fill in your details and we'll connect you directly.</p>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="cf-name" placeholder="உங்கள் பெயர்"/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="cf-email" placeholder="your@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="tel" id="cf-phone" placeholder="+91 XXXXX XXXXX"/>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cf-msg" placeholder="உங்கள் doubts / questions இங்கே type பண்ணுங்க..."></textarea>
+        </div>
+        <button class="btn-wa" onclick="sendWA()">
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.2-.5 0-.2-.1-.4-.2-.5-.1-.1-.7-1.6-1-2.1-.3-.5-.5-.4-.7-.4h-.6c-.2 0-.5.1-.8.4C7.9 8 7.2 8.7 7.2 10s1 2.6 1.1 2.8c.1.2 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.5.6.2 1.2.1 1.6-.1.5-.3.8-.7 1-.9l.1-.4c0-.3-.1-.5-.5-.5z M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10c-1.8 0-3.4-.5-4.8-1.3L2 22l1.3-4.9A9.9 9.9 0 0 1 2 12 10 10 0 0 1 12 2z"/></svg>
+          🚀 Send via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <div class="disclaimer-inner">
+    <h4>⚠️ Disclaimer</h4>
+    <p>Mutual Fund investments are subject to market risks. Read all scheme related documents carefully. The information provided on Universal Money Mart is for educational purposes only. As an AMFI Registered Distributor (ARN-288927), we strictly follow AMFI and SEBI guidelines. Past performance is not an indicator of future results. Please consult with us directly before making any investment decisions.</p>
+  </div>
 </div>
-<div id="advisor-intro" class="section advisor-section">
-    <div class="container">
-        
-        <div class="advisor-flex">
-            <div class="advisor-proofs">
-                <img src="vigneshphoto.jpg" alt="Vignesh Dhayalan" class="advisor-photo">
-                <div class="proof-info">
-                    <span class="arn-number">ARN: 288927</span>
-                    <div class="proof-links">
-                        <a href="arn_card.jpg" target="_blank">View ARN Certificate</a>
-                        <a href="nism_certificate.jpg" target="_blank">View NISM Certificate</a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="advisor-details">
-                <h2 class="advisor-name">Vignesh Dhayalan</h2>
-                <p class="advisor-role">AMFI Registered: Mutual Fund Distributor</p>
-                <p class="advisor-bio">"Our mission is to simplify wealth creation for every Indian. Get personalized, unbiased advice tailored for your goals."</p>
-            </div>
-        </div> 
-        <div class="why-umm-full-width">
-            <h3 class="highlights-heading" style="text-align: center; color: var(--color-primary); margin-top: 40px; margin-bottom: 20px;">Why Choose Universal Money Mart?</h3>
-
-            <div class="why-umm-grid">
-                <div class="why-umm-card">
-                    <i class="fas fa-handshake" style="color: var(--color-success);"></i>
-                    <h4>Unbiased & Trustworthy</h4>
-                    <p>No product pushing. Advice is customized purely on your financial goals and risk profile.</p>
-                </div>
-                <div class="why-umm-card">
-                    <i class="fas fa-lock" style="color: var(--color-primary);"></i>
-                    <h4>Regulated & Secure</h4>
-                    <p>Verified AMFI Registered (ARN: 288927). We ensure full compliance and data security.</p>
-                </div>
-                <div class="why-umm-card">
-                    <i class="fas fa-chart-area" style="color: var(--color-secondary);"></i>
-                    <h4>Goal-Focused Planning</h4>
-                    <p>Every investment is mapped to a life goal (Retirement, Education), ensuring disciplined tracking.</p>
-                </div>
-                <div class="why-umm-card">
-                    <i class="fab fa-whatsapp" style="color: #25D366;"></i>
-                    <h4>Instant Advisor Access</h4>
-                    <p>Get quick resolutions and direct support from Vignesh Dhayalan via WhatsApp.</p>
-                </div>
-            </div>
-
-            <div class="whatsapp-contact-advisor" style="text-align: center; margin-top: 30px;">
-                 <a href="https://wa.me/917200752628" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Instant Connect on WhatsApp
-                 </a>
-            </div>
-        </div>
-
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Universal Money Mart</h3>
+      <p>Learn to invest smartly, grow your wealth, and master financial freedom with our easy-to-follow Tamil courses.</p>
+      <div class="footer-arn">ARN-288927 | AMFI Registered Mutual Fund Distributor</div>
     </div>
-</div>
-    <div id="services" class="section">
-        <div class="container">
-            <h2>Our Core Services</h2>
-            <p>We offer tailored solutions to meet every financial goal.</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3><i class="fas fa-bullseye" style="color: var(--color-secondary); margin-right: 10px;"></i> Goal-Oriented Investment</h3>
-                    <p>We build customized portfolios aligned with your major life goals (e.g., house, child's education, retirement) using disciplined investing strategies.</p>
-                </div>
-                <div class="service-card">
-                    <h3><i class="fas fa-file-invoice-dollar" style="color: var(--color-secondary); margin-right: 10px;"></i> Tax-Efficient Portfolio Structuring</h3>
-                    <p>Minimize your tax liabilities and maximize returns through intelligent tax planning and investment vehicle selection, legally saving your wealth.</p>
-                </div>
-                <div class="service-card">
-                    <h3><i class="fas fa-chart-line" style="color: var(--color-secondary); margin-right: 10px;"></i> Dedicated Portfolio Monitoring</h3>
-                    <p>Receive continuous, active management and rebalancing of your portfolio to ensure it stays on track, regardless of market volatility.</p>
-                </div>
-            </div>
-        </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#articles">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-    
-    <div id="portfolio" class="section" style="background-color: var(--color-bg-light);">
-        <div class="container">
-            <h2>Personal Portfolio Success</h2>
-            <p style="max-width: 800px; margin: 0 auto;">We don't just invest; we strategize. Our focus is on achieving risk-adjusted returns through disciplined asset allocation tailored to your unique financial milestones. **We manage your money like it's our own.**</p>
-            <a href="dashboard.html" class="small-cta contact-cta" style="margin-top: 30px; display: inline-block;">View Our Portfolio Methodology →</a>
-        </div>
+    <div class="footer-col">
+      <h4>Courses</h4>
+      <ul>
+        <li><a href="https://universalmoneymart.com/mutual-fund-master-course-in-tamil/" target="_blank">Mutual Fund Course</a></li>
+        <li><a href="https://universalmoneymart.com/stock-market-master-course-in-tamil/" target="_blank">Stock Market Course</a></li>
+        <li><a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA" target="_blank">YouTube Channel</a></li>
+      </ul>
     </div>
-
-    <div id="testimonials" class="section" style="padding-top: 50px;">
-        <div class="container">
-            <h2>What Our Investors Say</h2>
-            <p>Real success stories from our trusted clients. (வாடிக்கையாளர்களின் வெற்றிக் கதைகள்)</p>
-
-            <div class="services-grid">
-                
-                <div class="service-card">
-                    <i class="fas fa-quote-left" style="color: #ccc; font-size: 1.5em; margin-bottom: 10px;"></i>
-                    <div class="star-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p style="font-style: italic;">"Vignesh's guidance helped me start my SIP planning for my child's education. The strategy was clear and easy to follow. Highly recommend Universal Money Mart!"</p>
-                    <h4 style="margin-top: 15px; color: var(--color-primary); font-weight: 700;">- Rahul S. (IT Professional)</h4>
-                </div>
-
-                <div class="service-card">
-                    <i class="fas fa-quote-left" style="color: #ccc; font-size: 1.5em; margin-bottom: 10px;"></i>
-                    <div class="star-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p style="font-style: italic;">"I was confused about tax saving. Vignesh showed me the best options under ELSS and helped me save significant tax this year. Excellent personalized service."</p>
-                    <h4 style="margin-top: 15px; color: var(--color-primary); font-weight: 700;">- Priya V. (Business Owner)</h4>
-                </div>
-            </div>
-            <a href="#contact-professional" style="margin-top: 30px; display: inline-block; color: var(--color-primary); font-weight: 600;">Share Your Success Story →</a>
-        </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="https://universalmoneymart.com/privacy-policy" target="_blank">Privacy Policy</a></li>
+        <li><a href="https://universalmoneymart.com/terms-conditions" target="_blank">Terms & Conditions</a></li>
+        <li><a href="https://universalmoneymart.com/disclaimer" target="_blank">Disclaimer</a></li>
+        <li><a href="https://universalmoneymart.com/refund-policy" target="_blank">Refund Policy</a></li>
+      </ul>
     </div>
-
-    <div id="blog" class="section" style="background-color: var(--color-bg-light);">
-    <div class="container">
-        <h2>Latest Market Insights & Learning</h2>
-        <p style="font-size: 1.1em; max-width: 800px; margin: 10px auto 40px;">
-            Stay updated with our expert articles and video tutorials on market trends, taxation, and personal finance tips.
-        </p>
-        
-        <div style="text-align: center; margin-bottom: 50px;">
-            <h3 style="color: var(--color-primary); margin-bottom: 25px;">Featured Video Tutorials (Tamil)</h3>
-            <div class="video-grid">
-                
-                <div>
-                    <div class="video-responsive">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dZQ35Rac40M?modestbranding=1" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <p style="font-size: 0.95em; margin-top: 15px; font-weight: 600;">Mutual Funds என்றால் என்ன? | Beginner Guide</p>
-                </div>
-
-                <div>
-                    <div class="video-responsive">
-                        <iframe 
-                            src="https://www.youtube.com/embed/V5VxBfEBWAo?modestbranding=1" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <p style="font-size: 0.95em; margin-top: 15px; font-weight: 600;">Mutual Fund Types Explained | Equity, Debt, Hybrid</p>
-                </div>
-                
-                <div>
-                    <div class="video-responsive">
-                        <iframe 
-                            src="https://www.youtube.com/embed/LfdPw5FtvHY?modestbranding=1" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <p style="font-size: 0.95em; margin-top: 15px; font-weight: 600;">SIP என்ன? | Mutual Fund SIP Explained in Tamil</p>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-bottom: 50px; display: flex; justify-content: center; gap: 20px;">
-            <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA?sub_confirmation=1" target="_blank" class="cta-subscribe">
-                ▶️ Subscribe Now
-            </a>
-            <a href="videos.html" class="cta-view-all">
-                View All Video Library →
-            </a>
-        </div>
-        
-        <div class="blog-cards-flex">
-            <div class="blog-card">
-                <h3>2025 Tax Planning Guide</h3>
-                <p style="font-size: 0.9em; color: #666;">How to legally optimize your portfolio for maximum tax savings this fiscal year.</p>
-                <a href="blog_tax.html" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">Read More →</a>
-            </div>
-            <div class="blog-card">
-                <h3>Market Volatility Decoded</h3>
-                <p style="font-size: 0.9em; color: #666;">Understand market movements and how to hedge your investments against risks.</p>
-                <a href="blog_market.html" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">Read More →</a>
-            </div>
-            <div class="blog-card">
-                <h3>Retirement Planning Basics</h3>
-                <p style="font-size: 0.9em; color: #666;">A comprehensive guide to building a corpus that secures your life after work.</p>
-                <a href="blog_retirement.html" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">Read More →</a>
-            </div>
-        </div>
-        
+  </div>
+  <div class="footer-bottom">
+    <p>Copyright © 2026 Universal Money Mart. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="https://universalmoneymart.com/privacy-policy" target="_blank">Privacy</a>
+      <a href="https://universalmoneymart.com/terms-conditions" target="_blank">Terms</a>
+      <a href="https://universalmoneymart.com/disclaimer" target="_blank">Disclaimer</a>
     </div>
-    </div>
-
-
-    <div id="contact-professional" class="section">
-        <div class="container">
-            <h2 style="color: var(--color-primary); margin-bottom: 50px;">Connect with an AMFI Registered Advisor</h2>
-
-            <div class="contact-flex">
-                
-                <div class="contact-form-area">
-                    <h2>Book a Free Consultation</h2>
-                    <p style="color: #eee; font-size: 0.9em; margin-bottom: 30px;">Let us know your query and we'll connect you with Vignesh Dhayalan within 24 hours.</p>
-                    
-                    <form action="https://formspree.io/f/xqawebje" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
-                        <input type="text" name="Full Name" placeholder="Your Full Name" required>
-                        <input type="email" name="Email" placeholder="Your Email Address" required>
-                        <input type="tel" name="Phone Number" placeholder="Your Phone Number (e.g., 91xxxxxxxxxx)">
-                        <textarea name="Financial Goals" placeholder="Tell us about your financial goals (e.g., Retirement, Tax Saving, Child Education)" rows="4"></textarea>
-                        <button type="submit">Send Consultation Request</button>
-                    </form>
-                </div>
-
-                <div class="contact-info-area">
-                    <h3>Contact Details</h3>
-                    
-                    <div class="detail-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <p>+91 72007 52628 (Call or WhatsApp)</p>
-                    </div>
-
-                    <div class="detail-item">
-                        <i class="fas fa-envelope"></i>
-                        <p>universalmoneymart@gmail.com</p>
-                    </div>
-
-                    <div class="detail-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Tiruvannamalai, Tamil Nadu, India</p>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <i class="fas fa-clock"></i>
-                        <p>Mon - Sat: 10:00 AM to 6:00 PM IST</p>
-                    </div>
-
-                    <h3 style="margin-top: 40px;">Follow Us</h3>
-                    <div style="display: flex; gap: 20px;">
-                        <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA?sub_confirmation=1" target="_blank" style="color: #FF0000; font-size: 2em;"><i class="fab fa-youtube"></i></a>
-                        <a href="https://t.me/vicky_dhayalan" target="_blank" style="color: #0088CC; font-size: 2em;"><i class="fab fa-telegram-plane"></i></a>
-                        <a href="https://www.instagram.com/vigneshdhayalanofficial?igsh=MW12NWE1c2hjdTh4MA==" target="_blank" style="color: #C13584; font-size: 2em;"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <footer>
-    <div class="container footer-content"> 
-        
-        <p class="footer-copyright">&copy; 2025 Universal Money Mart. All rights reserved.</p>
-        
-        <div class="footer-links-group">
-            <a href="privacy.html">Privacy Policy</a>
-            <span>|</span>
-            <a href="terms.html">Terms & Conditions</a>
-            <span>|</span>
-            <a href="disclaimer.html">Disclaimer</a>
-        </div>
-        
-        <div class="footer-disclosure">
-            <p class="disclosure-heading">ARN/RIA Disclosure:</p>
-            <p class="disclosure-text">Investments in mutual funds are subject to market risks. Please read the offer document carefully before investing.</p>
-        </div>
-        
-    </div>
+  </div>
 </footer>
 
-    <a href="https://wa.me/917200752628" target="_blank" class="whatsapp-float">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/917200752628?text=Hi%20Vignesh%2C%20I%20saw%20your%20website%20Universal%20Money%20Mart.%20I%20want%20to%20Start%20Investing%20and%20need%20your%20expert%20guidance." target="_blank" class="float-wa" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.2-.5 0-.2-.1-.4-.2-.5-.1-.1-.7-1.6-1-2.1-.3-.5-.5-.4-.7-.4h-.6c-.2 0-.5.1-.8.4C7.9 8 7.2 8.7 7.2 10s1 2.6 1.1 2.8c.1.2 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.5.6.2 1.2.1 1.6-.1.5-.3.8-.7 1-.9l.1-.4c0-.3-.1-.5-.5-.5z M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10c-1.8 0-3.4-.5-4.8-1.3L2 22l1.3-4.9A9.9 9.9 0 0 1 2 12 10 10 0 0 1 12 2z"/></svg>
+</a>
 
+<!-- SCROLL TO TOP -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-     <script src="script.js"></script> 
+<script>
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.faq-answer').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+function sendWA() {
+  const name = document.getElementById('cf-name').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const msg = document.getElementById('cf-msg').value.trim();
+  const text = encodeURIComponent(
+    'Hi Vignesh,\n\nName: ' + (name||'Not provided') +
+    '\nPhone: ' + (phone||'Not provided') +
+    '\nMessage: ' + (msg||'I want to know more about investments.')
+  );
+  window.open('https://wa.me/917200752628?text=' + text, '_blank');
+}
+
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTop');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+</script>
 </body>
 </html>
