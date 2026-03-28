@@ -4,17 +4,15 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>How Mutual Fund Works — NAV, Units & Fund Manager Explained in Tamil | Universal Money Mart</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814"
-crossorigin="anonymous"></script>
-<meta name="description" content="Mutual Fund எப்படி வேலை செய்யுது? NAV என்றால் என்ன? Units எப்படி கிடைக்கும்? Fund Manager யாரு? — Complete Tamil explanation with real examples. By Vignesh Dhayalan ARN-288927."/>
-<meta name="keywords" content="how mutual fund works tamil, NAV explained tamil, mutual fund units explained, fund manager explained, what is NAV, mutual fund mechanism tamil"/>
-<meta property="og:title" content="How Mutual Fund Works — NAV, Units & Fund Manager | Tamil Guide"/>
-<meta property="og:description" content="NAV என்றால் என்ன? Units எப்படி calculate ஆகும்? Fund Manager என்ன பண்றாரு? — Step-by-step Tamil explanation."/>
+<meta name="description" content="Mutual Fund எப்படி வேலை செய்யுது? NAV என்றால் என்ன? Units எப்படி கிடைக்கும்? Fund Manager யாரு? Complete Tamil explanation with real examples. By Vignesh Dhayalan ARN-288927."/>
+<meta name="keywords" content="how mutual fund works tamil, NAV explained tamil, mutual fund units explained, fund manager explained, what is NAV, ARN 288927"/>
+<meta property="og:title" content="How Mutual Fund Works — NAV, Units and Fund Manager Tamil Guide"/>
 <meta property="og:type" content="article"/>
 <link rel="canonical" href="https://universalmoneymart.com/how-mutual-fund-works/"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814" crossorigin="anonymous"></script>
 <style>
 :root{
   --gold:#C8963E;--gold-light:#F0C97A;--gold-pale:#FDF6E9;
@@ -24,80 +22,83 @@ crossorigin="anonymous"></script>
   --text:#1A1A1A;--text2:#4A5568;--text3:#718096;
   --white:#FFFFFF;--off:#FAFAF8;--border:#E8E4DC;
   --radius:12px;--radius-lg:20px;
-  --shadow:0 4px 24px rgba(0,0,0,0.07);
-  --shadow-lg:0 8px 48px rgba(0,0,0,0.11);
-  --col-w:680px;
+  --shadow:0 4px 24px rgba(0,0,0,0.08);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);line-height:1.75;overflow-x:hidden;font-size:16px}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);line-height:1.75;overflow-x:hidden;font-size:17px}
 h1,h2,h3,h4{font-family:'Lora',serif;line-height:1.3}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;height:auto;display:block}
 strong{font-weight:600}
 
-/* PROGRESS BAR */
-#progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--green);z-index:500;transition:width .1s linear;width:0%}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--green);z-index:9999;transition:width .1s linear;width:0%}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+nav{position:sticky;top:0;z-index:500;background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;max-width:1200px;margin:0 auto}
-.logo{font-family:'Lora',serif;font-size:19px;font-weight:700;color:var(--dark);display:flex;align-items:center;gap:8px}
+.logo{font-family:'Lora',serif;font-size:19px;font-weight:700;color:var(--dark);display:flex;align-items:center;gap:8px;flex-shrink:0}
 .logo em{color:var(--gold);font-style:normal}
 .logo-arn{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;background:var(--gold-pale);color:var(--gold);border:1px solid rgba(200,150,62,.35);padding:2px 9px;border-radius:20px}
 .nav-links{display:flex;align-items:center;gap:22px;list-style:none}
-.nav-links a{font-size:13.5px;font-weight:500;color:var(--text2);transition:color .2s}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text2);transition:color .2s}
 .nav-links a:hover{color:var(--green)}
-.nav-cta{background:var(--green)!important;color:#fff!important;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600}
+.nav-cta{background:var(--green)!important;color:#fff!important;padding:9px 18px;border-radius:8px;font-size:14px;font-weight:600}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;display:block}
-@media(max-width:640px){.nav-links{display:none}.hamburger{display:flex}}
-.nav-links.open{display:flex;flex-direction:column;position:absolute;top:52px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px;gap:14px;z-index:300}
 
 /* BREADCRUMB */
-.breadcrumb{max-width:var(--col-w);margin:20px auto;padding:0 24px;font-size:13px;color:var(--text3);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.breadcrumb{max-width:900px;margin:20px auto;padding:0 24px;font-size:13px;color:var(--text3);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .breadcrumb a{color:var(--green)}
-.breadcrumb-sep{color:var(--border)}
 
 /* ARTICLE HERO */
-.article-hero{max-width:var(--col-w);margin:0 auto;padding:0 24px 40px}
+.article-hero{max-width:900px;margin:0 auto;padding:0 24px 36px}
 .article-category{display:inline-flex;align-items:center;gap:7px;background:var(--green-pale);color:var(--green);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 13px;border-radius:20px;margin-bottom:18px}
 .article-hero h1{font-size:clamp(26px,4vw,42px);font-weight:700;color:var(--dark);margin-bottom:18px;line-height:1.18}
 .article-hero h1 span{color:var(--green)}
-.article-hero .lead{font-size:17px;color:var(--text2);line-height:1.8;margin-bottom:24px;font-family:'Lora',serif;font-style:italic}
-.article-meta-row{display:flex;flex-wrap:wrap;gap:20px;padding:16px 20px;background:var(--off);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:32px}
+.article-hero .lead{font-size:19px;color:var(--text2);line-height:1.8;margin-bottom:24px;font-family:'Lora',serif;font-style:italic}
+.article-meta-row{display:flex;flex-wrap:wrap;gap:16px;padding:16px 20px;background:var(--off);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:32px}
 .meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text3)}
 .meta-item strong{color:var(--text);font-weight:600}
 .meta-dot{width:4px;height:4px;background:var(--border);border-radius:50%}
 
 /* HERO BANNER */
 .hero-banner{background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 55%,var(--dark3) 100%);margin:0 0 40px;padding:48px 24px;color:var(--white)}
-.hero-banner-inner{max-width:var(--col-w);margin:0 auto}
-.hb-title{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px}
-.hb-formula{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:28px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);margin-bottom:24px}
+.hero-banner-inner{max-width:900px;margin:0 auto}
+.hb-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px}
+.hb-formula{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:28px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);margin-bottom:20px}
 .hb-formula-part{text-align:center}
-.hb-formula-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--gold-light)}
+.hb-formula-val{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--gold-light)}
 .hb-formula-label{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px}
-.hb-formula-op{font-size:28px;font-weight:300;color:rgba(255,255,255,.3);align-self:center}
+.hb-formula-op{font-size:26px;font-weight:300;color:rgba(255,255,255,.3);align-self:center}
 .hb-desc{font-size:14px;color:rgba(255,255,255,.6);text-align:center;line-height:1.7}
 
-/* TWO-COLUMN LAYOUT */
-.two-col{display:grid;grid-template-columns:1fr 280px;gap:48px;max-width:1060px;margin:0 auto;padding:0 24px;align-items:start}
-@media(max-width:900px){.two-col{grid-template-columns:1fr}.sidebar{display:none}}
+/* MOBILE TOC */
+.mobile-toc{display:none;background:var(--off);border-bottom:1px solid var(--border);padding:12px 20px;position:sticky;top:52px;z-index:300}
+.mobile-toc-btn{width:100%;background:none;border:1px solid var(--border);border-radius:8px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--text);cursor:pointer}
+.mobile-toc-dropdown{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-top:8px;overflow:hidden}
+.mobile-toc-dropdown.open{display:block}
+.mobile-toc-dropdown a{display:flex;align-items:center;gap:10px;padding:12px 16px;font-size:14px;color:var(--text2);border-bottom:1px solid var(--border);transition:background .15s}
+.mobile-toc-dropdown a:last-child{border-bottom:none}
+.mobile-toc-dropdown a:hover{background:var(--green-pale);color:var(--green)}
+.mobile-toc-dropdown a span{font-size:11px;font-weight:700;color:var(--text3);flex-shrink:0}
 
-/* SIDEBAR */
-.sidebar{position:sticky;top:80px;display:flex;flex-direction:column;gap:20px}
-.sidebar-box{background:var(--off);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
-.sb-title{font-size:12px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;font-family:'DM Sans',sans-serif}
+/* PAGE LAYOUT */
+.page-layout{display:grid;grid-template-columns:220px 1fr;gap:36px;max-width:1120px;margin:0 auto;padding:0 24px 60px;align-items:start}
+
+/* TOC SIDEBAR */
+.toc-sidebar{position:sticky;top:76px;max-height:calc(100vh - 100px);overflow-y:auto;scrollbar-width:thin}
+.toc-sidebar::-webkit-scrollbar{width:3px}
+.toc-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.toc-box{background:var(--off);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 16px}
+.toc-title{font-size:11px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;font-family:'DM Sans',sans-serif}
 .toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
-.toc-list a{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text2);padding:7px 10px;border-radius:8px;border-left:2px solid transparent;transition:all .15s;line-height:1.4}
-.toc-list a:hover,.toc-list a.active{background:rgba(29,107,68,.07);color:var(--green);border-left-color:var(--green)}
+.toc-list a{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;color:var(--text2);padding:6px 9px;border-radius:7px;border-left:2px solid transparent;transition:all .15s;line-height:1.4}
+.toc-list a:hover,.toc-list a.active{background:rgba(29,107,68,.08);color:var(--green);border-left-color:var(--green)}
 .toc-list a span{font-size:10px;font-weight:700;color:var(--text3);margin-top:2px;flex-shrink:0}
-.sb-cta{background:var(--dark);border-radius:var(--radius-lg);padding:20px;color:var(--white);text-align:center}
-.sb-cta h4{font-size:16px;margin-bottom:8px}
-.sb-cta p{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:16px;line-height:1.6}
-.btn-wa-sm{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;padding:11px;border-radius:9px;font-size:13px;font-weight:600;transition:background .2s}
-.btn-wa-sm:hover{background:#1ebe5a}
+.toc-cta{margin-top:16px;background:var(--green);color:var(--white);text-align:center;padding:11px;border-radius:9px;font-size:13px;font-weight:600;display:block;transition:background .2s}
+.toc-cta:hover{background:var(--green-light)}
+.sidebar-box{background:var(--off);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 16px;margin-top:16px}
+.sb-title{font-size:11px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;font-family:'DM Sans',sans-serif}
 .related-list{display:flex;flex-direction:column;gap:10px}
 .related-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;padding:10px;border-radius:8px;border:1px solid var(--border);transition:border-color .2s}
 .related-item:hover{border-color:var(--green)}
@@ -107,58 +108,69 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.97);backdrop
 
 /* ARTICLE BODY */
 .article-body{min-width:0}
-.section-block{margin-bottom:52px}
+.section-block{margin-bottom:56px}
 .section-block:last-child{margin-bottom:0}
 .section-anchor{display:block;height:90px;margin-top:-90px;visibility:hidden;pointer-events:none}
-.sh{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.sh-num{width:34px;height:34px;border-radius:50%;background:var(--dark);color:var(--gold-light);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Sans',sans-serif}
-.sh h2{font-size:clamp(21px,2.8vw,29px);font-weight:700;color:var(--dark)}
+.sh{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.sh-num{width:36px;height:36px;border-radius:50%;background:var(--dark);color:var(--gold-light);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'DM Sans',sans-serif}
+.sh h2{font-size:clamp(22px,2.6vw,30px);font-weight:700;color:var(--dark)}
 
 /* PROSE */
-.prose p{font-size:16px;color:var(--text2);margin-bottom:18px;line-height:1.8}
+.prose p{font-size:17px;color:var(--text2);margin-bottom:20px;line-height:1.85}
 .prose p:last-child{margin-bottom:0}
 .prose strong{color:var(--text)}
 
-/* TAMIL CALLOUT */
-.tamil-callout{background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin:24px 0;font-size:15px;color:var(--text);line-height:1.8}
-.tamil-callout .tc-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.tamil-callout p{font-size:15px;color:var(--text);margin-bottom:10px}
+/* CALLOUTS */
+.tamil-callout{background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin:28px 0;line-height:1.8}
+.tamil-callout .tc-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.tamil-callout p{font-size:16px;color:var(--text);margin-bottom:10px}
 .tamil-callout p:last-child{margin-bottom:0}
-
-/* KEY POINT */
 .key-point{background:var(--green-pale);border:1px solid rgba(29,107,68,.2);border-radius:var(--radius);padding:18px 22px;margin:24px 0;display:flex;gap:14px;align-items:flex-start}
 .kp-icon{font-size:22px;flex-shrink:0;margin-top:2px}
-.kp-text{font-size:15px;color:var(--text2);line-height:1.75}
+.kp-text{font-size:16px;color:var(--text2);line-height:1.8}
 .kp-text strong{color:var(--green)}
-
-/* WARNING */
 .warning-box{background:#FFFBEB;border:1px solid #FCD34D;border-left:4px solid #F59E0B;border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin:24px 0}
-.warning-box p{font-size:14px;color:#78350F;line-height:1.75;margin:0}
+.warning-box p{font-size:15px;color:#78350F;line-height:1.8;margin:0}
 
-/* INFO CARDS */
-.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
-.cards-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0}
-@media(max-width:580px){.cards-3,.cards-2{grid-template-columns:1fr}}
-.icard{background:var(--off);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:box-shadow .2s,transform .2s}
+/* CARDS */
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}
+.cards-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:28px 0}
+.icard{background:var(--off);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:box-shadow .2s,transform .2s}
 .icard:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
-.icard-icon{font-size:28px;margin-bottom:12px}
-.icard-title{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:6px;font-family:'Lora',serif}
-.icard-desc{font-size:13px;color:var(--text3);line-height:1.65}
+.icard-icon{font-size:30px;margin-bottom:12px}
+.icard-title{font-size:16px;font-weight:600;color:var(--dark);margin-bottom:8px;font-family:'Lora',serif}
+.icard-desc{font-size:14px;color:var(--text3);line-height:1.7}
 .icard.accent{border-top:3px solid var(--green)}
 .icard.accent-gold{border-top:3px solid var(--gold)}
 .icard.accent-blue{border-top:3px solid var(--blue)}
 
-/* CALCULATION BOX */
+/* STORY BOX */
+.story-box{background:var(--dark);color:var(--white);border-radius:var(--radius-lg);padding:30px 34px;margin:28px 0}
+.story-label{font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.story-box h3{font-size:22px;color:var(--white);margin-bottom:16px}
+.story-box p{font-size:16px;color:rgba(255,255,255,.75);line-height:1.85;margin-bottom:14px}
+.story-box p:last-child{margin-bottom:0}
+.hl{color:var(--gold-light);font-weight:600}
+.story-moral{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);font-size:15px;color:rgba(255,255,255,.55);font-style:italic}
+
+/* PROCESS FLOW */
+.process-flow{display:flex;flex-direction:column;gap:0;margin:28px 0;position:relative}
+.process-flow::before{content:'';position:absolute;left:20px;top:20px;bottom:20px;width:1px;background:var(--border)}
+.pf-step{display:flex;gap:20px;align-items:flex-start;padding-bottom:30px;position:relative}
+.pf-step:last-child{padding-bottom:0}
+.pf-num{width:40px;height:40px;border-radius:50%;background:var(--dark);color:var(--gold-light);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;border:2px solid var(--white);font-family:'DM Sans',sans-serif}
+.pf-content h4{font-size:17px;font-weight:600;color:var(--dark);margin-bottom:8px;font-family:'Lora',serif}
+.pf-content p{font-size:15px;color:var(--text2);line-height:1.8;margin:0}
+.pf-example{font-size:14px;color:var(--text3);background:var(--off);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-top:10px;line-height:1.75}
+
+/* CALCULATOR */
 .calc-box{background:var(--dark);border-radius:var(--radius-lg);padding:32px;margin:28px 0;color:var(--white)}
 .calc-box h3{font-size:20px;color:var(--white);margin-bottom:6px}
-.calc-box .calc-sub{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:24px}
+.calc-sub{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:24px}
 .calc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
-@media(max-width:580px){.calc-row{grid-template-columns:1fr}}
 .calc-field label{display:block;font-size:11px;color:rgba(255,255,255,.5);margin-bottom:8px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.calc-field input[type=range]{width:100%;accent-color:var(--gold)}
 .calc-field input[type=number]{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 14px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;outline:none}
 .calc-field input[type=number]:focus{border-color:var(--gold-light)}
-.calc-val-display{font-size:20px;font-weight:700;color:var(--gold-light);margin-top:6px;font-family:'Lora',serif}
 .calc-result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .calc-stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px 16px}
 .calc-stat-label{font-size:11px;color:rgba(255,255,255,.45);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
@@ -166,11 +178,11 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.97);backdrop
 .cv-blue{color:#85B7EB}
 .cv-gold{color:var(--gold-light)}
 .cv-teal{color:#9FE1CB}
-.calc-formula-display{margin-top:20px;padding:14px 18px;background:rgba(255,255,255,.05);border-radius:10px;font-size:14px;color:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif;line-height:1.8}
+.calc-formula-display{margin-top:20px;padding:14px 18px;background:rgba(255,255,255,.05);border-radius:10px;font-size:14px;color:rgba(255,255,255,.7);line-height:1.8}
 
 /* NAV JOURNEY TABLE */
 .nav-journey{margin:28px 0;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-.nj-header{background:var(--dark);padding:16px 20px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.nj-header{background:var(--dark);padding:14px 20px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .nj-header span{font-size:12px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;text-align:center}
 .nj-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:14px 20px;border-bottom:1px solid var(--border);transition:background .15s}
 .nj-row:last-child{border-bottom:none}
@@ -181,118 +193,130 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.97);backdrop
 .nj-cell.red{color:#c0392b;font-weight:600}
 .nj-cell.gold{color:var(--gold);font-weight:600}
 
-/* STORY BOX */
-.story-box{background:var(--dark);color:var(--white);border-radius:var(--radius-lg);padding:28px 32px;margin:28px 0}
-.story-label{font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
-.story-box h3{font-size:20px;color:var(--white);margin-bottom:14px}
-.story-box p{font-size:15px;color:rgba(255,255,255,.72);line-height:1.8;margin-bottom:12px}
-.story-box p:last-child{margin-bottom:0}
-.story-box .hl{color:var(--gold-light);font-weight:600}
-.story-moral{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);font-size:14px;color:rgba(255,255,255,.5);font-style:italic}
+/* STEPPER */
+.stepper{margin:28px 0;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.stepper-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--off)}
+.stepper-tab{flex:1;padding:14px 6px;font-size:12.5px;font-weight:600;color:var(--text3);cursor:pointer;text-align:center;border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;line-height:1.3}
+.stepper-tab:hover{color:var(--green);background:rgba(29,107,68,.04)}
+.stepper-tab.active{color:var(--green);border-bottom-color:var(--green);background:var(--white)}
+.stepper-panel{display:none;padding:28px}
+.stepper-panel.active{display:block}
+.stepper-panel h4{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:12px;font-family:'Lora',serif}
+.stepper-panel p{font-size:16px;color:var(--text2);line-height:1.85;margin-bottom:14px}
+.stepper-panel p:last-child{margin-bottom:0}
+.panel-example{background:var(--dark);color:var(--white);border-radius:var(--radius);padding:16px 20px;margin-top:14px;font-size:14px;color:rgba(255,255,255,.8);line-height:1.75}
+.panel-example span{color:var(--gold-light);font-weight:600}
 
-/* PROCESS FLOW */
-.process-flow{display:flex;flex-direction:column;gap:0;margin:28px 0;position:relative}
-.process-flow::before{content:'';position:absolute;left:20px;top:20px;bottom:20px;width:1px;background:var(--border)}
-.pf-step{display:flex;gap:18px;align-items:flex-start;padding-bottom:28px;position:relative}
-.pf-step:last-child{padding-bottom:0}
-.pf-num{width:40px;height:40px;border-radius:50%;background:var(--dark);color:var(--gold-light);font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;border:2px solid var(--white);font-family:'DM Sans',sans-serif}
-.pf-content h4{font-size:16px;font-weight:600;color:var(--dark);margin-bottom:6px;font-family:'Lora',serif}
-.pf-content p{font-size:14px;color:var(--text2);line-height:1.75;margin:0}
-.pf-example{font-size:13px;color:var(--text3);background:var(--off);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-top:10px}
-
-/* COMPARISON TABLE */
+/* TABLE */
 .table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}
-.data-table{width:100%;border-collapse:collapse;font-size:14px}
-.data-table thead th{background:var(--dark);color:var(--white);padding:12px 16px;text-align:left;font-weight:600;font-size:13px}
-.data-table tbody td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text2)}
+.data-table{width:100%;border-collapse:collapse;font-size:15px}
+.data-table thead th{background:var(--dark);color:var(--white);padding:13px 16px;text-align:left;font-weight:600;font-size:13px}
+.data-table tbody td{padding:13px 16px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text2)}
 .data-table tbody tr:hover td{background:var(--off)}
 .data-table tbody tr:last-child td{border-bottom:none}
 .td-green{color:var(--green);font-weight:600}
 .td-gold{color:var(--gold);font-weight:600}
 .td-red{color:#c0392b;font-weight:600}
 
-/* STEPPER / INTERACTIVE */
-.stepper{margin:28px 0;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-.stepper-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--off)}
-.stepper-tab{flex:1;padding:14px 8px;font-size:13px;font-weight:600;color:var(--text3);cursor:pointer;text-align:center;border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif}
-.stepper-tab:hover{color:var(--green);background:rgba(29,107,68,.04)}
-.stepper-tab.active{color:var(--green);border-bottom-color:var(--green);background:var(--white)}
-.stepper-panel{display:none;padding:28px}
-.stepper-panel.active{display:block}
-.stepper-panel h4{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:12px;font-family:'Lora',serif}
-.stepper-panel p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:14px}
-.stepper-panel p:last-child{margin-bottom:0}
-.panel-example{background:var(--dark);color:var(--white);border-radius:var(--radius);padding:16px 20px;margin-top:14px;font-size:14px;color:rgba(255,255,255,.8);line-height:1.75}
-.panel-example span{color:var(--gold-light);font-weight:600}
+/* PULL QUOTE */
+.pull-quote{border-left:4px solid var(--green);padding:18px 26px;margin:32px 0;background:var(--off)}
+.pull-quote p{font-family:'Lora',serif;font-size:20px;font-style:italic;color:var(--dark);line-height:1.65;margin:0}
+.pull-quote cite{display:block;font-size:14px;color:var(--text3);margin-top:12px;font-style:normal}
 
 /* FAQ */
 .faq-section{margin:28px 0}
 .faq-item{border-bottom:1px solid var(--border)}
 .faq-item:first-child{border-top:1px solid var(--border)}
-.faq-q{width:100%;background:none;border:none;cursor:pointer;padding:18px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;text-align:left;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:var(--text);line-height:1.4}
-.faq-icon{font-size:20px;color:var(--green);transition:transform .3s;flex-shrink:0}
+.faq-q{width:100%;background:none;border:none;cursor:pointer;padding:20px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;text-align:left;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:600;color:var(--text);line-height:1.4}
+.faq-icon{font-size:22px;color:var(--green);transition:transform .3s;flex-shrink:0}
 .faq-item.open .faq-icon{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.faq-a-inner{font-size:14.5px;color:var(--text2);line-height:1.8;padding-bottom:18px}
-.faq-a-inner p{margin-bottom:12px}
+.faq-a-inner{font-size:16px;color:var(--text2);line-height:1.85;padding-bottom:20px}
+.faq-a-inner p{margin-bottom:14px}
 .faq-a-inner p:last-child{margin-bottom:0}
 
 /* INLINE CTA */
-.inline-cta{background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 100%);border-radius:var(--radius-lg);padding:32px 36px;margin:36px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.inline-cta h3{font-size:22px;color:var(--white);margin-bottom:8px}
-.inline-cta p{font-size:14px;color:rgba(255,255,255,.6);max-width:440px;margin:0}
-.btn-wa-lg{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 26px;border-radius:10px;font-weight:600;font-size:15px;transition:background .2s;white-space:nowrap}
+.inline-cta{background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 100%);border-radius:var(--radius-lg);padding:34px 38px;margin:40px 0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.inline-cta h3{font-size:23px;color:var(--white);margin-bottom:8px}
+.inline-cta p{font-size:15px;color:rgba(255,255,255,.6);max-width:440px;margin:0}
+.btn-wa-lg{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 28px;border-radius:10px;font-weight:600;font-size:16px;transition:background .2s;white-space:nowrap}
 .btn-wa-lg:hover{background:#1ebe5a}
-@media(max-width:580px){.inline-cta{flex-direction:column;padding:24px}}
 
-/* PULL QUOTE */
-.pull-quote{border-left:4px solid var(--green);padding:16px 24px;margin:32px 0;background:var(--off)}
-.pull-quote p{font-family:'Lora',serif;font-size:18px;font-style:italic;color:var(--dark);line-height:1.65;margin:0}
-.pull-quote cite{display:block;font-size:13px;color:var(--text3);margin-top:10px;font-style:normal}
-
-/* AUTHOR BOX */
-.author-box{background:var(--off);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;margin:40px 0;display:flex;gap:20px;align-items:flex-start}
-.author-avatar{width:56px;height:56px;border-radius:50%;background:var(--dark);color:var(--gold-light);font-family:'Lora',serif;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.author-info h4{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:4px;font-family:'Lora',serif}
-.author-info .author-role{font-size:12px;color:var(--green);font-weight:600;letter-spacing:.05em;margin-bottom:10px}
-.author-info p{font-size:13.5px;color:var(--text2);line-height:1.7}
-@media(max-width:480px){.author-box{flex-direction:column}}
+/* AUTHOR */
+.author-box{background:var(--off);border:1px solid var(--border);border-radius:var(--radius-lg);padding:26px 30px;margin:44px 0;display:flex;gap:22px;align-items:flex-start}
+.author-avatar{width:60px;height:60px;border-radius:50%;background:var(--dark);color:var(--gold-light);font-family:'Lora',serif;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.author-info h4{font-size:17px;font-weight:700;color:var(--dark);margin-bottom:4px;font-family:'Lora',serif}
+.author-info .author-role{font-size:13px;color:var(--green);font-weight:600;margin-bottom:12px}
+.author-info p{font-size:15px;color:var(--text2);line-height:1.75}
 
 /* DISCLAIMER */
-.disclaimer{background:var(--gold-pale);border:1px solid rgba(200,150,62,.25);border-radius:var(--radius);padding:16px 20px;margin:32px 0;font-size:13px;color:var(--text2);line-height:1.7}
+.disclaimer{background:var(--gold-pale);border:1px solid rgba(200,150,62,.25);border-radius:var(--radius);padding:18px 22px;margin:32px 0;font-size:14px;color:var(--text2);line-height:1.75}
 .disclaimer strong{color:var(--gold)}
 
 /* ARTICLE NAV */
-.article-nav{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:48px 0 0}
-.article-nav-item{border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 22px;transition:border-color .2s,box-shadow .2s}
+.article-nav{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:52px 0 0}
+.article-nav-item{border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;transition:border-color .2s,box-shadow .2s}
 .article-nav-item:hover{border-color:var(--green);box-shadow:var(--shadow)}
-.an-dir{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-.an-title{font-size:15px;font-weight:600;color:var(--text);line-height:1.35}
+.an-dir{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.an-title{font-size:16px;font-weight:600;color:var(--text);line-height:1.35}
 .an-next{text-align:right}
-@media(max-width:480px){.article-nav{grid-template-columns:1fr}}
 
 /* FLOAT WA */
-.float-wa{position:fixed;bottom:24px;right:24px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .2s;animation:pulse-wa 2.5s ease-in-out infinite}
+.float-wa{position:fixed;bottom:24px;right:24px;z-index:999;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .2s;animation:pulse-wa 2.5s ease-in-out infinite}
 .float-wa:hover{transform:scale(1.1);animation:none}
-.float-wa svg{width:26px;height:26px;fill:white}
+.float-wa svg{width:28px;height:28px;fill:white}
 @keyframes pulse-wa{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5)}50%{box-shadow:0 4px 32px rgba(37,211,102,.75),0 0 0 8px rgba(37,211,102,.12)}}
 
 /* FOOTER */
-footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80px}
-.footer-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+footer{background:var(--dark);color:var(--white);padding:44px 24px;margin-top:80px}
+.footer-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
 .footer-brand h3{font-size:18px;margin-bottom:4px}
 .footer-brand p{font-size:12px;color:rgba(255,255,255,.45)}
 .footer-links{display:flex;gap:20px;flex-wrap:wrap}
 .footer-links a{font-size:13px;color:rgba(255,255,255,.5);transition:color .2s}
 .footer-links a:hover{color:var(--gold-light)}
 .footer-copy{width:100%;text-align:center;font-size:12px;color:rgba(255,255,255,.25);padding-top:20px;border-top:1px solid rgba(255,255,255,.08);margin-top:16px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .page-layout{grid-template-columns:1fr;gap:0;padding:0 20px 40px}
+  .toc-sidebar{display:none}
+  .mobile-toc{display:block}
+  .hero-banner-inner{padding:0}
+  .hb-formula{flex-direction:column;gap:12px}
+  .calc-row{grid-template-columns:1fr}
+  .calc-result-grid{grid-template-columns:1fr}
+  .cards-3{grid-template-columns:repeat(2,1fr)}
+  .article-nav{grid-template-columns:1fr}
+  .inline-cta{flex-direction:column;padding:24px}
+  .author-box{flex-direction:column}
+  .stepper-tabs{flex-wrap:wrap}
+  .stepper-tab{flex:0 0 50%}
+  .nj-header,.nj-row{grid-template-columns:repeat(3,1fr)}
+  .nj-header span:nth-child(2),.nj-row .nj-cell:nth-child(2){display:none}
+  .nj-header span:nth-child(4),.nj-row .nj-cell:nth-child(4){display:none}
+}
+@media(max-width:600px){
+  nav .nav-links{display:none}
+  .hamburger{display:flex}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:52px;left:0;right:0;bottom:0;background:var(--white);padding:24px;gap:16px;z-index:400;overflow-y:auto;border-top:1px solid var(--border)}
+  .article-hero h1{font-size:24px}
+  .article-hero .lead{font-size:17px}
+  .prose p{font-size:16px}
+  .cards-3,.cards-2{grid-template-columns:1fr}
+  .data-table{font-size:13px}
+  .data-table th,.data-table td{padding:10px 12px}
+  .sh h2{font-size:21px}
+  .story-box{padding:22px 20px}
+  .story-box h3{font-size:19px}
+  .stepper-tab{flex:0 0 100%}
+}
 </style>
 </head>
 <body>
 
 <div id="progress-bar"></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">Universal <em>Money</em> Mart <span class="logo-arn">ARN-288927</span></a>
@@ -303,36 +327,52 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
       <li><a href="index.html#contact">Contact</a></li>
       <li><a href="https://wa.me/917200752628?text=Hi%20Vignesh%2C%20I%20want%20to%20know%20about%20Mutual%20Funds" target="_blank" class="nav-cta">Free Consultation</a></li>
     </ul>
-    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
+<!-- MOBILE TOC -->
+<div class="mobile-toc">
+  <button class="mobile-toc-btn" onclick="toggleMobileTOC()">
+    <span>&#128203; In This Article</span><span id="tocArrow">&#9660;</span>
+  </button>
+  <div class="mobile-toc-dropdown" id="mobileTOC">
+    <a href="#s1" onclick="closeMobileTOC()"><span>01</span>The Money Journey</a>
+    <a href="#s2" onclick="closeMobileTOC()"><span>02</span>What is NAV? Deep Dive</a>
+    <a href="#s3" onclick="closeMobileTOC()"><span>03</span>Units — Your Ownership</a>
+    <a href="#s4" onclick="closeMobileTOC()"><span>04</span>NAV Calculator</a>
+    <a href="#s5" onclick="closeMobileTOC()"><span>05</span>Who is the Fund Manager?</a>
+    <a href="#s6" onclick="closeMobileTOC()"><span>06</span>What Does AMC Do?</a>
+    <a href="#s7" onclick="closeMobileTOC()"><span>07</span>How Returns Are Generated</a>
+    <a href="#s8" onclick="closeMobileTOC()"><span>08</span>Growth vs IDCW Plans</a>
+    <a href="#s9" onclick="closeMobileTOC()"><span>09</span>How Redemption Works</a>
+    <a href="#s10" onclick="closeMobileTOC()"><span>10</span>NAV Day-by-Day Tracking</a>
+    <a href="#faq" onclick="closeMobileTOC()"><span>?</span>FAQ</a>
+  </div>
+</div>
+
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
-  <a href="index.html">Home</a>
-  <span class="breadcrumb-sep">›</span>
-  <a href="mutual-funds.html">Mutual Fund Guide</a>
-  <span class="breadcrumb-sep">›</span>
+  <a href="index.html">Home</a><span>&#8250;</span>
+  <a href="mutual-funds.html">Mutual Fund Guide</a><span>&#8250;</span>
   <span>How Mutual Fund Works</span>
 </div>
 
 <!-- ARTICLE HERO -->
 <div class="article-hero">
-  <div class="article-category">📘 Basics — Article 02 of 10</div>
+  <div class="article-category">&#128216; Basics — Article 02 of 10</div>
   <h1>How Does a Mutual Fund <span>Actually Work?</span> — NAV, Units & Fund Manager Explained</h1>
   <p class="lead">NAV என்றால் என்ன? Units எப்படி கிடைக்கும்? Fund Manager யாரு, என்ன பண்றாரு? உங்க பணம் எங்கே போகுது? — Everything explained with real numbers and Tamil examples.</p>
   <div class="article-meta-row">
-    <div class="meta-item">✍️ <strong>Vignesh Dhayalan</strong></div>
+    <div class="meta-item">&#9997;&#65039; <strong>Vignesh Dhayalan</strong></div>
     <div class="meta-dot"></div>
-    <div class="meta-item">📅 <strong>Updated March 2026</strong></div>
+    <div class="meta-item">&#128197; <strong>Updated March 2026</strong></div>
     <div class="meta-dot"></div>
-    <div class="meta-item">⏱ <strong>20 min read</strong></div>
+    <div class="meta-item">&#9203; <strong>20 min read</strong></div>
     <div class="meta-dot"></div>
-    <div class="meta-item">🎓 <strong>Beginner Level</strong></div>
+    <div class="meta-item">&#127891; <strong>Beginner Level</strong></div>
     <div class="meta-dot"></div>
-    <div class="meta-item">🪪 <strong>ARN-288927</strong></div>
+    <div class="meta-item">&#129506; <strong>ARN-288927</strong></div>
   </div>
 </div>
 
@@ -343,30 +383,35 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
     <div class="hb-formula">
       <div class="hb-formula-part">
         <div class="hb-formula-val">NAV</div>
-        <div class="hb-formula-label">Net Asset Value (Unit Price)</div>
+        <div class="hb-formula-label">Net Asset Value (unit price)</div>
       </div>
       <div class="hb-formula-op">=</div>
       <div class="hb-formula-part">
-        <div class="hb-formula-val">(Total Assets − Liabilities)</div>
+        <div class="hb-formula-val">(Total Assets &#8722; Liabilities)</div>
         <div class="hb-formula-label">Fund's total market value minus expenses</div>
       </div>
-      <div class="hb-formula-op">÷</div>
+      <div class="hb-formula-op">&#247;</div>
       <div class="hb-formula-part">
         <div class="hb-formula-val">Total Units</div>
         <div class="hb-formula-label">All units held by all investors</div>
       </div>
     </div>
-    <div class="hb-desc">Example: Fund has ₹100 Crore in stocks, ₹1 Crore liabilities, 99 Lakh units outstanding → NAV = ₹100. Every investor's unit is worth ₹100 today.</div>
+    <div class="hb-desc">Example: Fund has &#8377;100 Crore in stocks, &#8377;1 Crore liabilities, 99 Lakh units outstanding &#8594; NAV = &#8377;100. Every investor's unit is worth &#8377;100 today.</div>
   </div>
 </div>
 
+<!-- ADSENSE TOP -->
+<div style="max-width:900px;margin:0 auto 28px;padding:0 24px">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
 <!-- TWO COLUMN LAYOUT -->
-<div class="two-col">
+<div class="page-layout">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-box">
-      <div class="sb-title">In This Article</div>
+  <aside class="toc-sidebar">
+    <div class="toc-box">
+      <div class="toc-title">In This Article</div>
       <ul class="toc-list" id="tocLinks">
         <li><a href="#s1"><span>01</span>The Money Journey</a></li>
         <li><a href="#s2"><span>02</span>What is NAV? Deep Dive</a></li>
@@ -375,31 +420,27 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
         <li><a href="#s5"><span>05</span>Who is the Fund Manager?</a></li>
         <li><a href="#s6"><span>06</span>What Does AMC Do?</a></li>
         <li><a href="#s7"><span>07</span>How Returns Are Generated</a></li>
-        <li><a href="#s8"><span>08</span>Growth vs Dividend Plans</a></li>
+        <li><a href="#s8"><span>08</span>Growth vs IDCW Plans</a></li>
         <li><a href="#s9"><span>09</span>How Redemption Works</a></li>
-        <li><a href="#s10"><span>10</span>NAV Tracking — Day by Day</a></li>
-        <li><a href="#faq"><span>❓</span>FAQ</a></li>
+        <li><a href="#s10"><span>10</span>NAV Day-by-Day Tracking</a></li>
+        <li><a href="#faq"><span>?</span>FAQ</a></li>
       </ul>
-    </div>
-    <div class="sb-cta">
-      <h4>Confused? Let's Talk!</h4>
-      <p>Get personalised guidance from AMFI-registered MFD Vignesh Dhayalan — in Tamil, free of charge.</p>
-      <a href="https://wa.me/917200752628?text=Hi%20Vignesh%2C%20I%20read%20your%20How%20MF%20Works%20article%20and%20want%20guidance" target="_blank" class="btn-wa-sm">💬 WhatsApp Now</a>
+      <a href="https://wa.me/917200752628?text=Hi%20Vignesh%2C%20I%20read%20your%20How%20MF%20Works%20article%20and%20want%20guidance" target="_blank" class="toc-cta">&#128172; Free MF Consultation</a>
     </div>
     <div class="sidebar-box">
       <div class="sb-title">Series Navigation</div>
       <div class="related-list">
         <a href="article-what-is-mutual-fund.html" class="related-item">
           <span class="related-num">01</span>
-          <div><div class="related-title">What is a Mutual Fund?</div><div class="related-tag">← Previous</div></div>
+          <div><div class="related-title">What is a Mutual Fund?</div><div class="related-tag">&#8592; Previous</div></div>
         </a>
         <a href="article-mutual-fund-types.html" class="related-item">
           <span class="related-num">03</span>
-          <div><div class="related-title">Types of Mutual Funds</div><div class="related-tag">→ Next Article</div></div>
+          <div><div class="related-title">Types of Mutual Funds</div><div class="related-tag">&#8594; Next Article</div></div>
         </a>
         <a href="article-what-is-sip.html" class="related-item">
           <span class="related-num">04</span>
-          <div><div class="related-title">What is SIP?</div><div class="related-tag">→ Article 4</div></div>
+          <div><div class="related-title">What is SIP?</div><div class="related-tag">&#8594; Article 4</div></div>
         </a>
       </div>
     </div>
@@ -408,72 +449,73 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
   <!-- ARTICLE BODY -->
   <article class="article-body">
 
-    <!-- SECTION 1: MONEY JOURNEY -->
+    <!-- S1: MONEY JOURNEY -->
     <div class="section-block" id="s1">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">01</div><h2>The Complete Money Journey — From Your Bank to Your Returns</h2></div>
       <div class="prose">
-        <p>When you invest ₹10,000 in a mutual fund, where does that money actually go? What happens behind the scenes? Let's trace the complete journey of your rupee — from the moment you press "Invest" to the moment profits hit your bank account.</p>
+        <p>When you invest &#8377;10,000 in a mutual fund, where does that money actually go? What happens behind the scenes? Let's trace the complete journey of your rupee — from the moment you press "Invest" to the moment profits hit your bank account.</p>
       </div>
-
       <div class="process-flow">
         <div class="pf-step">
           <div class="pf-num">1</div>
           <div class="pf-content">
-            <h4>Step 1 — You Place an Investment Order</h4>
-            <p>You decide to invest ₹10,000 in "Mirae Asset Large Cap Fund." You submit your order through an app, website, or via your MFD (Mutual Fund Distributor like Vignesh Dhayalan). Your bank account is debited the same day or next business day.</p>
-            <div class="pf-example">Tamil: நீங்க app-ல "Invest" click பண்றீங்க. Bank-ல இருந்து ₹10,000 automatically deduct ஆகும். This is called a "subscription" — நீங்க fund-ல subscribe பண்றீங்க.</div>
+            <h4>You Place an Investment Order</h4>
+            <p>You decide to invest &#8377;10,000 in a mutual fund. You submit your order through an app, website, or via your MFD (Mutual Fund Distributor). Your bank account is debited the same or next business day.</p>
+            <div class="pf-example">Tamil: நீங்க app-ல "Invest" click பண்றீங்க. Bank-ல இருந்து &#8377;10,000 automatically deduct ஆகும். This is called a "subscription" — நீங்க fund-ல subscribe பண்றீங்க.</div>
           </div>
         </div>
         <div class="pf-step">
           <div class="pf-num">2</div>
           <div class="pf-content">
-            <h4>Step 2 — AMC Processes Your Order at Day's NAV</h4>
-            <p>Your order is processed by the AMC (Asset Management Company). For equity funds, orders placed before 3:00 PM get that day's NAV. Orders after 3:00 PM get the next business day's NAV. If NAV today is ₹100, your ₹10,000 buys 100 units.</p>
-            <div class="pf-example">Tamil: Cut-off time = 3:00 PM. 3 PM-க்கு முன்னாடி invest பண்ணா → today's NAV கிடைக்கும். 3 PM-க்கு பிறகு → next day's NAV. Formula: ₹10,000 ÷ ₹100 NAV = 100 units உங்களுக்கு.</div>
+            <h4>AMC Processes Your Order at Day's NAV</h4>
+            <p>Your order is processed by the AMC. For equity funds, orders placed before 3:00 PM get that day's NAV. Orders after 3:00 PM get the next business day's NAV. If NAV today is &#8377;100, your &#8377;10,000 buys 100 units.</p>
+            <div class="pf-example">Tamil: Cut-off time = 3:00 PM. 3 PM-க்கு முன்னாடி invest பண்ணா today's NAV கிடைக்கும். 3 PM-க்கு பிறகு next day's NAV. Formula: &#8377;10,000 &#247; &#8377;100 NAV = 100 units.</div>
           </div>
         </div>
         <div class="pf-step">
           <div class="pf-num">3</div>
           <div class="pf-content">
-            <h4>Step 3 — Units Are Credited to Your Folio</h4>
-            <p>Within 1–2 business days, 100 units are credited to your "folio" — your personal mutual fund account number with that AMC. You'll receive a confirmation SMS, email, and can see it in your CAMS/KFintech statement or the investment app.</p>
+            <h4>Units Are Credited to Your Folio</h4>
+            <p>Within 1–2 business days, 100 units are credited to your "folio" — your personal mutual fund account number with that AMC. You'll receive a confirmation SMS, email, and can see it in your CAMS/KFintech statement.</p>
             <div class="pf-example">Tamil: "Folio" = உங்க mutual fund account number. 100 units இப்போ உங்களுக்கு belong ஆகுது. Confirmation SMS/email வரும். CAMS/KFintech-ல பார்க்கலாம்.</div>
           </div>
         </div>
         <div class="pf-step">
           <div class="pf-num">4</div>
           <div class="pf-content">
-            <h4>Step 4 — Fund Manager Invests the Pooled Money</h4>
-            <p>Your ₹10,000 is added to the massive pool of money collected from thousands of other investors. The Fund Manager uses this pool to buy stocks/bonds according to the fund's mandate. Your money becomes part of a diversified portfolio within 1–3 days.</p>
-            <div class="pf-example">Tamil: உங்க ₹10,000 + ஆயிரக்கணக்கான investors-ஓட பணம் = ₹500 Crore+ pool. Fund Manager இதை 40–70 different companies-ல invest பண்ணுவாரு. Instant diversification!</div>
+            <h4>Fund Manager Invests the Pooled Money</h4>
+            <p>Your &#8377;10,000 is added to the massive pool from thousands of other investors. The Fund Manager uses this pool to buy stocks/bonds according to the fund's mandate — building a diversified portfolio within 1–3 days.</p>
+            <div class="pf-example">Tamil: உங்க &#8377;10,000 + ஆயிரக்கணக்கான investors-ஓட பணம் = &#8377;500 Crore+ pool. Fund Manager இதை 40–70 different companies-ல invest பண்ணுவாரு. Instant diversification!</div>
           </div>
         </div>
         <div class="pf-step">
           <div class="pf-num">5</div>
           <div class="pf-content">
-            <h4>Step 5 — Daily NAV Reflects Your Portfolio Growth</h4>
-            <p>Every evening after market closes (3:30 PM), AMFI calculates and publishes NAV for every mutual fund in India. If the stocks in your fund rose 1% today, NAV rises 1%. Your 100 units × new NAV = your current investment value.</p>
-            <div class="pf-example">Tamil: Market close ஆனா (3:30 PM), AMFI daily NAV publish பண்றது. Today fund stocks 1% up → NAV ₹100 → ₹101. உங்க 100 units × ₹101 = ₹10,100. ₹100 profit in one day!</div>
+            <h4>Daily NAV Reflects Your Portfolio Growth</h4>
+            <p>Every evening after market closes (3:30 PM), AMFI calculates and publishes NAV for every mutual fund. If the stocks in your fund rose 1% today, NAV rises 1%. Your 100 units &#215; new NAV = your current investment value.</p>
+            <div class="pf-example">Tamil: Market close ஆனா (3:30 PM), AMFI daily NAV publish பண்றது. Today fund stocks 1% up → NAV &#8377;100 → &#8377;101. உங்க 100 units &#215; &#8377;101 = &#8377;10,100. &#8377;100 profit in one day!</div>
           </div>
         </div>
         <div class="pf-step">
           <div class="pf-num">6</div>
           <div class="pf-content">
-            <h4>Step 6 — You Redeem and Money Returns to Bank</h4>
-            <p>When you want to exit, you submit a redemption request. The AMC sells units at that day's NAV. For equity funds, money reaches your bank account within T+3 business days (3 days after the redemption date). Debt funds: T+2 or T+1.</p>
-            <div class="pf-example">Tamil: 2 years பிறகு NAV = ₹148 ஆனா. நீங்க redeem பண்றீங்க → 100 units × ₹148 = ₹14,800. ₹10,000 → ₹14,800 in 2 years. 3 working days-ல bank-ல வந்துடும்.</div>
+            <h4>You Redeem and Money Returns to Bank</h4>
+            <p>When you want to exit, you submit a redemption request. The AMC sells units at that day's NAV. For equity funds, money reaches your bank within T+3 business days. Debt funds: T+2 or T+1.</p>
+            <div class="pf-example">Tamil: 2 years பிறகு NAV = &#8377;148 ஆனா. நீங்க redeem பண்றீங்க → 100 units &#215; &#8377;148 = &#8377;14,800. &#8377;10,000 → &#8377;14,800 in 2 years. 3 working days-ல bank-ல வந்துடும்.</div>
           </div>
         </div>
       </div>
-
       <div class="tamil-callout">
-        <div class="tc-label">🇮🇳 Summary in Tamil</div>
+        <div class="tc-label">&#127470;&#127475; Summary in Tamil</div>
         <p>உங்க பணம் → AMC-க்கு போகுது → Fund Manager stocks வாங்குவாரு → Daily NAV change ஆகும் → Profit வந்தா NAV கூடும் → Redeem பண்ணும்போது profit உட bank-ல வரும். உங்க பணம் always AMC-கிட்ட இருக்கும் — distributor-கிட்ட இல்ல. SEBI இதை strictly regulate பண்றது.</p>
       </div>
     </div>
 
-    <!-- SECTION 2: NAV DEEP DIVE -->
+    <!-- ADSENSE MID 1 -->
+    <ins class="adsbygoogle" style="display:block;margin:32px 0" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+
+    <!-- S2: NAV DEEP DIVE -->
     <div class="section-block" id="s2">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">02</div><h2>What is NAV? — A Deep Dive</h2></div>
@@ -481,104 +523,94 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
         <p><strong>NAV (Net Asset Value)</strong> is the price at which you buy or sell one unit of a mutual fund. It is calculated every business day after market hours and published on the AMFI website.</p>
         <p>Think of NAV exactly like a stock price — but instead of one company's share price, it represents the value of the entire portfolio of investments held in the fund.</p>
       </div>
-
       <div class="story-box">
-        <div class="story-label">📖 Real Example — NAV Calculation</div>
-        <h3>Let's Calculate NAV Step by Step</h3>
-        <p>Imagine a mutual fund holds the following investments:</p>
+        <div class="story-label">&#128214; Real Example — NAV Calculation Step by Step</div>
+        <h3>Let's Calculate NAV with Real Numbers</h3>
+        <p>Imagine a mutual fund holds these investments today:</p>
         <p>
-          • Reliance Industries shares worth: <span class="hl">₹25 Crore</span><br/>
-          • Infosys shares worth: <span class="hl">₹20 Crore</span><br/>
-          • TCS shares worth: <span class="hl">₹18 Crore</span><br/>
-          • HDFC Bank shares worth: <span class="hl">₹15 Crore</span><br/>
-          • Cash and other assets: <span class="hl">₹2 Crore</span><br/>
-          • <strong>Total Assets = ₹80 Crore</strong>
+          &#8226; Reliance Industries shares worth: <span class="hl">&#8377;25 Crore</span><br/>
+          &#8226; Infosys shares worth: <span class="hl">&#8377;20 Crore</span><br/>
+          &#8226; TCS shares worth: <span class="hl">&#8377;18 Crore</span><br/>
+          &#8226; HDFC Bank shares worth: <span class="hl">&#8377;15 Crore</span><br/>
+          &#8226; Cash and other assets: <span class="hl">&#8377;2 Crore</span><br/>
+          <strong>Total Assets = &#8377;80 Crore</strong>
         </p>
-        <p>
-          Management fees payable: ₹0.50 Crore<br/>
-          Other liabilities: ₹0.50 Crore<br/>
-          <strong>Total Liabilities = ₹1 Crore</strong>
-        </p>
-        <p>
-          <strong>Net Assets = ₹80 Crore − ₹1 Crore = ₹79 Crore</strong><br/>
-          Total units issued to all investors = <span class="hl">79 Lakh units</span><br/>
-          <strong>NAV = ₹79 Crore ÷ 79 Lakh = ₹100 per unit</strong>
-        </p>
-        <div class="story-moral">💡 Next day if Reliance goes up ₹2 Crore and others stay same → Total Assets = ₹82 Crore → NAV = (₹82Cr − ₹1Cr) ÷ 79L = ₹102.53. Your units grew in value!</div>
+        <p>Management fees payable: &#8377;0.50 Crore | Other liabilities: &#8377;0.50 Crore<br/>
+        <strong>Total Liabilities = &#8377;1 Crore</strong></p>
+        <p><strong>Net Assets = &#8377;80 Cr &#8722; &#8377;1 Cr = &#8377;79 Crore</strong><br/>
+        Total units issued = <span class="hl">79 Lakh units</span><br/>
+        <strong>NAV = &#8377;79 Crore &#247; 79 Lakh = &#8377;100 per unit</strong></p>
+        <div class="story-moral">&#128161; Next day if Reliance goes up &#8377;2 Crore and others stay same → Total Assets = &#8377;82 Crore → NAV = (&#8377;82Cr &#8722; &#8377;1Cr) &#247; 79L = &#8377;102.53. Your units grew in value!</div>
       </div>
-
       <div class="tamil-callout">
-        <div class="tc-label">🇮🇳 NAV — Tamil Explanation</div>
-        <p>NAV = Fund-ஓட total investment value ÷ Total units. Simple-ஆ சொல்லணும்னா: Fund-ல இருக்கற எல்லா stocks-ஓட market value கூட்டி, outstanding units-ஆல வகுக்கணும் — அதுதான் NAV. Market up → NAV up. Market down → NAV down. AMFI daily 11 PM-க்கு முன்னாடி publish பண்ணும்.</p>
-        <p><strong>Important:</strong> High NAV = Bad, Low NAV = Cheap என்று நினைக்காதீங்க! ஒரு fund ஆரம்பிச்சு 10 years ஆனா NAV ₹500 ஆகலாம் — அது good performance sign! New fund-ஓட NAV ₹10 இருந்தா "cheap" இல்ல — அது just starting point.</p>
+        <div class="tc-label">&#127470;&#127475; NAV — Tamil Explanation</div>
+        <p>NAV = Fund-ல இருக்கற எல்லா stocks-ஓட market value கூட்டி, outstanding units-ஆல வகுக்கணும். Market up → NAV up. Market down → NAV down. AMFI daily 11 PM-க்கு முன்னாடி publish பண்ணும்.</p>
+        <p><strong>Important:</strong> High NAV = Bad, Low NAV = Cheap என்று நினைக்காதீங்க! ஒரு fund ஆரம்பிச்சு 10 years ஆனா NAV &#8377;500 ஆகலாம் — அது good performance sign! New fund-ஓட NAV &#8377;10 இருந்தா "cheap" இல்ல — அது just starting point.</p>
       </div>
-
       <div class="key-point">
-        <div class="kp-icon">💡</div>
-        <div class="kp-text"><strong>Key Insight:</strong> NAV is not like a stock price where lower is "cheaper." A fund with NAV ₹500 and one with NAV ₹10 can both be equally good investments — what matters is the fund's portfolio quality, fund manager track record, and expense ratio. Never choose a fund based on NAV alone.</div>
+        <div class="kp-icon">&#128161;</div>
+        <div class="kp-text"><strong>Key Insight:</strong> NAV is not like a stock price where lower is "cheaper." A fund with NAV &#8377;500 and one with NAV &#8377;10 can both be equally good investments. What matters is the fund's portfolio quality, fund manager track record, and expense ratio. Never choose a fund based on NAV alone.</div>
       </div>
-
       <div class="warning-box">
-        <p>⚠️ <strong>Common Mistake:</strong> Many beginners avoid funds with high NAV thinking it's "expensive" and prefer new funds with ₹10 NAV thinking they're "cheap." This is completely wrong. NAV history reflects fund performance history — a fund that grew from ₹10 to ₹500 has delivered excellent returns. Choosing a fund purely on low NAV is a costly mistake.</p>
+        <p>&#9888;&#65039; <strong>Common Mistake:</strong> Many beginners avoid funds with high NAV thinking it's "expensive" and prefer new funds with &#8377;10 NAV thinking they're "cheap." This is completely wrong. A fund that grew from &#8377;10 to &#8377;500 has delivered excellent returns over the years. Choosing a fund purely on low NAV is a costly mistake.</p>
       </div>
     </div>
 
-    <!-- SECTION 3: UNITS -->
+    <!-- S3: UNITS -->
     <div class="section-block" id="s3">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">03</div><h2>Mutual Fund Units — Your Ownership Certificate</h2></div>
       <div class="prose">
         <p>When you invest in a mutual fund, you don't receive stocks directly. Instead, you receive <strong>units</strong> — which represent your proportional ownership in the fund's entire portfolio.</p>
-        <p>Units work exactly like shares of a company — except instead of owning one company, your units give you proportional ownership in a basket of 30–80 companies.</p>
+        <p>Units work exactly like shares of a company — except instead of owning one company, your units give you proportional ownership in a basket of 30–80 companies at once.</p>
       </div>
-
       <div class="stepper">
         <div class="stepper-tabs">
           <button class="stepper-tab active" onclick="showTab(0)">Buying Units</button>
           <button class="stepper-tab" onclick="showTab(1)">Units Grow in Value</button>
-          <button class="stepper-tab" onclick="showTab(2)">More Units via SIP</button>
+          <button class="stepper-tab" onclick="showTab(2)">SIP Adds More Units</button>
           <button class="stepper-tab" onclick="showTab(3)">Selling Units</button>
         </div>
         <div class="stepper-panel active" id="tab0">
           <h4>How You Buy Units</h4>
-          <p>When you invest a lump sum, you receive units calculated by dividing your investment amount by the day's NAV.</p>
-          <p>The number of units can be in decimals — mutual funds allow up to 3 decimal places. So if NAV is ₹47.50 and you invest ₹5,000, you get exactly 105.263 units.</p>
+          <p>When you invest a lump sum, you receive units calculated by dividing your investment amount by the day's NAV. Units can be in decimals — mutual funds allow up to 3 decimal places.</p>
+          <p>So if NAV is &#8377;47.50 and you invest &#8377;5,000, you get exactly 105.263 units. Your investment is instantly diversified across the entire fund portfolio.</p>
           <div class="panel-example">
-            Formula: <span>Units = Investment Amount ÷ NAV</span><br/><br/>
-            Example: ₹5,000 ÷ ₹47.50 = <span>105.263 units</span><br/>
-            Tamil: ₹5,000 invest பண்ணா, NAV ₹47.50 ஆனா → 105.263 units கிடைக்கும். Decimal-ல units possible — worry பண்ணாதீங்க!
+            Formula: <span>Units = Investment Amount &#247; NAV</span><br/><br/>
+            Example: &#8377;5,000 &#247; &#8377;47.50 = <span>105.263 units</span><br/><br/>
+            Tamil: &#8377;5,000 invest பண்ணா, NAV &#8377;47.50 ஆனா → 105.263 units கிடைக்கும். Decimal-ல units possible — worry பண்ணாதீங்க!
           </div>
         </div>
         <div class="stepper-panel" id="tab1">
           <h4>How Your Units Grow in Value</h4>
           <p>The number of units you hold stays the same (unless you invest more or withdraw). But the VALUE of each unit changes daily as NAV changes.</p>
-          <p>Your total portfolio value = Number of Units × Current NAV. As the fund's stocks perform well, NAV rises, and your portfolio value increases — even without adding more money.</p>
+          <p>Your total portfolio value = Number of Units &#215; Current NAV. As the fund's stocks perform well, NAV rises, and your portfolio value increases — even without adding more money.</p>
           <div class="panel-example">
             You hold: <span>105.263 units</span><br/>
-            NAV when bought: ₹47.50 → Value = ₹5,000<br/>
-            NAV after 2 years: <span>₹75.00</span> → Value = <span>₹7,894.70</span><br/><br/>
-            Tamil: Units same — ஆனா NAV ₹47.50 → ₹75 ஆச்சு. உங்க investment ₹5,000 → ₹7,895 ஆச்சு. Units-ஓட count same, value மட்டும் change.
+            NAV when bought: &#8377;47.50 → Value = &#8377;5,000<br/>
+            NAV after 2 years: <span>&#8377;75.00</span> → Value = <span>&#8377;7,894.70</span><br/><br/>
+            Tamil: Units same — ஆனா NAV &#8377;47.50 → &#8377;75 ஆச்சு. உங்க investment &#8377;5,000 → &#8377;7,895 ஆச்சு. Units-ஓட count same, value மட்டும் change.
           </div>
         </div>
         <div class="stepper-panel" id="tab2">
           <h4>How SIP Adds More Units Every Month</h4>
-          <p>With SIP, every month you invest a fixed amount. Each month's investment buys units at that month's NAV. Since NAV changes monthly, you get different number of units each month — this is called Rupee Cost Averaging.</p>
-          <p>When NAV is high, your ₹1,000 buys fewer units. When NAV is low (market dip), your ₹1,000 buys more units. Over time, this averages out your cost per unit.</p>
+          <p>With SIP, every month you invest a fixed amount. Each month's investment buys units at that month's NAV. Since NAV changes monthly, you get different units each month — this is called Rupee Cost Averaging.</p>
+          <p>When NAV is high, your &#8377;1,000 buys fewer units. When NAV is low (market dip), your &#8377;1,000 buys more units. Over time this averages out your cost per unit beautifully.</p>
           <div class="panel-example">
-            Month 1: NAV ₹100 → ₹1,000 SIP → <span>10.000 units</span><br/>
-            Month 2: Market dips, NAV ₹80 → ₹1,000 SIP → <span>12.500 units</span><br/>
-            Month 3: NAV ₹90 → ₹1,000 SIP → <span>11.111 units</span><br/>
-            Total: ₹3,000 invested → <span>33.611 units</span> avg cost = ₹89.25/unit<br/><br/>
-            Tamil: Market down-ல more units கிடைக்கும் — இதுதான் SIP-ஓட beauty! Rupee Cost Averaging என்று இதை சொல்வாங்க.
+            Month 1: NAV &#8377;100 → &#8377;1,000 SIP → <span>10.000 units</span><br/>
+            Month 2: Market dips, NAV &#8377;80 → &#8377;1,000 SIP → <span>12.500 units</span><br/>
+            Month 3: NAV &#8377;90 → &#8377;1,000 SIP → <span>11.111 units</span><br/>
+            Total: &#8377;3,000 invested → <span>33.611 units</span> avg cost = &#8377;89.25/unit<br/><br/>
+            Tamil: Market down-ல more units கிடைக்கும் — இதுதான் SIP-ஓட beauty! Rupee Cost Averaging!
           </div>
         </div>
         <div class="stepper-panel" id="tab3">
           <h4>How You Sell (Redeem) Units</h4>
-          <p>When you redeem (withdraw), you specify either the amount you want (e.g., ₹20,000) or the number of units to sell (e.g., 50 units). The AMC calculates the proceeds at that day's NAV.</p>
-          <p>You can do partial redemptions — sell some units and keep the rest growing. There's no obligation to sell all units at once.</p>
+          <p>When you redeem, you specify either the amount you want (e.g., &#8377;20,000) or the number of units to sell (e.g., 50 units). The AMC calculates the proceeds at that day's NAV.</p>
+          <p>You can do partial redemptions — sell some units and keep the rest growing. There is no obligation to sell all units at once. Money reaches your bank in 1–3 working days.</p>
           <div class="panel-example">
-            You hold: <span>105.263 units</span>, Current NAV: ₹95<br/>
-            Partial redemption: Sell <span>50 units</span> → ₹50 × 95 = <span>₹4,750 to bank</span><br/>
+            You hold: <span>105.263 units</span>, Current NAV: &#8377;95<br/>
+            Partial redemption: Sell <span>50 units</span> → 50 &#215; &#8377;95 = <span>&#8377;4,750 to bank</span><br/>
             Remaining: <span>55.263 units</span> still invested, keep growing<br/><br/>
             Tamil: Full-ஆ withdraw பண்ண வேண்டாம். Partial-ஆ withdraw பண்ணலாம். Rest continue to grow. 3 working days-ல money bank-ல வரும்.
           </div>
@@ -586,26 +618,25 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
       </div>
     </div>
 
-    <!-- SECTION 4: NAV CALCULATOR -->
+    <!-- S4: NAV CALCULATOR -->
     <div class="section-block" id="s4">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">04</div><h2>NAV & Units Calculator — Try It Yourself</h2></div>
       <div class="prose"><p>Use this interactive calculator to understand exactly how many units you get and what your investment will be worth at different NAV levels.</p></div>
-
       <div class="calc-box">
         <h3>NAV Units Calculator</h3>
         <div class="calc-sub">உங்க investment amount-ஐயும் NAV-ஐயும் enter பண்ணி calculate பண்ணுங்க</div>
         <div class="calc-row">
           <div class="calc-field">
-            <label>Investment Amount (₹)</label>
+            <label>Investment Amount (&#8377;)</label>
             <input type="number" id="investAmt" value="10000" min="500" step="500" oninput="calcNAV()"/>
           </div>
           <div class="calc-field">
-            <label>Current NAV (₹)</label>
+            <label>Current NAV (&#8377;)</label>
             <input type="number" id="currentNAV" value="100" min="1" step="0.01" oninput="calcNAV()"/>
           </div>
           <div class="calc-field">
-            <label>Expected NAV After (₹)</label>
+            <label>Expected Future NAV (&#8377;)</label>
             <input type="number" id="futureNAV" value="150" min="1" step="0.01" oninput="calcNAV()"/>
           </div>
         </div>
@@ -616,233 +647,218 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
           </div>
           <div class="calc-stat">
             <div class="calc-stat-label">Future Value</div>
-            <div class="calc-stat-val cv-gold" id="futureValue">₹15,000</div>
+            <div class="calc-stat-val cv-gold" id="futureValue">&#8377;15,000</div>
           </div>
           <div class="calc-stat">
             <div class="calc-stat-label">Profit / Loss</div>
-            <div class="calc-stat-val cv-teal" id="profitLoss">+₹5,000</div>
+            <div class="calc-stat-val cv-teal" id="profitLoss">+&#8377;5,000</div>
           </div>
         </div>
         <div class="calc-formula-display" id="formulaDisplay">
-          Formula: ₹10,000 ÷ ₹100 NAV = 100.000 units | At ₹150 NAV → 100.000 × ₹150 = ₹15,000 | Profit = ₹5,000 (+50.00%)
+          Formula: &#8377;10,000 &#247; &#8377;100 NAV = 100.000 units | At &#8377;150 NAV &#8594; 100.000 &#215; &#8377;150 = &#8377;15,000 | Profit = &#8377;5,000 (+50.00%)
         </div>
       </div>
-
       <div class="tamil-callout">
-        <div class="tc-label">🇮🇳 Calculator Use — Tamil</div>
-        <p>Investment amount-ஐ type பண்ணுங்க. Current NAV enter பண்ணுங்க. Future-ல NAV என்ன ஆகலாம்-ன்னு estimate பண்ணி enter பண்ணுங்க. Automatically units, future value, profit எல்லாமே calculate ஆகும். Different scenarios try பண்ணி பாருங்க — NAV ₹200 ஆனா என்ன ஆகும், ₹80 ஆனா என்ன ஆகும் — இரண்டுமே experiment பண்ணுங்க.</p>
+        <div class="tc-label">&#127470;&#127475; Calculator — Tamil</div>
+        <p>Investment amount type பண்ணுங்க. Current NAV enter பண்ணுங்க. Future-ல NAV என்ன ஆகலாம் estimate பண்ணி enter பண்ணுங்க. Automatically units, future value, profit எல்லாமே calculate ஆகும். NAV &#8377;200 ஆனா என்ன, &#8377;80 ஆனா என்ன — different scenarios try பண்ணி பாருங்க!</p>
       </div>
     </div>
 
-    <!-- SECTION 5: FUND MANAGER -->
+    <!-- ADSENSE MID 2 -->
+    <ins class="adsbygoogle" style="display:block;margin:32px 0" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+
+    <!-- S5: FUND MANAGER -->
     <div class="section-block" id="s5">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">05</div><h2>Who is the Fund Manager? — The Person Managing Your Money</h2></div>
       <div class="prose">
-        <p>The <strong>Fund Manager</strong> is a highly qualified investment professional employed by the AMC to manage the fund's portfolio. When you invest in a mutual fund, this person makes all the buying and selling decisions on your behalf.</p>
+        <p>The <strong>Fund Manager</strong> is a highly qualified investment professional employed by the AMC to manage the fund's portfolio. When you invest, this person makes all the buying and selling decisions on your behalf.</p>
         <p>Think of the Fund Manager as a chef who decides what ingredients to buy, in what proportions, and when to change the recipe — all to make the best meal (returns) for the guests (investors).</p>
       </div>
-
       <div class="cards-3">
         <div class="icard accent">
-          <div class="icard-icon">🎓</div>
+          <div class="icard-icon">&#127891;</div>
           <div class="icard-title">Qualifications Required</div>
-          <div class="icard-desc">Must be NISM (National Institute of Securities Markets) certified. Typically CA, CFA, MBA Finance, or equivalent. Years of market research experience mandatory.</div>
+          <div class="icard-desc">Must be NISM certified. Typically CA, CFA, MBA Finance, or equivalent. Years of market research experience mandatory before managing any fund.</div>
         </div>
         <div class="icard accent">
-          <div class="icard-icon">🔍</div>
+          <div class="icard-icon">&#128269;</div>
           <div class="icard-title">What They Do Daily</div>
           <div class="icard-desc">Research companies, analyse balance sheets, meet management teams, attend analyst calls, study macroeconomic data, and decide which stocks to buy, hold, or sell.</div>
         </div>
         <div class="icard accent">
-          <div class="icard-icon">⚖️</div>
+          <div class="icard-icon">&#9878;&#65039;</div>
           <div class="icard-title">Bound by Fund Mandate</div>
           <div class="icard-desc">Cannot invest outside the fund's stated objective. A Large Cap fund manager must buy large cap stocks — cannot invest in small caps even if they look attractive.</div>
         </div>
         <div class="icard accent-gold">
-          <div class="icard-icon">👥</div>
+          <div class="icard-icon">&#128101;</div>
           <div class="icard-title">Team Support</div>
-          <div class="icard-desc">Never works alone. Supported by a team of research analysts, economists, risk managers, and compliance officers. It's an institution managing your money — not one person.</div>
+          <div class="icard-desc">Never works alone. Supported by research analysts, economists, risk managers, and compliance officers. It's an institution managing your money — not just one person.</div>
         </div>
         <div class="icard accent-gold">
-          <div class="icard-icon">📊</div>
+          <div class="icard-icon">&#128202;</div>
           <div class="icard-title">Performance Accountability</div>
-          <div class="icard-desc">Compared against a benchmark index (e.g., Nifty 50). Must consistently outperform. If a fund manager consistently underperforms, the AMC replaces them.</div>
+          <div class="icard-desc">Compared against a benchmark index like Nifty 50. Must consistently outperform. If a fund manager consistently underperforms, the AMC replaces them.</div>
         </div>
         <div class="icard accent-gold">
-          <div class="icard-icon">💰</div>
+          <div class="icard-icon">&#128176;</div>
           <div class="icard-title">How They're Paid</div>
-          <div class="icard-desc">Paid by the AMC from the expense ratio (annual management fee charged on AUM). You don't pay the fund manager directly — it's already factored into NAV.</div>
+          <div class="icard-desc">Paid by the AMC from the expense ratio. You don't pay the fund manager directly — it's already factored into NAV daily. No separate payment needed from you.</div>
         </div>
       </div>
-
       <div class="story-box">
-        <div class="story-label">📖 A Day in the Life of a Fund Manager</div>
+        <div class="story-label">&#128214; A Day in the Life of a Fund Manager</div>
         <h3>What Does a Fund Manager Actually Do?</h3>
         <p><span class="hl">6:00 AM:</span> Reviews overnight global market movements — US markets, Europe, Asian futures. Checks if any macro event affects Indian markets today.</p>
-        <p><span class="hl">8:00 AM:</span> Team meeting with research analysts. Reviews quarterly earnings reports of 15 companies in the portfolio. One company missed earnings — decision: hold or sell?</p>
-        <p><span class="hl">10:00 AM:</span> Market opens. Executes buy/sell orders through the dealing desk. Buys 5 lakh shares of a company at ₹450 because research shows it's undervalued.</p>
-        <p><span class="hl">2:00 PM:</span> Conference call with the CFO of a company they're considering adding to the portfolio. Asks about growth plans, debt levels, and competitive landscape.</p>
+        <p><span class="hl">8:00 AM:</span> Team meeting with research analysts. Reviews quarterly earnings of 15 portfolio companies. One company missed earnings — decision: hold or sell?</p>
+        <p><span class="hl">10:00 AM:</span> Market opens. Executes buy/sell orders through the dealing desk. Buys 5 lakh shares of a company at &#8377;450 because research shows it's undervalued.</p>
+        <p><span class="hl">2:00 PM:</span> Conference call with the CFO of a company being considered for the portfolio. Asks about growth plans, debt levels, and competitive landscape.</p>
         <p><span class="hl">4:00 PM:</span> Market closes. Reviews day's portfolio performance vs benchmark. Prepares monthly fact sheet and attribution analysis.</p>
-        <div class="story-moral">💡 Tamil: Fund Manager full-time உங்க பணத்தை manage பண்றாரு. நீங்க daily market பார்க்க வேண்டாம் — இதுதான் MF-ஓட biggest advantage!</div>
+        <div class="story-moral">&#128161; Tamil: Fund Manager full-time உங்க பணத்தை manage பண்றாரு. நீங்க daily market பார்க்க வேண்டாம் — இதுதான் Mutual Fund-ஓட biggest advantage!</div>
       </div>
-
       <div class="pull-quote">
         <p>"A good fund manager is not someone who never makes wrong calls — it's someone who makes more right calls than wrong ones, and manages risk intelligently when wrong."</p>
         <cite>— Vignesh Dhayalan, AMFI Registered MFD (ARN-288927)</cite>
       </div>
-
       <div class="tamil-callout">
-        <div class="tc-label">🇮🇳 Fund Manager — Tamil Summary</div>
-        <p>Fund Manager = உங்களுக்காக invest பண்ற expert. NISM certified, years of experience, research team support. Daily stocks research பண்றாரு, buy/sell decisions பண்றாரு. உங்க expense ratio-ல இருந்தே salary பெறுவாரு — உங்களுக்கு separate charge இல்ல. Fund Manager change ஆனா (AMC switch பண்ணும்போது) — அது ஒரு risk factor ஆகும். Good fund manager = consistent track record பாருங்க.</p>
+        <div class="tc-label">&#127470;&#127475; Fund Manager — Tamil Summary</div>
+        <p>Fund Manager = உங்களுக்காக invest பண்ற expert. NISM certified, years of experience, research team support. Daily stocks research பண்றாரு, buy/sell decisions பண்றாரு. உங்க expense ratio-ல இருந்தே salary பெறுவாரு — உங்களுக்கு separate charge இல்ல. Fund Manager change ஆனா — அது ஒரு risk factor ஆகும். Good fund manager = consistent track record பாருங்க.</p>
       </div>
     </div>
 
-    <!-- SECTION 6: AMC -->
+    <!-- S6: AMC -->
     <div class="section-block" id="s6">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">06</div><h2>What Does the AMC Do? — The Institution Behind the Fund</h2></div>
       <div class="prose">
         <p>The <strong>AMC (Asset Management Company)</strong> is the company that creates, manages, and distributes mutual funds. They are the legal entity responsible for your investments.</p>
       </div>
-
       <div class="table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Role</th><th>What They Do</th><th>Example</th></tr>
-          </thead>
+          <thead><tr><th>AMC Role</th><th>What They Do</th><th>Example</th></tr></thead>
           <tbody>
             <tr><td><strong>Fund Creation</strong></td><td>Designs the fund — its objective, benchmark, and investment strategy</td><td>SBI creates "SBI Bluechip Fund" targeting large cap stocks</td></tr>
-            <tr><td><strong>Portfolio Management</strong></td><td>Employs fund managers and research teams to invest your money wisely</td><td>Fund manager buys Reliance, TCS, Infosys shares</td></tr>
-            <tr><td><strong>NAV Calculation</strong></td><td>Calculates and publishes NAV every business day</td><td>NAV published by 11 PM on AMFI website daily</td></tr>
-            <tr><td><strong>Record Keeping</strong></td><td>Maintains your folio, unit holdings, and transaction history</td><td>Your CAMS statement from AMC records</td></tr>
-            <tr><td><strong>Compliance</strong></td><td>Follows all SEBI regulations, files mandatory reports, publishes monthly fact sheets</td><td>Monthly portfolio disclosure on AMC website</td></tr>
-            <tr><td><strong>Customer Service</strong></td><td>Processes investments, redemptions, SIP setup, and investor queries</td><td>Redemption processed within T+3 days</td></tr>
+            <tr><td><strong>Portfolio Management</strong></td><td>Employs fund managers and research teams to invest your money wisely</td><td>Fund manager buys Reliance, TCS, Infosys shares for the portfolio</td></tr>
+            <tr><td><strong>NAV Calculation</strong></td><td>Calculates and publishes NAV every business day after 3:30 PM</td><td>NAV published by 11 PM on AMFI website for every fund daily</td></tr>
+            <tr><td><strong>Record Keeping</strong></td><td>Maintains your folio, unit holdings, and complete transaction history</td><td>Your CAMS/KFintech statement with all investment records</td></tr>
+            <tr><td><strong>Compliance</strong></td><td>Follows all SEBI regulations, files mandatory reports, publishes monthly fact sheets</td><td>Monthly portfolio disclosure on AMC website — mandatory</td></tr>
+            <tr><td><strong>Customer Service</strong></td><td>Processes investments, redemptions, SIP setup, and investor queries</td><td>Redemption processed and money credited within T+3 days</td></tr>
           </tbody>
         </table>
       </div>
-
       <div class="cards-2">
         <div class="icard accent">
-          <div class="icard-icon">🏛️</div>
+          <div class="icard-icon">&#127963;&#65039;</div>
           <div class="icard-title">Top AMCs in India (2026)</div>
-          <div class="icard-desc">SBI Mutual Fund, HDFC Mutual Fund, ICICI Prudential MF, Mirae Asset MF, Axis MF, Kotak MF, Nippon India MF, Parag Parikh MF, Canara Robeco MF — all SEBI registered.</div>
+          <div class="icard-desc">SBI Mutual Fund, HDFC MF, ICICI Prudential MF, Mirae Asset MF, Axis MF, Kotak MF, Nippon India MF, Parag Parikh MF, Canara Robeco MF — all SEBI registered.</div>
         </div>
         <div class="icard accent">
-          <div class="icard-icon">🔒</div>
+          <div class="icard-icon">&#128274;</div>
           <div class="icard-title">Your Money's Safety with AMC</div>
-          <div class="icard-desc">Your investment is held separately by a Custodian bank (not by the AMC). Even if the AMC shuts down, your money is safe and returned to you. SEBI mandates this separation.</div>
+          <div class="icard-desc">Your investment is held separately by a Custodian bank — not by the AMC. Even if the AMC shuts down, your money is safe and returned to you. SEBI mandates this separation.</div>
         </div>
       </div>
-
       <div class="tamil-callout">
-        <div class="tc-label">🇮🇳 AMC — Tamil Explanation</div>
-        <p>AMC = Mutual Fund company. SBI MF, HDFC MF போன்றவை AMC. இவங்க SEBI-கிட்ட registered ஆகி இருக்காங்க. உங்க பணம் AMC-கிட்ட இல்ல — separate Custodian bank-ல இருக்கும் (like a locker). AMC fail ஆனாலும் உங்க பணம் safe. Currently India-ல 44 SEBI-registered AMCs இருக்காங்க. எல்லா AMC-உம் monthly fact sheet — portfolio details, NAV history, fund manager commentary publish பண்ணணும் — இது SEBI mandate.</p>
+        <div class="tc-label">&#127470;&#127475; AMC — Tamil Explanation</div>
+        <p>AMC = Mutual Fund company. SBI MF, HDFC MF போன்றவை AMC. இவங்க SEBI-கிட்ட registered ஆகி இருக்காங்க. உங்க பணம் AMC-கிட்ட இல்ல — separate Custodian bank-ல இருக்கும் (like a locker). AMC fail ஆனாலும் உங்க பணம் safe. Currently India-ல 44 SEBI-registered AMCs இருக்காங்க.</p>
       </div>
     </div>
 
-    <!-- SECTION 7: HOW RETURNS GENERATED -->
+    <!-- S7: HOW RETURNS GENERATED -->
     <div class="section-block" id="s7">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">07</div><h2>How Returns Are Generated in Mutual Funds</h2></div>
-      <div class="prose">
-        <p>Mutual fund returns come from 3 sources. Understanding each one helps you choose the right fund for your goal.</p>
-      </div>
-
+      <div class="prose"><p>Mutual fund returns come from 3 sources. Understanding each one helps you choose the right fund for your goal.</p></div>
       <div class="cards-3">
         <div class="icard accent">
-          <div class="icard-icon">📈</div>
+          <div class="icard-icon">&#128200;</div>
           <div class="icard-title">Capital Appreciation</div>
-          <div class="icard-desc">When stocks in the fund rise in price, the fund's NAV rises. This is the primary source of returns for equity funds. Long-term, equity NAV grows reflecting company earnings growth.</div>
+          <div class="icard-desc">When stocks in the fund rise in price, the fund's NAV rises. This is the primary source of returns for equity funds. Long-term NAV growth reflects company earnings growth.</div>
         </div>
         <div class="icard accent-gold">
-          <div class="icard-icon">💵</div>
+          <div class="icard-icon">&#128181;</div>
           <div class="icard-title">Dividends from Stocks</div>
-          <div class="icard-desc">Companies in the fund pay dividends to shareholders. The fund receives these dividends, which either get reinvested (in Growth plan) or distributed to you (in IDCW plan).</div>
+          <div class="icard-desc">Companies in the fund pay dividends to shareholders. The fund receives these dividends, which either get reinvested (Growth plan) or distributed to you (IDCW plan).</div>
         </div>
         <div class="icard accent-blue">
-          <div class="icard-icon">🏦</div>
+          <div class="icard-icon">&#127974;</div>
           <div class="icard-title">Interest Income</div>
-          <div class="icard-desc">For debt funds, returns come primarily from interest on bonds and government securities. More predictable than equity, lower risk, lower returns.</div>
+          <div class="icard-desc">For debt funds, returns come primarily from interest on bonds and government securities. More predictable than equity — lower risk, lower returns.</div>
         </div>
       </div>
-
       <div class="story-box">
-        <div class="story-label">📖 Example — How ₹1 Lakh Grows in 10 Years</div>
+        <div class="story-label">&#128214; Example — How &#8377;1 Lakh Grows in 10 Years</div>
         <h3>The Compounding Power of Mutual Fund Returns</h3>
-        <p>You invest ₹1,00,000 (₹1 Lakh) one-time in an equity mutual fund. The fund's NAV grows at an average of <span class="hl">12% per year</span> (rough historical average for diversified equity funds).</p>
+        <p>You invest &#8377;1,00,000 (&#8377;1 Lakh) one-time in an equity mutual fund growing at an average of <span class="hl">12% per year</span> (rough historical average for diversified equity funds):</p>
         <p>
-          Year 1: ₹1,00,000 × 1.12 = <span class="hl">₹1,12,000</span><br/>
-          Year 2: ₹1,12,000 × 1.12 = <span class="hl">₹1,25,440</span><br/>
-          Year 3: ₹1,25,440 × 1.12 = <span class="hl">₹1,40,493</span><br/>
-          Year 5: <span class="hl">₹1,76,234</span><br/>
-          Year 7: <span class="hl">₹2,21,068</span><br/>
-          Year 10: <span class="hl">₹3,10,585</span>
+          Year 1: &#8377;1,00,000 &#215; 1.12 = <span class="hl">&#8377;1,12,000</span><br/>
+          Year 3: <span class="hl">&#8377;1,40,493</span><br/>
+          Year 5: <span class="hl">&#8377;1,76,234</span><br/>
+          Year 7: <span class="hl">&#8377;2,21,068</span><br/>
+          Year 10: <span class="hl">&#8377;3,10,585</span>
         </p>
-        <p>₹1 Lakh → ₹3.10 Lakh in 10 years. Without doing anything. Just staying invested. Compare this to FD at 6.5%: ₹1 Lakh → ₹1.87 Lakh in 10 years.</p>
-        <div class="story-moral">💡 Tamil: ₹1 Lakh invest பண்ணி 10 years wait பண்ணா → ₹3.10 Lakh. FD-ல same money → ₹1.87 Lakh மட்டுமே. Difference = ₹1.23 Lakh! Long-term-ல compounding இப்படித்தான் work பண்ணும்.</div>
+        <p>&#8377;1 Lakh → &#8377;3.10 Lakh in 10 years. Without doing anything extra. Just staying invested. Compare this to FD at 6.5%: &#8377;1 Lakh → &#8377;1.87 Lakh in 10 years.</p>
+        <div class="story-moral">&#128161; Tamil: &#8377;1 Lakh invest பண்ணி 10 years wait பண்ணா → &#8377;3.10 Lakh. FD-ல same money → &#8377;1.87 Lakh மட்டுமே. Difference = &#8377;1.23 Lakh extra! Long-term-ல compounding இப்படித்தான் work பண்ணும்.</div>
       </div>
     </div>
 
-    <!-- SECTION 8: GROWTH VS DIVIDEND -->
+    <!-- ADSENSE MID 3 -->
+    <ins class="adsbygoogle" style="display:block;margin:32px 0" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+
+    <!-- S8: GROWTH VS IDCW -->
     <div class="section-block" id="s8">
       <span class="section-anchor"></span>
-      <div class="sh"><div class="sh-num">08</div><h2>Growth Plan vs IDCW (Dividend) Plan — Which to Choose?</h2></div>
+      <div class="sh"><div class="sh-num">08</div><h2>Growth Plan vs IDCW Plan — Which to Choose?</h2></div>
       <div class="prose">
         <p>Every mutual fund offers two variants: <strong>Growth Plan</strong> and <strong>IDCW Plan</strong> (Income Distribution cum Capital Withdrawal — formerly called Dividend Plan). Choosing the right one affects how your returns work.</p>
       </div>
-
       <div class="table-wrap">
         <table class="data-table">
-          <thead>
-            <tr><th>Feature</th><th>Growth Plan</th><th>IDCW Plan</th></tr>
-          </thead>
+          <thead><tr><th>Feature</th><th>Growth Plan</th><th>IDCW Plan</th></tr></thead>
           <tbody>
             <tr><td><strong>What happens to profits?</strong></td><td class="td-green">Reinvested automatically — NAV keeps growing</td><td class="td-gold">Distributed as periodic payouts to your bank</td></tr>
             <tr><td><strong>NAV behaviour</strong></td><td>Keeps rising over time</td><td>Falls after each distribution (profit removed)</td></tr>
             <tr><td><strong>Compounding effect</strong></td><td class="td-green">Maximum — profits generate more profits</td><td class="td-red">Reduced — profits taken out regularly</td></tr>
             <tr><td><strong>Tax on payouts</strong></td><td>Only when you redeem (LTCG/STCG)</td><td class="td-red">Taxed as income in the year received</td></tr>
             <tr><td><strong>Best for</strong></td><td class="td-green">Long-term wealth building</td><td>Retirees needing regular income</td></tr>
-            <tr><td><strong>Recommended for beginners?</strong></td><td class="td-green">Yes — always choose Growth</td><td>Only if you need regular income</td></tr>
+            <tr><td><strong>Recommended for beginners?</strong></td><td class="td-green">Yes — always choose Growth</td><td>Only if you need regular periodic income</td></tr>
           </tbody>
         </table>
       </div>
-
       <div class="key-point">
-        <div class="kp-icon">✅</div>
-        <div class="kp-text"><strong>Simple Rule:</strong> If you're investing for long-term wealth creation (retirement, child education, etc.) — <strong>always choose Growth Plan.</strong> IDCW is only for retirees or people who need periodic income from their investment. For all others, Growth Plan's compounding effect builds far more wealth over time.</div>
+        <div class="kp-icon">&#9989;</div>
+        <div class="kp-text"><strong>Simple Rule:</strong> If you're investing for long-term wealth creation (retirement, child education, etc.) — <strong>always choose Growth Plan.</strong> IDCW is only for retirees or people who specifically need periodic income. For everyone else, Growth Plan's compounding effect builds far more wealth over time.</div>
       </div>
-
       <div class="tamil-callout">
-        <div class="tc-label">🇮🇳 Growth vs IDCW — Tamil</div>
+        <div class="tc-label">&#127470;&#127475; Growth vs IDCW — Tamil</div>
         <p><strong>Growth Plan:</strong> Profit reinvest ஆகுது → NAV keep growing → Compounding maximum → Long-term wealth best → Tax only when sell பண்றீங்க.</p>
         <p><strong>IDCW Plan:</strong> Profit periodically distribute பண்றாங்க → NAV down ஆகும் → Compounding less → Tax that year income-ஆ count ஆகும்.</p>
         <p><strong>Verdict:</strong> Beginner, young investor, long-term goal — <strong>Growth Plan choose பண்ணுங்க.</strong> Retirement income வேணும்னா மட்டும் IDCW.</p>
       </div>
     </div>
 
-    <!-- SECTION 9: REDEMPTION -->
+    <!-- S9: REDEMPTION -->
     <div class="section-block" id="s9">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">09</div><h2>How Redemption Works — Getting Your Money Back</h2></div>
       <div class="prose">
-        <p>Redemption is the process of selling your mutual fund units and getting money back in your bank account. It's simpler than most people think — and usually takes just 1–3 business days.</p>
+        <p>Redemption is the process of selling your mutual fund units and getting money back in your bank account. It's simpler than most people think and usually takes just 1–3 business days.</p>
       </div>
-
       <div class="process-flow">
         <div class="pf-step">
           <div class="pf-num">1</div>
           <div class="pf-content">
             <h4>Submit Redemption Request</h4>
-            <p>Log in to your app/AMC website, go to your folio, select the fund, and click "Redeem." Choose either the amount (₹20,000) or number of units (50 units) you want to sell.</p>
-            <div class="pf-example">Tamil: App-ல போய் "Redeem" click பண்ணுங்க. Amount (₹20,000 withdraw) அல்லது Units (50 units sell) — ஏதாவது ஒன்னு specify பண்ணுங்க.</div>
+            <p>Log in to your app or AMC website, go to your folio, select the fund, and click "Redeem." Choose either the amount (&#8377;20,000) or number of units (50 units) you want to sell.</p>
+            <div class="pf-example">Tamil: App-ல போய் "Redeem" click பண்ணுங்க. Amount (&#8377;20,000 withdraw) அல்லது Units (50 units sell) — ஏதாவது ஒன்னு specify பண்ணுங்க.</div>
           </div>
         </div>
         <div class="pf-step">
           <div class="pf-num">2</div>
           <div class="pf-content">
             <h4>Cut-off Time Determines NAV</h4>
-            <p>Equity funds: request before 3:00 PM → same day NAV applied. Request after 3:00 PM → next day NAV. Debt funds: cut-off is also 3:00 PM but settlement is faster (T+1 or T+2).</p>
+            <p>Equity funds: request before 3:00 PM → same day NAV applied. Request after 3:00 PM → next day NAV. Debt funds: also 3:00 PM cut-off but settlement is faster (T+1 or T+2).</p>
             <div class="pf-example">Tamil: 3 PM cut-off important! 2:30 PM-ல request பண்ணா → today's NAV. 4 PM-ல request பண்ணா → tomorrow's NAV. Urgent need-ஆ இருந்தா 3 PM-க்கு முன்னாடி submit பண்ணுங்க.</div>
           </div>
         </div>
@@ -850,7 +866,7 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
           <div class="pf-num">3</div>
           <div class="pf-content">
             <h4>Units Are Debited from Folio</h4>
-            <p>The corresponding units are immediately marked for redemption and removed from your folio. You'll receive a redemption confirmation via email and SMS.</p>
+            <p>The corresponding units are immediately marked for redemption and removed from your folio. You'll receive a redemption confirmation via email and SMS instantly.</p>
             <div class="pf-example">Tamil: Folio-ல இருந்து units remove ஆகும். Email/SMS confirmation வரும். இந்த step-ல உங்களுக்கு ஒன்னும் பண்ண வேண்டாம் — automatic ஆகும்.</div>
           </div>
         </div>
@@ -858,83 +874,78 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
           <div class="pf-num">4</div>
           <div class="pf-content">
             <h4>Money Hits Your Bank Account</h4>
-            <p>For equity funds: T+3 business days (3 working days after redemption date). For debt funds: T+1 or T+2. Money goes directly to your registered bank account — the same one used for SIP investment.</p>
-            <div class="pf-example">Tamil: Equity fund → 3 working days. Debt fund → 1–2 working days. Money directly registered bank account-ல வரும். ATM withdraw பண்ணலாம், UPI use பண்ணலாம் — normal bank money போல.</div>
+            <p>For equity funds: T+3 business days. For debt funds: T+1 or T+2. Money goes directly to your registered bank account — the same one used for your SIP investment.</p>
+            <div class="pf-example">Tamil: Equity fund → 3 working days. Debt fund → 1–2 working days. Money directly registered bank account-ல வரும். Normal bank money போல use பண்ணலாம்.</div>
           </div>
         </div>
       </div>
-
       <div class="warning-box">
-        <p>⚠️ <strong>Exit Load Alert:</strong> Some funds charge an "Exit Load" if you redeem within a certain period (typically 1 year for equity funds, at 1%). This is deducted from your redemption proceeds. Always check the fund's exit load before investing, especially for short-term investments. ELSS funds have a mandatory 3-year lock-in and cannot be redeemed before that.</p>
+        <p>&#9888;&#65039; <strong>Exit Load Alert:</strong> Some funds charge an "Exit Load" if you redeem within a certain period — typically 1% if redeemed within 1 year for equity funds. This is deducted from redemption proceeds. Always check the fund's exit load before investing. ELSS funds have a mandatory 3-year lock-in and cannot be redeemed before that period ends.</p>
       </div>
-
       <div class="tamil-callout">
-        <div class="tc-label">🇮🇳 Exit Load — Tamil</div>
-        <p>Exit Load = Early withdrawal penalty. Most equity funds — 1 year-க்கு முன்னாடி withdraw பண்ணா 1% charge பண்ணுவாங்க. 1 year-க்கு பிறகு withdraw பண்ணா → Exit Load = 0 (free). ELSS = 3 years lock-in, ஒரே ஒரு exception. Invest பண்றதுக்கு முன்னாடி fund-ஓட exit load scheme document-ல check பண்ணுங்க.</p>
+        <div class="tc-label">&#127470;&#127475; Exit Load — Tamil</div>
+        <p>Exit Load = Early withdrawal penalty. Most equity funds — 1 year-க்கு முன்னாடி withdraw பண்ணா 1% charge பண்ணுவாங்க. 1 year-க்கு பிறகு withdraw பண்ணா → Exit Load = 0 (free!). ELSS = 3 years lock-in — only exception. Invest பண்றதுக்கு முன்னாடி exit load check பண்ணுங்க.</p>
       </div>
     </div>
 
-    <!-- SECTION 10: NAV DAY BY DAY -->
+    <!-- S10: NAV TRACKING -->
     <div class="section-block" id="s10">
       <span class="section-anchor"></span>
       <div class="sh"><div class="sh-num">10</div><h2>NAV Tracking — A Real Week of Market Movement</h2></div>
       <div class="prose">
-        <p>Let's track a hypothetical fund through one week of market activity to understand exactly how NAV changes — and why short-term fluctuations shouldn't worry a long-term investor.</p>
+        <p>Let's track a hypothetical fund through one week of market activity to understand exactly how NAV changes — and why short-term fluctuations should never worry a long-term investor.</p>
       </div>
-
       <div class="nav-journey">
         <div class="nj-header">
           <span>Day</span>
           <span>Market Event</span>
           <span>Fund NAV</span>
           <span>Change</span>
-          <span>Your ₹10K Worth</span>
+          <span>&#8377;10K Worth</span>
         </div>
         <div class="nj-row">
           <div class="nj-cell bold">Monday</div>
           <div class="nj-cell">You invest, markets stable</div>
-          <div class="nj-cell bold">₹100.00</div>
+          <div class="nj-cell bold">&#8377;100.00</div>
           <div class="nj-cell">— (buy day)</div>
-          <div class="nj-cell gold">₹10,000</div>
+          <div class="nj-cell gold">&#8377;10,000</div>
         </div>
         <div class="nj-row">
           <div class="nj-cell bold">Tuesday</div>
           <div class="nj-cell">IT sector news — stocks up</div>
-          <div class="nj-cell bold">₹102.50</div>
+          <div class="nj-cell bold">&#8377;102.50</div>
           <div class="nj-cell green">+2.50%</div>
-          <div class="nj-cell green">₹10,250</div>
+          <div class="nj-cell green">&#8377;10,250</div>
         </div>
         <div class="nj-row">
           <div class="nj-cell bold">Wednesday</div>
           <div class="nj-cell">Global sell-off, markets fall</div>
-          <div class="nj-cell bold">₹97.30</div>
-          <div class="nj-cell red">−5.07%</div>
-          <div class="nj-cell red">₹9,730</div>
+          <div class="nj-cell bold">&#8377;97.30</div>
+          <div class="nj-cell red">&#8722;5.07%</div>
+          <div class="nj-cell red">&#8377;9,730</div>
         </div>
         <div class="nj-row">
           <div class="nj-cell bold">Thursday</div>
           <div class="nj-cell">Good GDP data, recovery</div>
-          <div class="nj-cell bold">₹99.80</div>
+          <div class="nj-cell bold">&#8377;99.80</div>
           <div class="nj-cell green">+2.57%</div>
-          <div class="nj-cell">₹9,980</div>
+          <div class="nj-cell">&#8377;9,980</div>
         </div>
         <div class="nj-row">
           <div class="nj-cell bold">Friday</div>
           <div class="nj-cell">RBI policy positive, rally</div>
-          <div class="nj-cell bold">₹103.20</div>
+          <div class="nj-cell bold">&#8377;103.20</div>
           <div class="nj-cell green">+3.40%</div>
-          <div class="nj-cell green">₹10,320</div>
+          <div class="nj-cell green">&#8377;10,320</div>
         </div>
       </div>
-
       <div class="key-point">
-        <div class="kp-icon">🧘</div>
-        <div class="kp-text"><strong>The Lesson:</strong> On Wednesday, your investment went below ₹10,000 — to ₹9,730. A nervous investor might panic and sell, locking in a loss. A patient investor who stayed invested saw it recover and go higher by Friday. This is exactly why long-term investing works — <strong>short-term NAV dips are normal and expected.</strong></div>
+        <div class="kp-icon">&#129496;</div>
+        <div class="kp-text"><strong>The Lesson:</strong> On Wednesday, your investment went below &#8377;10,000 — to &#8377;9,730. A nervous investor might panic and sell, locking in a loss. A patient investor who stayed invested saw it recover and go higher by Friday. This is exactly why long-term investing works — <strong>short-term NAV dips are normal and expected.</strong></div>
       </div>
-
       <div class="tamil-callout">
-        <div class="tc-label">🇮🇳 NAV Fluctuation — Tamil Lesson</div>
-        <p>Wednesday-ல NAV ₹97 ஆச்சு — ₹10,000 → ₹9,730 ஆச்சு. Panic ஆகி sell பண்ணிருந்தா ₹270 loss. ஆனா wait பண்ணினவங்களுக்கு Friday-ல ₹10,320 — profit! இதுதான் long-term investing-ஓட lesson. <strong>Daily NAV பார்க்காதீங்க — anxiety வரும்.</strong> 6 மாசம் / 1 year intervals-ல review பண்ணுங்க. Goal-focused ஆ இருங்க, NAV-focused ஆ இல்லாதீங்க.</p>
+        <div class="tc-label">&#127470;&#127475; NAV Fluctuation — Tamil Lesson</div>
+        <p>Wednesday-ல NAV &#8377;97 ஆச்சு — &#8377;10,000 → &#8377;9,730 ஆச்சு. Panic ஆகி sell பண்ணிருந்தா &#8377;270 loss. ஆனா wait பண்ணினவங்களுக்கு Friday-ல &#8377;10,320 — profit! <strong>Daily NAV பார்க்காதீங்க — anxiety வரும்.</strong> 6 மாசம் / 1 year intervals-ல review பண்ணுங்க. Goal-focused ஆ இருங்க!</p>
       </div>
     </div>
 
@@ -953,54 +964,54 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
     <!-- FAQ -->
     <div class="section-block" id="faq">
       <span class="section-anchor"></span>
-      <div class="sh"><div class="sh-num">❓</div><h2>Frequently Asked Questions</h2></div>
+      <div class="sh"><div class="sh-num">?</div><h2>Frequently Asked Questions</h2></div>
       <div class="faq-section">
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Why does NAV change every day? Can it go to zero?<span class="faq-icon">+</span></button>
           <div class="faq-a"><div class="faq-a-inner">
             <p>NAV changes every day because the market value of all stocks in the fund's portfolio changes every day when stock markets are open. When company stocks rise, fund NAV rises. When stocks fall, fund NAV falls.</p>
-            <p>Can NAV go to zero? Theoretically only if every single company in the fund goes completely bankrupt simultaneously — which is virtually impossible for a diversified fund. Even in the 2008 global financial crisis, Indian diversified equity funds fell 50–60% but recovered fully within 2–3 years.</p>
+            <p>Can NAV go to zero? Theoretically only if every single company in the fund goes completely bankrupt simultaneously — virtually impossible for a diversified fund. Even in the 2008 global financial crisis, Indian diversified equity funds fell 50–60% but recovered fully within 2–3 years.</p>
             <p><strong>Tamil:</strong> NAV daily change ஆகுது ஏன்னா stocks daily change ஆகுது. Zero ஆகுமா? All 40–70 companies simultaneously bankrupt ஆகணும் — practically impossible. History-ல இதுவரை diversified MF NAV zero ஆனது இல்ல India-ல.</p>
           </div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">Is a fund with NAV ₹10 better than one with NAV ₹500?<span class="faq-icon">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">Is a fund with NAV &#8377;10 better than one with NAV &#8377;500?<span class="faq-icon">+</span></button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>Absolutely not. NAV is not an indicator of a fund's value or future potential. A fund with NAV ₹500 simply means it has been around longer and performed well over the years — that's actually a positive sign.</p>
-            <p>A new fund with NAV ₹10 is just starting — it has no track record. Choosing a fund based on low NAV is one of the most common and costly mistakes beginners make.</p>
-            <p><strong>Tamil:</strong> NAV ₹10 = cheap, NAV ₹500 = expensive — இந்த thinking totally wrong! NAV ₹500 = 10+ years of growth. NAV ₹10 = brand new, no history. Always fund's track record, fund manager, expense ratio பாருங்க — NAV பாக்காதீங்க.</p>
+            <p>Absolutely not. NAV is not an indicator of a fund's value or future potential. A fund with NAV &#8377;500 simply means it has been around longer and performed well over the years — that's actually a very positive sign showing consistent growth.</p>
+            <p>A new fund with NAV &#8377;10 is just starting — it has no track record to evaluate. Choosing a fund based on low NAV is one of the most common and costly mistakes beginners make.</p>
+            <p><strong>Tamil:</strong> NAV &#8377;10 = cheap, NAV &#8377;500 = expensive — இந்த thinking totally wrong! NAV &#8377;500 = 10+ years of proven growth. Always fund's track record, fund manager, expense ratio பாருங்க — NAV alone பாக்காதீங்க.</p>
           </div></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">What happens to my units if the fund manager leaves the AMC?<span class="faq-icon">+</span></button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>Your units and money are completely safe — they belong to you, not to the fund manager. The AMC will appoint a new fund manager. However, a change in fund manager is worth monitoring because the new manager may have a different investment philosophy.</p>
-            <p>If the new fund manager's track record is strong, no action needed. If you're concerned, you can exit the fund after the lock-in period (if any) without penalty in most cases. Your MFD will alert you to significant fund manager changes.</p>
-            <p><strong>Tamil:</strong> Fund manager போனாலும் உங்க units safe. AMC new manager appoint பண்ணும். ஆனா new manager-ஓட track record பாருங்க. Concern இருந்தா MFD-கிட்ட discuss பண்ணுங்க — அவங்க guide பண்ணுவாங்க.</p>
+            <p>Your units and money are completely safe — they belong to you, not to the fund manager. The AMC will appoint a new fund manager. However, a fund manager change is worth monitoring because the new manager may have a different investment philosophy that affects performance.</p>
+            <p>If the new fund manager has a strong track record, no action needed. If you're concerned, you can exit after any lock-in period. Your AMFI-registered MFD will alert you to significant changes.</p>
+            <p><strong>Tamil:</strong> Fund manager போனாலும் உங்க units safe. AMC new manager appoint பண்ணும். ஆனா new manager-ஓட track record பாருங்க. Concern இருந்தா MFD-கிட்ட discuss பண்ணுங்க.</p>
           </div></div>
         </div>
         <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">How many units do I get if I invest ₹1,000 in a SIP every month?<span class="faq-icon">+</span></button>
+          <button class="faq-q" onclick="toggleFaq(this)">How many units do I get if I invest &#8377;1,000 in a SIP every month?<span class="faq-icon">+</span></button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>It varies every month because NAV changes. In Month 1, if NAV is ₹50, you get 20 units. In Month 2, if NAV is ₹55, you get 18.18 units. In Month 3, if NAV is ₹45 (market dip), you get 22.22 units.</p>
-            <p>This variation is exactly what makes SIP powerful — you automatically buy more units when markets are low. Over 12 months your average cost per unit gets smoothed out — this is Rupee Cost Averaging.</p>
-            <p><strong>Tamil:</strong> Every month NAV different ஆனதால units different ஆகும். Market down month-ல more units கிடைக்கும் — market up month-ல less units. Average-ஆ calculate பண்ணும்போது cost per unit smoothen ஆகும். இதுதான் SIP-ஓட superpower — Rupee Cost Averaging!</p>
+            <p>It varies every month because NAV changes. In Month 1, if NAV is &#8377;50, you get 20 units. In Month 2, if NAV is &#8377;55, you get 18.18 units. In Month 3, if NAV is &#8377;45 (market dip), you get 22.22 units.</p>
+            <p>This variation is exactly what makes SIP powerful — you automatically buy more units when markets are low. Over 12 months your average cost per unit gets smoothed out — this is Rupee Cost Averaging, SIP's biggest superpower.</p>
+            <p><strong>Tamil:</strong> Every month NAV different ஆனதால units different ஆகும். Market down month-ல more units கிடைக்கும் — market up month-ல less units. Average-ஆ calculate பண்ணும்போது cost per unit smoothen ஆகும் — இதுதான் SIP-ஓட superpower!</p>
           </div></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">Can I pause or stop my SIP without penalty?<span class="faq-icon">+</span></button>
           <div class="faq-a"><div class="faq-a-inner">
             <p>Yes! SIP is completely flexible. You can pause your SIP for 1–3 months (most AMCs allow this), permanently stop it, or reduce the SIP amount — all without any penalty. Your existing units remain invested and continue to grow.</p>
-            <p>To pause or stop, simply log in to your app or contact your MFD at least 7–10 working days before the next SIP date. Missing one SIP payment without notifying the bank is fine — it just won't invest that month. No penalty from the fund side.</p>
-            <p><strong>Tamil:</strong> SIP pause / stop — no penalty! 7–10 working days-ஓட notice கொடுத்தா போதும். Existing units invested-ஆ இருக்கும், grow ஆகும். Financial emergency-ல pause பண்ணலாம். Situation normal ஆனா restart பண்ணலாம் — completely flexible.</p>
+            <p>To pause or stop, log in to your app or contact your MFD at least 7–10 working days before the next SIP date. Missing one SIP payment without notifying is fine — it just won't invest that month. No penalty from the fund side.</p>
+            <p><strong>Tamil:</strong> SIP pause/stop — no penalty! 7–10 working days-ஓட notice கொடுத்தா போதும். Existing units invested-ஆ இருக்கும், grow ஆகும். Financial emergency-ல pause பண்ணலாம். Situation normal ஆனா restart பண்ணலாம் — completely flexible!</p>
           </div></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">What is the difference between NAV and market price?<span class="faq-icon">+</span></button>
           <div class="faq-a"><div class="faq-a-inner">
-            <p>For open-ended mutual funds (the most common type), NAV = the price at which you buy or sell units. It's calculated once per day after market close. You always transact at this NAV — no premium or discount.</p>
-            <p>Market price is different from NAV only for Closed-Ended Funds and ETFs (Exchange Traded Funds) which trade on stock exchanges like shares — their market price can be above (premium) or below (discount) their actual NAV. For regular open-ended mutual funds, you always get exactly the NAV value.</p>
-            <p><strong>Tamil:</strong> Open-ended funds (regular MFs) — NAV = actual buy/sell price. No difference. ETFs மட்டும் stock exchange-ல trade ஆகுது — market price, NAV-விட different ஆகலாம். Regular mutual fund invest பண்றீங்கன்னா NAV-தான் உங்க actual price — no premium, no discount.</p>
+            <p>For open-ended mutual funds (the most common type), NAV equals the price at which you buy or sell units. It's calculated once per day after market close. You always transact at this NAV — no premium or discount ever.</p>
+            <p>Market price differs from NAV only for Closed-Ended Funds and ETFs (Exchange Traded Funds) which trade on stock exchanges like shares — their market price can be above (premium) or below (discount) their actual NAV. For regular open-ended mutual funds, you always get exactly the NAV value.</p>
+            <p><strong>Tamil:</strong> Open-ended funds (regular MFs) — NAV = actual buy/sell price. No difference at all. ETFs மட்டும் stock exchange-ல trade ஆகுது — market price, NAV-விட different ஆகலாம். Regular mutual fund-ல NAV-தான் உங்க actual price.</p>
           </div></div>
         </div>
       </div>
@@ -1012,24 +1023,27 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
       <div class="author-info">
         <h4>Vignesh Dhayalan</h4>
         <div class="author-role">AMFI Registered Mutual Fund Distributor | ARN-288927 | NISM Certified | Bangalore</div>
-        <p>Passionate about making financial education accessible to every Tamil-speaking investor. Creator of Universal Money Mart — a complete Tamil-language platform for mutual fund and wealth creation education. If you have any questions about this article or want to start investing, reach out directly on WhatsApp.</p>
+        <p>Passionate about making financial education accessible to every Tamil-speaking investor. Creator of Universal Money Mart — a complete Tamil-language platform for mutual fund and wealth creation education. If you have any questions about this article or want to start investing, reach out directly on WhatsApp — free guidance in Tamil.</p>
       </div>
     </div>
 
     <!-- DISCLAIMER -->
     <div class="disclaimer">
-      <strong>⚠️ Disclaimer:</strong> Mutual Fund investments are subject to market risks. Read all scheme related documents carefully. The content in this article is purely educational and does not constitute investment advice. NAV figures and return percentages used are illustrative examples only. Actual returns will vary based on fund performance and market conditions. As an AMFI Registered MFD (ARN-288927), all guidance follows SEBI and AMFI regulations. Past performance is not indicative of future results.
+      <strong>&#9888;&#65039; Disclaimer:</strong> Mutual Fund investments are subject to market risks. Read all scheme related documents carefully. The content in this article is purely educational and does not constitute investment advice. NAV figures and return percentages used are illustrative examples only. Actual returns will vary based on fund performance and market conditions. As an AMFI Registered MFD (ARN-288927), all guidance follows SEBI and AMFI regulations strictly. Past performance is not indicative of future results.
     </div>
+
+    <!-- ADSENSE BOTTOM -->
+    <ins class="adsbygoogle" style="display:block;margin:28px 0" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
 
     <!-- ARTICLE NAV -->
     <div class="article-nav">
       <a href="article-what-is-mutual-fund.html" class="article-nav-item">
-        <div class="an-dir">← Article 01</div>
+        <div class="an-dir">&#8592; Article 01</div>
         <div class="an-title">What is a Mutual Fund? — Complete Beginner's Guide</div>
       </a>
       <a href="article-mutual-fund-types.html" class="article-nav-item an-next">
-        <div class="an-dir">Article 03 →</div>
-        <div class="an-title">Types of Mutual Funds — Equity, Debt & Hybrid Explained</div>
+        <div class="an-dir">Article 03 &#8594;</div>
+        <div class="an-title">Types of Mutual Funds — Equity, Debt and Hybrid Explained</div>
       </a>
     </div>
 
@@ -1055,62 +1069,78 @@ footer{background:var(--dark);color:var(--white);padding:40px 24px;margin-top:80
       <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA" target="_blank">YouTube</a>
       <a href="index.html#contact">Contact</a>
     </div>
-    <div class="footer-copy">Copyright © 2026 Universal Money Mart. All rights reserved. | Mutual Fund investments are subject to market risks.</div>
+    <div class="footer-copy">Copyright 2026 Universal Money Mart. All rights reserved. | Mutual Fund investments are subject to market risks.</div>
   </div>
 </footer>
 
 <script>
-/* Reading progress */
-window.addEventListener('scroll',()=>{
-  const d=document.documentElement;
-  document.getElementById('progress-bar').style.width=
-    Math.min((d.scrollTop/(d.scrollHeight-d.clientHeight))*100,100)+'%';
+(adsbygoogle=window.adsbygoogle||[]).push({});
+(adsbygoogle=window.adsbygoogle||[]).push({});
+(adsbygoogle=window.adsbygoogle||[]).push({});
+(adsbygoogle=window.adsbygoogle||[]).push({});
+(adsbygoogle=window.adsbygoogle||[]).push({});
+
+window.addEventListener('scroll',function(){
+  var d=document.documentElement;
+  document.getElementById('progress-bar').style.width=Math.min((d.scrollTop/(d.scrollHeight-d.clientHeight))*100,100)+'%';
 });
 
-/* Stepper tabs */
-function showTab(idx){
-  document.querySelectorAll('.stepper-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
-  document.querySelectorAll('.stepper-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+function toggleNav(){document.getElementById('navLinks').classList.toggle('open')}
+document.querySelectorAll('#navLinks a').forEach(function(a){
+  a.addEventListener('click',function(){document.getElementById('navLinks').classList.remove('open')});
+});
+
+function toggleMobileTOC(){
+  var t=document.getElementById('mobileTOC');
+  var a=document.getElementById('tocArrow');
+  t.classList.toggle('open');
+  a.textContent=t.classList.contains('open')?'▲':'▼';
+}
+function closeMobileTOC(){
+  document.getElementById('mobileTOC').classList.remove('open');
+  document.getElementById('tocArrow').textContent='▼';
 }
 
-/* NAV Calculator */
+function showTab(idx){
+  document.querySelectorAll('.stepper-tab').forEach(function(t,i){t.classList.toggle('active',i===idx)});
+  document.querySelectorAll('.stepper-panel').forEach(function(p,i){p.classList.toggle('active',i===idx)});
+}
+
 function calcNAV(){
-  const inv=parseFloat(document.getElementById('investAmt').value)||0;
-  const nav=parseFloat(document.getElementById('currentNAV').value)||1;
-  const fNav=parseFloat(document.getElementById('futureNAV').value)||1;
-  const units=inv/nav;
-  const fv=units*fNav;
-  const pl=fv-inv;
-  const plPct=((fv-inv)/inv*100);
+  var inv=parseFloat(document.getElementById('investAmt').value)||0;
+  var nav=parseFloat(document.getElementById('currentNAV').value)||1;
+  var fNav=parseFloat(document.getElementById('futureNAV').value)||1;
+  var units=inv/nav;
+  var fv=units*fNav;
+  var pl=fv-inv;
+  var plPct=(fv-inv)/inv*100;
   document.getElementById('unitsAllotted').textContent=units.toFixed(3);
-  document.getElementById('futureValue').textContent='₹'+Math.round(fv).toLocaleString('en-IN');
-  const plEl=document.getElementById('profitLoss');
-  plEl.textContent=(pl>=0?'+':'')+'₹'+Math.round(Math.abs(pl)).toLocaleString('en-IN');
+  document.getElementById('futureValue').textContent='&#8377;'+Math.round(fv).toLocaleString('en-IN');
+  var plEl=document.getElementById('profitLoss');
+  plEl.innerHTML=(pl>=0?'+':'')+'\u20b9'+Math.round(Math.abs(pl)).toLocaleString('en-IN');
   plEl.style.color=pl>=0?'#9FE1CB':'#F09595';
   document.getElementById('formulaDisplay').textContent=
-    `Formula: ₹${inv.toLocaleString('en-IN')} ÷ ₹${nav} NAV = ${units.toFixed(3)} units | At ₹${fNav} NAV → ${units.toFixed(3)} × ₹${fNav} = ₹${Math.round(fv).toLocaleString('en-IN')} | ${pl>=0?'Profit':'Loss'} = ₹${Math.round(Math.abs(pl)).toLocaleString('en-IN')} (${plPct>=0?'+':''}${plPct.toFixed(2)}%)`;
+    'Formula: \u20b9'+inv.toLocaleString('en-IN')+' \u00f7 \u20b9'+nav+' NAV = '+units.toFixed(3)+' units | At \u20b9'+fNav+' NAV \u2192 '+units.toFixed(3)+' \u00d7 \u20b9'+fNav+' = \u20b9'+Math.round(fv).toLocaleString('en-IN')+' | '+(pl>=0?'Profit':'Loss')+' = \u20b9'+Math.round(Math.abs(pl)).toLocaleString('en-IN')+' ('+(plPct>=0?'+':'')+plPct.toFixed(2)+'%)';
 }
 
-/* TOC active highlight */
-const sections=document.querySelectorAll('.section-block');
-const tocLinks=document.querySelectorAll('#tocLinks a');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
+var sections=document.querySelectorAll('.section-block');
+var tocLinks=document.querySelectorAll('#tocLinks a');
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
     if(e.isIntersecting){
-      tocLinks.forEach(a=>a.classList.remove('active'));
-      const a=document.querySelector(`#tocLinks a[href="#${e.target.id}"]`);
+      tocLinks.forEach(function(a){a.classList.remove('active')});
+      var a=document.querySelector('#tocLinks a[href="#'+e.target.id+'"]');
       if(a)a.classList.add('active');
     }
   });
 },{rootMargin:'-80px 0px -60% 0px',threshold:0});
-sections.forEach(s=>observer.observe(s));
+sections.forEach(function(s){observer.observe(s)});
 
-/* FAQ */
 function toggleFaq(btn){
-  const item=btn.parentElement;
-  const ans=item.querySelector('.faq-a');
-  const isOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(i=>{
+  var item=btn.parentElement;
+  var ans=item.querySelector('.faq-a');
+  var isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(i){
     i.classList.remove('open');
     i.querySelector('.faq-a').style.maxHeight='0';
   });
