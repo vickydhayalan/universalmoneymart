@@ -4,895 +4,879 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Prompt Library — Universal Money Mart</title>
+<meta name="description" content="Free AI image prompts, video prompts, 3D render prompts. Copy, share and create stunning AI art. Updated daily.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814" crossorigin="anonymous"></script>
 <style>
-  /* ── Reset & Base ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: #0C0C0F;
-    color: #E2E2E6;
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+:root{
+  --bg:#0A0A0D;
+  --s1:#131316;
+  --s2:#1A1A1F;
+  --s3:#222228;
+  --s4:#2C2C34;
+  --b1:rgba(255,255,255,.06);
+  --b2:rgba(255,255,255,.11);
+  --b3:rgba(255,255,255,.18);
+  --gold:#F5A623;
+  --gold2:#FFD166;
+  --teal:#06B6D4;
+  --green:#22C55E;
+  --red:#EF4444;
+  --blue:#3B82F6;
+  --purple:#8B5CF6;
+  --wa:#25D366;
+  --tg:#0088CC;
+  --t1:#F4F4F8;
+  --t2:#9B9BA8;
+  --t3:#55555F;
+  --r:14px;
+  --rsm:10px;
+  --rfull:100px;
+}
 
-  /* ── CSS Variables ── */
-  :root {
-    --gold: #F5A623;
-    --gold-dim: rgba(245,166,35,.12);
-    --teal: #06B6D4;
-    --teal-dim: rgba(6,182,212,.1);
-    --surface: #16161A;
-    --surface2: #1E1E24;
-    --surface3: #28282F;
-    --border: rgba(255,255,255,.07);
-    --border2: rgba(255,255,255,.12);
-    --text: #F0F0F4;
-    --text2: #9B9BA8;
-    --text3: #62626E;
-    --green: #22C55E;
-    --red: #EF4444;
-    --blue: #3B82F6;
-    --purple: #8B5CF6;
-    --radius: 12px;
-    --radius-sm: 8px;
-    --radius-full: 100px;
-  }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);color:var(--t1);
+  font-size:15px;line-height:1.6;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
 
-  a { color: inherit; text-decoration: none; }
-  button { font-family: inherit; cursor: pointer; }
+/* ══════════════════════════════
+   HEADER — Mobile optimised
+══════════════════════════════ */
+.hdr{
+  position:sticky;top:0;z-index:200;
+  background:rgba(10,10,13,.92);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--b1);
+}
+.hdr-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;height:58px;
+}
+.logo{display:flex;align-items:center;gap:9px}
+.logo-box{
+  width:34px;height:34px;border-radius:9px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),#C97D10);
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;box-shadow:0 0 16px rgba(245,166,35,.3);
+}
+.logo-name{font-size:16px;font-weight:800;color:var(--t1);letter-spacing:-.02em}
+.logo-name b{color:var(--gold)}
 
-  /* ── HEADER ── */
-  .header {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(12,12,15,.9);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-  }
-  .header-inner {
-    max-width: 1200px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 60px; gap: 16px;
-  }
-  .logo {
-    display: flex; align-items: center; gap: 10px;
-    font-size: 17px; font-weight: 700; color: var(--text);
-  }
-  .logo-icon {
-    width: 32px; height: 32px; border-radius: 8px;
-    background: linear-gradient(135deg, var(--gold), #D97706);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-  }
-  .logo span { color: var(--gold); }
+/* Creative pill nav — horizontal scroll on mobile */
+.nav-scroll{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;padding:8px 16px 10px;
+  border-top:1px solid var(--b1);
+  display:flex;gap:8px;
+}
+.nav-scroll::-webkit-scrollbar{display:none}
+.nav-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:var(--rfull);
+  font-size:13px;font-weight:600;white-space:nowrap;
+  border:1.5px solid var(--b2);color:var(--t2);
+  transition:all .18s;flex-shrink:0;
+}
+.nav-pill:hover,.nav-pill.on{color:var(--t1);border-color:var(--b3);background:var(--s2)}
+.nav-pill.on.home{border-color:rgba(245,166,35,.4);color:var(--gold);background:rgba(245,166,35,.08)}
+.nav-pill.on.lib{border-color:rgba(6,182,212,.4);color:var(--teal);background:rgba(6,182,212,.08)}
+.nav-pill-ico{font-size:14px}
+.nav-pill.tg-pill{
+  background:rgba(0,136,204,.12);border-color:rgba(0,136,204,.35);
+  color:#60B8E0;margin-left:auto;
+}
+.nav-pill.tg-pill:hover{background:rgba(0,136,204,.2);color:#93D0F0}
 
-  .nav-links { display: flex; align-items: center; gap: 6px; }
-  .nav-links a {
-    font-size: 13.5px; color: var(--text2); padding: 6px 12px;
-    border-radius: var(--radius-sm); transition: all .15s;
-  }
-  .nav-links a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.hero{
+  padding:32px 16px 28px;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(245,166,35,.08),transparent 60%);
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:24px 24px;
+}
+.hero-live{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);
+  color:#86EFAC;font-size:12px;font-weight:600;
+  padding:5px 14px;border-radius:var(--rfull);margin-bottom:16px;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2s ease-in-out infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-  .header-cta {
-    display: flex; align-items: center; gap: 8px;
-    background: #0088CC; color: #fff;
-    font-size: 13.5px; font-weight: 600;
-    padding: 8px 18px; border-radius: var(--radius-full);
-    border: none; transition: all .2s;
-    box-shadow: 0 0 20px rgba(0,136,204,.25);
-  }
-  .header-cta:hover { background: #006BA3; transform: translateY(-1px); }
+.hero h1{
+  font-size:clamp(1.75rem,7vw,3rem);
+  font-weight:900;line-height:1.08;letter-spacing:-.03em;
+  color:var(--t1);margin-bottom:10px;
+}
+.hero h1 .g{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{font-size:14px;color:var(--t2);max-width:340px;margin:0 auto 24px;line-height:1.7}
 
-  /* ── HERO ── */
-  .hero {
-    padding: 72px 24px 56px;
-    text-align: center;
-    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(245,166,35,.07) 0%, transparent 60%);
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(255,255,255,.025) 1px, transparent 1px);
-    background-size: 28px 28px;
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--gold-dim); color: var(--gold);
-    border: 1px solid rgba(245,166,35,.25);
-    font-size: 12px; font-weight: 600; padding: 5px 14px;
-    border-radius: var(--radius-full); margin-bottom: 20px;
-  }
-  .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; display: block; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+/* Stats strip */
+.stats-strip{
+  display:flex;justify-content:center;gap:0;
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:var(--r);overflow:hidden;
+  margin:0 auto;max-width:400px;
+}
+.stat-item{
+  flex:1;padding:12px 8px;text-align:center;
+  border-right:1px solid var(--b1);
+}
+.stat-item:last-child{border-right:none}
+.stat-val{font-size:1.25rem;font-weight:800;color:var(--t1);display:block;line-height:1}
+.stat-lbl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-top:3px;display:block}
 
-  .hero h1 {
-    font-size: clamp(2rem, 4.5vw, 3.5rem);
-    font-weight: 900; line-height: 1.1;
-    color: var(--text); margin-bottom: 16px;
-    letter-spacing: -0.03em;
-  }
-  .hero h1 .grad {
-    background: linear-gradient(135deg, var(--gold), #FFD166);
-    -webkit-background-clip: text; background-clip: text;
-    color: transparent;
-  }
-  .hero p {
-    font-size: 16px; color: var(--text2);
-    max-width: 520px; margin: 0 auto 36px;
-    line-height: 1.75;
-  }
-  .hero-stats {
-    display: flex; align-items: center; justify-content: center;
-    gap: 32px; flex-wrap: wrap;
-  }
-  .hero-stat { text-align: center; }
-  .hero-stat-val { font-size: 1.75rem; font-weight: 800; color: var(--text); display: block; }
-  .hero-stat-lbl { font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: .06em; }
+/* ══════════════════════════════
+   AD STRIP
+══════════════════════════════ */
+.ad-wrap{padding:12px 16px;background:var(--s1);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1)}
 
-  /* ── MAIN WRAP ── */
-  .main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
+/* ══════════════════════════════
+   TELEGRAM BANNER
+══════════════════════════════ */
+.tg-banner{
+  margin:16px;
+  background:linear-gradient(135deg,#0A2035,#0D2D4A);
+  border:1px solid rgba(0,136,204,.25);
+  border-radius:var(--r);padding:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.tg-banner-ico{
+  width:42px;height:42px;border-radius:50%;flex-shrink:0;
+  background:var(--tg);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 18px rgba(0,136,204,.4);
+}
+.tg-banner-ico svg{width:20px;height:20px;fill:#fff}
+.tg-banner-txt{flex:1;min-width:0}
+.tg-banner-txt strong{display:block;font-size:13.5px;font-weight:700;color:var(--t1);margin-bottom:1px}
+.tg-banner-txt span{font-size:12px;color:#60B8E0;line-height:1.4;display:block}
+.tg-join-btn{
+  background:var(--tg);color:#fff;
+  font-size:12.5px;font-weight:700;
+  padding:8px 14px;border-radius:var(--rfull);
+  white-space:nowrap;flex-shrink:0;transition:all .2s;
+  box-shadow:0 4px 14px rgba(0,136,204,.3);
+}
+.tg-join-btn:hover{background:#006BA3;transform:translateY(-1px)}
 
-  /* ── TELEGRAM BANNER ── */
-  .tg-banner {
-    display: flex; align-items: center; gap: 16px;
-    background: linear-gradient(135deg, #0B2A3E, #0A1F33);
-    border: 1px solid rgba(0,136,204,.3);
-    border-radius: var(--radius); padding: 18px 24px; margin-bottom: 36px;
-  }
-  .tg-ico {
-    width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
-    background: #0088CC;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 20px rgba(0,136,204,.4);
-  }
-  .tg-ico svg { width: 22px; height: 22px; fill: white; }
-  .tg-info { flex: 1; }
-  .tg-info strong { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-  .tg-info span { font-size: 13px; color: #60A5C8; }
-  .tg-btn {
-    background: #0088CC; color: #fff;
-    font-size: 13.5px; font-weight: 700; padding: 10px 22px;
-    border-radius: var(--radius-full); border: none;
-    transition: all .2s; white-space: nowrap; flex-shrink: 0;
-    box-shadow: 0 4px 16px rgba(0,136,204,.3);
-  }
-  .tg-btn:hover { background: #006BA3; transform: translateY(-1px); }
-  @media(max-width:600px) { .tg-banner { flex-wrap: wrap; } .tg-btn { width: 100%; } }
+/* ══════════════════════════════
+   CONTROLS
+══════════════════════════════ */
+.controls{padding:0 16px 12px;display:flex;flex-direction:column;gap:10px}
 
-  /* ── CONTROLS ── */
-  .controls {
-    display: flex; align-items: center; gap: 12px;
-    flex-wrap: wrap; margin-bottom: 28px;
-  }
-  .search-box {
-    flex: 1; min-width: 200px; max-width: 320px;
-    display: flex; align-items: center; gap: 8px;
-    background: var(--surface2); border: 1px solid var(--border2);
-    border-radius: var(--radius-sm); padding: 0 12px; height: 38px;
-  }
-  .search-box svg { width: 15px; height: 15px; color: var(--text3); flex-shrink: 0; }
-  .search-box input {
-    flex: 1; background: none; border: none; outline: none;
-    color: var(--text); font-size: 13.5px; font-family: inherit;
-  }
-  .search-box input::placeholder { color: var(--text3); }
+.search-row{
+  display:flex;align-items:center;gap:8px;
+  background:var(--s2);border:1.5px solid var(--b2);
+  border-radius:var(--r);padding:0 14px;height:44px;
+}
+.search-row svg{width:16px;height:16px;color:var(--t3);flex-shrink:0;stroke:currentColor}
+.search-row input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--t1);font-size:14px;font-family:inherit;
+}
+.search-row input::placeholder{color:var(--t3)}
 
-  .filters { display: flex; gap: 6px; flex-wrap: wrap; }
-  .chip {
-    padding: 5px 14px; border-radius: var(--radius-full);
-    font-size: 13px; font-weight: 500;
-    border: 1px solid var(--border2); background: var(--surface2);
-    color: var(--text2); cursor: pointer; transition: all .15s;
-    white-space: nowrap;
-  }
-  .chip:hover { border-color: rgba(255,255,255,.22); color: var(--text); }
-  .chip.on {
-    background: var(--gold-dim); color: var(--gold);
-    border-color: rgba(245,166,35,.35);
-  }
+.filter-scroll{
+  display:flex;gap:7px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;padding-bottom:2px;
+}
+.filter-scroll::-webkit-scrollbar{display:none}
+.fchip{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:7px 14px;border-radius:var(--rfull);
+  font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;
+  border:1.5px solid var(--b2);color:var(--t2);
+  background:var(--s2);transition:all .18s;
+}
+.fchip:hover{color:var(--t1);border-color:var(--b3)}
+.fchip.on{background:rgba(245,166,35,.1);color:var(--gold);border-color:rgba(245,166,35,.35)}
+.fchip-ico{font-size:13px}
 
-  .sort-select {
-    background: var(--surface2); border: 1px solid var(--border2);
-    color: var(--text2); font-size: 13px; font-family: inherit;
-    padding: 6px 12px; border-radius: var(--radius-sm);
-    cursor: pointer; outline: none;
-    margin-left: auto;
-  }
+/* ══════════════════════════════
+   GRID — 2 col mobile, 3-4 desktop
+══════════════════════════════ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;padding:0 12px 12px;
+}
+@media(min-width:540px){.grid{grid-template-columns:repeat(2,1fr);gap:14px;padding:0 16px 16px}}
+@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr);gap:16px;padding:0 20px 20px}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(4,1fr);gap:18px;padding:0 24px 24px;max-width:1300px;margin:0 auto}}
 
-  /* ── GRID ── */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-  }
+/* ══════════════════════════════
+   CARD
+══════════════════════════════ */
+.card{
+  background:var(--s1);border:1px solid var(--b1);
+  border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .2s,transform .2s;
+}
+.card:hover{border-color:var(--b2);transform:translateY(-2px)}
+.card:active{transform:scale(.98)}
 
-  /* ── CARD ── */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden; display: flex; flex-direction: column;
-    transition: border-color .2s, transform .2s;
-  }
-  .card:hover { border-color: var(--border2); transform: translateY(-3px); }
+/* Frame */
+.frame{
+  position:relative;aspect-ratio:4/5;
+  overflow:hidden;cursor:pointer;background:var(--s2);
+  flex-shrink:0;
+}
+.frame img{transition:transform .4s}
+.frame:hover img{transform:scale(1.05)}
+.frame-ph{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;
+}
+.frame-ph-emo{font-size:clamp(28px,8vw,44px);line-height:1;opacity:.65}
+.frame-ph-lbl{font-size:11px;color:var(--t3)}
 
-  /* Frame */
-  .frame {
-    position: relative; aspect-ratio: 4/5;
-    overflow: hidden; cursor: pointer;
-    background: var(--surface2);
-  }
-  .frame img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform .4s;
-  }
-  .frame:hover img { transform: scale(1.04); }
-  .frame-ph {
-    width: 100%; height: 100%;
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 8px;
-  }
-  .frame-ph-emoji { font-size: 44px; line-height: 1; opacity: .7; }
-  .frame-ph-label { font-size: 12px; color: var(--text3); }
-  .frame-overlay {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,.55);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity .2s;
-  }
-  .frame:hover .frame-overlay { opacity: 1; }
-  .expand-btn {
-    display: flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,.95); color: #111;
-    border: none; border-radius: var(--radius-sm);
-    padding: 9px 18px; font-size: 13px; font-weight: 600;
-    cursor: pointer; transition: transform .15s;
-  }
-  .expand-btn:hover { transform: scale(1.04); }
+.frame-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s;
+}
+.frame:hover .frame-overlay{opacity:1}
+.expand-btn{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.95);color:#111;
+  padding:8px 14px;border-radius:var(--rsm);
+  font-size:12.5px;font-weight:700;transition:transform .15s;
+}
+.expand-btn:hover{transform:scale(1.04)}
+.expand-btn svg{width:13px;height:13px;stroke:currentColor;fill:none}
 
-  .cat-badge {
-    position: absolute; top: 10px; left: 10px;
-    font-size: 10.5px; font-weight: 700; padding: 3px 10px;
-    border-radius: var(--radius-full);
-    text-transform: uppercase; letter-spacing: .06em;
-    border: 1px solid transparent;
-  }
-  .cat-image  { background: rgba(34,197,94,.15); color: #86EFAC; border-color: rgba(34,197,94,.3); }
-  .cat-video  { background: rgba(59,130,246,.15); color: #93C5FD; border-color: rgba(59,130,246,.3); }
-  .cat-3d     { background: rgba(139,92,246,.15); color: #C4B5FD; border-color: rgba(139,92,246,.3); }
-  .cat-other  { background: rgba(245,166,35,.15); color: #FDE68A; border-color: rgba(245,166,35,.3); }
+/* Badges */
+.cat-badge{
+  position:absolute;top:8px;left:8px;
+  font-size:9.5px;font-weight:700;padding:3px 9px;
+  border-radius:var(--rfull);text-transform:uppercase;letter-spacing:.07em;
+  border:1px solid transparent;
+}
+.cat-image {background:rgba(34,197,94,.15);color:#86EFAC;border-color:rgba(34,197,94,.3)}
+.cat-video {background:rgba(59,130,246,.15);color:#93C5FD;border-color:rgba(59,130,246,.3)}
+.cat-3d    {background:rgba(139,92,246,.15);color:#C4B5FD;border-color:rgba(139,92,246,.3)}
 
-  .like-btn {
-    position: absolute; top: 10px; right: 10px;
-    width: 30px; height: 30px; border-radius: 50%;
-    background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.15);
-    color: var(--text2); font-size: 14px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: all .2s;
-  }
-  .like-btn:hover, .like-btn.liked { color: #F87171; background: rgba(239,68,68,.2); border-color: rgba(239,68,68,.35); }
+.like-btn{
+  position:absolute;top:8px;right:8px;
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);
+  color:var(--t2);font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.like-btn:hover,.like-btn.liked{color:#F87171;background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.35)}
 
-  /* Card Body */
-  .card-body { padding: 16px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+/* Card body */
+.card-body{padding:10px;flex:1;display:flex;flex-direction:column;gap:8px}
 
-  .card-title {
-    font-size: 14.5px; font-weight: 600; color: var(--text);
-    letter-spacing: -.01em;
-  }
+.card-title{
+  font-size:13px;font-weight:700;color:var(--t1);
+  line-height:1.35;letter-spacing:-.01em;
+}
 
-  /* Prompt Box */
-  .prompt-wrap {
-    background: var(--surface3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 11px 13px; flex: 1;
-  }
-  .prompt-lbl {
-    font-size: 10px; font-weight: 700; color: var(--text3);
-    text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .prompt-chars { font-size: 10px; color: var(--text3); }
-  .prompt-txt {
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: 12px; line-height: 1.65; color: #C8C8D6;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+.prompt-box{
+  background:var(--s3);border:1px solid var(--b1);
+  border-radius:var(--rsm);padding:9px 10px;flex:1;
+}
+.prompt-lbl{
+  font-size:9.5px;font-weight:700;color:var(--t3);
+  text-transform:uppercase;letter-spacing:.09em;
+  display:flex;justify-content:space-between;margin-bottom:5px;
+}
+.prompt-chars{font-weight:400}
+.prompt-txt{
+  font-family:'SF Mono','Fira Code',Menlo,monospace;
+  font-size:11px;line-height:1.6;color:#A8A8B8;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
 
-  /* Card Actions */
-  .card-actions { display: flex; gap: 7px; }
-  .act-btn {
-    flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px;
-    padding: 8px 6px; border-radius: var(--radius-sm);
-    font-size: 12.5px; font-weight: 500;
-    border: 1px solid var(--border2); background: var(--surface2);
-    color: var(--text2); cursor: pointer; transition: all .15s;
-    white-space: nowrap;
-  }
-  .act-btn:hover { background: var(--surface3); color: var(--text); border-color: rgba(255,255,255,.18); }
-  .act-btn.copied { background: rgba(34,197,94,.12); color: #86EFAC; border-color: rgba(34,197,94,.3); }
-  .act-btn.tg-act { border-color: rgba(0,136,204,.3); }
-  .act-btn.tg-act:hover { background: rgba(0,136,204,.1); color: #60A5C8; }
-  .act-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+/* Action row */
+.card-actions{display:flex;gap:6px}
+.act{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:4px;
+  padding:8px 4px;border-radius:var(--rsm);
+  font-size:11.5px;font-weight:600;
+  border:1.5px solid var(--b2);background:var(--s2);color:var(--t2);
+  transition:all .15s;
+}
+.act:hover{background:var(--s3);color:var(--t1);border-color:var(--b3)}
+.act.copied{background:rgba(34,197,94,.1);color:#86EFAC;border-color:rgba(34,197,94,.3)}
+.act svg{width:12px;height:12px;stroke:currentColor;fill:none;flex-shrink:0}
 
-  /* Share popover */
-  .share-wrap { position: relative; }
-  .share-pop {
-    position: absolute; bottom: calc(100% + 8px); right: 0;
-    background: var(--surface2); border: 1px solid var(--border2);
-    border-radius: var(--radius-sm); padding: 4px; min-width: 160px;
-    z-index: 50; box-shadow: 0 8px 24px rgba(0,0,0,.4);
-    display: none;
-  }
-  .share-pop.show { display: block; }
-  .share-opt {
-    display: flex; align-items: center; gap: 8px;
-    padding: 9px 12px; border-radius: 6px;
-    font-size: 13px; color: var(--text2);
-    cursor: pointer; border: none; background: none; width: 100%; text-align: left;
-    transition: all .12s;
-  }
-  .share-opt:hover { background: var(--surface3); color: var(--text); }
-  .share-opt svg { width: 14px; height: 14px; flex-shrink: 0; }
+/* Share popover */
+.share-wrap{position:relative}
+.share-pop{
+  position:absolute;bottom:calc(100% + 8px);right:0;
+  background:var(--s2);border:1px solid var(--b2);
+  border-radius:var(--r);padding:5px;min-width:170px;
+  z-index:60;box-shadow:0 8px 28px rgba(0,0,0,.5);
+  display:none;
+}
+.share-pop.show{display:block}
+.share-pop-title{
+  font-size:10.5px;font-weight:700;color:var(--t3);
+  text-transform:uppercase;letter-spacing:.09em;
+  padding:5px 10px 4px;
+}
+.sopt{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 12px;border-radius:8px;
+  font-size:13px;color:var(--t2);width:100%;
+  transition:all .12s;
+}
+.sopt:hover{background:var(--s3);color:var(--t1)}
+.sopt-ico{
+  width:28px;height:28px;border-radius:7px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.sopt-wa .sopt-ico{background:rgba(37,211,102,.15)}
+.sopt-x  .sopt-ico{background:rgba(255,255,255,.08)}
+.sopt-tg .sopt-ico{background:rgba(0,136,204,.15)}
+.sopt-lnk .sopt-ico{background:rgba(245,166,35,.12)}
+.sopt svg{width:14px;height:14px;fill:currentColor}
+.sopt-name{font-weight:600}
 
-  /* ── MODAL ── */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,.8);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 999; padding: 20px;
-    backdrop-filter: blur(6px);
-    opacity: 0; pointer-events: none; transition: opacity .2s;
-  }
-  .modal-overlay.show { opacity: 1; pointer-events: auto; }
-  .modal {
-    background: var(--surface); border: 1px solid var(--border2);
-    border-radius: var(--radius); width: 100%; max-width: 620px;
-    max-height: 90vh; overflow-y: auto;
-    transform: scale(.95); transition: transform .2s;
-  }
-  .modal-overlay.show .modal { transform: scale(1); }
-  .modal-frame {
-    aspect-ratio: 4/5; background: var(--surface2);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 72px; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden;
-  }
-  .modal-frame img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: var(--radius) var(--radius) 0 0; }
-  .modal-body { padding: 24px; }
-  .modal-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-  .modal-title { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -.02em; }
-  .modal-close {
-    background: var(--surface2); border: 1px solid var(--border2);
-    color: var(--text2); border-radius: var(--radius-sm);
-    padding: 6px 14px; font-size: 13px; cursor: pointer;
-    flex-shrink: 0; transition: all .15s;
-  }
-  .modal-close:hover { color: var(--text); background: var(--surface3); }
-  .modal-prompt {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 16px;
-  }
-  .modal-prompt-lbl {
-    font-size: 10.5px; font-weight: 700; color: var(--text3);
-    text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px;
-  }
-  .modal-prompt-txt {
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    font-size: 13px; color: #C8C8D6; line-height: 1.7;
-  }
-  .modal-actions { display: flex; gap: 10px; }
-  .modal-copy {
-    flex: 2; display: flex; align-items: center; justify-content: center; gap: 7px;
-    background: var(--gold); color: #000; font-size: 14px; font-weight: 700;
-    padding: 12px; border-radius: var(--radius-sm); border: none; cursor: pointer;
-    transition: all .2s;
-  }
-  .modal-copy:hover { background: #FFD166; }
-  .modal-tg {
-    flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
-    background: #0088CC; color: #fff; font-size: 14px; font-weight: 600;
-    padding: 12px; border-radius: var(--radius-sm); border: none; cursor: pointer;
-    transition: all .2s;
-  }
-  .modal-tg:hover { background: #006BA3; }
+/* ══════════════════════════════
+   EMPTY STATE
+══════════════════════════════ */
+.empty{
+  grid-column:1/-1;text-align:center;
+  padding:48px 20px;color:var(--t3);
+}
+.empty-emo{font-size:40px;margin-bottom:12px}
 
-  /* ── EMPTY ── */
-  .empty {
-    grid-column: 1 / -1; text-align: center;
-    padding: 56px 24px; color: var(--text3); font-size: 14px;
-  }
-  .empty-ico { font-size: 40px; margin-bottom: 12px; }
+/* ══════════════════════════════
+   MODAL
+══════════════════════════════ */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,.85);
+  display:flex;align-items:flex-end;justify-content:center;
+  z-index:500;padding:0;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-bg.show{opacity:1;pointer-events:auto}
+/* Bottom sheet on mobile, center on desktop */
+.modal{
+  background:var(--s1);border:1px solid var(--b2);
+  width:100%;max-width:480px;
+  border-radius:20px 20px 0 0;max-height:90vh;overflow-y:auto;
+  transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.modal-bg.show .modal{transform:translateY(0)}
+@media(min-width:600px){
+  .modal-bg{align-items:center;padding:20px}
+  .modal{border-radius:20px;max-height:85vh;transform:scale(.94)}
+  .modal-bg.show .modal{transform:scale(1)}
+}
+.modal-handle{width:36px;height:4px;background:var(--s4);border-radius:2px;margin:10px auto 0}
+.modal-frame{aspect-ratio:4/5;background:var(--s2);overflow:hidden}
+.modal-body{padding:20px}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:14px}
+.modal-title{font-size:17px;font-weight:800;color:var(--t1);letter-spacing:-.02em;line-height:1.3}
+.modal-close{
+  background:var(--s3);border:1px solid var(--b2);color:var(--t2);
+  border-radius:50%;width:32px;height:32px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;transition:all .15s;
+}
+.modal-close:hover{color:var(--t1);background:var(--s4)}
+.modal-prompt-box{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);padding:14px;margin-bottom:14px;
+}
+.modal-prompt-lbl{font-size:10.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px}
+.modal-prompt-txt{
+  font-family:'SF Mono','Fira Code',Menlo,monospace;
+  font-size:12.5px;color:#C0C0D0;line-height:1.7;
+}
+.modal-acts{display:flex;gap:10px}
+.modal-copy{
+  flex:2;display:flex;align-items:center;justify-content:center;gap:7px;
+  background:var(--gold);color:#000;font-size:14.5px;font-weight:800;
+  padding:14px;border-radius:var(--r);transition:all .2s;
+}
+.modal-copy:hover{background:var(--gold2)}
+.modal-tg-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  background:var(--tg);color:#fff;font-size:13px;font-weight:700;
+  padding:14px;border-radius:var(--r);transition:all .2s;
+}
+.modal-tg-btn:hover{background:#006BA3}
 
-  /* ── TELEGRAM FAB ── */
-  .tg-fab {
-    position: fixed; bottom: 28px; right: 28px; z-index: 200;
-    width: 56px; height: 56px; border-radius: 50%;
-    background: #0088CC; border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 0 0 rgba(0,136,204,.6);
-    animation: tgPulse 2.5s ease-in-out infinite;
-    transition: transform .2s;
-  }
-  .tg-fab:hover { transform: scale(1.1); animation: none; box-shadow: 0 0 28px rgba(0,136,204,.6); }
-  @keyframes tgPulse {
-    0%  { box-shadow: 0 0 0 0 rgba(0,136,204,.6); }
-    50% { box-shadow: 0 0 0 14px rgba(0,136,204,0); }
-    100%{ box-shadow: 0 0 0 0 rgba(0,136,204,.6); }
-  }
-  .tg-fab svg { width: 26px; height: 26px; fill: white; }
-  .tg-fab-tip {
-    position: absolute; right: 66px; top: 50%; transform: translateY(-50%);
-    background: var(--surface2); color: var(--text);
-    font-size: 12px; font-weight: 600; padding: 7px 14px;
-    border-radius: var(--radius-sm); white-space: nowrap;
-    border: 1px solid var(--border2); pointer-events: none;
-    opacity: 0; transition: opacity .15s;
-  }
-  .tg-fab:hover .tg-fab-tip { opacity: 1; }
+/* ══════════════════════════════
+   TOAST
+══════════════════════════════ */
+.toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#1A2820;color:#86EFAC;
+  border:1px solid rgba(34,197,94,.3);
+  border-radius:var(--rfull);padding:10px 20px;
+  font-size:13.5px;font-weight:600;
+  z-index:999;opacity:0;transition:all .3s;
+  display:flex;align-items:center;gap:7px;white-space:nowrap;
+  pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-  /* ── TOAST ── */
-  .toast {
-    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
-    background: #1E2424; color: #86EFAC;
-    border: 1px solid rgba(34,197,94,.3); border-radius: var(--radius-sm);
-    padding: 10px 20px; font-size: 13.5px; font-weight: 600;
-    z-index: 9999; transition: transform .3s; pointer-events: none;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
+/* ══════════════════════════════
+   TELEGRAM FAB — glowing
+══════════════════════════════ */
+.tg-fab{
+  position:fixed;bottom:24px;right:20px;z-index:300;
+  width:56px;height:56px;border-radius:50%;
+  background:var(--tg);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 0 rgba(0,136,204,.6);
+  animation:tgPop 2.5s ease-in-out infinite;
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;
+}
+.tg-fab:hover{
+  transform:scale(1.12) translateY(-3px);
+  animation:none;
+  box-shadow:0 0 0 0 transparent,0 0 28px 6px rgba(0,136,204,.5),0 8px 28px rgba(0,136,204,.5);
+}
+@keyframes tgPop{
+  0%  {box-shadow:0 0 0 0 rgba(0,136,204,.65),0 4px 16px rgba(0,136,204,.3)}
+  50% {box-shadow:0 0 0 14px rgba(0,136,204,0),0 4px 16px rgba(0,136,204,.4)}
+  100%{box-shadow:0 0 0 0 rgba(0,136,204,.65),0 4px 16px rgba(0,136,204,.3)}
+}
+.tg-fab svg{width:25px;height:25px;fill:#fff}
+.tg-fab-tip{
+  position:absolute;right:66px;top:50%;transform:translateY(-50%);
+  background:var(--s2);color:var(--t1);
+  font-size:12.5px;font-weight:600;padding:7px 14px;
+  border-radius:var(--rsm);white-space:nowrap;
+  border:1px solid var(--b2);pointer-events:none;
+  opacity:0;transition:opacity .15s;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+}
+.tg-fab:hover .tg-fab-tip{opacity:1}
 
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border); padding: 28px 24px;
-    text-align: center; color: var(--text3); font-size: 13px;
-  }
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer{
+  border-top:1px solid var(--b1);
+  padding:20px 16px 80px;
+  text-align:center;color:var(--t3);font-size:12.5px;
+  line-height:2;
+}
+footer a{color:var(--t3);transition:color .15s}
+footer a:hover{color:var(--t1)}
 
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
+/* ══════════════════════════════
+   UTILITIES
+══════════════════════════════ */
+.mt12{margin-top:12px}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--s4);border-radius:2px}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-icon">✨</div>
-      <span>Prompt<span>Hub</span></span>
-    </div>
-    <nav class="nav-links">
-      <a href="/index.html">🏠 Home</a>
-      <a href="/prompt-library.html" style="color:#F5A623">Library</a>
-      <a href="/blog/index.html">Blog</a>
-      <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20I%20want%20to%20submit%20a%20prompt." target="_blank" rel="noopener">Submit</a>
-    </nav>
-    <button class="header-cta" onclick="openTG()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.829.94z"/></svg>
-      Join Telegram
-    </button>
-  </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">
-    <span></span> Updated daily with new prompts
-  </div>
-  <h1>AI <span class="grad">Prompt Library</span></h1>
-  <p>Curated, ready-to-use prompts for image generation, video AI, and 3D rendering. Copy, share, and create.</p>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <span class="hero-stat-val" id="totalCount">8</span>
-      <span class="hero-stat-lbl">Prompts</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-val" id="copyCount">0</span>
-      <span class="hero-stat-lbl">Copied today</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-val">3</span>
-      <span class="hero-stat-lbl">Categories</span>
-    </div>
-    <div class="hero-stat">
-      <span class="hero-stat-val">Free</span>
-      <span class="hero-stat-lbl">Always</span>
-    </div>
-  </div>
-</section>
-
-<!-- HERO AD -->
-<div style="max-width:1200px;margin:0 auto;padding:8px 24px 0;text-align:center">
-  <ins class="adsbygoogle"
-    style="display:block"
-    data-ad-client="ca-pub-5033705011229814"
-    data-ad-slot="auto"
-    data-ad-format="auto"
-    data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-</div>
-
-<!-- MAIN -->
-<main class="main">
-
-  <!-- Telegram Banner -->
-  <div class="tg-banner">
-    <div class="tg-ico">
-      <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.829.94z"/></svg>
-    </div>
-    <div class="tg-info">
-      <strong>Get 5 new prompts every day — free</strong>
-      <span>Join our Telegram channel for exclusive packs, tips &amp; AI news</span>
-    </div>
-    <button class="tg-btn" onclick="openTG()">Join Channel →</button>
-  </div>
-
-  <!-- Controls -->
-  <div class="controls">
-    <div class="search-box">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="searchInput" placeholder="Search prompts..." oninput="doSearch(this.value)">
-    </div>
-    <div class="filters" id="filterRow"></div>
-    <select class="sort-select" onchange="doSort(this.value)">
-      <option value="default">Sort: Default</option>
-      <option value="alpha">Sort: A–Z</option>
-      <option value="category">Sort: Category</option>
-    </select>
-  </div>
-
-  <!-- Grid -->
-  <div class="grid" id="promptGrid"></div>
-
-  <!-- MID AD -->
-  <div style="margin-top:40px;text-align:center">
-    <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-5033705011229814"
-      data-ad-slot="auto"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
-  </div>
-
-</main>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="modal" onclick="handleModalClick(event)">
-  <div class="modal" id="modalBox"></div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-  <span id="toastMsg">Copied to clipboard!</span>
-</div>
-
-<!-- TG FAB -->
-<button class="tg-fab" onclick="openTG()" title="Join Telegram">
+<!-- ══ TELEGRAM FAB ══ -->
+<button class="tg-fab" onclick="openTG()" aria-label="Join Telegram">
   <span class="tg-fab-tip">Join Telegram 🚀</span>
   <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.829.94z"/></svg>
 </button>
 
+<!-- ══ HEADER ══ -->
+<header class="hdr">
+  <div class="hdr-top">
+    <a href="/index.html" class="logo">
+      <div class="logo-box">✨</div>
+      <div class="logo-name">Prompt<b>Hub</b></div>
+    </a>
+    <!-- Desktop telegram button -->
+    <button class="tg-join-btn" onclick="openTG()" style="display:none" id="deskTg">
+      Join Telegram
+    </button>
+  </div>
+  <!-- Creative pill nav — scrollable on mobile -->
+  <nav class="nav-scroll" aria-label="Navigation">
+    <a href="/index.html" class="nav-pill home on">
+      <span class="nav-pill-ico">🏠</span> Home
+    </a>
+    <a href="/prompt-library.html" class="nav-pill lib on">
+      <span class="nav-pill-ico">✨</span> AI Prompts
+    </a>
+    <a href="/blog/index.html" class="nav-pill">
+      <span class="nav-pill-ico">📝</span> Blog
+    </a>
+    <a href="/tools/sip-calculator.html" class="nav-pill">
+      <span class="nav-pill-ico">🧮</span> Calculator
+    </a>
+    <a href="/tools/nism-mock-test.html" class="nav-pill">
+      <span class="nav-pill-ico">📋</span> NISM Test
+    </a>
+    <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20I%20want%20to%20submit%20a%20prompt." target="_blank" rel="noopener" class="nav-pill">
+      <span class="nav-pill-ico">📤</span> Submit
+    </a>
+    <a href="https://t.me/universalmoneymart" target="_blank" rel="noopener" class="nav-pill tg-pill">
+      <span class="nav-pill-ico">✈️</span> Telegram
+    </a>
+  </nav>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-live">
+    <span class="live-dot"></span>
+    Updated daily with new prompts
+  </div>
+  <h1>AI <span class="g">Prompt</span><br>Library</h1>
+  <p class="hero-sub">Copy ready-to-use prompts for images, videos &amp; 3D. Share &amp; create stunning AI art.</p>
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-val" id="totalCount">8</span>
+      <span class="stat-lbl">Prompts</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" id="copyCount">0</span>
+      <span class="stat-lbl">Copied</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">3</span>
+      <span class="stat-lbl">Categories</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">Free</span>
+      <span class="stat-lbl">Always</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AD — TOP ══ -->
+<div class="ad-wrap">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+
+<!-- ══ TELEGRAM BANNER ══ -->
+<div class="tg-banner">
+  <div class="tg-banner-ico">
+    <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.829.94z"/></svg>
+  </div>
+  <div class="tg-banner-txt">
+    <strong>Get 5 new prompts every day — free</strong>
+    <span>Join our Telegram for exclusive packs &amp; AI tips</span>
+  </div>
+  <button class="tg-join-btn" onclick="openTG()">Join →</button>
+</div>
+
+<!-- ══ CONTROLS ══ -->
+<div class="controls">
+  <div class="search-row">
+    <svg viewBox="0 0 24 24" stroke-width="2.5" fill="none"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search prompts..." oninput="doSearch(this.value)" autocomplete="off">
+  </div>
+  <div class="filter-scroll" id="filterRow"></div>
+</div>
+
+<!-- ══ GRID ══ -->
+<div class="grid" id="promptGrid"></div>
+
+<!-- ══ AD — BOTTOM ══ -->
+<div class="ad-wrap mt12">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+</div>
+
+<!-- ══ MODAL ══ -->
+<div class="modal-bg" id="modalBg" onclick="handleModalBg(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-handle"></div>
+  </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div class="toast" id="toast">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toastMsg">Copied!</span>
+</div>
+
+<!-- ══ FOOTER ══ -->
 <footer>
-  © 2025 <a href="/index.html" style="color:#F5A623">Universal Money Mart</a>
-  &nbsp;·&nbsp; AI Prompt Library &nbsp;·&nbsp;
-  <a href="/index.html" style="color:#9B9BA8">🏠 Home</a>
-  &nbsp;·&nbsp;
-  <a href="https://t.me/universalmoneymart" target="_blank" rel="noopener" style="color:#0088CC">Join Telegram</a>
+  <div>
+    <a href="/index.html" style="color:var(--gold);font-weight:700">Universal Money Mart</a>
+    &nbsp;·&nbsp; AI Prompt Library
+  </div>
+  <div>
+    <a href="/index.html">🏠 Home</a>
+    &nbsp;·&nbsp;
+    <a href="/blog/index.html">📝 Blog</a>
+    &nbsp;·&nbsp;
+    <a href="https://t.me/universalmoneymart" target="_blank" rel="noopener" style="color:var(--tg)">✈️ Telegram</a>
+    &nbsp;·&nbsp;
+    <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
+  </div>
+  <div>© 2025 Universal Money Mart · ARN 288927 · All prompts free to use</div>
 </footer>
 
 <script>
-/* ─────────────────────────────────────────
-   CONFIG — change these to your own values
-   ───────────────────────────────────────── */
 const TELEGRAM = "https://t.me/universalmoneymart";
+const WHATSAPP = "https://wa.me/917200752628";
+const SITE_URL = "https://universalmoneymart.onrender.com/prompt-library.html";
 
-/* ─────────────────────────────────────────
-   PROMPTS DATA
-   Add image: "url" to any item for real images
-   ───────────────────────────────────────── */
+/* ── DATA ── */
 const prompts = [
   {
-    id: 1,
-    category: "Image",
-    title: "South Indian Leader — Cinematic Portrait",
-    emoji: "🎞",
-    image: "https://iili.io/Bs9noV2.jpg",
-    tags: ["portrait","cinematic","realistic","indian"],
-    prompt: "A highly realistic cinematic portrait of a young South Indian man standing through the sunroof of a black car during evening blue hour. He is wearing a traditional off-white silk shirt and veshti with rich golden borders. Around his neck are multiple thick flower garlands made of red roses, yellow marigolds, and white jasmine. A green and orange silk shawl with gold detailing is draped over both shoulders, giving a strong political leader presence. He has thick, slightly curly black hair, a short trimmed beard, and a small white vibhuti/tilak on his forehead. His expression is calm, confident, and slightly smiling, looking slightly to the side. His right hand is raised in a greeting/blessing gesture. The car roof is glossy black with scattered colorful flower petals, reflecting lights and surroundings. In the background, a tall South Indian temple gopuram is centered and fully decorated with warm golden string lights, creating a glowing festive look. A bright illuminated spear/vel-shaped light symbol is visible on the gopuram. The sky is deep blue twilight, with soft streetlights and distant crowd bokeh on both sides. Slight trees visible on the right side. Ultra-realistic, sharp focus on subject, shallow depth of field, creamy bokeh background, cinematic lighting, HDR, 8K resolution, vibrant colors, dramatic composition, professional photography, natural skin tones, high detail, low noise.",
-    liked: false
+    id:1,category:"Image",
+    title:"South Indian Leader — Cinematic Portrait",
+    emoji:"🎞",
+    image:"https://iili.io/Bs9noV2.jpg",
+    tags:["portrait","cinematic","realistic","indian"],
+    prompt:"A highly realistic cinematic portrait of a young South Indian man standing through the sunroof of a black car during evening blue hour. He is wearing a traditional off-white silk shirt and veshti with rich golden borders. Around his neck are multiple thick flower garlands made of red roses, yellow marigolds, and white jasmine. A green and orange silk shawl with gold detailing is draped over both shoulders, giving a strong political leader presence. He has thick, slightly curly black hair, a short trimmed beard, and a small white vibhuti/tilak on his forehead. His expression is calm, confident, and slightly smiling, looking slightly to the side. His right hand is raised in a greeting/blessing gesture. The car roof is glossy black with scattered colorful flower petals, reflecting lights and surroundings. In the background, a tall South Indian temple gopuram is centered and fully decorated with warm golden string lights, creating a glowing festive look. A bright illuminated spear/vel-shaped light symbol is visible on the gopuram. The sky is deep blue twilight, with soft streetlights and distant crowd bokeh on both sides. Slight trees visible on the right side. Ultra-realistic, sharp focus on subject, shallow depth of field, creamy bokeh background, cinematic lighting, HDR, 8K resolution, vibrant colors, dramatic composition, professional photography, natural skin tones, high detail, low noise.",
+    liked:false
   },
-  {
-    id: 2,
-    category: "Image",
-    title: "Cyberpunk cityscape",
-    emoji: "🌆",
-    tags: ["city","neon","scifi"],
-    prompt: "Aerial view of a futuristic cyberpunk city at night, neon signs reflected on wet cobblestone streets, dense skyscrapers, volumetric fog, cinematic wide-angle, photorealistic, Blade Runner aesthetic, 8K ultra-wide",
-    liked: false
-  },
-  {
-    id: 3,
-    category: "Image",
-    title: "Macro dewdrop",
-    emoji: "🌿",
-    tags: ["nature","macro","photography"],
-    prompt: "Extreme macro photography of a single crystal dewdrop on a bright green leaf at dawn, golden rim light, forest bokeh background, ultra-sharp detail, National Geographic award-winning style, Nikon Z9",
-    liked: false
-  },
-  {
-    id: 4,
-    category: "Image",
-    title: "Misty mountains",
-    emoji: "⛰",
-    tags: ["landscape","mountains","mood"],
-    prompt: "Ancient misty mountain peaks at sunrise, Chinese ink painting style blended with photorealistic rendering, dramatic god rays piercing clouds, layered silhouettes receding into fog, hyper-detailed, 8K panoramic",
-    liked: false
-  },
-  {
-    id: 5,
-    category: "Video",
-    title: "Ocean timelapse",
-    emoji: "🌊",
-    tags: ["nature","ocean","timelapse"],
-    prompt: "4K timelapse of ocean waves crashing on black volcanic rocks at golden hour, smooth slow motion 120fps, ultra-high detail foam patterns, warm cinematic color grading, locked tripod, no camera movement",
-    liked: false
-  },
-  {
-    id: 6,
-    category: "Video",
-    title: "Fire & smoke loop",
-    emoji: "🔥",
-    tags: ["abstract","fire","loop"],
-    prompt: "Seamless looping slow-motion video of flames and billowing smoke, pure black background, high-speed camera 240fps, orange and cobalt blue fire, cinematic color grade, perfect loop for background use",
-    liked: false
-  },
-  {
-    id: 7,
-    category: "3D",
-    title: "Glass orb render",
-    emoji: "🔮",
-    tags: ["3d","glass","render"],
-    prompt: "Photorealistic 3D render of a transparent glass orb floating in deep space, complex caustic light rays, perfect subsurface scattering, studio HDRI lighting, dark background with faint nebula, Cinema 4D Octane, 4K",
-    liked: false
-  },
-  {
-    id: 8,
-    category: "3D",
-    title: "Abstract fluid art",
-    emoji: "🎨",
-    tags: ["abstract","fluid","art"],
-    prompt: "Abstract 3D fluid simulation render, iridescent oil-on-water surface, swirling gold and teal colors, ultra-smooth organic curves, pure white studio background, Houdini simulation, Octane render, award-winning CGI",
-    liked: false
-  }
+  {id:2,category:"Image",title:"Cyberpunk Cityscape",emoji:"🌆",tags:["city","neon","scifi"],prompt:"Aerial view of a futuristic cyberpunk city at night, neon signs reflected on wet cobblestone streets, dense skyscrapers, volumetric fog, cinematic wide-angle, photorealistic, Blade Runner aesthetic, 8K ultra-wide",liked:false},
+  {id:3,category:"Image",title:"Macro Dewdrop",emoji:"🌿",tags:["nature","macro","photography"],prompt:"Extreme macro photography of a single crystal dewdrop on a bright green leaf at dawn, golden rim light, forest bokeh background, ultra-sharp detail, National Geographic award-winning style, Nikon Z9",liked:false},
+  {id:4,category:"Image",title:"Misty Mountains",emoji:"⛰",tags:["landscape","mountains","mood"],prompt:"Ancient misty mountain peaks at sunrise, Chinese ink painting style blended with photorealistic rendering, dramatic god rays piercing clouds, layered silhouettes receding into fog, hyper-detailed, 8K panoramic",liked:false},
+  {id:5,category:"Video",title:"Ocean Timelapse",emoji:"🌊",tags:["nature","ocean","timelapse"],prompt:"4K timelapse of ocean waves crashing on black volcanic rocks at golden hour, smooth slow motion 120fps, ultra-high detail foam patterns, warm cinematic color grading, locked tripod, no camera movement",liked:false},
+  {id:6,category:"Video",title:"Fire & Smoke Loop",emoji:"🔥",tags:["abstract","fire","loop"],prompt:"Seamless looping slow-motion video of flames and billowing smoke, pure black background, high-speed camera 240fps, orange and cobalt blue fire, cinematic color grade, perfect loop for background use",liked:false},
+  {id:7,category:"3D",title:"Glass Orb Render",emoji:"🔮",tags:["3d","glass","render"],prompt:"Photorealistic 3D render of a transparent glass orb floating in deep space, complex caustic light rays, perfect subsurface scattering, studio HDRI lighting, dark background with faint nebula, Cinema 4D Octane, 4K",liked:false},
+  {id:8,category:"3D",title:"Abstract Fluid Art",emoji:"🎨",tags:["abstract","fluid","art"],prompt:"Abstract 3D fluid simulation render, iridescent oil-on-water surface, swirling gold and teal colors, ultra-smooth organic curves, pure white studio background, Houdini simulation, Octane render, award-winning CGI",liked:false}
 ];
 
 /* ── State ── */
-let copies = 0;
-let filter = "All";
-let query = "";
-let sortBy = "default";
-let openShareId = null;
+let copies=0, filter="All", query="", openShareId=null;
 
-/* ── Helpers ── */
-function openTG() { window.open(TELEGRAM, "_blank"); }
+const openTG=()=>window.open(TELEGRAM,"_blank");
 
-function toast(msg) {
-  const t = document.getElementById("toast");
-  document.getElementById("toastMsg").textContent = msg;
+/* ── Toast ── */
+function toast(msg){
+  const t=document.getElementById("toast");
+  document.getElementById("toastMsg").textContent=msg;
   t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 2200);
-}
-
-function getCatClass(cat) {
-  const m = { Image:"cat-image", Video:"cat-video", "3D":"cat-3d" };
-  return m[cat] || "cat-other";
+  clearTimeout(t._tid);
+  t._tid=setTimeout(()=>t.classList.remove("show"),2200);
 }
 
 /* ── Copy ── */
-function copyPrompt(id) {
-  const p = prompts.find(x => x.id === id);
-  if (!p) return;
-  navigator.clipboard.writeText(p.prompt).then(() => {
-    copies++;
-    document.getElementById("copyCount").textContent = copies;
-    const btn = document.getElementById("cp-" + id);
-    if (btn) {
-      btn.classList.add("copied");
-      btn.innerHTML = svgCheck() + "Copied!";
-      setTimeout(() => {
-        btn.classList.remove("copied");
-        btn.innerHTML = svgCopy() + "Copy";
-      }, 2000);
+function copyPrompt(id,btnEl){
+  const p=prompts.find(x=>x.id===id); if(!p)return;
+  const doCopy=()=>{
+    copies++; document.getElementById("copyCount").textContent=copies;
+    if(btnEl){
+      btnEl.classList.add("copied");
+      const orig=btnEl.innerHTML;
+      btnEl.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:12px;height:12px"><polyline points="20 6 9 17 4 12"/></svg>Done';
+      setTimeout(()=>{btnEl.classList.remove("copied");btnEl.innerHTML=orig},2000);
     }
-    toast("Prompt copied to clipboard!");
-  }).catch(() => {
-    const ta = document.createElement("textarea");
-    ta.value = p.prompt;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    document.body.removeChild(ta);
     toast("Prompt copied!");
-  });
+  };
+  if(navigator.clipboard){navigator.clipboard.writeText(p.prompt).then(doCopy).catch(()=>{fbCopy(p.prompt);doCopy()})}
+  else{fbCopy(p.prompt);doCopy()}
 }
+function fbCopy(txt){const t=document.createElement("textarea");t.value=txt;t.style.cssText="position:fixed;opacity:0";document.body.appendChild(t);t.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(t)}
 
 /* ── Like ── */
-function toggleLike(id) {
-  const p = prompts.find(x => x.id === id);
-  if (!p) return;
-  p.liked = !p.liked;
-  const btn = document.getElementById("lk-" + id);
-  if (btn) {
-    btn.classList.toggle("liked", p.liked);
-    btn.textContent = p.liked ? "♥" : "♡";
-  }
+function toggleLike(id){
+  const p=prompts.find(x=>x.id===id); if(!p)return;
+  p.liked=!p.liked;
+  const btn=document.getElementById("lk-"+id);
+  if(btn){btn.classList.toggle("liked",p.liked);btn.textContent=p.liked?"♥":"♡"}
 }
 
 /* ── Share ── */
-function toggleShare(id, e) {
+function toggleShare(id,e){
   e.stopPropagation();
-  const pop = document.getElementById("sp-" + id);
-  if (!pop) return;
-  if (openShareId && openShareId !== id) {
-    const prev = document.getElementById("sp-" + openShareId);
-    if (prev) prev.classList.remove("show");
+  const pop=document.getElementById("sp-"+id); if(!pop)return;
+  if(openShareId&&openShareId!==id){
+    const prev=document.getElementById("sp-"+openShareId);
+    if(prev)prev.classList.remove("show");
   }
   pop.classList.toggle("show");
-  openShareId = pop.classList.contains("show") ? id : null;
+  openShareId=pop.classList.contains("show")?id:null;
+}
+function closeAllShare(){
+  if(openShareId){const p=document.getElementById("sp-"+openShareId);if(p)p.classList.remove("show");openShareId=null}
 }
 
-function doShare(type, id) {
-  const p = prompts.find(x => x.id === id);
-  if (!p) return;
-  const text = encodeURIComponent("🤖 AI Prompt: " + p.prompt + " via PromptHub");
-  const url = encodeURIComponent(window.location.href);
-  if (type === "link") { navigator.clipboard.writeText(window.location.href); toast("Link copied!"); }
-  if (type === "x") window.open("https://twitter.com/intent/tweet?text=" + text, "_blank");
-  if (type === "tg") window.open("https://t.me/share/url?url=" + url + "&text=" + text, "_blank");
-  const pop = document.getElementById("sp-" + id);
-  if (pop) pop.classList.remove("show");
-  openShareId = null;
+function doShare(type,id){
+  const p=prompts.find(x=>x.id===id); if(!p)return;
+  const txt=encodeURIComponent("✨ AI Prompt: "+p.prompt.substring(0,200)+"...\n\nFull prompt 👉 "+SITE_URL);
+  const url=encodeURIComponent(SITE_URL);
+  if(type==="wa") window.open("https://wa.me/?text="+txt,"_blank");
+  if(type==="tg") window.open("https://t.me/share/url?url="+url+"&text="+encodeURIComponent("✨ AI Prompt: "+p.title),"_blank");
+  if(type==="x")  window.open("https://twitter.com/intent/tweet?text="+txt,"_blank");
+  if(type==="lnk"){navigator.clipboard.writeText(SITE_URL).catch(()=>fbCopy(SITE_URL));toast("Link copied!");}
+  closeAllShare();
 }
 
 /* ── Modal ── */
-function openModal(id) {
-  const p = prompts.find(x => x.id === id);
-  if (!p) return;
-  const box = document.getElementById("modalBox");
-  box.innerHTML = `
-    <div class="modal-frame">${p.image ? `<img src="${p.image}" alt="${p.title}">` : `<span>${p.emoji}</span>`}</div>
+function openModal(id){
+  const p=prompts.find(x=>x.id===id); if(!p)return;
+  const box=document.getElementById("modalBox");
+  box.innerHTML=`
+    <div class="modal-handle"></div>
+    <div class="modal-frame">${p.image?`<img src="${p.image}" alt="${p.title}" loading="lazy">`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;opacity:.6">${p.emoji}</div>`}</div>
     <div class="modal-body">
       <div class="modal-head">
-        <div class="modal-title">${p.title} <span class="cat-badge ${getCatClass(p.category)}" style="position:static;display:inline;font-size:11px;margin-left:8px">${p.category}</span></div>
-        <button class="modal-close" onclick="closeModal()">✕ Close</button>
+        <div>
+          <span class="cat-badge cat-${p.category.toLowerCase()}" style="position:static;display:inline-block;margin-bottom:6px">${p.category}</span>
+          <div class="modal-title">${p.title}</div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
-      <div class="modal-prompt">
-        <div class="modal-prompt-lbl">Full Prompt</div>
+      <div class="modal-prompt-box">
+        <div class="modal-prompt-lbl">Full Prompt · ${p.prompt.length} chars</div>
         <div class="modal-prompt-txt">${p.prompt}</div>
       </div>
-      <div class="modal-actions">
-        <button class="modal-copy" onclick="copyPrompt(${p.id});this.textContent='✓ Copied!'">
-          ${svgCopy()} Copy Prompt
+      <div class="modal-acts">
+        <button class="modal-copy" onclick="copyPrompt(${p.id},this)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy Prompt
         </button>
-        <button class="modal-tg" onclick="openTG()">
-          ${svgTG()} Telegram
+        <button class="modal-tg-btn" onclick="doShare('wa',${p.id})">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
         </button>
       </div>
     </div>`;
-  document.getElementById("modal").classList.add("show");
+  document.getElementById("modalBg").classList.add("show");
+  document.body.style.overflow="hidden";
 }
-
-function closeModal() { document.getElementById("modal").classList.remove("show"); }
-function handleModalClick(e) { if (e.target === document.getElementById("modal")) closeModal(); }
-
-/* ── Filter / Search / Sort ── */
-function setFilter(cat) {
-  filter = cat;
-  renderFilters();
-  renderGrid();
+function closeModal(){
+  document.getElementById("modalBg").classList.remove("show");
+  document.body.style.overflow="";
 }
+function handleModalBg(e){if(e.target===document.getElementById("modalBg"))closeModal()}
 
-function doSearch(val) { query = val.toLowerCase(); renderGrid(); }
+/* ── Filter / Search ── */
+function setFilter(cat){filter=cat;renderFilters();renderGrid()}
+function doSearch(v){query=v.toLowerCase();renderGrid()}
 
-function doSort(val) { sortBy = val; renderGrid(); }
-
-function filtered() {
-  let list = prompts.filter(p => {
-    const matchCat = filter === "All" || p.category === filter;
-    const matchQ = !query || p.title.toLowerCase().includes(query) || p.prompt.toLowerCase().includes(query) || p.tags.some(t => t.includes(query));
-    return matchCat && matchQ;
+function getFiltered(){
+  return prompts.filter(p=>{
+    const mc=filter==="All"||p.category===filter;
+    const mq=!query||p.title.toLowerCase().includes(query)||p.prompt.toLowerCase().includes(query)||p.tags.some(t=>t.includes(query));
+    return mc&&mq;
   });
-  if (sortBy === "alpha") list = list.sort((a, b) => a.title.localeCompare(b.title));
-  if (sortBy === "category") list = list.sort((a, b) => a.category.localeCompare(b.category));
-  return list;
 }
 
-/* ── Render Filters ── */
-function renderFilters() {
-  const cats = ["All", ...new Set(prompts.map(p => p.category))];
-  document.getElementById("filterRow").innerHTML = cats.map(c =>
-    `<button class="chip${c === filter ? " on" : ""}" onclick="setFilter('${c}')">${c}</button>`
+/* ── Cat class ── */
+function catClass(c){return{Image:"cat-image",Video:"cat-video","3D":"cat-3d"}[c]||"cat-image"}
+
+/* ── Render filters ── */
+function renderFilters(){
+  const cats=["All",...new Set(prompts.map(p=>p.category))];
+  const icons={"All":"🌟","Image":"🖼","Video":"🎬","3D":"🔮"};
+  document.getElementById("filterRow").innerHTML=cats.map(c=>
+    `<button class="fchip${c===filter?" on":""}" onclick="setFilter('${c}')">
+      <span class="fchip-ico">${icons[c]||"📁"}</span>${c}
+    </button>`
   ).join("");
 }
 
-/* ── Render Grid ── */
-function renderGrid() {
-  const list = filtered();
-  document.getElementById("totalCount").textContent = list.length;
-  const grid = document.getElementById("promptGrid");
-  if (!list.length) {
-    grid.innerHTML = `<div class="empty"><div class="empty-ico">🔍</div>No prompts match your search.</div>`;
+/* ── Render grid ── */
+function renderGrid(){
+  const list=getFiltered();
+  document.getElementById("totalCount").textContent=list.length;
+  const g=document.getElementById("promptGrid");
+  if(!list.length){
+    g.innerHTML=`<div class="empty"><div class="empty-emo">🔍</div>No prompts found</div>`;
     return;
   }
-  grid.innerHTML = list.map(p => `
+  g.innerHTML=list.map(p=>`
     <div class="card" id="card-${p.id}">
       <div class="frame" onclick="openModal(${p.id})">
-        ${p.image ? `<img src="${p.image}" alt="${p.title}" loading="lazy">` : `<div class="frame-ph"><span class="frame-ph-emoji">${p.emoji}</span><span class="frame-ph-label">${p.title}</span></div>`}
+        ${p.image
+          ?`<img src="${p.image}" alt="${p.title}" loading="lazy">`
+          :`<div class="frame-ph"><span class="frame-ph-emo">${p.emoji}</span><span class="frame-ph-lbl">${p.title}</span></div>`}
         <div class="frame-overlay">
           <button class="expand-btn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M14 10l6.1-6.1M9 21H3v-6M10 14l-6.1 6.1"/></svg>
-            View full
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M15 3h6v6M14 10l6.1-6.1M9 21H3v-6M10 14l-6.1 6.1"/></svg>
+            View
           </button>
         </div>
-        <span class="cat-badge ${getCatClass(p.category)}">${p.category}</span>
-        <button class="like-btn${p.liked ? " liked" : ""}" id="lk-${p.id}" onclick="event.stopPropagation();toggleLike(${p.id})">${p.liked ? "♥" : "♡"}</button>
+        <span class="cat-badge ${catClass(p.category)}">${p.category}</span>
+        <button class="like-btn${p.liked?" liked":""}" id="lk-${p.id}" onclick="event.stopPropagation();toggleLike(${p.id})">${p.liked?"♥":"♡"}</button>
       </div>
       <div class="card-body">
         <div class="card-title">${p.title}</div>
-        <div class="prompt-wrap">
-          <div class="prompt-lbl">Prompt <span class="prompt-chars">${p.prompt.length} chars</span></div>
+        <div class="prompt-box">
+          <div class="prompt-lbl">Prompt<span class="prompt-chars">${p.prompt.length}c</span></div>
           <div class="prompt-txt">${p.prompt}</div>
         </div>
         <div class="card-actions">
-          <button class="act-btn" id="cp-${p.id}" onclick="copyPrompt(${p.id})">
-            ${svgCopy()} Copy
+          <button class="act" id="cp-${p.id}" onclick="copyPrompt(${p.id},this)">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" fill="none"/></svg>
+            Copy
           </button>
           <div class="share-wrap">
-            <button class="act-btn" onclick="toggleShare(${p.id},event)">
-              ${svgShare()} Share
+            <button class="act" onclick="toggleShare(${p.id},event)">
+              <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+              Share
             </button>
             <div class="share-pop" id="sp-${p.id}">
-              <button class="share-opt" onclick="doShare('link',${p.id})">${svgLink()} Copy link</button>
-              <button class="share-opt" onclick="doShare('x',${p.id})">${svgX()} Share on X</button>
-              <button class="share-opt" onclick="doShare('tg',${p.id})">${svgTG()} Telegram</button>
+              <div class="share-pop-title">Share prompt</div>
+              <button class="sopt sopt-wa" onclick="doShare('wa',${p.id})">
+                <span class="sopt-ico">
+                  <svg viewBox="0 0 24 24" width="16" height="16" style="fill:#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </span>
+                <span class="sopt-name">WhatsApp</span>
+              </button>
+              <button class="sopt sopt-tg" onclick="doShare('tg',${p.id})">
+                <span class="sopt-ico">
+                  <svg viewBox="0 0 24 24" width="16" height="16" style="fill:#0088CC"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.829.94z"/></svg>
+                </span>
+                <span class="sopt-name">Telegram</span>
+              </button>
+              <button class="sopt sopt-x" onclick="doShare('x',${p.id})">
+                <span class="sopt-ico">
+                  <svg viewBox="0 0 24 24" width="14" height="14" style="fill:var(--t1)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </span>
+                <span class="sopt-name">Share on X</span>
+              </button>
+              <button class="sopt sopt-lnk" onclick="doShare('lnk',${p.id})">
+                <span class="sopt-ico">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+                </span>
+                <span class="sopt-name">Copy link</span>
+              </button>
             </div>
           </div>
-          <button class="act-btn tg-act" onclick="openTG()" title="Join channel">
-            ${svgTG()} Join
-          </button>
         </div>
       </div>
     </div>`).join("");
 }
 
-/* ── SVG Icons ── */
-function svgCopy()  { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>`; }
-function svgCheck() { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`; }
-function svgShare() { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>`; }
-function svgLink()  { return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>`; }
-function svgX()     { return `<svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`; }
-function svgTG()    { return `<svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.829.94z"/></svg>`; }
-
 /* ── Close share on outside click ── */
-document.addEventListener("click", e => {
-  if (openShareId && !e.target.closest(".share-wrap")) {
-    const pop = document.getElementById("sp-" + openShareId);
-    if (pop) pop.classList.remove("show");
-    openShareId = null;
-  }
+document.addEventListener("click",e=>{
+  if(openShareId&&!e.target.closest(".share-wrap"))closeAllShare();
 });
 
 /* ── Keyboard ── */
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+/* ── Desktop TG button show ── */
+if(window.innerWidth>860){document.getElementById("deskTg").style.display="flex"}
+window.addEventListener("resize",()=>{
+  document.getElementById("deskTg").style.display=window.innerWidth>860?"flex":"none";
+});
 
 /* ── INIT ── */
 renderFilters();
