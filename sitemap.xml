@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Home Page -->
   <url>
     <loc>https://universalmoneymart.onrender.com/</loc>
     <lastmod>2026-05-02</lastmod>
     <priority>1.0</priority>
   </url>
-  <!-- Unga ovvoru article link-aiyum kila irukkura madhiri add pannunga -->
+
+  <!-- Blog Articles -->
   <url>
-    <loc>https://universalmoneymart.onrender.com/article-name</loc>
+    <loc>https://universalmoneymart.onrender.com/blog/what-is-sip.html</loc>
     <lastmod>2026-05-02</lastmod>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://universalmoneymart.onrender.com/blog/new-vs-old-tax-regime.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://universalmoneymart.onrender.com/blog/what-is-share-market.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://universalmoneymart.onrender.com/blog/what-is-mutual-fund.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://universalmoneymart.onrender.com/blog/types-of-mutual-funds.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://universalmoneymart.onrender.com/blog/what-is-index-fund.html</loc>
+    <lastmod>2026-05-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
