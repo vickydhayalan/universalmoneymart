@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ta-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All Articles & Guides | Universal Money Mart</title>
+<meta name="description" content="Finance, Mutual Funds, Tax Planning and E-Services (PAN, Aadhaar, Passport) guides explained clearly in Tamil by Vignesh Dhayalan.">
+<meta name="keywords" content="tamil finance blog, mutual funds tamil, e-services guide tamil, pan card apply tamil, sip guide tamil, universal money mart blog">
+<meta name="author" content="Vignesh Dhayalan">
+<meta property="og:title" content="All Articles & Guides | Universal Money Mart">
+<meta property="og:description" content="Finance, Mutual Funds, Tax Planning and E-Services guides in Tamil.">
+<link rel="canonical" href="https://universalmoneymart.onrender.com/blog/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* CSS RULES - BASE */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:#F8F9FC;color:#1A1A2E;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:#4F46E5;text-decoration:none}
+a:hover{text-decoration:underline}
+img{display:block;max-width:100%}
+
+/* WA FAB */
+.wa-fab{position:fixed;bottom:24px;right:20px;z-index:999;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(37,211,102,.6);animation:waG 2.5s ease-in-out infinite;transition:transform .25s}
+.wa-fab:hover{transform:scale(1.12) translateY(-3px);animation:none;box-shadow:0 0 28px rgba(37,211,102,.55)}
+@keyframes waG{0%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}50%{box-shadow:0 0 0 14px rgba(37,211,102,0),0 4px 18px rgba(37,211,102,.45)}100%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}}
+.wa-fab svg{width:26px;height:26px;fill:#fff}
+
+/* HEADER */
+.hdr{background:rgba(255,255,255,.94);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.08);position:sticky;top:0;z-index:200}
+.hdr-inner{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;height:60px;gap:8px}
+.logo{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.logo-box{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#F5A623,#D97706);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#000;overflow:hidden}
+.logo-box img{width:32px;height:32px;object-fit:cover;border-radius:8px}
+.logo-name{font-size:15px;font-weight:800;color:#1A1A2E;letter-spacing:-.02em}
+.logo-name span{color:#F5A623}
+.hdr-nav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.hdr-nav a{font-size:13px;font-weight:500;color:#4A4A68;padding:5px 11px;border-radius:100px;transition:all .15s;white-space:nowrap}
+.hdr-nav a:hover{color:#1A1A2E;background:#F1F3F8;text-decoration:none}
+.hdr-nav a.active{font-weight:700;color:#1A1A2E;background:#F1F3F8}
+.hdr-wa{display:flex;align-items:center;gap:6px;flex-shrink:0;background:#25D366;color:#fff;font-size:13px;font-weight:700;padding:7px 16px;border-radius:100px;transition:all .2s;margin-left:8px}
+.hdr-wa:hover{background:#1ebe5a;transform:translateY(-1px);text-decoration:none}
+.hdr-wa svg{width:13px;height:13px;fill:#fff}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer;margin-left:auto}
+.burger span{display:block;width:20px;height:2px;background:#1A1A2E;border-radius:2px}
+.mob-nav{display:none;background:#fff;border-bottom:1px solid rgba(0,0,0,.07)}
+.mob-nav a{display:block;padding:12px 20px;font-size:14px;font-weight:500;color:#4A4A68;border-bottom:1px solid rgba(0,0,0,.05)}
+.mob-nav a:hover{color:#1A1A2E;text-decoration:none}
+.mob-nav.open{display:block}
+@media(max-width:700px){.hdr-nav{display:none}.hdr-wa{display:none}.burger{display:flex}}
+
+/* BLOG HERO */
+.blog-hero{background:#1A1A2E;color:#fff;padding:60px 20px 50px;text-align:center;border-bottom:4px solid #F5A623}
+.blog-hero-inner{max-width:800px;margin:0 auto}
+.blog-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;margin-bottom:16px;letter-spacing:-.02em}
+.blog-hero p{font-size:18px;color:rgba(255,255,255,.7);line-height:1.6}
+
+/* FILTERS */
+.filters-wrap{background:#fff;border-bottom:1px solid rgba(0,0,0,.07);padding:16px 20px;position:sticky;top:60px;z-index:150}
+.filters{max-width:1100px;margin:0 auto;display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
+.filters::-webkit-scrollbar{height:4px}
+.filters::-webkit-scrollbar-thumb{background:#D1D5DB;border-radius:4px}
+.filter-btn{padding:8px 20px;border:1px solid #E5E7EB;background:#F8F9FC;color:#4B5563;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Inter',sans-serif}
+.filter-btn:hover{background:#E5E7EB;color:#111827}
+.filter-btn.active{background:#4F46E5;color:#fff;border-color:#4F46E5}
+
+/* BLOG GRID */
+.blog-main{max-width:1100px;margin:0 auto;padding:40px 20px 80px}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:32px}
+
+/* BLOG CARD */
+.blog-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:all .3s;text-decoration:none !important}
+.blog-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.08);border-color:rgba(79,70,229,.3)}
+.bc-img-wrap{position:relative;width:100%;padding-top:56.25%;overflow:hidden;background:#E5E7EB}
+.bc-img-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.blog-card:hover .bc-img-wrap img{transform:scale(1.05)}
+.bc-cat{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);color:#111827;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:.05em}
+.bc-cat.mf{color:#DC2626}
+.bc-cat.tax{color:#059669}
+.bc-cat.esvc{color:#7C3AED}
+.bc-cat.bank{color:#D97706}
+.bc-content{padding:20px;display:flex;flex-direction:column;flex:1}
+.bc-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#1A1A2E;line-height:1.3;margin-bottom:10px;transition:color .2s}
+.blog-card:hover .bc-title{color:#4F46E5}
+.bc-desc{font-size:14px;color:#6B7280;line-height:1.6;margin-bottom:20px;flex:1}
+.bc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid rgba(0,0,0,.06)}
+.bc-meta{font-size:12px;color:#9CA3AF;font-family:'JetBrains Mono',monospace}
+.bc-read{font-size:13px;font-weight:700;color:#4F46E5;display:flex;align-items:center;gap:4px}
+.bc-read::after{content:'→';transition:transform .2s}
+.blog-card:hover .bc-read::after{transform:translateX(4px)}
+
+/* NO RESULTS */
+.no-results{display:none;grid-column:1/-1;text-align:center;padding:60px 20px;background:#fff;border-radius:16px;border:1px dashed #D1D5DB;color:#6B7280}
+
+/* FOOTER */
+footer{background:#1A1A2E;border-top:1px solid rgba(255,255,255,.07);padding:24px 20px}
+.ft-row{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-copy{font-size:12px;color:rgba(255,255,255,.35)}
+.ft-links{display:flex;gap:18px}
+.ft-links a{font-size:12px;color:rgba(255,255,255,.35);transition:color .15s}
+.ft-links a:hover{color:rgba(255,255,255,.8);text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- WA FAB -->
+<a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20Finance/E-Services%20பத்தி%20help%20வேணும்." target="_blank" rel="noopener" class="wa-fab" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <a href="/index.html" class="logo">
+      <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM" onerror="this.parentElement.innerHTML='₹'"></div>
+      <div class="logo-name">Universal <span>Money</span> Mart</div>
+    </a>
+    <nav class="hdr-nav">
+      <a href="/index.html">Home</a>
+      <a href="/blog/index.html" class="active">Articles</a>
+      <a href="/tools/sip-calculator.html">Calculator</a>
+      <a href="/tools/nism-series-va-mock-test.html">Mock Tests</a>
+      <a href="/about.html">About</a>
+    </nav>
+    <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="hdr-wa">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Free Advice
+    </a>
+    <button class="burger" onclick="document.getElementById('mob').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mob-nav" id="mob">
+    <a href="/index.html">🏠 Home</a>
+    <a href="/blog/index.html" class="active">📝 Articles</a>
+    <a href="/tools/sip-calculator.html">🧮 SIP Calculator</a>
+    <a href="/tools/nism-series-va-mock-test.html">🎯 Mock Tests</a>
+    <a href="/about.html">👤 About</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <h1>All Articles & Guides</h1>
+    <p>Finance, Mutual Funds, Tax Planning, and E-Services (PAN, Aadhaar, Passport) explained simply in Tamil by Vignesh Dhayalan.</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-wrap">
+  <div class="filters" id="filters">
+    <button class="filter-btn active" data-filter="all">All Topics</button>
+    <button class="filter-btn" data-filter="mf">Mutual Funds & SIP</button>
+    <button class="filter-btn" data-filter="bank">Banking & Taxes</button>
+    <button class="filter-btn" data-filter="esvc">E-Services (PAN, Passport)</button>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="blog-main">
+  <div class="blog-grid" id="blogGrid">
+
+    <!-- Card 1 -->
+    <a href="/blog/gold-vs-mutual-funds.html" class="blog-card" data-cat="mf">
+      <div class="bc-img-wrap">
+        <span class="bc-cat mf">Mutual Funds</span>
+        <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gold vs Mutual Funds">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Gold vs Mutual Funds — எதில் முதலீடு செய்வது சிறந்தது?</h2>
+        <p class="bc-desc">நகைக்கடையில் சீட்டு போடுவது லாபமா அல்லது Equity Mutual Funds-ல் SIP செய்வது லாபமா? SGB என்றால் என்ன?</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 12 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 2 -->
+    <a href="/blog/neft-rtgs-imps-upi-difference.html" class="blog-card" data-cat="bank">
+      <div class="bc-img-wrap">
+        <span class="bc-cat bank">Banking</span>
+        <img src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="NEFT RTGS IMPS UPI">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">NEFT vs RTGS vs IMPS vs UPI — என்ன வித்தியாசம்?</h2>
+        <p class="bc-desc">Fund Transfer modes-ல் எந்த சூழ்நிலைக்கு எதை பயன்படுத்த வேண்டும்? Transaction Limits மற்றும் Settlement Time விவரங்கள்.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 10 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 3 -->
+    <a href="/blog/epf-vs-ppf-difference.html" class="blog-card" data-cat="bank">
+      <div class="bc-img-wrap">
+        <span class="bc-cat bank">Banking & Tax</span>
+        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="EPF vs PPF">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">EPF vs PPF — என்ன வித்தியாசம்? Retirement Guide</h2>
+        <p class="bc-desc">எதிர்கால சேமிப்பிற்கு EPF சிறந்ததா அல்லது PPF சிறந்ததா? வட்டி விகிதம் மற்றும் EEE வரி சலுகைகளை பற்றி அறியவும்.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 11 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 4 -->
+    <a href="/blog/credit-score-guide.html" class="blog-card" data-cat="bank">
+      <div class="bc-img-wrap">
+        <span class="bc-cat bank">Banking</span>
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Credit Score CIBIL">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Credit Score 750+ எப்படி Achieve பண்றது? CIBIL Guide</h2>
+        <p class="bc-desc">Home Loan மற்றும் Credit Card எளிதாக கிடைக்க CIBIL Score-ஐ பாதிக்கும் 5 முக்கிய Factors என்ன?</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 12 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 5 -->
+    <a href="/blog/aadhaar-update-online.html" class="blog-card" data-cat="esvc">
+      <div class="bc-img-wrap">
+        <span class="bc-cat esvc">E-Services</span>
+        <img src="https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Aadhaar Update">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Aadhaar Card Online Update & Correction Guide</h2>
+        <p class="bc-desc">Aadhaar கார்டில் Address Change மற்றும் Document Update செய்வது எப்படி? myAadhaar புதிய விதிமுறைகள்.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 10 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 6 -->
+    <a href="/blog/apply-passport-online.html" class="blog-card" data-cat="esvc">
+      <div class="bc-img-wrap">
+        <span class="bc-cat esvc">E-Services</span>
+        <img src="https://images.unsplash.com/photo-1544377193-33dce4ea9a87?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Passport Apply">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Passport Online-ஆக Apply செய்வது எப்படி?</h2>
+        <p class="bc-desc">ஏஜென்ட் இல்லாமல் நீங்களே புதிய பாஸ்போர்ட்டுக்கு ஆன்லைனில் அப்ளை செய்வது எப்படி? ECR/Non-ECR விவரங்கள்.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 10 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 7 -->
+    <a href="/blog/pan-card-correction-online.html" class="blog-card" data-cat="esvc">
+      <div class="bc-img-wrap">
+        <span class="bc-cat esvc">E-Services</span>
+        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="PAN Correction">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">PAN Card Correction Online-ஆக செய்வது எப்படி?</h2>
+        <p class="bc-desc">உங்கள் PAN கார்டில் உள்ள பிழைகள் (Name, DOB) மற்றும் Photo-வை நீங்களே ஆன்லைனில் திருத்தம் செய்வது எப்படி?</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 8 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 8 -->
+    <a href="/blog/apply-pan-card-online.html" class="blog-card" data-cat="esvc">
+      <div class="bc-img-wrap">
+        <span class="bc-cat esvc">E-Services</span>
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="PAN Apply">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">PAN Card Online-ஆக Apply செய்வது எப்படி?</h2>
+        <p class="bc-desc">புதிய PAN Card-க்கு Aadhaar e-KYC முறை மூலம் ஆன்லைனில் (NSDL) 5 நிமிடங்களில் apply செய்வது எப்படி?</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 8 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 9 -->
+    <a href="/blog/voter-id-online-apply-correction.html" class="blog-card" data-cat="esvc">
+      <div class="bc-img-wrap">
+        <span class="bc-cat esvc">E-Services</span>
+        <img src="https://images.unsplash.com/photo-1555848962-6e79363ec58f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Voter ID Apply">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Voter ID Online-ஆக Apply & Correction செய்வது எப்படி?</h2>
+        <p class="bc-desc">புதிய Voter ID வாங்குவது மற்றும் முகவரி/பெயர் திருத்தம் (Form 8) ஆன்லைனில் செய்வது எப்படி?</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 7 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 10 -->
+    <a href="/blog/what-is-index-fund.html" class="blog-card" data-cat="mf">
+      <div class="bc-img-wrap">
+        <span class="bc-cat mf">Mutual Funds</span>
+        <img src="https://images.unsplash.com/photo-1612010167102-d1e8f83833e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Index Funds">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Index Fund என்றால் என்ன? Active vs Passive Funds</h2>
+        <p class="bc-desc">Warren Buffett ஏன் Beginners-க்கு Index Fund-ஐ பரிந்துரைக்கிறார்? Active மற்றும் Passive funds வித்தியாசம்.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 10 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 11 -->
+    <a href="/blog/types-of-mutual-funds.html" class="blog-card" data-cat="mf">
+      <div class="bc-img-wrap">
+        <span class="bc-cat mf">Mutual Funds</span>
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Types of Mutual Funds">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Types of Mutual Funds — Equity, Debt, Hybrid?</h2>
+        <p class="bc-desc">Mutual Fund-ல் எத்தனை வகைகள் உள்ளன? உங்களுக்கு எந்த ஃபண்ட் சிறந்தது என தெரிந்துகொள்ளுங்கள்.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 11 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 12 -->
+    <a href="/blog/what-is-mutual-fund.html" class="blog-card" data-cat="mf">
+      <div class="bc-img-wrap">
+        <span class="bc-cat mf">Mutual Funds</span>
+        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="What is Mutual Fund">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Mutual Fund என்றால் என்ன? Beginners Guide</h2>
+        <p class="bc-desc">மியூச்சுவல் ஃபண்ட் (Mutual Fund) எப்படி வேலை செய்கிறது? SIP, AMC, Fund Manager பற்றிய முழு விவரம்.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 10 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 13 -->
+    <a href="/blog/what-is-share-market.html" class="blog-card" data-cat="mf">
+      <div class="bc-img-wrap">
+        <span class="bc-cat mf">Finance</span>
+        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Share Market Basics">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">Share Market என்றால் என்ன? Complete Tamil Guide</h2>
+        <p class="bc-desc">பங்குச்சந்தை (Share Market) basics-ஐ மிக எளிமையாக தமிழில் கற்றுக்கொள்ளுங்கள். NSE, BSE விளக்கம்.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 8 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 14 -->
+    <a href="/blog/new-vs-old-tax-regime.html" class="blog-card" data-cat="bank">
+      <div class="bc-img-wrap">
+        <span class="bc-cat bank">Tax Planning</span>
+        <img src="https://iili.io/BsXiukB.jpg" alt="Tax Regime" onerror="this.src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'">
+      </div>
+      <div class="bc-content">
+        <h2 class="bc-title">New Tax Regime vs Old Tax Regime FY 2025-26</h2>
+        <p class="bc-desc">எது உங்களுக்கு better? Salary, deductions, interactive calculator உடன் complete Tamil explanation.</p>
+        <div class="bc-footer">
+          <span class="bc-meta">⏱ 11 MIN READ</span>
+          <span class="bc-read">Read Guide</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+  
+  <div class="no-results" id="noResults">
+    No articles found in this category. Check back later!
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-row">
+    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan · ARN 288927 · Bangalore</div>
+    <div class="ft-links">
+      <a href="/index.html">Home</a>
+      <a href="/tools/sip-calculator.html">Tools</a>
+      <a href="/privacy-policy.html">Privacy</a>
+      <a href="/about.html">About</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Filter Logic
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.blog-card');
+const noRes = document.getElementById('noResults');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Active class toggle
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const filter = btn.getAttribute('data-filter');
+    let count = 0;
+    
+    cards.forEach(card => {
+      if (filter === 'all' || card.getAttribute('data-cat') === filter) {
+        card.style.display = 'flex';
+        count++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    
+    if(count === 0) {
+      noRes.style.display = 'block';
+    } else {
+      noRes.style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>
