@@ -38,8 +38,12 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   --t1:#0F0F1A;
   --t2:#4A4A68;
   --t3:#9090A8;
+  --tw:#FFFFFF;
+  --tw2:rgba(255,255,255,.75);
+  --tw3:rgba(255,255,255,.45);
   --bdr:rgba(0,0,0,.08);
   --bdr2:rgba(0,0,0,.12);
+  --bdrw:rgba(255,255,255,.1);
   --fh:'Playfair Display',Georgia,serif;
   --fb:'Inter',system-ui,sans-serif;
   --fm:'JetBrains Mono',monospace;
@@ -142,7 +146,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
 .ft-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
 @media(max-width:860px){.ft-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.ft-grid{grid-template-columns:1fr}}
-.ft-logo-name{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-top:10px;margin-bottom:10px}
+.ft-logo-name{font-size:17px;font-weight:800;color:var(--tw);letter-spacing:-.02em;margin-top:10px;margin-bottom:10px}
 .ft-logo-name span{color:var(--gold)}
 .ft-desc{font-size:13.5px;color:var(--tw2);line-height:1.75;margin-bottom:16px}
 .ft-col-h{font-family:var(--fm);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tw3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bdrw)}
@@ -193,7 +197,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
   <div class="mob-menu" id="mobNav">
     <a href="/index.html">🏠 Home</a>
     <a href="/blog/index.html">📝 Articles</a>
-    <a href="/tools/sip-calculator.html">🧮 Calculators</a>
+    <a href="/tools/sip-calculator.html" class="active">🧮 Calculator</a>
     <a href="/tools/nism-series-va-mock-test.html">📋 Mock Tests</a>
     <a href="/about.html">👤 About</a>
   </div>
@@ -293,7 +297,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
     <div>
       <div class="logo" style="gap:10px">
         <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="logo-name" style="color:#fff">Universal <span>Money</span> Mart</div>
+        <div class="logo-name" style="color:var(--tw)">Universal <span>Money</span> Mart</div>
       </div>
       <p class="ft-desc">Tamil Finance Education. SIP, Tax, Stock Market, Gold, Insurance & Mock Tests — free guidance by Vignesh Dhayalan, AMFI MFD ARN 288927, Bangalore.</p>
     </div>
