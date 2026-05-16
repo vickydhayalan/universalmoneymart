@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ta-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIP Calculator Online — Mutual Fund Returns Calculator | Universal Money Mart</title>
+<meta name="description" content="Free Online SIP Calculator in Tamil. Calculate your Mutual Fund SIP returns, future wealth, and power of compounding accurately.">
+<meta name="keywords" content="sip calculator tamil, mutual fund calculator tamil, sip returns calculator, power of compounding calculator, universal money mart tools">
+<meta name="author" content="Vignesh Dhayalan">
+<meta property="og:title" content="SIP Calculator Online — Estimate Your Mutual Fund Returns">
+<meta property="og:description" content="Plan your financial future with our free, interactive SIP Calculator. Understand the power of compounding in Tamil.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://universalmoneymart.onrender.com/tools/sip-calculator.html">
+<link rel="canonical" href="https://universalmoneymart.onrender.com/tools/sip-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Chart.js for Pie Chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814" crossorigin="anonymous"></script>
+<style>
+/* ══════════════════════════════════════════════════
+   UNIVERSAL MONEY MART — SIP Calculator Styles
+   ══════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+:root{
+  --white:#FFFFFF;
+  --off:#F8F9FC;
+  --off2:#F1F3F8;
+  --dark:#0D0D12;
+  --dark2:#141420;
+  --dark3:#1C1C2E;
+  --ink:#1A1A2E;
+  --gold:#F5A623;
+  --teal:#0EA5E9;
+  --green:#10B981;
+  --indigo:#4F46E5;
+  --indigolight:#EEF2FF;
+  --t1:#0F0F1A;
+  --t2:#4A4A68;
+  --t3:#9090A8;
+  --bdr:rgba(0,0,0,.08);
+  --bdr2:rgba(0,0,0,.12);
+  --fh:'Playfair Display',Georgia,serif;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --max:1160px;
+  --r:16px;
+  --rsm:10px;
+  --rfull:100px;
+}
+body{font-family:var(--fb);font-size:16px;line-height:1.6;color:var(--t1);background:var(--off);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* ── WHATSAPP FAB ── */
+.wa-fab{position:fixed;bottom:24px;right:20px;z-index:999;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(37,211,102,.6);animation:waGlow 2.5s ease-in-out infinite;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .2s}
+.wa-fab:hover{transform:scale(1.15) translateY(-3px);animation:none;box-shadow:0 0 0 0 transparent,0 0 30px 8px rgba(37,211,102,.5),0 8px 28px rgba(37,211,102,.55)}
+@keyframes waGlow{0%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}50%{box-shadow:0 0 0 15px rgba(37,211,102,0),0 4px 20px rgba(37,211,102,.45)}100%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}}
+.wa-fab svg{width:28px;height:28px;fill:#fff}
+
+/* ── HEADER ── */
+.hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr)}
+.hdr-inner{max-width:var(--max);margin:0 auto;padding:0 20px;display:flex;align-items:center;height:64px;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-box{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--gold),#D97706);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 18px rgba(245,166,35,.3)}
+.logo-name{font-size:16.5px;font-weight:800;color:var(--t1);letter-spacing:-.025em}
+.logo-name span{color:var(--gold)}
+.hdr-nav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.hdr-nav a{font-size:14px;font-weight:500;color:var(--t2);padding:7px 13px;border-radius:var(--rfull);transition:all .15s;white-space:nowrap}
+.hdr-nav a:hover{color:var(--t1);background:var(--off2)}
+.hdr-nav a.active{font-weight:700;color:var(--t1);background:var(--off2)}
+.hdr-btns{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn-wa-hdr{display:flex;align-items:center;gap:7px;background:#25D366;color:#fff;font-size:13.5px;font-weight:700;padding:9px 18px;border-radius:var(--rfull);transition:all .2s;white-space:nowrap;box-shadow:0 4px 14px rgba(37,211,102,.3)}
+.btn-wa-hdr:hover{background:#1ebe5a;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.4)}
+.btn-wa-hdr svg{width:15px;height:15px;fill:#fff}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;margin-left:auto}
+.burger span{display:block;width:22px;height:2px;background:var(--t1);border-radius:2px;transition:all .3s}
+.mob-menu{display:none;background:var(--white);border-bottom:1px solid var(--bdr)}
+.mob-menu a{display:block;padding:14px 20px;font-size:15px;font-weight:500;color:var(--t2);border-bottom:1px solid var(--bdr);transition:all .15s}
+.mob-menu a:hover{color:var(--t1);padding-left:26px}
+.mob-menu.open{display:block}
+@media(max-width:860px){.hdr-nav{display:none}.btn-wa-hdr{display:none}.burger{display:flex}}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{background:#fff;border-bottom:1px solid var(--bdr);padding:12px 20px}
+.bc-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--t3);font-family:var(--fm)}
+.bc-inner a{color:var(--indigo);transition:color .2s}
+.bc-inner a:hover{color:var(--t1)}
+
+/* ── HERO ── */
+.tool-hero{padding:48px 20px 32px;text-align:center;background:var(--white)}
+.th-eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--indigolight);color:var(--indigo);font-size:12px;font-weight:700;padding:5px 14px;border-radius:var(--rfull);margin-bottom:16px;text-transform:uppercase;letter-spacing:.08em}
+.th-title{font-family:var(--fh);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--t1);letter-spacing:-.03em;margin-bottom:12px;line-height:1.1}
+.th-desc{font-size:16px;color:var(--t2);max-width:600px;margin:0 auto;line-height:1.7}
+
+/* ── CALCULATOR MAIN ── */
+.calc-wrapper{max-width:1000px;margin:0 auto 64px;padding:0 20px}
+.calc-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;background:var(--white);border:1px solid var(--bdr);border-radius:24px;padding:32px;box-shadow:0 12px 40px rgba(0,0,0,.03)}
+@media(max-width:860px){.calc-grid{grid-template-columns:1fr;padding:24px}}
+
+/* Input Section */
+.c-input-sec{display:flex;flex-direction:column;gap:28px}
+.input-group{display:flex;flex-direction:column;gap:12px}
+.ig-header{display:flex;justify-content:space-between;align-items:center}
+.ig-label{font-size:14.5px;font-weight:600;color:var(--t2)}
+.ig-val-box{display:flex;align-items:center;background:var(--indigolight);border:1px solid rgba(79,70,229,.2);border-radius:8px;padding:6px 12px}
+.ig-prefix{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--indigo);margin-right:4px}
+.ig-suffix{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--indigo);margin-left:4px}
+.ig-input{border:none;background:transparent;font-family:var(--fm);font-size:16px;font-weight:700;color:var(--indigo);width:80px;text-align:right;outline:none}
+.ig-input::-webkit-outer-spin-button, .ig-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* Custom Slider */
+.slider-wrap{position:relative;width:100%;padding:10px 0}
+.custom-slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:var(--off2);border-radius:10px;outline:none;background-image:linear-gradient(var(--indigo),var(--indigo));background-repeat:no-repeat}
+.custom-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;cursor:pointer;border:3px solid var(--indigo);box-shadow:0 2px 6px rgba(0,0,0,.15);transition:transform .1s}
+.custom-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.slider-labels{display:flex;justify-content:space-between;font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:8px}
+
+/* Result Section */
+.c-result-sec{background:var(--off);border:1px solid var(--bdr);border-radius:16px;padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.res-card{width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--bdr2)}
+.res-card:last-of-type{border-bottom:none;margin-bottom:24px}
+.rc-label{font-size:14px;font-weight:500;color:var(--t2);display:flex;align-items:center;gap:8px}
+.rc-dot{width:10px;height:10px;border-radius:3px}
+.rc-val{font-family:var(--fm);font-size:18px;font-weight:700;color:var(--t1)}
+.rc-total{font-family:var(--fm);font-size:24px;font-weight:800;color:var(--indigo)}
+
+/* Chart */
+.chart-container{position:relative;width:100%;max-width:240px;aspect-ratio:1/1;margin:0 auto}
+
+/* CTA inside calc */
+.calc-cta{width:100%;background:var(--indigo);color:#fff;font-size:15px;font-weight:700;padding:14px;border-radius:10px;text-align:center;margin-top:20px;transition:all .2s;text-decoration:none;display:block}
+.calc-cta:hover{background:#3730A3;box-shadow:0 6px 20px rgba(79,70,229,.3)}
+
+/* ── INFO SECTION ── */
+.info-sec{max-width:900px;margin:0 auto 80px;padding:0 20px}
+.info-box{background:var(--white);border:1px solid var(--bdr);border-radius:16px;padding:32px;margin-bottom:24px}
+.info-h2{font-family:var(--fh);font-size:1.5rem;font-weight:800;color:var(--t1);margin-bottom:16px;letter-spacing:-.02em}
+.info-p{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:16px}
+.info-list{padding-left:24px;margin-bottom:16px}
+.info-list li{font-size:15px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+
+/* ── FOOTER ── */
+footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20px 28px}
+.ft-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+@media(max-width:860px){.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr}}
+.ft-logo-name{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-top:10px;margin-bottom:10px}
+.ft-logo-name span{color:var(--gold)}
+.ft-desc{font-size:13.5px;color:var(--tw2);line-height:1.75;margin-bottom:16px}
+.ft-col-h{font-family:var(--fm);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tw3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bdrw)}
+.ft-links{display:flex;flex-direction:column;gap:9px}
+.ft-links a{font-size:13.5px;color:var(--tw2);transition:color .15s}
+.ft-links a:hover{color:var(--gold)}
+.ft-bottom{max-width:var(--max);margin:0 auto;border-top:1px solid var(--bdrw);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ft-copy{font-size:12.5px;color:var(--tw3)}
+.ft-legal{display:flex;gap:20px}
+.ft-legal a{font-size:12.5px;color:var(--tw3);transition:color .15s}
+.ft-legal a:hover{color:var(--white)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ══ WHATSAPP FAB ══ -->
+<a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20SIP%20invest%20பண்ண%20help%20வேணும்." target="_blank" rel="noopener" class="wa-fab" aria-label="WhatsApp">
+  <span class="wa-tip">Start SIP Today 💬</span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ══ HEADER ══ -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <a href="/index.html" class="logo">
+      <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+      <div class="logo-name">Universal <span>Money</span> Mart</div>
+    </a>
+    <nav class="hdr-nav">
+      <a href="/index.html">Home</a>
+      <a href="/blog/index.html">Articles</a>
+      <a href="/tools/sip-calculator.html" class="active">Calculator</a>
+      <a href="/tools/nism-series-va-mock-test.html">Mock Tests</a>
+      <a href="/about.html">About</a>
+    </nav>
+    <div class="hdr-btns">
+      <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="btn-wa-hdr">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message Vignesh
+      </a>
+    </div>
+    <button class="burger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mob-nav" id="mobNav">
+    <a href="/index.html">🏠 Home</a>
+    <a href="/blog/index.html">📝 Articles</a>
+    <a href="/tools/nism-series-va-mock-test.html">📋 Mock Tests</a>
+    <a href="/about.html">👤 About</a>
+    <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:#25D366;font-weight:700">💬 WhatsApp Free Advice</a>
+  </div>
+</header>
+
+<!-- ══ BREADCRUMB ══ -->
+<div class="breadcrumb">
+  <div class="bc-inner">
+    <a href="/index.html">Home</a><span class="bc-sep">›</span>
+    <a href="#">Tools & Calculators</a><span class="bc-sep">›</span>
+    <span>SIP Calculator</span>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<div class="tool-hero rv">
+  <div class="th-eyebrow">Financial Tools</div>
+  <h1 class="th-title">SIP Return Calculator</h1>
+  <p class="th-desc">மாதாந்திர முதலீடு (SIP) மூலமாக நீங்கள் எவ்வளவு லாபத்தை (Corpus) உருவாக்க முடியும் என்பதை கணக்கிட்டு பாருங்கள். Power of Compounding-ஐ எளிமையாக புரிந்துகொள்ளுங்கள்.</p>
+</div>
+
+<!-- ══ CALCULATOR ══ -->
+<div class="calc-wrapper rv">
+  <div class="calc-grid">
+    <!-- Inputs -->
+    <div class="c-input-sec">
+      <!-- Investment Amount -->
+      <div class="input-group">
+        <div class="ig-header">
+          <span class="ig-label">மாதாந்திர முதலீடு (Monthly Investment)</span>
+          <div class="ig-val-box">
+            <span class="ig-prefix">₹</span>
+            <input type="number" class="ig-input" id="inpAmount" value="5000" min="500" max="1000000" step="500">
+          </div>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" class="custom-slider" id="slAmount" value="5000" min="500" max="100000" step="500">
+          <div class="slider-labels"><span>₹500</span><span>₹1,00,000</span></div>
+        </div>
+      </div>
+
+      <!-- Expected Return -->
+      <div class="input-group">
+        <div class="ig-header">
+          <span class="ig-label">எதிர்பார்க்கும் லாபம் (Expected Return Rate)</span>
+          <div class="ig-val-box">
+            <input type="number" class="ig-input" id="inpRate" value="12" min="1" max="30" step="0.5">
+            <span class="ig-suffix">%</span>
+          </div>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" class="custom-slider" id="slRate" value="12" min="1" max="30" step="0.5">
+          <div class="slider-labels"><span>1%</span><span>30%</span></div>
+        </div>
+      </div>
+
+      <!-- Time Period -->
+      <div class="input-group">
+        <div class="ig-header">
+          <span class="ig-label">முதலீட்டு காலம் (Time Period)</span>
+          <div class="ig-val-box">
+            <input type="number" class="ig-input" id="inpYears" value="10" min="1" max="40" step="1">
+            <span class="ig-suffix">Yr</span>
+          </div>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" class="custom-slider" id="slYears" value="10" min="1" max="40" step="1">
+          <div class="slider-labels"><span>1 Yr</span><span>40 Yr</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="c-result-sec">
+      <div class="res-card">
+        <span class="rc-label"><span class="rc-dot" style="background:#E5E7EB"></span>மொத்த முதலீடு (Total Invested)</span>
+        <span class="rc-val" id="resInvested">₹6,00,000</span>
+      </div>
+      <div class="res-card">
+        <span class="rc-label"><span class="rc-dot" style="background:#4F46E5"></span>கிடைக்கும் லாபம் (Est. Returns)</span>
+        <span class="rc-val" style="color:#4F46E5" id="resReturns">₹5,61,695</span>
+      </div>
+      <div class="res-card">
+        <span class="rc-label">💰 மொத்த மதிப்பு (Total Value)</span>
+        <span class="rc-total" id="resTotal">₹11,61,695</span>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-container">
+        <canvas id="sipChart"></canvas>
+      </div>
+
+      <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20Naan%20SIP%20start%20panna%20help%20venum." target="_blank" rel="noopener" class="calc-cta">
+        Start Your SIP Journey →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INFO SECTION ══ -->
+<div class="info-sec rv">
+  <div class="info-box">
+    <h2 class="info-h2">What is SIP (Systematic Investment Plan)?</h2>
+    <p class="info-p">SIP என்பது Mutual Funds-ல் முதலீடு செய்வதற்கான ஒரு சிறந்த முறையாகும். உங்கள் Bank Account-ல் இருந்து மாதாமாதம் ஒரு குறிப்பிட்ட தொகையை (Ex: ₹1,000) தானாகவே (Auto-debit) எடுத்து Mutual fund-ல் முதலீடு செய்யும் வசதி இது.</p>
+    <ul class="info-list">
+      <li><strong>Power of Compounding:</strong> வட்டிக்கு வட்டி (Returns on Returns) ஈட்டுவதன் மூலம் நீண்ட காலத்தில் (Long-term) மிகப்பெரிய Wealth-ஐ உருவாக்க முடியும்.</li>
+      <li><strong>Rupee Cost Averaging:</strong> மார்க்கெட் ஏறும்போதும் இறங்கும்போதும் முதலீடு செய்வதால், Risk குறைந்து Average Cost லாபம் தருகிறது.</li>
+      <li><strong>Discipline:</strong> மாதாமாதம் தவறாமல் சேமிக்கும் பழக்கத்தை (Financial Discipline) உருவாக்குகிறது.</li>
+    </ul>
+  </div>
+  <div class="info-box">
+    <h2 class="info-h2">Disclaimer</h2>
+    <p class="info-p">This calculator is for illustration purposes only and does not represent actual returns. Mutual fund investments are subject to market risks, read all scheme related documents carefully. The calculated figures do not guarantee future returns. Consult your AMFI Registered MFD before investing.</p>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="logo" style="gap:10px">
+        <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+        <div class="logo-name" style="color:#fff">Universal <span>Money</span> Mart</div>
+      </div>
+      <p class="ft-desc">Tamil Finance Education. SIP, Tax, Stock Market, Gold, Insurance & Mock Tests — free guidance by Vignesh Dhayalan, AMFI MFD ARN 288927, Bangalore.</p>
+    </div>
+    <div>
+      <div class="ft-col-h">Popular Articles</div>
+      <div class="ft-links">
+        <a href="/blog/what-is-sip.html">What is SIP?</a>
+        <a href="/blog/new-vs-old-tax-regime.html">Tax Regime 2025-26</a>
+        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
+        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Tools & Exams</div>
+      <div class="ft-links">
+        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
+        <a href="/tools/sip-calculator.html">SIP Calculator</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Legal</div>
+      <div class="ft-links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/about.html">About Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan · ARN 288927 · Bangalore</div>
+  </div>
+</footer>
+
+<script>
+/* Mobile nav */
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open')}
+
+/* Scroll reveal */
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* SIP Calculator Logic & Chart.js */
+const elements = {
+  inpAmount: document.getElementById('inpAmount'),
+  slAmount: document.getElementById('slAmount'),
+  inpRate: document.getElementById('inpRate'),
+  slRate: document.getElementById('slRate'),
+  inpYears: document.getElementById('inpYears'),
+  slYears: document.getElementById('slYears'),
+  resInvested: document.getElementById('resInvested'),
+  resReturns: document.getElementById('resReturns'),
+  resTotal: document.getElementById('resTotal')
+};
+
+let sipChart;
+
+// Initialize Chart
+function initChart() {
+  const ctx = document.getElementById('sipChart').getContext('2d');
+  sipChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Total Invested', 'Est. Returns'],
+      datasets: [{
+        data: [50, 50], // Dummy initial
+        backgroundColor: ['#E5E7EB', '#4F46E5'],
+        borderWidth: 0,
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '75%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let value = context.raw;
+              return ' ₹' + value.toLocaleString('en-IN');
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+// Formatting numbers to Indian Rupee style
+function formatINR(number) {
+  return '₹' + Math.round(number).toLocaleString('en-IN');
+}
+
+// Set gradient for custom sliders
+function updateSliderTrack(slider) {
+  const min = slider.min;
+  const max = slider.max;
+  const val = slider.value;
+  const percentage = ((val - min) / (max - min)) * 100;
+  slider.style.backgroundSize = percentage + '% 100%';
+}
+
+function calculateSIP() {
+  let P = parseFloat(elements.inpAmount.value);
+  let rate = parseFloat(elements.inpRate.value);
+  let years = parseFloat(elements.inpYears.value);
+
+  // Fallbacks for invalid inputs
+  if (isNaN(P) || P < 0) P = 0;
+  if (isNaN(rate) || rate < 0) rate = 0;
+  if (isNaN(years) || years < 0) years = 0;
+
+  const i = rate / 12 / 100; // monthly rate
+  const n = years * 12; // months
+
+  let M = 0;
+  if (rate === 0) {
+    M = P * n;
+  } else {
+    M = P * (((Math.pow(1 + i, n) - 1) / i) * (1 + i));
+  }
+
+  const invested = P * n;
+  const estReturns = M - invested;
+
+  // Update DOM
+  elements.resInvested.textContent = formatINR(invested);
+  elements.resReturns.textContent = formatINR(estReturns > 0 ? estReturns : 0);
+  elements.resTotal.textContent = formatINR(M);
+
+  // Update Chart
+  if(sipChart) {
+    sipChart.data.datasets[0].data = [invested, estReturns > 0 ? estReturns : 0];
+    sipChart.update();
+  }
+}
+
+function syncValues(type, source) {
+  let val = parseFloat(source.value);
+  
+  if (type === 'amount') {
+    if(source.id === 'inpAmount') {
+      if(val > 100000) val = 100000;
+      elements.slAmount.value = val;
+    } else {
+      elements.inpAmount.value = val;
+    }
+    updateSliderTrack(elements.slAmount);
+  } 
+  else if (type === 'rate') {
+    if(source.id === 'inpRate') {
+      if(val > 30) val = 30;
+      elements.slRate.value = val;
+    } else {
+      elements.inpRate.value = val;
+    }
+    updateSliderTrack(elements.slRate);
+  } 
+  else if (type === 'years') {
+    if(source.id === 'inpYears') {
+      if(val > 40) val = 40;
+      elements.slYears.value = val;
+    } else {
+      elements.inpYears.value = val;
+    }
+    updateSliderTrack(elements.slYears);
+  }
+
+  calculateSIP();
+}
+
+// Event Listeners
+elements.inpAmount.addEventListener('input', (e) => syncValues('amount', e.target));
+elements.slAmount.addEventListener('input', (e) => syncValues('amount', e.target));
+
+elements.inpRate.addEventListener('input', (e) => syncValues('rate', e.target));
+elements.slRate.addEventListener('input', (e) => syncValues('rate', e.target));
+
+elements.inpYears.addEventListener('input', (e) => syncValues('years', e.target));
+elements.slYears.addEventListener('input', (e) => syncValues('years', e.target));
+
+// Init
+window.addEventListener('DOMContentLoaded', () => {
+  initChart();
+  updateSliderTrack(elements.slAmount);
+  updateSliderTrack(elements.slRate);
+  updateSliderTrack(elements.slYears);
+  calculateSIP();
+});
+</script>
+</body>
+</html>
