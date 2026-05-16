@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ta-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EMI Calculator Online — Home, Car & Personal Loan | Universal Money Mart</title>
+<meta name="description" content="Free Online EMI Calculator in Tamil. Calculate your Home, Car, or Personal Loan EMI, Total Interest, and Total Payment instantly.">
+<meta name="keywords" content="emi calculator tamil, home loan calculator, car loan emi calculator, personal loan emi tamil, universal money mart tools">
+<meta name="author" content="Vignesh Dhayalan">
+<meta property="og:title" content="EMI Calculator Online — Home, Car & Personal Loan">
+<meta property="og:description" content="உங்கள் Loan EMI மற்றும் வட்டியை (Interest) துல்லியமாக கணக்கிட எங்கள் Free EMI Calculator-ஐ பயன்படுத்துங்கள்.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://universalmoneymart.com/tools/emi-calculator.html">
+<link rel="canonical" href="https://universalmoneymart.com/tools/emi-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814" crossorigin="anonymous"></script>
+<style>
+/* ══════════════════════════════════════════════════
+   UNIVERSAL MONEY MART — EMI Calculator Styles
+   ══════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+:root{
+  --white:#FFFFFF;
+  --off:#F8F9FC;
+  --off2:#F1F3F8;
+  --dark:#0D0D12;
+  --dark2:#141420;
+  --ink:#1A1A2E;
+  --gold:#F5A623;
+  --teal:#0EA5E9;
+  --teallight:#E0F2FE;
+  --green:#10B981;
+  --indigo:#4F46E5;
+  --rose:#E11D48;
+  --t1:#0F0F1A;
+  --t2:#4A4A68;
+  --t3:#9090A8;
+  --tw:#FFFFFF;
+  --tw2:rgba(255,255,255,.75);
+  --tw3:rgba(255,255,255,.45);
+  --bdr:rgba(0,0,0,.08);
+  --bdr2:rgba(0,0,0,.12);
+  --bdrw:rgba(255,255,255,.1);
+  --fh:'Playfair Display',Georgia,serif;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --max:1160px;
+  --r:16px;
+  --rsm:10px;
+  --rfull:100px;
+}
+body{font-family:var(--fb);font-size:16px;line-height:1.6;color:var(--t1);background:var(--off);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* ── WHATSAPP FAB ── */
+.wa-fab{position:fixed;bottom:24px;right:20px;z-index:999;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(37,211,102,.6);animation:waGlow 2.5s ease-in-out infinite;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .2s}
+.wa-fab:hover{transform:scale(1.15) translateY(-3px);animation:none;box-shadow:0 0 0 0 transparent,0 0 30px 8px rgba(37,211,102,.5),0 8px 28px rgba(37,211,102,.55)}
+@keyframes waGlow{0%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}50%{box-shadow:0 0 0 15px rgba(37,211,102,0),0 4px 20px rgba(37,211,102,.45)}100%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}}
+.wa-fab svg{width:28px;height:28px;fill:#fff}
+
+/* ── HEADER ── */
+.hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr)}
+.hdr-inner{max-width:var(--max);margin:0 auto;padding:0 20px;display:flex;align-items:center;height:64px;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-box{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--gold),#D97706);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 18px rgba(245,166,35,.3)}
+.logo-name{font-size:16.5px;font-weight:800;color:var(--t1);letter-spacing:-.025em}
+.logo-name span{color:var(--gold)}
+.hdr-nav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.hdr-nav a{font-size:14px;font-weight:500;color:var(--t2);padding:7px 13px;border-radius:var(--rfull);transition:all .15s;white-space:nowrap}
+.hdr-nav a:hover{color:var(--t1);background:var(--off2)}
+.hdr-nav a.active{font-weight:700;color:var(--t1);background:var(--off2)}
+.hdr-btns{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn-wa-hdr{display:flex;align-items:center;gap:7px;background:#25D366;color:#fff;font-size:13.5px;font-weight:700;padding:9px 18px;border-radius:var(--rfull);transition:all .2s;white-space:nowrap;box-shadow:0 4px 14px rgba(37,211,102,.3)}
+.btn-wa-hdr:hover{background:#1ebe5a;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.4)}
+.btn-wa-hdr svg{width:15px;height:15px;fill:#fff}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;margin-left:auto}
+.burger span{display:block;width:22px;height:2px;background:var(--t1);border-radius:2px;transition:all .3s}
+.mob-menu{display:none;background:var(--white);border-bottom:1px solid var(--bdr)}
+.mob-menu a{display:block;padding:14px 20px;font-size:15px;font-weight:500;color:var(--t2);border-bottom:1px solid var(--bdr);transition:all .15s}
+.mob-menu a:hover{color:var(--t1);padding-left:26px}
+.mob-menu.open{display:block}
+@media(max-width:860px){.hdr-nav{display:none}.btn-wa-hdr{display:none}.burger{display:flex}}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{background:#fff;border-bottom:1px solid var(--bdr);padding:12px 20px}
+.bc-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--t3);font-family:var(--fm)}
+.bc-inner a{color:var(--teal);transition:color .2s}
+.bc-inner a:hover{color:var(--t1)}
+
+/* ── HERO ── */
+.tool-hero{padding:48px 20px 32px;text-align:center;background:var(--white)}
+.th-eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--teallight);color:var(--teal);font-size:12px;font-weight:700;padding:5px 14px;border-radius:var(--rfull);margin-bottom:16px;text-transform:uppercase;letter-spacing:.08em}
+.th-title{font-family:var(--fh);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--t1);letter-spacing:-.03em;margin-bottom:12px;line-height:1.1}
+.th-desc{font-size:16px;color:var(--t2);max-width:600px;margin:0 auto;line-height:1.7}
+
+/* ── CALCULATOR MAIN ── */
+.calc-wrapper{max-width:1000px;margin:0 auto 64px;padding:0 20px}
+.calc-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;background:var(--white);border:1px solid var(--bdr);border-radius:24px;padding:32px;box-shadow:0 12px 40px rgba(0,0,0,.03)}
+@media(max-width:860px){.calc-grid{grid-template-columns:1fr;padding:24px}}
+
+/* Input Section */
+.c-input-sec{display:flex;flex-direction:column;gap:28px}
+.input-group{display:flex;flex-direction:column;gap:12px}
+.ig-header{display:flex;justify-content:space-between;align-items:center}
+.ig-label{font-size:14.5px;font-weight:600;color:var(--t2)}
+.ig-val-box{display:flex;align-items:center;background:var(--teallight);border:1px solid rgba(14,165,233,.3);border-radius:8px;padding:6px 12px}
+.ig-prefix{font-family:var(--fm);font-size:14px;font-weight:600;color:#0284C7;margin-right:4px}
+.ig-suffix{font-family:var(--fm);font-size:14px;font-weight:600;color:#0284C7;margin-left:4px}
+.ig-input{border:none;background:transparent;font-family:var(--fm);font-size:16px;font-weight:700;color:#0284C7;width:100px;text-align:right;outline:none}
+.ig-input::-webkit-outer-spin-button, .ig-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* Custom Slider */
+.slider-wrap{position:relative;width:100%;padding:10px 0}
+.custom-slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:var(--off2);border-radius:10px;outline:none;background-image:linear-gradient(var(--teal),var(--teal));background-repeat:no-repeat}
+.custom-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;cursor:pointer;border:3px solid var(--teal);box-shadow:0 2px 6px rgba(0,0,0,.15);transition:transform .1s}
+.custom-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.slider-labels{display:flex;justify-content:space-between;font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:8px}
+
+/* Result Section */
+.c-result-sec{background:var(--off);border:1px solid var(--bdr);border-radius:16px;padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.res-card{width:100%;display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--bdr2)}
+.res-card:last-of-type{border-bottom:none;margin-bottom:24px}
+.rc-label{font-size:14px;font-weight:500;color:var(--t2);display:flex;align-items:center;gap:8px}
+.rc-dot{width:10px;height:10px;border-radius:3px}
+.rc-val{font-family:var(--fm);font-size:18px;font-weight:700;color:var(--t1)}
+.rc-total{font-family:var(--fm);font-size:24px;font-weight:800;color:#0284C7}
+
+/* Chart */
+.chart-container{position:relative;width:100%;max-width:240px;aspect-ratio:1/1;margin:0 auto}
+
+/* CTA inside calc */
+.calc-cta{width:100%;background:var(--teal);color:#fff;font-size:15px;font-weight:700;padding:14px;border-radius:10px;text-align:center;margin-top:20px;transition:all .2s;text-decoration:none;display:block}
+.calc-cta:hover{background:#0284C7;box-shadow:0 6px 20px rgba(14,165,233,.3)}
+
+/* ── INFO SECTION ── */
+.info-sec{max-width:900px;margin:0 auto 80px;padding:0 20px}
+.info-box{background:var(--white);border:1px solid var(--bdr);border-radius:16px;padding:32px;margin-bottom:24px}
+.info-h2{font-family:var(--fh);font-size:1.5rem;font-weight:800;color:var(--t1);margin-bottom:16px;letter-spacing:-.02em}
+.info-p{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:16px}
+.info-list{padding-left:24px;margin-bottom:16px}
+.info-list li{font-size:15px;color:var(--t2);margin-bottom:8px;line-height:1.6}
+
+/* ── FOOTER ── */
+footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20px 28px}
+.ft-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+@media(max-width:860px){.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr}}
+.ft-logo-name{font-size:17px;font-weight:800;color:var(--tw);letter-spacing:-.02em;margin-top:10px;margin-bottom:10px}
+.ft-logo-name span{color:var(--gold)}
+.ft-desc{font-size:13.5px;color:var(--tw2);line-height:1.75;margin-bottom:16px}
+.ft-col-h{font-family:var(--fm);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tw3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bdrw)}
+.ft-links{display:flex;flex-direction:column;gap:9px}
+.ft-links a{font-size:13.5px;color:var(--tw2);transition:color .15s}
+.ft-links a:hover{color:var(--gold)}
+.ft-bottom{max-width:var(--max);margin:0 auto;border-top:1px solid var(--bdrw);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ft-copy{font-size:12.5px;color:var(--tw3)}
+.ft-legal{display:flex;gap:20px}
+.ft-legal a{font-size:12.5px;color:var(--tw3);transition:color .15s}
+.ft-legal a:hover{color:var(--white)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20Loan%20planning%20help%20வேணும்." target="_blank" rel="noopener" class="wa-fab" aria-label="WhatsApp">
+  <span class="wa-tip">Loan Query? 💬</span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <a href="/index.html" class="logo">
+      <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+      <div class="logo-name">Universal <span>Money</span> Mart</div>
+    </a>
+    <nav class="hdr-nav">
+      <a href="/index.html">Home</a>
+      <a href="/blog/index.html">Articles</a>
+      <a href="/tools/sip-calculator.html" class="active">Calculators</a>
+      <a href="/tools/nism-series-va-mock-test.html">Mock Tests</a>
+      <a href="/about.html">About</a>
+    </nav>
+    <div class="hdr-btns">
+      <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="btn-wa-hdr">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Free Advice
+      </a>
+    </div>
+    <button class="burger" onclick="document.getElementById('mobNav').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mob-menu" id="mobNav">
+    <a href="/index.html">🏠 Home</a>
+    <a href="/blog/index.html">📝 Articles</a>
+    <a href="/tools/sip-calculator.html" class="active">🧮 Calculators</a>
+    <a href="/tools/nism-series-va-mock-test.html">📋 Mock Tests</a>
+    <a href="/about.html">👤 About</a>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="bc-inner">
+    <a href="/index.html">Home</a><span class="bc-sep">›</span>
+    <a href="#">Tools & Calculators</a><span class="bc-sep">›</span>
+    <span>EMI Calculator</span>
+  </div>
+</div>
+
+<div class="tool-hero rv">
+  <div class="th-eyebrow">Financial Tools</div>
+  <h1 class="th-title">Loan EMI Calculator</h1>
+  <p class="th-desc">வீடு (Home), கார் (Car), அல்லது தனிநபர் கடன் (Personal Loan) எடுக்க திட்டமிடுகிறீர்களா? மாதம் எவ்வளவு EMI கட்ட வேண்டும் மற்றும் வட்டி (Interest) எவ்வளவு என்பதை துல்லியமாக கணக்கிடுங்கள்.</p>
+</div>
+
+<div class="calc-wrapper rv">
+  <div class="calc-grid">
+    <div class="c-input-sec">
+      <div class="input-group">
+        <div class="ig-header">
+          <span class="ig-label">கடன் தொகை (Loan Amount)</span>
+          <div class="ig-val-box">
+            <span class="ig-prefix">₹</span>
+            <input type="number" class="ig-input" id="inpAmount" value="500000" min="10000" max="50000000" step="10000">
+          </div>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" class="custom-slider" id="slAmount" value="500000" min="10000" max="10000000" step="10000">
+          <div class="slider-labels"><span>₹10K</span><span>₹1 Crore</span></div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="ig-header">
+          <span class="ig-label">வட்டி விகிதம் (Interest Rate p.a)</span>
+          <div class="ig-val-box">
+            <input type="number" class="ig-input" id="inpRate" value="9.5" min="1" max="30" step="0.1">
+            <span class="ig-suffix">%</span>
+          </div>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" class="custom-slider" id="slRate" value="9.5" min="5" max="25" step="0.1">
+          <div class="slider-labels"><span>5%</span><span>25%</span></div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="ig-header">
+          <span class="ig-label">கடன் காலம் (Loan Tenure)</span>
+          <div class="ig-val-box">
+            <input type="number" class="ig-input" id="inpYears" value="5" min="1" max="30" step="1">
+            <span class="ig-suffix">Yrs</span>
+          </div>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" class="custom-slider" id="slYears" value="5" min="1" max="30" step="1">
+          <div class="slider-labels"><span>1 Yr</span><span>30 Yrs</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-result-sec">
+      <div class="res-card">
+        <span class="rc-label"><span class="rc-dot" style="background:#0EA5E9"></span>மாதாந்திர தவணை (Monthly EMI)</span>
+        <span class="rc-total" id="resEMI" style="font-size:28px">₹10,501</span>
+      </div>
+      <div class="res-card">
+        <span class="rc-label"><span class="rc-dot" style="background:#E5E7EB"></span>அசல் தொகை (Principal)</span>
+        <span class="rc-val" id="resPrincipal">₹5,00,000</span>
+      </div>
+      <div class="res-card">
+        <span class="rc-label"><span class="rc-dot" style="background:#F5A623"></span>மொத்த வட்டி (Total Interest)</span>
+        <span class="rc-val" style="color:#D97706" id="resInterest">₹1,30,059</span>
+      </div>
+      <div class="res-card">
+        <span class="rc-label">💰 மொத்த செலவு (Total Payment)</span>
+        <span class="rc-val" id="resTotal">₹6,30,059</span>
+      </div>
+
+      <div class="chart-container" style="margin-top:20px">
+        <canvas id="emiChart"></canvas>
+      </div>
+
+      <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20Loan/EMI%20paththi%20doubt%20irukku." target="_blank" rel="noopener" class="calc-cta">
+        Get Free Financial Advice →
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="info-sec rv">
+  <div class="info-box">
+    <h2 class="info-h2">What is an EMI? (EMI என்றால் என்ன?)</h2>
+    <p class="info-p">EMI (Equated Monthly Installment) என்பது நீங்கள் வாங்கிய கடனை (Loan) அடைப்பதற்காக, மாதாமாதம் வங்கிக்கு (Bank) செலுத்தும் ஒரு குறிப்பிட்ட தொகையாகும்.</p>
+    <p class="info-p">நீங்கள் செலுத்தும் ஒவ்வொரு EMI-யிலும் இரண்டு பகுதிகள் உள்ளன:</p>
+    <ul class="info-list">
+      <li><strong>Principal (அசல்):</strong> நீங்கள் வாங்கிய அசல் தொகையை குறைக்கும் பகுதி.</li>
+      <li><strong>Interest (வட்டி):</strong> உங்கள் கடனுக்காக வங்கி வசூலிக்கும் கட்டணம்.</li>
+    </ul>
+    <p class="info-p" style="margin-top:10px">ஆரம்ப வருடங்களில் நீங்கள் கட்டும் EMI-ல் <strong>வட்டி (Interest) அதிகமாகவும், அசல் குறைவாகவும்</strong> இருக்கும். போகப் போக வட்டி குறைந்து, அசல் அதிகமாக கழியும் (Reducing Balance Method).</p>
+  </div>
+  
+  <div class="info-box">
+    <h2 class="info-h2">Tips to Reduce Your EMI Burden 💡</h2>
+    <ul class="info-list">
+      <li><strong>Prepayment:</strong> உங்களிடம் extra பணம் கிடைக்கும்போதெல்லாம் கடனில் கொஞ்சம் அடைத்து விடுங்கள். இது உங்கள் அசலை குறைத்து, பல லட்ச ரூபாய் வட்டியை மிச்சப்படுத்தும்.</li>
+      <li><strong>Shorter Tenure:</strong> கடன் காலத்தை (Tenure) குறைவாக வைத்தால், மாத EMI அதிகமாக இருக்கும். ஆனால், ஒட்டுமொத்தமாக நீங்கள் கட்டும் வட்டி மிக மிக குறைவாக இருக்கும்.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="logo" style="gap:10px">
+        <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+        <div class="logo-name" style="color:var(--tw)">Universal <span>Money</span> Mart</div>
+      </div>
+      <p class="ft-desc">Tamil Finance Education. SIP, Tax, Stock Market, Gold, Insurance & Mock Tests — free guidance by Vignesh Dhayalan, AMFI MFD ARN 288927, Bangalore.</p>
+    </div>
+    <div>
+      <div class="ft-col-h">Popular Articles</div>
+      <div class="ft-links">
+        <a href="/blog/what-is-sip.html">What is SIP?</a>
+        <a href="/blog/new-vs-old-tax-regime.html">Tax Regime 2025-26</a>
+        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
+        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Tools & Exams</div>
+      <div class="ft-links">
+        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
+        <a href="/tools/sip-calculator.html">SIP Calculator</a>
+        <a href="/tools/budget-calculator.html">Budget Planner</a>
+        <a href="/tools/emi-calculator.html">EMI Calculator</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Legal</div>
+      <div class="ft-links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/about.html">About Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan · ARN 288927 · Bangalore</div>
+  </div>
+</footer>
+
+<script>
+/* Mobile nav */
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open')}
+
+/* Scroll reveal */
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* EMI Calculator Logic & Chart.js */
+const elements = {
+  inpAmount: document.getElementById('inpAmount'),
+  slAmount: document.getElementById('slAmount'),
+  inpRate: document.getElementById('inpRate'),
+  slRate: document.getElementById('slRate'),
+  inpYears: document.getElementById('inpYears'),
+  slYears: document.getElementById('slYears'),
+  resEMI: document.getElementById('resEMI'),
+  resPrincipal: document.getElementById('resPrincipal'),
+  resInterest: document.getElementById('resInterest'),
+  resTotal: document.getElementById('resTotal')
+};
+
+let emiChart;
+
+// Initialize Chart
+function initChart() {
+  const ctx = document.getElementById('emiChart').getContext('2d');
+  emiChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Principal', 'Total Interest'],
+      datasets: [{
+        data: [50, 50], // Dummy initial
+        backgroundColor: ['#E5E7EB', '#F5A623'],
+        borderWidth: 0,
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '75%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let value = context.raw;
+              return ' ₹' + value.toLocaleString('en-IN');
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+// Formatting numbers to Indian Rupee style
+function formatINR(number) {
+  return '₹' + Math.round(number).toLocaleString('en-IN');
+}
+
+// Set gradient for custom sliders
+function updateSliderTrack(slider) {
+  const min = slider.min;
+  const max = slider.max;
+  const val = slider.value;
+  const percentage = ((val - min) / (max - min)) * 100;
+  slider.style.backgroundSize = percentage + '% 100%';
+}
+
+// Calculate EMI Formula: E = P * r * (1 + r)^n / ((1 + r)^n - 1)
+function calculateEMI() {
+  let P = parseFloat(elements.inpAmount.value);
+  let annualRate = parseFloat(elements.inpRate.value);
+  let years = parseFloat(elements.inpYears.value);
+
+  // Fallbacks
+  if (isNaN(P) || P <= 0) P = 0;
+  if (isNaN(annualRate) || annualRate <= 0) annualRate = 0;
+  if (isNaN(years) || years <= 0) years = 0;
+
+  const r = (annualRate / 12) / 100; // monthly interest rate
+  const n = years * 12; // number of months
+
+  let EMI = 0;
+  let totalPayment = 0;
+  let totalInterest = 0;
+
+  if (P > 0 && n > 0 && r > 0) {
+    EMI = P * r * (Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1));
+    totalPayment = EMI * n;
+    totalInterest = totalPayment - P;
+  } else if (P > 0 && n > 0 && r === 0) {
+    EMI = P / n;
+    totalPayment = P;
+    totalInterest = 0;
+  }
+
+  // Update DOM
+  elements.resEMI.textContent = formatINR(EMI);
+  elements.resPrincipal.textContent = formatINR(P);
+  elements.resInterest.textContent = formatINR(totalInterest);
+  elements.resTotal.textContent = formatINR(totalPayment);
+
+  // Update Chart
+  if(emiChart && P > 0) {
+    emiChart.data.datasets[0].data = [P, totalInterest > 0 ? totalInterest : 0];
+    emiChart.update();
+  }
+}
+
+function syncValues(type, source) {
+  let val = parseFloat(source.value);
+  
+  if (type === 'amount') {
+    if(source.id === 'inpAmount') {
+      if(val > 10000000) val = 10000000;
+      elements.slAmount.value = val;
+    } else {
+      elements.inpAmount.value = val;
+    }
+    updateSliderTrack(elements.slAmount);
+  } 
+  else if (type === 'rate') {
+    if(source.id === 'inpRate') {
+      if(val > 30) val = 30;
+      elements.slRate.value = val;
+    } else {
+      elements.inpRate.value = val;
+    }
+    updateSliderTrack(elements.slRate);
+  } 
+  else if (type === 'years') {
+    if(source.id === 'inpYears') {
+      if(val > 30) val = 30;
+      elements.slYears.value = val;
+    } else {
+      elements.inpYears.value = val;
+    }
+    updateSliderTrack(elements.slYears);
+  }
+
+  calculateEMI();
+}
+
+// Event Listeners
+elements.inpAmount.addEventListener('input', (e) => syncValues('amount', e.target));
+elements.slAmount.addEventListener('input', (e) => syncValues('amount', e.target));
+
+elements.inpRate.addEventListener('input', (e) => syncValues('rate', e.target));
+elements.slRate.addEventListener('input', (e) => syncValues('rate', e.target));
+
+elements.inpYears.addEventListener('input', (e) => syncValues('years', e.target));
+elements.slYears.addEventListener('input', (e) => syncValues('years', e.target));
+
+// Init
+window.addEventListener('DOMContentLoaded', () => {
+  initChart();
+  updateSliderTrack(elements.slAmount);
+  updateSliderTrack(elements.slRate);
+  updateSliderTrack(elements.slYears);
+  calculateEMI();
+});
+</script>
+</body>
+</html>
