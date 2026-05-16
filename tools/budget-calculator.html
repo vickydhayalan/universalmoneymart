@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ta-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Budget Planner Online (50/30/20 Rule) | Universal Money Mart</title>
+<meta name="description" content="Free Online Budget Planner based on the 50/30/20 rule. Calculate your monthly expenses for Needs, Wants, and Savings accurately in Tamil.">
+<meta name="keywords" content="budget calculator tamil, 50 30 20 rule calculator, personal finance planner tamil, salary breakdown calculator, universal money mart tools">
+<meta name="author" content="Vignesh Dhayalan">
+<meta property="og:title" content="Budget Planner Online — 50/30/20 Rule Calculator">
+<meta property="og:description" content="Plan your monthly salary smartly. Separate your Needs, Wants, and Savings using our interactive Budget Calculator.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://universalmoneymart.onrender.com/tools/budget-calculator.html">
+<link rel="canonical" href="https://universalmoneymart.onrender.com/tools/budget-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814" crossorigin="anonymous"></script>
+<style>
+/* ══════════════════════════════════════════════════
+   UNIVERSAL MONEY MART — Budget Calculator Styles
+   ══════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+:root{
+  --white:#FFFFFF;
+  --off:#F8F9FC;
+  --off2:#F1F3F8;
+  --dark:#0D0D12;
+  --dark2:#141420;
+  --ink:#1A1A2E;
+  --gold:#F5A623;
+  --teal:#0EA5E9;
+  --green:#10B981;
+  --indigo:#4F46E5;
+  --rose:#E11D48;
+  --roselight:#FFE4E6;
+  --t1:#0F0F1A;
+  --t2:#4A4A68;
+  --t3:#9090A8;
+  --bdr:rgba(0,0,0,.08);
+  --bdr2:rgba(0,0,0,.12);
+  --fh:'Playfair Display',Georgia,serif;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --max:1160px;
+  --r:16px;
+  --rsm:10px;
+  --rfull:100px;
+}
+body{font-family:var(--fb);font-size:16px;line-height:1.6;color:var(--t1);background:var(--off);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* ── WHATSAPP FAB ── */
+.wa-fab{position:fixed;bottom:24px;right:20px;z-index:999;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(37,211,102,.6);animation:waGlow 2.5s ease-in-out infinite;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .2s}
+.wa-fab:hover{transform:scale(1.15) translateY(-3px);animation:none;box-shadow:0 0 0 0 transparent,0 0 30px 8px rgba(37,211,102,.5),0 8px 28px rgba(37,211,102,.55)}
+@keyframes waGlow{0%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}50%{box-shadow:0 0 0 15px rgba(37,211,102,0),0 4px 20px rgba(37,211,102,.45)}100%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}}
+.wa-fab svg{width:28px;height:28px;fill:#fff}
+
+/* ── HEADER ── */
+.hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr)}
+.hdr-inner{max-width:var(--max);margin:0 auto;padding:0 20px;display:flex;align-items:center;height:64px;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-box{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--gold),#D97706);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 18px rgba(245,166,35,.3)}
+.logo-name{font-size:16.5px;font-weight:800;color:var(--t1);letter-spacing:-.025em}
+.logo-name span{color:var(--gold)}
+.hdr-nav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.hdr-nav a{font-size:14px;font-weight:500;color:var(--t2);padding:7px 13px;border-radius:var(--rfull);transition:all .15s;white-space:nowrap}
+.hdr-nav a:hover{color:var(--t1);background:var(--off2)}
+.hdr-nav a.active{font-weight:700;color:var(--t1);background:var(--off2)}
+.hdr-btns{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn-wa-hdr{display:flex;align-items:center;gap:7px;background:#25D366;color:#fff;font-size:13.5px;font-weight:700;padding:9px 18px;border-radius:var(--rfull);transition:all .2s;white-space:nowrap;box-shadow:0 4px 14px rgba(37,211,102,.3)}
+.btn-wa-hdr:hover{background:#1ebe5a;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.4)}
+.btn-wa-hdr svg{width:15px;height:15px;fill:#fff}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;margin-left:auto}
+.burger span{display:block;width:22px;height:2px;background:var(--t1);border-radius:2px;transition:all .3s}
+.mob-menu{display:none;background:var(--white);border-bottom:1px solid var(--bdr)}
+.mob-menu a{display:block;padding:14px 20px;font-size:15px;font-weight:500;color:var(--t2);border-bottom:1px solid var(--bdr);transition:all .15s}
+.mob-menu a:hover{color:var(--t1);padding-left:26px}
+.mob-menu.open{display:block}
+@media(max-width:860px){.hdr-nav{display:none}.btn-wa-hdr{display:none}.burger{display:flex}}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{background:#fff;border-bottom:1px solid var(--bdr);padding:12px 20px}
+.bc-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--t3);font-family:var(--fm)}
+.bc-inner a{color:var(--rose);transition:color .2s}
+.bc-inner a:hover{color:var(--t1)}
+
+/* ── HERO ── */
+.tool-hero{padding:48px 20px 32px;text-align:center;background:var(--white)}
+.th-eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--roselight);color:var(--rose);font-size:12px;font-weight:700;padding:5px 14px;border-radius:var(--rfull);margin-bottom:16px;text-transform:uppercase;letter-spacing:.08em}
+.th-title{font-family:var(--fh);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--t1);letter-spacing:-.03em;margin-bottom:12px;line-height:1.1}
+.th-desc{font-size:16px;color:var(--t2);max-width:600px;margin:0 auto;line-height:1.7}
+
+/* ── CALCULATOR MAIN ── */
+.calc-wrapper{max-width:1000px;margin:0 auto 64px;padding:0 20px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;background:var(--white);border:1px solid var(--bdr);border-radius:24px;padding:32px;box-shadow:0 12px 40px rgba(0,0,0,.03)}
+@media(max-width:860px){.calc-grid{grid-template-columns:1fr;padding:24px}}
+
+/* Input Section */
+.c-input-sec{display:flex;flex-direction:column;gap:28px;justify-content:center}
+.input-group{display:flex;flex-direction:column;gap:12px}
+.ig-header{display:flex;justify-content:space-between;align-items:center}
+.ig-label{font-size:14.5px;font-weight:600;color:var(--t2)}
+.ig-val-box{display:flex;align-items:center;background:var(--roselight);border:1px solid rgba(225,29,72,.2);border-radius:8px;padding:8px 16px}
+.ig-prefix{font-family:var(--fm);font-size:16px;font-weight:600;color:var(--rose);margin-right:6px}
+.ig-input{border:none;background:transparent;font-family:var(--fm);font-size:20px;font-weight:800;color:var(--rose);width:120px;text-align:right;outline:none}
+.ig-input::-webkit-outer-spin-button, .ig-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* Custom Slider */
+.slider-wrap{position:relative;width:100%;padding:10px 0}
+.custom-slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:var(--off2);border-radius:10px;outline:none;background-image:linear-gradient(var(--rose),var(--rose));background-repeat:no-repeat}
+.custom-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;cursor:pointer;border:3px solid var(--rose);box-shadow:0 2px 6px rgba(0,0,0,.15);transition:transform .1s}
+.custom-slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.slider-labels{display:flex;justify-content:space-between;font-family:var(--fm);font-size:11px;color:var(--t3);margin-top:8px}
+
+/* Result Section */
+.c-result-sec{background:var(--off);border:1px solid var(--bdr);border-radius:16px;padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+/* Chart */
+.chart-container{position:relative;width:100%;max-width:240px;aspect-ratio:1/1;margin:0 auto 24px}
+
+.res-breakdown{width:100%;display:flex;flex-direction:column;gap:12px}
+.rb-item{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:12px 16px;border-radius:10px;border:1px solid var(--bdr)}
+.rb-left{display:flex;align-items:center;gap:8px}
+.rb-dot{width:12px;height:12px;border-radius:4px}
+.rb-title{font-size:14px;font-weight:600;color:var(--t1)}
+.rb-sub{font-size:11px;color:var(--t3);display:block;margin-top:2px}
+.rb-val{font-family:var(--fm);font-size:16px;font-weight:700}
+
+/* ── INFO SECTION ── */
+.info-sec{max-width:900px;margin:0 auto 80px;padding:0 20px}
+.info-box{background:var(--white);border:1px solid var(--bdr);border-radius:16px;padding:32px;margin-bottom:24px}
+.info-h2{font-family:var(--fh);font-size:1.5rem;font-weight:800;color:var(--t1);margin-bottom:16px;letter-spacing:-.02em}
+.info-p{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:16px}
+
+/* ── FOOTER ── */
+footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20px 28px}
+.ft-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+@media(max-width:860px){.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr}}
+.ft-logo-name{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-top:10px;margin-bottom:10px}
+.ft-logo-name span{color:var(--gold)}
+.ft-desc{font-size:13.5px;color:var(--tw2);line-height:1.75;margin-bottom:16px}
+.ft-col-h{font-family:var(--fm);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tw3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bdrw)}
+.ft-links{display:flex;flex-direction:column;gap:9px}
+.ft-links a{font-size:13.5px;color:var(--tw2);transition:color .15s}
+.ft-links a:hover{color:var(--gold)}
+.ft-bottom{max-width:var(--max);margin:0 auto;border-top:1px solid var(--bdrw);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ft-copy{font-size:12.5px;color:var(--tw3)}
+.ft-legal{display:flex;gap:20px}
+.ft-legal a{font-size:12.5px;color:var(--tw3);transition:color .15s}
+.ft-legal a:hover{color:var(--white)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.rv.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20Budget%20planning%20help%20வேணும்." target="_blank" rel="noopener" class="wa-fab" aria-label="WhatsApp">
+  <span class="wa-tip">Plan Your Budget 💬</span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <a href="/index.html" class="logo">
+      <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+      <div class="logo-name">Universal <span>Money</span> Mart</div>
+    </a>
+    <nav class="hdr-nav">
+      <a href="/index.html">Home</a>
+      <a href="/blog/index.html">Articles</a>
+      <a href="/tools/sip-calculator.html" class="active">Calculators</a>
+      <a href="/tools/nism-series-va-mock-test.html">Mock Tests</a>
+      <a href="/about.html">About</a>
+    </nav>
+    <div class="hdr-btns">
+      <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="btn-wa-hdr">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Free Guidance
+      </a>
+    </div>
+    <button class="burger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mob-menu" id="mobNav">
+    <a href="/index.html">🏠 Home</a>
+    <a href="/blog/index.html">📝 Articles</a>
+    <a href="/tools/sip-calculator.html">🧮 Calculators</a>
+    <a href="/tools/nism-series-va-mock-test.html">📋 Mock Tests</a>
+    <a href="/about.html">👤 About</a>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="bc-inner">
+    <a href="/index.html">Home</a><span class="bc-sep">›</span>
+    <a href="#">Tools & Calculators</a><span class="bc-sep">›</span>
+    <span>Budget Planner</span>
+  </div>
+</div>
+
+<div class="tool-hero rv">
+  <div class="th-eyebrow">Financial Tools</div>
+  <h1 class="th-title">Personal Budget Planner</h1>
+  <p class="th-desc">சம்பளம் வந்த உடனே பணத்தை எப்படி பிரித்து செலவு செய்ய வேண்டும்? 50/30/20 Rule-ஐ பயன்படுத்தி உங்களது Needs, Wants மற்றும் Savings-ஐ சரியாக கணக்கிடுங்கள்.</p>
+</div>
+
+<div class="calc-wrapper rv">
+  <div class="calc-grid">
+    <div class="c-input-sec">
+      <div class="input-group">
+        <div class="ig-header">
+          <span class="ig-label">உங்கள் மாதாந்திர வருமானம் (Monthly Salary)</span>
+          <div class="ig-val-box">
+            <span class="ig-prefix">₹</span>
+            <input type="number" class="ig-input" id="inpSalary" value="50000" min="5000" max="1000000" step="1000">
+          </div>
+        </div>
+        <div class="slider-wrap">
+          <input type="range" class="custom-slider" id="slSalary" value="50000" min="5000" max="500000" step="1000">
+          <div class="slider-labels"><span>₹5,000</span><span>₹5,00,000</span></div>
+        </div>
+      </div>
+      <p style="font-size:14px;color:var(--t3);margin-top:-10px;">Move the slider to enter your take-home pay after tax deductions.</p>
+    </div>
+
+    <div class="c-result-sec">
+      <div class="chart-container">
+        <canvas id="budgetChart"></canvas>
+      </div>
+
+      <div class="res-breakdown">
+        <div class="rb-item">
+          <div class="rb-left">
+            <div class="rb-dot" style="background:#EF4444"></div>
+            <div>
+              <div class="rb-title">50% Needs (அத்தியாவசியம்)</div>
+              <span class="rb-sub">Rent, Groceries, EMI, EB Bill</span>
+            </div>
+          </div>
+          <div class="rb-val" style="color:#EF4444" id="resNeeds">₹25,000</div>
+        </div>
+
+        <div class="rb-item">
+          <div class="rb-left">
+            <div class="rb-dot" style="background:#F5A623"></div>
+            <div>
+              <div class="rb-title">30% Wants (ஆசைகள்)</div>
+              <span class="rb-sub">Shopping, Movies, Dining Out</span>
+            </div>
+          </div>
+          <div class="rb-val" style="color:#D97706" id="resWants">₹15,000</div>
+        </div>
+
+        <div class="rb-item">
+          <div class="rb-left">
+            <div class="rb-dot" style="background:#10B981"></div>
+            <div>
+              <div class="rb-title">20% Savings (சேமிப்பு & முதலீடு)</div>
+              <span class="rb-sub">SIP, Mutual Funds, Emergency Fund</span>
+            </div>
+          </div>
+          <div class="rb-val" style="color:#059669" id="resSavings">₹10,000</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="info-sec rv">
+  <div class="info-box">
+    <h2 class="info-h2">What is the 50/30/20 Budget Rule?</h2>
+    <p class="info-p">Warren Elizabeth-ஆல் பிரபலப்படுத்தப்பட்ட இந்த 50/30/20 Rule, நமது மாத வருமானத்தை (Take-home pay) எப்படி சரியான முறையில் பிரித்து செலவு செய்ய வேண்டும் என்பதை எளிதாக விளக்குகிறது.</p>
+    <ul class="info-list">
+      <li><strong>50% Needs (அத்தியாவசிய தேவைகள்):</strong> வீடு வாடகை (Rent), மளிகை பொருட்கள் (Groceries), கரன்ட் பில், மற்றும் Bank EMIs — இவையெல்லாம் தவிர்க்க முடியாத தேவைகள். இதற்கு உங்கள் வருமானத்தில் 50% மட்டுமே ஒதுக்க வேண்டும்.</li>
+      <li><strong>30% Wants (ஆசைகள்/விரும்பும் செலவுகள்):</strong> வெளியே சென்று சாப்பிடுவது, தியேட்டர் செல்வது, ஆன்லைன் Shopping செய்வது, மற்றும் சுற்றுலா செல்வது. உங்களை சந்தோஷப்படுத்திக் கொள்ள உங்கள் வருமானத்தில் 30%-ஐ பயன்படுத்தலாம்.</li>
+      <li><strong>20% Savings & Investing (சேமிப்பு):</strong> மிக மிக முக்கியமானது! சம்பளம் வந்தவுடன் முதல் வேலையாக இந்த 20%-ஐ எடுத்து Mutual Funds (SIP), Emergency Fund, அல்லது PPF-ல் முதலீடு செய்துவிட வேண்டும். இதுவே உங்களை எதிர்காலத்தில் கோடீஸ்வரன் ஆக்கும்.</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="logo" style="gap:10px">
+        <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+        <div class="logo-name" style="color:#fff">Universal <span>Money</span> Mart</div>
+      </div>
+      <p class="ft-desc">Tamil Finance Education. SIP, Tax, Stock Market, Gold, Insurance & Mock Tests — free guidance by Vignesh Dhayalan, AMFI MFD ARN 288927, Bangalore.</p>
+    </div>
+    <div>
+      <div class="ft-col-h">Popular Articles</div>
+      <div class="ft-links">
+        <a href="/blog/what-is-sip.html">What is SIP?</a>
+        <a href="/blog/new-vs-old-tax-regime.html">Tax Regime 2025-26</a>
+        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
+        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Tools & Exams</div>
+      <div class="ft-links">
+        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
+        <a href="/tools/sip-calculator.html">SIP Calculator</a>
+        <a href="/tools/budget-calculator.html">Budget Planner</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Legal</div>
+      <div class="ft-links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/about.html">About Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan · ARN 288927 · Bangalore</div>
+  </div>
+</footer>
+
+<script>
+/* Mobile nav */
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open')}
+
+/* Scroll reveal */
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')}),{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* Budget Calculator Logic & Chart.js */
+const elements = {
+  inpSalary: document.getElementById('inpSalary'),
+  slSalary: document.getElementById('slSalary'),
+  resNeeds: document.getElementById('resNeeds'),
+  resWants: document.getElementById('resWants'),
+  resSavings: document.getElementById('resSavings')
+};
+
+let budgetChart;
+
+function initChart() {
+  const ctx = document.getElementById('budgetChart').getContext('2d');
+  budgetChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['50% Needs', '30% Wants', '20% Savings'],
+      datasets: [{
+        data: [25000, 15000, 10000], 
+        backgroundColor: ['#EF4444', '#F5A623', '#10B981'],
+        borderWidth: 0,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '65%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let value = context.raw;
+              return ' ₹' + value.toLocaleString('en-IN');
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function formatINR(number) {
+  return '₹' + Math.round(number).toLocaleString('en-IN');
+}
+
+function updateSliderTrack(slider) {
+  const min = slider.min;
+  const max = slider.max;
+  const val = slider.value;
+  const percentage = ((val - min) / (max - min)) * 100;
+  slider.style.backgroundSize = percentage + '% 100%';
+}
+
+function calculateBudget() {
+  let salary = parseFloat(elements.inpSalary.value);
+  if (isNaN(salary) || salary < 0) salary = 0;
+
+  const needs = salary * 0.50;
+  const wants = salary * 0.30;
+  const savings = salary * 0.20;
+
+  elements.resNeeds.textContent = formatINR(needs);
+  elements.resWants.textContent = formatINR(wants);
+  elements.resSavings.textContent = formatINR(savings);
+
+  if(budgetChart) {
+    budgetChart.data.datasets[0].data = [needs, wants, savings];
+    budgetChart.update();
+  }
+}
+
+function syncValues(e) {
+  let val = parseFloat(e.target.value);
+  if(e.target.id === 'inpSalary') {
+    if(val > 500000) elements.slSalary.value = 500000;
+    else elements.slSalary.value = val;
+  } else {
+    elements.inpSalary.value = val;
+  }
+  updateSliderTrack(elements.slSalary);
+  calculateBudget();
+}
+
+elements.inpSalary.addEventListener('input', syncValues);
+elements.slSalary.addEventListener('input', syncValues);
+
+window.addEventListener('DOMContentLoaded', () => {
+  initChart();
+  updateSliderTrack(elements.slSalary);
+  calculateBudget();
+});
+</script>
+</body>
+</html>
