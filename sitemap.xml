@@ -1,48 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <!-- Home Page -->
+
   <url>
-    <loc>https://universalmoneymart.onrender.com/</loc>
-    <lastmod>2026-05-02</lastmod>
+    <loc>https://universalmoneymart.com/</loc>
+    <lastmod>2026-05-23</lastmod>
     <priority>1.0</priority>
   </url>
 
-  <!-- Blog Articles -->
   <url>
-    <loc>https://universalmoneymart.onrender.com/blog/what-is-sip.html</loc>
-    <lastmod>2026-05-02</lastmod>
+    <loc>https://universalmoneymart.com/blog/what-is-sip.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/new-vs-old-tax-regime.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/what-is-share-market.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/what-is-mutual-fund.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/types-of-mutual-funds.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/what-is-index-fund.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/apply-pan-card-online.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/pan-card-correction-online.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/apply-passport-online.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/voter-id-online-apply-correction.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/credit-score-guide.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/aadhaar-update-online.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/epf-vs-ppf-difference.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/gold-vs-mutual-funds.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/neft-rtgs-imps-upi-difference.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/what-is-term-insurance.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/health-insurance-guide.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/home-loan-prepayment-strategy.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/what-is-nps-scheme.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/blog/15-15-15-wealth-creation-rule.html</loc>
+    <lastmod>2026-05-23</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://universalmoneymart.onrender.com/blog/new-vs-old-tax-regime.html</loc>
-    <lastmod>2026-05-02</lastmod>
-    <priority>0.8</priority>
+    <loc>https://universalmoneymart.com/tools/nism-series-va-mock-test.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://universalmoneymart.onrender.com/blog/what-is-share-market.html</loc>
-    <lastmod>2026-05-02</lastmod>
-    <priority>0.8</priority>
+    <loc>https://universalmoneymart.com/tools/irdai-ic38-mock-test.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://universalmoneymart.onrender.com/blog/what-is-mutual-fund.html</loc>
-    <lastmod>2026-05-02</lastmod>
-    <priority>0.8</priority>
+    <loc>https://universalmoneymart.com/tools/sip-calculator.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://universalmoneymart.onrender.com/blog/types-of-mutual-funds.html</loc>
-    <lastmod>2026-05-02</lastmod>
-    <priority>0.8</priority>
+    <loc>https://universalmoneymart.com/tools/budget-calculator.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://universalmoneymart.onrender.com/blog/what-is-index-fund.html</loc>
-    <lastmod>2026-05-02</lastmod>
-    <priority>0.8</priority>
+    <loc>https://universalmoneymart.com/tools/emi-calculator.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://universalmoneymart.com/tools/lumpsum-calculator.html</loc>
+    <lastmod>2026-05-23</lastmod>
+    <priority>0.9</priority>
   </url>
 
 </urlset>
