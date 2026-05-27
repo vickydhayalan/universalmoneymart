@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>UMM Invites — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;
+  --gold:#f5a623;--gold2:#ffd166;--green:#10b981;
+  --red:#ef4444;--blue:#3b82f6;--purple:#8b5cf6;
+  --text:#f0f0f0;--text2:#9090a8;--text3:#555577;
+  --border:rgba(255,255,255,.08);--r:10px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:'Inter',sans-serif;cursor:pointer}
+
+/* LOGIN */
+.login-wrap{
+  min-height:100vh;display:flex;align-items:center;
+  justify-content:center;padding:20px;
+  background:radial-gradient(ellipse at center,rgba(245,166,35,.05) 0%,transparent 70%);
+}
+.login-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:40px;width:100%;max-width:360px;
+  text-align:center;
+}
+.login-logo{font-size:2rem;margin-bottom:8px}
+.login-title{font-size:1.3rem;font-weight:700;margin-bottom:4px}
+.login-sub{font-size:.82rem;color:var(--text2);margin-bottom:28px}
+.login-input{
+  width:100%;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);color:var(--text);
+  padding:12px 16px;border-radius:8px;font-size:.9rem;
+  font-family:'Inter',sans-serif;outline:none;
+  transition:all .3s;margin-bottom:12px;
+}
+.login-input:focus{border-color:var(--gold);background:rgba(245,166,35,.05)}
+.login-input::placeholder{color:var(--text3)}
+.login-btn{
+  width:100%;padding:13px;border-radius:8px;
+  background:linear-gradient(135deg,#d97706,var(--gold));
+  color:#000;border:none;font-size:.9rem;font-weight:700;
+  cursor:pointer;transition:all .3s;
+}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(245,166,35,.3)}
+.login-error{color:var(--red);font-size:.8rem;margin-top:8px;display:none}
+
+/* ADMIN LAYOUT */
+.admin-wrap{display:none;min-height:100vh}
+
+/* HEADER */
+.admin-header{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0 24px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.admin-logo{font-size:.95rem;font-weight:700;letter-spacing:1px}
+.admin-logo span{color:var(--gold)}
+.header-right{display:flex;align-items:center;gap:12px}
+.logout-btn{
+  background:rgba(239,68,68,.1);color:var(--red);
+  border:1px solid rgba(239,68,68,.25);
+  padding:7px 16px;border-radius:6px;font-size:.78rem;
+  font-weight:600;cursor:pointer;transition:all .2s;
+}
+.logout-btn:hover{background:rgba(239,68,68,.2)}
+
+/* MAIN */
+.admin-main{max-width:1100px;margin:0 auto;padding:32px 24px}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:20px;
+}
+.stat-label{font-size:.72rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.stat-val{font-size:1.8rem;font-weight:700;line-height:1}
+.stat-sub{font-size:.72rem;color:var(--text2);margin-top:4px}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.tab-btn{
+  padding:9px 20px;border-radius:6px;font-size:.82rem;font-weight:500;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  color:var(--text2);cursor:pointer;transition:all .2s;
+}
+.tab-btn.active,.tab-btn:hover{background:rgba(245,166,35,.1);border-color:rgba(245,166,35,.4);color:var(--gold)}
+
+/* PANELS */
+.panel{display:none}
+.panel.active{display:block}
+
+/* CREATE INVITATION */
+.create-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.form-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px;
+}
+.form-card-title{font-size:.9rem;font-weight:600;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:.75rem;color:var(--text2);margin-bottom:6px;letter-spacing:.3px}
+.form-label.req::after{content:' *';color:var(--red)}
+.form-input,.form-select,.form-textarea{
+  width:100%;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);color:var(--text);
+  padding:10px 14px;border-radius:8px;font-size:.85rem;
+  font-family:'Inter',sans-serif;outline:none;transition:all .2s;
+  -webkit-appearance:none;
+}
+.form-select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23f5a623' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;
+  padding-right:32px;cursor:pointer;
+}
+.form-select option{background:var(--surface2);color:var(--text)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);background:rgba(245,166,35,.04)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text3)}
+.form-textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* TEMPLATE PREVIEW */
+.preview-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;position:sticky;top:72px;
+}
+.preview-header{padding:16px 20px;border-bottom:1px solid var(--border);font-size:.85rem;font-weight:600}
+.preview-frame{
+  padding:24px;min-height:300px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;transition:background .5s;
+}
+.prev-ornament{font-size:.7rem;letter-spacing:6px;opacity:.4;margin-bottom:12px}
+.prev-event-type{font-size:.58rem;letter-spacing:3px;opacity:.7;margin-bottom:10px;font-weight:600}
+.prev-name{font-size:1.6rem;font-weight:300;margin-bottom:6px;line-height:1.1}
+.prev-date{font-size:.65rem;letter-spacing:2px;opacity:.5;margin-bottom:20px}
+.prev-venue{font-size:.75rem;opacity:.6;margin-bottom:16px}
+.template-dots{display:flex;gap:8px;justify-content:center;margin:16px 0}
+.template-dot{
+  width:20px;height:20px;border-radius:50%;cursor:pointer;
+  border:2px solid transparent;transition:all .2s;
+}
+.template-dot.active,.template-dot:hover{border-color:#fff;transform:scale(1.2)}
+
+/* ACTION BUTTONS */
+.action-bar{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.btn{
+  padding:10px 20px;border-radius:8px;font-size:.82rem;
+  font-weight:600;cursor:pointer;transition:all .2s;
+  border:none;display:inline-flex;align-items:center;gap:6px;
+}
+.btn-primary{background:linear-gradient(135deg,#d97706,var(--gold));color:#000}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(245,166,35,.3)}
+.btn-success{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+.btn-success:hover{background:rgba(16,185,129,.25)}
+.btn-blue{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.3)}
+.btn-blue:hover{background:rgba(59,130,246,.25)}
+.btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* GENERATED LINK */
+.link-box{
+  background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.25);
+  border-radius:8px;padding:16px;margin-top:16px;display:none;
+}
+.link-label{font-size:.72rem;color:var(--green);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.link-url{font-size:.82rem;color:var(--text);word-break:break-all;margin-bottom:12px;font-family:'Courier New',monospace}
+.link-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ORDERS LIST */
+.orders-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.search-input{
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+  color:var(--text);padding:9px 14px;border-radius:8px;
+  font-size:.82rem;font-family:'Inter',sans-serif;outline:none;
+  width:260px;
+}
+.search-input::placeholder{color:var(--text3)}
+.orders-table{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.table-head{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1.5fr;gap:0;background:var(--surface2);padding:12px 16px;font-size:.72rem;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
+.table-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1.5fr;gap:0;padding:14px 16px;border-top:1px solid var(--border);transition:background .2s;align-items:center}
+.table-row:hover{background:rgba(255,255,255,.02)}
+.table-cell{font-size:.82rem;padding-right:8px}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.3px}
+.badge-pending{background:rgba(245,166,35,.15);color:var(--gold)}
+.badge-paid{background:rgba(16,185,129,.15);color:var(--green)}
+.badge-sent{background:rgba(59,130,246,.15);color:var(--blue)}
+.empty-state{padding:48px;text-align:center;color:var(--text3);font-size:.88rem}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--text);padding:14px 20px;border-radius:10px;
+  font-size:.84rem;z-index:9999;
+  transform:translateY(80px);opacity:0;
+  transition:all .35s ease;box-shadow:0 8px 32px rgba(0,0,0,.4);
+  pointer-events:none;max-width:320px;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:rgba(16,185,129,.4)}
+.toast.error{border-color:rgba(239,68,68,.4)}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+  .create-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .preview-card{position:static}
+  .table-head,.table-row{grid-template-columns:2fr 1fr 1fr 1.2fr}
+  .table-head .col-date,.table-row .col-date,
+  .table-head .col-plan,.table-row .col-plan{display:none}
+}
+@media(max-width:500px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .admin-main{padding:20px 16px}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="login-logo">🔐</div>
+    <div class="login-title">UMM Invites Admin</div>
+    <div class="login-sub">Enter password to access dashboard</div>
+    <input type="password" class="login-input" id="pwdInput" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">Login →</button>
+    <div class="login-error" id="loginError">❌ Wrong password!</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-wrap" id="adminWrap">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-logo"><span>UMM</span> INVITES ADMIN</div>
+    <div class="header-right">
+      <span style="font-size:.78rem;color:var(--text2)" id="adminDate"></span>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="admin-main">
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Total Orders</div>
+        <div class="stat-val" id="statTotal" style="color:var(--gold)">0</div>
+        <div class="stat-sub">All time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Paid</div>
+        <div class="stat-val" id="statPaid" style="color:var(--green)">0</div>
+        <div class="stat-sub">Confirmed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pending</div>
+        <div class="stat-val" id="statPending" style="color:var(--gold)">0</div>
+        <div class="stat-sub">Awaiting payment</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Revenue</div>
+        <div class="stat-val" id="statRevenue" style="color:var(--green)">₹0</div>
+        <div class="stat-sub">Total earned</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('create',this)">✦ Create Invitation</button>
+      <button class="tab-btn" onclick="showTab('orders',this)">📋 Orders</button>
+      <button class="tab-btn" onclick="showTab('quicksend',this)">⚡ Quick Send</button>
+    </div>
+
+    <!-- ── CREATE INVITATION ── -->
+    <div class="panel active" id="panel-create">
+      <div class="create-grid">
+
+        <!-- Form -->
+        <div>
+          <div class="form-card">
+            <div class="form-card-title">📝 Customer & Event Details</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label req">Customer Name</label>
+                <input type="text" class="form-input" id="c_name" placeholder="Vignesh Kumar">
+              </div>
+              <div class="form-group">
+                <label class="form-label req">Phone Number</label>
+                <input type="tel" class="form-input" id="c_phone" placeholder="9876543210" maxlength="10" inputmode="numeric">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label req">Event Type</label>
+                <select class="form-select" id="c_event" onchange="updatePreview()">
+                  <option value="">-- Select --</option>
+                  <option value="Marriage">💍 Marriage</option>
+                  <option value="Engagement">💒 Engagement</option>
+                  <option value="Birthday">🎂 Birthday</option>
+                  <option value="Baby Shower">👶 Baby Shower</option>
+                  <option value="House Warming">🏠 House Warming</option>
+                  <option value="Reception">🥂 Reception</option>
+                  <option value="Seemantham">🌙 Seemantham</option>
+                  <option value="Retirement">🌟 Retirement</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label req">Plan</label>
+                <select class="form-select" id="c_plan" onchange="updateStats()">
+                  <option value="">-- Select --</option>
+                  <option value="Basic ₹49">Basic — ₹49</option>
+                  <option value="Premium ₹149">Premium — ₹149</option>
+                  <option value="Bundle ₹299">Bundle — ₹299</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label req">Primary Name</label>
+                <input type="text" class="form-input" id="c_primary" placeholder="Arjun / Baby Riya" oninput="updatePreview()">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Secondary Name (if any)</label>
+                <input type="text" class="form-input" id="c_secondary" placeholder="Priya (for marriage)" oninput="updatePreview()">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Event Date</label>
+                <input type="date" class="form-input" id="c_date" oninput="updatePreview()">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Event Time</label>
+                <input type="time" class="form-input" id="c_time">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Venue Name</label>
+              <input type="text" class="form-input" id="c_venue" placeholder="Sri Murugan Mahal" oninput="updatePreview()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Venue Address</label>
+              <input type="text" class="form-input" id="c_venueAddr" placeholder="123 Main Street, Chennai">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Google Maps Link</label>
+              <input type="url" class="form-input" id="c_maps" placeholder="https://maps.google.com/...">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Additional Info / Dress Code</label>
+              <textarea class="form-textarea" id="c_info" placeholder="Dress code: Traditional. Dinner will be served..."></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label req">Template</label>
+                <select class="form-select" id="c_template" onchange="updatePreview()">
+                  <option value="emerald">🌿 Emerald Royal</option>
+                  <option value="crimson">🔴 Crimson Gold</option>
+                  <option value="midnight">🌙 Midnight Blue</option>
+                  <option value="rosegold">🌸 Rose Gold</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Payment Status</label>
+                <select class="form-select" id="c_paid">
+                  <option value="pending">⏳ Pending</option>
+                  <option value="paid">✅ Paid</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="createInvitation()" style="width:100%;padding:13px;font-size:.88rem">
+              ✦ Generate Invitation Link
+            </button>
+          </div>
+
+          <!-- Generated Link -->
+          <div class="link-box" id="linkBox">
+            <div class="link-label">✅ Invitation Link Generated!</div>
+            <div class="link-url" id="generatedLink"></div>
+            <div class="link-actions">
+              <button class="btn btn-success" onclick="copyLink()">📋 Copy Link</button>
+              <button class="btn btn-success" onclick="openWhatsApp()">💬 Send WhatsApp</button>
+              <button class="btn btn-blue" onclick="previewInvite()">👁️ Preview</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preview -->
+        <div>
+          <div class="preview-card">
+            <div class="preview-header">👁️ Live Preview</div>
+            <div class="preview-frame" id="previewFrame">
+              <div class="prev-ornament">✦ ── ✦ ── ✦</div>
+              <div class="prev-event-type" id="prev_event">INVITATION</div>
+              <div class="prev-name" id="prev_name" style="color:#d4af37">Your Name Here</div>
+              <div class="prev-date" id="prev_date">DATE & TIME</div>
+              <div class="prev-venue" id="prev_venue">Venue Name</div>
+              <div class="template-dots">
+                <div class="template-dot active" style="background:#1a4030" onclick="setTemplate('emerald',this)" title="Emerald"></div>
+                <div class="template-dot" style="background:#3d1010" onclick="setTemplate('crimson',this)" title="Crimson"></div>
+                <div class="template-dot" style="background:#141840" onclick="setTemplate('midnight',this)" title="Midnight"></div>
+                <div class="template-dot" style="background:#3d1818" onclick="setTemplate('rosegold',this)" title="Rose Gold"></div>
+              </div>
+            </div>
+            <div style="padding:16px;border-top:1px solid var(--border)">
+              <div style="font-size:.72rem;color:var(--text2);margin-bottom:8px">INVITATION DETAILS:</div>
+              <div style="font-size:.78rem;color:var(--text);line-height:1.8" id="previewDetails">
+                Fill the form to see preview
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── ORDERS ── -->
+    <div class="panel" id="panel-orders">
+      <div class="orders-header">
+        <h3 style="font-size:1rem;font-weight:600">All Orders</h3>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <input type="text" class="search-input" placeholder="🔍 Search name, phone..." oninput="searchOrders(this.value)">
+          <button class="btn btn-outline" onclick="exportCSV()">⬇️ Export CSV</button>
+        </div>
+      </div>
+
+      <div class="orders-table">
+        <div class="table-head">
+          <div>Customer</div>
+          <div class="col-date">Event</div>
+          <div class="col-plan">Plan</div>
+          <div>Status</div>
+          <div>Date</div>
+          <div>Actions</div>
+        </div>
+        <div id="ordersBody">
+          <div class="empty-state">No orders yet. Create your first invitation!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── QUICK SEND ── -->
+    <div class="panel" id="panel-quicksend">
+      <div class="form-card" style="max-width:600px">
+        <div class="form-card-title">⚡ Quick WhatsApp Message</div>
+        <p style="font-size:.82rem;color:var(--text2);margin-bottom:20px;line-height:1.7">
+          Order email வந்ததும் — customer-க்கு payment link அனுப்ப இந்த tool use பண்ணு.
+        </p>
+
+        <div class="form-group">
+          <label class="form-label req">Customer Name</label>
+          <input type="text" class="form-input" id="qs_name" placeholder="Karthik">
+        </div>
+        <div class="form-group">
+          <label class="form-label req">Customer Phone</label>
+          <input type="tel" class="form-input" id="qs_phone" placeholder="9876543210" maxlength="10" inputmode="numeric">
+        </div>
+        <div class="form-group">
+          <label class="form-label req">Plan Selected</label>
+          <select class="form-select" id="qs_plan">
+            <option value="basic">Basic — ₹49</option>
+            <option value="premium">Premium — ₹149</option>
+            <option value="bundle">Bundle — ₹299</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Event Type</label>
+          <input type="text" class="form-input" id="qs_event" placeholder="Marriage / Birthday...">
+        </div>
+
+        <div style="margin-bottom:16px">
+          <div style="font-size:.75rem;color:var(--text2);margin-bottom:8px">PAYMENT LINKS:</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-outline" onclick="copyPayLink('basic')" style="font-size:.75rem">📋 Basic ₹49</button>
+            <button class="btn btn-outline" onclick="copyPayLink('premium')" style="font-size:.75rem">📋 Premium ₹149</button>
+            <button class="btn btn-outline" onclick="copyPayLink('bundle')" style="font-size:.75rem">📋 Bundle ₹299</button>
+          </div>
+        </div>
+
+        <button class="btn btn-success" onclick="sendQuickWA()" style="width:100%;padding:13px">
+          💬 Open WhatsApp with Message
+        </button>
+
+        <div style="margin-top:16px;padding:14px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--border)">
+          <div style="font-size:.72rem;color:var(--text2);margin-bottom:8px">MESSAGE PREVIEW:</div>
+          <div style="font-size:.78rem;color:var(--text);line-height:1.8;white-space:pre-line" id="msgPreview">Fill the form to see message preview</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── CONFIG ──────────────────────────────────
+const ADMIN_PASSWORD = 'UMM@2026';  // Change this!
+const PAYMENT_LINKS = {
+  basic:   'https://rzp.io/rzp/agf1J092',
+  premium: 'https://rzp.io/rzp/sshqm9eC',
+  bundle:  'https://rzp.io/rzp/di4XWXk'
+};
+const BASE_URL = 'https://universalmoneymart.onrender.com/invites/view.html';
+
+const TEMPLATES = {
+  emerald:  { bg: 'linear-gradient(135deg,#0a2818,#1a4030)', accent: '#d4af37' },
+  crimson:  { bg: 'linear-gradient(135deg,#1a0808,#3d1010)', accent: '#c9a84c' },
+  midnight: { bg: 'linear-gradient(135deg,#060820,#141840)', accent: '#f0d080' },
+  rosegold: { bg: 'linear-gradient(135deg,#1a0c0c,#3d1818)', accent: '#e8b4b8' },
+};
+
+let orders = JSON.parse(localStorage.getItem('umm_orders') || '[]');
+let currentInviteId = null;
+let currentPhone = null;
+
+// ── AUTH ──────────────────────────────────
+function doLogin() {
+  const pwd = document.getElementById('pwdInput').value;
+  if (pwd === ADMIN_PASSWORD) {
+    sessionStorage.setItem('umm_admin', '1');
+    document.getElementById('loginWrap').style.display = 'none';
+    document.getElementById('adminWrap').style.display = 'block';
+    init();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('pwdInput').focus();
+  }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('umm_admin');
+  location.reload();
+}
+
+// ── INIT ──────────────────────────────────
+function init() {
+  if (!sessionStorage.getItem('umm_admin')) return;
+  
+  // Date
+  document.getElementById('adminDate').textContent = 
+    new Date().toLocaleDateString('en-IN', {weekday:'short', day:'numeric', month:'short'});
+  
+  renderStats();
+  renderOrders();
+  updatePreview();
+  updateMsgPreview();
+  
+  // Quick send live preview
+  ['qs_name','qs_phone','qs_plan','qs_event'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', updateMsgPreview);
+    document.getElementById(id)?.addEventListener('change', updateMsgPreview);
+  });
+}
+
+// Auto-login check
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem('umm_admin')) {
+    document.getElementById('loginWrap').style.display = 'none';
+    document.getElementById('adminWrap').style.display = 'block';
+    init();
+  }
+});
+
+// ── TABS ──────────────────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── PREVIEW ──────────────────────────────
+function updatePreview() {
+  const primary = document.getElementById('c_primary')?.value || 'Your Name';
+  const secondary = document.getElementById('c_secondary')?.value;
+  const event = document.getElementById('c_event')?.value || 'Invitation';
+  const date = document.getElementById('c_date')?.value;
+  const venue = document.getElementById('c_venue')?.value || 'Venue Name';
+  const tpl = document.getElementById('c_template')?.value || 'emerald';
+
+  const t = TEMPLATES[tpl];
+  const frame = document.getElementById('previewFrame');
+  frame.style.background = t.bg;
+
+  document.getElementById('prev_event').textContent = event.toUpperCase();
+  document.getElementById('prev_event').style.color = t.accent;
+
+  const nameEl = document.getElementById('prev_name');
+  nameEl.style.color = t.accent;
+  nameEl.textContent = secondary ? `${primary} ♥ ${secondary}` : primary;
+
+  document.getElementById('prev_date').textContent = date
+    ? new Date(date + 'T00:00:00').toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'}).toUpperCase()
+    : 'DATE';
+
+  document.getElementById('prev_venue').textContent = venue;
+
+  // Update details panel
+  const name = document.getElementById('c_name')?.value;
+  const phone = document.getElementById('c_phone')?.value;
+  const plan = document.getElementById('c_plan')?.value;
+  document.getElementById('previewDetails').innerHTML = `
+    <b>Customer:</b> ${name || '—'}<br>
+    <b>Phone:</b> ${phone || '—'}<br>
+    <b>Event:</b> ${event || '—'}<br>
+    <b>Plan:</b> ${plan || '—'}<br>
+    <b>Template:</b> ${tpl}
+  `;
+}
+
+function setTemplate(tpl, dot) {
+  document.getElementById('c_template').value = tpl;
+  document.querySelectorAll('.template-dot').forEach(d => d.classList.remove('active'));
+  dot.classList.add('active');
+  updatePreview();
+}
+
+// ── CREATE INVITATION ─────────────────────
+function createInvitation() {
+  const name = document.getElementById('c_name').value.trim();
+  const phone = document.getElementById('c_phone').value.trim();
+  const event = document.getElementById('c_event').value;
+  const plan = document.getElementById('c_plan').value;
+  const primary = document.getElementById('c_primary').value.trim();
+
+  if (!name) { showToast('❌ Customer name required', 'error'); return; }
+  if (!phone || phone.length !== 10) { showToast('❌ Valid 10-digit phone required', 'error'); return; }
+  if (!event) { showToast('❌ Select event type', 'error'); return; }
+  if (!plan) { showToast('❌ Select plan', 'error'); return; }
+  if (!primary) { showToast('❌ Enter primary name', 'error'); return; }
+
+  // Generate unique ID
+  const slug = `${event.toLowerCase().replace(/\s+/g,'')}-${primary.toLowerCase().replace(/[^a-z0-9]/g,'').substring(0,8)}-${Date.now().toString(36)}`;
+  
+  // Build URL params
+  const params = new URLSearchParams({
+    id: slug,
+    event: event,
+    primary: primary,
+    secondary: document.getElementById('c_secondary').value,
+    date: document.getElementById('c_date').value,
+    time: document.getElementById('c_time').value,
+    venue: document.getElementById('c_venue').value,
+    addr: document.getElementById('c_venueAddr').value,
+    maps: document.getElementById('c_maps').value,
+    info: document.getElementById('c_info').value,
+    tpl: document.getElementById('c_template').value,
+  });
+
+  const inviteUrl = `${BASE_URL}?${params.toString()}`;
+  currentInviteId = inviteUrl;
+  currentPhone = phone;
+
+  // Save to local orders
+  const order = {
+    id: slug,
+    customerName: name,
+    customerPhone: phone,
+    eventType: event,
+    plan: plan,
+    primaryName: primary,
+    date: document.getElementById('c_date').value,
+    status: document.getElementById('c_paid').value,
+    inviteUrl,
+    createdAt: new Date().toISOString(),
+    amount: plan.includes('49') ? 49 : plan.includes('149') ? 149 : 299
+  };
+  
+  orders.unshift(order);
+  localStorage.setItem('umm_orders', JSON.stringify(orders));
+  renderStats();
+  renderOrders();
+
+  // Show link
+  document.getElementById('generatedLink').textContent = inviteUrl;
+  document.getElementById('linkBox').style.display = 'block';
+  document.getElementById('linkBox').scrollIntoView({behavior:'smooth', block:'center'});
+  
+  showToast('✅ Invitation link generated!', 'success');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(currentInviteId)
+    .then(() => showToast('✅ Link copied!', 'success'))
+    .catch(() => showToast('❌ Copy failed', 'error'));
+}
+
+function openWhatsApp() {
+  const name = document.getElementById('c_name').value;
+  const event = document.getElementById('c_event').value;
+  const msg = encodeURIComponent(
+    `Hi ${name}! 🎉\n\nUngal ${event} invitation ready!\n\n` +
+    `View here: ${currentInviteId}\n\n` +
+    `— UMM Invites Team\nuniversalmoneymart.com`
+  );
+  window.open(`https://wa.me/91${currentPhone}?text=${msg}`, '_blank');
+}
+
+function previewInvite() {
+  window.open(currentInviteId, '_blank');
+}
+
+// ── ORDERS ───────────────────────────────
+function renderOrders(filter = '') {
+  const body = document.getElementById('ordersBody');
+  const filtered = filter
+    ? orders.filter(o => 
+        o.customerName?.toLowerCase().includes(filter.toLowerCase()) ||
+        o.customerPhone?.includes(filter) ||
+        o.eventType?.toLowerCase().includes(filter.toLowerCase())
+      )
+    : orders;
+
+  if (!filtered.length) {
+    body.innerHTML = '<div class="empty-state">No orders found</div>';
+    return;
+  }
+
+  body.innerHTML = filtered.map(o => `
+    <div class="table-row">
+      <div class="table-cell">
+        <div style="font-weight:500">${o.customerName}</div>
+        <div style="font-size:.72rem;color:var(--text2)">${o.customerPhone}</div>
+      </div>
+      <div class="table-cell col-date" style="font-size:.78rem">${o.eventType}</div>
+      <div class="table-cell col-plan" style="font-size:.78rem">${o.plan}</div>
+      <div class="table-cell">
+        <span class="badge badge-${o.status === 'paid' ? 'paid' : o.status === 'sent' ? 'sent' : 'pending'}">
+          ${o.status}
+        </span>
+      </div>
+      <div class="table-cell" style="font-size:.72rem;color:var(--text2)">
+        ${new Date(o.createdAt).toLocaleDateString('en-IN')}
+      </div>
+      <div class="table-cell">
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn btn-success" style="padding:5px 10px;font-size:.7rem" onclick="sendInviteWA('${o.customerPhone}','${o.customerName}','${encodeURIComponent(o.inviteUrl)}','${o.eventType}')">
+            💬 Send
+          </button>
+          <button class="btn btn-blue" style="padding:5px 10px;font-size:.7rem" onclick="window.open('${o.inviteUrl}','_blank')">
+            👁️ View
+          </button>
+          <button class="btn btn-outline" style="padding:5px 10px;font-size:.7rem" onclick="markPaid('${o.id}')">
+            ✅ Paid
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function searchOrders(val) {
+  renderOrders(val);
+}
+
+function markPaid(id) {
+  const idx = orders.findIndex(o => o.id === id);
+  if (idx > -1) {
+    orders[idx].status = 'paid';
+    localStorage.setItem('umm_orders', JSON.stringify(orders));
+    renderOrders();
+    renderStats();
+    showToast('✅ Marked as paid', 'success');
+  }
+}
+
+function sendInviteWA(phone, name, url, event) {
+  const decodedUrl = decodeURIComponent(url);
+  const msg = encodeURIComponent(
+    `Hi ${name}! 🎉\n\nUngal ${event} invitation ready!\n\n` +
+    `View: ${decodedUrl}\n\n— UMM Invites\nuniversalmoneymart.com`
+  );
+  window.open(`https://wa.me/91${phone}?text=${msg}`, '_blank');
+  
+  // Mark as sent
+  const idx = orders.findIndex(o => o.customerPhone === phone);
+  if (idx > -1 && orders[idx].status === 'pending') {
+    orders[idx].status = 'sent';
+    localStorage.setItem('umm_orders', JSON.stringify(orders));
+    renderOrders();
+  }
+}
+
+// ── STATS ─────────────────────────────────
+function renderStats() {
+  const total = orders.length;
+  const paid = orders.filter(o => o.status === 'paid').length;
+  const pending = orders.filter(o => o.status === 'pending').length;
+  const revenue = orders.filter(o => o.status === 'paid').reduce((s, o) => s + (o.amount || 0), 0);
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statPaid').textContent = paid;
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('statRevenue').textContent = `₹${revenue}`;
+}
+
+function updateStats() { renderStats(); }
+
+// ── QUICK SEND ────────────────────────────
+function updateMsgPreview() {
+  const name = document.getElementById('qs_name')?.value || 'Customer';
+  const plan = document.getElementById('qs_plan')?.value || 'basic';
+  const event = document.getElementById('qs_event')?.value || 'your event';
+  const link = PAYMENT_LINKS[plan];
+
+  const msg = `Hi ${name}! 🎉
+
+UMM Invites - ${event} invitation order receive பண்ணிட்டோம்!
+
+Payment பண்ண இந்த link click பண்ணுங்கள்:
+${link}
+
+Payment complete ஆனதும் 2 hours-ல் invitation link அனுப்புவோம்! 
+
+— UMM Invites Team
+universalmoneymart.com`;
+
+  document.getElementById('msgPreview').textContent = msg;
+}
+
+function sendQuickWA() {
+  const phone = document.getElementById('qs_phone').value.trim();
+  if (!phone || phone.length !== 10) {
+    showToast('❌ Valid phone number enter பண்ணுங்கள்', 'error');
+    return;
+  }
+  const msg = encodeURIComponent(document.getElementById('msgPreview').textContent);
+  window.open(`https://wa.me/91${phone}?text=${msg}`, '_blank');
+}
+
+function copyPayLink(plan) {
+  navigator.clipboard.writeText(PAYMENT_LINKS[plan])
+    .then(() => showToast(`✅ ${plan} payment link copied!`, 'success'))
+    .catch(() => showToast('❌ Copy failed', 'error'));
+}
+
+// ── EXPORT CSV ────────────────────────────
+function exportCSV() {
+  if (!orders.length) { showToast('No orders to export', 'error'); return; }
+  const headers = ['Name','Phone','Event','Plan','Status','Date','Amount','Link'];
+  const rows = orders.map(o => [
+    o.customerName, o.customerPhone, o.eventType, o.plan,
+    o.status, new Date(o.createdAt).toLocaleDateString('en-IN'),
+    o.amount, o.inviteUrl
+  ]);
+  const csv = [headers, ...rows].map(r => r.map(c => `"${c || ''}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = `umm-orders-${Date.now()}.csv`;
+  a.click();
+  showToast('✅ CSV downloaded!', 'success');
+}
+
+// ── TOAST ─────────────────────────────────
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type}`;
+  setTimeout(() => t.classList.add('show'), 10);
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>
