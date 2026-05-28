@@ -499,7 +499,13 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
 .ft-legal a{font-size:12px;color:var(--tw3);transition:color .15s}
 .ft-legal a:hover{color:var(--tw)}
 
-/* ════ SCROLL REVEAL ════ */
+/* ════ LEAD FORM CHIPS ════ */
+.lf-chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);font-size:.73rem;font-weight:500;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all .2s;user-select:none}
+.lf-chip:hover{border-color:rgba(245,166,35,.4);color:var(--gold)}
+.lf-chip.selected{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.5);color:var(--gold);font-weight:600}
+@media(max-width:860px){.lead-grid{grid-template-columns:1fr!important;gap:36px!important}}
+@media(max-width:480px){.lead-grid form{padding:18px 16px!important}.lead-grid>div:first-child form div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}
+</style>
 .rv{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
 .rv.in{opacity:1;transform:none}
 .rv2{opacity:0;transform:translateY(28px);transition:opacity .65s .14s ease,transform .65s .14s ease}
@@ -1064,6 +1070,131 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
   </div>
 </section>
 
+<!-- LEAD GEN FORM -->
+<section style="background:linear-gradient(135deg,#080810,#0f1020,#080810);padding:88px 20px" id="consultation">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center" class="rv lead-grid">
+
+      <!-- Left -->
+      <div>
+        <div class="sec-eyebrow green">💬 Free Consultation</div>
+        <h2 class="sec-title white" style="margin-top:12px;text-align:left">
+          உங்கள் <em>Investment Journey</em><br>இன்றே Start பண்ணுங்கள்
+        </h2>
+        <p style="font-size:15px;color:var(--tw2);line-height:1.8;margin-top:16px;max-width:420px">
+          AMFI Registered MFD Vignesh Dhayalan (ARN: 288927) — உங்கள் financial goals-க்கு ஏற்ற investment plan <strong style="color:var(--gold)">FREE-ஆ</strong> பெறுங்கள்.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--tw2)"><span>✅</span><span>100% Free Consultation</span></div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--tw2)"><span>🔒</span><span>Your data is safe & private</span></div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--tw2)"><span>⚡</span><span>Reply within 24 hours</span></div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--tw2)"><span>📋</span><span>AMFI Certified — ARN 288927</span></div>
+        </div>
+      </div>
+
+      <!-- Right — Form -->
+      <div class="rv2">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden">
+          <div style="background:linear-gradient(135deg,rgba(245,166,35,.1),rgba(245,166,35,.04));border-bottom:1px solid rgba(245,166,35,.18);padding:20px 24px">
+            <div style="font-size:.95rem;font-weight:700;color:#fff;margin-bottom:4px">🎯 Free Investment Consultation</div>
+            <div style="font-size:.78rem;color:var(--tw2)">உங்கள் details fill பண்ணுங்கள் — நாங்கள் contact பண்றோம்</div>
+          </div>
+
+          <form id="leadForm" action="https://formspree.io/f/xnjrgonp" method="POST" style="padding:22px 24px">
+            <input type="hidden" name="source" value="Homepage Lead Form — UMM">
+            <input type="hidden" name="_subject" value="🎯 New Investment Lead — UMM">
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+              <div>
+                <label style="display:block;font-size:.71rem;color:rgba(255,255,255,.5);margin-bottom:6px">பெயர் / Name *</label>
+                <input type="text" name="name" placeholder="உங்கள் பெயர்" required style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 14px;border-radius:8px;font-size:.84rem;font-family:inherit;outline:none">
+              </div>
+              <div>
+                <label style="display:block;font-size:.71rem;color:rgba(255,255,255,.5);margin-bottom:6px">Phone Number *</label>
+                <input type="tel" name="phone" placeholder="98765 43210" maxlength="10" required style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 14px;border-radius:8px;font-size:.84rem;font-family:inherit;outline:none">
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+              <div>
+                <label style="display:block;font-size:.71rem;color:rgba(255,255,255,.5);margin-bottom:6px">Age Group</label>
+                <select name="age_group" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 14px;border-radius:8px;font-size:.84rem;font-family:inherit;outline:none;-webkit-appearance:none">
+                  <option value="">Select</option>
+                  <option>18–25 வயது</option>
+                  <option>26–35 வயது</option>
+                  <option>36–45 வயது</option>
+                  <option>45+ வயது</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:.71rem;color:rgba(255,255,255,.5);margin-bottom:6px">Occupation</label>
+                <select name="occupation" style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;padding:10px 14px;border-radius:8px;font-size:.84rem;font-family:inherit;outline:none;-webkit-appearance:none">
+                  <option value="">Select</option>
+                  <option>💼 Salaried</option>
+                  <option>🏪 Business</option>
+                  <option>🎓 Student</option>
+                  <option>👤 Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="margin-bottom:14px">
+              <label style="display:block;font-size:.71rem;color:rgba(255,255,255,.5);margin-bottom:8px">Monthly Investment Capacity</label>
+              <div style="display:flex;flex-wrap:wrap;gap:8px" id="amountChips">
+                <span class="lf-chip" onclick="selectChip(this,'amount')">₹500–₹2,000</span>
+                <span class="lf-chip" onclick="selectChip(this,'amount')">₹2,000–₹5,000</span>
+                <span class="lf-chip" onclick="selectChip(this,'amount')">₹5,000–₹10,000</span>
+                <span class="lf-chip" onclick="selectChip(this,'amount')">₹10,000+</span>
+              </div>
+              <input type="hidden" name="monthly_investment" id="amountVal">
+            </div>
+
+            <div style="margin-bottom:14px">
+              <label style="display:block;font-size:.71rem;color:rgba(255,255,255,.5);margin-bottom:8px">Primary Goal *</label>
+              <div style="display:flex;flex-wrap:wrap;gap:8px" id="goalChips">
+                <span class="lf-chip" onclick="selectChip(this,'goal')">📈 Wealth Creation</span>
+                <span class="lf-chip" onclick="selectChip(this,'goal')">💸 Tax Saving</span>
+                <span class="lf-chip" onclick="selectChip(this,'goal')">🏡 Retirement</span>
+                <span class="lf-chip" onclick="selectChip(this,'goal')">🎓 Child Education</span>
+                <span class="lf-chip" onclick="selectChip(this,'goal')">🛡️ Emergency Fund</span>
+              </div>
+              <input type="hidden" name="investment_goal" id="goalVal">
+            </div>
+
+            <div style="margin-bottom:14px">
+              <label style="display:block;font-size:.71rem;color:rgba(255,255,255,.5);margin-bottom:8px">Already Investing?</label>
+              <div style="display:flex;flex-wrap:wrap;gap:8px" id="investingChips">
+                <span class="lf-chip" onclick="selectChip(this,'investing')">✅ Yes</span>
+                <span class="lf-chip" onclick="selectChip(this,'investing')">❌ No</span>
+                <span class="lf-chip" onclick="selectChip(this,'investing')">🤔 Not Sure</span>
+              </div>
+              <input type="hidden" name="already_investing" id="investingVal">
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:10px;font-size:.7rem;color:rgba(255,255,255,.35);line-height:1.6;margin-bottom:14px">
+              <input type="checkbox" id="consentCheck" required style="margin-top:2px;flex-shrink:0;accent-color:var(--gold)">
+              <label for="consentCheck">I agree to be contacted by Vignesh Dhayalan (ARN: 288927) for investment guidance. Mutual Fund investments are subject to market risks.</label>
+            </div>
+
+            <button type="submit" id="leadSubmitBtn" style="width:100%;padding:14px;border-radius:10px;background:linear-gradient(135deg,#1ebe5a,#25D366);color:#fff;border:none;cursor:pointer;font-family:inherit;font-size:.88rem;font-weight:700;box-shadow:0 4px 20px rgba(37,211,102,.3)">
+              💬 Get Free Consultation on WhatsApp
+            </button>
+          </form>
+
+          <div id="leadSuccess" style="display:none;padding:36px 24px;text-align:center;color:#fff">
+            <div style="font-size:3rem;margin-bottom:12px">🎉</div>
+            <div style="font-size:1.3rem;font-weight:700;margin-bottom:8px">Thank You!</div>
+            <div style="font-size:.84rem;color:var(--tw2);line-height:1.7;margin-bottom:20px">உங்கள் details receive பண்ணிட்டோம். 24 hours-ல் WhatsApp-ல் contact பண்றோம்!</div>
+            <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20I%20just%20filled%20the%20consultation%20form." target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:13px 24px;border-radius:10px;font-size:.88rem;font-weight:700;text-decoration:none">
+              💬 WhatsApp-ல் Direct Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="sec sec-alt">
   <div class="wrap">
@@ -1220,6 +1351,33 @@ const s = document.createElement('script');
 s.type = 'application/ld+json';
 s.textContent = JSON.stringify(sd);
 document.head.appendChild(s);
+
+// Lead Form
+function selectChip(el, group) {
+  el.closest('[id$="Chips"]').querySelectorAll('.lf-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById(group + 'Val').value = el.textContent.trim();
+}
+document.getElementById('leadForm')?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('leadSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting...';
+  try {
+    const res = await fetch(this.action, { method:'POST', body:new FormData(this), headers:{'Accept':'application/json'} });
+    if (res.ok) {
+      this.style.display = 'none';
+      document.getElementById('leadSuccess').style.display = 'block';
+      const name = this.querySelector('[name="name"]')?.value || '';
+      const goal = document.getElementById('goalVal')?.value || '';
+      const amount = document.getElementById('amountVal')?.value || '';
+      setTimeout(() => {
+        const msg = encodeURIComponent(`Hi Vignesh! 👋\n\nI filled the consultation form on universalmoneymart.com\n\nName: ${name}\nGoal: ${goal}\nMonthly Investment: ${amount}\n\nPlease guide me!`);
+        window.open(`https://wa.me/917200752628?text=${msg}`, '_blank');
+      }, 1500);
+    } else { btn.disabled = false; btn.textContent = '💬 Get Free Consultation on WhatsApp'; }
+  } catch { btn.disabled = false; btn.textContent = '💬 Get Free Consultation on WhatsApp'; }
+});
 </script>
 </body>
 </html>
