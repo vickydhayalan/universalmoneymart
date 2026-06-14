@@ -162,6 +162,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .wa-float{position:fixed;bottom:24px;right:24px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:200;transition:transform .2s}
 .wa-float:hover{transform:scale(1.1)}
 .wa-float svg{width:28px;height:28px;fill:#fff}
+
+/* YOUTUBE SECTION */
+.yt-section{background:linear-gradient(135deg,var(--navy) 0%,#0d1f3a 100%);border-radius:18px;padding:36px 32px;margin:48px 0;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.25)}
+.yt-label{display:inline-flex;align-items:center;gap:8px;background:rgba(255,0,0,.15);border:1px solid rgba(255,0,0,.3);color:#FF6B6B;padding:5px 16px;border-radius:20px;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+.yt-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:#fff;margin-bottom:10px}
+.yt-title span{color:var(--teal)}
+.yt-desc{color:rgba(255,255,255,.65);font-size:.94rem;margin-bottom:24px;line-height:1.7}
+.yt-player{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:24px;box-shadow:0 8px 32px rgba(0,0,0,.4);background:#000}
+.yt-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.yt-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.yt-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .25s;border:none;cursor:pointer}
+.yt-btn.subscribe{background:#FF0000;color:#fff;box-shadow:0 4px 18px rgba(255,0,0,.35)}
+.yt-btn.subscribe:hover{background:#CC0000;transform:translateY(-2px)}
+.yt-btn.more{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.yt-btn.more:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+.yt-btn svg{width:20px;height:20px;fill:currentColor}
 </style>
 </head>
 <body>
@@ -416,6 +432,42 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
     <p>Growth option NAV-ஐ track பண்ணு — true fund performance இது reflect பண்றது. Dividend option NAV misleading-ஆ இருக்கும் — dividend போனாப்போ drop ஆகும்.</p>
   </section>
 
+
+  <!-- YOUTUBE VIDEO SECTION -->
+  <section class="article-section" id="video">
+    <h2>Video-ல பாருங்க — NAV Full Explanation</h2>
+    <p>Reading-ஐ விட video-ல பார்க்கும்போது more clear-ஆ புரியும். NAV myth bust, daily movement, fund selection — எல்லாம் simple Tamil-ல:</p>
+
+    <div class="yt-section">
+      <div class="yt-label">
+        <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:#FF6B6B"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.3 31.3 0 000 12a31.3 31.3 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.3 31.3 0 0024 12a31.3 31.3 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+        YouTube Video
+      </div>
+      <div class="yt-title">NAV என்னன்னு? — <span>Myth Busted!</span></div>
+      <p class="yt-desc">Low NAV = Better Fund-னு நினைக்கிறீங்களா? இந்த video-ல truth சொல்றேன். Share பண்ணுங்க — ஒருத்தர் wrong decision தவிர்க்கலாம்!</p>
+
+      <div class="yt-player">
+        <iframe
+          src="https://www.youtube.com/embed/VIDEO_ID_DAY3?rel=0&modestbranding=1&color=white"
+          title="NAV என்னன்னு? Tamil Guide | Universal Money Mart"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy">
+        </iframe>
+      </div>
+
+      <div class="yt-buttons">
+        <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA?sub_confirmation=1" target="_blank" class="yt-btn subscribe">
+          <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31.3 31.3 0 000 12a31.3 31.3 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31.3 31.3 0 0024 12a31.3 31.3 0 00-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Subscribe — Free!
+        </a>
+        <a href="https://youtube.com/playlist?list=PLGQKHUg70jHjyiU23LpM_wPT3fNth2W5P" target="_blank" class="yt-btn more">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+          25 Episodes பாருங்க
+        </a>
+      </div>
+    </div>
+  </section>
+
   <div class="disclaimer">
     <strong>⚠️ Investment Disclaimer:</strong> Mutual Fund investments are subject to market risks. Read all scheme related documents carefully before investing. Past performance is not indicative of future results. This article is for educational purposes only. Vignesh Dhayalan — ARN: 288927, EUIN: E543710 — AMFI Registered Mutual Fund Distributor.
   </div>
@@ -442,8 +494,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 
   <div class="sidebar-card">
     <div class="sc-title">📚 Series Navigation</div>
-    <div class="quick-fact"><div class="qf-text"><strong><a href="/blog/what-is-mutual-fund" style="color:var(--navy);text-decoration:none">Day 1: Mutual Fund என்னன்னு?</a></strong></div></div>
-    <div class="quick-fact"><div class="qf-text"><strong><a href="/blog/sip-vs-lumpsum" style="color:var(--navy);text-decoration:none">Day 2: SIP vs Lumpsum</a></strong></div></div>
+    <div class="quick-fact"><div class="qf-text"><strong><a href="https://universalmoneymart.onrender.com/blog/what-is-mutual-fund.html" style="color:var(--navy);text-decoration:none">Day 1: Mutual Fund என்னன்னு?</a></strong></div></div>
+    <div class="quick-fact"><div class="qf-text"><strong><a href="https://universalmoneymart.onrender.com/blog/sip-vs-lumpsum.html" style="color:var(--navy);text-decoration:none">Day 2: SIP vs Lumpsum</a></strong></div></div>
     <div class="quick-fact"><div class="qf-text"><strong style="color:var(--gold)">Day 3: NAV என்னன்னு? ✓</strong></div></div>
     <div class="quick-fact"><div class="qf-text"><strong><a href="#" style="color:var(--navy);text-decoration:none">Day 4: Expense Ratio — Coming Soon</a></strong></div></div>
   </div>
