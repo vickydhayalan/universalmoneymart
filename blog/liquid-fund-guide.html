@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ta-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liquid Fund Deep Dive — Emergency Fund + STP Strategy | Universal Money Mart</title>
+<meta name="description" content="Liquid Fund complete guide. Emergency fund, STP strategy, T+1 redemption, Bank vs Liquid Fund comparison. Tamil guide. Vignesh Dhayalan ARN 288927.">
+<meta name="keywords" content="liquid fund tamil, emergency fund tamil, stp strategy tamil, liquid fund vs bank savings, t+1 redemption tamil, universal money mart, vignesh dhayalan">
+<meta name="author" content="Vignesh Dhayalan">
+<link rel="canonical" href="https://universalmoneymart.onrender.com/blog/liquid-fund-guide.html">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1628;--navy2:#122040;--gold:#D4A017;--gold2:#F5C842;--teal:#06B6D4;--teal2:#14B8A6;--cream:#FAF6EF;--text:#1A1A2E;--tl:#5A5A72;--border:#E8E0D0;--hl:#F0FFFE;--green:#22C55E;--red:#C0392B;--orange:#F97316;--white:#FFFFFF;--muted:#8899BB}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);line-height:1.85;font-size:17px}
+.nav{background:var(--navy);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.nav-brand{color:var(--gold);font-weight:700;font-size:1.1rem;text-decoration:none}
+.nav-brand span{color:#fff;font-weight:300}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.85rem}
+.nav-cta{background:var(--gold);color:var(--navy)!important;padding:7px 16px;border-radius:20px;font-weight:600!important}
+.hero{background:linear-gradient(135deg,#02141e 0%,var(--navy) 50%,var(--navy2) 100%);padding:70px 20px 60px}
+.hero-inner{max-width:800px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.3);color:#A5F3FC;padding:5px 16px;border-radius:20px;font-size:.78rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5.5vw,3.4rem);color:#fff;line-height:1.2;margin-bottom:18px}
+.hero h1 span{color:var(--teal)}
+.hero-sub{color:rgba(255,255,255,.72);font-size:1.08rem;margin-bottom:30px;max-width:620px}
+.hero-meta{display:flex;gap:22px;flex-wrap:wrap}
+.hm{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.6);font-size:.82rem}
+.hm strong{color:rgba(255,255,255,.88)}
+.page{max-width:1080px;margin:0 auto;padding:44px 20px 70px;display:grid;grid-template-columns:1fr 310px;gap:44px}
+@media(max-width:880px){.page{grid-template-columns:1fr}}
+.sec{margin-bottom:52px}
+.sec h2{font-family:'Playfair Display',serif;font-size:1.65rem;color:var(--navy);margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+.sec h3{font-size:1.12rem;font-weight:700;color:var(--navy);margin:26px 0 12px}
+.sec p{margin-bottom:18px;color:#2A2A3E;line-height:1.85}
+.sec ul,.sec ol{padding-left:22px;margin-bottom:18px}
+.sec li{margin-bottom:10px;color:#2A2A3E;line-height:1.7}
+.toc{background:#fff;border:1px solid var(--border);border-left:5px solid var(--teal);border-radius:12px;padding:24px 28px;margin-bottom:40px}
+.toc h3{font-size:.82rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--tl);margin-bottom:16px}
+.toc ol{padding-left:20px}
+.toc li{margin-bottom:8px}
+.toc a{color:var(--navy);text-decoration:none;font-size:.93rem}
+.teal-box{background:linear-gradient(135deg,#F0FFFE,#F5FFFF);border:1px solid rgba(6,182,212,.25);border-left:5px solid var(--teal);border-radius:12px;padding:22px 24px;margin:26px 0}
+.teal-box .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);font-weight:700;margin-bottom:10px}
+.teal-box p{font-size:1.05rem;color:#002A30;margin:0;line-height:2}
+.gold-box{background:linear-gradient(135deg,#FFF8E7,#FFFBF0);border:1px solid rgba(212,160,23,.3);border-left:5px solid var(--gold);border-radius:12px;padding:22px 24px;margin:26px 0}
+.gold-box .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);font-weight:700;margin-bottom:10px}
+.gold-box p{font-size:1.05rem;color:#3A2A00;margin:0;line-height:2}
+.dark-card{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:14px;padding:30px;margin:26px 0;color:#fff}
+.dark-card .lbl{color:var(--teal);font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:14px}
+.dark-card p{color:rgba(255,255,255,.88);margin:0;line-height:1.85}
+.dark-card strong{color:var(--gold2)}
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+@media(max-width:650px){.compare-grid{grid-template-columns:1fr}}
+.cmp-card{border-radius:12px;padding:20px;text-align:center}
+.cmp-card.bank{background:#0A1830;border:2px solid var(--muted)}
+.cmp-card.lqd{background:#021820;border:2px solid var(--teal)}
+.cmp-card.diff{background:#0A2010;border:2px solid var(--green)}
+.cmp-card .cv{font-size:2rem;font-weight:800;margin-bottom:8px}
+.cmp-card.bank .cv{color:var(--muted)}
+.cmp-card.lqd .cv{color:var(--teal)}
+.cmp-card.diff .cv{color:var(--green)}
+.cmp-card .cl{font-size:.82rem;color:rgba(255,255,255,.7)}
+.fund-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
+@media(max-width:650px){.fund-grid{grid-template-columns:1fr}}
+.fund-card{border-radius:12px;padding:18px;border:2px solid}
+.fund-card.liq{background:#021820;border-color:var(--green)}
+.fund-card.ult{background:#08122a;border-color:#6366F1}
+.fund-card.mm{background:#180528;border-color:#A855F7}
+.fund-card h4{font-size:.95rem;font-weight:700;margin-bottom:10px}
+.fund-card.liq h4{color:var(--green)}
+.fund-card.ult h4{color:#818CF8}
+.fund-card.mm h4{color:#D8B4FE}
+.fund-card .fc-item{font-size:.82rem;color:rgba(255,255,255,.82);margin-bottom:5px}
+.tbl{width:100%;border-collapse:collapse;margin:24px 0;font-size:.92rem;border-radius:12px;overflow:hidden}
+.tbl thead{background:var(--navy);color:#fff}
+.tbl th{padding:14px 18px;text-align:left;font-weight:600}
+.tbl td{padding:12px 18px;border-bottom:1px solid var(--border)}
+.tbl tbody tr:nth-child(odd){background:#fff}
+.tbl tbody tr:nth-child(even){background:var(--hl)}
+.good{color:var(--green);font-weight:600}
+.bad{color:var(--red)}
+.neu{color:var(--orange);font-weight:600}
+.calc{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;margin:28px 0}
+.calc h4{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:20px}
+.cr{display:flex;gap:14px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.cr label{font-size:.86rem;color:var(--tl);min-width:175px}
+.cr input{flex:1;min-width:120px;padding:9px 14px;border:1px solid var(--border);border-radius:8px;font-size:.93rem;background:var(--cream)}
+.cb{width:100%;padding:13px;background:var(--teal);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:10px}
+.cres{margin-top:18px;background:var(--navy2);border-radius:12px;padding:22px;display:none;flex-direction:column;gap:10px}
+.cres.show{display:flex}
+.ci{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.ci:last-child{border-bottom:none}
+.ci .cl{font-size:.88rem;color:rgba(255,255,255,.6)}
+.ci .cv{font-size:1.05rem;font-weight:700}
+.ad{background:#F0F0F0;border:1px dashed #CCC;border-radius:8px;padding:8px;text-align:center;margin:30px 0;min-height:100px;display:flex;align-items:center;justify-content:center}
+.yt-section{background:linear-gradient(135deg,var(--navy) 0%,#0d1f3a 100%);border-radius:18px;padding:36px 32px;margin:48px 0}
+.yt-label{display:inline-flex;align-items:center;gap:8px;background:rgba(255,0,0,.15);border:1px solid rgba(255,0,0,.3);color:#FF6B6B;padding:5px 16px;border-radius:20px;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:18px}
+.yt-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:#fff;margin-bottom:10px}
+.yt-title span{color:var(--teal)}
+.yt-desc{color:rgba(255,255,255,.65);font-size:.94rem;margin-bottom:24px;line-height:1.7}
+.yt-player{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin-bottom:24px;background:#000}
+.yt-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.yt-buttons{display:flex;gap:14px;flex-wrap:wrap}
+.yt-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;border:none;cursor:pointer}
+.yt-btn.subscribe{background:#FF0000;color:#fff}
+.yt-btn.more{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.disc{background:#F8F8FA;border:1px solid #DDD;border-radius:10px;padding:18px 20px;margin:36px 0;font-size:.78rem;color:#666;line-height:1.65}
+.author{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:14px;padding:24px;margin-bottom:26px;text-align:center}
+.av{width:64px;height:64px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 14px}
+.an{color:#fff;font-weight:700;font-size:1rem;margin-bottom:4px}
+.ac{color:var(--teal);font-size:.78rem;margin-bottom:14px}
+.ab{color:rgba(255,255,255,.65);font-size:.82rem;line-height:1.65;margin-bottom:18px}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;padding:11px 20px;border-radius:24px;font-weight:600;font-size:.86rem}
+.scard{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:24px;position:sticky;top:72px}
+.sct{font-size:.82rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--tl);margin-bottom:16px;font-weight:600}
+.qf{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.qf:last-child{border-bottom:none}
+.qf-t{font-size:.88rem;color:var(--text)}
+.qf-t strong{color:var(--navy);display:block;font-size:.83rem;margin-bottom:2px}
+.footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:34px 20px;font-size:.82rem;line-height:1.9}
+.footer strong{color:var(--gold)}
+.wf{position:fixed;bottom:24px;right:24px;width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:200;text-decoration:none;font-size:1.4rem}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="https://universalmoneymart.onrender.com" class="nav-brand">Universal <span>Money Mart</span></a>
+  <div class="nav-links">
+    <a href="https://universalmoneymart.onrender.com/blog">Blog</a>
+    <a href="https://wa.me/917200752628" target="_blank" class="nav-cta">💬 Free Consult</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">📚 Day 10 of 25 · Fund Types Module Complete!</div>
+    <h1>Liquid Fund —<br><span>Emergency + STP!</span></h1>
+    <p class="hero-sub">Bank Savings 3-4% vs Liquid Fund 6-7%! T+1 Redemption, Emergency Fund Strategy, STP Gateway — Complete Tamil Guide.</p>
+    <div class="hero-meta">
+      <div class="hm">✍️ <strong>Vignesh Dhayalan</strong></div>
+      <div class="hm">📅 <strong>June 2026</strong></div>
+      <div class="hm">⏱️ <strong>14 min read</strong></div>
+      <div class="hm">🏅 <strong>ARN: 288927</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+<article>
+  <nav class="toc">
+    <h3>📋 இந்த article-ல என்ன இருக்கு?</h3>
+    <ol>
+      <li><a href="#what">Liquid Fund என்னன்னு?</a></li>
+      <li><a href="#compare">Bank Savings vs Liquid Fund</a></li>
+      <li><a href="#numbers">Real Numbers — ₹15,000 Difference</a></li>
+      <li><a href="#types">3 Types of Liquid Funds</a></li>
+      <li><a href="#t1">T+1 Redemption — How it works</a></li>
+      <li><a href="#emergency">Emergency Fund Strategy</a></li>
+      <li><a href="#stp">STP Strategy</a></li>
+      <li><a href="#who">யார் Use பண்ணணும்?</a></li>
+      <li><a href="#risks">Risks — Honest Truth</a></li>
+      <li><a href="#tax">Tax Guide</a></li>
+      <li><a href="#calculator">Calculator</a></li>
+      <li><a href="#mistakes">Common Mistakes</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </nav>
+
+  <div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+
+  <section class="sec" id="what">
+    <h2>1. Liquid Fund என்னன்னு?</h2>
+    <p>91 நாட்கள் வரை maturity உள்ள Money Market instruments-ல invest பண்ற Debt Mutual Fund. Safest, most liquid category.</p>
+    <div class="teal-box"><div class="lbl">💧 5 Core Features</div><p>① 91-day max maturity · ② T+1 day redemption · ③ Lowest risk category · ④ 6-7% returns · ⑤ No lock-in period</p></div>
+  </section>
+
+  <section class="sec" id="compare">
+    <h2>2. Bank Savings vs Liquid Fund</h2>
+    <table class="tbl">
+      <thead><tr><th>Feature</th><th>Bank Savings</th><th>Liquid Fund</th></tr></thead>
+      <tbody>
+        <tr><td>Interest</td><td>3-4%</td><td class="good">6-7% ✓</td></tr>
+        <tr><td>Access</td><td class="good">Immediate</td><td>T+1 Day</td></tr>
+        <tr><td>Risk</td><td class="good">Zero (RBI)</td><td>Very Low</td></tr>
+        <tr><td>Tax</td><td>Slab rate</td><td>Slab rate</td></tr>
+        <tr><td>Min Balance</td><td class="bad">Required</td><td class="good">₹1 minimum</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sec" id="numbers">
+    <h2>3. Real Numbers — ₹15,000 Difference!</h2>
+    <p>₹5 Lakh parked for 1 year:</p>
+    <div class="compare-grid">
+      <div class="cmp-card bank"><div class="cv">₹17,500</div><div class="cl">Bank Savings (3.5%)</div></div>
+      <div class="cmp-card lqd"><div class="cv">₹32,500</div><div class="cl">Liquid Fund (6.5%)</div></div>
+      <div class="cmp-card diff"><div class="cv">₹15,000</div><div class="cl">Extra Every Year!</div></div>
+    </div>
+    <div class="dark-card"><div class="lbl">💡 Simple Strategy</div><p>Salary credit → Fixed expenses out → Surplus to Liquid Fund. Emergency வந்தா T+1 day-ல return. <strong>Zero sacrifice in liquidity, better returns!</strong></p></div>
+  </section>
+
+  <div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+
+  <section class="sec" id="types">
+    <h2>4. 3 Types of Liquid Funds</h2>
+    <div class="fund-grid">
+      <div class="fund-card liq">
+        <h4>💧 Pure Liquid Fund</h4>
+        <div class="fc-item">Maturity: 91 days max</div>
+        <div class="fc-item">Returns: 6.0-6.8%</div>
+        <div class="fc-item">Risk: Very Low</div>
+        <div class="fc-item">Best: Emergency Fund</div>
+      </div>
+      <div class="fund-card ult">
+        <h4>⚡ Ultra Short Duration</h4>
+        <div class="fc-item">Maturity: 91-365 days</div>
+        <div class="fc-item">Returns: 6.5-7.5%</div>
+        <div class="fc-item">Risk: Low</div>
+        <div class="fc-item">Best: 3-6 month parking</div>
+      </div>
+      <div class="fund-card mm">
+        <h4>🏦 Money Market Fund</h4>
+        <div class="fc-item">Maturity: Up to 1 year</div>
+        <div class="fc-item">Returns: 6.8-7.5%</div>
+        <div class="fc-item">Risk: Low</div>
+        <div class="fc-item">Best: 3-12 month parking</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="t1">
+    <h2>5. T+1 Redemption — How Fast?</h2>
+    <ul>
+      <li><strong>Monday before 2 PM</strong> — Request submit</li>
+      <li><strong>Tuesday</strong> — Money in bank account!</li>
+    </ul>
+    <div class="gold-box"><div class="lbl">⚡ Cut-off Time</div><p>2:00 PM cut-off. Before 2 PM → next working day money. After 2 PM → 2 working days. Holiday இருந்தா next working day count ஆகும்.</p></div>
+  </section>
+
+  <section class="sec" id="emergency">
+    <h2>6. Emergency Fund Strategy</h2>
+    <p><strong>How much?</strong> Salaried: 3-6 months expenses. Freelancer/Business: 6-12 months.</p>
+    <p><strong>Example:</strong> Monthly expenses ₹50,000 → Emergency Fund ₹1.5L to ₹3L in Liquid Fund.</p>
+    <div class="teal-box"><div class="lbl">✅ Why Liquid Fund and Not Bank?</div><p>6-7% returns vs 3-4% savings + T+1 access (practically same as savings) + No minimum balance = Best emergency fund vehicle!</p></div>
+  </section>
+
+  <section class="sec" id="stp">
+    <h2>7. STP Strategy — Liquid to Equity</h2>
+    <p>Bonus/Windfall received? Direct equity-ல போடாதீங்க. STP strategy use பண்ணுங்க:</p>
+    <ol>
+      <li>₹5L bonus → Liquid Fund-ல park (6.5% earn ஆரம்பிக்கும்)</li>
+      <li>Every month ₹50,000 STP → Equity Fund</li>
+      <li>10 months-ல full amount equity-ல invested</li>
+      <li>Bonus: Liquid Fund income ≈ ₹15,000-20,000 extra!</li>
+    </ol>
+    <div class="dark-card"><div class="lbl">💡 Why STP?</div><p>Cost averaging benefit. Market timing risk avoid. Liquid fund earns while waiting. Especially powerful in volatile markets!</p></div>
+  </section>
+
+  <div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>
+
+  <section class="sec" id="who">
+    <h2>8. யார் Use பண்ணணும்?</h2>
+    <ul>
+      <li>🚨 <strong>Emergency Fund</strong> — 3-6 months expenses</li>
+      <li>💰 <strong>Salary Surplus</strong> — Monthly leftover savings</li>
+      <li>🔄 <strong>STP Source</strong> — Lumpsum → Equity gradually</li>
+      <li>🏦 <strong>FD Mature Amount</strong> — Next decision wait</li>
+      <li>⏰ <strong>Short-term Goal (&lt;3 months)</strong> — Upcoming expense</li>
+    </ul>
+  </section>
+
+  <section class="sec" id="risks">
+    <h2>9. Risks — Honest Truth</h2>
+    <ul>
+      <li><strong>Interest Rate Risk</strong> — Very low, almost negligible</li>
+      <li><strong>Credit Risk</strong> — SEBI strict regulations, top-rated instruments</li>
+      <li><strong>NAV Drop Risk</strong> — Extremely rare (2008 type events)</li>
+      <li><strong>Returns Not Guaranteed</strong> — 6-7% indicative, not fixed like FD</li>
+    </ul>
+  </section>
+
+  <section class="sec" id="tax">
+    <h2>10. Tax Guide (2023 Rules)</h2>
+    <p>Liquid Fund = Debt category. Post April 2023: Gains taxed at Income Tax Slab Rate regardless of holding period.</p>
+    <table class="tbl">
+      <thead><tr><th>Bracket</th><th>Gain on ₹5L</th><th>Tax</th><th>Net Gain</th></tr></thead>
+      <tbody>
+        <tr><td>20%</td><td>₹32,500</td><td>₹6,500</td><td class="good">₹26,000</td></tr>
+        <tr><td>30%</td><td>₹32,500</td><td>₹9,750</td><td class="good">₹22,750</td></tr>
+      </tbody>
+    </table>
+    <div class="teal-box"><div class="lbl">✅ Still Wins!</div><p>FD-உம் same slab rate. ஆனா Liquid Fund pre-tax returns better! Post-tax-உம் FD-ஐ விட often better outcome.</p></div>
+  </section>
+
+  <section class="sec" id="calculator">
+    <h2>11. Calculator — Bank vs Liquid Fund</h2>
+    <div class="calc">
+      <h4>🧮 உன் Savings Calculate பண்ணு</h4>
+      <div class="cr"><label>Amount Parked (₹)</label><input type="number" id="amt" value="300000" min="1000"></div>
+      <div class="cr"><label>Duration (Months)</label><input type="number" id="mon" value="12" min="1" max="60"></div>
+      <button class="cb" onclick="calc()">Calculate Difference 📊</button>
+      <div class="cres" id="res">
+        <div class="ci"><div class="cl">Bank Savings (3.5%)</div><div class="cv" style="color:var(--muted)" id="bv">—</div></div>
+        <div class="ci"><div class="cl">Liquid Fund (6.5%)</div><div class="cv" style="color:var(--teal)" id="lv">—</div></div>
+        <div class="ci"><div class="cl">Extra Earned</div><div class="cv" style="color:var(--green)" id="diff">—</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="mistakes">
+    <h2>12. Common Mistakes</h2>
+    <ul>
+      <li><strong>Savings-லயே எல்லாம் வைக்கிறது</strong> — Surplus → Liquid Fund</li>
+      <li><strong>Emergency Fund இல்லாம invest</strong> — Liquid Fund first priority</li>
+      <li><strong>Long-term money Liquid-ல வைக்கிறது</strong> — Long-term → Equity only</li>
+      <li><strong>Lumpsum direct Equity</strong> — Use STP strategy</li>
+    </ul>
+  </section>
+
+  <section class="sec" id="video">
+    <h2>13. Video Watch பண்ணுங்க!</h2>
+    <div class="yt-section">
+      <div class="yt-label">YouTube Video</div>
+      <div class="yt-title">Liquid Fund — <span>Emergency + STP!</span></div>
+      <p class="yt-desc">Bank vs Liquid Fund, T+1 redemption, STP strategy — எல்லாம் ஒரே video-ல. Fund Types Module Complete!</p>
+      <div class="yt-player">
+        <iframe src="https://www.youtube.com/embed/9SPVvY1kCyE?rel=0&modestbranding=1&color=white" title="Liquid Fund Tamil Guide" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="yt-buttons">
+        <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA?sub_confirmation=1" target="_blank" class="yt-btn subscribe">Subscribe — Free!</a>
+        <a href="https://youtube.com/playlist?list=PLGQKHUg70jHjyiU23LpM_wPT3fNth2W5P" target="_blank" class="yt-btn more">25 Episodes</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <h2>14. FAQ</h2>
+    <h3>Q: Liquid Fund 100% safe-ஆ?</h3>
+    <div class="teal-box"><div class="lbl">✅ Answer</div><p>Near-safe but not zero risk. Credit risk, NAV drop risk extremely rare. SEBI regulations strong. FD-ஓட bank-backed safety-ஐ விட slightly lower, ஆனா practically very safe.</p></div>
+    <h3>Q: Minimum investment எவ்வளவு?</h3>
+    <p>₹1 minimum most funds-ல. SIP தேவையில்ல — anytime invest, anytime redeem.</p>
+  </section>
+
+  <div class="disc"><strong>⚠️ Disclaimer:</strong> Mutual Fund investments are subject to market risks. Educational purpose only. Vignesh Dhayalan — ARN: 288927, EUIN: E543710.</div>
+</article>
+
+<aside>
+  <div class="author">
+    <div class="av">🧑‍💼</div>
+    <div class="an">Vignesh Dhayalan</div>
+    <div class="ac">ARN: 288927 · EUIN: E543710</div>
+    <div class="ab">AMFI Registered MFD. Liquid Fund setup பண்ண help வேணுமா?</div>
+    <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20Liquid%20Fund%20article%20padichen.%20Help%20vendum." target="_blank" class="wa-btn">💬 WhatsApp Consult</a>
+  </div>
+  <div class="scard">
+    <div class="sct">⚡ Quick Facts</div>
+    <div class="qf"><div class="qf-t"><strong>Returns</strong>6-7% (indicative)</div></div>
+    <div class="qf"><div class="qf-t"><strong>Redemption</strong>T+1 working day</div></div>
+    <div class="qf"><div class="qf-t"><strong>Lock-in</strong>None</div></div>
+    <div class="qf"><div class="qf-t"><strong>Risk</strong>Very Low</div></div>
+    <div class="qf"><div class="qf-t"><strong>Min Investment</strong>₹1</div></div>
+  </div>
+  <div class="scard">
+    <div class="sct">📚 Fund Types Series</div>
+    <div class="qf"><div class="qf-t"><a href="/blog/equity-fund-guide.html" style="color:var(--navy);text-decoration:none">Day 6: Equity →</a></div></div>
+    <div class="qf"><div class="qf-t"><a href="/blog/debt-fund-guide.html" style="color:var(--navy);text-decoration:none">Day 7: Debt →</a></div></div>
+    <div class="qf"><div class="qf-t"><a href="/blog/index-fund-guide.html" style="color:var(--navy);text-decoration:none">Day 8: Index →</a></div></div>
+    <div class="qf"><div class="qf-t"><a href="/blog/elss-fund-guide.html" style="color:var(--navy);text-decoration:none">Day 9: ELSS →</a></div></div>
+    <div class="qf"><div class="qf-t"><strong style="color:var(--teal)">Day 10: Liquid ✓</strong></div></div>
+  </div>
+</aside>
+</div>
+
+<footer class="footer">
+  <p><strong>Universal Money Mart</strong> — universalmoneymart.onrender.com</p>
+  <p>Vignesh Dhayalan · ARN: 288927 · EUIN: E543710</p>
+</footer>
+<a href="https://wa.me/917200752628" target="_blank" class="wf">💬</a>
+
+<script>
+function calc(){
+  const a=parseFloat(document.getElementById('amt').value)||300000;
+  const m=parseFloat(document.getElementById('mon').value)||12;
+  const bv=a*(Math.pow(1+0.035/12,m)-1);
+  const lv=a*(Math.pow(1+0.065/12,m)-1);
+  const fmt=v=>'₹'+Math.round(v).toLocaleString('en-IN');
+  document.getElementById('bv').textContent=fmt(bv);
+  document.getElementById('lv').textContent=fmt(lv);
+  document.getElementById('diff').textContent=fmt(lv-bv);
+  document.getElementById('res').classList.add('show');
+}
+</script>
+</body>
+</html>
