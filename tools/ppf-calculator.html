@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ta-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free PPF Calculator - Public Provident Fund Maturity Value | Universal Money Mart</title>
+<meta name="description" content="Free online PPF calculator to estimate your Public Provident Fund maturity value. Current rate 7.1% p.a. Simple, mobile-friendly tool by Vignesh Dhayalan, AMFI Registered Mutual Fund Distributor (ARN 288927).">
+<meta name="keywords" content="PPF calculator, public provident fund calculator, PPF maturity calculator, PPF interest calculator tamil">
+<meta name="author" content="Vignesh Dhayalan">
+<meta property="og:title" content="Free PPF Calculator — Universal Money Mart">
+<meta property="og:description" content="Calculate your PPF maturity value instantly with our free, easy-to-use calculator.">
+<meta property="og:image" content="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/vigneshphoto.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://universalmoneymart.com/tools/ppf-calculator.html">
+<link rel="canonical" href="https://universalmoneymart.com/tools/ppf-calculator.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PPF Calculator",
+  "url": "https://universalmoneymart.com/tools/ppf-calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+  "description": "Free PPF calculator to estimate Public Provident Fund maturity value.",
+  "provider": { "@type": "Organization", "name": "Universal Money Mart" }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+:root{
+  --white:#FFFFFF;--off:#F8F9FC;--off2:#F1F3F8;--dark:#0D0D12;--dark2:#141420;--dark3:#1C1C2E;--ink:#1A1A2E;
+  --gold:#F5A623;--gold2:#FFD166;--teal:#0EA5E9;--green:#10B981;--red:#EF4444;--purple:#8B5CF6;--wa:#25D366;--tg:#0088CC;
+  --t1:#0F0F1A;--t2:#4A4A68;--t3:#9090A8;--tw:#FFFFFF;--tw2:rgba(255,255,255,.75);--tw3:rgba(255,255,255,.45);
+  --bdr:rgba(0,0,0,.08);--bdr2:rgba(0,0,0,.12);--bdrw:rgba(255,255,255,.1);
+  --fh:'Playfair Display',Georgia,serif;--fb:'Inter',system-ui,sans-serif;--fm:'JetBrains Mono',monospace;
+  --max:1100px;--r:16px;--rsm:10px;--rfull:100px;
+}
+body{font-family:var(--fb);font-size:16px;line-height:1.6;color:var(--t1);background:var(--off);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+.wa-fab{position:fixed;bottom:24px;right:20px;z-index:999;width:58px;height:58px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 0 rgba(37,211,102,.6);animation:waGlow 2.5s ease-in-out infinite;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .2s}
+.wa-fab:hover{transform:scale(1.15) translateY(-3px);animation:none;box-shadow:0 0 0 0 transparent,0 0 30px 8px rgba(37,211,102,.5),0 8px 28px rgba(37,211,102,.55)}
+@keyframes waGlow{0%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}50%{box-shadow:0 0 0 15px rgba(37,211,102,0),0 4px 20px rgba(37,211,102,.45)}100%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}}
+.wa-fab svg{width:28px;height:28px;fill:#fff}
+.wa-tip{position:absolute;right:68px;background:var(--dark);color:#fff;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.wa-fab:hover .wa-tip{opacity:1}
+
+.hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr)}
+.hdr-inner{max-width:var(--max);margin:0 auto;padding:0 20px;display:flex;align-items:center;height:64px;gap:8px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-box{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--gold),#D97706);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 18px rgba(245,166,35,.3)}
+.logo-name{font-size:16.5px;font-weight:800;color:var(--t1);letter-spacing:-.025em}
+.logo-name span{color:var(--gold)}
+.hdr-nav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.hdr-nav a{font-size:14px;font-weight:500;color:var(--t2);padding:7px 13px;border-radius:var(--rfull);transition:all .15s;white-space:nowrap}
+.hdr-nav a:hover{color:var(--t1);background:var(--off2)}
+.hdr-nav a.active{font-weight:700;color:var(--t1);background:var(--off2)}
+.hdr-btns{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.btn-wa-hdr{display:flex;align-items:center;gap:7px;background:var(--wa);color:#fff;font-size:13.5px;font-weight:700;padding:9px 18px;border-radius:var(--rfull);transition:all .2s;white-space:nowrap;box-shadow:0 4px 14px rgba(37,211,102,.3)}
+.btn-wa-hdr:hover{background:#1ebe5a;transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,211,102,.4)}
+.btn-wa-hdr svg{width:15px;height:15px;fill:#fff}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px;margin-left:auto}
+.burger span{display:block;width:22px;height:2px;background:var(--t1);border-radius:2px;transition:all .3s}
+.mob-menu{display:none;background:var(--white);border-bottom:1px solid var(--bdr)}
+.mob-menu a{display:block;padding:14px 20px;font-size:15px;font-weight:500;color:var(--t2);border-bottom:1px solid var(--bdr);transition:all .15s}
+.mob-menu a:hover{color:var(--t1);padding-left:26px}
+.mob-menu.open{display:block}
+@media(max-width:860px){.hdr-nav{display:none}.btn-wa-hdr{display:none}.burger{display:flex}}
+
+.breadcrumb{background:#fff;border-bottom:1px solid var(--bdr);padding:12px 20px}
+.bc-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--t3);font-family:var(--fm)}
+.bc-inner a{color:#4F46E5;transition:color .2s}
+.bc-inner a:hover{color:var(--t1)}
+
+.calc-wrap{max-width:640px;margin:44px auto 72px;padding:0 20px}
+.calc-eyebrow{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.calc-title{font-family:var(--fh);font-size:clamp(1.9rem,5vw,2.6rem);font-weight:900;color:var(--t1);line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+.calc-sub{font-size:15.5px;color:var(--t2);line-height:1.7;margin-bottom:32px}
+
+.calc-card{background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:28px 24px;box-shadow:0 12px 40px rgba(0,0,0,.04)}
+.field{margin-bottom:26px}
+.field:last-of-type{margin-bottom:0}
+.field-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.field-label{font-size:14px;font-weight:700;color:var(--t1)}
+.field-value{font-size:15.5px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;font-family:var(--fm)}
+
+input[type="range"]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:var(--off2);outline:none}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 1px 6px rgba(245,166,35,.5);cursor:pointer}
+input[type="range"]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--gold);border:3px solid #fff;cursor:pointer}
+.range-labels{display:flex;justify-content:space-between;margin-top:6px}
+.range-labels span{font-size:12px;color:var(--t3)}
+
+.results{margin-top:30px;padding-top:26px;border-top:1px solid var(--bdr)}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.stat-card{background:var(--off2);border-radius:12px;padding:16px}
+.stat-card.growth{background:rgba(16,185,129,.08)}
+.stat-l{font-size:12px;color:var(--t3);font-weight:600;margin-bottom:4px}
+.stat-v{font-family:var(--fh);font-size:20px;font-weight:800;color:var(--t1);font-variant-numeric:tabular-nums}
+
+.total-card{background:var(--dark);border-radius:14px;padding:20px 18px;text-align:center;position:relative;overflow:hidden}
+.total-card::before{content:'';position:absolute;top:0;right:0;width:140px;height:140px;background:radial-gradient(circle,rgba(245,166,35,.18),transparent 70%);border-radius:50%}
+.total-l{font-size:13px;color:var(--tw3);font-weight:600;margin-bottom:6px;position:relative}
+.total-v{font-family:var(--fh);font-size:32px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums;position:relative}
+
+.bar-wrap{margin-top:18px;display:flex;align-items:flex-end;gap:4px;height:90px;background:var(--off);border-radius:8px;padding:8px}
+.bar{flex:1;border-radius:3px 3px 0 0;min-height:2px}
+.legend{display:flex;gap:16px;margin-top:10px;font-size:12px;color:var(--t3)}
+.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:2px;display:inline-block}
+
+.assumptions{margin-top:16px;font-size:12px;color:var(--t3);background:var(--off);border-radius:8px;padding:10px 12px;line-height:1.6}
+
+.cta-box{margin-top:24px;background:var(--white);border:1px solid var(--bdr);border-radius:var(--r);padding:22px}
+.cta-box h2{font-family:var(--fh);font-size:18px;font-weight:800;color:var(--t1);margin-bottom:8px}
+.cta-box p{font-size:14px;color:var(--t2);margin-bottom:16px;line-height:1.6}
+.btn-social{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border-radius:12px;font-size:14.5px;font-weight:700;transition:all .2s}
+.s-wa{background:var(--wa);color:#fff}.s-wa:hover{background:#1ebe5a}
+
+.disclaimer-box{margin-top:24px;padding:16px;background:var(--dark);border-radius:12px;color:var(--tw2);font-size:12.5px;line-height:1.7}
+.disclaimer-box .dh{font-family:var(--fm);font-size:10.5px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.disclaimer-box strong{color:#fff}
+
+.ad-strip{padding:24px 20px;text-align:center}
+.ad-center{max-width:var(--max);margin:0 auto}
+
+footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20px 28px}
+.ft-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+@media(max-width:860px){.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr}}
+.ft-logo-name{font-size:17px;font-weight:800;color:var(--tw);letter-spacing:-.02em;margin-top:10px;margin-bottom:10px}
+.ft-logo-name span{color:var(--gold)}
+.ft-desc{font-size:13.5px;color:var(--tw2);line-height:1.75;margin-bottom:16px}
+.ft-col-h{font-family:var(--fm);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tw3);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--bdrw)}
+.ft-links{display:flex;flex-direction:column;gap:9px}
+.ft-links a{font-size:13.5px;color:var(--tw2);transition:color .15s}
+.ft-links a:hover{color:var(--gold)}
+.ft-bottom{max-width:var(--max);margin:0 auto;border-top:1px solid var(--bdrw);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.ft-copy{font-size:12.5px;color:var(--tw3)}
+.ft-legal{display:flex;gap:20px}
+.ft-legal a{font-size:12.5px;color:var(--tw3);transition:color .15s}
+.ft-legal a:hover{color:var(--tw)}
+</style>
+</head>
+<body>
+
+<a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20I%20used%20the%20PPF%20calculator%20on%20your%20site." target="_blank" rel="noopener" class="wa-fab" aria-label="WhatsApp">
+  <span class="wa-tip">Chat with Vignesh 💬</span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <a href="/index.html" class="logo">
+      <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+      <div class="logo-name">Universal <span>Money</span> Mart</div>
+    </a>
+    <nav class="hdr-nav">
+      <a href="/index.html">Home</a>
+      <a href="/blog/index.html">Articles</a>
+      <a href="/tools/sip-calculator.html">Calculator</a>
+      <a href="/tools/nism-series-va-mock-test.html">Mock Tests</a>
+      <a href="/about.html">About</a>
+    </nav>
+    <div class="hdr-btns">
+      <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="btn-wa-hdr">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Message Vignesh
+      </a>
+    </div>
+    <button class="burger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mob-menu" id="mobNav">
+    <a href="/index.html">🏠 Home</a>
+    <a href="/blog/index.html">📝 All Articles</a>
+    <a href="/tools/sip-calculator.html">🧮 SIP Calculator</a>
+    <a href="/tools/lumpsum-calculator.html">💰 Lumpsum Calculator</a>
+    <a href="/tools/tax-calculator.html">🧾 Tax Calculator</a>
+    <a href="/tools/ppf-calculator.html">🏦 PPF Calculator</a>
+    <a href="/tools/nism-series-va-mock-test.html">📋 Mock Tests</a>
+    <a href="/about.html">👤 About Vignesh</a>
+    <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:#25D366;font-weight:700">💬 WhatsApp Free Advice</a>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="bc-inner">
+    <a href="/index.html">Home</a><span>›</span>
+    <a href="/tools/index.html">Tools</a><span>›</span>
+    <span>PPF Calculator</span>
+  </div>
+</div>
+
+<div class="calc-wrap">
+  <div class="calc-eyebrow">Free tool &middot; Current rate 7.1% p.a.</div>
+  <h1 class="calc-title">PPF Calculator</h1>
+  <p class="calc-sub">Enter your yearly PPF investment and tenure to see your maturity value. Interest is tax-free (EEE status) and compounded annually.</p>
+
+  <div class="calc-card">
+    <div class="field">
+      <div class="field-head">
+        <span class="field-label">Yearly investment</span>
+        <span class="field-value" id="amtOut">₹1,50,000</span>
+      </div>
+      <input type="range" id="amt" min="500" max="150000" step="500" value="150000">
+      <div class="range-labels"><span>₹500</span><span>₹1,50,000 (max)</span></div>
+    </div>
+
+    <div class="field">
+      <div class="field-head">
+        <span class="field-label">Tenure</span>
+        <span class="field-value" id="yearsOut">15 years</span>
+      </div>
+      <input type="range" id="years" min="15" max="50" step="5" value="15">
+      <div class="range-labels"><span>15 yrs (min lock-in)</span><span>50 yrs</span></div>
+    </div>
+
+    <div class="field">
+      <div class="field-head">
+        <span class="field-label">Interest rate (govt sets quarterly)</span>
+        <span class="field-value" id="rateOut">7.1%</span>
+      </div>
+      <input type="range" id="rate" min="6" max="9" step="0.1" value="7.1">
+      <div class="range-labels"><span>6%</span><span>9%</span></div>
+    </div>
+
+    <div class="results">
+      <div class="result-grid">
+        <div class="stat-card">
+          <div class="stat-l">Total invested</div>
+          <div class="stat-v" id="investedOut">₹—</div>
+        </div>
+        <div class="stat-card growth">
+          <div class="stat-l">Interest earned (tax-free)</div>
+          <div class="stat-v" id="returnsOut">₹—</div>
+        </div>
+      </div>
+      <div class="total-card">
+        <div class="total-l">Maturity value</div>
+        <div class="total-v" id="totalOut">₹—</div>
+      </div>
+
+      <div class="bar-wrap" id="barWrap"></div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--purple)"></i>Invested</span>
+        <span><i class="dot" style="background:var(--green)"></i>Interest</span>
+      </div>
+
+      <div class="assumptions">Assumes deposit made at the start of each financial year, compounded annually at <span id="assumeRate">7.1%</span>. PPF has a 15-year lock-in, extendable in blocks of 5 years. Maximum ₹1.5 lakh/year qualifies for Section 80C (old regime). Actual rate is revised by the government every quarter.</div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h2>Planning your long-term savings?</h2>
+    <p>Talk to Vignesh Dhayalan, AMFI Registered Mutual Fund Distributor (ARN 288927), for personalised guidance — free via WhatsApp.</p>
+    <a class="btn-social s-wa" href="https://wa.me/917200752628?text=Hi%2C%20I%20used%20the%20PPF%20calculator%20on%20your%20site%20and%20want%20to%20know%20more" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp Message
+    </a>
+  </div>
+
+  <div class="disclaimer-box">
+    <div class="dh">Disclaimer</div>
+    <strong>For illustration only.</strong> This calculator does not constitute investment advice. The PPF interest rate shown (7.1% p.a. as of Q2 FY 2026-27) is fixed by the Government of India and revised quarterly — actual returns will vary if the rate changes during your tenure. Universal Money Mart (ARN: 288927, EUIN: E543710) is an AMFI Registered Mutual Fund Distributor.
+    <br><br>
+    <strong>Your data:</strong> This calculator runs entirely in your browser. No inputs you enter are stored, transmitted, or shared with anyone.
+  </div>
+</div>
+
+<div class="ad-strip">
+  <div class="ad-center">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5033705011229814" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="logo" style="gap:10px">
+        <div class="logo-box"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png" alt="UMM Logo" style="width:36px;height:36px;border-radius:10px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
+      </div>
+      <p class="ft-desc">Tamil Finance Education. SIP, Tax, Stock Market, Gold, Insurance, e-Services & Mock Tests — free guidance by Vignesh Dhayalan, AMFI MFD ARN 288927, Bangalore.</p>
+    </div>
+    <div>
+      <div class="ft-col-h">Popular Articles</div>
+      <div class="ft-links">
+        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF Difference</a>
+        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
+        <a href="/blog/aadhaar-update-online.html">Aadhaar Update Online</a>
+        <a href="/blog/apply-pan-card-online.html">Apply PAN Card</a>
+        <a href="/blog/neft-rtgs-imps-upi-difference.html">NEFT vs RTGS vs IMPS</a>
+        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
+        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Mock Tests & Tools</div>
+      <div class="ft-links">
+        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
+        <a href="/tools/sip-calculator.html">SIP Calculator</a>
+        <a href="/tools/lumpsum-calculator.html">Lumpsum Calculator</a>
+        <a href="/tools/tax-calculator.html">Tax Calculator</a>
+        <a href="/tools/ppf-calculator.html">PPF Calculator</a>
+        <a href="/prompt-library.html">AI Prompt Library</a>
+      </div>
+      <div class="ft-col-h" style="margin-top:22px">Connect</div>
+      <div class="ft-links">
+        <a href="/about.html">About Vignesh</a>
+        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Legal</div>
+      <div class="ft-links">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/disclaimer.html">Disclaimer</a>
+        <a href="/contact.html">Contact Us</a>
+      </div>
+      <div style="margin-top:22px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
+        <div style="font-family:var(--fm);font-size:10.5px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
+        <div style="font-size:11.5px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Educational content only. GST: 29BWRPV6671C1ZQ</div>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan · ARN 288927 · Bangalore, India</div>
+    <div class="ft-legal">
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/disclaimer.html">Disclaimer</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open')}
+
+var amt=document.getElementById('amt'),rate=document.getElementById('rate'),years=document.getElementById('years');
+var amtOut=document.getElementById('amtOut'),rateOut=document.getElementById('rateOut'),yearsOut=document.getElementById('yearsOut'),assumeRate=document.getElementById('assumeRate');
+var investedOut=document.getElementById('investedOut'),returnsOut=document.getElementById('returnsOut'),totalOut=document.getElementById('totalOut');
+var barWrap=document.getElementById('barWrap');
+
+function formatINR(num){num=Math.round(num);return '₹'+num.toLocaleString('en-IN');}
+
+function ppfFV(P, r, n){
+  // annual deposit at start of year, annual compounding (annuity due)
+  return P * (((Math.pow(1+r,n)-1)/r)) * (1+r);
+}
+
+function calculate(){
+  var P=parseFloat(amt.value),annualRate=parseFloat(rate.value),n=parseInt(years.value,10);
+  var r=annualRate/100;
+  var futureValue=ppfFV(P,r,n);
+  var invested=P*n;
+  var returns=futureValue-invested;
+
+  amtOut.textContent=formatINR(P);
+  rateOut.textContent=annualRate.toFixed(1)+'%';
+  yearsOut.textContent=n+' years';
+  assumeRate.textContent=annualRate.toFixed(1)+'%';
+
+  investedOut.textContent=formatINR(invested);
+  returnsOut.textContent=formatINR(returns);
+  totalOut.textContent=formatINR(futureValue);
+
+  renderBars();
+}
+
+function renderBars(){
+  barWrap.innerHTML='';
+  var n=Math.max(1,parseInt(years.value,10));
+  var steps=Math.min(n,20);
+  var P=parseFloat(amt.value),annualRate=parseFloat(rate.value),r=annualRate/100;
+  var maxVal=0,vals=[];
+  for(var s=1;s<=steps;s++){
+    var yr=Math.round((s/steps)*n);
+    var fv=ppfFV(P,r,yr);
+    var inv=P*yr;
+    vals.push({inv:inv,fv:fv});
+    if(fv>maxVal)maxVal=fv;
+  }
+  vals.forEach(function(v){
+    var investH=maxVal>0?(v.inv/maxVal)*100:0;
+    var totalH=maxVal>0?(v.fv/maxVal)*100:0;
+    var col=document.createElement('div');
+    col.style.flex='1';col.style.height='100%';col.style.display='flex';col.style.flexDirection='column';col.style.justifyContent='flex-end';
+    var growthBar=document.createElement('div');
+    growthBar.className='bar';growthBar.style.background='var(--green)';growthBar.style.height=Math.max(1,totalH-investH)+'%';
+    var investBar=document.createElement('div');
+    investBar.className='bar';investBar.style.background='var(--purple)';investBar.style.borderRadius='0';investBar.style.height=Math.max(1,investH)+'%';
+    col.appendChild(growthBar);col.appendChild(investBar);barWrap.appendChild(col);
+  });
+}
+
+amt.addEventListener('input',calculate);
+rate.addEventListener('input',calculate);
+years.addEventListener('input',calculate);
+calculate();
+</script>
+</body>
+</html>
