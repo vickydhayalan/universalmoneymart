@@ -7,6 +7,7 @@ on:
       - 'partials/footer.html'
       - '**/*.html'
       - 'build-footer.py'
+  workflow_dispatch: {}
 
 permissions:
   contents: write
