@@ -340,6 +340,24 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
   .lf-row{grid-template-columns:1fr}
 }
 @media(max-width:420px){.articles-grid{grid-template-columns:1fr}}
+
+/* ── TWO VERTICALS SECTION ── */
+.verticals-sec{padding:56px 20px;background:var(--off2)}
+.vert-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:760px){.vert-grid{grid-template-columns:1fr}}
+.vert-card{background:var(--white);border-radius:20px;padding:32px;border:1px solid var(--bdr);transition:all .2s}
+.vert-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.vert-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px}
+.vert-title{font-family:var(--fh);font-size:1.4rem;font-weight:800;color:var(--t1);margin-bottom:8px}
+.vert-who{font-size:12.5px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px}
+.vert-p{font-size:14.5px;color:var(--t2);line-height:1.75;margin-bottom:20px}
+.vert-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;padding:11px 20px;border-radius:100px;transition:all .2s}
+.vert-ribbon{display:inline-block;font-family:var(--fm);font-size:10.5px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:100px;margin-bottom:16px}
+.vert-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.vert-avatar{width:56px;height:56px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--off2);border:2px solid var(--off2)}
+.vert-avatar img{width:100%;height:100%;object-fit:cover;object-position:top}
+.vert-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.vert-chip{font-size:11.5px;font-weight:600;color:var(--t2);background:var(--off2);padding:4px 11px;border-radius:100px}
 </style>
 </head>
 <body>
@@ -361,10 +379,9 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
     </a>
     <nav class="hdr-nav">
       <a href="/index.html">Home</a>
-      <a href="/blog/index.html">Blog</a>
-      <a href="/tools/sip-calculator.html">Calculators</a>
-      <a href="#exams">Mock Tests</a>
-      <a href="#consultation" class="nav-consult">🎯 Free Consultation</a>
+      <a href="#wealth">Wealth</a>
+      <a href="#compliance">Compliance</a>
+      <a href="/blog/index.html">Articles</a>
       <a href="/about.html">About</a>
     </nav>
     <div class="hdr-btns">
@@ -380,12 +397,12 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
   </div>
   <div class="mob-menu" id="mobNav">
     <a href="/index.html">🏠 Home</a>
-    <a href="/blog/index.html">📝 Blog — 28 Articles</a>
-    <a href="#exams">📋 Mock Tests</a>
-    <a href="/tools/sip-calculator.html">🧮 SIP Calculator</a>
+    <a href="#wealth">📊 Wealth &amp; Investments</a>
+    <a href="#compliance">📄 Compliance &amp; Documents</a>
+    <a href="/blog/index.html">📝 Articles</a>
     <a href="#consultation" style="color:var(--green);font-weight:700">🎯 Free Consultation</a>
-    <a href="/about.html">👤 About Vignesh</a>
-    <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:#25D366;font-weight:700">💬 WhatsApp — Free Advice</a>
+    <a href="/about.html">👤 About Us</a>
+    <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:#25D366;font-weight:700">💬 WhatsApp</a>
   </div>
 </header>
 
@@ -394,25 +411,71 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
   <div class="wrap">
     <div class="hero-label rv">
       <span class="hero-label-dot"></span>
-      Tamil Finance Education · ARN 288927 · Bangalore
+      Wealth &amp; Compliance Partners · Bangalore
     </div>
     <h1 class="hero-h1 rv">உங்கள் பணம் <em>Smart-ஆ</em></h1>
     <div class="hero-h2 rv2">Grow ஆகட்டும்</div>
-    <p class="hero-p rv2">SIP, Mutual Fund, Tax Saving, Stock Market, Gold, Insurance & Banking e-Services — எல்லாவற்றையும் simple Tamil-ல கற்றுக்கொள்ளுங்கள். Free. Forever.</p>
+    <p class="hero-p rv2">SIP, Mutual Fund, Tax Saving, Stock Market — plus GST, ITR, MSME &amp; Citizen Documentation (PAN, Passport). Two experts, one platform, honest guidance. Free education, always.</p>
     <div class="hero-btns rv3">
-      <a href="/blog/index.html" class="btn-primary">
+      <a href="#wealth" class="btn-primary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-        Explore Articles
+        Wealth Services
       </a>
-      <a href="#exams" class="btn-secondary-outline">🎯 Free Mock Tests</a>
+      <a href="#compliance" class="btn-secondary-outline">📄 Compliance Services</a>
       <a href="#consultation" class="btn-green">💬 Free Consultation</a>
     </div>
     <div class="hero-stats-row rv3">
       <div class="hstat"><span class="hstat-v">28+</span><span class="hstat-l">Articles</span></div>
-      <div class="hstat"><span class="hstat-v">100%</span><span class="hstat-l">Free</span></div>
       <div class="hstat"><span class="hstat-v">AMFI</span><span class="hstat-l">ARN 288927</span></div>
+      <div class="hstat"><span class="hstat-v">GST·ITR</span><span class="hstat-l">Compliance</span></div>
       <div class="hstat"><span class="hstat-v">Tamil</span><span class="hstat-l">Language</span></div>
       <div class="hstat"><span class="hstat-v">Free</span><span class="hstat-l">Guidance</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TWO VERTICALS -->
+<section class="verticals-sec" id="two-ways">
+  <div class="wrap">
+    <div class="sec-head rv" style="margin-bottom:32px">
+      <div class="sec-eyebrow blue">✦ Two Founders, One Platform</div>
+      <h2 class="sec-title dark-em">Wealth <em>&amp;</em> Compliance — Under One Roof</h2>
+      <p class="sec-sub">Two specialists, equally invested in getting things right for you.</p>
+    </div>
+    <div class="vert-grid">
+      <div class="vert-card rv">
+        <div class="vert-ribbon" style="background:rgba(245,166,35,.12);color:#B45309">WEALTH VERTICAL</div>
+        <div class="vert-top">
+          <div class="vert-avatar"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/vigneshphoto.jpg" alt="Vignesh Dhayalan" onerror="this.style.display='none'"></div>
+          <div>
+            <div class="vert-title">Wealth &amp; Investments</div>
+            <div class="vert-who">Vignesh Dhayalan · ARN 288927</div>
+          </div>
+        </div>
+        <p class="vert-p">Mutual Funds, SIP, Tax Planning, Stock Market basics — free education plus personalized investment guidance.</p>
+        <div class="vert-chips">
+          <span class="vert-chip">SIP</span><span class="vert-chip">Mutual Funds</span><span class="vert-chip">Tax Planning</span><span class="vert-chip">Stock Market</span>
+        </div>
+        <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20I%20need%20investment%20guidance." target="_blank" rel="noopener" class="vert-btn" style="background:var(--wa);color:#fff">💬 Talk to Vignesh</a>
+      </div>
+      <div class="vert-card rv2">
+        <div class="vert-ribbon" style="background:rgba(16,185,129,.12);color:#047857">COMPLIANCE VERTICAL</div>
+        <div class="vert-top">
+          <div class="vert-avatar"><img src="https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/ramyaphoto.jpg" alt="Ramya" onerror="this.style.display='none'"></div>
+          <div>
+            <div class="vert-title">Compliance &amp; Citizen Services</div>
+            <div class="vert-who">Ramya · B.Com (CS)</div>
+          </div>
+        </div>
+        <p class="vert-p">GST, MSME/Udyam, ITR filing, and citizen documentation (PAN, Passport, agreements) — honest, transparent facilitation.</p>
+        <div class="vert-chips">
+          <span class="vert-chip">GST</span><span class="vert-chip">ITR Filing</span><span class="vert-chip">PAN &amp; Passport</span><span class="vert-chip">MSME/Udyam</span>
+        </div>
+        <a href="https://wa.me/917200752628?text=Hi%20Ramya!%20I%20need%20help%20with%20GST%2FCompliance." target="_blank" rel="noopener" class="vert-btn" style="background:var(--wa);color:#fff">💬 Talk to Ramya</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px">
+      <a href="/about.html" style="font-size:13.5px;color:var(--t3);text-decoration:underline">Meet the founders →</a>
     </div>
   </div>
 </section>
@@ -432,10 +495,14 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
     <div class="logos-reel">
       <div class="logo-item"><span>📊</span> SIP & Mutual Funds</div>
       <div class="logo-item"><span>💸</span> Tax Planning</div>
+      <div class="logo-item"><span>🧾</span> GST Registration</div>
       <div class="logo-item"><span>📈</span> Stock Market</div>
+      <div class="logo-item"><span>📊</span> ITR Filing</div>
       <div class="logo-item"><span>🥇</span> Gold & SGB</div>
+      <div class="logo-item"><span>🏭</span> MSME/Udyam</div>
       <div class="logo-item"><span>🏦</span> Fixed Deposit</div>
       <div class="logo-item"><span>🛡️</span> IC38 Insurance</div>
+      <div class="logo-item"><span>🛂</span> Passport Docs</div>
       <div class="logo-item"><span>🏡</span> Retirement Planning</div>
       <div class="logo-item"><span>📋</span> NISM V-A Exam</div>
       <div class="logo-item"><span>💳</span> Credit Score</div>
@@ -444,10 +511,14 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
       <div class="logo-item"><span>✨</span> AI Prompts</div>
       <div class="logo-item"><span>📊</span> SIP & Mutual Funds</div>
       <div class="logo-item"><span>💸</span> Tax Planning</div>
+      <div class="logo-item"><span>🧾</span> GST Registration</div>
       <div class="logo-item"><span>📈</span> Stock Market</div>
+      <div class="logo-item"><span>📊</span> ITR Filing</div>
       <div class="logo-item"><span>🥇</span> Gold & SGB</div>
+      <div class="logo-item"><span>🏭</span> MSME/Udyam</div>
       <div class="logo-item"><span>🏦</span> Fixed Deposit</div>
       <div class="logo-item"><span>🛡️</span> IC38 Insurance</div>
+      <div class="logo-item"><span>🛂</span> Passport Docs</div>
       <div class="logo-item"><span>🏡</span> Retirement Planning</div>
       <div class="logo-item"><span>📋</span> NISM V-A Exam</div>
       <div class="logo-item"><span>💳</span> Credit Score</div>
@@ -459,7 +530,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
 </div>
 
 <!-- FEATURES -->
-<section class="sec">
+<section class="sec" id="wealth">
   <div class="wrap">
     <div class="sec-head rv">
       <div class="sec-eyebrow blue">✦ What We Offer</div>
@@ -556,6 +627,77 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
     <div style="text-align:center;margin-top:32px">
       <a href="/blog/index.html" class="btn-primary">📚 All 28 Articles பார்க்க →</a>
     </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE & GOVERNMENT DOCUMENTATION -->
+<section class="routemap-section" id="compliance" style="background:var(--off2)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-eyebrow" style="color:#047857">📄 COMPLIANCE &amp; CITIZEN SERVICES</div>
+      <h2 class="sec-title dark-em">Government &amp; Business <em>Documentation, Simplified</em></h2>
+      <p class="sec-sub">Led by Ramya (B.Com, Corporate Secretaryship) — honest, transparent facilitation for your business and personal paperwork.</p>
+    </div>
+    <div class="route-grid">
+      <a href="https://wa.me/917200752628?text=Hi%20Ramya!%20I%20need%20help%20with%20GST%20registration." target="_blank" rel="noopener" class="route-card rv">
+        <div class="route-card-num">01</div>
+        <span class="route-card-icon">🧾</span>
+        <div>
+          <h3>GST Registration &amp; Filing</h3>
+          <p>New GST registration, monthly/quarterly returns, amendments — for shops, startups, and freelancers</p>
+          <span class="route-tag tag-beginner">Business</span>
+        </div>
+      </a>
+      <a href="https://wa.me/917200752628?text=Hi%20Ramya!%20I%20need%20help%20with%20MSME%2FUdyam%20registration." target="_blank" rel="noopener" class="route-card rv2">
+        <div class="route-card-num">02</div>
+        <span class="route-card-icon">🏭</span>
+        <div>
+          <h3>MSME / Udyam Registration</h3>
+          <p>Register your business under Udyam — unlock government schemes, loans, and tender eligibility</p>
+          <span class="route-tag tag-beginner">Business</span>
+        </div>
+      </a>
+      <a href="https://wa.me/917200752628?text=Hi%20Ramya!%20I%20need%20help%20with%20ITR%20filing." target="_blank" rel="noopener" class="route-card rv3">
+        <div class="route-card-num">03</div>
+        <span class="route-card-icon">📊</span>
+        <div>
+          <h3>ITR Filing</h3>
+          <p>Individual &amp; business Income Tax Return filing — accurate, on-time, and stress-free</p>
+          <span class="route-tag tag-intermediate">Tax</span>
+        </div>
+      </a>
+      <a href="https://wa.me/917200752628?text=Hi%20Ramya!%20I%20need%20help%20with%20PAN%20card." target="_blank" rel="noopener" class="route-card rv">
+        <div class="route-card-num">04</div>
+        <span class="route-card-icon">🆔</span>
+        <div>
+          <h3>PAN Card Services</h3>
+          <p>New PAN application, corrections, and re-print assistance — documentation help end to end</p>
+          <span class="route-tag tag-beginner">Citizen</span>
+        </div>
+      </a>
+      <a href="https://wa.me/917200752628?text=Hi%20Ramya!%20I%20need%20help%20with%20Passport%20documentation." target="_blank" rel="noopener" class="route-card rv2">
+        <div class="route-card-num">05</div>
+        <span class="route-card-icon">🛂</span>
+        <div>
+          <h3>Passport Documentation</h3>
+          <p>Application guidance, document checklist, and appointment support for fresh &amp; renewal passports</p>
+          <span class="route-tag tag-beginner">Citizen</span>
+        </div>
+      </a>
+      <a href="https://wa.me/917200752628?text=Hi%20Ramya!%20I%20need%20help%20with%20a%20business%20agreement." target="_blank" rel="noopener" class="route-card rv3">
+        <div class="route-card-num">06</div>
+        <span class="route-card-icon">📝</span>
+        <div>
+          <h3>Business Agreements &amp; Bookkeeping</h3>
+          <p>Legal agreement drafting support and accounting/bookkeeping for small businesses</p>
+          <span class="route-tag tag-intermediate">Business</span>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://wa.me/917200752628?text=Hi%20Ramya!%20I%20need%20help%20with%20documentation." target="_blank" rel="noopener" class="btn-primary" style="background:var(--green)">💬 Talk to Ramya — Get Started →</a>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--t3);margin-top:20px;max-width:600px;margin-left:auto;margin-right:auto">Universal Money Mart is a private business consultancy and financial services facilitation platform. We are not a government body or affiliated with any government agency. We assist clients in documentation, filing, and advisory based on client-provided information.</p>
   </div>
 </section>
 
