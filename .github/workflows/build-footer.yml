@@ -1,4 +1,4 @@
-name: Sync Footer
+name: Sync Footer & Sitemap
 
 on:
   push:
@@ -7,13 +7,14 @@ on:
       - 'partials/footer.html'
       - '**/*.html'
       - 'build-footer.py'
+      - 'build-sitemap.py'
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
 jobs:
-  sync-footer:
+  sync-site:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -27,14 +28,17 @@ jobs:
       - name: Run footer sync
         run: python3 build-footer.py
 
-      - name: Commit updated footers (if any)
+      - name: Regenerate sitemap
+        run: python3 build-sitemap.py
+
+      - name: Commit updates (if any)
         run: |
           git config user.name "footer-sync-bot"
           git config user.email "actions@github.com"
           git add -A
           if ! git diff --cached --quiet; then
-            git commit -m "chore: auto-sync footer across pages [skip ci]"
+            git commit -m "chore: auto-sync footer & sitemap [skip ci]"
             git push
           else
-            echo "No footer changes needed."
+            echo "No changes needed."
           fi
