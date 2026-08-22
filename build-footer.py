@@ -1,62 +1,72 @@
 #!/usr/bin/env python3
 """
-build-footer.py — Universal Money Mart footer sync tool
+build-sitemap.py — Universal Money Mart sitemap generator
 
-Edit ONLY partials/footer.html. Then run this script before every git push.
-It finds the first <footer> ... </footer> block in every .html file (except
-files inside partials/) and replaces it with the current master footer.
+Scans the repo for real, public HTML pages and regenerates sitemap.xml.
+Run this whenever pages are added/removed. It is also run automatically
+by the GitHub Action (see .github/workflows/build-footer.yml).
 
 Usage:
-    python3 build-footer.py            # apply changes
-    python3 build-footer.py --dry-run  # show which files WOULD change, no writes
+    python3 build-sitemap.py
 """
-import re
-import sys
+import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-FOOTER_PARTIAL = ROOT / "partials" / "footer.html"
-FOOTER_RE = re.compile(r"<footer\b.*?</footer>", re.DOTALL | re.IGNORECASE)
+DOMAIN = "https://universalmoneymart.com"
+TODAY = datetime.date.today().isoformat()
+
+# Folders/files to exclude entirely (not public pages)
+EXCLUDE_DIRS = {"partials", "invites", ".git", "node_modules"}
+EXCLUDE_FILES = {"view.html"}
+
+# Priority rules — first matching rule wins
+def priority_for(rel_path: str) -> str:
+    if rel_path == "index.html":
+        return "1.0"
+    if rel_path in ("about.html", "contact.html", "masterclass.html"):
+        return "0.8"
+    if rel_path.startswith("tools/"):
+        return "0.9"
+    if rel_path.startswith("blog/") and rel_path != "blog/index.html":
+        return "0.7"
+    if rel_path == "blog/index.html":
+        return "0.8"
+    if rel_path in ("privacy-policy.html", "disclaimer.html", "terms-and-conditions.html"):
+        return "0.3"
+    return "0.6"
+
+def url_for(rel_path: str) -> str:
+    if rel_path == "index.html":
+        return f"{DOMAIN}/"
+    return f"{DOMAIN}/{rel_path}"
 
 def main():
-    dry_run = "--dry-run" in sys.argv
-
-    if not FOOTER_PARTIAL.exists():
-        print(f"ERROR: {FOOTER_PARTIAL} not found. Create it first.")
-        sys.exit(1)
-
-    master_footer = FOOTER_PARTIAL.read_text(encoding="utf-8").strip()
-
-    html_files = [
-        p for p in ROOT.rglob("*.html")
-        if "partials" not in p.parts and ".git" not in p.parts
-    ]
-
-    changed, unchanged, no_footer = [], [], []
-
-    for f in html_files:
-        text = f.read_text(encoding="utf-8")
-        if not FOOTER_RE.search(text):
-            no_footer.append(f)
+    html_files = []
+    for p in ROOT.rglob("*.html"):
+        rel = p.relative_to(ROOT)
+        parts = rel.parts
+        if any(part in EXCLUDE_DIRS for part in parts):
             continue
-        new_text, n = FOOTER_RE.subn(master_footer, text, count=1)
-        if new_text != text:
-            changed.append(f)
-            if not dry_run:
-                f.write_text(new_text, encoding="utf-8")
-        else:
-            unchanged.append(f)
+        if rel.name in EXCLUDE_FILES:
+            continue
+        html_files.append(rel.as_posix())
 
-    print(f"Scanned {len(html_files)} HTML files")
-    print(f"  Updated : {len(changed)}")
-    print(f"  Already up to date : {len(unchanged)}")
-    print(f"  No <footer> found (skipped) : {len(no_footer)}")
-    if no_footer:
-        print("\nFiles with no <footer> tag (check these manually):")
-        for f in no_footer:
-            print(f"  - {f.relative_to(ROOT)}")
-    if dry_run:
-        print("\nDRY RUN — no files were written. Re-run without --dry-run to apply.")
+    html_files.sort(key=lambda x: (x != "index.html", x))
+
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', '']
+    for rel_path in html_files:
+        lines.append("  <url>")
+        lines.append(f"    <loc>{url_for(rel_path)}</loc>")
+        lines.append(f"    <lastmod>{TODAY}</lastmod>")
+        lines.append(f"    <priority>{priority_for(rel_path)}</priority>")
+        lines.append("  </url>")
+    lines.append("")
+    lines.append("</urlset>")
+
+    (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"sitemap.xml regenerated with {len(html_files)} URLs")
 
 if __name__ == "__main__":
     main()
