@@ -54,6 +54,18 @@ img{display:block;max-width:100%}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.4);color:#F5C842;padding:6px 16px;border-radius:100px;font-size:13px;font-weight:700;margin-bottom:18px}
 
 .filters-wrap{background:#fff;border-bottom:1px solid rgba(0,0,0,.07);padding:16px 20px;position:sticky;top:60px;z-index:150}
+.search-wrap{max-width:1100px;margin:0 auto 12px;display:flex;gap:10px;align-items:center}
+.blog-search{flex:1;padding:11px 16px;border:1px solid rgba(0,0,0,.12);border-radius:100px;font-size:14px;outline:none;transition:border-color .15s}
+.blog-search:focus{border-color:#4F46E5}
+.az-toggle{white-space:nowrap;padding:10px 16px;border-radius:100px;border:1px solid rgba(0,0,0,.12);background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.az-toggle.active,.az-toggle:hover{background:#4F46E5;color:#fff;border-color:#4F46E5}
+.az-wrap{max-width:1100px;margin:0 auto;padding:24px 20px}
+.az-inner{columns:2;column-gap:32px}
+@media(max-width:600px){.az-inner{columns:1}.search-wrap{flex-wrap:wrap}.blog-search{width:100%}}
+.az-item{display:block;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:14px;color:#333;text-decoration:none;break-inside:avoid}
+.az-item:hover{color:#4F46E5}
+.az-item .az-cat{font-size:11px;color:#888;margin-left:8px}
+.az-letter{font-weight:800;font-size:13px;color:#4F46E5;margin-top:16px;display:block}
 .filters{max-width:1100px;margin:0 auto;display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
 .filters::-webkit-scrollbar{height:4px}
 .filters::-webkit-scrollbar-thumb{background:#D1D5DB;border-radius:4px}
@@ -172,13 +184,22 @@ footer{background:#1A1A2E;border-top:1px solid rgba(255,255,255,.07);padding:24p
 </div>
 
 <div class="filters-wrap">
+  <div class="search-wrap">
+    <input type="text" id="blogSearch" class="blog-search" placeholder="🔍 Search articles... (e.g. GST, SIP, PAN)">
+    <button class="az-toggle" id="azToggle">🔤 A-Z Index</button>
+  </div>
   <div class="filters" id="filters">
     <button class="filter-btn active" data-filter="all">All Topics</button>
     <button class="filter-btn" data-filter="masterclass">🎓 Masterclass (25 Episodes)</button>
     <button class="filter-btn" data-filter="mf">Mutual Funds & SIP</button>
     <button class="filter-btn" data-filter="bank">Banking & Taxes</button>
-    <button class="filter-btn" data-filter="esvc">E-Services (PAN, Passport)</button>
+    <button class="filter-btn" data-filter="esvc">Government Documents (PAN, Passport)</button>
   </div>
+</div>
+
+<!-- A-Z INDEX (hidden by default) -->
+<div class="az-wrap" id="azWrap" style="display:none">
+  <div class="az-inner" id="azList"></div>
 </div>
 
 <!-- MASTERCLASS SECTION -->
@@ -620,6 +641,77 @@ filterBtns.forEach(btn => {
     });
     noRes.style.display = count === 0 ? 'block' : 'none';
   });
+});
+
+// ---- SEARCH ----
+const searchInput = document.getElementById('blogSearch');
+const allLinkedCards = () => document.querySelectorAll('.mc-card, .blog-card');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) {
+    // reset to whatever filter was active
+    document.querySelector('.filter-btn.active').click();
+    return;
+  }
+  mcSection.style.display = 'block';
+  otherSection.style.display = 'block';
+  let count = 0;
+  allLinkedCards().forEach(card => {
+    const text = card.textContent.toLowerCase();
+    const show = text.includes(q);
+    card.style.display = show ? '' : 'none';
+    if (show) count++;
+  });
+  noRes.style.display = count === 0 ? 'block' : 'none';
+});
+
+// ---- A-Z INDEX ----
+const azToggle = document.getElementById('azToggle');
+const azWrap = document.getElementById('azWrap');
+const azList = document.getElementById('azList');
+let azBuilt = false;
+
+function buildAZIndex() {
+  if (azBuilt) return;
+  const entries = [];
+  document.querySelectorAll('.mc-card').forEach(a => {
+    const title = a.querySelector('.mc-title')?.textContent.trim() || a.textContent.trim();
+    entries.push({ title, href: a.getAttribute('href'), cat: 'Mutual Funds' });
+  });
+  document.querySelectorAll('.blog-card').forEach(a => {
+    const title = a.querySelector('.bc-title')?.textContent.trim() || a.textContent.trim();
+    const cat = a.querySelector('.bc-cat')?.textContent.trim() || '';
+    entries.push({ title, href: a.getAttribute('href'), cat });
+  });
+  entries.sort((a, b) => a.title.localeCompare(b.title));
+  let html = '';
+  let lastLetter = '';
+  entries.forEach(e => {
+    const letter = e.title.charAt(0).toUpperCase();
+    if (letter !== lastLetter) {
+      html += `<span class="az-letter">${letter}</span>`;
+      lastLetter = letter;
+    }
+    html += `<a class="az-item" href="${e.href}">${e.title}<span class="az-cat">${e.cat}</span></a>`;
+  });
+  azList.innerHTML = html;
+  azBuilt = true;
+}
+
+azToggle.addEventListener('click', () => {
+  const showing = azWrap.style.display !== 'none';
+  if (showing) {
+    azWrap.style.display = 'none';
+    azToggle.classList.remove('active');
+    document.getElementById('filters').style.display = 'flex';
+  } else {
+    buildAZIndex();
+    azWrap.style.display = 'block';
+    azToggle.classList.add('active');
+    mcSection.style.display = 'none';
+    otherSection.style.display = 'none';
+    document.getElementById('filters').style.display = 'none';
+  }
 });
 </script>
 </body>
