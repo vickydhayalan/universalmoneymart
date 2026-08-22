@@ -508,7 +508,7 @@ footer{background:#1A1A2E;border-top:1px solid rgba(255,255,255,.07);padding:24p
 <div class="art-main">
   <!-- LEFT: MOCK TEST ENGINE -->
   <article class="art-content">
-    <div class="umm-mt">
+    <div class="umm-mt" id="ummMtEngine">
       
       <!-- ── SCREEN 0: MODE SELECT ── -->
       <div class="mt-screen active" id="sc-home">
@@ -1537,7 +1537,13 @@ function renderReview(){
 function showScreen(id){
   document.querySelectorAll('.mt-screen').forEach(function(s){s.classList.remove('active')});
   document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+  const engine=document.getElementById('ummMtEngine');
+  if(engine){
+    const y=engine.getBoundingClientRect().top+window.pageYOffset-16;
+    window.scrollTo({top:y,behavior:'smooth'});
+  }else{
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
 }
 
 function goHome(){switchMode('exam');}
