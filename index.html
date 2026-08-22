@@ -228,7 +228,9 @@ img{display:block;max-width:100%}
 .wf-link:hover{gap:9px}
 
 /* ── TESTIMONIALS ── */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:1100px){.testi-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.testi-grid{grid-template-columns:1fr}}
 .testi-card{background:var(--white);border:1px solid var(--bdr2);border-radius:var(--r);padding:24px;transition:all .2s}
 .testi-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.07);transform:translateY(-3px)}
 .testi-stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:12px}
@@ -950,6 +952,14 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
         <div class="testi-author">
           <div class="testi-ava">👩</div>
           <div><div class="testi-name">Meena Sundaram</div><div class="testi-role">Salaried Employee, Bangalore</div></div>
+        </div>
+      </div>
+      <div class="testi-card rv">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"என் shop-க்கு GST registration வேணும்னு Ramya மேடம்-கிட்ட WhatsApp பண்ணினேன். ஒரு வாரத்துல முடிச்சுக் கொடுத்தாங்க, ஒவ்வொரு step-உம் clear-ஆ explain பண்ணி நேர்மையா help பண்ணாங்க."</p>
+        <div class="testi-author">
+          <div class="testi-ava">👨</div>
+          <div><div class="testi-name">Suresh Babu</div><div class="testi-role">Small Business Owner, Bangalore</div></div>
         </div>
       </div>
     </div>
