@@ -69,6 +69,8 @@ img{display:block;max-width:100%}
 .wa-fab:hover{transform:scale(1.15) translateY(-3px);animation:none;box-shadow:0 0 0 0 transparent,0 0 30px 8px rgba(37,211,102,.5),0 8px 28px rgba(37,211,102,.55)}
 @keyframes waGlow{0%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}50%{box-shadow:0 0 0 15px rgba(37,211,102,0),0 4px 20px rgba(37,211,102,.45)}100%{box-shadow:0 0 0 0 rgba(37,211,102,.65),0 4px 18px rgba(37,211,102,.35)}}
 .wa-fab svg{width:28px;height:28px;fill:#fff}
+.wa-tip{position:absolute;right:68px;top:50%;transform:translateY(-50%);background:var(--dark);color:#fff;font-size:12px;font-weight:600;padding:7px 14px;border-radius:var(--rsm);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .18s}
+.wa-fab:hover .wa-tip{opacity:1}
 
 /* ── HEADER ── */
 .hdr{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--bdr)}
