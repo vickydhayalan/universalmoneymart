@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Contact Us — Vignesh Dhayalan | Universal Money Mart</title>
-<meta name="description" content="Contact Vignesh Dhayalan (AMFI Registered MFD) for free financial guidance, SIP investment, Tax planning, and e-Services support in Tamil.">
-<meta name="keywords" content="contact universal money mart, vignesh dhayalan contact, tamil financial advisor whatsapp, mutual fund distributor bangalore">
-<meta name="author" content="Vignesh Dhayalan">
+<title>Contact Us | Universal Money Mart — Vignesh & Ramya</title>
+<meta name="description" content="Contact Vignesh Dhayalan (AMFI Registered MFD) for Wealth guidance or Ramya for GST/Compliance & Citizen Documentation — free guidance via WhatsApp.">
+<meta name="keywords" content="contact universal money mart, vignesh dhayalan contact, ramya contact, gst compliance bangalore, tamil financial advisor whatsapp, mutual fund distributor bangalore">
+<meta name="author" content="Universal Money Mart">
 <meta property="og:title" content="Contact Us — Universal Money Mart">
-<meta property="og:description" content="Get free financial guidance on SIP, Mutual Funds, and Tax Planning via WhatsApp.">
+<meta property="og:description" content="Get free guidance on Wealth (SIP, Mutual Funds, Tax) or Compliance (GST, ITR, PAN, Passport) via WhatsApp.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://universalmoneymart.com/contact.html">
 <link rel="canonical" href="https://universalmoneymart.com/contact.html">
@@ -161,9 +161,9 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
     </a>
     <nav class="hdr-nav">
       <a href="/index.html">Home</a>
+      <a href="/index.html#wealth">Wealth</a>
+      <a href="/index.html#compliance">Compliance</a>
       <a href="/blog/index.html">Articles</a>
-      <a href="/tools/sip-calculator.html">Calculators</a>
-      <a href="/tools/nism-series-va-mock-test.html">Mock Tests</a>
       <a href="/about.html">About</a>
     </nav>
     <div class="hdr-btns">
@@ -178,8 +178,9 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
   </div>
   <div class="mob-menu" id="mobNav">
     <a href="/index.html">🏠 Home</a>
+    <a href="/index.html#wealth">📊 Wealth</a>
+    <a href="/index.html#compliance">📄 Compliance</a>
     <a href="/blog/index.html">📝 Articles</a>
-    <a href="/tools/sip-calculator.html">🧮 Calculators</a>
     <a href="/about.html">👤 About</a>
     <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa);font-weight:700">💬 Contact on WhatsApp</a>
   </div>
@@ -194,8 +195,8 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
 
 <div class="contact-hero rv">
   <div class="ch-eyebrow">Get in Touch</div>
-  <h1 class="ch-title">Let's plan your<br><em>Financial Future</em></h1>
-  <p class="ch-desc">உங்களுக்கு Mutual Funds, SIP, அல்லது Financial Planning குறித்து ஏதேனும் சந்தேகம் இருந்தால், தயங்காமல் என்னை தொடர்பு கொள்ளுங்கள். முற்றிலும் இலவசமான வழிகாட்டுதல் (Free Guidance).</p>
+  <h1 class="ch-title">Let's plan your<br><em>Wealth &amp; Compliance</em></h1>
+  <p class="ch-desc">Mutual Funds, SIP, Financial Planning-க்கு Vignesh, GST/ITR/PAN/Passport Documentation-க்கு Ramya — உங்களுக்கு தேவையான ஆளுக்கு direct-ஆ message பண்ணுங்கள். முற்றிலும் இலவசமான வழிகாட்டுதல்.</p>
 </div>
 
 <div class="contact-wrap rv">
@@ -238,7 +239,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
 
     <div class="c-form-sec">
       <h2 class="form-title">Send a Message</h2>
-      <p class="form-desc">Fill out this quick form, and it will directly send a formatted WhatsApp message to Vignesh Dhayalan.</p>
+      <p class="form-desc">Fill out this quick form — it'll send a formatted WhatsApp message directly to the right person: Vignesh for Wealth, Ramya for Compliance.</p>
       
       <div class="form-group">
         <label class="form-label">Your Name</label>
@@ -248,10 +249,17 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
       <div class="form-group">
         <label class="form-label">What do you need help with?</label>
         <select id="fbService" class="form-select">
-          <option value="Mutual Funds & SIP">Mutual Funds & SIP Planning</option>
-          <option value="Tax Saving & ITR">Tax Saving & ITR Filing</option>
-          <option value="E-Services (PAN/Aadhaar)">E-Services (PAN, Aadhaar, Passport)</option>
-          <option value="General Query">General Finance Query</option>
+          <optgroup label="Wealth (Vignesh)">
+            <option value="Mutual Funds & SIP" data-person="Vignesh">Mutual Funds & SIP Planning</option>
+            <option value="Tax Saving & ITR Planning" data-person="Vignesh">Tax Saving Guidance</option>
+            <option value="General Finance Query" data-person="Vignesh">General Finance Query</option>
+          </optgroup>
+          <optgroup label="Compliance & Citizen Services (Ramya)">
+            <option value="GST Registration & Filing" data-person="Ramya">GST Registration & Filing</option>
+            <option value="MSME/Udyam Registration" data-person="Ramya">MSME / Udyam Registration</option>
+            <option value="ITR Filing" data-person="Ramya">ITR Filing (Business/Individual)</option>
+            <option value="PAN, Passport & Documentation" data-person="Ramya">PAN, Passport & Documentation</option>
+          </optgroup>
         </select>
       </div>
 
@@ -352,7 +360,9 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 /* WhatsApp Form Logic */
 function sendWhatsApp() {
   const name = document.getElementById('fbName').value.trim();
-  const service = document.getElementById('fbService').value;
+  const serviceSelect = document.getElementById('fbService');
+  const service = serviceSelect.value;
+  const person = serviceSelect.options[serviceSelect.selectedIndex].getAttribute('data-person') || 'Vignesh';
   const message = document.getElementById('fbMessage').value.trim();
 
   if(!name || !message) {
@@ -361,7 +371,7 @@ function sendWhatsApp() {
   }
 
   const phone = "917200752628";
-  const formattedMsg = `Hi Vignesh!\n\n*Name:* ${name}\n*Requirement:* ${service}\n*Message:* ${message}`;
+  const formattedMsg = `Hi ${person}!\n\n*Name:* ${name}\n*Requirement:* ${service}\n*Message:* ${message}`;
   const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(formattedMsg)}`;
 
   window.open(whatsappUrl, '_blank');
