@@ -385,6 +385,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
       <a href="#compliance">Compliance</a>
       <a href="/blog/index.html">Articles</a>
       <a href="/masterclass.html">Videos</a>
+      <a href="/gold-rate-today.html">🥇 Gold Rate</a>
       <a href="/about.html">About</a>
     </nav>
     <div class="hdr-btns">
@@ -437,6 +438,29 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
     </div>
   </div>
 </section>
+
+<!-- GOLD RATE TEASER -->
+<a href="/gold-rate-today.html" class="gold-teaser-link">
+  <div class="gold-teaser">
+    <div class="gt-left">
+      <span class="gt-dot"></span>
+      <span class="gt-label">🥇 இன்றைய தங்கம் ரேட்டு</span>
+    </div>
+    <div class="gt-right">
+      <span id="gtPrice" class="gt-price">Live rate பார்க்க →</span>
+    </div>
+  </div>
+</a>
+<style>
+.gold-teaser-link{display:block;text-decoration:none}
+.gold-teaser{max-width:var(--max);margin:0 auto;padding:12px 20px;background:linear-gradient(90deg,#1A1A2E,#2A2A42);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:0}
+.gt-left{display:flex;align-items:center;gap:9px}
+.gt-dot{width:7px;height:7px;border-radius:50%;background:#10B981;animation:gtPulse 1.6s infinite;flex-shrink:0}
+@keyframes gtPulse{0%,100%{opacity:1}50%{opacity:.3}}
+.gt-label{font-size:13.5px;font-weight:700;color:#fff}
+.gt-price{font-family:var(--fm);font-size:13px;font-weight:700;color:#F5C842}
+@media(max-width:600px){.gold-teaser{justify-content:center;text-align:center}}
+</style>
 
 <!-- TWO VERTICALS -->
 <section class="verticals-sec" id="two-ways">
@@ -1233,6 +1257,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
       <div class="ft-col-h">Tools & Services</div>
       <div class="ft-links">
         <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
         <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
         <a href="/tools/sip-calculator.html">SIP Calculator</a>
         <a href="/tools/budget-calculator.html">Budget Planner</a>
@@ -1312,6 +1337,21 @@ document.getElementById('leadForm')?.addEventListener('submit',async function(e)
 });
 const sd={"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Universal Money Mart","url":"https://universalmoneymart.onrender.com","description":"Tamil Finance Education — SIP, Mutual Fund, E-Services, Mock Tests by Vignesh Dhayalan ARN 288927"},{"@type":"Person","name":"Vignesh Dhayalan","jobTitle":"AMFI Registered Mutual Fund Distributor","identifier":"ARN 288927","url":"https://universalmoneymart.onrender.com/about.html","address":{"@type":"PostalAddress","addressLocality":"Bangalore","addressRegion":"Karnataka","addressCountry":"IN"},"contactPoint":{"@type":"ContactPoint","telephone":"+91-7200752628","contactType":"customer service"}}]};
 const s=document.createElement('script');s.type='application/ld+json';s.textContent=JSON.stringify(sd);document.head.appendChild(s);
+
+/* Homepage gold rate teaser */
+(async function(){
+  const el = document.getElementById('gtPrice');
+  if (!el) return;
+  try {
+    const res = await fetch('https://xaus.com/api/v1/spot?currency=INR&unit=gram');
+    const data = await res.json();
+    const price24k = data.xau && data.xau.price ? data.xau.price : null;
+    if (price24k) {
+      const price22k = Math.round(price24k * (22/24));
+      el.textContent = '22K: ₹' + price22k.toLocaleString('en-IN') + '/g →';
+    }
+  } catch(e) { /* keep default "Live rate பார்க்க →" text on failure */ }
+})();
 </script>
 </body>
 </html>
