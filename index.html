@@ -385,6 +385,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
       <a href="#compliance">Compliance</a>
       <a href="/blog/index.html">Articles</a>
       <a href="/masterclass.html">Videos</a>
+      <a href="/daily-quiz.html">🧠 Daily Quiz</a>
       <a href="/gold-rate-today.html">🥇 Gold Rate</a>
       <a href="/about.html">About</a>
     </nav>
@@ -439,19 +440,33 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
   </div>
 </section>
 
-<!-- GOLD RATE TEASER -->
-<a href="/gold-rate-today.html" class="gold-teaser-link">
-  <div class="gold-teaser">
-    <div class="gt-left">
-      <span class="gt-dot"></span>
-      <span class="gt-label">🥇 இன்றைய தங்கம் ரேட்டு</span>
+<!-- DAILY HABITS STRIP (Gold Rate + Daily Quiz) -->
+<div class="daily-strip">
+  <a href="/gold-rate-today.html" class="gold-teaser-link">
+    <div class="gold-teaser">
+      <div class="gt-left">
+        <span class="gt-dot"></span>
+        <span class="gt-label">🥇 இன்றைய தங்கம் ரேட்டு</span>
+      </div>
+      <div class="gt-right">
+        <span id="gtPrice" class="gt-price">Live rate பார்க்க →</span>
+      </div>
     </div>
-    <div class="gt-right">
-      <span id="gtPrice" class="gt-price">Live rate பார்க்க →</span>
+  </a>
+  <a href="/daily-quiz.html" class="gold-teaser-link">
+    <div class="gold-teaser" style="background:linear-gradient(90deg,#2A2A42,#3730A3)">
+      <div class="gt-left">
+        <span class="gt-dot" style="background:#F5A623"></span>
+        <span class="gt-label">🧠 Daily Finance Quiz</span>
+      </div>
+      <div class="gt-right">
+        <span class="gt-price">இன்றைய Question →</span>
+      </div>
     </div>
-  </div>
-</a>
+  </a>
+</div>
 <style>
+.daily-strip{display:flex;flex-direction:column}
 .gold-teaser-link{display:block;text-decoration:none}
 .gold-teaser{max-width:var(--max);margin:0 auto;padding:12px 20px;background:linear-gradient(90deg,#1A1A2E,#2A2A42);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:0}
 .gt-left{display:flex;align-items:center;gap:9px}
@@ -1257,6 +1272,7 @@ footer{background:var(--dark2);border-top:1px solid var(--bdrw);padding:56px 20p
       <div class="ft-col-h">Tools & Services</div>
       <div class="ft-links">
         <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
         <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
         <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
         <a href="/tools/sip-calculator.html">SIP Calculator</a>
