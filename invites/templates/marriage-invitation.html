@@ -267,10 +267,12 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 .journey-venue{font-size:.7rem;color:#888;margin-bottom:10px}
 .journey-map{background:var(--paper2);border:1px solid rgba(0,0,0,.1);color:var(--ink2);font-size:.65rem;font-weight:700;padding:7px 14px;border-radius:100px;cursor:pointer}
 
-.s-gallery{padding:60px 24px;background:var(--bg1);position:relative;overflow:hidden}
-.gal-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;margin:0 auto}
+.s-gallery{padding:60px 24px;background:var(--bg1);position:relative;overflow:hidden;text-align:center}
+.gallery-script-title{font-family:var(--fc);font-style:italic;font-weight:600;font-size:clamp(2rem,7vw,2.8rem);color:var(--ink2);text-align:center;margin-bottom:14px}
+.gallery-divider{width:70px;height:1px;background:var(--line2);margin:0 auto 30px}
+.gal-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:420px;margin:0 auto}
 .gal-grid::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:80%;background:radial-gradient(ellipse,rgba(201,151,42,.09),transparent 60%);pointer-events:none;z-index:0;animation:pulse 4s ease-in-out infinite}
-.gal-grid .gi:first-child{grid-column:1/3;aspect-ratio:16/10}
+.gal-grid .gi-cover{grid-column:1/3;aspect-ratio:16/10}
 .gi{aspect-ratio:1/1;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;background:var(--paper2);border:1.5px dashed var(--line2);display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;z-index:1}
 .gi.has-img{border-style:solid}
 .gi:hover{transform:scale(1.03);box-shadow:0 10px 26px rgba(201,151,42,.25);border-color:var(--line2)}
@@ -322,8 +324,9 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 .couple-grid{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
 .couple-card{background:#fff;border-radius:18px;padding:26px 22px;text-align:center;border:1px solid rgba(0,0,0,.06);box-shadow:0 10px 34px rgba(0,0,0,.06);position:relative}
 .couple-photo-wrap{width:156px;height:156px;margin:0 auto 16px;position:relative}
-.couple-photo-ring{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(#7FA05C 0deg 9deg,#8FB56A 9deg 14deg,#F4A81E 14deg 20deg,#D9720F 20deg 26deg,#7FA05C 26deg 34deg);animation:spin 50s linear infinite;box-shadow:0 8px 20px rgba(107,20,20,.15)}
-.couple-photo{position:absolute;inset:24px;width:auto;height:auto;border-radius:50%;background:var(--paper2);border:3px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.couple-photo-ring{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(#7FA05C 0deg 9deg,#8FB56A 9deg 14deg,#F4A81E 14deg 20deg,#D9720F 20deg 26deg,#7FA05C 26deg 34deg);animation:spin 50s linear infinite;box-shadow:0 8px 20px rgba(107,20,20,.15);z-index:0}
+.wreath-real{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;animation:spin 60s linear infinite}
+.couple-photo{position:absolute;inset:24px;width:auto;height:auto;border-radius:50%;background:var(--paper2);border:3px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:2}
 
 /* ═══ GARLAND / MOTIF DECORATIONS ═══ */
 .garland-strip{width:100%;height:48px;display:block}
@@ -643,14 +646,22 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 <div id="cardGate">
   <svg class="garland-strip" style="position:absolute;top:0;left:0" viewBox="0 0 640 48" preserveAspectRatio="none"><rect width="640" height="48" fill="url(#marigoldPattern)"/></svg>
   <div class="entry-content">
-    <svg class="entry-ganesha" viewBox="0 0 100 100"><use href="#motif-ganesha"></use></svg>
+    <div class="ganesha-wrap" style="width:64px;height:64px;margin:0 auto 14px;position:relative">
+      <svg class="entry-ganesha" style="width:100%;height:100%;position:absolute;inset:0" viewBox="0 0 100 100"><use href="#motif-ganesha"></use></svg>
+      <!-- freeimage.host Ganesha PNG link paste pண்ணுங்க இங்கே -->
+      <img class="ganesha-real" src="https://iili.io/nFNVp6b.png" alt="Ganesha" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
+    </div>
     <div class="entry-invocation">|| Sri Ganeshaya Namah ||</div>
     <div class="entry-ornament">〜◆〜</div>
     <div class="entry-eyebrow">YOU ARE INVITED TO THE WEDDING OF</div>
     <div class="entry-names"><span id="gateNames1">Arjun</span><span class="entry-amp">&amp;</span><span id="gateNames2">Priya</span></div>
     <button class="entry-btn" onclick="openCard()">OPEN INVITATION</button>
   </div>
-  <div class="entry-gopuram"><svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMax slice"><use href="#motif-gopuram-big"></use></svg></div>
+  <div class="entry-gopuram">
+    <svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMax slice"><use href="#motif-gopuram-big"></use></svg>
+    <!-- freeimage.host temple background PNG/JPG link paste pண்ணுங்க இங்கே -->
+    <img class="gopuram-real" src="https://iili.io/nFNWBMg.png" alt="Temple background" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top">
+  </div>
 </div>
 
 <div id="loadingSpinner">
@@ -682,8 +693,16 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 
 <!-- ═══════════ 1. HERO (matches reference's post-open screen) ═══════════ -->
 <section class="s-hero" id="sec-hero">
-  <div class="hero2-gopuram-bg"><svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMax slice"><use href="#motif-gopuram-big"></use></svg></div>
-  <svg class="hero2-ganesha-sm" viewBox="0 0 100 100"><use href="#motif-ganesha"></use></svg>
+  <div class="hero2-gopuram-bg">
+    <svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMax slice"><use href="#motif-gopuram-big"></use></svg>
+    <!-- freeimage.host temple background PNG/JPG link paste pண்ணுங்க இங்கே -->
+    <img class="gopuram-real" src="https://iili.io/nFNWBMg.png" alt="Temple background" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top">
+  </div>
+  <div class="ganesha-wrap" style="width:52px;height:52px;margin-bottom:14px;position:relative;z-index:2">
+    <svg class="hero2-ganesha-sm" style="width:100%;height:100%;position:absolute;inset:0" viewBox="0 0 100 100"><use href="#motif-ganesha"></use></svg>
+    <!-- freeimage.host Ganesha PNG link paste pண்ணுங்க இங்கே -->
+    <img class="ganesha-real" src="https://iili.io/nFNVp6b.png" alt="Ganesha" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
+  </div>
   <p class="hero-invite edit-flag" contenteditable="true" spellcheck="false">"Two hearts united, one beautiful journey begins. Wishing you a lifetime of togetherness."</p>
   <div class="hero2-ornament">〜◆〜</div>
   <p class="hero-parents edit-flag" contenteditable="true" spellcheck="false">TOGETHER WITH THE BLESSINGS OF THEIR FAMILIES</p>
@@ -720,6 +739,8 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
     <div class="couple-card">
       <div class="couple-photo-wrap">
         <div class="couple-photo-ring"></div>
+        <!-- freeimage.host wreath PNG link paste pண்ணுங்க (transparent center) -->
+        <img class="wreath-real" src="https://iili.io/nFNVr6G.png" alt="marigold flower wreath">
         <div class="couple-photo" onclick="triggerCoupleUpload(this)">
           <!-- freeimage.host link paste pண்ணுங்க இங்கே -->
           <img class="couple-img" alt="Groom photo">
@@ -735,6 +756,8 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
     <div class="couple-card">
       <div class="couple-photo-wrap">
         <div class="couple-photo-ring"></div>
+        <!-- freeimage.host wreath PNG link paste pண்ணுங்க (transparent center) -->
+        <img class="wreath-real" src="https://iili.io/nFNVr6G.png" alt="marigold flower wreath">
         <div class="couple-photo" onclick="triggerCoupleUpload(this)">
           <!-- freeimage.host link paste pண்ணுங்க இங்கே -->
           <img class="couple-img" alt="Bride photo">
@@ -811,30 +834,48 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 
 <!-- ═══════════ 5. GALLERY (glow) ═══════════ -->
 <section class="s-gallery reveal" id="sec-gallery">
-  <span class="sec-ey">MEMORIES</span>
-  <h2 class="sec-tt" style="color:var(--accent2)">Moments of Love</h2>
+  <h2 class="gallery-script-title">Captured Moments</h2>
+  <div class="gallery-divider"></div>
   <div class="gal-grid" id="galGrid">
-    <div class="gi" onclick="triggerUpload(this.querySelector('.gi-img'))">
+    <div class="gi gi-cover has-img" onclick="triggerUpload(this.querySelector('.gi-img'))">
       <!-- freeimage.host link paste pண்ணுங்க இங்கே -->
-      <img class="gi-img" alt="Cover photo">
+      <img class="gi-img" src="https://iili.io/nFNOMRj.jpg" alt="Cover photo">
       <div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add cover photo</div>
       <div class="gi-overlay">
         <button class="gi-replace" onclick="event.stopPropagation();triggerUpload(this.closest('.gi').querySelector('.gi-img'))">Replace</button>
         <button class="gi-expand" onclick="event.stopPropagation();openLightbox(this.closest('.gi').querySelector('.gi-img').src)">⤢</button>
       </div>
     </div>
-    <div class="gi" onclick="triggerUpload(this.querySelector('.gi-img'))">
+    <div class="gi has-img" onclick="triggerUpload(this.querySelector('.gi-img'))">
       <!-- freeimage.host link paste pண்ணுங்க இங்கே -->
-      <img class="gi-img" alt="Gallery photo">
+      <img class="gi-img" src="https://iili.io/nFNOD5G.jpg" alt="Gallery photo">
       <div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add photo</div>
       <div class="gi-overlay">
         <button class="gi-replace" onclick="event.stopPropagation();triggerUpload(this.closest('.gi').querySelector('.gi-img'))">Replace</button>
         <button class="gi-expand" onclick="event.stopPropagation();openLightbox(this.closest('.gi').querySelector('.gi-img').src)">⤢</button>
       </div>
     </div>
-    <div class="gi" onclick="triggerUpload(this.querySelector('.gi-img'))">
+    <div class="gi has-img" onclick="triggerUpload(this.querySelector('.gi-img'))">
       <!-- freeimage.host link paste pண்ணுங்க இங்கே -->
-      <img class="gi-img" alt="Gallery photo">
+      <img class="gi-img" src="https://iili.io/nFNexLB.jpg" alt="Gallery photo">
+      <div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add photo</div>
+      <div class="gi-overlay">
+        <button class="gi-replace" onclick="event.stopPropagation();triggerUpload(this.closest('.gi').querySelector('.gi-img'))">Replace</button>
+        <button class="gi-expand" onclick="event.stopPropagation();openLightbox(this.closest('.gi').querySelector('.gi-img').src)">⤢</button>
+      </div>
+    </div>
+    <div class="gi has-img" onclick="triggerUpload(this.querySelector('.gi-img'))">
+      <!-- freeimage.host link paste pண்ணுங்க இங்கே -->
+      <img class="gi-img" src="https://iili.io/nFNeeQ2.jpg" alt="Gallery photo">
+      <div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add photo</div>
+      <div class="gi-overlay">
+        <button class="gi-replace" onclick="event.stopPropagation();triggerUpload(this.closest('.gi').querySelector('.gi-img'))">Replace</button>
+        <button class="gi-expand" onclick="event.stopPropagation();openLightbox(this.closest('.gi').querySelector('.gi-img').src)">⤢</button>
+      </div>
+    </div>
+    <div class="gi has-img" onclick="triggerUpload(this.querySelector('.gi-img'))">
+      <!-- freeimage.host link paste pண்ணுங்க இங்கே -->
+      <img class="gi-img" src="https://iili.io/nFNem3F.jpg" alt="Gallery photo">
       <div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add photo</div>
       <div class="gi-overlay">
         <button class="gi-replace" onclick="event.stopPropagation();triggerUpload(this.closest('.gi').querySelector('.gi-img'))">Replace</button>
