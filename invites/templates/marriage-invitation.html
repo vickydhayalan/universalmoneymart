@@ -110,7 +110,7 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 #cardGate{position:fixed;inset:0;z-index:1000;background:var(--bg1);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;transition:opacity .5s ease}
 #cardGate.opened{opacity:0;pointer-events:none}
 .entry-content{position:relative;z-index:2;text-align:center;padding:70px 30px 20px;max-width:400px}
-.entry-ganesha{width:64px;height:64px;margin:0 auto 14px;display:block}
+.entry-ganesha{width:80px;height:80px;margin:0 auto 14px;display:block}
 .entry-invocation{font-family:var(--fc);font-style:italic;font-size:.85rem;color:var(--accent3);margin-bottom:16px;letter-spacing:.5px}
 .entry-ornament{color:var(--accent);font-size:.9rem;letter-spacing:4px;margin-bottom:22px;opacity:.7}
 .entry-eyebrow{font-size:.68rem;letter-spacing:2px;color:#8A7A6C;margin-bottom:16px}
@@ -201,7 +201,7 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 .hero2-cordial{position:relative;z-index:2;font-size:calc(.78rem*var(--scale));color:var(--ink2);margin:22px 0 20px;font-style:italic;font-family:var(--fc)}
 .hero2-gopuram-bg{position:absolute;bottom:0;left:0;right:0;height:55%;z-index:0;opacity:.9;pointer-events:none}
 .hero2-gopuram-bg svg{width:100%;height:100%;color:var(--accent)}
-.hero2-ganesha-sm{position:relative;z-index:2;width:52px;height:52px;margin-bottom:14px}
+.hero2-ganesha-sm{position:relative;z-index:2;width:80px;height:80px;margin-bottom:16px}
 .hero-parents b{color:var(--tw2);font-weight:600}
 .hero-names{position:relative;z-index:2;margin-bottom:8px}
 .hero-name{font-family:var(--fh);font-weight:900;font-size:clamp(2.6rem,10vw,4.2rem);line-height:1.15;display:inline;color:var(--ink2);animation:textGlow 4s ease-in-out infinite}
@@ -229,8 +229,8 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 
 /* ═══════════════ VENUE ═══════════════ */
 .s-venue{padding:60px 24px;background:var(--paper);color:var(--ink)}
-.sec-ey{font-family:var(--fs);font-size:calc(.5rem*var(--scale));letter-spacing:4px;color:var(--accent3);text-align:center;display:block;margin-bottom:8px}
-.sec-tt{font-family:var(--fc);font-size:clamp(1.7rem,5vw,2.4rem);font-weight:300;font-style:italic;color:var(--ink2);text-align:center;margin-bottom:28px}
+.sec-ey{font-family:var(--fs);font-size:calc(.52rem*var(--scale));letter-spacing:4px;font-weight:700;color:var(--accent3);text-align:center;display:block;margin-bottom:8px}
+.sec-tt{font-family:var(--fc);font-size:clamp(1.8rem,5.2vw,2.6rem);font-weight:600;font-style:italic;color:var(--ink2);text-align:center;margin-bottom:28px;text-shadow:0 1px 0 rgba(201,151,42,.08)}
 .venue-card{max-width:400px;margin:0 auto;background:#fff;border-radius:14px;padding:26px 22px;text-align:center;border:1px solid rgba(0,0,0,.06);box-shadow:0 8px 32px rgba(0,0,0,.06);transition:box-shadow .3s}
 .venue-card:hover{box-shadow:0 10px 40px rgba(201,151,42,.22)}
 .venue-map-box{position:relative;max-width:400px;margin:16px auto 0;border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 8px 24px rgba(0,0,0,.08);cursor:pointer}
@@ -268,7 +268,7 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 .journey-map{background:var(--paper2);border:1px solid rgba(0,0,0,.1);color:var(--ink2);font-size:.65rem;font-weight:700;padding:7px 14px;border-radius:100px;cursor:pointer}
 
 .s-gallery{padding:60px 24px;background:var(--bg1);position:relative;overflow:hidden;text-align:center}
-.gallery-script-title{font-family:var(--fc);font-style:italic;font-weight:600;font-size:clamp(2rem,7vw,2.8rem);color:var(--ink2);text-align:center;margin-bottom:14px}
+.gallery-script-title{font-family:var(--fc);font-style:italic;font-weight:700;font-size:clamp(2rem,7vw,2.8rem);color:var(--ink2);text-align:center;margin-bottom:14px}
 .gallery-divider{width:70px;height:1px;background:var(--line2);margin:0 auto 30px}
 .gal-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:420px;margin:0 auto}
 .gal-grid::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:80%;background:radial-gradient(ellipse,rgba(201,151,42,.09),transparent 60%);pointer-events:none;z-index:0;animation:pulse 4s ease-in-out infinite}
@@ -326,7 +326,7 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 .couple-photo-wrap{width:156px;height:156px;margin:0 auto 16px;position:relative}
 .couple-photo-ring{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(#7FA05C 0deg 9deg,#8FB56A 9deg 14deg,#F4A81E 14deg 20deg,#D9720F 20deg 26deg,#7FA05C 26deg 34deg);animation:spin 50s linear infinite;box-shadow:0 8px 20px rgba(107,20,20,.15);z-index:0}
 .wreath-real{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;animation:spin 60s linear infinite}
-.couple-photo{position:absolute;inset:24px;width:auto;height:auto;border-radius:50%;background:var(--paper2);border:3px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:2}
+.couple-photo{position:absolute;inset:36px;width:auto;height:auto;border-radius:50%;background:var(--paper2);border:3px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:2}
 
 /* ═══ GARLAND / MOTIF DECORATIONS ═══ */
 .garland-strip{width:100%;height:48px;display:block}
@@ -646,7 +646,7 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
 <div id="cardGate">
   <svg class="garland-strip" style="position:absolute;top:0;left:0" viewBox="0 0 640 48" preserveAspectRatio="none"><rect width="640" height="48" fill="url(#marigoldPattern)"/></svg>
   <div class="entry-content">
-    <div class="ganesha-wrap" style="width:64px;height:64px;margin:0 auto 14px;position:relative">
+    <div class="ganesha-wrap" style="width:80px;height:80px;margin:0 auto 14px;position:relative">
       <svg class="entry-ganesha" style="width:100%;height:100%;position:absolute;inset:0" viewBox="0 0 100 100"><use href="#motif-ganesha"></use></svg>
       <!-- freeimage.host Ganesha PNG link paste pண்ணுங்க இங்கே -->
       <img class="ganesha-real" src="https://iili.io/nFNVp6b.png" alt="Ganesha" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
@@ -698,7 +698,7 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
     <!-- freeimage.host temple background PNG/JPG link paste pண்ணுங்க இங்கே -->
     <img class="gopuram-real" src="https://iili.io/nFNWBMg.png" alt="Temple background" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top">
   </div>
-  <div class="ganesha-wrap" style="width:52px;height:52px;margin-bottom:14px;position:relative;z-index:2">
+  <div class="ganesha-wrap" style="width:80px;height:80px;margin-bottom:16px;position:relative;z-index:2">
     <svg class="hero2-ganesha-sm" style="width:100%;height:100%;position:absolute;inset:0" viewBox="0 0 100 100"><use href="#motif-ganesha"></use></svg>
     <!-- freeimage.host Ganesha PNG link paste pண்ணுங்க இங்கே -->
     <img class="ganesha-real" src="https://iili.io/nFNVp6b.png" alt="Ganesha" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
