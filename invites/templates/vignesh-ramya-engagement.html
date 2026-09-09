@@ -1,1 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Vignesh & Ramya — An Invitation Awaits</title>
+<meta name="description" content="You are cordially invited to the engagement celebration of Vignesh & Ramya.">
+<meta name="theme-color" content="#0A0A0C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600;700&family=Italiana&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#0A0A0C;--bg2:#141416;--bg3:#1C1C1F;
+  --gold:#C9972A;--gold2:#E4B84A;--gold3:#F5D06E;
+  --tw:rgba(245,240,225,.92);--tw2:rgba(245,240,225,.6);--tw3:rgba(245,240,225,.32);
+  --line:rgba(201,151,42,.28);--line2:rgba(201,151,42,.55);
+  --fc:'Cormorant Garamond',Georgia,serif;
+  --fs:'Cinzel',serif;
+  --fi:'Italiana',serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+}
+body{
+  font-family:var(--fb);background:var(--bg);color:var(--tw);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden;height:100vh}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
 
+[contenteditable="true"]{outline:none;border-radius:4px;cursor:text;transition:background .2s,box-shadow .2s;padding:2px 4px;margin:-2px -4px}
+[contenteditable="true"]:hover{background:rgba(201,151,42,.08)}
+[contenteditable="true"]:focus{background:rgba(201,151,42,.12);box-shadow:0 0 0 1.5px var(--gold2)}
+
+@keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:.6;transform:scale(1.1)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(201,151,42,.25)}50%{box-shadow:0 0 42px rgba(201,151,42,.5)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ═══════════════ DOOR GATE ═══════════════ */
+#doorGate{position:fixed;inset:0;z-index:1000;overflow:hidden;background:var(--bg)}
+.door-stars{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;width:2px;height:2px;background:var(--gold2);border-radius:50%;animation:twinkle 3s ease-in-out infinite}
+.door-panel{
+  position:absolute;top:0;bottom:0;width:50%;
+  background:linear-gradient(160deg,var(--bg3),var(--bg2) 55%,var(--bg3));
+  transition:transform 1.3s cubic-bezier(.76,0,.24,1);
+  display:flex;align-items:center;
+  border-top:1px solid var(--line);
+}
+.door-l{left:0;justify-content:flex-end;border-right:1px solid var(--line2)}
+.door-r{right:0;justify-content:flex-start;border-left:1px solid var(--line2)}
+.door-arch{
+  width:1px;height:78%;position:relative;
+}
+.door-l .door-arch{margin-right:-1px}
+.door-r .door-arch{margin-left:-1px}
+.door-panel::before{
+  content:'';position:absolute;top:8%;bottom:8%;
+  width:2px;background:linear-gradient(180deg,transparent,var(--gold),var(--gold2),var(--gold),transparent);
+}
+.door-l::before{right:0}
+.door-r::before{left:0}
+.door-motif{
+  position:absolute;top:50%;font-size:1.6rem;color:var(--gold);opacity:.5;
+  transform:translateY(-50%);
+}
+.door-l .door-motif{right:14px}
+.door-r .door-motif{left:14px}
+#doorGate.opening .door-l{transform:translateX(-100%)}
+#doorGate.opening .door-r{transform:translateX(100%)}
+#doorGate.hidden{display:none}
+
+.gate-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:2;text-align:center;width:min(300px,80vw);
+  transition:opacity .5s ease;
+}
+#doorGate.opening .gate-center{opacity:0;pointer-events:none}
+.gate-emblem{width:64px;height:64px;border-radius:50%;margin:0 auto 18px;border:1.5px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--gold2);animation:float1 5s ease-in-out infinite,glowPulse 3.5s ease-in-out infinite;position:relative}
+.gate-emblem::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px dashed var(--line);animation:spin 20s linear infinite}
+.gate-tap{font-family:var(--fs);font-size:.6rem;letter-spacing:4px;color:var(--tw3);margin-bottom:8px}
+.gate-headline{font-family:var(--fc);font-style:italic;font-size:1.15rem;color:var(--tw2);margin-bottom:26px;font-weight:300}
+.gate-btn{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1305;
+  font-family:var(--fs);font-size:.6rem;font-weight:700;letter-spacing:3px;
+  padding:14px 30px;border-radius:100px;border:none;cursor:pointer;width:100%;
+  box-shadow:0 4px 24px rgba(201,151,42,.35);transition:transform .3s;
+}
+.gate-btn:hover{transform:scale(1.03)}
+.gate-hint{font-size:.58rem;color:var(--tw3);margin-top:12px;letter-spacing:1px;font-family:var(--fs)}
+
+/* ═══════════════ MAIN CONTENT ═══════════════ */
+#mainContent{display:none;opacity:0}
+#mainContent.revealed{display:block;animation:fadeUp .9s ease .1s forwards}
+
+.s-hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:56px 24px 40px;position:relative;overflow:hidden;background:radial-gradient(ellipse 90% 60% at 50% 0%,var(--bg3),var(--bg) 70%)}
+.s-hero>*:not(.hero-mandala):not(.deco-ring):not(.hero-corner):not(.float-el){position:relative;z-index:2}
+.hero-invocation{font-family:var(--fc);font-style:italic;font-size:.85rem;color:var(--tw3);margin-bottom:22px;letter-spacing:.5px}
+.hero-family{font-family:var(--fs);font-size:.55rem;letter-spacing:4px;color:var(--gold2);margin-bottom:18px}
+.hero-names{margin-bottom:22px}
+.hero-name{font-family:var(--fi);font-size:clamp(2.6rem,10vw,4.4rem);color:var(--gold2);line-height:1.05;display:block;text-shadow:0 0 40px rgba(201,151,42,.25)}
+.hero-amp{font-family:var(--fc);font-style:italic;font-size:1.3rem;color:var(--gold3);display:block;margin:8px 0}
+.hero-request{font-size:.68rem;letter-spacing:2px;color:var(--tw2);max-width:280px;margin:0 auto 26px;line-height:1.9}
+.hero-dt{display:flex;flex-direction:column;gap:6px;align-items:center;margin-bottom:8px}
+.hero-day{font-family:var(--fs);font-size:.6rem;letter-spacing:3px;color:var(--gold2)}
+.hero-date{font-family:var(--fc);font-size:1.5rem;color:var(--tw);font-weight:400}
+.hero-time{font-size:.72rem;color:var(--tw2);letter-spacing:1px}
+
+.divider{display:flex;align-items:center;justify-content:center;gap:12px;padding:34px 0}
+.divider-line{width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--line2))}
+.divider-line.r{background:linear-gradient(90deg,var(--line2),transparent)}
+.divider-icon{color:var(--gold);font-size:1rem}
+
+.s-count{padding:0 24px 50px;text-align:center}
+.count-lbl{font-family:var(--fs);font-size:.55rem;letter-spacing:4px;color:var(--tw3);margin-bottom:18px}
+.count-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cd-box{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:66px}
+.cd-num{font-family:var(--fc);font-size:1.5rem;font-weight:600;color:var(--gold2);line-height:1}
+.cd-unit{font-size:.55rem;letter-spacing:1.5px;color:var(--tw3);margin-top:5px}
+
+.s-venue{padding:0 24px 50px;text-align:center}
+.sec-ey{font-family:var(--fs);font-size:.5rem;letter-spacing:4px;color:var(--gold);margin-bottom:10px;display:block}
+.sec-tt{font-family:var(--fc);font-size:1.6rem;font-style:italic;font-weight:300;color:var(--tw);margin-bottom:24px}
+.venue-card{max-width:380px;margin:0 auto;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:24px 20px}
+.venue-name{font-family:var(--fc);font-size:1.2rem;color:var(--gold2);margin-bottom:6px}
+.venue-addr{font-size:.75rem;color:var(--tw2);line-height:1.7;margin-bottom:16px}
+.venue-map{position:relative;border-radius:10px;overflow:hidden;margin-bottom:16px;border:1px solid var(--line);cursor:pointer}
+.venue-map iframe{width:100%;height:160px;border:0;pointer-events:none}
+.venue-map-tap{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:10px;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.6))}
+.venue-map-tap span{background:var(--gold2);color:#1a1305;font-size:.62rem;font-weight:700;padding:7px 14px;border-radius:100px}
+.venue-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold2);color:#1a1305;padding:10px 20px;border-radius:100px;font-size:.7rem;font-weight:700;border:none;cursor:pointer;text-decoration:none}
+
+.s-itin{padding:0 24px 50px;text-align:center}
+.itin-list{max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+.itin-item{display:flex;gap:16px;text-align:left;padding:18px 4px;border-bottom:1px dashed var(--line)}
+.itin-item:last-child{border-bottom:none}
+.itin-dot{width:8px;height:8px;border-radius:50%;background:var(--gold2);margin-top:6px;flex-shrink:0;box-shadow:0 0 8px rgba(201,151,42,.6)}
+.itin-name{font-family:var(--fc);font-size:1rem;color:var(--tw);margin-bottom:2px}
+.itin-time{font-size:.68rem;color:var(--gold2);font-weight:600}
+
+.s-quote{padding:0 24px 50px;text-align:center}
+.quote-txt{font-family:var(--fc);font-style:italic;font-size:1.15rem;color:var(--tw2);max-width:340px;margin:0 auto 10px;line-height:1.7}
+.quote-attr{font-size:.65rem;color:var(--tw3);letter-spacing:1px}
+
+.s-dress{padding:0 24px 50px;text-align:center}
+.dress-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.dress-sw{display:flex;flex-direction:column;align-items:center;gap:6px;width:76px}
+.dress-circ{width:34px;height:34px;border-radius:50%;border:2px solid var(--line2)}
+.dress-sw span{font-size:.58rem;color:var(--tw3);text-align:center;line-height:1.3}
+
+.s-actions{padding:0 24px 60px;display:flex;flex-direction:column;gap:12px;max-width:340px;margin:0 auto}
+.act-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border-radius:12px;font-size:.78rem;font-weight:700;cursor:pointer;border:none;text-decoration:none}
+.act-btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1305}
+.act-btn.wa{background:#25D366;color:#fff}
+.act-btn.ghost{background:transparent;border:1.5px solid var(--line2);color:var(--tw2)}
+.act-btn svg{width:16px;height:16px}
+
+.footer-note{text-align:center;padding:20px 24px 60px}
+.footer-mono{font-family:var(--fi);font-size:1.4rem;color:var(--gold2);margin-bottom:10px}
+.footer-msg{font-size:.72rem;color:var(--tw2);max-width:300px;margin:0 auto;line-height:1.8}
+.footer-brand{text-align:center;padding-bottom:24px;font-size:.58rem;color:var(--tw3);letter-spacing:1px}
+
+@media(min-width:600px){body{max-width:480px;margin:0 auto;box-shadow:0 0 60px rgba(0,0,0,.5)}}
+
+/* ═══════════════ RICH BACKGROUND TEXTURE ═══════════════ */
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.045;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body{background-image:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(201,151,42,.10),transparent 60%),radial-gradient(ellipse 70% 40% at 15% 30%,rgba(201,151,42,.05),transparent 55%),radial-gradient(ellipse 70% 40% at 85% 70%,rgba(201,151,42,.05),transparent 55%)}
+.kolam-pattern{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+  background-image:radial-gradient(circle,var(--gold) 1px,transparent 1.4px);
+  background-size:28px 28px;
+}
+
+/* ═══ HERO ARCH SILHOUETTE + DECOR ═══ */
+.hero-arch-bg{position:absolute;top:6%;left:50%;transform:translateX(-50%);width:min(320px,84vw);height:60%;pointer-events:none;z-index:0;opacity:.5}
+.hero-mandala{position:absolute;top:44%;left:50%;width:min(620px,90vw);height:min(620px,90vw);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0}
+.hero-mandala::before{content:'';position:absolute;inset:0;border-radius:50%;border:1px solid rgba(201,151,42,.08)}
+.hero-mandala::after{content:'';position:absolute;inset:26px;border-radius:50%;border:1px solid rgba(201,151,42,.05)}
+.deco-ring{position:absolute;top:44%;left:50%;border-radius:50%;border:1px solid var(--line);opacity:.4;transform:translate(-50%,-50%);pointer-events:none}
+.deco-ring-2{width:340px;height:340px;animation:spin 70s linear infinite}
+.deco-ring-3{width:480px;height:480px;opacity:.25;animation:spin 100s linear infinite reverse}
+.hero-corner{position:absolute;font-size:2rem;opacity:.14;pointer-events:none;z-index:1;color:var(--gold)}
+.hc-tl{top:18px;left:14px}.hc-tr{top:18px;right:14px;transform:scaleX(-1)}
+.float-el{position:absolute;pointer-events:none;z-index:1;color:var(--gold)}
+.fe-1{top:13%;left:8%;font-size:1.3rem;opacity:.16}
+.fe-2{top:20%;right:7%;font-size:1.1rem;opacity:.14}
+.fe-3{bottom:14%;left:7%;font-size:1.5rem;opacity:.12}
+.fe-4{bottom:20%;right:8%;font-size:1.2rem;opacity:.13}
+
+/* ═══ TRADITIONAL DIVIDER STRIP ═══ */
+.trad-strip{padding:10px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:1}
+.trad-icons{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.trad-ic{width:22px;height:22px;color:var(--gold2);opacity:.8}
+
+/* ═══ EXPANDED SECTIONS ═══ */
+.s-story{padding:0 24px 50px;position:relative;z-index:1}
+.story-timeline{max-width:360px;margin:0 auto;position:relative;padding-left:24px}
+.story-timeline::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:linear-gradient(180deg,transparent,var(--line2),var(--line2),transparent)}
+.story-item{position:relative;padding-bottom:26px;text-align:left}
+.story-item:last-child{padding-bottom:0}
+.story-dot{position:absolute;left:-24px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--gold2);box-shadow:0 0 0 4px var(--bg),0 0 0 5px var(--line2)}
+.story-year{font-family:var(--fs);font-size:.56rem;letter-spacing:2px;color:var(--gold2);margin-bottom:5px}
+.story-text{font-size:.76rem;color:var(--tw2);line-height:1.7}
+
+.s-family{padding:0 24px 50px;position:relative;z-index:1}
+.family-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:380px;margin:0 auto}
+.family-card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center}
+.family-side{font-family:var(--fs);font-size:.48rem;letter-spacing:2px;color:var(--gold);margin-bottom:8px}
+.family-avatar{width:38px;height:38px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;color:var(--gold2)}
+.family-name{font-family:var(--fc);font-size:.82rem;color:var(--tw);line-height:1.5}
+.family-role{font-size:.58rem;color:var(--tw3);margin-top:1px}
+
+.s-gallery{padding:0 24px 50px;text-align:center;position:relative;z-index:1}
+.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:380px;margin:0 auto}
+.gal-grid .gi:first-child{grid-column:1/3;aspect-ratio:16/9}
+.gi{aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;background-size:cover;background-position:center}
+.gi.has-img{border-color:var(--line2)}
+.gi-add{display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--tw3);font-size:.58rem}
+.gi-add svg{width:18px;height:18px;stroke:var(--tw3);fill:none;stroke-width:1.6}
+.gi.has-img .gi-add{display:none}
+.gal-hint{font-size:.6rem;color:var(--tw3);margin-top:10px}
+
+.s-wishes{padding:0 24px 50px;position:relative;z-index:1}
+.wi-list{max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.wi{background:var(--bg2);border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:10px;padding:14px 16px}
+.wi-name{font-weight:700;font-size:.74rem;color:var(--tw);margin-bottom:3px}
+.wi-txt{font-size:.72rem;color:var(--tw2);font-style:italic;line-height:1.6}
+
+.s-contacts{padding:0 24px 50px;position:relative;z-index:1}
+.contact-grid{max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.contact-card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;display:flex;align-items:center;gap:12px}
+.contact-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;color:#1a1305;font-weight:700;font-size:.72rem;flex-shrink:0}
+.contact-name{font-family:var(--fc);font-size:.82rem;color:var(--tw)}
+.contact-role{font-size:.62rem;color:var(--tw3)}
+.contact-btn{width:32px;height:32px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;margin-left:auto;flex-shrink:0}
+.contact-btn svg{width:15px;height:15px;fill:#fff}
+
+.ic-symbol{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;color:var(--gold)}
+.family-avatar .ic-symbol{width:18px;height:18px}
+</style>
+</head>
+<body class="locked">
+
+<div class="grain"></div>
+<div class="kolam-pattern"></div>
+
+<!-- ═══ SVG ICON LIBRARY ═══ -->
+<svg style="display:none" aria-hidden="true">
+<defs>
+  <symbol id="ic-lamp" viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M6 8c0-2 2.5-3 6-3s6 1 6 3-2.5 3-6 3-6-1-6-3z"/><path d="M7 9l1 8h8l1-8"/><path d="M9 20h6"/><path d="M12 14c1-1 1-2 0-3-1 1-1 2 0 3z"/></symbol>
+  <symbol id="ic-kalasham" viewBox="0 0 24 24"><path d="M8 8c0-2 1.8-4 4-4s4 2 4 4"/><path d="M6 8h12l-1.5 11a2 2 0 0 1-2 1.8h-5a2 2 0 0 1-2-1.8L6 8z"/><path d="M9 5l-1-2M15 5l1-2"/></symbol>
+  <symbol id="ic-thoranam" viewBox="0 0 24 24"><path d="M2 5c3 4 6 4 10 0 4 4 7 4 10 0"/><path d="M6 5v3M10.5 6v3M13.5 6v3M18 5v3"/></symbol>
+  <symbol id="ic-garland" viewBox="0 0 24 24"><path d="M4 5c3 6 13 6 16 0"/><circle cx="6" cy="8" r="1.4"/><circle cx="9.5" cy="12.5" r="1.4"/><circle cx="14.5" cy="12.5" r="1.4"/><circle cx="18" cy="8" r="1.4"/><circle cx="12" cy="14" r="1.6"/></symbol>
+  <symbol id="ic-conch" viewBox="0 0 24 24"><path d="M12 3c4 0 7 3.5 7 8 0 5-4 9-7 9s-7-2-7-6c0-2.5 2-4 4-3 1.5.7 1 3 3 3 2.5 0 3.5-2.5 2-4.5-1-1.3-2.5-1-3.5-2.3C9.5 5.8 10 3 12 3z"/></symbol>
+  <symbol id="ic-family" viewBox="0 0 24 24"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="8" r="2.4"/><path d="M2 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M15 21v-1.5a4 4 0 0 1 4-4h.5a3.5 3.5 0 0 1 3.5 3.5V21"/></symbol>
+  <symbol id="ic-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5.5-5.5L9 17"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 24 24"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 1H6a2 2 0 0 1 2 1.7c.1 1 .4 2.1.7 3.1a2 2 0 0 1-.5 2.1L7 9c1.3 2.6 3.4 4.7 6 6l1.1-1.2a2 2 0 0 1 2.1-.5c1 .3 2 .5 3.1.7a2 2 0 0 1 1.7 2z"/></symbol>
+</defs>
+</svg>
+
+<!-- ═══════════ DOOR GATE ═══════════ -->
+<div id="doorGate">
+  <div class="door-stars" id="doorStars"></div>
+  <div class="door-panel door-l"><div class="door-arch"><span class="door-motif">✦</span></div></div>
+  <div class="door-panel door-r"><div class="door-arch"><span class="door-motif">✦</span></div></div>
+  <div class="gate-center">
+    <div class="gate-emblem">🕉</div>
+    <div class="gate-tap">TAP TO OPEN</div>
+    <div class="gate-headline">An Invitation Awaits</div>
+    <button class="gate-btn" onclick="openDoors()">Open Invitation</button>
+    <div class="gate-hint">Vignesh &amp; Ramya</div>
+  </div>
+</div>
+
+<div id="mainContent">
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="s-hero">
+  <div class="hero-mandala"></div>
+  <div class="deco-ring deco-ring-2"></div>
+  <div class="deco-ring deco-ring-3"></div>
+  <span class="hero-corner hc-tl">❦</span><span class="hero-corner hc-tr">❦</span>
+  <span class="float-el fe-1">❀</span><span class="float-el fe-2">✦</span>
+  <span class="float-el fe-3">❀</span><span class="float-el fe-4">✦</span>
+  <div class="hero-invocation">|| Shree Ganeshay Namah ||</div>
+  <div class="hero-family">TOGETHER WITH THEIR FAMILIES</div>
+  <div class="hero-names">
+    <span class="hero-name">Vignesh</span>
+    <span class="hero-amp">&amp;</span>
+    <span class="hero-name">Ramya</span>
+  </div>
+  <p class="hero-request">REQUEST THE HONOR OF YOUR PRESENCE AT THE CELEBRATION OF THEIR ENGAGEMENT</p>
+  <div class="hero-dt">
+    <div class="hero-day">FRIDAY</div>
+    <div class="hero-date">December 4, 2026</div>
+    <div class="hero-time" id="eventTime" contenteditable="true" spellcheck="false">Time — tap to add</div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-line"></span><span class="divider-icon">✦</span><span class="divider-line r"></span></div>
+
+<!-- ═══════════ OUR STORY ═══════════ -->
+<section class="s-story">
+  <span class="sec-ey">OUR STORY</span>
+  <h2 class="sec-tt">How It Began</h2>
+  <div class="story-timeline">
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div class="story-year" contenteditable="true" spellcheck="false">FIRST MET</div>
+      <div class="story-text" contenteditable="true" spellcheck="false">Tap to share how your story began...</div>
+    </div>
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div class="story-year" contenteditable="true" spellcheck="false">THE PROPOSAL</div>
+      <div class="story-text" contenteditable="true" spellcheck="false">Tap to share this special moment...</div>
+    </div>
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div class="story-year" contenteditable="true" spellcheck="false">DECEMBER 2026 — THE PROMISE</div>
+      <div class="story-text" contenteditable="true" spellcheck="false">And now, surrounded by the people we love most, we take the first formal step toward forever.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ COUNTDOWN ═══════════ -->
+<section class="s-count">
+  <div class="count-lbl">COUNTING DOWN TO THE DAY</div>
+  <div class="count-row">
+    <div class="cd-box"><div class="cd-num" id="cd-d">--</div><div class="cd-unit">DAYS</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-h">--</div><div class="cd-unit">HRS</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-m">--</div><div class="cd-unit">MIN</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-s">--</div><div class="cd-unit">SEC</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ FAMILY DETAILS ═══════════ -->
+<section class="s-family">
+  <span class="sec-ey">WITH THE BLESSINGS OF</span>
+  <h2 class="sec-tt">Our Families</h2>
+  <div class="family-grid">
+    <div class="family-card">
+      <div class="family-side">VIGNESH'S SIDE</div>
+      <div class="family-avatar"><svg class="ic-symbol"><use href="#ic-family"></use></svg></div>
+      <div class="family-name" contenteditable="true" spellcheck="false">Father's Name</div>
+      <div class="family-role">Father</div>
+      <div class="family-name" contenteditable="true" spellcheck="false" style="margin-top:6px">Mother's Name</div>
+      <div class="family-role">Mother</div>
+    </div>
+    <div class="family-card">
+      <div class="family-side">RAMYA'S SIDE</div>
+      <div class="family-avatar"><svg class="ic-symbol"><use href="#ic-family"></use></svg></div>
+      <div class="family-name" contenteditable="true" spellcheck="false">Father's Name</div>
+      <div class="family-role">Father</div>
+      <div class="family-name" contenteditable="true" spellcheck="false" style="margin-top:6px">Mother's Name</div>
+      <div class="family-role">Mother</div>
+    </div>
+  </div>
+</section>
+
+<div class="trad-strip">
+  <div class="divider" style="padding:0"><span class="divider-line"></span><span class="divider-icon">✦</span><span class="divider-line r"></span></div>
+  <div class="trad-icons">
+    <svg class="trad-ic"><use href="#ic-lamp"></use></svg>
+    <svg class="trad-ic"><use href="#ic-kalasham"></use></svg>
+    <svg class="trad-ic"><use href="#ic-thoranam"></use></svg>
+    <svg class="trad-ic"><use href="#ic-garland"></use></svg>
+    <svg class="trad-ic"><use href="#ic-conch"></use></svg>
+  </div>
+</div>
+
+<!-- ═══════════ VENUE ═══════════ -->
+<section class="s-venue">
+  <span class="sec-ey">VENUE</span>
+  <h2 class="sec-tt">Where We Celebrate</h2>
+  <div class="venue-card">
+    <div class="venue-name" id="venueName" contenteditable="true" spellcheck="false">Venue Name — tap to add</div>
+    <div class="venue-addr" id="venueAddr" contenteditable="true" spellcheck="false">Full address — tap to add</div>
+    <div class="venue-map" id="mapBox" onclick="openMaps()">
+      <iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=India&output=embed"></iframe>
+      <div class="venue-map-tap"><span>Tap for directions</span></div>
+    </div>
+    <button class="venue-btn" onclick="openMaps()">Get Directions</button>
+  </div>
+</section>
+
+<!-- ═══════════ ITINERARY ═══════════ -->
+<section class="s-itin">
+  <span class="sec-ey">PROGRAM</span>
+  <h2 class="sec-tt">Event Itinerary</h2>
+  <div class="itin-list">
+    <div class="itin-item">
+      <div class="itin-dot"></div>
+      <div>
+        <div class="itin-name" contenteditable="true" spellcheck="false">Guests Arrive &amp; Welcome</div>
+        <div class="itin-time" contenteditable="true" spellcheck="false">Time — tap to add</div>
+      </div>
+    </div>
+    <div class="itin-item">
+      <div class="itin-dot"></div>
+      <div>
+        <div class="itin-name" contenteditable="true" spellcheck="false">Ring Exchange Ceremony</div>
+        <div class="itin-time" contenteditable="true" spellcheck="false">Time — tap to add</div>
+      </div>
+    </div>
+    <div class="itin-item">
+      <div class="itin-dot"></div>
+      <div>
+        <div class="itin-name" contenteditable="true" spellcheck="false">Family Blessings</div>
+        <div class="itin-time" contenteditable="true" spellcheck="false">Time — tap to add</div>
+      </div>
+    </div>
+    <div class="itin-item">
+      <div class="itin-dot"></div>
+      <div>
+        <div class="itin-name" contenteditable="true" spellcheck="false">Dinner &amp; Celebration</div>
+        <div class="itin-time" contenteditable="true" spellcheck="false">Time — tap to add</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section class="s-gallery">
+  <span class="sec-ey">MEMORIES</span>
+  <h2 class="sec-tt">Moments Together</h2>
+  <div class="gal-grid" id="galGrid">
+    <div class="gi" onclick="triggerUpload(this)"><div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add cover photo</div></div>
+    <div class="gi" onclick="triggerUpload(this)"><div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add photo</div></div>
+    <div class="gi" onclick="triggerUpload(this)"><div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add photo</div></div>
+  </div>
+  <div class="gal-hint">Tap any tile to upload a photo</div>
+</section>
+<input type="file" id="fileInput" accept="image/*" style="display:none">
+
+<!-- ═══════════ WISHES WALL ═══════════ -->
+<section class="s-wishes">
+  <span class="sec-ey">BLESSINGS</span>
+  <h2 class="sec-tt">Wishes From Loved Ones</h2>
+  <div class="wi-list" id="wiList">
+    <div class="wi"><div class="wi-name">Family &amp; Friends</div><div class="wi-txt" contenteditable="true" spellcheck="false">Wishing you both a lifetime of love and happiness together!</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ QUOTE ═══════════ -->
+<section class="s-quote">
+  <p class="quote-txt" contenteditable="true" spellcheck="false">"Two souls, one heart — a beautiful journey of love, sacred togetherness, and lifelong happiness."</p>
+  <div class="quote-attr">— Vignesh &amp; Ramya</div>
+</section>
+
+<!-- ═══════════ DRESS CODE ═══════════ -->
+<section class="s-dress">
+  <span class="sec-ey">DRESS CODE</span>
+  <h2 class="sec-tt">Traditional Elegance</h2>
+  <div class="dress-row">
+    <div class="dress-sw"><div class="dress-circ" style="background:#1E4E8C"></div><span>Royal Blue (Vignesh)</span></div>
+    <div class="dress-sw"><div class="dress-circ" style="background:#6B2C91"></div><span>Deep Purple (Ramya)</span></div>
+    <div class="dress-sw"><div class="dress-circ" style="background:#D6779F"></div><span>Blush Pink (Ramya)</span></div>
+  </div>
+</section>
+
+<!-- ═══════════ HOST COMMITTEE ═══════════ -->
+<section class="s-contacts">
+  <span class="sec-ey">NEED HELP?</span>
+  <h2 class="sec-tt">Host Committee</h2>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-avatar">V</div>
+      <div>
+        <div class="contact-name" contenteditable="true" spellcheck="false">Vignesh</div>
+        <div class="contact-role" contenteditable="true" spellcheck="false">+91 72007 52628</div>
+      </div>
+      <button class="contact-btn" onclick="contactWA(this)"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></button>
+    </div>
+    <div class="contact-card">
+      <div class="contact-avatar">R</div>
+      <div>
+        <div class="contact-name" contenteditable="true" spellcheck="false">Ramya</div>
+        <div class="contact-role" contenteditable="true" spellcheck="false">+91 XXXXX XXXXX</div>
+      </div>
+      <button class="contact-btn" onclick="contactWA(this)"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ACTIONS ═══════════ -->
+<section class="s-actions">
+  <button class="act-btn gold" onclick="addToCalendar()">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm12 8v10H5V10h14z"/></svg>
+    Add to Calendar
+  </button>
+  <button class="act-btn wa" onclick="sendRSVP()">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    RSVP via WhatsApp
+  </button>
+  <button class="act-btn ghost" onclick="replayDoors()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 2.6-6.3M3 4v5h5"/></svg>
+    Replay Door Opening
+  </button>
+</section>
+
+<div class="footer-note">
+  <div class="footer-mono">V &amp; R</div>
+  <p class="footer-msg" contenteditable="true" spellcheck="false">With hearts full of joy, we can't wait to celebrate this moment with you.</p>
+</div>
+<div class="footer-brand">Crafted with ✦ UMM Invites</div>
+
+</div><!-- /#mainContent -->
+
+<script>
+/* ═══ RANDOM STAR FIELD ═══ */
+const starsWrap = document.getElementById('doorStars');
+for(let i=0;i<24;i++){
+  const s = document.createElement('span');
+  s.className = 'star';
+  s.style.left = Math.random()*100+'%';
+  s.style.top = Math.random()*100+'%';
+  s.style.animationDelay = (Math.random()*3)+'s';
+  starsWrap.appendChild(s);
+}
+
+/* ═══ DOOR OPEN / REPLAY ═══ */
+const gate = document.getElementById('doorGate');
+const main = document.getElementById('mainContent');
+function openDoors(){
+  gate.classList.add('opening');
+  setTimeout(()=>{
+    gate.classList.add('hidden');
+    document.body.classList.remove('locked');
+    main.classList.add('revealed');
+    window.scrollTo(0,0);
+  }, 1300);
+}
+function replayDoors(){
+  window.scrollTo(0,0);
+  document.body.classList.add('locked');
+  main.classList.remove('revealed');
+  gate.classList.remove('hidden');
+  gate.classList.remove('opening');
+  void gate.offsetWidth;
+}
+
+/* ═══ COUNTDOWN ═══ */
+let eventTarget = new Date('2026-12-04T18:00:00'); // placeholder time — update once confirmed
+function tickCountdown(){
+  const now = new Date();
+  let diff = eventTarget - now;
+  if(diff < 0) diff = 0;
+  document.getElementById('cd-d').textContent = String(Math.floor(diff/(1000*60*60*24))).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(Math.floor(diff/(1000*60*60)%24)).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(Math.floor(diff/(1000*60)%60)).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(Math.floor(diff/1000%60)).padStart(2,'0');
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+/* live-sync countdown when the time field is edited */
+document.getElementById('eventTime').addEventListener('blur', function(){
+  const t = this.textContent.trim();
+  const parsed = new Date(`December 4, 2026 ${t}`);
+  if(!isNaN(parsed.getTime())){
+    eventTarget = parsed;
+    tickCountdown();
+  }
+});
+
+/* ═══ VENUE MAP ═══ */
+function getVenueAddr(){
+  return document.getElementById('venueName').textContent.trim() + ', ' + document.getElementById('venueAddr').textContent.trim();
+}
+function openMaps(){
+  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(getVenueAddr())}`, '_blank');
+}
+function refreshMap(){
+  document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${encodeURIComponent(getVenueAddr())}&output=embed`;
+}
+document.getElementById('venueName').addEventListener('blur', refreshMap);
+document.getElementById('venueAddr').addEventListener('blur', refreshMap);
+
+/* ═══ ADD TO CALENDAR (Google Calendar link) ═══ */
+function addToCalendar(){
+  const start = eventTarget;
+  const end = new Date(start.getTime() + 3*60*60*1000);
+  const fmt = d => d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const details = `Engagement of Vignesh & Ramya`;
+  const loc = getVenueAddr();
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(details)}&dates=${fmt(start)}/${fmt(end)}&location=${encodeURIComponent(loc)}`;
+  window.open(url, '_blank');
+}
+
+/* ═══ RSVP via WhatsApp ═══ */
+const WA_NUMBER = '917200752628';
+function sendRSVP(){
+  const msg = `Hi! I'd love to join the engagement celebration of Vignesh & Ramya on December 4, 2026. Confirming my attendance!`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* ═══ GALLERY UPLOAD ═══ */
+let activeTile = null;
+const fileInput = document.getElementById('fileInput');
+function triggerUpload(tile){ activeTile = tile; fileInput.click(); }
+fileInput.addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file || !activeTile) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    activeTile.style.backgroundImage = `url(${ev.target.result})`;
+    activeTile.classList.add('has-img');
+  };
+  reader.readAsDataURL(file);
+  fileInput.value = '';
+});
+
+/* ═══ HOST COMMITTEE CONTACT ═══ */
+function contactWA(btn){
+  const card = btn.closest('.contact-card');
+  const roleText = card.querySelector('.contact-role').textContent;
+  const numMatch = roleText.match(/(\+?\d[\d\s]{7,})/);
+  const num = numMatch ? numMatch[1].replace(/\D/g,'') : WA_NUMBER;
+  const name = card.querySelector('.contact-name').textContent;
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent('Hi '+name+', I had a question about the engagement.')}`, '_blank');
+}
+
+/* ═══ SCROLL REVEAL (subtle) ═══ */
+document.querySelectorAll('section').forEach(s=>s.classList.add('reveal'));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('in'); });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
