@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="ta-IN" data-theme="maroon" data-font="classic" data-scale="md">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Vignesh & Partner — Engagement Invitation | UMM Invites</title>
+<meta name="description" content="Edit your engagement invitation live — tap any text to change it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Noto+Sans+Tamil:wght@300;400;500;600;700&family=Marcellus&family=Italiana&family=Tiro+Tamil:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --fh:'Playfair Display',Georgia,serif;
+  --fc:'Cormorant Garamond',Georgia,serif;
+  --fs:'Cinzel',serif;
+  --fb:'DM Sans','Noto Sans Tamil',system-ui,sans-serif;
+  --ft:'Noto Sans Tamil',sans-serif;
+  --scale:1;
+  --toolbar-h:64px;
+  --cta-h:56px;
+  --topbar-h:56px;
+  --top-gap:18px;
+  --bottom-gap:22px;
+}
+
+html[data-theme="maroon"]{
+  --bg1:#2C0808;--bg2:#4A1010;--bg3:#6B1C1C;
+  --accent:#C9972A;--accent2:#E4B84A;--accent3:#F5D06E;--accent4:#FFE8A0;
+  --paper:#FDF8EE;--paper2:#FAF3E0;
+  --tw:rgba(253,240,200,.92);--tw2:rgba(253,240,200,.62);--tw3:rgba(253,240,200,.32);
+  --line:rgba(201,151,42,.25);--line2:rgba(201,151,42,.5);
+  --ink:#2C0808;--ink2:#4A1010;
+}
+html[data-theme="teal"]{
+  --bg1:#041E28;--bg2:#082E40;--bg3:#0E4258;
+  --accent:#2FA394;--accent2:#5FC4B6;--accent3:#8FDCD1;--accent4:#C6F0EA;
+  --paper:#F5FBFA;--paper2:#E9F5F3;
+  --tw:rgba(230,250,247,.92);--tw2:rgba(230,250,247,.6);--tw3:rgba(230,250,247,.3);
+  --line:rgba(47,163,148,.28);--line2:rgba(47,163,148,.55);
+  --ink:#082E40;--ink2:#0E4258;
+}
+html[data-theme="navy"]{
+  --bg1:#0A0F2E;--bg2:#131A45;--bg3:#1D2860;
+  --accent:#C9972A;--accent2:#E4B84A;--accent3:#F5D06E;--accent4:#FFE8A0;
+  --paper:#F7F6FB;--paper2:#ECEAF6;
+  --tw:rgba(240,238,255,.92);--tw2:rgba(240,238,255,.6);--tw3:rgba(240,238,255,.3);
+  --line:rgba(201,151,42,.28);--line2:rgba(201,151,42,.55);
+  --ink:#131A45;--ink2:#1D2860;
+}
+html[data-theme="rose"]{
+  --bg1:#3D1418;--bg2:#5C1F26;--bg3:#7A2A32;
+  --accent:#C97A6D;--accent2:#E4A192;--accent3:#F0BFB3;--accent4:#FADAD2;
+  --paper:#FEF7F5;--paper2:#FBEBE7;
+  --tw:rgba(255,240,236,.92);--tw2:rgba(255,240,236,.62);--tw3:rgba(255,240,236,.32);
+  --line:rgba(201,122,109,.28);--line2:rgba(201,122,109,.55);
+  --ink:#3D1418;--ink2:#5C1F26;
+}
+
+html[data-font="classic"] .hero-name{font-family:var(--fc);font-weight:300}
+html[data-font="royal"] .hero-name{font-family:'Italiana',var(--fc);font-weight:400}
+html[data-font="modern"] .hero-name{font-family:'Marcellus',var(--fh);font-weight:400}
+html[data-font="tamil"] .hero-name{font-family:'Tiro Tamil',var(--fc);font-weight:400}
+
+html[data-scale="sm"]{--scale:.88}
+html[data-scale="md"]{--scale:1}
+html[data-scale="lg"]{--scale:1.14}
+
+body{
+  font-family:var(--fb);
+  background:var(--bg1);
+  color:var(--tw);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  padding-top:calc(var(--topbar-h) + var(--top-gap));
+  padding-bottom:calc(var(--cta-h) + var(--toolbar-h) + var(--bottom-gap));
+}
+body.locked{overflow:hidden;height:100vh}
+section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg1)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ══ ANIMATIONS ══ */
+@keyframes float1{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-12px) rotate(3deg)}66%{transform:translateY(-6px) rotate(-2deg)}}
+@keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-16px) rotate(5deg)}}
+@keyframes float3{0%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}70%{transform:translateY(-14px)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes spinR{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@keyframes glow{0%,100%{box-shadow:0 0 24px rgba(201,151,42,.3),0 0 48px rgba(201,151,42,.08)}50%{box-shadow:0 0 40px rgba(201,151,42,.6),0 0 80px rgba(201,151,42,.2)}}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+@keyframes shimmer{to{background-position:-300% center}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes editPulse{0%{box-shadow:0 0 0 0 rgba(201,151,42,.5)}70%{box-shadow:0 0 0 8px rgba(201,151,42,0)}100%{box-shadow:0 0 0 0 rgba(201,151,42,0)}}
+@keyframes petals{0%{transform:translateY(-20px) rotate(0deg) translateX(0);opacity:0}10%{opacity:1}90%{opacity:.8}100%{transform:translateY(105vh) rotate(720deg) translateX(50px);opacity:0}}
+@keyframes cardOpen{0%{transform:perspective(1200px) rotateX(0deg);opacity:1}100%{transform:perspective(1200px) rotateX(-90deg) translateY(-40%);opacity:0}}
+@keyframes cardReveal{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes syncFlash{0%{opacity:0;transform:translateY(-4px)}15%{opacity:1;transform:translateY(0)}85%{opacity:1}100%{opacity:0}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.g-txt{background:linear-gradient(135deg,var(--ink2),var(--accent),var(--accent2),var(--accent3),var(--accent2),var(--accent));background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 7s linear infinite}
+
+/* ═══════════════ CARD GATE (signature open animation) ═══════════════ */
+#cardGate{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;background:var(--bg1);transition:background .6s}
+#cardGate.opened{pointer-events:none}
+.gate-bg{position:absolute;inset:0;overflow:hidden}
+.gate-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(201,151,42,.1),transparent 55%)}
+.gate-petal{position:absolute;top:-5%;font-size:1.4rem;opacity:0;color:var(--accent2);animation:petals 8s ease-in infinite}
+.gate-petal:nth-child(1){left:10%;animation-delay:0s;font-size:1.1rem}
+.gate-petal:nth-child(2){left:30%;animation-delay:2s;font-size:1.7rem}
+.gate-petal:nth-child(3){left:50%;animation-delay:4s;font-size:1rem}
+.gate-petal:nth-child(4){left:70%;animation-delay:1s;font-size:1.4rem}
+.gate-petal:nth-child(5){left:85%;animation-delay:3s;font-size:1.2rem}
+
+.card-wrap{perspective:1200px;width:min(340px,86vw);position:relative;z-index:2}
+.card{
+  background:linear-gradient(160deg,var(--bg2),var(--bg1) 50%,var(--bg2));
+  border:1px solid var(--line2);border-radius:16px;overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 60px rgba(201,151,42,.08);
+  transform-origin:top center;
+  transition:transform 1.2s cubic-bezier(.77,0,.18,1),opacity .9s ease;
+  position:relative;
+}
+.card.opening{animation:cardOpen 1.2s cubic-bezier(.77,0,.18,1) forwards}
+.card-inner-border{position:absolute;inset:9px;border:1px solid var(--line);border-radius:10px;pointer-events:none}
+.card-corner{position:absolute;width:22px;height:22px;border-color:var(--accent2);border-style:solid}
+.card-corner.tl{top:9px;left:9px;border-width:2px 0 0 2px}
+.card-corner.tr{top:9px;right:9px;border-width:2px 2px 0 0}
+.card-corner.bl{bottom:9px;left:9px;border-width:0 0 2px 2px}
+.card-corner.br{bottom:9px;right:9px;border-width:0 2px 2px 0}
+.card-content{padding:44px 26px 34px;text-align:center;position:relative;z-index:2}
+.card-god{width:74px;height:74px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:radial-gradient(circle,rgba(201,151,42,.16),rgba(201,151,42,.04));border:1.5px solid var(--line2);position:relative;animation:float1 5s ease-in-out infinite}
+.card-god::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px dashed var(--line);animation:spin 15s linear infinite}
+.card-tag{font-family:var(--fs);font-size:.5rem;letter-spacing:5px;color:var(--tw3);margin-bottom:14px}
+.card-names{font-family:var(--fc);font-size:clamp(2rem,7vw,3rem);font-weight:300;color:var(--accent2);line-height:1;margin-bottom:6px}
+.card-amp{font-style:italic;color:var(--accent3);font-size:.55em;display:block;margin:4px 0}
+.card-date{font-family:var(--fs);font-size:.5rem;letter-spacing:3px;color:var(--tw3);margin-bottom:26px}
+.card-divider{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.card-divider-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--line2),transparent)}
+.card-divider-icon{color:var(--accent);font-size:.85rem}
+.card-open-btn{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:var(--ink);font-family:var(--fs);font-size:.58rem;font-weight:700;
+  letter-spacing:3px;padding:14px 30px;border-radius:100px;border:none;
+  cursor:pointer;transition:all .3s;width:100%;
+  box-shadow:0 4px 20px rgba(201,151,42,.35);
+}
+.card-open-btn:hover{transform:scale(1.03)}
+.card-hint{font-size:.58rem;color:var(--tw3);margin-top:12px;font-family:var(--fs);letter-spacing:1.5px}
+
+#mainContent{display:none;opacity:0}
+#mainContent.revealed{display:block;animation:cardReveal .8s ease .15s forwards}
+
+/* ═══════════════ TOP EDITOR BAR ═══════════════ */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--topbar-h);z-index:400;
+  background:var(--paper);border-bottom:1px solid rgba(0,0,0,.08);
+  display:flex;align-items:center;justify-content:space-between;padding:0 12px;gap:10px;
+}
+.tb-left{display:flex;align-items:center;gap:10px;min-width:0}
+.tb-back{width:34px;height:34px;border-radius:50%;border:none;background:transparent;color:var(--ink);font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.tb-titles{min-width:0}
+.tb-title{font-family:var(--fs);font-size:.72rem;font-weight:700;letter-spacing:1.5px;color:var(--ink);white-space:nowrap}
+.tb-sub{font-size:.62rem;color:#888;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.tb-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.tb-icon-btn{width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.1);background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem}
+.tb-chip{background:var(--paper2);border:1px solid var(--line2);color:var(--ink);font-size:.65rem;font-weight:600;padding:6px 12px;border-radius:100px;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.tb-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:700;flex-shrink:0}
+
+/* ═══════════════ EDITABLE ELEMENTS ═══════════════ */
+[contenteditable="true"]{outline:none;border-radius:4px;cursor:text;transition:background .2s,box-shadow .2s;padding:2px 4px;margin:-2px -4px;position:relative}
+[contenteditable="true"]:hover{background:rgba(201,151,42,.08)}
+[contenteditable="true"]:focus{background:rgba(201,151,42,.12);box-shadow:0 0 0 1.5px var(--accent2);animation:editPulse .6s ease}
+.edit-flag{position:relative}
+.edit-flag::after{content:'✎';position:absolute;top:-6px;right:-14px;font-size:.6rem;color:var(--accent2);opacity:0;transition:opacity .2s}
+.edit-flag:hover::after{opacity:.8}
+.sync-flash{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:.55rem;background:var(--accent2);color:var(--ink);padding:3px 9px;border-radius:100px;white-space:nowrap;pointer-events:none;opacity:0;font-weight:700;letter-spacing:.5px}
+.sync-flash.show{animation:syncFlash 1.8s ease forwards}
+
+/* ═══════════════ HERO ═══════════════ */
+.s-hero{min-height:94vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px 40px;position:relative;overflow:hidden;background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 35%,var(--bg3) 65%,var(--bg1) 100%)}
+.hero-mandala{position:absolute;top:50%;left:50%;width:min(680px,92vw);height:min(680px,92vw);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0}
+.hero-mandala::before{content:'';position:absolute;inset:0;border-radius:50%;border:1px solid rgba(201,151,42,.07);box-shadow:inset 0 0 80px rgba(201,151,42,.04)}
+.hero-mandala::after{content:'';position:absolute;inset:28px;border-radius:50%;border:1px solid rgba(201,151,42,.05)}
+.deco-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid var(--line);opacity:.5;transform:translate(-50%,-50%);pointer-events:none}
+.deco-ring-1{width:210px;height:210px}
+.deco-ring-2{width:360px;height:360px;animation:spin 65s linear infinite}
+.deco-ring-3{width:520px;height:520px;animation:spinR 85s linear infinite;opacity:.3}
+.hero-corner{position:absolute;font-size:2.2rem;opacity:.08;pointer-events:none;z-index:0;color:var(--accent)}
+.hc-tl{top:16px;left:16px}.hc-tr{top:16px;right:16px;transform:scaleX(-1)}
+.hc-bl{bottom:56px;left:16px;transform:scaleY(-1)}.hc-br{bottom:56px;right:16px;transform:scale(-1)}
+.float-el{position:absolute;pointer-events:none;z-index:1;color:var(--accent)}
+.fe-1{top:11%;left:7%;font-size:1.4rem;opacity:.16;animation:float2 7s ease-in-out infinite}
+.fe-2{top:17%;right:6%;font-size:1.15rem;opacity:.14;animation:float1 8s ease-in-out 1s infinite}
+.fe-3{top:62%;left:5%;font-size:1.7rem;opacity:.11;animation:float3 9s ease-in-out 2s infinite}
+.fe-4{top:57%;right:5%;font-size:1.3rem;opacity:.13;animation:float2 7.5s ease-in-out .5s infinite}
+.fe-5{top:78%;left:14%;font-size:1rem;opacity:.1;animation:float1 6.5s ease-in-out 1.5s infinite}
+
+.god-silhouette{position:relative;z-index:2;width:82px;height:82px;margin:0 auto 10px}
+.god-sil-inner{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 40% 35%,rgba(201,151,42,.25),rgba(201,151,42,.07));border:2px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:2.9rem;animation:float1 5s ease-in-out infinite,glow 3.5s ease-in-out infinite;position:relative}
+.god-sil-ring1{position:absolute;inset:-7px;border-radius:50%;border:1px dashed var(--line);animation:spin 16s linear infinite}
+.god-sil-ring2{position:absolute;inset:-16px;border-radius:50%;border:1px dashed rgba(201,151,42,.12);animation:spinR 22s linear infinite}
+
+.hero-tag{position:relative;z-index:2;font-family:var(--fs);font-size:calc(.5rem*var(--scale));letter-spacing:4px;color:var(--tw3);margin-bottom:14px}
+.hero-invite{position:relative;z-index:2;font-family:var(--fc);font-size:calc(1rem*var(--scale));font-style:italic;font-weight:300;color:var(--tw2);margin-bottom:14px}
+.hero-parents{position:relative;z-index:2;font-size:calc(.74rem*var(--scale));color:var(--tw3);line-height:2.1;margin-bottom:22px;max-width:320px}
+.hero-parents b{color:var(--tw2);font-weight:600}
+.hero-names{position:relative;z-index:2;margin-bottom:22px}
+.hero-name{font-size:clamp(3rem,11vw,5rem);line-height:.95;display:inline-block;color:var(--accent2);animation:textGlow 4s ease-in-out infinite}
+@keyframes textGlow{0%,100%{text-shadow:0 0 20px rgba(201,151,42,.3)}50%{text-shadow:0 0 42px rgba(201,151,42,.65),0 0 80px rgba(201,151,42,.25)}}
+.hero-amp{font-family:var(--fc);font-style:italic;font-size:clamp(1.1rem,3vw,1.6rem);color:var(--accent3);display:block;margin:4px 0}
+.hero-dt{position:relative;z-index:2;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.hero-dt-chip{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:calc(.7rem*var(--scale));color:var(--tw2);display:flex;align-items:center;gap:6px;backdrop-filter:blur(6px)}
+.hero-dt-chip svg{width:13px;height:13px;fill:var(--accent2);flex-shrink:0}
+
+.sec-divider{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 0 28px;position:relative;z-index:2}
+.sd-line{width:44px;height:1px;background:linear-gradient(90deg,transparent,var(--line2))}
+.sd-line.r{background:linear-gradient(90deg,var(--line2),transparent)}
+.sd-icon{font-size:1rem;color:var(--accent)}
+
+/* ═══════════════ COUNTDOWN ═══════════════ */
+.s-count{padding:0 24px 56px;background:var(--bg1);text-align:center}
+.count-lbl{font-family:var(--fs);font-size:calc(.55rem*var(--scale));letter-spacing:4px;color:var(--tw3);margin-bottom:18px}
+.count-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cd-box{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:68px;position:relative;overflow:hidden;transition:border-color .3s}
+.cd-box.pulse{animation:glow 1s ease}
+.cd-num{font-family:var(--fh);font-size:calc(1.5rem*var(--scale));font-weight:700;color:var(--accent2);line-height:1}
+.cd-unit{font-size:.55rem;letter-spacing:1.5px;color:var(--tw3);margin-top:5px}
+.count-note{margin-top:14px;font-size:.62rem;color:var(--tw3)}
+
+/* ═══════════════ VENUE ═══════════════ */
+.s-venue{padding:60px 24px;background:var(--paper);color:var(--ink)}
+.sec-ey{font-family:var(--fs);font-size:calc(.5rem*var(--scale));letter-spacing:4px;color:var(--accent);text-align:center;display:block;margin-bottom:8px}
+.sec-tt{font-family:var(--fc);font-size:clamp(1.7rem,5vw,2.4rem);font-weight:300;font-style:italic;color:var(--ink2);text-align:center;margin-bottom:28px}
+.venue-card{max-width:400px;margin:0 auto;background:#fff;border-radius:14px;padding:26px 22px;text-align:center;border:1px solid rgba(0,0,0,.06);box-shadow:0 8px 32px rgba(0,0,0,.06);transition:box-shadow .3s}
+.venue-card:hover{box-shadow:0 10px 40px rgba(201,151,42,.22)}
+.venue-map-box{position:relative;max-width:400px;margin:16px auto 0;border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 8px 24px rgba(0,0,0,.08);cursor:pointer}
+.venue-map-box iframe{width:100%;height:190px;border:0;display:block;pointer-events:none}
+.venue-map-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:14px;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55))}
+.venue-map-tap{background:#fff;color:var(--ink);font-size:.68rem;font-weight:700;padding:9px 16px;border-radius:100px;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.venue-pin{width:40px;height:40px;border-radius:50%;background:var(--paper2);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;color:var(--accent)}
+.venue-name{font-family:var(--fh);font-size:calc(1.25rem*var(--scale));font-weight:700;color:var(--ink);margin-bottom:6px}
+.venue-addr{font-size:calc(.78rem*var(--scale));color:#777;line-height:1.7;margin-bottom:18px}
+.venue-btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink2);color:#fff;padding:11px 22px;border-radius:100px;font-size:.75rem;font-weight:600;text-decoration:none;border:none;cursor:pointer}
+
+/* ═══════════════ PROGRAM TIMELINE ═══════════════ */
+.s-program{padding:60px 24px;background:var(--paper2);color:var(--ink)}
+.timeline{max-width:420px;margin:0 auto;background:#fff;border-radius:14px;padding:8px 22px;border:1px solid rgba(0,0,0,.05)}
+.tl-item{display:flex;gap:16px;padding:20px 0;position:relative}
+.tl-item:not(:last-child){border-bottom:1px dashed rgba(0,0,0,.08)}
+.tl-ic{width:38px;height:38px;border-radius:50%;background:var(--paper2);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0;font-size:1rem}
+.tl-eyebrow{font-size:.6rem;letter-spacing:2px;color:#999;margin-bottom:4px}
+.tl-title{font-family:var(--fh);font-size:calc(1.05rem*var(--scale));font-weight:700;color:var(--ink);margin-bottom:3px}
+.tl-desc{font-size:calc(.72rem*var(--scale));color:#888;font-style:italic}
+
+/* ═══════════════ GALLERY (with glow) ═══════════════ */
+.s-gallery{padding:60px 24px;background:var(--bg1);position:relative;overflow:hidden}
+.gal-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;margin:0 auto}
+.gal-grid::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:80%;background:radial-gradient(ellipse,rgba(201,151,42,.09),transparent 60%);pointer-events:none;z-index:0;animation:pulse 4s ease-in-out infinite}
+.gal-grid .gi:first-child{grid-column:1/3;aspect-ratio:16/10}
+.gi{aspect-ratio:1/1;border-radius:10px;overflow:hidden;position:relative;cursor:pointer;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;background-size:cover;background-position:center;transition:all .4s ease;z-index:1}
+.gi:hover{transform:scale(1.02);z-index:2;border-color:var(--line2);box-shadow:inset 0 0 20px rgba(201,151,42,.12)}
+.gi::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.4));pointer-events:none}
+.gi-add{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tw3);font-size:.62rem}
+.gi-add svg{width:22px;height:22px;fill:none;stroke:var(--tw3);stroke-width:1.6}
+.gi.has-img .gi-add{display:none}
+.gal-hint{position:relative;text-align:center;font-size:.65rem;color:var(--tw3);margin-top:14px;z-index:1}
+
+/* ═══════════════ WISHES WALL ═══════════════ */
+.s-wishes{padding:60px 24px;background:var(--paper2);color:var(--ink)}
+.wi-list{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.wi{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:10px;padding:16px 18px;border-left:3px solid var(--accent);transition:all .3s}
+.wi:hover{border-left-color:var(--accent2);box-shadow:0 4px 24px rgba(201,151,42,.1);transform:translateX(4px)}
+.wi-name{font-weight:700;font-size:.78rem;color:var(--ink);margin-bottom:4px}
+.wi-txt{font-size:.76rem;color:#777;font-style:italic;line-height:1.6}
+.wi-add-btn{display:block;margin:16px auto 0;background:none;border:1.5px dashed var(--line2);color:var(--accent);border-radius:10px;padding:12px;font-size:.72rem;font-weight:600;cursor:pointer;max-width:420px;width:100%}
+
+/* ═══════════════ RSVP ═══════════════ */
+.s-rsvp{padding:60px 24px 20px;background:var(--paper);color:var(--ink)}
+.rsvp-card{max-width:400px;margin:0 auto;background:#fff;border-radius:16px;padding:28px 22px;border:1px solid rgba(0,0,0,.06);box-shadow:0 8px 32px rgba(0,0,0,.06),0 0 0 1px rgba(201,151,42,.05)}
+.rsvp-intro{text-align:center;font-size:calc(.78rem*var(--scale));color:#777;margin-bottom:22px;line-height:1.7}
+.rsvp-intro b{color:var(--ink)}
+.f-lbl{font-size:.62rem;letter-spacing:1.5px;color:#999;margin-bottom:7px;display:block;font-weight:600}
+.f-group{margin-bottom:16px}
+.f-input{width:100%;border:1px solid rgba(0,0,0,.12);border-radius:10px;padding:12px 14px;font-size:.85rem;font-family:var(--fb);background:var(--paper2);color:var(--ink)}
+.f-input:focus{outline:none;border-color:var(--accent)}
+.attend-row{display:flex;gap:10px}
+.attend-btn{flex:1;padding:12px;border-radius:10px;border:1.5px solid rgba(0,0,0,.12);background:var(--paper2);font-size:.78rem;font-weight:600;color:#777;cursor:pointer;transition:all .2s}
+.attend-btn.active{background:var(--ink2);border-color:var(--ink2);color:#fff}
+.guest-row{display:flex;gap:8px;flex-wrap:wrap}
+.guest-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(0,0,0,.12);background:var(--paper2);font-size:.78rem;font-weight:600;color:#777;cursor:pointer}
+.guest-btn.active{background:var(--ink2);border-color:var(--ink2);color:#fff}
+.rsvp-send{width:100%;background:#25D366;color:#fff;border:none;border-radius:12px;padding:14px;font-size:.82rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-top:6px}
+.rsvp-send svg{width:17px;height:17px;fill:#fff}
+
+.footer-note{text-align:center;padding:30px 24px 10px;color:var(--tw3);font-size:.68rem;line-height:1.8}
+.footer-mono{font-family:var(--fc);font-size:1.6rem;color:var(--accent2);margin-bottom:10px}
+.footer-brand{text-align:center;padding:14px 24px 30px;font-size:.6rem;color:var(--tw3);letter-spacing:1px}
+
+/* ═══ FLOATING FABS ═══ */
+.music-fab{position:fixed;bottom:calc(var(--cta-h) + var(--toolbar-h) + 66px);right:16px;z-index:380;width:44px;height:44px;border-radius:50%;background:var(--bg2);border:1.5px solid var(--line2);color:var(--accent2);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+.music-fab.on{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+.wa-fab{position:fixed;bottom:calc(var(--cta-h) + var(--toolbar-h) + 16px);right:16px;z-index:380;width:44px;height:44px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s}
+.wa-fab:hover{transform:scale(1.1)}
+.wa-fab svg{width:20px;height:20px;fill:#fff}
+
+/* ═══════════════ STICKY CTA + TOOLBAR ═══════════════ */
+.sticky-cta{position:fixed;left:0;right:0;bottom:var(--toolbar-h);height:var(--cta-h);z-index:390;background:var(--paper);border-top:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:8px}
+.plan-toggle{display:flex;gap:6px}
+.plan-pill{font-size:.58rem;font-weight:700;padding:8px 11px;border-radius:100px;border:1.5px solid rgba(0,0,0,.12);background:var(--paper2);color:#888;cursor:pointer;white-space:nowrap}
+.plan-pill.active{background:var(--ink2);border-color:var(--ink2);color:#fff}
+.sc-txt{font-size:.65rem;letter-spacing:1px;color:#999;font-weight:600}
+.sc-btn{background:var(--ink2);color:#fff;border:none;border-radius:100px;padding:11px 22px;font-size:.78rem;font-weight:700;display:flex;align-items:center;gap:8px;cursor:pointer}
+.toolbar{position:fixed;left:0;right:0;bottom:0;height:var(--toolbar-h);z-index:395;background:#fff;border-top:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-around;padding-bottom:env(safe-area-inset-bottom)}
+.tbar-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;color:#888;font-size:.6rem;font-weight:600;cursor:pointer;padding:6px 10px}
+.tbar-btn svg{width:20px;height:20px;fill:none;stroke:#888;stroke-width:1.6}
+.tbar-btn.active,.tbar-btn.active svg{color:var(--ink2);stroke:var(--ink2)}
+.tbar-btn.active{color:var(--ink2)}
+
+/* ═══════════════ BOTTOM SHEET ═══════════════ */
+.sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;opacity:0;pointer-events:none;transition:opacity .25s}
+.sheet-backdrop.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:501;background:#fff;border-radius:20px 20px 0 0;padding:18px 20px calc(24px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);max-height:60vh;overflow-y:auto;color:var(--ink)}
+.sheet.open{transform:translateY(0)}
+.sheet-handle{width:36px;height:4px;background:#ddd;border-radius:4px;margin:0 auto 16px}
+.sheet-title{font-family:var(--fh);font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--ink)}
+.preset-row{display:flex;gap:12px;flex-wrap:wrap}
+.preset-swatch{width:64px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;border:none;background:none}
+.preset-circ{width:44px;height:44px;border-radius:50%;border:2px solid transparent;position:relative}
+.preset-swatch.active .preset-circ{border-color:var(--ink2)}
+.preset-swatch span{font-size:.6rem;color:#777;font-weight:600}
+.font-opt{display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid rgba(0,0,0,.06);cursor:pointer}
+.font-opt.active{color:var(--accent)}
+.font-opt-name{font-size:1.3rem}
+.font-opt-lbl{font-size:.65rem;color:#999;font-weight:600;letter-spacing:.5px}
+.scale-row{display:flex;gap:10px}
+.scale-btn{flex:1;padding:16px;border-radius:12px;border:1.5px solid rgba(0,0,0,.1);background:var(--paper2);cursor:pointer;text-align:center}
+.scale-btn.active{border-color:var(--ink2);background:var(--ink2);color:#fff}
+.scale-btn-lbl{font-size:.65rem;font-weight:600;margin-top:4px}
+.sec-nav-item{display:flex;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid rgba(0,0,0,.06);cursor:pointer}
+.sec-nav-ic{width:30px;height:30px;border-radius:8px;background:var(--paper2);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0}
+.sec-nav-lbl{font-size:.82rem;font-weight:600;color:var(--ink)}
+
+.hint-toast{position:fixed;top:calc(var(--topbar-h) + 12px);left:50%;transform:translateX(-50%) translateY(-10px);background:rgba(20,10,10,.9);color:#fff;font-size:.7rem;padding:9px 16px;border-radius:100px;z-index:399;display:flex;align-items:center;gap:8px;opacity:0;pointer-events:none;transition:all .3s;white-space:nowrap;backdrop-filter:blur(6px)}
+.hint-toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.hint-toast button{background:none;border:none;color:rgba(255,255,255,.6);font-size:.9rem;cursor:pointer;margin-left:4px}
+
+/* ═══════════════ COUPLE STORY ═══════════════ */
+.s-story{padding:56px 24px;background:var(--bg1)}
+.story-timeline{max-width:400px;margin:0 auto;position:relative;padding-left:26px}
+.story-timeline::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:linear-gradient(180deg,transparent,var(--line2),var(--line2),transparent)}
+.story-item{position:relative;padding-bottom:28px}
+.story-item:last-child{padding-bottom:0}
+.story-dot{position:absolute;left:-26px;top:4px;width:13px;height:13px;border-radius:50%;background:var(--accent2);box-shadow:0 0 0 4px var(--bg1),0 0 0 5px var(--line2)}
+.story-year{font-family:var(--fs);font-size:.58rem;letter-spacing:2px;color:var(--accent2);margin-bottom:5px}
+.story-text{font-size:calc(.78rem*var(--scale));color:var(--tw2);line-height:1.7}
+
+/* ═══════════════ FAMILY DETAILS ═══════════════ */
+.s-family{padding:56px 24px;background:var(--paper);color:var(--ink)}
+.family-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:420px;margin:0 auto}
+.family-card{background:#fff;border-radius:14px;padding:20px 16px;text-align:center;border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 24px rgba(0,0,0,.05);transition:box-shadow .3s}
+.family-card:hover{box-shadow:0 8px 30px rgba(201,151,42,.2)}
+.family-side{font-family:var(--fs);font-size:.5rem;letter-spacing:2px;color:var(--accent);margin-bottom:10px}
+.family-avatar{width:44px;height:44px;border-radius:50%;background:var(--paper2);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.2rem;color:var(--accent)}
+.family-name{font-family:var(--fh);font-size:calc(.85rem*var(--scale));font-weight:700;color:var(--ink);line-height:1.5}
+.family-role{font-size:.62rem;color:#999;margin-top:2px}
+
+/* ═══════════════ CEREMONY SCHEDULE (multi-day) ═══════════════ */
+.s-ceremony{padding:56px 24px;background:var(--paper2);color:var(--ink)}
+.cer-grid{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.cer-card{background:#fff;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;border:1px solid rgba(0,0,0,.05);border-left:3px solid var(--accent);transition:box-shadow .3s}
+.cer-card:hover{box-shadow:0 8px 26px rgba(201,151,42,.18)}
+.cer-day{width:46px;height:46px;border-radius:10px;background:var(--paper2);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.cer-day-num{font-family:var(--fh);font-weight:700;font-size:1rem;color:var(--ink)}
+.cer-day-lbl{font-size:.5rem;color:#999;letter-spacing:.5px}
+.cer-name{font-family:var(--fh);font-size:calc(.9rem*var(--scale));font-weight:700;color:var(--ink)}
+.cer-time{font-size:.68rem;color:var(--accent);font-weight:600;margin-top:2px}
+.cer-desc{font-size:.7rem;color:#888;font-style:italic;margin-top:2px}
+
+/* ═══════════════ DRESS CODE ═══════════════ */
+.s-dress{padding:56px 24px;background:var(--bg1);text-align:center}
+.dress-note{max-width:340px;margin:0 auto 20px;font-size:calc(.78rem*var(--scale));color:var(--tw2);line-height:1.8}
+.dress-swatches{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.dress-sw{display:flex;flex-direction:column;align-items:center;gap:7px;width:78px}
+.dress-sw-circ{width:38px;height:38px;border-radius:50%;border:2px solid var(--line2)}
+.dress-sw span{font-size:.6rem;color:var(--tw3);text-align:center;line-height:1.3}
+
+/* ═══════════════ HOST COMMITTEE / CONTACTS ═══════════════ */
+.s-contacts{padding:56px 24px;background:var(--paper);color:var(--ink)}
+.contact-grid{max-width:400px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.contact-card{background:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1px solid rgba(0,0,0,.06);transition:box-shadow .3s}
+.contact-card:hover{box-shadow:0 8px 24px rgba(201,151,42,.16)}
+.contact-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.8rem;flex-shrink:0}
+.contact-info{flex:1;min-width:0}
+.contact-name{font-family:var(--fh);font-size:calc(.85rem*var(--scale));font-weight:700;color:var(--ink)}
+.contact-role{font-size:.65rem;color:#999}
+.contact-btn{width:34px;height:34px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:none;cursor:pointer}
+.contact-btn svg{width:16px;height:16px;fill:#fff}
+
+/* ═══ TRADITIONAL ELEMENTS DIVIDER (vector motifs, not PNG — scales crisp, matches theme, no copyright risk) ═══ */
+.trad-strip{padding:34px 24px;background:var(--bg1);display:flex;flex-direction:column;align-items:center;gap:14px}
+.trad-strip-line{display:flex;align-items:center;gap:10px;width:100%;max-width:360px}
+.trad-strip-line .sd-line{flex:1}
+.trad-icons{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+.trad-ic{width:26px;height:26px;color:var(--accent2);opacity:.85}
+
+/* ═══ ICON SYMBOL SIZING ═══ */
+.ic-symbol{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;color:var(--accent)}
+.family-avatar .ic-symbol{width:20px;height:20px}
+.tl-ic .ic-symbol{width:18px;height:18px}
+.sec-nav-ic .ic-symbol{width:16px;height:16px}
+
+@media(min-width:600px){.s-hero,.s-count,.s-venue,.s-program,.s-gallery,.s-wishes,.s-rsvp,.s-story,.s-family,.s-ceremony,.s-dress,.s-contacts{padding-left:5vw;padding-right:5vw}}
+</style>
+</head>
+<body class="locked">
+
+<div class="grain"></div>
+
+<!-- ═══ SVG ICON LIBRARY (replaces pictographic emoji with elegant gold line icons) ═══ -->
+<svg style="display:none" aria-hidden="true">
+<defs>
+  <symbol id="ic-flower" viewBox="0 0 24 24"><path d="M12 8a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 8a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm-4-4a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm12 0a3 3 0 1 1 6 0 3 3 0 0 1-6 0zM9.5 9.5a3 3 0 1 1-4.2-4.2 3 3 0 0 1 4.2 4.2zm9.2-4.2a3 3 0 1 1-4.2 4.2 3 3 0 0 1 4.2-4.2zM9.5 14.5a3 3 0 1 1-4.2 4.2 3 3 0 0 1 4.2-4.2zm9.2 4.2a3 3 0 1 1-4.2-4.2 3 3 0 0 1 4.2 4.2z"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="ic-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5v-17z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></symbol>
+  <symbol id="ic-family" viewBox="0 0 24 24"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="8" r="2.4"/><path d="M2 21v-2a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v2"/><path d="M15 21v-1.5a4 4 0 0 1 4-4h.5a3.5 3.5 0 0 1 3.5 3.5V21"/></symbol>
+  <symbol id="ic-pin" viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="ic-diya" viewBox="0 0 24 24"><path d="M3 15c1.5 3 5 5 9 5s7.5-2 9-5"/><ellipse cx="12" cy="15" rx="9" ry="3"/><path d="M12 11c-1.5-2-1-4.5 0-6.5C13 6.5 13.5 9 12 11z"/></symbol>
+  <symbol id="ic-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.4"/><circle cx="4.5" cy="12" r="1.4"/><circle cx="4.5" cy="18" r="1.4"/></symbol>
+  <symbol id="ic-dress" viewBox="0 0 24 24"><path d="M9 2h6l1 4-2 2 3 13H7L10 8 8 6z"/></symbol>
+  <symbol id="ic-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 16l-5.5-5.5L9 17"/></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.4-6.5L21 4l-1 4.5A7.9 7.9 0 0 1 21 12z"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 24 24"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 1H6a2 2 0 0 1 2 1.7c.1 1 .4 2.1.7 3.1a2 2 0 0 1-.5 2.1L7 9c1.3 2.6 3.4 4.7 6 6l1.1-1.2a2 2 0 0 1 2.1-.5c1 .3 2 .5 3.1.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="ic-envelope" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 8 10-8"/></symbol>
+  <symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="ic-ring" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><path d="M9 9l3-6 3 6"/></symbol>
+  <symbol id="ic-feast" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="3.5"/><path d="M3 12v3c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5v-3"/></symbol>
+  <symbol id="ic-lamp" viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M6 8c0-2 2.5-3 6-3s6 1 6 3-2.5 3-6 3-6-1-6-3z"/><path d="M7 9l1 8h8l1-8"/><path d="M9 20h6"/><path d="M12 14c1-1 1-2 0-3-1 1-1 2 0 3z"/></symbol>
+  <symbol id="ic-kalasham" viewBox="0 0 24 24"><path d="M8 8c0-2 1.8-4 4-4s4 2 4 4"/><path d="M6 8h12l-1.5 11a2 2 0 0 1-2 1.8h-5a2 2 0 0 1-2-1.8L6 8z"/><path d="M9 5l-1-2M15 5l1-2"/></symbol>
+  <symbol id="ic-thoranam" viewBox="0 0 24 24"><path d="M2 5c3 4 6 4 10 0 4 4 7 4 10 0"/><path d="M6 5v3M10.5 6v3M13.5 6v3M18 5v3"/></symbol>
+  <symbol id="ic-garland" viewBox="0 0 24 24"><path d="M4 5c3 6 13 6 16 0"/><circle cx="6" cy="8" r="1.4"/><circle cx="9.5" cy="12.5" r="1.4"/><circle cx="14.5" cy="12.5" r="1.4"/><circle cx="18" cy="8" r="1.4"/><circle cx="12" cy="14" r="1.6"/></symbol>
+  <symbol id="ic-conch" viewBox="0 0 24 24"><path d="M12 3c4 0 7 3.5 7 8 0 5-4 9-7 9s-7-2-7-6c0-2.5 2-4 4-3 1.5.7 1 3 3 3 2.5 0 3.5-2.5 2-4.5-1-1.3-2.5-1-3.5-2.3C9.5 5.8 10 3 12 3z"/></symbol>
+</defs>
+</svg>
+
+<!-- ═══════════ CARD GATE — signature open animation ═══════════ -->
+<div id="cardGate">
+  <div class="gate-bg">
+    <span class="gate-petal">❀</span><span class="gate-petal">✦</span><span class="gate-petal">❀</span>
+    <span class="gate-petal">✦</span><span class="gate-petal">❀</span>
+  </div>
+  <div class="card-wrap">
+    <div class="card" id="theCard">
+      <div class="card-inner-border"></div>
+      <div class="card-corner tl"></div><div class="card-corner tr"></div>
+      <div class="card-corner bl"></div><div class="card-corner br"></div>
+      <div class="card-content">
+        <div class="card-god">🕉</div>
+        <div class="card-tag">ENGAGEMENT INVITATION</div>
+        <div class="card-names" id="gateNames">Vignesh<span class="card-amp">&amp;</span>Partner Name</div>
+        <div class="card-date" id="gateDate">04 DECEMBER 2026</div>
+        <div class="card-divider"><div class="card-divider-line"></div><div class="card-divider-icon">✦</div><div class="card-divider-line"></div></div>
+        <button class="card-open-btn" onclick="openCard()">Open Invitation</button>
+        <div class="card-hint">Tap to reveal</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="mainContent">
+
+<!-- ═══ TOP EDITOR BAR ═══ -->
+<div class="topbar">
+  <div class="tb-left">
+    <button class="tb-back" onclick="history.back()" aria-label="Back">‹</button>
+    <div class="tb-titles">
+      <div class="tb-title">LIVE EDITOR</div>
+      <div class="tb-sub">Engagement — Golden Promise</div>
+    </div>
+  </div>
+  <div class="tb-right">
+    <button class="tb-icon-btn" onclick="undoLast()" aria-label="Undo" title="Undo last change">↺</button>
+    <div class="tb-chip">✎ Tap to edit</div>
+    <div class="tb-avatar">A</div>
+  </div>
+</div>
+
+<div class="hint-toast" id="hintToast">
+  👆 Tap any text below to edit it live
+  <button onclick="dismissHint()" aria-label="Dismiss">×</button>
+</div>
+
+<!-- ═══════════ 1. HERO ═══════════ -->
+<section class="s-hero" id="sec-hero">
+  <div class="hero-mandala"></div>
+  <div class="deco-ring deco-ring-1"></div>
+  <div class="deco-ring deco-ring-2"></div>
+  <div class="deco-ring deco-ring-3"></div>
+  <span class="hero-corner hc-tl">❦</span><span class="hero-corner hc-tr">❦</span>
+  <span class="hero-corner hc-bl">❦</span><span class="hero-corner hc-br">❦</span>
+  <span class="float-el fe-1">❀</span><span class="float-el fe-2">✦</span>
+  <span class="float-el fe-3">❀</span><span class="float-el fe-4">✦</span><span class="float-el fe-5">❀</span>
+
+  <div class="god-silhouette">
+    <div class="god-sil-ring1"></div><div class="god-sil-ring2"></div>
+    <div class="god-sil-inner">🕉</div>
+  </div>
+  <span class="hero-tag">GANESH VANDANA</span>
+  <p class="hero-invite edit-flag" contenteditable="true" spellcheck="false">as we begin this beautiful journey of commitment</p>
+
+  <p class="hero-parents edit-flag" contenteditable="true" spellcheck="false">
+    Son of <b>Father's Name &amp; Mother's Name</b><br>
+    Daughter of <b>Father's Name &amp; Mother's Name</b>
+  </p>
+
+  <div class="hero-names">
+    <span class="hero-name edit-flag" contenteditable="true" spellcheck="false" id="heroName1">Vignesh</span>
+    <span class="hero-amp">&amp;</span>
+    <span class="hero-name edit-flag" contenteditable="true" spellcheck="false" id="heroName2">Partner Name</span>
+  </div>
+
+  <div class="hero-dt">
+    <div class="hero-dt-chip" style="position:relative">
+      <svg viewBox="0 0 24 24"><path d="M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm12 8v10H5V10h14z"/></svg>
+      <span class="edit-flag" contenteditable="true" spellcheck="false" id="weddingDate">4 December 2026</span>
+      <span class="sync-flash" id="dateSyncFlash">Countdown updated ✓</span>
+    </div>
+    <div class="hero-dt-chip" style="position:relative">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.5V6h-2v8h6v-2h-4z"/></svg>
+      <span class="edit-flag" contenteditable="true" spellcheck="false" id="weddingTime">Time — tap to add</span>
+      <span class="sync-flash" id="timeSyncFlash">Countdown updated ✓</span>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider" style="background:var(--bg1)">
+  <span class="sd-line"></span><span class="sd-icon">✦</span><span class="sd-line r"></span>
+</div>
+
+<!-- ═══════════ 2. COUNTDOWN ═══════════ -->
+<section class="s-count reveal">
+  <div class="count-lbl">COUNTING EVERY MOMENT</div>
+  <div class="count-row">
+    <div class="cd-box" id="cdBoxD"><div class="cd-num" id="cd-d">--</div><div class="cd-unit">DAYS</div></div>
+    <div class="cd-box" id="cdBoxH"><div class="cd-num" id="cd-h">--</div><div class="cd-unit">HRS</div></div>
+    <div class="cd-box" id="cdBoxM"><div class="cd-num" id="cd-m">--</div><div class="cd-unit">MIN</div></div>
+    <div class="cd-box" id="cdBoxS"><div class="cd-num" id="cd-s">--</div><div class="cd-unit">SEC</div></div>
+  </div>
+  <div class="count-note">Edit the date or time above — this counter updates automatically</div>
+</section>
+
+<!-- ═══════════ COUPLE STORY ═══════════ -->
+<section class="s-story reveal" id="sec-story">
+  <span class="sec-ey" style="color:var(--accent2)">OUR STORY</span>
+  <h2 class="sec-tt" style="color:var(--accent2)">How It Began</h2>
+  <div class="story-timeline">
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div class="story-year edit-flag" contenteditable="true" spellcheck="false">2021 — FIRST MET</div>
+      <div class="story-text edit-flag" contenteditable="true" spellcheck="false">A chance introduction at a common friend's celebration — and an instant, easy conversation.</div>
+    </div>
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div class="story-year edit-flag" contenteditable="true" spellcheck="false">2023 — THE PROPOSAL</div>
+      <div class="story-text edit-flag" contenteditable="true" spellcheck="false">Under a sky full of stars, a promise was made — to stand together through every season of life.</div>
+    </div>
+    <div class="story-item">
+      <div class="story-dot"></div>
+      <div class="story-year edit-flag" contenteditable="true" spellcheck="false">2026 — THE PROMISE</div>
+      <div class="story-text edit-flag" contenteditable="true" spellcheck="false">And now, surrounded by the people we love most, we take the first formal step toward forever.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FAMILY DETAILS ═══════════ -->
+<section class="s-family reveal" id="sec-family">
+  <span class="sec-ey">WITH THE BLESSINGS OF</span>
+  <h2 class="sec-tt">Our Families</h2>
+  <div class="family-grid">
+    <div class="family-card">
+      <div class="family-side">GROOM'S SIDE</div>
+      <div class="family-avatar"><svg class="ic-symbol"><use href="#ic-family"></use></svg></div>
+      <div class="family-name edit-flag" contenteditable="true" spellcheck="false">Father's Name</div>
+      <div class="family-role">Father</div>
+      <div class="family-name edit-flag" contenteditable="true" spellcheck="false" style="margin-top:8px">Mother's Name</div>
+      <div class="family-role">Mother</div>
+    </div>
+    <div class="family-card">
+      <div class="family-side">BRIDE'S SIDE</div>
+      <div class="family-avatar"><svg class="ic-symbol"><use href="#ic-family"></use></svg></div>
+      <div class="family-name edit-flag" contenteditable="true" spellcheck="false">Father's Name</div>
+      <div class="family-role">Father</div>
+      <div class="family-name edit-flag" contenteditable="true" spellcheck="false" style="margin-top:8px">Mother's Name</div>
+      <div class="family-role">Mother</div>
+    </div>
+  </div>
+</section>
+
+<div class="trad-strip reveal">
+  <div class="trad-strip-line"><span class="sd-line"></span><span class="sd-icon">✦</span><span class="sd-line r"></span></div>
+  <div class="trad-icons" title="Traditional elements">
+    <svg class="trad-ic"><use href="#ic-lamp"></use></svg>
+    <svg class="trad-ic"><use href="#ic-kalasham"></use></svg>
+    <svg class="trad-ic"><use href="#ic-thoranam"></use></svg>
+    <svg class="trad-ic"><use href="#ic-garland"></use></svg>
+    <svg class="trad-ic"><use href="#ic-conch"></use></svg>
+  </div>
+</div>
+
+<!-- ═══════════ 3. VENUE ═══════════ -->
+<section class="s-venue reveal" id="sec-venue">
+  <span class="sec-ey">VENUE</span>
+  <h2 class="sec-tt">Where We Celebrate</h2>
+  <div class="venue-card">
+    <div class="venue-pin">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 8 12 8 12s8-6.6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+    </div>
+    <div class="venue-name edit-flag" contenteditable="true" spellcheck="false">Venue Name — tap to edit</div>
+    <div class="venue-addr edit-flag" contenteditable="true" spellcheck="false">Full venue address — tap to edit</div>
+    <button class="venue-btn" onclick="openMaps()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3L3 10.5l7.5 3L13.5 21z"/></svg>
+      Get Directions
+    </button>
+  </div>
+  <div class="venue-map-box" id="mapBox" onclick="openMaps()">
+    <iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=India&output=embed"></iframe>
+    <div class="venue-map-overlay">
+      <div class="venue-map-tap">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M21 3L3 10.5l7.5 3L13.5 21z"/></svg>
+        Tap for directions
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CEREMONY SCHEDULE (multi-day) ═══════════ -->
+<section class="s-ceremony reveal" id="sec-ceremony">
+  <span class="sec-ey">A DAY OF PROMISES</span>
+  <h2 class="sec-tt">Engagement Day Program</h2>
+  <div class="cer-grid">
+    <div class="cer-card">
+      <div class="cer-day"><div class="cer-day-num">04</div><div class="cer-day-lbl">DEC</div></div>
+      <div>
+        <div class="cer-name edit-flag" contenteditable="true" spellcheck="false">Guests Arrive &amp; Welcome</div>
+        <div class="cer-time edit-flag" contenteditable="true" spellcheck="false">Time — tap to add</div>
+        <div class="cer-desc edit-flag" contenteditable="true" spellcheck="false">Venue — tap to add</div>
+      </div>
+    </div>
+    <div class="cer-card">
+      <div class="cer-day"><div class="cer-day-num">04</div><div class="cer-day-lbl">DEC</div></div>
+      <div>
+        <div class="cer-name edit-flag" contenteditable="true" spellcheck="false">Ring Exchange Ceremony</div>
+        <div class="cer-time edit-flag" contenteditable="true" spellcheck="false">Time — tap to add</div>
+        <div class="cer-desc edit-flag" contenteditable="true" spellcheck="false">The moment of promise</div>
+      </div>
+    </div>
+    <div class="cer-card">
+      <div class="cer-day"><div class="cer-day-num">04</div><div class="cer-day-lbl">DEC</div></div>
+      <div>
+        <div class="cer-name edit-flag" contenteditable="true" spellcheck="false">Family Blessings</div>
+        <div class="cer-time edit-flag" contenteditable="true" spellcheck="false">Time — tap to add</div>
+        <div class="cer-desc edit-flag" contenteditable="true" spellcheck="false">Elders' blessings for the couple</div>
+      </div>
+    </div>
+    <div class="cer-card">
+      <div class="cer-day"><div class="cer-day-num">04</div><div class="cer-day-lbl">DEC</div></div>
+      <div>
+        <div class="cer-name edit-flag" contenteditable="true" spellcheck="false">Dinner &amp; Celebration</div>
+        <div class="cer-time edit-flag" contenteditable="true" spellcheck="false">Time — tap to add</div>
+        <div class="cer-desc edit-flag" contenteditable="true" spellcheck="false">Followed by dinner with loved ones</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4. PROGRAM ═══════════ -->
+<section class="s-program reveal" id="sec-program">
+  <span class="sec-ey">THE ESSENTIALS</span>
+  <h2 class="sec-tt">At a Glance</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-ic"><svg class="ic-symbol"><use href="#ic-calendar"></use></svg></div>
+      <div>
+        <div class="tl-eyebrow">THE DATE</div>
+        <div class="tl-title edit-flag" contenteditable="true" spellcheck="false">Friday, 4 December 2026</div>
+        <div class="tl-desc edit-flag" contenteditable="true" spellcheck="false">An auspicious day for a new beginning</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-ic"><svg class="ic-symbol"><use href="#ic-ring"></use></svg></div>
+      <div>
+        <div class="tl-eyebrow">RING EXCHANGE</div>
+        <div class="tl-title edit-flag" contenteditable="true" spellcheck="false">Time — tap to add</div>
+        <div class="tl-desc edit-flag" contenteditable="true" spellcheck="false">The formal engagement moment</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-ic"><svg class="ic-symbol"><use href="#ic-feast"></use></svg></div>
+      <div>
+        <div class="tl-eyebrow">DINNER</div>
+        <div class="tl-title edit-flag" contenteditable="true" spellcheck="false">Time — tap to add</div>
+        <div class="tl-desc edit-flag" contenteditable="true" spellcheck="false">Followed by dinner &amp; celebration</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ DRESS CODE ═══════════ -->
+<section class="s-dress reveal" id="sec-dress">
+  <span class="sec-ey">DRESS CODE</span>
+  <h2 class="sec-tt" style="color:var(--accent2)">Traditional Elegance</h2>
+  <p class="dress-note edit-flag" contenteditable="true" spellcheck="false">We'd love to see you in traditional attire. Here's the palette we're celebrating in — feel free to draw inspiration from these tones.</p>
+  <div class="dress-swatches">
+    <div class="dress-sw"><div class="dress-sw-circ" style="background:#1E4E8C"></div><span class="edit-flag" contenteditable="true" spellcheck="false">Royal Blue (Groom)</span></div>
+    <div class="dress-sw"><div class="dress-sw-circ" style="background:#6B2C91"></div><span class="edit-flag" contenteditable="true" spellcheck="false">Deep Purple (Bride)</span></div>
+    <div class="dress-sw"><div class="dress-sw-circ" style="background:#D6779F"></div><span class="edit-flag" contenteditable="true" spellcheck="false">Blush Pink (Bride)</span></div>
+    <div class="dress-sw"><div class="dress-sw-circ" style="background:#C9972A"></div><span class="edit-flag" contenteditable="true" spellcheck="false">Gold Accent</span></div>
+  </div>
+</section>
+
+<!-- ═══════════ 5. GALLERY (glow) ═══════════ -->
+<section class="s-gallery reveal" id="sec-gallery">
+  <span class="sec-ey">MEMORIES</span>
+  <h2 class="sec-tt" style="color:var(--accent2)">Moments of Love</h2>
+  <div class="gal-grid" id="galGrid">
+    <div class="gi" onclick="triggerUpload(this)"><div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add cover photo</div></div>
+    <div class="gi" onclick="triggerUpload(this)"><div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add photo</div></div>
+    <div class="gi" onclick="triggerUpload(this)"><div class="gi-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add photo</div></div>
+  </div>
+  <div class="gal-hint">Tap any tile to upload a photo</div>
+</section>
+<input type="file" id="fileInput" accept="image/*" style="display:none">
+
+<!-- ═══════════ 6. WISHES WALL ═══════════ -->
+<section class="s-wishes reveal" id="sec-wishes">
+  <span class="sec-ey">BLESSINGS</span>
+  <h2 class="sec-tt">Wishes From Loved Ones</h2>
+  <div class="wi-list" id="wiList">
+    <div class="wi"><div class="wi-name">Guest Name</div><div class="wi-txt edit-flag" contenteditable="true" spellcheck="false">Wishing you both a lifetime of love and happiness together!</div></div>
+    <div class="wi"><div class="wi-name">Guest Name</div><div class="wi-txt edit-flag" contenteditable="true" spellcheck="false">May your journey together be as beautiful as your love story.</div></div>
+  </div>
+  <button class="wi-add-btn" onclick="addWish()">+ Add a sample wish card</button>
+</section>
+
+<!-- ═══════════ HOST COMMITTEE ═══════════ -->
+<section class="s-contacts reveal" id="sec-contacts">
+  <span class="sec-ey">NEED HELP?</span>
+  <h2 class="sec-tt">Host Committee</h2>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="contact-avatar">V</div>
+      <div class="contact-info">
+        <div class="contact-name edit-flag" contenteditable="true" spellcheck="false">Contact Name</div>
+        <div class="contact-role edit-flag" contenteditable="true" spellcheck="false">Groom's side · +91 XXXXX XXXXX</div>
+      </div>
+      <button class="contact-btn" onclick="contactWA(this)"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></button>
+    </div>
+    <div class="contact-card">
+      <div class="contact-avatar">P</div>
+      <div class="contact-info">
+        <div class="contact-name edit-flag" contenteditable="true" spellcheck="false">Contact Name</div>
+        <div class="contact-role edit-flag" contenteditable="true" spellcheck="false">Bride's side · +91 XXXXX XXXXX</div>
+      </div>
+      <button class="contact-btn" onclick="contactWA(this)"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 7. RSVP ═══════════ -->
+<section class="s-rsvp reveal" id="sec-rsvp">
+  <span class="sec-ey">RSVP</span>
+  <h2 class="sec-tt">Kindly Respond</h2>
+  <div class="rsvp-card">
+    <p class="rsvp-intro">Let <b id="rsvpNames">Vignesh &amp; Partner Name</b> know if you can join the celebration</p>
+    <div class="f-group">
+      <label class="f-lbl">YOUR FULL NAME</label>
+      <input class="f-input" id="gName" placeholder="e.g. Sameer &amp; Family">
+    </div>
+    <div class="f-group">
+      <label class="f-lbl">WILL YOU ATTEND?</label>
+      <div class="attend-row">
+        <button class="attend-btn active" id="attendYes" onclick="setAttend(true)">Joyfully Accept</button>
+        <button class="attend-btn" id="attendNo" onclick="setAttend(false)">Regretfully Decline</button>
+      </div>
+    </div>
+    <div class="f-group">
+      <label class="f-lbl">NUMBER OF GUESTS</label>
+      <div class="guest-row" id="guestRow">
+        <button class="guest-btn active" onclick="setGuest(this,1)">1</button>
+        <button class="guest-btn" onclick="setGuest(this,2)">2</button>
+        <button class="guest-btn" onclick="setGuest(this,3)">3</button>
+        <button class="guest-btn" onclick="setGuest(this,4)">4</button>
+        <button class="guest-btn" onclick="setGuest(this,5)">5+</button>
+      </div>
+    </div>
+    <div class="f-group">
+      <label class="f-lbl">HEARTFELT WISH (OPTIONAL)</label>
+      <textarea class="f-input" id="gWish" rows="2" placeholder="Share a blessing or note for the couple..."></textarea>
+    </div>
+    <button class="rsvp-send" onclick="sendRSVP()">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      Send RSVP via WhatsApp
+    </button>
+  </div>
+</section>
+
+<div class="footer-note">
+  <div class="footer-mono" id="footerMono">V &amp; P</div>
+  <p class="edit-flag" contenteditable="true" spellcheck="false" style="font-family:var(--fc);font-size:1.05rem;font-style:italic;color:var(--tw2);margin-bottom:8px">With hearts full of gratitude, we thank you for being part of our story.</p>
+  <p class="edit-flag" contenteditable="true" spellcheck="false">We look forward to celebrating this beautiful journey with you.</p>
+</div>
+<div class="footer-brand">Made with ♥ on UMM Invites</div>
+
+<!-- ═══ FLOATING FABS ═══ -->
+<button class="music-fab" id="musicFab" onclick="toggleMusic()" aria-label="Toggle music" title="Background music">♪</button>
+<audio id="bgMusic" loop preload="none">
+  <!-- 🎵 Drop your chosen track's file path/URL here before publishing, e.g.: -->
+  <!-- <source src="assets/wedding-shehnai.mp3" type="audio/mpeg"> -->
+</audio>
+<a class="wa-fab" href="#" onclick="quickWhatsapp();return false;" aria-label="WhatsApp quick contact" title="Message the couple">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4L10 7.6c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.1 0 1.3.9 2.5 1.1 2.7.1.2 1.9 2.9 4.6 4 .6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5.1-1.3C8.5 21.5 10.2 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C4 14.9 3.7 13.5 3.7 12 3.7 7.4 7.4 3.7 12 3.7S20.3 7.4 20.3 12 16.6 20.3 12 20.3z"/></svg>
+</a>
+
+<!-- ═══ STICKY CTA ═══ -->
+<div class="sticky-cta">
+  <div class="plan-toggle">
+    <button class="plan-pill active" id="planFree" onclick="setPlan('free')">Free (Ads)</button>
+    <button class="plan-pill" id="planPaid" onclick="setPlan('paid')">₹399 Ad-Free</button>
+  </div>
+  <button class="sc-btn" onclick="goNextDetails()">Next — Details →</button>
+</div>
+
+<!-- ═══ BOTTOM TOOLBAR ═══ -->
+<div class="toolbar">
+  <button class="tbar-btn" onclick="openSheet('presets')">
+    <svg viewBox="0 0 24 24"><path d="M12 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+    Presets
+  </button>
+  <button class="tbar-btn" onclick="openSheet('font')">
+    <svg viewBox="0 0 24 24"><path d="M4 6h16M12 6v14"/></svg>
+    Hero Font
+  </button>
+  <button class="tbar-btn" onclick="openSheet('scale')">
+    <svg viewBox="0 0 24 24"><path d="M4 21V3M4 3l4 4M4 3L0 7M20 3v18M20 21l4-4M20 21l-4-4"/></svg>
+    Text Size
+  </button>
+  <button class="tbar-btn" onclick="openSheet('sections')">
+    <svg viewBox="0 0 24 24"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></svg>
+    Sections
+  </button>
+</div>
+
+<div class="sheet-backdrop" id="backdrop" onclick="closeSheet()"></div>
+
+<div class="sheet" id="sheet-presets">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title">Choose a theme</div>
+  <div class="preset-row">
+    <button class="preset-swatch active" data-theme="maroon" onclick="setTheme('maroon',this)">
+      <div class="preset-circ" style="background:linear-gradient(135deg,#4A1010,#C9972A)"></div><span>Maroon Gold</span>
+    </button>
+    <button class="preset-swatch" data-theme="teal" onclick="setTheme('teal',this)">
+      <div class="preset-circ" style="background:linear-gradient(135deg,#082E40,#2FA394)"></div><span>Teal Gold</span>
+    </button>
+    <button class="preset-swatch" data-theme="navy" onclick="setTheme('navy',this)">
+      <div class="preset-circ" style="background:linear-gradient(135deg,#131A45,#C9972A)"></div><span>Navy Gold</span>
+    </button>
+    <button class="preset-swatch" data-theme="rose" onclick="setTheme('rose',this)">
+      <div class="preset-circ" style="background:linear-gradient(135deg,#5C1F26,#C97A6D)"></div><span>Ivory Rose</span>
+    </button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet-font">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title">Hero name style</div>
+  <div class="font-opt active" data-font="classic" onclick="setFont('classic',this)">
+    <span class="font-opt-name" style="font-family:'Cormorant Garamond',serif">Arjun &amp; Priya</span>
+    <span class="font-opt-lbl">CLASSIC</span>
+  </div>
+  <div class="font-opt" data-font="royal" onclick="setFont('royal',this)">
+    <span class="font-opt-name" style="font-family:'Italiana',serif">Arjun &amp; Priya</span>
+    <span class="font-opt-lbl">ROYAL</span>
+  </div>
+  <div class="font-opt" data-font="modern" onclick="setFont('modern',this)">
+    <span class="font-opt-name" style="font-family:'Marcellus',serif">Arjun &amp; Priya</span>
+    <span class="font-opt-lbl">MODERN</span>
+  </div>
+  <div class="font-opt" data-font="tamil" onclick="setFont('tamil',this)">
+    <span class="font-opt-name" style="font-family:'Tiro Tamil',serif">Arjun &amp; Priya</span>
+    <span class="font-opt-lbl">TAMIL TOUCH</span>
+  </div>
+</div>
+
+<div class="sheet" id="sheet-scale">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title">Text size</div>
+  <div class="scale-row">
+    <button class="scale-btn" data-scale="sm" onclick="setScale('sm',this)"><div style="font-size:.85rem">Aa</div><div class="scale-btn-lbl">Small</div></button>
+    <button class="scale-btn active" data-scale="md" onclick="setScale('md',this)"><div style="font-size:1.1rem">Aa</div><div class="scale-btn-lbl">Medium</div></button>
+    <button class="scale-btn" data-scale="lg" onclick="setScale('lg',this)"><div style="font-size:1.35rem">Aa</div><div class="scale-btn-lbl">Large</div></button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet-sections">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title">Jump to section</div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-hero')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-flower"></use></svg></div><div class="sec-nav-lbl">Hero — Names &amp; Date</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-story')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-book"></use></svg></div><div class="sec-nav-lbl">Our Story</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-family')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-family"></use></svg></div><div class="sec-nav-lbl">Family Details</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-venue')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-pin"></use></svg></div><div class="sec-nav-lbl">Venue</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-ceremony')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-diya"></use></svg></div><div class="sec-nav-lbl">Engagement Day Program</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-program')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-list"></use></svg></div><div class="sec-nav-lbl">At a Glance</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-dress')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-dress"></use></svg></div><div class="sec-nav-lbl">Dress Code</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-gallery')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-image"></use></svg></div><div class="sec-nav-lbl">Gallery</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-wishes')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-chat"></use></svg></div><div class="sec-nav-lbl">Wishes Wall</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-contacts')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-phone"></use></svg></div><div class="sec-nav-lbl">Host Committee</div></div>
+  <div class="sec-nav-item" onclick="jumpTo('sec-rsvp')"><div class="sec-nav-ic"><svg class="ic-symbol"><use href="#ic-envelope"></use></svg></div><div class="sec-nav-lbl">RSVP</div></div>
+</div>
+
+</div><!-- /#mainContent -->
+
+<script>
+/* ═══════════════ CARD GATE OPEN ═══════════════ */
+function openCard(){
+  const card = document.getElementById('theCard');
+  const gate = document.getElementById('cardGate');
+  const main = document.getElementById('mainContent');
+  card.classList.add('opening');
+  setTimeout(()=>{
+    gate.classList.add('opened');
+    gate.style.opacity = '0';
+    document.body.classList.remove('locked');
+    main.classList.add('revealed');
+    setTimeout(()=>{ gate.style.display='none'; }, 700);
+  }, 1100);
+}
+
+/* ═══════════════ COUNTDOWN — live, bound to editable date/time ═══════════════ */
+let weddingTarget = new Date('2026-12-04T18:00:00'); // placeholder time — update once time is confirmed
+
+const WEEKDAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+function parseWeddingDateTime(){
+  const rawDate = document.getElementById('weddingDate').textContent.trim();
+  const rawTime = document.getElementById('weddingTime').textContent.trim();
+  // strip a leading weekday like "Saturday, 12 December 2026" -> "12 December 2026"
+  // (checked against real weekday names, not a word-count guess, so "December 25, 2026" is left intact)
+  let cleanDate = rawDate;
+  const commaParts = rawDate.split(',');
+  if(commaParts.length > 1 && WEEKDAYS.includes(commaParts[0].trim().toLowerCase())){
+    cleanDate = commaParts.slice(1).join(',').trim();
+  }
+  let parsed = new Date(`${cleanDate} ${rawTime}`);
+  if(isNaN(parsed.getTime())){
+    // fallback: date only, ignore an unparsable time string
+    parsed = new Date(cleanDate);
+  }
+  return isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function tickCountdown(){
+  const now = new Date();
+  let diff = weddingTarget - now;
+  if(diff < 0) diff = 0;
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor(diff/(1000*60*60)%24);
+  const m = Math.floor(diff/(1000*60)%60);
+  const s = Math.floor(diff/1000%60);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+function resyncCountdown(flashId){
+  const parsed = parseWeddingDateTime();
+  if(parsed){
+    weddingTarget = parsed;
+    tickCountdown();
+    ['cdBoxD','cdBoxH','cdBoxM','cdBoxS'].forEach(id=>{
+      const el = document.getElementById(id);
+      el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse');
+    });
+    if(flashId){
+      const f = document.getElementById(flashId);
+      f.classList.remove('show'); void f.offsetWidth; f.classList.add('show');
+    }
+    // keep the gate card + wedding card date chip in sync too
+    document.getElementById('gateDate').textContent =
+      document.getElementById('weddingDate').textContent.trim().toUpperCase();
+  }
+}
+document.getElementById('weddingDate').addEventListener('blur', ()=>resyncCountdown('dateSyncFlash'));
+document.getElementById('weddingTime').addEventListener('blur', ()=>resyncCountdown('timeSyncFlash'));
+
+/* ═══════════════ NAME PROPAGATION ═══════════════ */
+function syncNames(){
+  const n1 = document.getElementById('heroName1').textContent.trim() || 'Arjun';
+  const n2 = document.getElementById('heroName2').textContent.trim() || 'Priya';
+  document.getElementById('rsvpNames').textContent = `${n1} & ${n2}`;
+  document.getElementById('gateNames').innerHTML = `${n1}<span class="card-amp">&amp;</span>${n2}`;
+  document.getElementById('footerMono').textContent = `${n1[0] || 'A'} & ${n2[0] || 'P'}`;
+  document.title = `${n1} Weds ${n2} — Wedding Invitation`;
+}
+document.getElementById('heroName1').addEventListener('blur', syncNames);
+document.getElementById('heroName2').addEventListener('blur', syncNames);
+
+/* ═══════════════ UNDO HISTORY ═══════════════ */
+let history_ = [];
+document.querySelectorAll('[contenteditable="true"]').forEach(el=>{
+  el.addEventListener('focus', ()=>{ el.dataset.before = el.innerHTML; dismissHint(); });
+  el.addEventListener('blur', ()=>{
+    if(el.dataset.before !== el.innerHTML){
+      history_.push({el, prev: el.dataset.before});
+      saveDraft();
+    }
+  });
+  el.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); } });
+});
+function undoLast(){
+  const last = history_.pop();
+  if(last){
+    last.el.innerHTML = last.prev;
+    if(last.el.id==='weddingDate') resyncCountdown('dateSyncFlash');
+    if(last.el.id==='weddingTime') resyncCountdown('timeSyncFlash');
+    if(last.el.id==='heroName1' || last.el.id==='heroName2') syncNames();
+    saveDraft();
+  }
+}
+
+/* ═══════════════ HINT TOAST ═══════════════ */
+const hint = document.getElementById('hintToast');
+setTimeout(()=> hint.classList.add('show'), 400);
+setTimeout(()=> dismissHint(), 6000);
+function dismissHint(){ hint.classList.remove('show'); }
+
+/* ═══════════════ THEME / FONT / SCALE ═══════════════ */
+function setTheme(name, btn){
+  document.documentElement.setAttribute('data-theme', name);
+  document.querySelectorAll('.preset-swatch').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  saveDraft();
+}
+function setFont(name, opt){
+  document.documentElement.setAttribute('data-font', name);
+  document.querySelectorAll('.font-opt').forEach(o=>o.classList.remove('active'));
+  opt.classList.add('active');
+  saveDraft();
+}
+function setScale(name, btn){
+  document.documentElement.setAttribute('data-scale', name);
+  document.querySelectorAll('.scale-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+/* ═══════════════ SHEETS ═══════════════ */
+const backdrop = document.getElementById('backdrop');
+let openSheetEl = null;
+function openSheet(name){
+  closeSheet();
+  const s = document.getElementById('sheet-'+name);
+  s.classList.add('open'); backdrop.classList.add('open');
+  openSheetEl = s;
+  document.querySelectorAll('.tbar-btn').forEach(b=>b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+function closeSheet(){
+  if(openSheetEl) openSheetEl.classList.remove('open');
+  backdrop.classList.remove('open');
+  document.querySelectorAll('.tbar-btn').forEach(b=>b.classList.remove('active'));
+  openSheetEl = null;
+}
+function jumpTo(id){
+  closeSheet();
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ═══════════════ GALLERY UPLOAD ═══════════════ */
+let activeTile = null;
+const fileInput = document.getElementById('fileInput');
+function triggerUpload(tile){ activeTile = tile; fileInput.click(); }
+fileInput.addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file || !activeTile) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    activeTile.style.backgroundImage = `url(${ev.target.result})`;
+    activeTile.classList.add('has-img');
+    saveDraft();
+  };
+  reader.readAsDataURL(file);
+  fileInput.value = '';
+});
+
+/* ═══════════════ WISHES WALL ═══════════════ */
+function addWish(){
+  const list = document.getElementById('wiList');
+  const card = document.createElement('div');
+  card.className = 'wi';
+  card.innerHTML = `<div class="wi-name edit-flag" contenteditable="true" spellcheck="false">Guest Name</div><div class="wi-txt edit-flag" contenteditable="true" spellcheck="false">Write a heartfelt wish here...</div>`;
+  list.appendChild(card);
+  card.querySelectorAll('[contenteditable="true"]').forEach(el=>{
+    el.addEventListener('focus', ()=>{ el.dataset.before = el.innerHTML; dismissHint(); });
+    el.addEventListener('blur', ()=>{ if(el.dataset.before !== el.innerHTML){ history_.push({el, prev: el.dataset.before}); saveDraft(); } });
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); } });
+  });
+}
+
+/* ═══════════════ RSVP ═══════════════ */
+let attending = true, guestCount = 1;
+const WA_NUMBER = '917200752628'; // Universal Money Mart — replace with couple's number before publishing
+function setAttend(yes){
+  attending = yes;
+  document.getElementById('attendYes').classList.toggle('active', yes);
+  document.getElementById('attendNo').classList.toggle('active', !yes);
+}
+function setGuest(btn, n){
+  guestCount = n;
+  document.querySelectorAll('#guestRow .guest-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function sendRSVP(){
+  const name = document.getElementById('gName').value.trim() || 'Guest';
+  const wish = document.getElementById('gWish').value.trim();
+  const status = attending ? 'will joyfully attend' : 'regretfully cannot attend';
+  let msg = `RSVP for ${document.getElementById('rsvpNames').textContent}: ${name} ${status}`;
+  if(attending) msg += ` with ${guestCount} guest(s)`;
+  if(wish) msg += `. Wish: ${wish}`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+function contactWA(btn){
+  const card = btn.closest('.contact-card');
+  const roleText = card.querySelector('.contact-role').textContent;
+  const numMatch = roleText.match(/(\+?\d[\d\s]{7,})/);
+  const num = numMatch ? numMatch[1].replace(/\D/g,'') : WA_NUMBER;
+  const name = card.querySelector('.contact-name').textContent;
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent('Hi '+name+', I had a question about the wedding.')}`, '_blank');
+}
+function quickWhatsapp(){
+  const names = document.getElementById('rsvpNames').textContent;
+  const msg = `Hi! I have a question about the ${names} wedding invitation.`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* ═══════════════ VENUE MAPS ═══════════════ */
+function getVenueAddr(){
+  return document.querySelector('.venue-name').textContent.trim() + ', ' + document.querySelector('.venue-addr').textContent.trim();
+}
+function openMaps(){
+  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(getVenueAddr())}`, '_blank');
+}
+function refreshMapEmbed(){
+  document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${encodeURIComponent(getVenueAddr())}&output=embed`;
+}
+document.querySelector('.venue-name').addEventListener('blur', refreshMapEmbed);
+document.querySelector('.venue-addr').addEventListener('blur', refreshMapEmbed);
+
+/* ═══════════════ MUSIC TOGGLE — real play/pause; add a track src on #bgMusic before publishing ═══════════════ */
+let musicOn = false;
+const bgMusic = document.getElementById('bgMusic');
+function toggleMusic(){
+  musicOn = !musicOn;
+  document.getElementById('musicFab').classList.toggle('on', musicOn);
+  if(musicOn){
+    bgMusic.volume = 0.5;
+    bgMusic.play().catch(()=>{
+      // No track attached yet, or browser blocked autoplay — that's expected until a real song file is added
+      console.log('Add a track source to #bgMusic before publishing to enable background music.');
+    });
+  } else {
+    bgMusic.pause();
+  }
+}
+
+/* ═══════════════ PLAN TOGGLE ═══════════════ */
+let selectedPlan = 'free';
+function setPlan(p){
+  selectedPlan = p;
+  document.getElementById('planFree').classList.toggle('active', p==='free');
+  document.getElementById('planPaid').classList.toggle('active', p==='paid');
+  saveDraft();
+}
+
+/* ═══════════════ NEXT — DETAILS ═══════════════ */
+function goNextDetails(){
+  saveDraft();
+  const planTxt = selectedPlan==='paid' ? '₹399 Ad-Free' : 'Free (with Ads)';
+  alert(`Plan selected: ${planTxt}\n\nNext step: RSVP contact number, publish settings & payment — wiring this to preview-smart.html flow next.`);
+}
+
+/* ═══════════════ AUTOSAVE DRAFT ═══════════════ */
+function saveDraft(){
+  try{
+    const data = {
+      theme: document.documentElement.getAttribute('data-theme'),
+      font: document.documentElement.getAttribute('data-font'),
+      plan: typeof selectedPlan!=='undefined' ? selectedPlan : 'free'
+    };
+    localStorage.setItem('umm_invite_draft_v1', JSON.stringify(data));
+  }catch(e){}
+}
+
+/* ═══════════════ SCROLL REVEAL ═══════════════ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('in'); });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
