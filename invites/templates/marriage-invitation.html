@@ -647,7 +647,6 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
   <svg class="garland-strip" style="position:absolute;top:0;left:0" viewBox="0 0 640 48" preserveAspectRatio="none"><rect width="640" height="48" fill="url(#marigoldPattern)"/></svg>
   <div class="entry-content">
     <div class="ganesha-wrap" style="width:80px;height:80px;margin:0 auto 14px;position:relative">
-      <svg class="entry-ganesha" style="width:100%;height:100%;position:absolute;inset:0" viewBox="0 0 100 100"><use href="#motif-ganesha"></use></svg>
       <!-- freeimage.host Ganesha PNG link paste pண்ணுங்க இங்கே -->
       <img class="ganesha-real" src="https://iili.io/nFNVp6b.png" alt="Ganesha" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
     </div>
@@ -660,7 +659,7 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
   <div class="entry-gopuram">
     <svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMax slice"><use href="#motif-gopuram-big"></use></svg>
     <!-- freeimage.host temple background PNG/JPG link paste pண்ணுங்க இங்கே -->
-    <img class="gopuram-real" src="https://iili.io/nFNWBMg.png" alt="Temple background" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top">
+    <img class="gopuram-real" src="https://iili.io/nFNp9ft.jpg" alt="Temple background" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top">
   </div>
 </div>
 
@@ -696,10 +695,9 @@ section[id]{scroll-margin-top:calc(var(--topbar-h) + 14px)}
   <div class="hero2-gopuram-bg">
     <svg viewBox="0 0 400 340" preserveAspectRatio="xMidYMax slice"><use href="#motif-gopuram-big"></use></svg>
     <!-- freeimage.host temple background PNG/JPG link paste pண்ணுங்க இங்கே -->
-    <img class="gopuram-real" src="https://iili.io/nFNWBMg.png" alt="Temple background" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top">
+    <img class="gopuram-real" src="https://iili.io/nFNp9ft.jpg" alt="Temple background" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top">
   </div>
   <div class="ganesha-wrap" style="width:80px;height:80px;margin-bottom:16px;position:relative;z-index:2">
-    <svg class="hero2-ganesha-sm" style="width:100%;height:100%;position:absolute;inset:0" viewBox="0 0 100 100"><use href="#motif-ganesha"></use></svg>
     <!-- freeimage.host Ganesha PNG link paste pண்ணுங்க இங்கே -->
     <img class="ganesha-real" src="https://iili.io/nFNVp6b.png" alt="Ganesha" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
   </div>
@@ -1079,6 +1077,18 @@ function openCard(){
   const main = document.getElementById('mainContent');
   gate.classList.add('opened');
   spinner.classList.add('show');
+  // Auto-play background music the moment guests open the invitation (needs a real tap gesture, which this is)
+  const bgMusicEl = document.getElementById('bgMusic');
+  if(bgMusicEl){
+    bgMusicEl.volume = 0.5;
+    bgMusicEl.play().then(()=>{
+      const fab = document.getElementById('musicFab');
+      if(fab) fab.classList.add('on');
+      musicOn = true;
+    }).catch(()=>{
+      console.log('Add a track source to #bgMusic before publishing to enable auto-play music.');
+    });
+  }
   setTimeout(()=>{
     spinner.classList.remove('show');
     gate.style.display = 'none';
