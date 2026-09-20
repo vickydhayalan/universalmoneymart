@@ -99,7 +99,7 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
 @keyframes heartbeat{ 0%,100%{ transform:scale(1);} 25%{ transform:scale(1.15);} 40%{ transform:scale(1);} }
 .gate-card h2{ color:var(--purple-deep); margin:6px 0 10px; font-size:1.5rem; }
 .gate-card p{ font-size:0.95rem; color:#5c3d6e; line-height:1.7; margin:0 0 26px; }
-.gate-btns{ position:relative; height:64px; display:flex; align-items:center; justify-content:center; gap:16px; }
+.gate-btns{ height:64px; display:flex; align-items:center; justify-content:center; gap:16px; }
 .gate-yes, .gate-no{
   padding:13px 26px; border-radius:40px; border:none; font-family:'Poppins',sans-serif;
   font-weight:600; font-size:0.92rem; cursor:pointer;
@@ -146,6 +146,15 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
 .countdown .box .label{ font-size:0.65rem; text-transform:uppercase; letter-spacing:1.5px; color:#8a6a9a; margin-top:4px; }
 
 .scroll-hint{ margin-top:20px; font-size:0.8rem; color:#8a6a9a; display:flex; flex-direction:column; align-items:center; gap:4px; animation:bobDown 2s ease-in-out infinite; }
+.play-song-btn{
+  margin-top:22px; padding:12px 26px; border-radius:40px; border:none;
+  background:linear-gradient(135deg, var(--pink-hot), var(--purple-med)); color:#fff;
+  font-family:'Poppins', sans-serif; font-weight:600; font-size:0.88rem; cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px;
+  box-shadow:0 8px 24px rgba(255,105,180,0.4);
+}
+.play-song-btn i{ width:16px; height:16px; }
+.play-song-btn.playing i{ animation:spin 4s linear infinite; }
 @keyframes bobDown{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(8px);} }
 
 /* ============ TIMELINE ============ */
@@ -386,6 +395,8 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
     <div class="box"><div class="num" id="cd-mins">00</div><div class="label">Mins</div></div>
     <div class="box"><div class="num" id="cd-secs">00</div><div class="label">Secs</div></div>
   </div>
+
+  <button class="play-song-btn reveal" id="playSongBtn"><i data-lucide="music"></i> <span id="playSongLabel">Play Our Song</span></button>
 
   <div class="scroll-hint reveal">
     <span>scroll for our story</span>
@@ -654,74 +665,10 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
 
 <!-- ============ FOOTER ============ -->
 <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
+  <button class="confetti-btn" id="confettiBtn"><i data-lucide="party-popper" style="width:18px;height:18px;"></i> Celebrate!</button>
+  <div class="signoff signature">Forever Yours, Vicky ❤️</div>
+  <div class="tiny">made with 1000 butterflies, since June 30, 2026 🌸</div>
 </footer>
-<script src="/cookie-consent.js" defer></script>
 
 <script>
 /* =========================================================
@@ -818,12 +765,7 @@ function onYouTubeIframeAPIReady(){
           ytReady = true;
           if (ytPendingPlay){ ytPendingPlay = false; playSong(); }
         },
-        onStateChange: (e) => {
-          const toggle = $('musicToggle');
-          if (!toggle) return;
-          if (e.data === YT.PlayerState.PLAYING) toggle.classList.add('spinning');
-          else toggle.classList.remove('spinning');
-        },
+        onStateChange: (e) => { updateMusicUI(e.data === YT.PlayerState.PLAYING); },
         onError: () => {
           // Embedding blocked / video unavailable on this specific ID —
           // fail quietly rather than breaking the rest of the page.
@@ -851,6 +793,14 @@ function pauseSong(){
 function isSongPlaying(){
   try { return !!(ytPlayer && typeof ytPlayer.getPlayerState === 'function' && ytPlayer.getPlayerState() === 1); }
   catch(e){ return false; }
+}
+function updateMusicUI(playing){
+  const toggle = $('musicToggle');
+  if (toggle) toggle.classList.toggle('spinning', playing);
+  const heroBtn = $('playSongBtn');
+  const heroLabel = $('playSongLabel');
+  if (heroBtn) heroBtn.classList.toggle('playing', playing);
+  if (heroLabel) heroLabel.textContent = playing ? 'Pause Our Song' : 'Play Our Song';
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1228,11 +1178,11 @@ function initSecret(){
 
 /* ============ MUSIC TOGGLE (manual pause/resume after gate) ============ */
 function initMusicToggle(){
-  const btn = $('musicToggle');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    if (isSongPlaying()) pauseSong(); else playSong();
-  });
+  const toggleFn = () => { if (isSongPlaying()) pauseSong(); else playSong(); };
+  const floatBtn = $('musicToggle');
+  const heroBtn = $('playSongBtn');
+  if (floatBtn) floatBtn.addEventListener('click', toggleFn);
+  if (heroBtn) heroBtn.addEventListener('click', toggleFn);
 }
 
 /* ============ CONFETTI ============ */
