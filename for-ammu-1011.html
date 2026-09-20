@@ -11,6 +11,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <style>
 :root{
@@ -105,7 +106,7 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
 }
 .gate-yes{ background:linear-gradient(135deg, var(--pink-hot), var(--purple-med)); color:#fff; box-shadow:0 10px 26px rgba(255,105,180,0.45); animation:pulseGlow 2.2s ease-in-out infinite; }
 .gate-no{ background:rgba(255,255,255,0.6); color:#8a6a9a; }
-.gate-no.dodging{ position:fixed; z-index:600; margin:0; transition:left 0.18s ease, top 0.18s ease; }
+.gate-no.dodging{ position:absolute; z-index:600; margin:0; transition:left 0.18s ease, top 0.18s ease; }
 @keyframes pulseGlow{ 0%,100%{ box-shadow:0 8px 22px rgba(147,112,219,0.4);} 50%{ box-shadow:0 10px 32px rgba(255,105,180,0.7);} }
 .gate-msg{ min-height:20px; margin-top:16px; font-size:0.78rem; color:var(--pink-hot); font-weight:500; }
 
@@ -177,6 +178,13 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
 .featured-frame{ max-width:320px; margin:0 auto 44px; text-align:center; }
 .featured-frame .glow-wrap{ width:100%; aspect-ratio:4/5; margin:0 auto; }
 .featured-frame .cap{ margin-top:14px; font-size:0.85rem; color:#7a5c8c; font-style:italic; }
+.carousel-track{ position:relative; width:100%; height:100%; cursor:pointer; }
+.carousel-slide{ position:absolute; inset:0; opacity:0; transition:opacity 0.9s ease; }
+.carousel-slide.active{ opacity:1; }
+.carousel-slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+.carousel-dots{ display:flex; justify-content:center; gap:8px; margin-top:16px; }
+.carousel-dots .dot{ width:8px; height:8px; border-radius:50%; background:rgba(147,112,219,0.3); cursor:pointer; transition:background 0.3s ease, transform 0.3s ease; border:none; padding:0; }
+.carousel-dots .dot.active{ background:var(--pink-hot); transform:scale(1.3); }
 
 /* ============ GLOW FRAME (core visual upgrade) ============ */
 .glow-wrap{ position:relative; border-radius:20px; padding:5px; }
@@ -354,9 +362,10 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
   </div>
 </div>
 
-<audio id="bgMusic" loop preload="auto">
-  <source src="AUDIO_PLACEHOLDER" type="audio/mpeg">
-</audio>
+<!-- Background music via YouTube's own player (legal way to play a
+     commercial song — no mp3 file needed). The player itself is
+     shrunk to 2x2px and pushed off-screen; only its audio is heard. -->
+<div id="ytPlayer" style="position:fixed; top:-9999px; left:-9999px; width:2px; height:2px; opacity:0; pointer-events:none;"></div>
 <button class="music-toggle" id="musicToggle" aria-label="Toggle music">
   <i data-lucide="music"></i>
 </button>
@@ -461,9 +470,10 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
 
   <div class="featured-frame reveal">
     <div class="glow-wrap" style="--glow-c1:#c0392b; --glow-c2:#D9A441;">
-      <div class="inner"><img id="featuredImg" src="" alt="Our first framed photo" onerror="this.closest('.inner').innerHTML='&lt;div class=&quot;empty-card&quot;&gt;&lt;i data-lucide=&quot;heart&quot;&gt;&lt;/i&gt;&lt;span&gt;Un photo idhu vandhu ippo frame-a niraiyum 💗&lt;/span&gt;&lt;/div&gt;'; if(window.refreshIcons)refreshIcons();"></div>
+      <div class="inner"><div class="carousel-track" id="carouselTrack"></div></div>
     </div>
-    <p class="cap">Namma first proper picture — ippo permanent-a un red frame-la ✨</p>
+    <div class="carousel-dots" id="carouselDots"></div>
+    <p class="cap" id="carouselCaption">Namma first proper picture — ippo permanent-a un red frame-la ✨</p>
   </div>
 
   <h3 class="gallery-heading reveal">Namma Moments 💕</h3>
@@ -644,74 +654,10 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
 
 <!-- ============ FOOTER ============ -->
 <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
+  <button class="confetti-btn" id="confettiBtn"><i data-lucide="party-popper" style="width:18px;height:18px;"></i> Celebrate!</button>
+  <div class="signoff signature">Forever Yours, Vicky ❤️</div>
+  <div class="tiny">made with 1000 butterflies, since June 30, 2026 🌸</div>
 </footer>
-<script src="/cookie-consent.js" defer></script>
 
 <script>
 /* =========================================================
@@ -724,7 +670,15 @@ const IMAGE_MEET3_LEGS       = "PASTE_MEET3_LEGS_PHOTO_URL_HERE";
 const IMAGE_MEET4_FAMILY     = "PASTE_MEET4_FAMILY_GIFT_PHOTO_URL_HERE";
 const IMAGE_MEET4_FRAME_GIFT = "PASTE_MEET4_PHOTO_FRAME_GIFT_PHOTO_URL_HERE";
 const IMAGE_CANDID_SHOP      = "PASTE_CANDID_PHOTO_FROM_SHOP_OWNER_URL_HERE";
-const AUDIO_PLACEHOLDER      = "PASTE_GVPRAKASH_SONG_MP3_URL_HERE";
+
+// Background music, played through YouTube's own player (legal —
+// no mp3 file needed, no copyright risk on your side). This is
+// "Pirai Thedum Iravilae" (GV Prakash, Mayakkam Enna) — the official
+// video song upload. If it doesn't play on her phone (some label
+// channels disable embedding), swap in a different video ID of the
+// same song — just grab the 11-character id from the YouTube URL
+// after "v=".
+const YOUTUBE_VIDEO_ID = "6B2jvf81LxE";
 
 // Her selfies you've saved — add/remove freely, masonry re-renders automatically
 const SELFIES = [
@@ -771,12 +725,76 @@ function fireConfetti(opts){
 }
 function $(id){ return document.getElementById(id); }
 
+/* ============ BACKGROUND MUSIC — via YouTube's own player ============
+   Playing a commercial song straight from an mp3 file/link raises
+   copyright issues; playing it through YouTube's own embedded player
+   (hidden off-screen, audio only) is the legal route since it's
+   YouTube itself serving and licensing the playback. The YT IFrame
+   API loads asynchronously (see the <script src=".../iframe_api">
+   tag), so `onYouTubeIframeAPIReady` below is a global callback
+   YouTube calls once it's ready — this is why these are plain global
+   functions rather than tucked inside the DOMContentLoaded steps. */
+let ytPlayer = null;
+let ytReady = false;
+let ytPendingPlay = false;
+
+function onYouTubeIframeAPIReady(){
+  try {
+    ytPlayer = new YT.Player('ytPlayer', {
+      height: '2',
+      width: '2',
+      videoId: YOUTUBE_VIDEO_ID,
+      playerVars: {
+        autoplay: 0, controls: 0, disablekb: 1, fs: 0,
+        modestbranding: 1, playsinline: 1, rel: 0,
+        loop: 1, playlist: YOUTUBE_VIDEO_ID
+      },
+      events: {
+        onReady: () => {
+          ytReady = true;
+          if (ytPendingPlay){ ytPendingPlay = false; playSong(); }
+        },
+        onStateChange: (e) => {
+          const toggle = $('musicToggle');
+          if (!toggle) return;
+          if (e.data === YT.PlayerState.PLAYING) toggle.classList.add('spinning');
+          else toggle.classList.remove('spinning');
+        },
+        onError: () => {
+          // Embedding blocked / video unavailable on this specific ID —
+          // fail quietly rather than breaking the rest of the page.
+          // Swap YOUTUBE_VIDEO_ID for a different upload of the same
+          // song if this happens on her phone too.
+          console.error('[YouTube player] could not play video id:', YOUTUBE_VIDEO_ID);
+        }
+      }
+    });
+  } catch(e){ console.error('[YouTube player init failed]', e); }
+}
+
+function playSong(){
+  if (!ytReady || !ytPlayer || typeof ytPlayer.playVideo !== 'function'){
+    ytPendingPlay = true; // API/player not ready yet — play as soon as it is
+    return;
+  }
+  try { ytPlayer.playVideo(); } catch(e){}
+}
+function pauseSong(){
+  if (ytPlayer && typeof ytPlayer.pauseVideo === 'function'){
+    try { ytPlayer.pauseVideo(); } catch(e){}
+  }
+}
+function isSongPlaying(){
+  try { return !!(ytPlayer && typeof ytPlayer.getPlayerState === 'function' && ytPlayer.getPlayerState() === 1); }
+  catch(e){ return false; }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // Each step runs independently — if one throws (e.g. a CDN script
-  // blocked, or the <audio> tag stripped by a sandboxed preview), the
-  // rest still runs, so the Yes/No gate always stays clickable.
+  // blocked in some sandboxed preview), the rest still runs, so the
+  // Yes/No gate always stays clickable.
   const steps = [
-    wirePlaceholders, refreshIcons, buildGallery, buildMasonry, refreshIcons,
+    refreshIcons, buildGallery, buildMasonry, initCarousel, refreshIcons,
     initBgFx, initGate, initCountdown, initRoadCountdowns, initReveal,
     initGalleryModal, initEnvelope, initMusicToggle, initConfetti,
     initTilt, initCursorTrail, initParallax, initSecret
@@ -785,15 +803,6 @@ document.addEventListener("DOMContentLoaded", () => {
     try { step(); } catch (err) { console.error('[step failed]', step.name, err); }
   });
 });
-
-function wirePlaceholders(){
-  const source = document.querySelector('#bgMusic source');
-  if (source) source.src = AUDIO_PLACEHOLDER;
-  const audioEl = $('bgMusic');
-  if (audioEl && typeof audioEl.load === 'function') { try { audioEl.load(); } catch(e){} }
-  const featured = $('featuredImg');
-  if (featured) featured.src = IMAGE_MEET3_SELFIE;
-}
 
 /* ============ BUILD GALLERY ============ */
 function buildGallery(){
@@ -820,6 +829,66 @@ function buildGallery(){
     }
     grid.appendChild(wrap);
   });
+}
+
+/* ============ AUTO-SLIDING PHOTO CAROUSEL ============
+   Featured red-frame photo now cycles through all the real gallery
+   photos automatically every 5 seconds (tap a photo, or a dot, to
+   jump straight to it; tapping the photo also opens it full-screen). */
+function initCarousel(){
+  const track = $('carouselTrack');
+  const dotsWrap = $('carouselDots');
+  const caption = $('carouselCaption');
+  if (!track || !dotsWrap) return;
+
+  const photos = GALLERY.filter(item => item.type === 'photo');
+  if (!photos.length) return;
+
+  photos.forEach((item, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'carousel-slide' + (i === 0 ? ' active' : '');
+    slide.innerHTML = `<img src="${item.src}" alt="memory" onerror="this.parentElement.innerHTML='<div class=\\'empty-card\\'><i data-lucide=\\'heart\\'></i><span>Photo ippo add pannunga 💗</span></div>'; if(window.refreshIcons)refreshIcons();">`;
+    track.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to photo ' + (i+1));
+    dot.addEventListener('click', () => goTo(i, true));
+    dotsWrap.appendChild(dot);
+  });
+
+  const slides = track.querySelectorAll('.carousel-slide');
+  const dots = dotsWrap.querySelectorAll('.dot');
+  let current = 0;
+  let timer = null;
+
+  if (caption) caption.textContent = photos[0].tag;
+
+  function goTo(i, manual){
+    if (i === current) return;
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    if (caption) caption.textContent = photos[current].tag;
+    if (manual) restart(); // manual jump gets a fresh 5s before auto-advancing again
+  }
+
+  function next(){ goTo((current + 1) % slides.length, false); }
+  function restart(){ if (timer) clearInterval(timer); timer = setInterval(next, 5000); }
+
+  track.addEventListener('click', () => {
+    const modal = $('imgModal');
+    const modalImg = $('modalImg');
+    const modalCaption = $('modalCaption');
+    if (!modal || !modalImg) return;
+    modalImg.src = photos[current].src;
+    if (modalCaption) modalCaption.textContent = photos[current].tag;
+    modal.classList.add('active');
+  });
+
+  restart();
 }
 
 function buildMasonry(){
@@ -858,22 +927,36 @@ function initGate(){
     "Vera location-ku poiduchu button 🏃‍♀️"
   ];
   let teaseIndex = 0;
+  let lastDodgeAt = 0;
   const PAD = 16;
 
   function dodge(){
-    // First escape: anchor a fixed-position copy exactly where the
-    // button currently sits, so it doesn't jump before it moves.
+    // Some mobile browsers still fire a synthetic 'click' after
+    // touchstart even with preventDefault — debounce so one tap
+    // never triggers two dodges back-to-back.
+    const now = Date.now();
+    if (now - lastDodgeAt < 300) return;
+    lastDodgeAt = now;
+
+    // Anchor as position:absolute relative to the gate overlay itself
+    // (not position:fixed) — fixed positioning under a backdrop-filter
+    // parent is unreliable on some mobile browsers (notably Safari),
+    // which quietly changes what "fixed" is measured against and made
+    // the button drift off-screen after a couple of dodges. Absolute,
+    // anchored to a container we control and measure directly, has no
+    // such ambiguity.
+    const gateRect = gate.getBoundingClientRect();
     if (!noBtn.classList.contains('dodging')){
       const r = noBtn.getBoundingClientRect();
       noBtn.classList.add('dodging');
-      noBtn.style.left = r.left + 'px';
-      noBtn.style.top = r.top + 'px';
+      noBtn.style.left = (r.left - gateRect.left) + 'px';
+      noBtn.style.top = (r.top - gateRect.top) + 'px';
       void noBtn.offsetWidth; // force layout before animating to a new spot
     }
     const w = noBtn.offsetWidth || 70;
     const h = noBtn.offsetHeight || 44;
-    const maxX = Math.max(window.innerWidth - w - PAD*2, PAD);
-    const maxY = Math.max(window.innerHeight - h - PAD*2, PAD);
+    const maxX = Math.max(gateRect.width - w - PAD*2, PAD);
+    const maxY = Math.max(gateRect.height - h - PAD*2, PAD);
     const x = PAD + Math.random() * maxX;
     const y = PAD + Math.random() * maxY;
     noBtn.style.left = x + 'px';
@@ -892,11 +975,10 @@ function initGate(){
     gate.classList.add('hide');
     document.body.classList.remove('locked');
 
-    const music = $('bgMusic');
-    const toggle = $('musicToggle');
-    if (music && typeof music.play === 'function'){
-      music.play().then(() => { if (toggle) toggle.classList.add('spinning'); }).catch(() => {});
-    }
+    // This tap is a real user gesture, which is exactly what's needed
+    // to unlock audio playback — same idea as before, just through
+    // YouTube's player instead of an <audio> tag.
+    playSong();
 
     const colors = ['#FFB6C1','#FF69B4','#E6E6FA','#9370DB','#F3CBB9'];
     fireConfetti({ particleCount:110, spread:80, origin:{ y:0.4 }, colors });
@@ -1082,16 +1164,10 @@ function initSecret(){
 
 /* ============ MUSIC TOGGLE (manual pause/resume after gate) ============ */
 function initMusicToggle(){
-  const music = $('bgMusic');
   const btn = $('musicToggle');
-  if (!music || !btn) return;
+  if (!btn) return;
   btn.addEventListener('click', () => {
-    if (music.paused){
-      music.play().then(() => btn.classList.add('spinning')).catch(()=>{});
-    } else {
-      music.pause();
-      btn.classList.remove('spinning');
-    }
+    if (isSongPlaying()) pauseSong(); else playSong();
   });
 }
 
