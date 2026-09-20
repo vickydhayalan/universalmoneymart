@@ -670,75 +670,11 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
+<footer id="ammuFooter">
+  <button class="confetti-btn" id="confettiBtn"><i data-lucide="party-popper" style="width:18px;height:18px;"></i> Celebrate!</button>
+  <div class="signoff signature">Forever Yours, Vicky ❤️</div>
+  <div class="tiny">made with 1000 butterflies, since June 30, 2026 🌸</div>
 </footer>
-<script src="/cookie-consent.js" defer></script>
 <div id="ammuPageEnd" style="display:none" aria-hidden="true"></div>
 
 <script id="ammuMainScript">
@@ -759,8 +695,26 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
     'Universal Money Mart', 'AMFI MFD ARN', 'IRDAI IC38 Mock Test',
     'Free Investment Consultation', 'NISM V-A Mock Test'
   ];
+  // Every landmark that makes up OUR page. If a candidate removal
+  // target contains any of these, it is (or holds) our own content
+  // and must never be touched — this is what stops the guard from
+  // ever eating our own footer along with the foreign one.
+  var OWN_SELECTORS = '#ammuFooter, #ammuPageEnd, #ammuMainScript, #gate, .hero, ' +
+    '#timeline, #favorites, #gallery, #varam, #promises, #letter, #secret, #road-ahead';
+  function holdsOwnContent(el){
+    return !!(el && el.querySelector && (el.matches(OWN_SELECTORS) || el.querySelector(OWN_SELECTORS)));
+  }
   function isOwnEl(el){
-    return !!(el && el.closest && el.closest('#ammuFooter, #ammuMainScript, script, style'));
+    return !!(el && el.closest && el.closest(OWN_SELECTORS + ', script, style'));
+  }
+  function climbSafely(startEl){
+    var cur = startEl;
+    while (cur && cur.parentElement && cur.parentElement !== document.body) {
+      var parent = cur.parentElement;
+      if (holdsOwnContent(parent)) break; // parent also holds our content — stop, don't swallow it
+      cur = parent;
+    }
+    return cur;
   }
   function findForeignRoots(){
     var roots = [];
@@ -777,11 +731,9 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
       var txt = node.textContent;
       for (var i = 0; i < FOOTPRINTS.length; i++) {
         if (txt.indexOf(FOOTPRINTS[i]) !== -1) {
-          var el = node.parentElement;
-          while (el && el.parentElement && el.parentElement !== document.body) {
-            el = el.parentElement;
-          }
-          if (el && el !== document.body && !isOwnEl(el) && seen.indexOf(el) === -1) {
+          var el = climbSafely(node.parentElement);
+          // final safety net: never remove anything that contains our own landmarks
+          if (el && el !== document.body && !isOwnEl(el) && !holdsOwnContent(el) && seen.indexOf(el) === -1) {
             seen.push(el);
             roots.push(el);
           }
@@ -799,8 +751,8 @@ footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
         var n = marker.nextSibling;
         while (n) {
           var next = n.nextSibling;
-          var isOurScript = n.nodeType === 1 && n.id === 'ammuMainScript';
-          if (!isOurScript) {
+          var keep = (n.nodeType === 1 && n.id === 'ammuMainScript') || holdsOwnContent(n) || isOwnEl(n);
+          if (!keep) {
             if (n.nodeType === 1) { n.remove(); }
             else if (n.nodeType === 3 && n.textContent.trim() !== '') { n.remove(); }
           }
