@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Happy 22nd Birthday, Ammu 🌸</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+:root{
+  --pink-soft:#FFB6C1;
+  --pink-hot:#FF69B4;
+  --lavender:#E6E6FA;
+  --purple-med:#9370DB;
+  --purple-deep:#4B0082;
+  --rose-gold:#F3CBB9;
+  --gold:#D9A441;
+  --white:#FFFDFB;
+  --glass-bg: rgba(255,255,255,0.30);
+  --glass-border: rgba(255,255,255,0.5);
+  --glass-shadow: 0 10px 36px rgba(75,0,130,0.16);
+  --text-dark:#3d1e4f;
+}
+
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  color:var(--text-dark);
+  background:linear-gradient(-45deg, #ffe3ef, #f3e7ff, #ffe9f7, #e9e3ff);
+  background-size:400% 400%;
+  animation:gradientShift 20s ease infinite;
+  overflow-x:hidden;
+  position:relative;
+}
+body.locked{ overflow:hidden; height:100vh; }
+@keyframes gradientShift{
+  0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;}
+}
+
+h1,h2,h3, .script-font{ font-family:'Playfair Display', serif; }
+.signature{ font-family:'Dancing Script', cursive; }
+
+section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z-index:2; }
+
+.section-title{ text-align:center; font-size:clamp(1.6rem, 5vw, 2.5rem); color:var(--purple-deep); margin-bottom:8px; font-weight:700; }
+.section-sub{ text-align:center; color:#7a5c8c; font-size:0.95rem; margin-bottom:38px; font-style:italic; }
+
+.glass{ background:var(--glass-bg); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border:1px solid var(--glass-border); border-radius:24px; box-shadow:var(--glass-shadow); }
+
+/* ============ AMBIENT BLURRED BLOBS (elegance layer) ============ */
+.blob{ position:fixed; border-radius:50%; filter:blur(70px); opacity:0.45; z-index:0; pointer-events:none; }
+.blob-1{ width:360px; height:360px; background:var(--pink-soft); top:-80px; left:-100px; animation:driftA 22s ease-in-out infinite; }
+.blob-2{ width:420px; height:420px; background:var(--lavender); bottom:-140px; right:-120px; animation:driftB 26s ease-in-out infinite; }
+.blob-3{ width:260px; height:260px; background:var(--rose-gold); top:45%; left:60%; animation:driftA 30s ease-in-out infinite reverse; opacity:0.3; }
+@keyframes driftA{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(40px,60px) scale(1.15);} }
+@keyframes driftB{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(-50px,-40px) scale(1.1);} }
+
+/* ============ FLOATING BACKGROUND LAYER ============ */
+#bg-fx{ position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden; z-index:1; }
+.petal, .sparkle, .heart-float{ position:absolute; top:-10%; will-change:transform; opacity:0.9; }
+.petal{ font-size:1.4rem; animation:fall linear infinite; color:var(--pink-hot); }
+.sparkle{ font-size:1rem; animation:fall linear infinite; color:var(--purple-med); filter:drop-shadow(0 0 4px rgba(255,255,255,0.85)); }
+.heart-float{ font-size:1.25rem; animation:fall linear infinite; color:var(--pink-soft); }
+@keyframes fall{
+  0%{ transform:translateY(-10vh) translateX(0) rotate(0deg); opacity:0; }
+  10%{ opacity:0.95; } 90%{ opacity:0.7; }
+  100%{ transform:translateY(110vh) translateX(30px) rotate(360deg); opacity:0; }
+}
+
+/* cursor heart trail (desktop only) */
+.cursor-heart{ position:fixed; pointer-events:none; z-index:999; font-size:14px; opacity:0.9; transition:opacity 0.6s ease; }
+
+/* ============ GATE / ENTRY SCREEN ============ */
+.gate-overlay{
+  position:fixed; inset:0; z-index:500;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(160deg, rgba(255,225,240,0.96), rgba(230,220,255,0.96));
+  backdrop-filter:blur(6px);
+  padding:24px;
+  transition:opacity 0.7s ease, visibility 0.7s ease;
+}
+.gate-overlay.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+.gate-card{
+  max-width:380px; width:100%; text-align:center;
+  padding:38px 28px 30px;
+  animation:gateIn 0.8s ease;
+}
+@keyframes gateIn{ from{ opacity:0; transform:translateY(20px) scale(0.96);} to{ opacity:1; transform:translateY(0) scale(1);} }
+.gate-emoji{ font-size:2.4rem; margin-bottom:6px; animation:heartbeat 1.6s ease-in-out infinite; }
+@keyframes heartbeat{ 0%,100%{ transform:scale(1);} 25%{ transform:scale(1.15);} 40%{ transform:scale(1);} }
+.gate-card h2{ color:var(--purple-deep); margin:6px 0 10px; font-size:1.5rem; }
+.gate-card p{ font-size:0.95rem; color:#5c3d6e; line-height:1.7; margin:0 0 26px; }
+.gate-btns{ position:relative; height:64px; display:flex; align-items:center; justify-content:center; gap:16px; }
+.gate-yes, .gate-no{
+  padding:13px 26px; border-radius:40px; border:none; font-family:'Poppins',sans-serif;
+  font-weight:600; font-size:0.92rem; cursor:pointer;
+}
+.gate-yes{ background:linear-gradient(135deg, var(--pink-hot), var(--purple-med)); color:#fff; box-shadow:0 10px 26px rgba(255,105,180,0.45); animation:pulseGlow 2.2s ease-in-out infinite; }
+.gate-no{ background:rgba(255,255,255,0.6); color:#8a6a9a; }
+.gate-no.dodging{ position:fixed; z-index:600; margin:0; transition:left 0.18s ease, top 0.18s ease; }
+@keyframes pulseGlow{ 0%,100%{ box-shadow:0 8px 22px rgba(147,112,219,0.4);} 50%{ box-shadow:0 10px 32px rgba(255,105,180,0.7);} }
+.gate-msg{ min-height:20px; margin-top:16px; font-size:0.78rem; color:var(--pink-hot); font-weight:500; }
+
+/* Music unlock toggle */
+.music-toggle{
+  position:fixed; bottom:22px; right:18px; z-index:50;
+  width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg, var(--pink-hot), var(--purple-med));
+  color:#fff; border:none; box-shadow:0 6px 20px rgba(147,112,219,0.5); cursor:pointer;
+  animation:pulseGlow 2.5s ease-in-out infinite;
+}
+.music-toggle svg{ width:22px; height:22px; }
+.music-toggle.spinning svg{ animation:spin 4s linear infinite; }
+@keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+/* ============ REVEAL SYSTEM ============ */
+.reveal{ opacity:0; transform:translateY(34px); transition:opacity 0.75s ease, transform 0.75s ease; transition-delay:var(--d, 0s); }
+.reveal.show{ opacity:1; transform:translateY(0); }
+
+/* ============ ORNAMENTAL DIVIDER ============ */
+.divider{ display:flex; align-items:center; justify-content:center; gap:14px; max-width:340px; margin:0 auto 10px; opacity:0.75; }
+.divider span{ height:1px; flex:1; background:linear-gradient(90deg, transparent, var(--purple-med), transparent); }
+.divider i{ color:var(--pink-hot); width:16px; height:16px; }
+
+/* ============ HERO ============ */
+.hero{ min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 20px; }
+.hero-kicker{ letter-spacing:3px; text-transform:uppercase; font-size:0.75rem; color:var(--purple-med); margin-bottom:14px; }
+.hero h1{ font-size:clamp(1.9rem, 7vw, 3.5rem); color:var(--purple-deep); line-height:1.25; margin:0 0 18px; text-shadow:0 2px 20px rgba(255,105,180,0.35); }
+.hero p.quote{ max-width:540px; font-size:1.02rem; color:#5c3d6e; margin:0 auto 34px; line-height:1.75; }
+.hero p.quote em{ color:var(--pink-hot); font-style:normal; font-weight:600; }
+.cd-caption{ font-size:0.82rem; color:#8a6a9a; margin:0 0 14px; font-weight:500; }
+
+.countdown{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-bottom:28px; }
+.countdown .box{ padding:16px 14px; min-width:74px; text-align:center; }
+.countdown .box .num{ font-size:clamp(1.5rem, 5vw, 2.2rem); font-weight:700; color:var(--purple-deep); font-family:'Playfair Display', serif; }
+.countdown .box .label{ font-size:0.65rem; text-transform:uppercase; letter-spacing:1.5px; color:#8a6a9a; margin-top:4px; }
+
+.scroll-hint{ margin-top:20px; font-size:0.8rem; color:#8a6a9a; display:flex; flex-direction:column; align-items:center; gap:4px; animation:bobDown 2s ease-in-out infinite; }
+@keyframes bobDown{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(8px);} }
+
+/* ============ TIMELINE ============ */
+.timeline{ position:relative; padding-left:26px; border-left:3px dashed rgba(147,112,219,0.45); }
+.tl-item{ position:relative; margin-bottom:26px; padding:20px 20px 20px 24px; }
+.tl-item::before{
+  content:"💗"; position:absolute; left:-40px; top:22px; font-size:1.1rem;
+  background:var(--white); border-radius:50%; width:30px; height:30px;
+  display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(147,112,219,0.35);
+}
+.tl-date{ display:inline-block; font-size:0.72rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:#fff; background:linear-gradient(135deg, var(--pink-hot), var(--purple-med)); padding:4px 12px; border-radius:20px; margin-bottom:10px; }
+.tl-title{ font-family:'Playfair Display', serif; font-size:1.15rem; color:var(--purple-deep); margin:0 0 8px; }
+.tl-desc{ font-size:0.92rem; line-height:1.65; color:#5c3d6e; margin:0; }
+.tl-photo-note{ margin-top:10px; font-size:0.78rem; color:var(--pink-hot); font-style:italic; }
+
+/* ============ BENTO GRID ============ */
+.bento{ display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
+.bento .cell{ padding:20px 16px; grid-column:span 2; text-align:center; transition:transform 0.35s ease; }
+.bento .cell:hover{ transform:translateY(-6px); }
+.bento .cell.wide{ grid-column:span 4; }
+.bento .cell .emoji{ font-size:1.8rem; display:block; margin-bottom:10px; }
+.bento .cell .cap{ font-size:0.7rem; text-transform:uppercase; letter-spacing:1px; color:#8a6a9a; margin-bottom:6px;}
+.bento .cell .val{ font-family:'Playfair Display', serif; font-size:1.05rem; color:var(--purple-deep); font-weight:600; }
+@media(max-width:520px){ .bento .cell{ grid-column:span 4; } }
+
+/* ============ FEATURED RED FRAME ============ */
+.frame-note{ text-align:center; max-width:580px; margin:0 auto 36px; padding:26px; }
+.frame-note p{ font-size:0.95rem; line-height:1.75; color:#5c3d6e; margin:0; }
+.frame-note .sig{ margin-top:10px; font-size:1.3rem; color:var(--pink-hot); }
+.featured-frame{ max-width:320px; margin:0 auto 44px; text-align:center; }
+.featured-frame .glow-wrap{ width:100%; aspect-ratio:4/5; margin:0 auto; }
+.featured-frame .cap{ margin-top:14px; font-size:0.85rem; color:#7a5c8c; font-style:italic; }
+
+/* ============ GLOW FRAME (core visual upgrade) ============ */
+.glow-wrap{ position:relative; border-radius:20px; padding:5px; }
+.glow-wrap::before{
+  content:""; position:absolute; inset:-3px; border-radius:24px;
+  background:conic-gradient(from 0deg, var(--glow-c1, #FF69B4), var(--glow-c2, #9370DB), var(--glow-c1, #FF69B4));
+  filter:blur(10px); opacity:0.75; z-index:0;
+  animation:rotateGlow 6s linear infinite;
+}
+@keyframes rotateGlow{ to{ transform:rotate(360deg); } }
+.glow-wrap .inner{ position:relative; z-index:1; width:100%; height:100%; border-radius:18px; overflow:hidden; background:linear-gradient(135deg,#ffd1e3,#e4d4ff); }
+.glow-wrap .inner img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.4s ease; }
+.glow-wrap:hover .inner img{ transform:scale(1.06); }
+.glow-wrap .empty-card{ width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; text-align:center; padding:16px; background:linear-gradient(135deg,#fff0f5,#f1e9ff); }
+.glow-wrap .empty-card i{ width:34px; height:34px; color:var(--pink-hot); animation:heartbeat 1.8s ease-in-out infinite; }
+.glow-wrap .empty-card span{ font-size:0.78rem; color:#6d4b81; line-height:1.5; }
+
+/* ============ GALLERY ============ */
+.gallery-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:18px; }
+.g-item{ cursor:pointer; }
+.g-item .aspect{ aspect-ratio:1/1.12; }
+.g-item .tag{ margin-top:8px; font-size:0.74rem; text-align:center; color:#6d4b81; line-height:1.4; padding:0 4px; }
+
+.gallery-heading{ margin:44px 0 16px; text-align:center; font-family:'Playfair Display', serif; font-size:1.1rem; color:var(--purple-deep); }
+.masonry{ column-count:2; column-gap:14px; }
+@media(min-width:560px){ .masonry{ column-count:3; } }
+.masonry .m-item{ break-inside:avoid; margin-bottom:14px; }
+.masonry .m-item .glow-wrap{ aspect-ratio: unset; }
+.masonry .m-item .inner{ aspect-ratio: 3/4; }
+
+
+/* modal viewer */
+.modal-overlay{ position:fixed; inset:0; background:rgba(45,20,60,0.88); display:none; align-items:center; justify-content:center; z-index:200; padding:24px; }
+.modal-overlay.active{ display:flex; }
+.modal-overlay img{ max-width:100%; max-height:76vh; border-radius:16px; box-shadow:0 10px 50px rgba(0,0,0,0.5); }
+.modal-caption{ position:absolute; bottom:34px; left:0; right:0; text-align:center; color:#fff; font-size:0.85rem; padding:0 30px; }
+.modal-close{ position:absolute; top:20px; right:24px; background:rgba(255,255,255,0.2); border:none; color:#fff; width:40px; height:40px; border-radius:50%; cursor:pointer; z-index:2; }
+
+/* ============ VARAM (BLESSING) SECTION ============ */
+.varam-text{ max-width:600px; margin:0 auto 30px; padding:28px; text-align:center; }
+.varam-text p{ font-size:0.98rem; line-height:1.85; color:#4a2c5e; margin:0; }
+.varam-cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:600px){ .varam-cards{ grid-template-columns:1fr; } }
+.varam-card{ padding:22px; }
+.varam-card h4{ color:var(--purple-deep); margin:0 0 12px; font-size:1rem; font-family:'Playfair Display', serif; }
+.varam-card ul{ margin:0; padding-left:18px; }
+.varam-card li{ font-size:0.9rem; color:#4a2c5e; line-height:1.8; }
+.varam-footer{ text-align:center; margin-top:26px; font-size:0.92rem; color:var(--pink-hot); font-style:italic; max-width:460px; margin-left:auto; margin-right:auto; }
+
+/* ============ PROMISES ============ */
+.promise-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:600px){ .promise-grid{ grid-template-columns:1fr; } }
+.promise-card{ padding:22px; position:relative; overflow:hidden; }
+.promise-card::before{
+  content:""; position:absolute; inset:0; border-radius:24px; padding:2px;
+  background:linear-gradient(135deg, var(--pink-hot), var(--purple-med), var(--rose-gold));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; opacity:0.85;
+}
+.promise-num{ font-family:'Playfair Display', serif; font-size:1.6rem; color:var(--pink-hot); margin-bottom:8px; }
+.promise-card p{ font-size:0.94rem; line-height:1.7; margin:0; color:#4a2c5e; }
+
+/* ============ LOVE LETTER ============ */
+.envelope-wrap{ display:flex; flex-direction:column; align-items:center; }
+.envelope{ width:min(280px, 80vw); height:180px; position:relative; cursor:pointer; filter:drop-shadow(0 10px 25px rgba(147,112,219,0.4)); }
+.envelope .body{ position:absolute; inset:0; background:linear-gradient(135deg, #fff0f5, #f3e6ff); border-radius:12px; border:2px solid var(--pink-hot); }
+.envelope .flap{
+  position:absolute; top:0; left:0; right:0; height:50%;
+  background:linear-gradient(135deg, #ffd6e8, #e6d4ff);
+  clip-path:polygon(0 0, 100% 0, 50% 85%);
+  border-radius:12px 12px 0 0; transform-origin:top; transition:transform 0.6s ease;
+  border:2px solid var(--pink-hot); border-bottom:none; z-index:3;
+}
+.envelope.open .flap{ transform:rotateX(180deg); }
+.envelope .seal{
+  position:absolute; top:38%; left:50%; transform:translate(-50%,-50%);
+  width:44px; height:44px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, var(--pink-hot), var(--purple-deep));
+  display:flex; align-items:center; justify-content:center; color:#fff; z-index:4;
+  box-shadow:0 3px 10px rgba(0,0,0,0.25);
+}
+.envelope-tap{ margin-top:16px; font-size:0.85rem; color:#8a6a9a; font-style:italic; }
+
+.letter-modal{ position:fixed; inset:0; background:rgba(45,20,60,0.88); display:none; align-items:center; justify-content:center; z-index:210; padding:20px; }
+.letter-modal.active{ display:flex; }
+.letter-paper{
+  max-width:530px; width:100%; max-height:82vh; overflow-y:auto;
+  background:linear-gradient(160deg,#fffaf7,#fff0f7); border-radius:18px; padding:36px 28px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.4); position:relative;
+}
+.letter-paper h3{ color:var(--pink-hot); text-align:center; margin-top:0; }
+.letter-paper p{ font-size:0.95rem; line-height:1.85; color:#4a2c5e; }
+.letter-paper .sign-off{ text-align:right; font-size:1.5rem; color:var(--purple-deep); margin-top:20px; }
+.letter-close{ position:absolute; top:14px; right:14px; background:var(--pink-hot); color:#fff; border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; }
+
+/* ============ SECRET WORD ============ */
+.secret-card{ max-width:420px; margin:0 auto; padding:38px 28px; text-align:center; }
+.secret-icon{ width:34px; height:34px; color:var(--purple-med); margin-bottom:14px; animation:heartbeat 2s ease-in-out infinite; }
+.secret-icon.unlocked{ color:var(--pink-hot); animation:none; }
+.secret-form{ display:flex; flex-direction:column; align-items:center; gap:12px; }
+.secret-input{
+  width:100%; max-width:280px; padding:13px 18px; border-radius:30px;
+  border:1.5px solid rgba(147,112,219,0.4); background:rgba(255,255,255,0.6);
+  font-family:'Poppins', sans-serif; font-size:0.92rem; color:var(--text-dark);
+  text-align:center; outline:none;
+}
+.secret-input:focus{ border-color:var(--pink-hot); }
+.secret-submit{
+  padding:12px 30px; border-radius:30px; border:none;
+  background:linear-gradient(135deg, var(--pink-hot), var(--purple-med)); color:#fff;
+  font-family:'Poppins', sans-serif; font-weight:600; font-size:0.9rem; cursor:pointer;
+  box-shadow:0 8px 22px rgba(255,105,180,0.4);
+}
+.secret-hint{ min-height:18px; font-size:0.78rem; color:var(--pink-hot); font-style:italic; margin:2px 0 0; }
+.secret-card.shake{ animation:shakeCard 0.5s ease; }
+@keyframes shakeCard{
+  0%,100%{ transform:translateX(0); } 20%{ transform:translateX(-8px); }
+  40%{ transform:translateX(8px); } 60%{ transform:translateX(-6px); } 80%{ transform:translateX(6px); }
+}
+.secret-message{ display:none; }
+.secret-message.show{ display:block; animation:gateIn 0.8s ease; }
+.secret-message p{ font-size:0.98rem; line-height:1.85; color:#4a2c5e; margin:0 0 14px; }
+.secret-highlight{
+  font-family:'Playfair Display', serif; font-weight:700; font-size:1.1rem !important;
+  background:linear-gradient(135deg, var(--pink-hot), var(--purple-med));
+  -webkit-background-clip:text; background-clip:text; color:transparent !important;
+}
+
+/* ============ ROAD AHEAD ============ */
+.road-list{ display:flex; flex-direction:column; gap:14px; }
+.road-item{ display:flex; align-items:center; gap:16px; padding:16px 18px; }
+.road-date{ min-width:78px; text-align:center; font-family:'Playfair Display', serif; color:#fff; background:linear-gradient(135deg, var(--purple-med), var(--pink-hot)); border-radius:14px; padding:8px 6px; font-size:0.78rem; line-height:1.3; }
+.road-date b{ display:block; font-size:1.15rem; }
+.road-body{ flex:1; }
+.road-title{ font-weight:600; color:var(--purple-deep); margin:0 0 3px; }
+.road-sub{ font-size:0.82rem; color:#7a5c8c; margin:0; }
+.road-address{ font-size:0.72rem; color:#9c7fae; margin:6px 0 0; line-height:1.5; }
+.road-map{ display:inline-flex; align-items:center; gap:4px; margin-top:6px; font-size:0.72rem; font-weight:600; color:var(--pink-hot); text-decoration:none; }
+.road-map i{ width:12px; height:12px; }
+.road-days{ font-size:0.72rem; color:var(--pink-hot); font-weight:600; white-space:nowrap; text-align:right; }
+
+/* ============ FOOTER ============ */
+footer{ text-align:center; padding:70px 20px 100px; position:relative; z-index:2; }
+.confetti-btn{
+  background:linear-gradient(135deg, var(--pink-hot), var(--purple-med)); color:#fff; border:none;
+  padding:14px 34px; border-radius:40px; font-family:'Poppins', sans-serif; font-weight:600; font-size:0.95rem;
+  cursor:pointer; box-shadow:0 10px 30px rgba(255,105,180,0.45); display:inline-flex; align-items:center; gap:8px;
+  transition:transform 0.25s ease;
+}
+.confetti-btn:active{ transform:scale(0.95); }
+footer .signoff{ margin-top:36px; font-size:2.1rem; color:var(--purple-deep); }
+footer .tiny{ margin-top:10px; font-size:0.72rem; color:#a68abf; }
+
+::selection{ background:var(--pink-hot); color:#fff; }
+</style>
+</head>
+<body class="locked">
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<div id="bg-fx"></div>
+
+<!-- ============ GATE / ENTRY ============ -->
+<div class="gate-overlay" id="gate">
+  <div class="gate-card glass">
+    <div class="gate-emoji">🌸</div>
+    <h2>Ammu...</h2>
+    <p>Enakku theriyum nee ithu paakka poringa nu 🙈<br>Oru chinna surprise irukku unakkaga.<br>Ready ah?</p>
+    <div class="gate-btns" id="gateBtns">
+      <button class="gate-yes" id="yesBtn">Yes, Ready! 💗</button>
+      <button class="gate-no" id="noBtn">No</button>
+    </div>
+    <div class="gate-msg" id="gateMsg">&nbsp;</div>
+  </div>
+</div>
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="AUDIO_PLACEHOLDER" type="audio/mpeg">
+</audio>
+<button class="music-toggle" id="musicToggle" aria-label="Toggle music">
+  <i data-lucide="music"></i>
+</button>
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero">
+  <div class="hero-kicker reveal">✨ A little secret, just for you ✨</div>
+  <h1 class="reveal">Happy 22nd Birthday,<br>En Chella Ammu! 🌸✨</h1>
+  <p class="quote reveal">
+    Vaazhkaila edho oru nimisham unna paatha, andha nimisham mudinjidalaam nu ninacha…<br>
+    but <em>you</em> became the beginning of every good thing after that. 💜
+  </p>
+
+  <p class="cd-caption reveal" id="cdCaption">Counting down to your day...</p>
+  <div class="countdown glass reveal" style="padding:18px 22px;">
+    <div class="box"><div class="num" id="cd-days">00</div><div class="label">Days</div></div>
+    <div class="box"><div class="num" id="cd-hours">00</div><div class="label">Hours</div></div>
+    <div class="box"><div class="num" id="cd-mins">00</div><div class="label">Mins</div></div>
+    <div class="box"><div class="num" id="cd-secs">00</div><div class="label">Secs</div></div>
+  </div>
+
+  <div class="scroll-hint reveal">
+    <span>scroll for our story</span>
+    <i data-lucide="chevron-down"></i>
+  </div>
+</section>
+
+<div class="divider reveal"><span></span><i data-lucide="heart"></i><span></span></div>
+
+<!-- ============ 2. TIMELINE ============ -->
+<section id="timeline">
+  <h2 class="section-title reveal">Our Milestones 💫</h2>
+  <p class="section-sub reveal">Ovvoru chapter-um, unnoda oru pudhu pakkam thaan</p>
+
+  <div class="timeline">
+    <div class="tl-item glass reveal">
+      <span class="tl-date">June 30, 2026 — The First Spark</span>
+      <h3 class="tl-title">11:50 AM, Pinned Chat 💬</h3>
+      <p class="tl-desc">Unaku marriage-la real-a interest irukka, illa veetla compel pannuranga nu therinjikkanum nu tha unaku message pannen — pressure pannanum nu illa. Reply panna nee edutha two days-ku ulla veetla commitment pesi, amma-vum "varom" nu solli vittanga. Apparam nee "seri" nu sonna, aana adhu un mulu manasoda sonna mathiri enakku theriyala — "nerla paathutu pesi decide pannalam" nu vittuten. Namba oru chinna purchase-kae 10 thadava yosippom, ithu marriage — kandippa un decision-ku time venum nu enakku theriyum.</p>
+      <p class="tl-desc" style="margin-top:12px;">Enakku konjam expectations irunthichu — azhaga irukkanum nu, aana rich-ah illa model-ah illa; azhagu life-long irukkathu, understanding thaan life-a nalla run pannum nu nambaren. Curiosity-la un Instagram paathen, confirm aagama iruntha, next day same face-la photo share pannirundhanga — apparam "okay sollidalam" nu oru feeling vanthuchu, yenna nu innum enakku theriyala. Adhoda vida, veetla un pathi "hardworking, strong girl" nu sonnadhu enakku innum pudichuchu. Family enna sonnalum, un kitta pesi thaan mudivu edukkanum nu ready-ah message panna. Enakku ellaru mathiri life venaam — naan en partner-ku nalla support-ah irukkanum, avanga support-um enakku venum. Nee un life-a en kooda spend pannura nu nambi, unna unmaiya, nalla paathukkanum nu mattum enakku aasai.</p>
+      <p class="tl-photo-note">📸 Photo edukkala andha naal — aana konjam nerathula, nee anupina oru cute selfie irukku 👇 (gallery-la paaru)</p>
+    </div>
+
+    <div class="tl-item glass reveal">
+      <span class="tl-date">July 05, 2026 — Meet 1</span>
+      <h3 class="tl-title">Un Veetla Meeting 🏡</h3>
+      <p class="tl-desc">Marriage-la personal-a periya interest illama, "first nerla paakalam, apparam mudivu sollu" nu sonna nu ready-a vandhen. Chat pannumbothe, unaku interest illa nu enakku thonuchu. Nee nail polish kooda podama vandhirundha, aana adhu vachi mudivu edukka vena nu, innum konjam time kudukkalam nu vittuten.</p>
+      <p class="tl-desc" style="margin-top:12px;">Reels-la paathu bouquet vangalaam nu thonuchu, aana unaku awkward-a feel aagum nu vaanguna illa — family formalities-ku mattum edho vanguna. Aana rendu perum plan pannaama same pastel green dress-la vandhurichi — amma kooda kandu pudichi "dress matching-a irukku" nu sonnanga. Ellame green signal-ah irunthalum, un answer-ku thaan yosichitu iruntha.</p>
+    </div>
+
+    <div class="tl-item glass reveal">
+      <span class="tl-date">August 02, 2026 — Meet 2</span>
+      <h3 class="tl-title">Kuladheivam Kovil Visit 🙏</h3>
+      <p class="tl-desc">Andha naal completely unexpected-a nadanthuchu — nee kooda "veetuku varala" nu sonna, aana un appa "naanga pickup drop pannuren" nu solli koottitu vandhanga. Naan lite-a thoonguna nerathula, andha unexpected call &amp; meet nadanthuchu — kanavu maadhiri irunthuchu.</p>
+      <p class="tl-photo-note">📸 Andha naal photo edukkala — aana andha moment namma manasula pathiyirukku 🙏</p>
+    </div>
+
+    <div class="tl-item glass reveal">
+      <span class="tl-date">August 15, 2026 — Meet 3 · The Secret Mission</span>
+      <h3 class="tl-title">Undercover Chennai Surprise Trip 🕵️‍♂️</h3>
+      <p class="tl-desc">Intha naal un kooda spend panna ovvoru second-um enakku romba special. Namba meet pannathula irundhu, ellarume evlo comfortable-a pesinom, andha moments ellame innum en kannu munnadiye oditu irukku. Namba close friends serthu intha naal-a celebrate pannathum, namma rendu perum spend panna time-um romba azhagana memory-a irukku.</p>
+      <p class="tl-desc" style="margin-top:12px;">Unkooda serthu photos eduthu irukken 🤩 athe enakku romba happy. Nee jasthi pesala nu yosikkathe, intha moments romba nallave irunthuchi — 3 hours spend panni irunthom, aana enakku still 3 mins maadhiri thaan irukku. Thank you for everything! ✨</p>
+      <p class="tl-photo-note">📸 Ithu thaan namma real photo session — selfie, kai pudichathu, legs pic ellame ippo iruku, gallery scroll pannu 👇</p>
+    </div>
+
+    <div class="tl-item glass reveal">
+      <span class="tl-date">Meet 4 — Our Family &amp; Soil</span>
+      <h3 class="tl-title">Kaadhu Kuthu Function 🌾</h3>
+      <p class="tl-desc">Nieces &amp; nephew-ku gifts kuduthadhu, namma wedding temple &amp; reception hall show pannadhu, and namma thottam &amp; kazhani-la sethu nadandha andha walk — home-a feel aachu.</p>
+      <p class="tl-desc" style="margin-top:12px;">Ithula vida special — nee enakku present panna andha gift enna romba emotional-a touch pannichu. Yaarume avlo effort podala, nee potta andha effort thaan romba special — adhu namma first "nishaani", naan innum adha olichi vachi, thaniya eduthu paathutu irupen. Unna andha nerathula emotional-a hug pannadhu tharra comfort-a eppadi explain pannurathunu enakku theriyala — andha moment nenachaale innum freeze aagi happy-a poiduven. Aniki namba romba time spend pannitu, romba pesikittu, romba happy-a feel pannom.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"><span></span><i data-lucide="sparkles"></i><span></span></div>
+
+<!-- ============ 3. ALL ABOUT MY GIRL ============ -->
+<section id="favorites">
+  <h2 class="section-title reveal">All About My Girl 💖</h2>
+  <p class="section-sub reveal">Ippove enakku theriyum, but innum konjam paakalaam 😌</p>
+
+  <div class="bento">
+    <div class="cell glass reveal"><span class="emoji">🎬</span><div class="cap">Movie</div><div class="val">Sachein</div></div>
+    <div class="cell glass reveal"><span class="emoji">🎵</span><div class="cap">Song</div><div class="val">Pirai Thedum</div></div>
+    <div class="cell glass wide reveal"><span class="emoji">🌟</span><div class="cap">Favourites</div><div class="val">Thalapathy Vijay &amp; Samantha</div></div>
+    <div class="cell glass reveal"><span class="emoji">🍫</span><div class="cap">Treats</div><div class="val">Dairy Milk, KitKat &amp; Maaza</div></div>
+    <div class="cell glass reveal"><span class="emoji">🎂</span><div class="cap">Cake</div><div class="val">Black Forest</div></div>
+    <div class="cell glass wide reveal"><span class="emoji">🍗</span><div class="cap">Comfort Food</div><div class="val">Chicken Biriyani &amp; Thakkali Thokku</div></div>
+    <div class="cell glass wide reveal"><span class="emoji">🧸</span><div class="cap">Pure Joy</div><div class="val">Cute Puppies, Teddy Bears, Pink &amp; Purple, and the Beach</div></div>
+  </div>
+</section>
+
+<div class="divider reveal"><span></span><i data-lucide="heart"></i><span></span></div>
+
+<!-- ============ 4. FEATURED FRAME + GALLERY ============ -->
+<section id="gallery">
+  <h2 class="section-title reveal">The Secret Red Frame 🖼️</h2>
+  <div class="frame-note glass reveal">
+    <p>Namma real first photo — Chennai trip-la eduthadhu — ippo andha cute silhouette red frame-la vachirukken, nee gift panna adhula. "Together is a beautiful place to be" — my secretly hidden room treasure. 🌹</p>
+    <div class="sig signature">— Vicky</div>
+  </div>
+
+  <div class="featured-frame reveal">
+    <div class="glow-wrap" style="--glow-c1:#c0392b; --glow-c2:#D9A441;">
+      <div class="inner"><img id="featuredImg" src="" alt="Our first framed photo" onerror="this.closest('.inner').innerHTML='&lt;div class=&quot;empty-card&quot;&gt;&lt;i data-lucide=&quot;heart&quot;&gt;&lt;/i&gt;&lt;span&gt;Un photo idhu vandhu ippo frame-a niraiyum 💗&lt;/span&gt;&lt;/div&gt;'; if(window.refreshIcons)refreshIcons();"></div>
+    </div>
+    <p class="cap">Namma first proper picture — ippo permanent-a un red frame-la ✨</p>
+  </div>
+
+  <h3 class="gallery-heading reveal">Namma Moments 💕</h3>
+  <div class="gallery-grid" id="galleryGrid"></div>
+
+  <h3 class="gallery-heading reveal">Naan Save Panna Un Selfies 📸</h3>
+  <div class="masonry" id="selfieMasonry"></div>
+</section>
+
+<div class="modal-overlay" id="imgModal">
+  <button class="modal-close" id="modalClose"><i data-lucide="x"></i></button>
+  <img id="modalImg" src="" alt="memory">
+  <div class="modal-caption" id="modalCaption"></div>
+</div>
+
+<div class="divider reveal"><span></span><i data-lucide="sparkles"></i><span></span></div>
+
+<!-- ============ 5. VARAM / BLESSING ============ -->
+<section id="varam">
+  <h2 class="section-title reveal">Enoda Vaazhkaila Kedaicha Varam 🙏💜</h2>
+  <p class="section-sub reveal">Kekkama kedaicha oru periya aashirvaadham</p>
+
+  <div class="varam-text glass reveal">
+    <p>Nee enakku kedaicha oru periya varam Ammu. Yaaru kittayum kekkama, yosikama kudutha kaanuka nee. Naan unna epovum nalla paathukanum nu nenaikaren — appadiye, nee kooda unna nalla paathukanum, un health-a, un happiness-a, un dreams-a priority pannanum nu kekkaren.</p>
+  </div>
+
+  <div class="varam-cards">
+    <div class="varam-card glass reveal">
+      <h4>Naan Solradhu 💪</h4>
+      <ul>
+        <li>Unna kanne pola paathukappen</li>
+        <li>Un chinna chinna dreams-ah respect pannuven</li>
+        <li>Un tired days-layum kooda strength-a nikkuven</li>
+      </ul>
+    </div>
+    <div class="varam-card glass reveal">
+      <h4>Un Kitta Kekkaren 🌸</h4>
+      <ul>
+        <li>Unna nee nalla paathukko</li>
+        <li>Un health-a, un rest-a ignore pannaadha</li>
+        <li>Un dreams-ayum konjam selfish-a nenachu vaazhu</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="varam-footer reveal">Because intha gifts vida, namba iruvarum podra effort &amp; love thaan periya matter. 💜</p>
+</section>
+
+<div class="divider reveal"><span></span><i data-lucide="heart"></i><span></span></div>
+
+<!-- ============ 6. PROMISES ============ -->
+<section id="promises">
+  <h2 class="section-title reveal">My 4 Sacred Promises to You 🤍</h2>
+  <p class="section-sub reveal">Ithu vaakku, kaditham illa</p>
+
+  <div class="promise-grid">
+    <div class="promise-card glass reveal">
+      <div class="promise-num">01</div>
+      <p>"Endha oru situation-layum, yaar munnadiyum unna vittu kodukka maaten."</p>
+    </div>
+    <div class="promise-card glass reveal">
+      <div class="promise-num">02</div>
+      <p>"Misunderstandings vandhaalum pesi theerppome thavira, ego-ku namma life-la idam illa."</p>
+    </div>
+    <div class="promise-card glass reveal">
+      <div class="promise-num">03</div>
+      <p>"Un MBA padichi mudikkarathukum, marriage-ku apparam kooda nee work continue pannanum-nu un aasaikkum — rendaiyum eppovum support pannra balama naan iruppen."</p>
+    </div>
+    <div class="promise-card glass reveal">
+      <div class="promise-num">04</div>
+      <p>"Unga Amma-vukku oru nalla magana ninnu, un koodave serndhu paathupen."</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"><span></span><i data-lucide="sparkles"></i><span></span></div>
+
+<!-- ============ 7. LOVE LETTER ============ -->
+<section id="letter">
+  <h2 class="section-title reveal">A Little Envelope, Just For You 💌</h2>
+  <p class="section-sub reveal">Tap it open, Ammu</p>
+
+  <div class="envelope-wrap reveal">
+    <div class="envelope" id="envelope">
+      <div class="body"></div>
+      <div class="flap"></div>
+      <div class="seal"><i data-lucide="heart" style="width:20px;height:20px;"></i></div>
+    </div>
+    <div class="envelope-tap">tap the envelope to open 💗</div>
+  </div>
+</section>
+
+<div class="letter-modal" id="letterModal">
+  <div class="letter-paper">
+    <button class="letter-close" id="letterClose"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+    <h3 class="script-font">My Ammu,</h3>
+    <p>
+      Happy 22nd birthday-nu solradhukku munnadi, onnu solanum — nee vandhadhukku apparam thaan en life-la ellame oru meaning edukka aarambichadhu. Namma small fights, un over-thinking, en over-teasing — ellame sernthu thaan namma "us" nu oru cute chaos aachu, aana andha chaos-a kooda naan love pannuren.
+    </p>
+    <p>
+      Nee ithu oru simple decision nu ninacha, aana enakku theriyum adhu evlo periya courage venum nu — un family, un dreams, un future ellame edho oru pudhu vaazhkai-ku vendi nee ready aayitta. Adhukaga naan unna innum azhaga paathukkanum nu decide pannitten. Un career-ku, un dreams-ku, un family-ku eppovum naan un side-la thaan iruppen. Namma ippo start pannadhu oru relationship illa, oru vaazhkai — saree shopping-la irundhu wedding varaikkum, ella step-layum unna kai pudichi nadakkarathukku ready.
+    </p>
+    <p>
+      22 vayasu nu solradhu oru number thaan, aana enakku theriyum nee edho oru miracle nu. Ovvoru naalum unna innum konjam nerama love pannanum nu thonudhu. Happy birthday, en Ammu. Ithu namma first-a irundha birthday, but last-a irundhaa maatinum. Forever &amp; ever. 💜
+    </p>
+    <div class="sign-off signature">Unga Vicky ❤️</div>
+  </div>
+</div>
+
+<div class="divider reveal"><span></span><i data-lucide="sparkles"></i><span></span></div>
+
+<!-- ============ SECRET WORD ============ -->
+<section id="secret">
+  <h2 class="section-title reveal">A Secret Just For Us 🔐</h2>
+  <p class="section-sub reveal">Idhu open panna, oru secret word therinjirukkanum...</p>
+
+  <div class="secret-card glass reveal" id="secretCard">
+    <i data-lucide="lock" class="secret-icon" id="secretIcon"></i>
+
+    <div class="secret-form" id="secretForm">
+      <input type="text" id="secretInput" class="secret-input" placeholder="Type the secret word..." autocomplete="off" autocapitalize="off">
+      <button class="secret-submit" id="secretSubmit">Unlock 🔓</button>
+      <p class="secret-hint" id="secretHint">&nbsp;</p>
+    </div>
+
+    <div class="secret-message" id="secretMessage">
+      <p>En ulagamey un kitta thaan thodangudhu Ammu.<br>Un kooda vazhra ovvoru nodiyum en uyiraa paathuppen.</p>
+      <p class="secret-highlight">I love you so much, en Rani-ya en koodave iruppiya? 💍💜</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider reveal"><span></span><i data-lucide="heart"></i><span></span></div>
+
+<!-- ============ 8. ROAD AHEAD ============ -->
+<section id="road-ahead">
+  <h2 class="section-title reveal">The Road Ahead 🛣️</h2>
+  <p class="section-sub reveal">Namma next chapters, together</p>
+
+  <div class="road-list">
+    <div class="road-item glass reveal" data-target="2026-11-20T00:00:00+05:30">
+      <div class="road-date"><b>20</b>Nov '26</div>
+      <div class="road-body"><p class="road-title">Saree Shopping 🛍️</p><p class="road-sub">Namma first shopping trip, together</p></div>
+      <div class="road-days"></div>
+    </div>
+    <div class="road-item glass reveal" data-target="2026-12-04T00:00:00+05:30">
+      <div class="road-date"><b>04</b>Dec '26</div>
+      <div class="road-body">
+        <p class="road-title">Engagement 💍 — Ram Chandra Party Hall</p>
+        <p class="road-sub">Namma official-a "yes" solra naal · Night function</p>
+        <p class="road-address">Ramadass Nagar, Arjunamedu, Thiruverkadu, Tamil Nadu 600077</p>
+        <a class="road-map" href="https://maps.app.goo.gl/ouNKQfwwmS8DMcyq5" target="_blank" rel="noopener"><i data-lucide="map-pin"></i> View on Map</a>
+      </div>
+      <div class="road-days"></div>
+    </div>
+    <div class="road-item glass reveal" data-target="2027-02-07T00:00:00+05:30">
+      <div class="road-date"><b>07</b>Feb '27</div>
+      <div class="road-body">
+        <p class="road-title">Reception 🎉 — SMS Mahal</p>
+        <p class="road-sub">Namma family ellarum serra naal · Night function</p>
+        <p class="road-address">Polur - Vellore Rd, Kunnathur, Tamil Nadu 606803</p>
+        <a class="road-map" href="https://maps.app.goo.gl/eZRR192wGbq8KGti9" target="_blank" rel="noopener"><i data-lucide="map-pin"></i> View on Map</a>
+      </div>
+      <div class="road-days"></div>
+    </div>
+    <div class="road-item glass reveal" data-target="2027-02-08T00:00:00+05:30">
+      <div class="road-date"><b>08</b>Feb '27</div>
+      <div class="road-body">
+        <p class="road-title">Wedding 👰🤵 — Kunnathur Murugan Temple</p>
+        <p class="road-sub">Namma vaazhkai onna serra naal</p>
+        <p class="road-address">Kunnathur, Tamil Nadu 606803</p>
+        <a class="road-map" href="https://maps.app.goo.gl/exwhcVYZsbbeH7H69" target="_blank" rel="noopener"><i data-lucide="map-pin"></i> View on Map</a>
+      </div>
+      <div class="road-days"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <button class="confetti-btn" id="confettiBtn"><i data-lucide="party-popper" style="width:18px;height:18px;"></i> Celebrate!</button>
+  <div class="signoff signature">Forever Yours, Vicky ❤️</div>
+  <div class="tiny">made with 1000 butterflies, since June 30, 2026 🌸</div>
+</footer>
+
+<script>
+/* =========================================================
+   IMAGE & AUDIO PLACEHOLDERS — replace these with your links
+   ========================================================= */
+const IMAGE_MEET1_SELFIE     = "PASTE_MEET1_SELFIE_SHE_SENT_URL_HERE";
+const IMAGE_MEET3_SELFIE     = "PASTE_MEET3_SELFIE_URL_HERE";
+const IMAGE_MEET3_HANDS      = "PASTE_MEET3_HAND_HOLDING_PHOTO_URL_HERE";
+const IMAGE_MEET3_LEGS       = "PASTE_MEET3_LEGS_PHOTO_URL_HERE";
+const IMAGE_MEET4_FAMILY     = "PASTE_MEET4_FAMILY_GIFT_PHOTO_URL_HERE";
+const IMAGE_MEET4_FRAME_GIFT = "PASTE_MEET4_PHOTO_FRAME_GIFT_PHOTO_URL_HERE";
+const IMAGE_CANDID_SHOP      = "PASTE_CANDID_PHOTO_FROM_SHOP_OWNER_URL_HERE";
+const AUDIO_PLACEHOLDER      = "PASTE_GVPRAKASH_SONG_MP3_URL_HERE";
+
+// Her selfies you've saved — add/remove freely, masonry re-renders automatically
+const SELFIES = [
+  "PASTE_SELFIE_1_URL_HERE",
+  "PASTE_SELFIE_2_URL_HERE",
+  "PASTE_SELFIE_3_URL_HERE",
+  "PASTE_SELFIE_4_URL_HERE",
+  "PASTE_SELFIE_5_URL_HERE",
+  "PASTE_SELFIE_6_URL_HERE",
+];
+
+/* =========================================================
+   GALLERY DATA — matches the real story, easy to extend
+   ========================================================= */
+const GALLERY = [
+  { src: IMAGE_MEET1_SELFIE, glow:["#FF69B4","#9370DB"], type:"photo",
+    tag: "Meet 1 · Photo edukkala, aana nee anupina cute selfie 💌" },
+  { type:"empty", glow:["#9370DB","#E6E6FA"],
+    tag: "Meet 2 · Kovil-la photo edukkala, aana andha divine moment nenappula 🙏",
+    note: "No photo, but a moment we'll never forget" },
+  { src: IMAGE_MEET3_SELFIE, glow:["#c0392b","#D9A441"], type:"photo",
+    tag: "Meet 3 · Namma first proper selfie 💕" },
+  { src: IMAGE_MEET3_HANDS, glow:["#9370DB","#FF69B4"], type:"photo",
+    tag: "Meet 3 · Kai pudichi eduthadhu 🤝💜" },
+  { src: IMAGE_MEET3_LEGS, glow:["#FF69B4","#FFB6C1"], type:"photo",
+    tag: "Meet 3 · Namma legs onnu vacha cute pic 😄" },
+  { src: IMAGE_MEET4_FAMILY, glow:["#D9A441","#FF69B4"], type:"photo",
+    tag: "Meet 4 · Pasangaluku gift kudukkum pothu, family moment 👨‍👩‍👧‍👦" },
+  { src: IMAGE_MEET4_FRAME_GIFT, glow:["#9370DB","#D9A441"], type:"photo",
+    tag: "Meet 4 · Naa & nee sernthu frame gift panra moment 🖼️" },
+  { src: IMAGE_CANDID_SHOP, glow:["#D9A441","#FFB6C1"], type:"photo",
+    tag: "Nee theriyama effort podra apo, Chandru anna share panna pic 🥹" },
+];
+
+/* Safe wrappers — external CDNs (lucide/confetti) or optional elements
+   (audio) can fail to load in some preview sandboxes; a single crash
+   here must never stop the rest of the page (gate, buttons, gallery)
+   from working. */
+function refreshIcons(){
+  try { if (window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons(); } catch(e){}
+}
+function fireConfetti(opts){
+  try { if (typeof confetti === 'function') confetti(opts); } catch(e){}
+}
+function $(id){ return document.getElementById(id); }
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Each step runs independently — if one throws (e.g. a CDN script
+  // blocked, or the <audio> tag stripped by a sandboxed preview), the
+  // rest still runs, so the Yes/No gate always stays clickable.
+  const steps = [
+    wirePlaceholders, refreshIcons, buildGallery, buildMasonry, refreshIcons,
+    initBgFx, initGate, initCountdown, initRoadCountdowns, initReveal,
+    initGalleryModal, initEnvelope, initMusicToggle, initConfetti,
+    initTilt, initCursorTrail, initParallax, initSecret
+  ];
+  steps.forEach(step => {
+    try { step(); } catch (err) { console.error('[step failed]', step.name, err); }
+  });
+});
+
+function wirePlaceholders(){
+  const source = document.querySelector('#bgMusic source');
+  if (source) source.src = AUDIO_PLACEHOLDER;
+  const audioEl = $('bgMusic');
+  if (audioEl && typeof audioEl.load === 'function') { try { audioEl.load(); } catch(e){} }
+  const featured = $('featuredImg');
+  if (featured) featured.src = IMAGE_MEET3_SELFIE;
+}
+
+/* ============ BUILD GALLERY ============ */
+function buildGallery(){
+  const grid = $('galleryGrid');
+  if (!grid) return;
+  GALLERY.forEach((item, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'g-item reveal';
+    wrap.style.setProperty('--d', (i*0.06)+'s');
+    if (item.type === 'photo'){
+      wrap.setAttribute('data-full', item.src);
+      wrap.setAttribute('data-caption', item.tag);
+      wrap.innerHTML = `
+        <div class="glow-wrap aspect" style="--glow-c1:${item.glow[0]};--glow-c2:${item.glow[1]}">
+          <div class="inner"><img src="${item.src}" alt="memory" onerror="this.closest('.inner').innerHTML='<div class=\\'empty-card\\'><i data-lucide=\\'image-off\\'></i><span>Photo ippo add pannunga 💗</span></div>'; if(window.refreshIcons)refreshIcons();"></div>
+        </div>
+        <div class="tag">${item.tag}</div>`;
+    } else {
+      wrap.innerHTML = `
+        <div class="glow-wrap aspect" style="--glow-c1:${item.glow[0]};--glow-c2:${item.glow[1]}">
+          <div class="inner"><div class="empty-card"><i data-lucide="heart"></i><span>${item.note}</span></div></div>
+        </div>
+        <div class="tag">${item.tag}</div>`;
+    }
+    grid.appendChild(wrap);
+  });
+}
+
+function buildMasonry(){
+  const box = $('selfieMasonry');
+  if (!box) return;
+  SELFIES.forEach((src, i) => {
+    const el = document.createElement('div');
+    el.className = 'm-item reveal';
+    el.style.setProperty('--d', (i*0.05)+'s');
+    el.setAttribute('data-full', src);
+    el.setAttribute('data-caption', 'Un oru cute selfie 📸');
+    const colors = [["#FF69B4","#9370DB"],["#9370DB","#D9A441"],["#D9A441","#FF69B4"]];
+    const c = colors[i % colors.length];
+    el.innerHTML = `
+      <div class="glow-wrap g-item" style="--glow-c1:${c[0]};--glow-c2:${c[1]}">
+        <div class="inner"><img src="${src}" alt="selfie" onerror="this.closest('.inner').innerHTML='<div class=\\'empty-card\\'><i data-lucide=\\'image-off\\'></i><span>Selfie ippo add pannunga 💗</span></div>'; if(window.refreshIcons)refreshIcons();"></div>
+      </div>`;
+    box.appendChild(el);
+  });
+}
+
+/* ============ GATE (Yes / dodging No) ============ */
+function initGate(){
+  const gate = $('gate');
+  const noBtn = $('noBtn');
+  const yesBtn = $('yesBtn');
+  const msg = $('gateMsg');
+  if (!gate || !noBtn || !yesBtn) return;
+
+  const teases = [
+    "Ammu... No solla mudiyadhu 😜",
+    "Try pannunga, mudiyadhu 😆",
+    "Ithu move aayiduchu paaru 😝",
+    "Yes mattum thaan option irukku 💜",
+    "Konjam persistent-a irukkeenga ah? 😂",
+    "Vera location-ku poiduchu button 🏃‍♀️"
+  ];
+  let teaseIndex = 0;
+  const PAD = 16;
+
+  function dodge(){
+    // First escape: anchor a fixed-position copy exactly where the
+    // button currently sits, so it doesn't jump before it moves.
+    if (!noBtn.classList.contains('dodging')){
+      const r = noBtn.getBoundingClientRect();
+      noBtn.classList.add('dodging');
+      noBtn.style.left = r.left + 'px';
+      noBtn.style.top = r.top + 'px';
+      void noBtn.offsetWidth; // force layout before animating to a new spot
+    }
+    const w = noBtn.offsetWidth || 70;
+    const h = noBtn.offsetHeight || 44;
+    const maxX = Math.max(window.innerWidth - w - PAD*2, PAD);
+    const maxY = Math.max(window.innerHeight - h - PAD*2, PAD);
+    const x = PAD + Math.random() * maxX;
+    const y = PAD + Math.random() * maxY;
+    noBtn.style.left = x + 'px';
+    noBtn.style.top = y + 'px';
+    if (msg){
+      msg.textContent = teases[teaseIndex % teases.length];
+      teaseIndex++;
+    }
+  }
+
+  noBtn.addEventListener('mouseenter', dodge);
+  noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); dodge(); }, { passive:false });
+  noBtn.addEventListener('click', (e) => { e.preventDefault(); dodge(); });
+
+  yesBtn.addEventListener('click', () => {
+    gate.classList.add('hide');
+    document.body.classList.remove('locked');
+
+    const music = $('bgMusic');
+    const toggle = $('musicToggle');
+    if (music && typeof music.play === 'function'){
+      music.play().then(() => { if (toggle) toggle.classList.add('spinning'); }).catch(() => {});
+    }
+
+    const colors = ['#FFB6C1','#FF69B4','#E6E6FA','#9370DB','#F3CBB9'];
+    fireConfetti({ particleCount:110, spread:80, origin:{ y:0.4 }, colors });
+  });
+}
+
+/* ============ FLOATING PETALS / SPARKLES / HEARTS ============ */
+function initBgFx(){
+  const layer = $('bg-fx');
+  if (!layer) return;
+  const glyphs = { petal:['🌸','🌺','🌹'], sparkle:['✨','⭐','💫'], heart:['💗','💕','💓','💜','💖'] };
+  const kinds = ['petal','sparkle','heart-float','heart-float'];
+  const glyphMap = { petal:glyphs.petal, sparkle:glyphs.sparkle, 'heart-float':glyphs.heart };
+
+  function spawn(){
+    const kind = kinds[Math.floor(Math.random()*kinds.length)];
+    const el = document.createElement('span');
+    el.className = kind;
+    const list = glyphMap[kind];
+    el.textContent = list[Math.floor(Math.random()*list.length)];
+    el.style.left = Math.random()*100 + 'vw';
+    const duration = 8 + Math.random()*10;
+    el.style.animationDuration = duration + 's';
+    el.style.fontSize = (0.9 + Math.random()*1.2) + 'rem';
+    layer.appendChild(el);
+    setTimeout(()=> el.remove(), duration*1000 + 500);
+  }
+  for(let i=0;i<16;i++) setTimeout(spawn, i*250);
+  setInterval(spawn, 550);
+}
+
+/* ============ HERO COUNTER ============
+   This page's link only reaches Ammu ON her birthday, so a plain
+   "countdown to Nov 10" would already read 00:00:00:00 the moment
+   she opens it — dead on arrival. Instead: if somehow opened before
+   the birthday (e.g. while testing), it counts DOWN to Nov 10 like
+   normal. From the birthday onward (the real scenario), it switches
+   to counting UP the days/hours/mins/secs since 11:50 AM, June 30 —
+   "namba pesi aarambichadhu" — which stays true and keeps climbing
+   forever, so it's never stale no matter which day she opens it. */
+function initCountdown(){
+  const birthday = new Date("2026-11-10T00:00:00+05:30").getTime();
+  const usStart  = new Date("2026-06-30T11:50:00+05:30").getTime();
+  const dEl = $('cd-days');
+  const hEl = $('cd-hours');
+  const mEl = $('cd-mins');
+  const sEl = $('cd-secs');
+  const caption = $('cdCaption');
+  if (!dEl || !hEl || !mEl || !sEl) return;
+
+  function paint(diff){
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = Math.floor((diff/(1000*60*60))%24);
+    const m = Math.floor((diff/(1000*60))%60);
+    const s = Math.floor((diff/1000)%60);
+    dEl.textContent = String(d).padStart(2,'0');
+    hEl.textContent = String(h).padStart(2,'0');
+    mEl.textContent = String(m).padStart(2,'0');
+    sEl.textContent = String(s).padStart(2,'0');
+  }
+
+  function tick(){
+    const now = Date.now();
+    if (now < birthday){
+      if (caption) caption.textContent = "Counting down to your day...";
+      paint(birthday - now);
+    } else {
+      if (caption) caption.textContent = "Namba pesi aarambichu...";
+      const h1 = document.querySelector('.hero h1');
+      if (h1 && h1.dataset.bdaySet !== '1'){
+        h1.textContent = "It's Ammu's Birthday!! 🎉🎂";
+        h1.dataset.bdaySet = '1';
+      }
+      paint(now - usStart);
+    }
+    setTimeout(tick, 1000);
+  }
+  tick();
+}
+
+/* ============ ROAD AHEAD MINI COUNTDOWNS ============ */
+function initRoadCountdowns(){
+  const items = document.querySelectorAll('.road-item');
+  function update(){
+    const now = Date.now();
+    items.forEach(item => {
+      const target = new Date(item.getAttribute('data-target')).getTime();
+      const daysLeft = Math.ceil((target - now)/(1000*60*60*24));
+      const el = item.querySelector('.road-days');
+      el.textContent = daysLeft > 0 ? daysLeft + ' days to go' : (daysLeft === 0 ? "Today! 🎉" : "Done ✔");
+    });
+  }
+  update();
+  setInterval(update, 60000);
+}
+
+/* ============ UNIFIED SCROLL REVEAL ============ */
+function initReveal(){
+  const items = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold:0.15 });
+  items.forEach(i => obs.observe(i));
+}
+
+/* ============ GALLERY LIGHTBOX (delegated — works for dynamic items) ============ */
+function initGalleryModal(){
+  const modal = $('imgModal');
+  const modalImg = $('modalImg');
+  const modalCaption = $('modalCaption');
+  const closeBtn = $('modalClose');
+  if (!modal || !modalImg) return;
+
+  document.addEventListener('click', (e) => {
+    const item = e.target.closest('.g-item[data-full], .m-item[data-full]');
+    if (!item) return;
+    const full = item.getAttribute('data-full');
+    if (!full) return;
+    modalImg.src = full;
+    if (modalCaption) modalCaption.textContent = item.getAttribute('data-caption') || '';
+    modal.classList.add('active');
+  });
+  if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+}
+
+/* ============ ENVELOPE / LOVE LETTER ============ */
+function initEnvelope(){
+  const envelope = $('envelope');
+  const letterModal = $('letterModal');
+  const closeBtn = $('letterClose');
+  if (!envelope || !letterModal) return;
+
+  envelope.addEventListener('click', () => {
+    envelope.classList.add('open');
+    setTimeout(() => letterModal.classList.add('active'), 500);
+  });
+  if (closeBtn) closeBtn.addEventListener('click', () => letterModal.classList.remove('active'));
+  letterModal.addEventListener('click', (e) => { if (e.target === letterModal) letterModal.classList.remove('active'); });
+}
+
+/* ============ SECRET WORD ============ */
+function initSecret(){
+  const input = $('secretInput');
+  const submit = $('secretSubmit');
+  const hint = $('secretHint');
+  const card = $('secretCard');
+  const form = $('secretForm');
+  const message = $('secretMessage');
+  const icon = $('secretIcon');
+  if (!input || !submit || !message || !card) return;
+
+  // She's called "Ammu" right at the top of the page — that unlocks it.
+  const answers = ['ammu'];
+  let attempts = 0;
+
+  function tryUnlock(){
+    const val = input.value.trim().toLowerCase();
+    if (answers.includes(val)){
+      if (form) form.style.display = 'none';
+      if (icon) icon.classList.add('unlocked');
+      message.classList.add('show');
+      const colors = ['#FFB6C1','#FF69B4','#E6E6FA','#9370DB','#F3CBB9'];
+      fireConfetti({ particleCount:120, spread:85, origin:{ y:0.5 }, colors });
+    } else {
+      attempts++;
+      card.classList.remove('shake');
+      void card.offsetWidth; // restart animation
+      card.classList.add('shake');
+      if (hint){
+        hint.textContent = attempts >= 2
+          ? "Hint: Mela top-la irukra un per-a try pannu 👆"
+          : "Oops, try again 😜";
+      }
+      input.value = '';
+      input.focus();
+    }
+  }
+
+  submit.addEventListener('click', tryUnlock);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
+}
+
+/* ============ MUSIC TOGGLE (manual pause/resume after gate) ============ */
+function initMusicToggle(){
+  const music = $('bgMusic');
+  const btn = $('musicToggle');
+  if (!music || !btn) return;
+  btn.addEventListener('click', () => {
+    if (music.paused){
+      music.play().then(() => btn.classList.add('spinning')).catch(()=>{});
+    } else {
+      music.pause();
+      btn.classList.remove('spinning');
+    }
+  });
+}
+
+/* ============ CONFETTI ============ */
+function initConfetti(){
+  const btn = $('confettiBtn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const colors = ['#FFB6C1','#FF69B4','#E6E6FA','#9370DB','#F3CBB9'];
+    fireConfetti({ particleCount:140, spread:90, origin:{ y:0.6 }, colors });
+    setTimeout(() => fireConfetti({ particleCount:80, angle:60, spread:70, origin:{x:0}, colors }), 200);
+    setTimeout(() => fireConfetti({ particleCount:80, angle:120, spread:70, origin:{x:1}, colors }), 200);
+  });
+}
+
+/* ============ TILT ON GALLERY CARDS (desktop only) ============ */
+function initTilt(){
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  document.addEventListener('mousemove', (e) => {
+    const card = e.target.closest('.glow-wrap');
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(600px) rotateY(${x*10}deg) rotateX(${-y*10}deg)`;
+  });
+  document.addEventListener('mouseout', (e) => {
+    const card = e.target.closest('.glow-wrap');
+    if (card) card.style.transform = '';
+  });
+}
+
+/* ============ CURSOR HEART TRAIL (desktop only) ============ */
+function initCursorTrail(){
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  let last = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - last < 90) return;
+    last = now;
+    const el = document.createElement('div');
+    el.className = 'cursor-heart';
+    el.textContent = ['💗','💕','✨'][Math.floor(Math.random()*3)];
+    el.style.left = e.clientX + 'px';
+    el.style.top = e.clientY + 'px';
+    document.body.appendChild(el);
+    requestAnimationFrame(() => { el.style.opacity = '0'; el.style.transform = 'translateY(-20px)'; });
+    setTimeout(() => el.remove(), 650);
+  });
+}
+
+/* ============ PARALLAX BLOBS ============ */
+function initParallax(){
+  const blobs = document.querySelectorAll('.blob');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    blobs.forEach((b, i) => {
+      b.style.transform = `translateY(${y * (0.06 + i*0.03)}px)`;
+    });
+  }, { passive:true });
+}
+</script>
+
+</body>
+</html>
