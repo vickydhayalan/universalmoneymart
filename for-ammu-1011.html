@@ -400,7 +400,7 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
   <div class="gate-card glass">
     <div class="gate-emoji">🌸</div>
     <h2>Ammu...</h2>
-    <p>System Alert 🚨 — Cuteness overload incoming, un phone-ku warning kudukkanum nu thonuchu.<br>Idhu naan build panna oru chinna world unakkaga — full-a bugs irukalam, aana full-a love irukkum athu confirm 😂<br>Ready ah, mudinja video call panna solli ketta stating la no solluviye ipo no solli paru parkkalam 😏</p>
+    <p>Naa ethuna panna sonna mudiyathu nu solli enna veruppu yethi pakkurathu thana unaku pudikkum, like video call panna solli ketta stating la no solluviye ipo no sollu parkkalam 😂</p>
     <div class="gate-btns" id="gateBtns">
       <button class="gate-yes" id="yesBtn">Yes, Ready! 💗</button>
       <button class="gate-no" id="noBtn">No</button>
@@ -419,7 +419,7 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
   <h1 class="reveal">Happy 22nd Birthday,<br>En Chella Ammu! 🌸✨</h1>
   <p class="quote reveal">
     Life ye oru mathiri kaduppa "Enna Vazhka Da" appdingira maathiri poitu irunthuchi…<br>
-    but <em>you</em> Nee vantha approm oru new life start ana feelings. 💜
+    but <em>Nee</em> vantha approm oru new life mathiri start ana feelings. 💜
   </p>
 
   <p class="cd-caption reveal" id="cdCaption">Counting down to your day...</p>
@@ -625,7 +625,6 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
 <section id="secret">
   <h2 class="section-title reveal">A Secret Just For Us 🔐</h2>
   <p class="section-sub reveal">Idhu open panna, oru secret word therinjirukkanum...</p>
-
   <div class="secret-card glass reveal" id="secretCard">
     <i data-lucide="lock" class="secret-icon" id="secretIcon"></i>
 
@@ -637,7 +636,7 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
 
     <div class="secret-message" id="secretMessage">
       <p>En ulagamey un kitta thaan thodangudhu Ammu.<br>Un kooda vazhra ovvoru nodiyum en uyiraa paathuppen.</p>
-      <p class="secret-highlight">I love you so much, en Rani-ya en koodave iruppiya? 💍💜</p>
+      <p class="secret-highlight">I love you so much ammu, en Rani-ya en koodave iruppiya? 💍💜</p>
     </div>
   </div>
 </section>
@@ -702,7 +701,7 @@ section{ position:relative; padding:76px 20px; max-width:920px; margin:0 auto; z
       <h4>Intha surprise eppadi irunthuchu, Ammu? 💌</h4>
       <p class="review-sub">Un feelings-ah type pannu — ithu straight-a enoda WhatsApp-ku varum 🥹</p>
       <textarea id="reviewInput" class="review-textarea" rows="3" placeholder="Type your message here..."></textarea>
-      <button class="review-submit" id="reviewSubmit">Send to Vicky 💌</button>
+      <button class="review-submit" id="reviewSubmit">Send to Mama 💌</button>
       <p class="review-hint" id="reviewHint">&nbsp;</p>
     </div>
   </div>
@@ -1012,9 +1011,7 @@ function initGate(){
     "Yes mattum thaan option irukku 💜",
     "Konjam persistent-a irukkeenga ah? 😂",
     "Vera location-ku poiduchu button 🏃‍♀️",
-    "No button GPS off pannitu odiduchu 📍😂",
-    "No.exe has stopped responding 💻",
-    "Ithu button-ku kooda un mela avlo pudichirukku, ovlaam illa 🙈",
+    "No button escape agi odiduchu 📍😂",
     "Signal illama poidum, ippove Yes sollu 📶"
   ];
   let teaseIndex = 0;
@@ -1059,7 +1056,7 @@ function initGate(){
 function initBgFx(){
   const layer = $('bg-fx');
   if (!layer) return;
-  const glyphs = { petal:['🌸','🌺','🌹'], sparkle:['✨','⭐','💫'], heart:['💗','💕','💓','💜','💖'] };
+  const glyphs = { petal:['🌸','🌺','🌹'], sparkle:['✨','⭐','💫'], heart:['💗','💕','💓','💜','💖','❣️'] };
   const kinds = ['petal','sparkle','heart-float','heart-float'];
   const glyphMap = { petal:glyphs.petal, sparkle:glyphs.sparkle, 'heart-float':glyphs.heart };
   function spawn(){
@@ -1192,7 +1189,7 @@ function initSecret(){
       card.classList.add('shake');
       if (hint){
         hint.textContent = attempts >= 2
-          ? "Hint: Mela top-la irukra un per-a try pannu 👆"
+          ? "Hint: Antha word therijikkanum naa namba nerla meet pandra apo naa onnu kettala neeyum kudukura nu sonnala atha kudutha soldren"
           : "Oops, try again 😜";
       }
       input.value = '';
