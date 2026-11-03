@@ -3,293 +3,290 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>D-FARM | Smart Dairy & Agro Ecosystem (Polur)</title>
+  <title>D-FARM | Polur Smart Dairy & Agro Ecosystem</title>
   <meta name="theme-color" content="#064e3b">
 
-  <!-- Production Tailwind CSS & Custom Modern Styles -->
+  <!-- Production Tailwind CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- jsPDF & autoTable for Billing -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; }
     body {
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       background-color: #030712;
-      color: #f3f4f6;
+      color: #f8fafc;
     }
-    .glass-card {
-      background: rgba(17, 24, 39, 0.75);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+    .glass-box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
     }
-    .glass-card-accent {
-      background: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, rgba(17, 24, 39, 0.8) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.2);
+    .glass-emerald {
+      background: linear-gradient(135deg, rgba(6, 78, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
-    .badge-glow {
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 4px;
-    }
+    .custom-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    .badge-amber { background-color: #451a03; color: #fde68a; border: 1px solid #78350f; }
+    .badge-emerald { background-color: #064e3b; color: #6ee7b7; border: 1px solid #065f46; }
+    .badge-rose { background-color: #4c0519; color: #fecdd3; border: 1px solid #881337; }
+    .badge-blue { background-color: #172554; color: #93c5fd; border: 1px solid #1e3a8a; }
   </style>
 </head>
-<body class="h-full flex flex-col antialiased selection:bg-emerald-500 selection:text-white pb-24">
+<body class="h-full flex flex-col antialiased selection:bg-emerald-600 selection:text-white pb-24">
 
-  <!-- ==================== TOP NAVIGATION ==================== -->
-  <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-md px-4 py-3 flex items-center justify-between">
+  <!-- ==================== HEADER BAR ==================== -->
+  <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 px-4 py-3 shadow-xl flex items-center justify-between">
     <div class="flex items-center space-x-3">
-      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-emerald-900/50">
+      <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-emerald-950">
         <i data-lucide="sprout" class="w-6 h-6"></i>
       </div>
       <div>
         <div class="flex items-center gap-2">
-          <h1 class="font-extrabold text-base tracking-tight text-white">D-FARM</h1>
-          <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold uppercase tracking-wider">Polur</span>
+          <h1 class="font-extrabold text-lg tracking-tight text-white">D-FARM</h1>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold tracking-wider">POLUR</span>
         </div>
-        <p class="text-[11px] text-slate-400">Integrated Farm Intelligence ERP</p>
+        <p class="text-[11px] text-slate-400 font-medium">Smart Dairy & Multi-Crop Ecosystem</p>
       </div>
     </div>
     <div class="flex items-center gap-2">
-      <span id="syncBadge" class="flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/80">
+      <span class="flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span id="syncStatus">Cloud Live</span>
+        <span id="cloudStatus">Cloud Live</span>
       </span>
     </div>
   </header>
 
-  <!-- ==================== TAB BAR ==================== -->
-  <nav class="bg-slate-900/80 border-b border-slate-800 px-3 py-2 flex gap-1.5 overflow-x-auto custom-scrollbar max-w-2xl mx-auto w-full sticky top-[61px] z-40 backdrop-blur-md">
-    <button onclick="switchTab('ops')" id="tabOps" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-emerald-600 text-white shadow-sm">
-      <i data-lucide="activity" class="w-4 h-4"></i> Daily Ops
+  <!-- ==================== TAB NAVIGATION ==================== -->
+  <nav class="bg-slate-900/95 border-b border-slate-800 px-3 py-2.5 flex gap-2 overflow-x-auto custom-scroll max-w-2xl mx-auto w-full sticky top-[65px] z-40 backdrop-blur-md">
+    <button onclick="switchTab('ops')" id="tabOps" class="flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-emerald-600 text-white shadow-md">
+      <i data-lucide="activity" class="w-4 h-4"></i> தினசரி பதிவு
     </button>
-    <button onclick="switchTab('animals')" id="tabAnimals" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
-      <i data-lucide="scan" class="w-4 h-4"></i> Animals 360°
+    <button onclick="switchTab('animals')" id="tabAnimals" class="flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white bg-slate-800/60">
+      <i data-lucide="scan" class="w-4 h-4"></i> கால்நடைகள் 360°
     </button>
-    <button onclick="switchTab('capex')" id="tabCapex" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
-      <i data-lucide="hammer" class="w-4 h-4"></i> CAPEX & Projects
+    <button onclick="switchTab('capex')" id="tabCapex" class="flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white bg-slate-800/60">
+      <i data-lucide="hammer" class="w-4 h-4"></i> முதலீடு (CAPEX)
     </button>
-    <button onclick="switchTab('bills')" id="tabBills" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
-      <i data-lucide="receipt" class="w-4 h-4"></i> Ledger & Bills
+    <button onclick="switchTab('bills')" id="tabBills" class="flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white bg-slate-800/60">
+      <i data-lucide="receipt" class="w-4 h-4"></i> பால் பில் (Ledger)
     </button>
-    <button onclick="switchTab('store')" id="tabStore" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
-      <i data-lucide="store" class="w-4 h-4"></i> Storefront
+    <button onclick="switchTab('store')" id="tabStore" class="flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white bg-slate-800/60">
+      <i data-lucide="shopping-bag" class="w-4 h-4"></i> இயற்கை அங்காடி
+    </button>
+    <button onclick="switchTab('about')" id="tabAbout" class="flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white bg-slate-800/60">
+      <i data-lucide="heart" class="w-4 h-4 text-rose-400"></i> நமது கதை (Story)
     </button>
   </nav>
 
-  <!-- ==================== MAIN VIEW CONTAINER ==================== -->
+  <!-- ==================== MAIN CONTENT ==================== -->
   <main class="flex-1 overflow-y-auto px-4 py-4 space-y-5 max-w-2xl mx-auto w-full">
 
-    <!-- ==================== TAB 1: DAILY OPS ==================== -->
+    <!-- ==================== VIEW 1: DAILY OPS ==================== -->
     <div id="viewOps" class="space-y-5">
-      <!-- Quick Actions Grid -->
       <section class="space-y-3">
         <div class="flex items-center justify-between">
           <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-            <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i> Appa Direct Entry (1-Tap)
+            <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i> உடனடிப் பதிவு (1-Tap Quick Actions)
           </h2>
-          <span class="text-[11px] text-slate-500">Live Polur Sync</span>
+          <span class="text-[11px] text-emerald-400 font-medium">Polur Farm Ops</span>
         </div>
         <div class="grid grid-cols-2 gap-3">
-          <button onclick="openModal('cowMilkModal', 'AM')" class="glass-card active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-blue-500/50">
+          <button onclick="openModal('cowMilkModal', 'AM')" class="glass-box active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-blue-500">
             <div class="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center mb-2">
               <i data-lucide="sun" class="w-6 h-6"></i>
             </div>
             <span class="font-bold text-sm text-white">காலை பால் (AM)</span>
-            <span class="text-[11px] text-blue-300">Cow-wise Morning Milk</span>
+            <span class="text-[11px] text-blue-300">Morning Milk Log</span>
           </button>
-          <button onclick="openModal('cowMilkModal', 'PM')" class="glass-card active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-indigo-500/50">
+          <button onclick="openModal('cowMilkModal', 'PM')" class="glass-box active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-indigo-500">
             <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-2">
               <i data-lucide="moon" class="w-6 h-6"></i>
             </div>
             <span class="font-bold text-sm text-white">மாலை பால் (PM)</span>
-            <span class="text-[11px] text-indigo-300">Cow-wise Evening Milk</span>
+            <span class="text-[11px] text-indigo-300">Evening Milk Log</span>
           </button>
-          <button onclick="openModal('expenseModal')" class="glass-card active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-rose-500/50">
+          <button onclick="openModal('expenseModal')" class="glass-box active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-rose-500">
             <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center mb-2">
               <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
             </div>
             <span class="font-bold text-sm text-white">செலவுப் பதிவு</span>
-            <span class="text-[11px] text-rose-300">OPEX Daily Spend</span>
+            <span class="text-[11px] text-rose-300">Daily OPEX Spend</span>
           </button>
-          <button onclick="openModal('saleModal')" class="glass-card active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/50">
+          <button onclick="openModal('saleModal')" class="glass-box active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500">
             <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-2">
               <i data-lucide="wallet" class="w-6 h-6"></i>
             </div>
             <span class="font-bold text-sm text-white">வரவு / விற்பனை</span>
-            <span class="text-[11px] text-emerald-300">Direct Income (₹)</span>
+            <span class="text-[11px] text-emerald-300">Farm Direct Income</span>
           </button>
         </div>
       </section>
 
-      <!-- Instant Quick Expense Buttons -->
-      <section class="glass-card rounded-2xl p-4 space-y-3">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-          <i data-lucide="coins" class="w-4 h-4 text-emerald-400"></i> உடனடிச் செலவுகள் (Quick Expense)
+      <!-- Instant Micro Expenses -->
+      <section class="glass-box rounded-2xl p-4 space-y-3">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+          <i data-lucide="coins" class="w-4 h-4 text-emerald-400"></i> உடனடிச் செலவுகள் (Quick Expense Buttons)
         </h3>
         <div class="grid grid-cols-3 gap-2">
-          <button onclick="quickExpense(10, 'Tea / Snack', 'Labour')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(10, 'Tea / Snack', 'Labour')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹10</span>
-            <span class="block text-[10px] text-slate-400 truncate">டீ / பிஸ்கட்</span>
+            <span class="block text-[11px] text-slate-400 truncate">டீ / பிஸ்கட்</span>
           </button>
-          <button onclick="quickExpense(20, 'Needle / Syringe', 'Medical')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(20, 'Needle / Syringe', 'Medical')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹20</span>
-            <span class="block text-[10px] text-slate-400 truncate">ஊசி / சிரின்ஞ்</span>
+            <span class="block text-[11px] text-slate-400 truncate">ஊசி / சிரின்ஞ்</span>
           </button>
-          <button onclick="quickExpense(30, 'Teflon / Washer', 'Maintenance')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(30, 'Teflon / Washer', 'Maintenance')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹30</span>
-            <span class="block text-[10px] text-slate-400 truncate">வாஷர் / டேப்</span>
+            <span class="block text-[11px] text-slate-400 truncate">வாஷர் / டேப்</span>
           </button>
-          <button onclick="quickExpense(50, 'Town Petrol / Travel', 'Fuel')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(50, 'Town Petrol / Travel', 'Fuel')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹50</span>
-            <span class="block text-[10px] text-slate-400 truncate">பெட்ரோல்</span>
+            <span class="block text-[11px] text-slate-400 truncate">பெட்ரோல்</span>
           </button>
-          <button onclick="quickExpense(60, 'Salt / Minerals', 'Feed')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(60, 'Salt / Minerals', 'Feed')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹60</span>
-            <span class="block text-[10px] text-slate-400 truncate">தாது உப்பு</span>
+            <span class="block text-[11px] text-slate-400 truncate">தாது உப்பு</span>
           </button>
-          <button onclick="quickExpense(100, 'Daily Helper Tip', 'Labour')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(100, 'Daily Helper Tip', 'Labour')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹100</span>
-            <span class="block text-[10px] text-slate-400 truncate">கூலி அட்வான்ஸ்</span>
+            <span class="block text-[11px] text-slate-400 truncate">கூலி அட்வான்ஸ்</span>
           </button>
         </div>
       </section>
 
-      <!-- Today Snapshot -->
+      <!-- Today Highlights -->
       <section class="grid grid-cols-2 gap-3">
-        <div class="glass-card rounded-2xl p-4">
-          <span class="text-xs text-slate-400 flex items-center gap-1 mb-1">
+        <div class="glass-box rounded-2xl p-4">
+          <span class="text-xs text-slate-400 font-semibold flex items-center gap-1 mb-1">
             <i data-lucide="milk" class="w-4 h-4 text-blue-400"></i> Today's Milk
           </span>
           <div class="flex items-baseline gap-1">
             <span id="todayMilkTotal" class="text-2xl font-black text-white">0.0</span>
-            <span class="text-xs text-slate-400">Ltrs</span>
+            <span class="text-xs text-slate-400 font-bold">Ltrs</span>
           </div>
-          <p id="todayMilkSplit" class="text-[10px] text-slate-400 mt-0.5">AM: 0L | PM: 0L</p>
+          <p id="todayMilkSplit" class="text-[11px] text-slate-400 mt-1">AM: 0L | PM: 0L</p>
         </div>
-        <div class="glass-card rounded-2xl p-4">
-          <span class="text-xs text-slate-400 flex items-center gap-1 mb-1">
+        <div class="glass-box rounded-2xl p-4">
+          <span class="text-xs text-slate-400 font-semibold flex items-center gap-1 mb-1">
             <i data-lucide="trending-down" class="w-4 h-4 text-rose-400"></i> Today's Spend
           </span>
           <div class="flex items-baseline gap-1">
-            <span class="text-sm font-semibold text-rose-400">₹</span>
+            <span class="text-sm font-bold text-rose-400">₹</span>
             <span id="todayExpTotal" class="text-2xl font-black text-rose-400">0</span>
           </div>
-          <p class="text-[10px] text-slate-400 mt-0.5">Direct OPEX</p>
+          <p class="text-[11px] text-slate-400 mt-1">Live Synced OPEX</p>
         </div>
       </section>
 
-      <!-- Recent Ops Feed with Edit/Delete Buttons -->
-      <section class="glass-card rounded-2xl p-4 space-y-3">
+      <!-- Audit Feed with Edit & Delete -->
+      <section class="glass-box rounded-2xl p-4 space-y-3">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
             <i data-lucide="history" class="w-4 h-4 text-slate-400"></i> சமீபத்திய பதிவுகள் (Recent Activity)
           </h3>
-          <span id="opsFeedCount" class="text-[11px] text-slate-500">0 entries</span>
+          <span id="opsFeedCount" class="text-[11px] text-slate-500">0 items</span>
         </div>
-        <div id="opsFeedList" class="space-y-2 max-h-72 overflow-y-auto pr-1 text-xs custom-scrollbar">
+        <div id="opsFeedList" class="space-y-2 max-h-72 overflow-y-auto pr-1 text-xs custom-scroll">
           <div class="text-center py-6 text-slate-500">பதிவுகள் எதுவும் இல்லை.</div>
         </div>
       </section>
     </div>
 
-    <!-- ==================== TAB 2: ANIMALS 360° ==================== -->
+    <!-- ==================== VIEW 2: ANIMALS 360° ==================== -->
     <div id="viewAnimals" class="space-y-5 hidden">
-      <!-- Animal Top Banner -->
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">கால்நடை 360° (Full Animal Tracker)</h2>
+          <h2 class="text-base font-extrabold text-white">கால்நடைகள் 360°</h2>
           <p class="text-xs text-slate-400">Cow, Goat, Country Chicken & Rabbit</p>
         </div>
-        <button onclick="openModal('animalModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
+        <button onclick="openModal('animalModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
           <i data-lucide="plus" class="w-4 h-4"></i> Add Animal
         </button>
       </div>
 
-      <!-- Tag Lookup Search Bar -->
-      <div class="glass-card rounded-2xl p-3 flex items-center gap-2">
+      <!-- Tag Search -->
+      <div class="glass-box rounded-2xl p-3 flex items-center gap-2">
         <i data-lucide="search" class="w-5 h-5 text-slate-400 ml-1"></i>
-        <input type="text" id="animalSearchInput" onkeyup="filterAnimals()" placeholder="Search by Tag ID (e.g. COW-01, GOAT-04)..." class="w-full bg-transparent text-sm text-white outline-none">
+        <input type="text" id="animalSearchInput" onkeyup="filterAnimals()" placeholder="டேக் எண் மூலம் தேடுங்கள் (COW-01, GOAT-03)..." class="w-full bg-transparent text-sm text-white placeholder-slate-500 outline-none">
       </div>
 
-      <!-- Action Sub-Buttons: Weight & Health Log -->
+      <!-- Quick Weight & Medical Modal Triggers -->
       <div class="grid grid-cols-2 gap-2">
-        <button onclick="openModal('weightModal')" class="bg-slate-900 border border-slate-800 hover:border-slate-700 p-2.5 rounded-xl text-left flex items-center gap-2.5">
+        <button onclick="openModal('weightModal')" class="glass-box p-3 rounded-xl text-left flex items-center gap-2.5 hover:border-amber-500">
           <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
             <i data-lucide="scale" class="w-4 h-4"></i>
           </div>
           <div>
             <h4 class="text-xs font-bold text-white">Weight Check</h4>
-            <span class="text-[10px] text-slate-400">Monthly Gain Tracker</span>
+            <span class="text-[10px] text-slate-400">Monthly Gain Audit</span>
           </div>
         </button>
-        <button onclick="openModal('medicalModal')" class="bg-slate-900 border border-slate-800 hover:border-slate-700 p-2.5 rounded-xl text-left flex items-center gap-2.5">
+        <button onclick="openModal('medicalModal')" class="glass-box p-3 rounded-xl text-left flex items-center gap-2.5 hover:border-teal-500">
           <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center">
             <i data-lucide="syringe" class="w-4 h-4"></i>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-white">Vaccine / Health</h4>
-            <span class="text-[10px] text-slate-400">Deworming & Meds</span>
+            <h4 class="text-xs font-bold text-white">Vaccine / Meds</h4>
+            <span class="text-[10px] text-slate-400">AI & Deworming</span>
           </div>
         </button>
       </div>
 
-      <!-- Animal Cards Container -->
       <div id="animalCardsList" class="space-y-3">
         <div class="text-center py-8 text-slate-500 text-xs">கால்நடைகள் எதுவும் இன்னும் பதிவு செய்யப்படவில்லை.</div>
       </div>
     </div>
 
-    <!-- ==================== TAB 3: CAPEX & INFRASTRUCTURE ==================== -->
+    <!-- ==================== VIEW 3: CAPEX & INFRASTRUCTURE ==================== -->
     <div id="viewCapex" class="space-y-5 hidden">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">முதலீட்டுச் செலவுகள் (CAPEX Tracker)</h2>
-          <p class="text-xs text-slate-400">Shed, Borewell, RCC Tank, Chaff Cutter, Solar</p>
+          <h2 class="text-base font-extrabold text-white">பண்ணை முதலீடுகள் (CAPEX)</h2>
+          <p class="text-xs text-slate-400">Shed, Borewell, RCC Tank, Chaff Cutter & Solar</p>
         </div>
-        <button onclick="openModal('capexModal')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
+        <button onclick="openModal('capexModal')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
           <i data-lucide="plus" class="w-4 h-4"></i> Add CAPEX
         </button>
       </div>
 
-      <!-- Summary Card -->
-      <div class="glass-card-accent rounded-2xl p-4">
-        <span class="text-xs text-slate-400">Total Infrastructure Investment (Polur Farm)</span>
-        <div class="flex items-baseline gap-1 mt-1">
-          <span class="text-base font-bold text-emerald-400">₹</span>
+      <!-- CAPEX Total Box -->
+      <div class="glass-emerald rounded-3xl p-5 text-white">
+        <span class="text-xs text-emerald-200 font-semibold tracking-wide uppercase">Total Capital Infrastructure Investment</span>
+        <div class="flex items-baseline gap-1 mt-1.5">
+          <span class="text-xl font-bold text-emerald-400">₹</span>
           <span id="totalCapexAmount" class="text-3xl font-extrabold text-white">0</span>
         </div>
-        <p class="text-[11px] text-slate-400 mt-1">Tracks building, electrical, water & long-term capital assets</p>
+        <p class="text-[11px] text-slate-300 mt-2">D-FARM Polur smart farm civil, electrical, pipeline & long-term assets.</p>
       </div>
 
-      <!-- CAPEX List -->
       <div id="capexListContainer" class="space-y-3">
         <div class="text-center py-8 text-slate-500 text-xs">முதலீட்டுப் பதிவுகள் எதுவும் இல்லை.</div>
       </div>
     </div>
 
-    <!-- ==================== TAB 4: CUSTOMER LEDGER & BILLS ==================== -->
+    <!-- ==================== VIEW 4: CUSTOMER LEDGER & BILLS ==================== -->
     <div id="viewBills" class="space-y-5 hidden">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">வாடிக்கையாளர் கணக்கு & பில்</h2>
+          <h2 class="text-base font-extrabold text-white">வாடிக்கையாளர் கணக்கு & பில்</h2>
           <p class="text-xs text-slate-400">Monthly Statements, WhatsApp Invoicing & PDF</p>
         </div>
-        <button onclick="openModal('customerModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
+        <button onclick="openModal('customerModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
           <i data-lucide="user-plus" class="w-4 h-4"></i> Add Customer
         </button>
       </div>
 
-      <!-- Daily Customer Milk Drop -->
-      <div class="glass-card rounded-2xl p-4 space-y-3">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+      <!-- Daily Drop Entry -->
+      <div class="glass-box rounded-2xl p-4 space-y-3">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
           <i data-lucide="truck" class="w-4 h-4 text-blue-400"></i> வாடிக்கையாளருக்கு பால் சப்ளை (Daily Supply)
         </h3>
         <div class="grid grid-cols-2 gap-2">
@@ -298,37 +295,35 @@
           </select>
           <div class="flex gap-2">
             <input type="number" step="0.5" id="custDropLiters" placeholder="Litres (e.g. 5)" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none font-bold">
-            <button onclick="saveCustomerDailyDrop()" class="bg-blue-600 active:scale-95 text-white px-3 py-2 rounded-xl text-xs font-bold">Add</button>
+            <button onclick="saveCustomerDailyDrop()" class="bg-blue-600 active:scale-95 text-white px-3.5 py-2 rounded-xl text-xs font-bold">Add</button>
           </div>
         </div>
       </div>
 
-      <!-- Customer Cards List -->
       <div id="customerCardsContainer" class="space-y-3">
         <div class="text-center py-8 text-slate-500 text-xs">வாடிக்கையாளர்கள் சேர்க்கப்படவில்லை.</div>
       </div>
     </div>
 
-    <!-- ==================== TAB 5: PUBLIC STOREFRONT ==================== -->
+    <!-- ==================== VIEW 5: STOREFRONT ==================== -->
     <div id="viewStore" class="space-y-5 hidden">
-      <div class="glass-card-accent rounded-3xl p-5 text-center relative overflow-hidden">
+      <div class="glass-emerald rounded-3xl p-5 text-center relative overflow-hidden">
         <span class="inline-block px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 text-[11px] font-bold tracking-wider mb-2">
           100% FARM DIRECT • POLUR
         </span>
         <h2 class="text-xl font-extrabold text-white">D-FARM ஆர்கானிக் அங்காடி</h2>
-        <p class="text-xs text-slate-300 mt-1 max-w-sm mx-auto">கலப்படம் இல்லாத தூய பால், நாட்டுக் கோழி முட்டை, விவசாய சாண உரம்.</p>
+        <p class="text-xs text-slate-300 mt-1 max-w-sm mx-auto">கலப்படம் இல்லாத தூய பசும்பால், நாட்டுக் கோழி முட்டை, விவசாய சாண உரம்.</p>
         
-        <div class="mt-3 flex items-center justify-center gap-2 text-xs text-slate-400">
-          <span>📱 ஆர்டர் உதவி: <b>7200752628</b></span>
+        <div class="mt-3 flex flex-wrap items-center justify-center gap-2 text-xs text-emerald-200">
+          <span>📱 ஆர்டர்: <b>7200752628</b></span>
           <span>•</span>
           <span>💳 UPI: <b>7200752628@upi</b></span>
         </div>
       </div>
 
-      <!-- Store Catalog -->
       <div class="space-y-3">
-        <!-- Item 1: Milk -->
-        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
+        <!-- Milk -->
+        <div class="glass-box rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
               <i data-lucide="milk" class="w-6 h-6"></i>
@@ -344,15 +339,15 @@
           </button>
         </div>
 
-        <!-- Item 2: Eggs -->
-        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
+        <!-- Eggs -->
+        <div class="glass-box rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
               <i data-lucide="egg" class="w-6 h-6"></i>
             </div>
             <div>
               <h4 class="font-bold text-sm text-white">நாட்டுக் கோழி முட்டை</h4>
-              <p class="text-[11px] text-slate-400">பண்ணையில் சுதந்திரமாக மேயும் கோழிகள்</p>
+              <p class="text-[11px] text-slate-400">சுதந்திரமாக மேயும் நாட்டு கோழிகள்</p>
               <span class="text-emerald-400 font-bold text-sm">₹12 / Egg</span>
             </div>
           </div>
@@ -361,8 +356,8 @@
           </button>
         </div>
 
-        <!-- Item 3: Cow Dung -->
-        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
+        <!-- Dung -->
+        <div class="glass-box rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-lime-500/20 text-lime-400 flex items-center justify-center">
               <i data-lucide="truck" class="w-6 h-6"></i>
@@ -378,15 +373,15 @@
           </button>
         </div>
 
-        <!-- Item 4: Goat Manure -->
-        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
+        <!-- Goat Manure -->
+        <div class="glass-box rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center">
               <i data-lucide="archive" class="w-6 h-6"></i>
             </div>
             <div>
               <h4 class="font-bold text-sm text-white">ஆட்டுப் புழுக்கை உரம் (Bag)</h4>
-              <p class="text-[11px] text-slate-400">மரங்கள் மற்றும் செடிகளுக்கான ஊட்ட உரம்</p>
+              <p class="text-[11px] text-slate-400">செடி மற்றும் மரங்களுக்கான இயற்கை உரம்</p>
               <span class="text-emerald-400 font-bold text-sm">₹150 / Bag</span>
             </div>
           </div>
@@ -395,15 +390,15 @@
           </button>
         </div>
 
-        <!-- Item 5: Fodder Stems -->
-        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
+        <!-- Fodder Stems -->
+        <div class="glass-box rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
               <i data-lucide="leaf" class="w-6 h-6"></i>
             </div>
             <div>
               <h4 class="font-bold text-sm text-white">Super Napier தீவனக் குச்சிகள்</h4>
-              <p class="text-[11px] text-slate-400">உயர் ரக அடர் பசுந்தீவன கரணைகள்</p>
+              <p class="text-[11px] text-slate-400">உயர் ரக பசுந்தீவன கரணைகள்</p>
               <span class="text-emerald-400 font-bold text-sm">₹1 / Stem</span>
             </div>
           </div>
@@ -414,140 +409,111 @@
       </div>
     </div>
 
+    <!-- ==================== VIEW 6: ABOUT US / OUR STORY ==================== -->
+    <div id="viewAbout" class="space-y-5 hidden">
+      <!-- Story Banner -->
+      <div class="glass-emerald rounded-3xl p-6 text-white space-y-3">
+        <span class="inline-block px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 text-[11px] font-bold uppercase tracking-wider">
+          விதைத்த விதை • வளர்ந்த கதை
+        </span>
+        <h2 class="text-2xl font-extrabold tracking-tight">மண்ணின் மீதான பற்று, நவீனத் தொழில்நுட்பத்தின் கூட்டணி!</h2>
+        <p class="text-xs text-slate-200 leading-relaxed">
+          திருவண்ணாமலை மாவட்டம் போளூர் (Polur) மண்ணில், நம் முன்னோர்களின் பாரம்பரிய விவசாய நெறிமுறைகளையும், இன்றைய நவீன டேட்டா சயின்ஸ் மற்றும் ஆட்டோமேஷன் தொழில்நுட்பத்தையும் ஒன்றிணைத்து உருவாக்கப்பட்டதே இந்த <b>D-FARM</b>.
+        </p>
+      </div>
+
+      <!-- Vision Narrative Cards -->
+      <div class="glass-box rounded-2xl p-5 space-y-4">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-white">100% கலப்படமற்ற தூய உணவு</h4>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              தண்ணீர் கலக்காத, ஹார்மோன் ஊசிகள் செலுத்தப்படாத தரமான பசும்பால், இயற்கையான திறந்தவெளியில் வளரும் நாட்டுக் கோழி முட்டைகள் ஆகியவற்றை நம் பகுதி மக்களுக்கு நேரடியாாகக் கொண்டு சேர்ப்பதே எங்கள் முதல் நோக்கம்.
+            </p>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-800 pt-4 flex items-start gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i data-lucide="recycle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-white">முழுமையான வட்டார ஒருங்கிணைந்த பண்ணை (Circular Smart Farm)</h4>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              மாடுகளின் சாணம் மற்றும் ஆட்டுப் புழுக்கை நிலத்திற்கு இயற்கை உரமாக மாறுகிறது. அந்த இயற்கை உரத்தில் விளையும் சூப்பர் நேப்பியர் புல் மாடுகளுக்கு சத்தான தீவனமாகிறது. எந்த ஒரு கழிவும் வீணாகாமல் சுழற்சி முறையில் இயங்குகிறது.
+            </p>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-800 pt-4 flex items-start gap-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i data-lucide="cpu" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-white">டிஜிட்டல் நிர்வாகம் & துல்லியக் கணக்கு</h4>
+            <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+              ஒவ்வொரு கால்நடையின் உடல் எடை வளர்ச்சி, தடுப்பூசி தேதிகள், பால் உற்பத்தி அளவுகள் மற்றும் பண்ணை செலவுகள் அனைத்தையும் கிளவுட் முறையில் துல்லியமாகப் பதிவு செய்து லாபகரமான நவீன விவசாயத்திற்கு வழிகாட்டுகிறோம்.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Farm Leadership Contacts -->
+      <div class="glass-box rounded-2xl p-5 space-y-3">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">பண்ணைத் தொடர்புகள் (Direct Contacts)</h3>
+        <div class="space-y-2 text-xs">
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+            <div>
+              <p class="font-bold text-white">பண்ணை நேரடி ஆர்டர்கள் (Digital & Store)</p>
+              <p class="text-slate-400">WhatsApp & PhonePe</p>
+            </div>
+            <a href="https://wa.me/917200752628" target="_blank" class="text-emerald-400 font-bold flex items-center gap-1">
+              7200752628 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+            <div>
+              <p class="font-bold text-white">கள நிர்வாகம் (Farm Field Operations - Appa)</p>
+              <p class="text-slate-400">போளூர் பண்ணை நேரடி அழைப்பு</p>
+            </div>
+            <a href="tel:8870804123" class="text-blue-400 font-bold flex items-center gap-1">
+              8870804123 <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+            <div>
+              <p class="font-bold text-white">அதிகாரப்பூர்வ மின்னஞ்சல்</p>
+              <p class="text-slate-400">Email Enquiries</p>
+            </div>
+            <span class="text-slate-300 font-medium">dfarmpolur@gmail.com</span>
+          </div>
+
+          <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-800">
+            <div>
+              <p class="font-bold text-white">பண்ணை அமைவிடம்</p>
+              <p class="text-slate-400">Farm Location</p>
+            </div>
+            <span class="text-emerald-400 font-bold">Polur, Tiruvannamalai Dt, TN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
-  <!-- ==================== ALL INTERACTIVE MODALS ==================== -->
+  <!-- ==================== INTERACTIVE POPUPS (MODALS) ==================== -->
 
-  <!-- MODAL: ADD / EDIT ANIMAL -->
-  <div id="animalModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base" id="animalModalTitle">புதிய கால்நடை பதிவு</h3>
-        <button onclick="closeModal('animalModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <form onsubmit="handleAnimalSubmit(event)" class="space-y-3">
-        <input type="hidden" id="editAnimalId">
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">Tag / Code ID*</label>
-            <input type="text" id="animalTag" required placeholder="e.g. COW-01, GOAT-03" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs font-bold outline-none">
-          </div>
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">வகை (Type)*</label>
-            <select id="animalType" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-              <option value="Cow">மாடு (Cow)</option>
-              <option value="Goat">ஆடு (Goat)</option>
-              <option value="Country Chicken">நாட்டுக் கோழி</option>
-              <option value="Rabbit">முயல் (Rabbit)</option>
-            </select>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">ரகம் (Breed)*</label>
-            <input type="text" id="animalBreed" required placeholder="e.g. Jersey Cross, Tellicherry" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-          </div>
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">ஆரம்ப எடை (Initial Wt kg)</label>
-            <input type="number" step="0.1" id="animalInitWeight" placeholder="e.g. 320" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">வாங்கிய தேதி / பிறந்த நாள்</label>
-            <input type="date" id="animalDob" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-          </div>
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">வாங்கிய விலை (₹)</label>
-            <input type="number" id="animalPurchaseCost" placeholder="₹" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">சினை ஊசி போட்ட தேதி (AI Date - மாடுகளுக்கு)</label>
-          <input type="date" id="animalAiDate" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-        </div>
-        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Animal Profile</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: WEIGHT LOG -->
-  <div id="weightModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base">மாதாந்திர எடை பதிவு (Weight Check)</h3>
-        <button onclick="closeModal('weightModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <form onsubmit="handleWeightSubmit(event)" class="space-y-3">
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">Animal Tag*</label>
-          <select id="weightAnimalSelect" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-            <option value="">Select Animal...</option>
-          </select>
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">தற்போதைய எடை (kg)*</label>
-            <input type="number" step="0.1" id="weightVal" required placeholder="kg" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-sm font-bold outline-none">
-          </div>
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">தேதி*</label>
-            <input type="date" id="weightDate" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">குறிப்புகள் (Notes / Health)</label>
-          <input type="text" id="weightNotes" placeholder="e.g. Good active feed intake" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-        </div>
-        <button type="submit" class="w-full bg-amber-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Weight Record</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: MEDICAL / VACCINATION -->
-  <div id="medicalModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base">தடுப்பூசி & சிகிச்சை பதிவு (Health Log)</h3>
-        <button onclick="closeModal('medicalModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <form onsubmit="handleMedicalSubmit(event)" class="space-y-3">
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">Animal Tag*</label>
-          <select id="medAnimalSelect" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-            <option value="">Select Animal...</option>
-          </select>
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">வகை (Category)*</label>
-            <select id="medType" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-              <option value="Vaccination">தடுப்பூசி (Vaccination)</option>
-              <option value="Deworming">குடற்புழு நீக்கம் (Deworming)</option>
-              <option value="Medical Treatment">சிகிச்சை (Treatment)</option>
-              <option value="Vitamin / Mineral">வைட்டமின் / தாது உப்புகள்</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs text-slate-400 mb-1">செலவு (₹)</label>
-            <input type="number" id="medCost" placeholder="₹ 0" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">மருந்து விவரம் (Details / Medicine)*</label>
-          <input type="text" id="medDesc" required placeholder="e.g. FMD Vaccine, Albendazole" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-        </div>
-        <button type="submit" class="w-full bg-teal-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Health Record</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: COW-WISE MILK ENTRY -->
+  <!-- MODAL: COW MILK ENTRY -->
   <div id="cowMilkModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <h3 class="font-bold text-white text-base" id="cowMilkModalTitle">பால் பதிவு</h3>
-        <button onclick="closeModal('cowMilkModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button onclick="closeModal('cowMilkModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleCowMilkSubmit(event)" class="space-y-3">
         <input type="hidden" id="cowMilkSession" value="AM">
@@ -571,50 +537,17 @@
             <input type="number" step="0.1" id="cowMilkSnf" placeholder="8.5" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
           </div>
         </div>
-        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Milk Log</button>
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Save Milk Log</button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: CAPEX ENTRY -->
-  <div id="capexModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base">முதலீட்டுச் செலவு பதிவு (CAPEX)</h3>
-        <button onclick="closeModal('capexModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <form onsubmit="handleCapexSubmit(event)" class="space-y-3">
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">தொகை (₹)*</label>
-          <input type="number" id="capexAmount" required placeholder="₹ 0" class="w-full bg-slate-800 border border-slate-700 text-indigo-400 font-black text-2xl rounded-xl px-4 py-3 outline-none">
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">பிரிவு (Project / Asset)*</label>
-          <select id="capexCategory" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-            <option value="Shed & Civil Structure">மாட்டுக்கொட்டகை / கொட்டகை கட்டுமானம்</option>
-            <option value="Borewell & Water Rig">போர்வெல் & பைப்லைன்</option>
-            <option value="RCC Water Tank 5000L">RCC தூண் மேல்நிலை நீர்த்தேக்கத் தொட்டி</option>
-            <option value="Chaff Cutter & Machinery">புல் நறுக்கும் மெஷின் (Chaff Cutter)</option>
-            <option value="Solar & Electrical Setup">சோலார் & மின்சார கட்டமைப்பு</option>
-            <option value="Fencing & Security">வேலி & CCTV கேமரா</option>
-            <option value="Fodder Land Prep">தீவன நில மேம்பாடு (Super Napier)</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">விவரம் (Vendor / Description)*</label>
-          <input type="text" id="capexDesc" required placeholder="e.g. சிமெண்ட், இரும்பு கம்பிகள், மேஸ்திரி கூலி" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-        </div>
-        <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg">Save CAPEX Asset</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: EXPENSE ENTRY (OPEX) -->
+  <!-- MODAL: EXPENSE ENTRY -->
   <div id="expenseModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <h3 class="font-bold text-white text-base" id="expenseModalTitle">தினசரி செலவுப் பதிவு</h3>
-        <button onclick="closeModal('expenseModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button onclick="closeModal('expenseModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleExpenseSubmit(event)" class="space-y-3">
         <input type="hidden" id="editExpId">
@@ -624,7 +557,7 @@
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">காரணம் / விவரம்*</label>
-          <input type="text" id="expDesc" required placeholder="e.g. 1 மூட்டை தவிடு, ஆள் கூலி" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          <input type="text" id="expDesc" required placeholder="e.g. 1 மூட்டை தவிடு, ஆள் கூலி, டீ" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">பிரிவு (Category)</label>
@@ -637,7 +570,7 @@
             <option value="Misc">இதர செலவுகள் (Misc)</option>
           </select>
         </div>
-        <button type="submit" class="w-full bg-rose-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Daily Expense</button>
+        <button type="submit" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Save Daily Expense</button>
       </form>
     </div>
   </div>
@@ -647,7 +580,7 @@
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <h3 class="font-bold text-white text-base">வரவுப் பதிவு (Direct Sale)</h3>
-        <button onclick="closeModal('saleModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button onclick="closeModal('saleModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleSaleSubmit(event)" class="space-y-3">
         <div>
@@ -661,11 +594,167 @@
             <option value="Cow Dung Load">சாணம் டிராக்டர் லோடு (Cow Dung)</option>
             <option value="Goat Manure Bag">ஆட்டுப் புழுக்கை மூட்டை</option>
             <option value="Country Eggs">நாட்டுக் கோழி முட்டை</option>
-            <option value="Live Bird / Goat">ஆடு / சேவல் விற்பனை</option>
+            <option value="Live Bird / Goat">ஆடு / சேவல் நேரடி விற்பனை</option>
             <option value="Napier Stems">தீவனக் குச்சிகள்</option>
           </select>
         </div>
-        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Direct Income</button>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Save Direct Income</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ANIMAL PROFILE -->
+  <div id="animalModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4 max-h-[90vh] overflow-y-auto custom-scroll">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-base">கால்நடைப் பதிவு</h3>
+        <button onclick="closeModal('animalModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="handleAnimalSubmit(event)" class="space-y-3">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Tag / Code ID*</label>
+            <input type="text" id="animalTag" required placeholder="COW-01" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs font-bold outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">வகை (Type)*</label>
+            <select id="animalType" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+              <option value="Cow">மாடு (Cow)</option>
+              <option value="Goat">ஆடு (Goat)</option>
+              <option value="Country Chicken">நாட்டுக் கோழி</option>
+              <option value="Rabbit">முயல் (Rabbit)</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">ரகம் (Breed)*</label>
+            <input type="text" id="animalBreed" required placeholder="Jersey Cross" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">ஆரம்ப எடை (kg)</label>
+            <input type="number" step="0.1" id="animalInitWeight" placeholder="320" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">பிறந்த / வாங்கிய தேதி</label>
+            <input type="date" id="animalDob" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">விலை (₹)</label>
+            <input type="number" id="animalPurchaseCost" placeholder="₹" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">சினை ஊசி போட்ட தேதி (AI Date - மாடுகளுக்கு)</label>
+          <input type="date" id="animalAiDate" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg transition">Save Animal</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: WEIGHT LOG -->
+  <div id="weightModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-base">மாதாந்திர எடை பதிவு</h3>
+        <button onclick="closeModal('weightModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="handleWeightSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Animal Tag ID*</label>
+          <select id="weightAnimalSelect" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+            <option value="">Select Animal...</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">தற்போதைய எடை (kg)*</label>
+            <input type="number" step="0.1" id="weightVal" required placeholder="kg" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-sm font-bold outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">தேதி*</label>
+            <input type="date" id="weightDate" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">குறிப்புகள்</label>
+          <input type="text" id="weightNotes" placeholder="Healthy active feed" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl shadow-lg transition">Save Weight</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: MEDICAL ENTRY -->
+  <div id="medicalModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-base">தடுப்பூசி & மருத்துவ சிகிச்சை</h3>
+        <button onclick="closeModal('medicalModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="handleMedicalSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Animal Tag ID*</label>
+          <select id="medAnimalSelect" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+            <option value="">Select Animal...</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">வகை*</label>
+            <select id="medType" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+              <option value="Vaccination">தடுப்பூசி (Vaccination)</option>
+              <option value="Deworming">குடற்புழு நீக்கம் (Deworming)</option>
+              <option value="Medical Treatment">சிகிச்சை (Treatment)</option>
+              <option value="Mineral Salt">தாது உப்பு / வைட்டமின்</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">செலவு (₹)</label>
+            <input type="number" id="medCost" placeholder="₹ 0" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">விவரம் (Medicine / Doctor)*</label>
+          <input type="text" id="medDesc" required placeholder="e.g. FMD Vaccine, Albendazole" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-xl shadow-lg transition">Save Health Record</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: CAPEX -->
+  <div id="capexModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-base">முதலீட்டுச் செலவு (CAPEX)</h3>
+        <button onclick="closeModal('capexModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="handleCapexSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">தொகை (₹)*</label>
+          <input type="number" id="capexAmount" required placeholder="₹ 0" class="w-full bg-slate-800 border border-slate-700 text-indigo-400 font-black text-2xl rounded-xl px-4 py-3 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">பிரிவு (Project / Asset)*</label>
+          <select id="capexCategory" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+            <option value="Shed & Civil Structure">கொட்டகை கட்டுமானம் (Civil & Shed)</option>
+            <option value="Borewell & Water Rig">போர்வெல் & பைப்லைன் (Borewell)</option>
+            <option value="RCC Water Tank 5000L">RCC தூண் மேல்நிலை நீர்த்தேக்கத் தொட்டி</option>
+            <option value="Chaff Cutter & Machinery">புல் நறுக்கும் மெஷின் (Chaff Cutter)</option>
+            <option value="Solar & Electrical Setup">சோலார் & மின்சார கட்டமைப்பு</option>
+            <option value="Fencing & Security">வேலி & CCTV கேமரா</option>
+            <option value="Fodder Land Prep">தீவன நில மேம்பாடு (Super Napier)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">விவரம் (Vendor / Description)*</label>
+          <input type="text" id="capexDesc" required placeholder="e.g. சிமெண்ட், இரும்பு கம்பிகள், கூலி" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl shadow-lg transition">Save CAPEX Asset</button>
       </form>
     </div>
   </div>
@@ -674,33 +763,33 @@
   <div id="customerModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base">புதிய வாடிக்கையாளர் (Customer Ledger)</h3>
-        <button onclick="closeModal('customerModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <h3 class="font-bold text-white text-base">புதிய வாடிக்கையாளர்</h3>
+        <button onclick="closeModal('customerModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleCustomerSubmit(event)" class="space-y-3">
         <div>
           <label class="block text-xs text-slate-400 mb-1">பெயர் (Customer Name)*</label>
-          <input type="text" id="custName" required placeholder="e.g. Murugan Tea Stall" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          <input type="text" id="custName" required placeholder="Murugan Tea Stall" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
         </div>
         <div>
-          <label class="block text-xs text-slate-400 mb-1">மொபைல் எண் (WhatsApp Mobile No)*</label>
+          <label class="block text-xs text-slate-400 mb-1">மொபைல் எண் (WhatsApp 10 Digit)*</label>
           <input type="tel" id="custPhone" required placeholder="10 Digit Number" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">நிர்ணயிக்கப்பட்ட பால் விலை (₹ / Litre)*</label>
           <input type="number" id="custRate" required value="46" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
         </div>
-        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Customer</button>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg transition">Save Customer</button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: CUSTOMER PAYMENT IN -->
+  <!-- MODAL: CUSTOMER PAYMENT -->
   <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <h3 class="font-bold text-white text-base">பணம் வரவு (Customer Payment)</h3>
-        <button onclick="closeModal('paymentModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button onclick="closeModal('paymentModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleCustomerPaymentSubmit(event)" class="space-y-3">
         <input type="hidden" id="payCustPhone">
@@ -708,18 +797,18 @@
           <label class="block text-xs text-slate-400 mb-1">பெற்ற தொகை (₹)*</label>
           <input type="number" id="payAmount" required placeholder="₹ 0" class="w-full bg-slate-800 border border-slate-700 text-emerald-400 font-bold text-2xl rounded-xl px-4 py-3 outline-none">
         </div>
-        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Confirm Payment</button>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">Confirm Payment</button>
       </form>
     </div>
   </div>
 
   <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-700 text-white px-4 py-2 rounded-full shadow-2xl text-xs font-medium z-50 transition opacity-0 pointer-events-none flex items-center gap-2">
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-700 text-white px-4 py-2.5 rounded-full shadow-2xl text-xs font-semibold z-50 transition opacity-0 pointer-events-none flex items-center gap-2">
     <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
     <span id="toastMsg">Saved</span>
   </div>
 
-  <!-- ==================== LOGIC ENGINE (FIREBASE & EVENT HANDLERS) ==================== -->
+  <!-- ==================== SCRIPT ENGINE (FIREBASE V10) ==================== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
     import { 
@@ -728,7 +817,6 @@
       addDoc, 
       setDoc, 
       doc, 
-      getDoc, 
       updateDoc, 
       deleteDoc, 
       onSnapshot, 
@@ -738,7 +826,7 @@
       serverTimestamp 
     } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-    // EXACT LIVE BACKEND FIREBASE KEYS
+    // EXACT LIVE FIREBASE CONFIGURATION
     const firebaseConfig = {
       apiKey: "AIzaSyBJ2C0V2U8PGroB8xeHeKknzS5znY3XFE",
       authDomain: "dfarm-tracker.firebaseapp.com",
@@ -753,35 +841,33 @@
     try {
       const app = initializeApp(firebaseConfig);
       db = getFirestore(app);
-      document.getElementById('syncStatus').textContent = 'Cloud Live';
+      document.getElementById('cloudStatus').textContent = 'Cloud Live';
     } catch (e) {
-      console.warn("Offline Fallback:", e);
-      document.getElementById('syncStatus').textContent = 'Offline';
+      console.warn("Offline fallback mode:", e);
+      document.getElementById('cloudStatus').textContent = 'Offline';
     }
 
-    // STATE CACHE
     let animalsCache = [];
     let customersCache = [];
-    let capexCache = [];
 
     // TABS
     window.switchTab = function(t) {
-      const tabs = ['ops', 'animals', 'capex', 'bills', 'store'];
+      const tabs = ['ops', 'animals', 'capex', 'bills', 'store', 'about'];
       tabs.forEach(item => {
         const view = document.getElementById(`view${item.charAt(0).toUpperCase() + item.slice(1)}`);
         const btn = document.getElementById(`tab${item.charAt(0).toUpperCase() + item.slice(1)}`);
         if (item === t) {
           view.classList.remove('hidden');
-          btn.className = "flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-emerald-600 text-white shadow-sm";
+          btn.className = "flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-emerald-600 text-white shadow-md";
         } else {
           view.classList.add('hidden');
-          btn.className = "flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white";
+          btn.className = "flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white bg-slate-800/60";
         }
       });
       lucide.createIcons();
     };
 
-    // MODAL HELPERS
+    // MODAL HANDLERS
     window.openModal = function(id, session = null) {
       if (session && id === 'cowMilkModal') {
         document.getElementById('cowMilkSession').value = session;
@@ -799,7 +885,7 @@
       setTimeout(() => t.classList.add('opacity-0', 'pointer-events-none'), 2200);
     };
 
-    // ==================== OPS: COW MILK / EXPENSE / SALE ====================
+    // OPS WRITES
     window.handleCowMilkSubmit = async function(e) {
       e.preventDefault();
       const cowTag = document.getElementById('cowSelectMilk').value;
@@ -860,7 +946,7 @@
         date: new Date().toISOString().split('T')[0],
         timestamp: serverTimestamp ? serverTimestamp() : new Date()
       });
-      showToast(`Quick ₹${amount} logged (${desc})`);
+      showToast(`₹${amount} logged (${desc})`);
     };
 
     window.handleSaleSubmit = async function(e) {
@@ -885,21 +971,20 @@
       document.getElementById('expAmount').value = amount;
       document.getElementById('expDesc').value = desc;
       document.getElementById('expCategory').value = category;
-      document.getElementById('expenseModalTitle').textContent = 'செலவைத் திருத்து (Edit Expense)';
+      document.getElementById('expenseModalTitle').textContent = 'செலவைத் திருத்து (Edit)';
       openModal('expenseModal');
     };
 
     window.deleteExpenseItem = async function(id) {
-      if (confirm('Are you sure you want to delete this expense record?')) {
+      if (confirm('Delete this expense record?')) {
         await deleteDoc(doc(db, 'expenses', id));
         showToast('Record deleted');
       }
     };
 
-    // ==================== ANIMALS 360° MANAGEMENT ====================
+    // ANIMALS
     window.handleAnimalSubmit = async function(e) {
       e.preventDefault();
-      const id = document.getElementById('editAnimalId').value;
       const tag = document.getElementById('animalTag').value.trim().toUpperCase();
       const type = document.getElementById('animalType').value;
       const breed = document.getElementById('animalBreed').value.trim();
@@ -917,7 +1002,7 @@
         dryOffDate = dry.toISOString().split('T')[0];
       }
 
-      const payload = {
+      await addDoc(collection(db, 'animals'), {
         tag,
         type,
         breed,
@@ -927,22 +1012,12 @@
         cost,
         aiDate: aiDate || null,
         expectedCalving,
-        dryOffDate
-      };
-
-      if (id) {
-        await updateDoc(doc(db, 'animals', id), payload);
-        document.getElementById('editAnimalId').value = '';
-        showToast('Animal profile updated!');
-      } else {
-        await addDoc(collection(db, 'animals'), {
-          ...payload,
-          createdAt: serverTimestamp ? serverTimestamp() : new Date()
-        });
-        showToast(`Animal ${tag} registered!`);
-      }
+        dryOffDate,
+        createdAt: serverTimestamp ? serverTimestamp() : new Date()
+      });
 
       closeModal('animalModal');
+      showToast(`Animal ${tag} registered!`);
     };
 
     window.handleWeightSubmit = async function(e) {
@@ -960,7 +1035,6 @@
         timestamp: serverTimestamp ? serverTimestamp() : new Date()
       });
 
-      // Update current weight in animal doc
       const animalDoc = animalsCache.find(a => a.tag === tag);
       if (animalDoc && animalDoc.id) {
         await updateDoc(doc(db, 'animals', animalDoc.id), { currentWeight: weight });
@@ -988,7 +1062,6 @@
       });
 
       if (cost > 0) {
-        // Also log as farm expense
         await addDoc(collection(db, 'expenses'), {
           type: 'expense',
           amount: cost,
@@ -1002,7 +1075,7 @@
       closeModal('medicalModal');
       document.getElementById('medCost').value = '';
       document.getElementById('medDesc').value = '';
-      showToast(`Medical record saved for ${tag}`);
+      showToast(`Health record saved for ${tag}`);
     };
 
     window.deleteAnimal = async function(id) {
@@ -1018,7 +1091,7 @@
       renderAnimalCards(filtered);
     };
 
-    // ==================== CAPEX PROJECT TRACKER ====================
+    // CAPEX
     window.handleCapexSubmit = async function(e) {
       e.preventDefault();
       const amount = parseFloat(document.getElementById('capexAmount').value);
@@ -1046,7 +1119,7 @@
       }
     };
 
-    // ==================== CUSTOMER LEDGER & BILLS ====================
+    // CUSTOMERS & BILLING
     window.handleCustomerSubmit = async function(e) {
       e.preventDefault();
       const name = document.getElementById('custName').value.trim();
@@ -1121,7 +1194,6 @@
       showToast(`Payment of ₹${amount} received!`);
     };
 
-    // WHATSAPP BILL SHARE
     window.shareCustomerBillWhatsApp = function(phone) {
       const cust = customersCache.find(c => c.phone === phone);
       const currentMonth = new Intl.DateTimeFormat('en-IN', { month: 'long', year: 'numeric' }).format(new Date());
@@ -1142,14 +1214,12 @@
       window.open(url, '_blank');
     };
 
-    // INSTANT BRANDED PDF BILL
     window.downloadCustomerPDF = function(phone) {
       const { jsPDF } = window.jspdf;
       const docPdf = new jsPDF();
       const cust = customersCache.find(c => c.phone === phone);
       const currentMonth = new Intl.DateTimeFormat('en-IN', { month: 'long', year: 'numeric' }).format(new Date());
 
-      // Header Branding
       docPdf.setFillColor(6, 78, 59);
       docPdf.rect(0, 0, 210, 32, 'F');
       docPdf.setFontSize(18);
@@ -1158,7 +1228,6 @@
       docPdf.setFontSize(10);
       docPdf.text("Pure Farm Direct Milk & Natural Agro Products | Tiruvannamalai Dt", 14, 25);
 
-      // Customer Info
       docPdf.setTextColor(30, 41, 59);
       docPdf.setFontSize(12);
       docPdf.text(`MONTHLY MILK STATEMENT - ${currentMonth.toUpperCase()}`, 14, 44);
@@ -1193,16 +1262,16 @@
       docPdf.save(`D-FARM_${cust.name}_${cust.phone}.pdf`);
     };
 
-    // ==================== STOREFRONT WHATSAPP ORDER ====================
+    // STORE WHATSAPP ORDER
     window.orderStoreItem = function(item, price) {
       const message = `வணக்கம் D-FARM Polur! 👋\nநான் உங்கள் பண்ணையிலிருந்து ஆர்டர் செய்ய விரும்புகிறேன்:\n\n• பொருள்: *${item}*\n• விலை: ₹${price}\n\nதயவுசெய்து விநியோக விவரங்களை தெரிவிக்கவும்.`;
       const url = `https://wa.me/917200752628?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     };
 
-    // ==================== REALTIME FIRESTORE LISTENERS ====================
+    // FIRESTORE REALTIME SYNC
     if (db) {
-      // 1. Animals Listener
+      // 1. Animals
       onSnapshot(collection(db, 'animals'), (snap) => {
         animalsCache = [];
         const cowSelect = document.getElementById('cowSelectMilk');
@@ -1227,7 +1296,7 @@
         renderAnimalCards(animalsCache);
       });
 
-      // 2. Customers Listener
+      // 2. Customers
       onSnapshot(collection(db, 'customers'), (snap) => {
         customersCache = [];
         const dropSelect = document.getElementById('custSelectDrop');
@@ -1240,7 +1309,7 @@
           dropSelect.innerHTML += `<option value="${c.phone}">${c.name} (${c.phone}) - ₹${c.rate}/L</option>`;
 
           html += `
-            <div class="glass-card rounded-2xl p-4 space-y-3">
+            <div class="glass-box rounded-2xl p-4 space-y-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h4 class="font-bold text-white text-sm">${c.name}</h4>
@@ -1252,10 +1321,10 @@
                 </div>
               </div>
               <div class="flex items-center gap-2 pt-2 border-t border-slate-800">
-                <button onclick="shareCustomerBillWhatsApp('${c.phone}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 py-2 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-1">
+                <button onclick="shareCustomerBillWhatsApp('${c.phone}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 py-2 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-1 transition">
                   <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp Bill
                 </button>
-                <button onclick="downloadCustomerPDF('${c.phone}')" class="flex-1 bg-slate-800 hover:bg-slate-700 py-2 rounded-xl text-xs font-bold text-blue-400 border border-slate-700 flex items-center justify-center gap-1">
+                <button onclick="downloadCustomerPDF('${c.phone}')" class="flex-1 bg-slate-800 hover:bg-slate-700 py-2 rounded-xl text-xs font-bold text-blue-400 border border-slate-700 flex items-center justify-center gap-1 transition">
                   <i data-lucide="file-text" class="w-3.5 h-3.5"></i> PDF Bill
                 </button>
                 <button onclick="openPaymentModal('${c.phone}')" class="bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl text-xs font-bold text-emerald-400 border border-slate-700">
@@ -1269,7 +1338,7 @@
         lucide.createIcons();
       });
 
-      // 3. CAPEX Listener
+      // 3. CAPEX
       onSnapshot(collection(db, 'capex'), (snap) => {
         let total = 0;
         let html = '';
@@ -1277,7 +1346,7 @@
           const d = { id: docSnap.id, ...docSnap.data() };
           total += (d.amount || 0);
           html += `
-            <div class="glass-card rounded-2xl p-3.5 flex items-center justify-between">
+            <div class="glass-box rounded-2xl p-3.5 flex items-center justify-between">
               <div>
                 <span class="text-[10px] uppercase font-bold text-indigo-400 px-2 py-0.5 rounded bg-indigo-950 border border-indigo-800">${d.category}</span>
                 <h4 class="font-bold text-white text-xs mt-1">${d.desc}</h4>
@@ -1295,7 +1364,7 @@
         lucide.createIcons();
       });
 
-      // 4. Expenses Feed Listener
+      // 4. Expenses
       const qExp = query(collection(db, 'expenses'), orderBy('timestamp', 'desc'), limit(15));
       onSnapshot(qExp, (snap) => {
         let todayTotal = 0;
@@ -1310,7 +1379,7 @@
         renderOpsFeed(items);
       });
 
-      // 5. Milk Listener
+      // 5. Milk
       const qMilk = query(collection(db, 'milk_records'), orderBy('timestamp', 'desc'), limit(15));
       onSnapshot(qMilk, (snap) => {
         let am = 0, pm = 0;
@@ -1341,14 +1410,14 @@
 
         if (a.expectedCalving) {
           const days = Math.ceil((new Date(a.expectedCalving) - new Date()) / 86400000);
-          radarAlert = `<div class="bg-amber-950/40 border border-amber-800/80 rounded-xl p-2 text-[11px] text-amber-300 flex items-center justify-between">
+          radarAlert = `<div class="bg-amber-950/60 border border-amber-800 rounded-xl p-2.5 text-xs text-amber-300 flex items-center justify-between">
             <span>🤰 சினை: கன்று ஈன இன்னும் <b>${days}</b> நாட்கள் (ETA: ${a.expectedCalving})</span>
             <span class="text-[10px] text-slate-400">Dry-off: ${a.dryOffDate}</span>
           </div>`;
         }
 
         return `
-          <div class="glass-card rounded-2xl p-4 space-y-3">
+          <div class="glass-box rounded-2xl p-4 space-y-3">
             <div class="flex justify-between items-start">
               <div class="flex items-center gap-2.5">
                 <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
@@ -1360,9 +1429,9 @@
                 </div>
               </div>
               <div class="text-right">
-                <span class="text-[10px] text-slate-400 block uppercase">Weight Audit</span>
+                <span class="text-[10px] text-slate-400 block uppercase font-semibold">Weight Audit</span>
                 <span class="text-sm font-black text-white">${a.currentWeight || '-'} kg</span>
-                <span class="text-[10px] ${isGainPositive ? 'text-emerald-400' : 'text-rose-400'} block">
+                <span class="text-[11px] font-bold ${isGainPositive ? 'text-emerald-400' : 'text-rose-400'} block">
                   ${isGainPositive ? '▲ +' : '▼ '}${gain} kg
                 </span>
               </div>
@@ -1370,9 +1439,9 @@
 
             ${radarAlert}
 
-            <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-[11px] text-slate-400">
+            <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-[11px] text-slate-400">
               <span>Cost: ₹${(a.cost || 0).toLocaleString('en-IN')}</span>
-              <button onclick="deleteAnimal('${a.id}')" class="text-rose-400 hover:text-rose-300 flex items-center gap-1">
+              <button onclick="deleteAnimal('${a.id}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-1">
                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
               </button>
             </div>
@@ -1390,7 +1459,7 @@
       }
       document.getElementById('opsFeedCount').textContent = `${items.length} items`;
       container.innerHTML = items.map(d => `
-        <div class="glass-card rounded-xl p-2.5 flex items-center justify-between">
+        <div class="glass-box rounded-xl p-2.5 flex items-center justify-between">
           <div>
             <h5 class="font-bold text-white text-xs">${d.description}</h5>
             <span class="text-[10px] text-slate-400">${d.category} • ${d.date}</span>
