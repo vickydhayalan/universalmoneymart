@@ -3,87 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>D-FARM | Smart Dairy & Agro Ecosystem</title>
-  <meta name="theme-color" content="#059669">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>D-FARM | Smart Dairy & Agro Ecosystem (Polur)</title>
+  <meta name="theme-color" content="#064e3b">
+
+  <!-- Production Tailwind CSS & Custom Modern Styles -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- jsPDF & autoTable for Instant PDF Generation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-</head>
-<body class="h-full flex flex-col font-sans select-none antialiased bg-slate-950 pb-20">
 
-  <!-- TOP HEADER -->
-  <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 px-4 py-3 shadow-md flex items-center justify-between">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: #030712;
+      color: #f3f4f6;
+    }
+    .glass-card {
+      background: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-accent {
+      background: linear-gradient(135deg, rgba(6, 78, 59, 0.4) 0%, rgba(17, 24, 39, 0.8) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col antialiased selection:bg-emerald-500 selection:text-white pb-24">
+
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-50 backdrop-blur-md px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-3">
-      <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-900/40">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-lg shadow-emerald-900/50">
         <i data-lucide="sprout" class="w-6 h-6"></i>
       </div>
       <div>
-        <h1 class="font-bold text-lg leading-tight tracking-wide text-white flex items-center gap-2">
-          D-FARM <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-700/60 font-semibold tracking-wider">POLUR</span>
-        </h1>
-        <p class="text-xs text-slate-400">Integrated Dairy & Agro Ops</p>
+        <div class="flex items-center gap-2">
+          <h1 class="font-extrabold text-base tracking-tight text-white">D-FARM</h1>
+          <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold uppercase tracking-wider">Polur</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Integrated Farm Intelligence ERP</p>
       </div>
     </div>
     <div class="flex items-center gap-2">
-      <span id="syncBadge" class="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800">
+      <span id="syncBadge" class="flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/80">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span id="syncStatusText">Cloud Live</span>
+        <span id="syncStatus">Cloud Live</span>
       </span>
     </div>
   </header>
 
-  <!-- NAVIGATION TABS -->
-  <nav class="bg-slate-900/90 border-b border-slate-800 px-3 py-2 flex justify-between gap-1 max-w-xl mx-auto w-full sticky top-[61px] z-30 backdrop-blur-sm">
-    <button onclick="switchTab('ops')" id="tabBtnOps" class="flex-1 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-emerald-600 text-white shadow-md">
-      <i data-lucide="activity" class="w-4 h-4"></i> நிர்வாகம் (Ops)
+  <!-- ==================== TAB BAR ==================== -->
+  <nav class="bg-slate-900/80 border-b border-slate-800 px-3 py-2 flex gap-1.5 overflow-x-auto custom-scrollbar max-w-2xl mx-auto w-full sticky top-[61px] z-40 backdrop-blur-md">
+    <button onclick="switchTab('ops')" id="tabOps" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-emerald-600 text-white shadow-sm">
+      <i data-lucide="activity" class="w-4 h-4"></i> Daily Ops
     </button>
-    <button onclick="switchTab('ledger')" id="tabBtnLedger" class="flex-1 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200">
-      <i data-lucide="receipt" class="w-4 h-4"></i> பில் (Bills)
+    <button onclick="switchTab('animals')" id="tabAnimals" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+      <i data-lucide="scan" class="w-4 h-4"></i> Animals 360°
     </button>
-    <button onclick="switchTab('radar')" id="tabBtnRadar" class="flex-1 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200">
-      <i data-lucide="baby" class="w-4 h-4"></i> மாடுகள் (Radar)
+    <button onclick="switchTab('capex')" id="tabCapex" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+      <i data-lucide="hammer" class="w-4 h-4"></i> CAPEX & Projects
     </button>
-    <button onclick="switchTab('store')" id="tabBtnStore" class="flex-1 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200">
-      <i data-lucide="store" class="w-4 h-4"></i> கடை (Store)
+    <button onclick="switchTab('bills')" id="tabBills" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+      <i data-lucide="receipt" class="w-4 h-4"></i> Ledger & Bills
+    </button>
+    <button onclick="switchTab('store')" id="tabStore" class="flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white">
+      <i data-lucide="store" class="w-4 h-4"></i> Storefront
     </button>
   </nav>
 
-  <!-- MAIN VIEWPORT -->
-  <main class="flex-1 overflow-y-auto px-4 py-4 space-y-5 max-w-xl mx-auto w-full">
+  <!-- ==================== MAIN VIEW CONTAINER ==================== -->
+  <main class="flex-1 overflow-y-auto px-4 py-4 space-y-5 max-w-2xl mx-auto w-full">
 
-    <!-- ==================== TAB 1: OPERATIONS ==================== -->
+    <!-- ==================== TAB 1: DAILY OPS ==================== -->
     <div id="viewOps" class="space-y-5">
-      <!-- High Contrast Touch Actions -->
+      <!-- Quick Actions Grid -->
       <section class="space-y-3">
-        <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-          <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i> உடனடிப் பதிவு (Quick Actions)
-        </h2>
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+            <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i> Appa Direct Entry (1-Tap)
+          </h2>
+          <span class="text-[11px] text-slate-500">Live Polur Sync</span>
+        </div>
         <div class="grid grid-cols-2 gap-3">
-          <button onclick="openModal('milkModal', 'AM')" class="bg-gradient-to-br from-blue-900/40 to-slate-900 border-2 border-blue-600/50 active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg">
-            <div class="w-11 h-11 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mb-1.5">
+          <button onclick="openModal('cowMilkModal', 'AM')" class="glass-card active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-blue-500/50">
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center mb-2">
               <i data-lucide="sun" class="w-6 h-6"></i>
             </div>
-            <span class="font-bold text-sm text-white">காலை பால்</span>
-            <span class="text-[11px] text-blue-300">Morning Milk (AM)</span>
+            <span class="font-bold text-sm text-white">காலை பால் (AM)</span>
+            <span class="text-[11px] text-blue-300">Cow-wise Morning Milk</span>
           </button>
-          <button onclick="openModal('milkModal', 'PM')" class="bg-gradient-to-br from-indigo-900/40 to-slate-900 border-2 border-indigo-600/50 active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg">
-            <div class="w-11 h-11 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-1.5">
+          <button onclick="openModal('cowMilkModal', 'PM')" class="glass-card active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-indigo-500/50">
+            <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-2">
               <i data-lucide="moon" class="w-6 h-6"></i>
             </div>
-            <span class="font-bold text-sm text-white">மாலை பால்</span>
-            <span class="text-[11px] text-indigo-300">Evening Milk (PM)</span>
+            <span class="font-bold text-sm text-white">மாலை பால் (PM)</span>
+            <span class="text-[11px] text-indigo-300">Cow-wise Evening Milk</span>
           </button>
-          <button onclick="openModal('expenseModal')" class="bg-gradient-to-br from-rose-900/40 to-slate-900 border-2 border-rose-600/50 active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg">
-            <div class="w-11 h-11 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center mb-1.5">
+          <button onclick="openModal('expenseModal')" class="glass-card active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-rose-500/50">
+            <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center mb-2">
               <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
             </div>
             <span class="font-bold text-sm text-white">செலவுப் பதிவு</span>
-            <span class="text-[11px] text-rose-300">Daily Expense (₹)</span>
+            <span class="text-[11px] text-rose-300">OPEX Daily Spend</span>
           </button>
-          <button onclick="openModal('saleModal')" class="bg-gradient-to-br from-emerald-900/40 to-slate-900 border-2 border-emerald-600/50 active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-lg">
-            <div class="w-11 h-11 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-1.5">
+          <button onclick="openModal('saleModal')" class="glass-card active:scale-95 transition rounded-2xl p-4 flex flex-col items-center justify-center text-center hover:border-emerald-500/50">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-2">
               <i data-lucide="wallet" class="w-6 h-6"></i>
             </div>
             <span class="font-bold text-sm text-white">வரவு / விற்பனை</span>
@@ -92,205 +129,285 @@
         </div>
       </section>
 
-      <!-- Instant Quick Expense -->
-      <section class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-3">
-        <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+      <!-- Instant Quick Expense Buttons -->
+      <section class="glass-card rounded-2xl p-4 space-y-3">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
           <i data-lucide="coins" class="w-4 h-4 text-emerald-400"></i> உடனடிச் செலவுகள் (Quick Expense)
         </h3>
         <div class="grid grid-cols-3 gap-2">
-          <button onclick="quickExpense(10, 'Tea / Snack', 'Labour')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(10, 'Tea / Snack', 'Labour')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹10</span>
-            <span class="block text-[10px] text-slate-400 truncate">டீ/பிஸ்கட்</span>
+            <span class="block text-[10px] text-slate-400 truncate">டீ / பிஸ்கட்</span>
           </button>
-          <button onclick="quickExpense(20, 'Needle / Syringe', 'Medical')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(20, 'Needle / Syringe', 'Medical')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹20</span>
-            <span class="block text-[10px] text-slate-400 truncate">சிரின்ஞ்</span>
+            <span class="block text-[10px] text-slate-400 truncate">ஊசி / சிரின்ஞ்</span>
           </button>
-          <button onclick="quickExpense(30, 'Teflon / Washer', 'Maintenance')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(30, 'Teflon / Washer', 'Maintenance')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹30</span>
-            <span class="block text-[10px] text-slate-400 truncate">வாஷர்/டேப்</span>
+            <span class="block text-[10px] text-slate-400 truncate">வாஷர் / டேப்</span>
           </button>
-          <button onclick="quickExpense(50, 'Town Petrol / Travel', 'Fuel')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(50, 'Town Petrol / Travel', 'Fuel')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹50</span>
             <span class="block text-[10px] text-slate-400 truncate">பெட்ரோல்</span>
           </button>
-          <button onclick="quickExpense(60, 'Salt / Minerals', 'Feed')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(60, 'Salt / Minerals', 'Feed')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹60</span>
             <span class="block text-[10px] text-slate-400 truncate">தாது உப்பு</span>
           </button>
-          <button onclick="quickExpense(100, 'Daily Helper Tip', 'Labour')" class="bg-slate-800 active:bg-slate-700 border border-slate-700 rounded-xl py-2 px-1 text-center">
+          <button onclick="quickExpense(100, 'Daily Helper Tip', 'Labour')" class="bg-slate-800 active:bg-slate-700 border border-slate-700/80 rounded-xl py-2 px-1 text-center">
             <span class="block text-white font-bold text-sm">₹100</span>
             <span class="block text-[10px] text-slate-400 truncate">கூலி அட்வான்ஸ்</span>
           </button>
         </div>
       </section>
 
-      <!-- Live Ops Snapshot -->
+      <!-- Today Snapshot -->
       <section class="grid grid-cols-2 gap-3">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5">
+        <div class="glass-card rounded-2xl p-4">
           <span class="text-xs text-slate-400 flex items-center gap-1 mb-1">
-            <i data-lucide="milk" class="w-3.5 h-3.5 text-blue-400"></i> Today's Milk
+            <i data-lucide="milk" class="w-4 h-4 text-blue-400"></i> Today's Milk
           </span>
           <div class="flex items-baseline gap-1">
-            <span id="todayMilkLiters" class="text-2xl font-black text-white">0.0</span>
+            <span id="todayMilkTotal" class="text-2xl font-black text-white">0.0</span>
             <span class="text-xs text-slate-400">Ltrs</span>
           </div>
-          <p id="todayMilkBreakdown" class="text-[11px] text-slate-500 mt-0.5">AM: 0L | PM: 0L</p>
+          <p id="todayMilkSplit" class="text-[10px] text-slate-400 mt-0.5">AM: 0L | PM: 0L</p>
         </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3.5">
+        <div class="glass-card rounded-2xl p-4">
           <span class="text-xs text-slate-400 flex items-center gap-1 mb-1">
-            <i data-lucide="arrow-down-left" class="w-3.5 h-3.5 text-rose-400"></i> Today's Spend
+            <i data-lucide="trending-down" class="w-4 h-4 text-rose-400"></i> Today's Spend
           </span>
           <div class="flex items-baseline gap-1">
             <span class="text-sm font-semibold text-rose-400">₹</span>
-            <span id="todayExpenseTotal" class="text-2xl font-black text-rose-400">0</span>
+            <span id="todayExpTotal" class="text-2xl font-black text-rose-400">0</span>
           </div>
-          <p class="text-[11px] text-slate-500 mt-0.5">Real-time synced</p>
+          <p class="text-[10px] text-slate-400 mt-0.5">Direct OPEX</p>
         </div>
       </section>
 
-      <!-- Recent Audit Feed -->
-      <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+      <!-- Recent Ops Feed with Edit/Delete Buttons -->
+      <section class="glass-card rounded-2xl p-4 space-y-3">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
             <i data-lucide="history" class="w-4 h-4 text-slate-400"></i> சமீபத்திய பதிவுகள் (Recent Activity)
           </h3>
-          <span id="feedCount" class="text-xs text-slate-500">0 items</span>
+          <span id="opsFeedCount" class="text-[11px] text-slate-500">0 entries</span>
         </div>
-        <div id="activityFeed" class="space-y-2 max-h-64 overflow-y-auto pr-1 text-xs">
+        <div id="opsFeedList" class="space-y-2 max-h-72 overflow-y-auto pr-1 text-xs custom-scrollbar">
           <div class="text-center py-6 text-slate-500">பதிவுகள் எதுவும் இல்லை.</div>
         </div>
       </section>
     </div>
 
-    <!-- ==================== TAB 2: CUSTOMER LEDGER & BILLS ==================== -->
-    <div id="viewLedger" class="space-y-5 hidden">
-      <div class="flex justify-between items-center">
+    <!-- ==================== TAB 2: ANIMALS 360° ==================== -->
+    <div id="viewAnimals" class="space-y-5 hidden">
+      <!-- Animal Top Banner -->
+      <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-base font-bold text-white">வாடிக்கையாளர் கணக்கு & பில்</h2>
-          <p class="text-xs text-slate-400">Monthly Statements & WhatsApp Billing</p>
+          <h2 class="text-base font-bold text-white">கால்நடை 360° (Full Animal Tracker)</h2>
+          <p class="text-xs text-slate-400">Cow, Goat, Country Chicken & Rabbit</p>
         </div>
-        <button onclick="openModal('customerModal')" class="bg-emerald-600 active:scale-95 text-white text-xs font-semibold px-3 py-2 rounded-xl flex items-center gap-1 shadow">
-          <i data-lucide="user-plus" class="w-4 h-4"></i> Add Customer
-        </button>
-      </div>
-
-      <!-- Quick Add Milk to Customer Form -->
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
-        <h3 class="text-xs font-semibold uppercase text-slate-400 flex items-center gap-1.5">
-          <i data-lucide="truck" class="w-4 h-4 text-blue-400"></i> வாடிக்கையாளருக்கு பால் பதிவு (Daily Drop)
-        </h3>
-        <div class="grid grid-cols-2 gap-2">
-          <select id="ledgerCustomerSelect" class="bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
-            <option value="">Select Customer...</option>
-          </select>
-          <div class="flex gap-2">
-            <input type="number" step="0.5" id="ledgerDropLiters" placeholder="Liters (e.g. 5)" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none font-bold">
-            <button onclick="recordCustomerDrop()" class="bg-blue-600 text-white px-3 py-2 rounded-xl text-xs font-bold active:scale-95">Add</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Customer Accounts List -->
-      <div class="space-y-3" id="customerCardsContainer">
-        <div class="text-center py-8 text-slate-500 text-xs">வாடிக்கையாளர்கள் சேர்க்கப்படவில்லை.</div>
-      </div>
-    </div>
-
-    <!-- ==================== TAB 3: LIVESTOCK & CALVING RADAR ==================== -->
-    <div id="viewRadar" class="space-y-5 hidden">
-      <div class="flex justify-between items-center">
-        <div>
-          <h2 class="text-base font-bold text-white">மாடு & ஆடு பராமரிப்பு ரேடார்</h2>
-          <p class="text-xs text-slate-400">Calving (சினைக் கணக்கு) & Vaccination</p>
-        </div>
-        <button onclick="openModal('livestockModal')" class="bg-blue-600 active:scale-95 text-white text-xs font-semibold px-3 py-2 rounded-xl flex items-center gap-1 shadow">
+        <button onclick="openModal('animalModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
           <i data-lucide="plus" class="w-4 h-4"></i> Add Animal
         </button>
       </div>
 
-      <!-- Live Animals List -->
-      <div id="livestockCardsContainer" class="space-y-3">
-        <div class="text-center py-8 text-slate-500 text-xs">கால்நடைகள் எதுவும் சேர்க்கப்படவில்லை.</div>
+      <!-- Tag Lookup Search Bar -->
+      <div class="glass-card rounded-2xl p-3 flex items-center gap-2">
+        <i data-lucide="search" class="w-5 h-5 text-slate-400 ml-1"></i>
+        <input type="text" id="animalSearchInput" onkeyup="filterAnimals()" placeholder="Search by Tag ID (e.g. COW-01, GOAT-04)..." class="w-full bg-transparent text-sm text-white outline-none">
+      </div>
+
+      <!-- Action Sub-Buttons: Weight & Health Log -->
+      <div class="grid grid-cols-2 gap-2">
+        <button onclick="openModal('weightModal')" class="bg-slate-900 border border-slate-800 hover:border-slate-700 p-2.5 rounded-xl text-left flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+            <i data-lucide="scale" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-white">Weight Check</h4>
+            <span class="text-[10px] text-slate-400">Monthly Gain Tracker</span>
+          </div>
+        </button>
+        <button onclick="openModal('medicalModal')" class="bg-slate-900 border border-slate-800 hover:border-slate-700 p-2.5 rounded-xl text-left flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center">
+            <i data-lucide="syringe" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-white">Vaccine / Health</h4>
+            <span class="text-[10px] text-slate-400">Deworming & Meds</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Animal Cards Container -->
+      <div id="animalCardsList" class="space-y-3">
+        <div class="text-center py-8 text-slate-500 text-xs">கால்நடைகள் எதுவும் இன்னும் பதிவு செய்யப்படவில்லை.</div>
       </div>
     </div>
 
-    <!-- ==================== TAB 4: STOREFRONT (CUSTOMER CATALOG) ==================== -->
-    <div id="viewStore" class="space-y-5 hidden">
-      <div class="bg-gradient-to-r from-emerald-900/60 to-slate-900 border border-emerald-700/50 rounded-2xl p-4 text-center">
-        <span class="inline-block px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 text-[11px] font-semibold mb-1">
-          D-FARM DIRECT POLUR
-        </span>
-        <h2 class="text-lg font-bold text-white">இயற்கை பண்ணை பொருட்கள்</h2>
-        <p class="text-xs text-slate-300 mt-1">கலப்படம் இல்லாத தூய பால், முட்டை, இயற்கை எரு உரம்.</p>
+    <!-- ==================== TAB 3: CAPEX & INFRASTRUCTURE ==================== -->
+    <div id="viewCapex" class="space-y-5 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-base font-bold text-white">முதலீட்டுச் செலவுகள் (CAPEX Tracker)</h2>
+          <p class="text-xs text-slate-400">Shed, Borewell, RCC Tank, Chaff Cutter, Solar</p>
+        </div>
+        <button onclick="openModal('capexModal')" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
+          <i data-lucide="plus" class="w-4 h-4"></i> Add CAPEX
+        </button>
       </div>
 
-      <!-- Store Items -->
+      <!-- Summary Card -->
+      <div class="glass-card-accent rounded-2xl p-4">
+        <span class="text-xs text-slate-400">Total Infrastructure Investment (Polur Farm)</span>
+        <div class="flex items-baseline gap-1 mt-1">
+          <span class="text-base font-bold text-emerald-400">₹</span>
+          <span id="totalCapexAmount" class="text-3xl font-extrabold text-white">0</span>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-1">Tracks building, electrical, water & long-term capital assets</p>
+      </div>
+
+      <!-- CAPEX List -->
+      <div id="capexListContainer" class="space-y-3">
+        <div class="text-center py-8 text-slate-500 text-xs">முதலீட்டுப் பதிவுகள் எதுவும் இல்லை.</div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: CUSTOMER LEDGER & BILLS ==================== -->
+    <div id="viewBills" class="space-y-5 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-base font-bold text-white">வாடிக்கையாளர் கணக்கு & பில்</h2>
+          <p class="text-xs text-slate-400">Monthly Statements, WhatsApp Invoicing & PDF</p>
+        </div>
+        <button onclick="openModal('customerModal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1 shadow-md active:scale-95">
+          <i data-lucide="user-plus" class="w-4 h-4"></i> Add Customer
+        </button>
+      </div>
+
+      <!-- Daily Customer Milk Drop -->
+      <div class="glass-card rounded-2xl p-4 space-y-3">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+          <i data-lucide="truck" class="w-4 h-4 text-blue-400"></i> வாடிக்கையாளருக்கு பால் சப்ளை (Daily Supply)
+        </h3>
+        <div class="grid grid-cols-2 gap-2">
+          <select id="custSelectDrop" class="bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+            <option value="">வாடிக்கையாளரைத் தேர்வு செய்...</option>
+          </select>
+          <div class="flex gap-2">
+            <input type="number" step="0.5" id="custDropLiters" placeholder="Litres (e.g. 5)" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none font-bold">
+            <button onclick="saveCustomerDailyDrop()" class="bg-blue-600 active:scale-95 text-white px-3 py-2 rounded-xl text-xs font-bold">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Cards List -->
+      <div id="customerCardsContainer" class="space-y-3">
+        <div class="text-center py-8 text-slate-500 text-xs">வாடிக்கையாளர்கள் சேர்க்கப்படவில்லை.</div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: PUBLIC STOREFRONT ==================== -->
+    <div id="viewStore" class="space-y-5 hidden">
+      <div class="glass-card-accent rounded-3xl p-5 text-center relative overflow-hidden">
+        <span class="inline-block px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 text-[11px] font-bold tracking-wider mb-2">
+          100% FARM DIRECT • POLUR
+        </span>
+        <h2 class="text-xl font-extrabold text-white">D-FARM ஆர்கானிக் அங்காடி</h2>
+        <p class="text-xs text-slate-300 mt-1 max-w-sm mx-auto">கலப்படம் இல்லாத தூய பால், நாட்டுக் கோழி முட்டை, விவசாய சாண உரம்.</p>
+        
+        <div class="mt-3 flex items-center justify-center gap-2 text-xs text-slate-400">
+          <span>📱 ஆர்டர் உதவி: <b>7200752628</b></span>
+          <span>•</span>
+          <span>💳 UPI: <b>7200752628@upi</b></span>
+        </div>
+      </div>
+
+      <!-- Store Catalog -->
       <div class="space-y-3">
         <!-- Item 1: Milk -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
+        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
-              <i data-lucide="milk" class="w-7 h-7"></i>
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
+              <i data-lucide="milk" class="w-6 h-6"></i>
             </div>
             <div>
-              <h4 class="font-bold text-sm text-white">பசும்பால் (Fresh Farm Milk)</h4>
-              <p class="text-xs text-slate-400">Fat 4.2%+ • காலை/மாலை பண்ணை நேரடி</p>
+              <h4 class="font-bold text-sm text-white">தூய பசும்பால் (Jersey Cross)</h4>
+              <p class="text-[11px] text-slate-400">Fat 4.2%+ • காலை/மாலை பண்ணை நேரடி</p>
               <span class="text-emerald-400 font-bold text-sm">₹50 / Litre</span>
             </div>
           </div>
-          <button onclick="orderViaWhatsApp('Fresh Farm Milk (Litre)', 50)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
+          <button onclick="orderStoreItem('Pure Cow Milk (Jersey Cross)', 50)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
             <i data-lucide="message-circle" class="w-4 h-4"></i> Order
           </button>
         </div>
 
-        <!-- Item 2: Country Eggs -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
+        <!-- Item 2: Eggs -->
+        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
-              <i data-lucide="egg" class="w-7 h-7"></i>
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+              <i data-lucide="egg" class="w-6 h-6"></i>
             </div>
             <div>
               <h4 class="font-bold text-sm text-white">நாட்டுக் கோழி முட்டை</h4>
-              <p class="text-xs text-slate-400">100% தூய நாட்டு ரகம்</p>
+              <p class="text-[11px] text-slate-400">பண்ணையில் சுதந்திரமாக மேயும் கோழிகள்</p>
               <span class="text-emerald-400 font-bold text-sm">₹12 / Egg</span>
             </div>
           </div>
-          <button onclick="orderViaWhatsApp('Country Chicken Eggs', 12)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
+          <button onclick="orderStoreItem('Country Chicken Eggs', 12)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
             <i data-lucide="message-circle" class="w-4 h-4"></i> Order
           </button>
         </div>
 
         <!-- Item 3: Cow Dung -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
+        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-lime-500/20 text-lime-400 flex items-center justify-center">
-              <i data-lucide="truck" class="w-7 h-7"></i>
+            <div class="w-12 h-12 rounded-2xl bg-lime-500/20 text-lime-400 flex items-center justify-center">
+              <i data-lucide="truck" class="w-6 h-6"></i>
             </div>
             <div>
-              <h4 class="font-bold text-sm text-white">சாணம் (Organic Cow Dung)</h4>
-              <p class="text-xs text-slate-400">விவசாய நில உரம் (டிராக்டர் லோடு)</p>
+              <h4 class="font-bold text-sm text-white">இயற்கை சாணம் (Tractor Load)</h4>
+              <p class="text-[11px] text-slate-400">செழுமையான விவசாய எரு உரம்</p>
               <span class="text-emerald-400 font-bold text-sm">₹1,800 / Load</span>
             </div>
           </div>
-          <button onclick="orderViaWhatsApp('Cow Dung Tractor Load', 1800)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
+          <button onclick="orderStoreItem('Cow Dung Tractor Load', 1800)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
             <i data-lucide="message-circle" class="w-4 h-4"></i> Order
           </button>
         </div>
 
-        <!-- Item 4: Fodder Stems -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
+        <!-- Item 4: Goat Manure -->
+        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center">
-              <i data-lucide="leaf" class="w-7 h-7"></i>
+            <div class="w-12 h-12 rounded-2xl bg-teal-500/20 text-teal-400 flex items-center justify-center">
+              <i data-lucide="archive" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-white">ஆட்டுப் புழுக்கை உரம் (Bag)</h4>
+              <p class="text-[11px] text-slate-400">மரங்கள் மற்றும் செடிகளுக்கான ஊட்ட உரம்</p>
+              <span class="text-emerald-400 font-bold text-sm">₹150 / Bag</span>
+            </div>
+          </div>
+          <button onclick="orderStoreItem('Goat Manure Bag', 150)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> Order
+          </button>
+        </div>
+
+        <!-- Item 5: Fodder Stems -->
+        <div class="glass-card rounded-2xl p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+              <i data-lucide="leaf" class="w-6 h-6"></i>
             </div>
             <div>
               <h4 class="font-bold text-sm text-white">Super Napier தீவனக் குச்சிகள்</h4>
-              <p class="text-xs text-slate-400">உயர் விளைச்சல் புல் விதைகள்/குச்சிகள்</p>
+              <p class="text-[11px] text-slate-400">உயர் ரக அடர் பசுந்தீவன கரணைகள்</p>
               <span class="text-emerald-400 font-bold text-sm">₹1 / Stem</span>
             </div>
           </div>
-          <button onclick="orderViaWhatsApp('Super Napier Fodder Stems', 1)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
+          <button onclick="orderStoreItem('Super Napier Stems', 1)" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-bold px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow">
             <i data-lucide="message-circle" class="w-4 h-4"></i> Order
           </button>
         </div>
@@ -299,113 +416,219 @@
 
   </main>
 
-  <!-- ==================== MODALS ==================== -->
+  <!-- ==================== ALL INTERACTIVE MODALS ==================== -->
 
-  <!-- MODAL: ADD CUSTOMER -->
-  <div id="customerModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
+  <!-- MODAL: ADD / EDIT ANIMAL -->
+  <div id="animalModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base">புதிய வாடிக்கையாளர் (New Customer)</h3>
-        <button onclick="closeModal('customerModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <h3 class="font-bold text-white text-base" id="animalModalTitle">புதிய கால்நடை பதிவு</h3>
+        <button onclick="closeModal('animalModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <form onsubmit="handleCustomerSubmit(event)" class="space-y-3">
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">பெயர் (Customer Name)*</label>
-          <input type="text" id="custName" required placeholder="e.g. Murugan Tea Stall" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white outline-none">
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">மொபைல் எண் (WhatsApp Mobile No)*</label>
-          <input type="tel" id="custPhone" required placeholder="10 Digit Number" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white outline-none">
-        </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">நிர்ணயிக்கப்பட்ட பால் விலை (₹ / Litre)*</label>
-          <input type="number" id="custRate" required value="46" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white outline-none">
-        </div>
-        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Customer</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- MODAL: ADD LIVESTOCK / CALVING -->
-  <div id="livestockModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base">கால்நடைப் பதிவு & சினைக் கணக்கு</h3>
-        <button onclick="closeModal('livestockModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-      <form onsubmit="handleLivestockSubmit(event)" class="space-y-3">
+      <form onsubmit="handleAnimalSubmit(event)" class="space-y-3">
+        <input type="hidden" id="editAnimalId">
         <div class="grid grid-cols-2 gap-2">
           <div>
-            <label class="block text-xs text-slate-400 mb-1">டேக் எண் (Tag / Name)*</label>
-            <input type="text" id="animalTag" required placeholder="e.g. Cow #1 (Lakshmi)" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
+            <label class="block text-xs text-slate-400 mb-1">Tag / Code ID*</label>
+            <input type="text" id="animalTag" required placeholder="e.g. COW-01, GOAT-03" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs font-bold outline-none">
           </div>
           <div>
-            <label class="block text-xs text-slate-400 mb-1">ரகம் (Breed)*</label>
-            <select id="animalBreed" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-              <option value="Jersey Cross">Jersey Cross</option>
-              <option value="HF Cross">HF Cross</option>
-              <option value="Country Cow">நாட்டு மாடு</option>
-              <option value="Tellicherry Goat">தலைச்சேரி ஆடு</option>
+            <label class="block text-xs text-slate-400 mb-1">வகை (Type)*</label>
+            <select id="animalType" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+              <option value="Cow">மாடு (Cow)</option>
+              <option value="Goat">ஆடு (Goat)</option>
+              <option value="Country Chicken">நாட்டுக் கோழி</option>
+              <option value="Rabbit">முயல் (Rabbit)</option>
             </select>
           </div>
         </div>
-        <div>
-          <label class="block text-xs text-slate-400 mb-1">சினை ஊசி போட்ட தேதி (AI Date - Optional)</label>
-          <input type="date" id="animalAiDate" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white outline-none">
-          <p class="text-[10px] text-slate-500 mt-1">கன்று ஈனும் நாள் (280 days) மற்றும் பால் வற்றும் நாள் தானாகக் கணக்கிடப்படும்.</p>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">ரகம் (Breed)*</label>
+            <input type="text" id="animalBreed" required placeholder="e.g. Jersey Cross, Tellicherry" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">ஆரம்ப எடை (Initial Wt kg)</label>
+            <input type="number" step="0.1" id="animalInitWeight" placeholder="e.g. 320" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
         </div>
-        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Livestock</button>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">வாங்கிய தேதி / பிறந்த நாள்</label>
+            <input type="date" id="animalDob" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">வாங்கிய விலை (₹)</label>
+            <input type="number" id="animalPurchaseCost" placeholder="₹" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">சினை ஊசி போட்ட தேதி (AI Date - மாடுகளுக்கு)</label>
+          <input type="date" id="animalAiDate" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Animal Profile</button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: MILK ENTRY -->
-  <div id="milkModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+  <!-- MODAL: WEIGHT LOG -->
+  <div id="weightModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base" id="milkModalTitle">பால் பதிவு (Milk Entry)</h3>
-        <button onclick="closeModal('milkModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <h3 class="font-bold text-white text-base">மாதாந்திர எடை பதிவு (Weight Check)</h3>
+        <button onclick="closeModal('weightModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <form onsubmit="handleMilkSubmit(event)" class="space-y-3">
-        <input type="hidden" id="milkSession" value="AM">
+      <form onsubmit="handleWeightSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Animal Tag*</label>
+          <select id="weightAnimalSelect" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+            <option value="">Select Animal...</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">தற்போதைய எடை (kg)*</label>
+            <input type="number" step="0.1" id="weightVal" required placeholder="kg" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-sm font-bold outline-none">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">தேதி*</label>
+            <input type="date" id="weightDate" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">குறிப்புகள் (Notes / Health)</label>
+          <input type="text" id="weightNotes" placeholder="e.g. Good active feed intake" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-amber-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Weight Record</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: MEDICAL / VACCINATION -->
+  <div id="medicalModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-base">தடுப்பூசி & சிகிச்சை பதிவு (Health Log)</h3>
+        <button onclick="closeModal('medicalModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="handleMedicalSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">Animal Tag*</label>
+          <select id="medAnimalSelect" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+            <option value="">Select Animal...</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">வகை (Category)*</label>
+            <select id="medType" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+              <option value="Vaccination">தடுப்பூசி (Vaccination)</option>
+              <option value="Deworming">குடற்புழு நீக்கம் (Deworming)</option>
+              <option value="Medical Treatment">சிகிச்சை (Treatment)</option>
+              <option value="Vitamin / Mineral">வைட்டமின் / தாது உப்புகள்</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">செலவு (₹)</label>
+            <input type="number" id="medCost" placeholder="₹ 0" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">மருந்து விவரம் (Details / Medicine)*</label>
+          <input type="text" id="medDesc" required placeholder="e.g. FMD Vaccine, Albendazole" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-teal-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Health Record</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: COW-WISE MILK ENTRY -->
+  <div id="cowMilkModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-base" id="cowMilkModalTitle">பால் பதிவு</h3>
+        <button onclick="closeModal('cowMilkModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="handleCowMilkSubmit(event)" class="space-y-3">
+        <input type="hidden" id="cowMilkSession" value="AM">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">மாடு தேர்வு (Cow Tag ID)*</label>
+          <select id="cowSelectMilk" required class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2.5 text-xs outline-none">
+            <option value="GENERAL">பொதுவான பண்ணைப் பால் (All Cows Aggregate)</option>
+          </select>
+        </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">அளவு (Quantity in Litres)*</label>
-          <input type="number" step="0.1" id="milkQuantity" required placeholder="18.5" class="w-full bg-slate-800 border border-slate-700 font-bold text-2xl text-white rounded-xl px-4 py-3 outline-none">
+          <input type="number" step="0.1" id="cowMilkQty" required placeholder="e.g. 18.5" class="w-full bg-slate-800 border border-slate-700 text-white font-black text-2xl rounded-xl px-4 py-3 outline-none">
         </div>
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-xs text-slate-400 mb-1">கொழுப்பு (Fat %)</label>
-            <input type="number" step="0.1" id="milkFat" placeholder="4.2" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-sm outline-none">
+            <input type="number" step="0.1" id="cowMilkFat" placeholder="4.2" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
           </div>
           <div>
             <label class="block text-xs text-slate-400 mb-1">SNF</label>
-            <input type="number" step="0.1" id="milkSnf" placeholder="8.5" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-sm outline-none">
+            <input type="number" step="0.1" id="cowMilkSnf" placeholder="8.5" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
           </div>
         </div>
-        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Milk Entry</button>
+        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Milk Log</button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: EXPENSE ENTRY -->
-  <div id="expenseModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+  <!-- MODAL: CAPEX ENTRY -->
+  <div id="capexModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base">செலவுப் பதிவு (Daily Expense)</h3>
+        <h3 class="font-bold text-white text-base">முதலீட்டுச் செலவு பதிவு (CAPEX)</h3>
+        <button onclick="closeModal('capexModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="handleCapexSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">தொகை (₹)*</label>
+          <input type="number" id="capexAmount" required placeholder="₹ 0" class="w-full bg-slate-800 border border-slate-700 text-indigo-400 font-black text-2xl rounded-xl px-4 py-3 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">பிரிவு (Project / Asset)*</label>
+          <select id="capexCategory" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+            <option value="Shed & Civil Structure">மாட்டுக்கொட்டகை / கொட்டகை கட்டுமானம்</option>
+            <option value="Borewell & Water Rig">போர்வெல் & பைப்லைன்</option>
+            <option value="RCC Water Tank 5000L">RCC தூண் மேல்நிலை நீர்த்தேக்கத் தொட்டி</option>
+            <option value="Chaff Cutter & Machinery">புல் நறுக்கும் மெஷின் (Chaff Cutter)</option>
+            <option value="Solar & Electrical Setup">சோலார் & மின்சார கட்டமைப்பு</option>
+            <option value="Fencing & Security">வேலி & CCTV கேமரா</option>
+            <option value="Fodder Land Prep">தீவன நில மேம்பாடு (Super Napier)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">விவரம் (Vendor / Description)*</label>
+          <input type="text" id="capexDesc" required placeholder="e.g. சிமெண்ட், இரும்பு கம்பிகள், மேஸ்திரி கூலி" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg">Save CAPEX Asset</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EXPENSE ENTRY (OPEX) -->
+  <div id="expenseModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-base" id="expenseModalTitle">தினசரி செலவுப் பதிவு</h3>
         <button onclick="closeModal('expenseModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleExpenseSubmit(event)" class="space-y-3">
+        <input type="hidden" id="editExpId">
         <div>
           <label class="block text-xs text-slate-400 mb-1">தொகை (₹)*</label>
           <input type="number" id="expAmount" required placeholder="₹ 0" class="w-full bg-slate-800 border border-slate-700 text-rose-400 font-bold text-2xl rounded-xl px-4 py-3 outline-none">
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">காரணம் / விவரம்*</label>
-          <input type="text" id="expDesc" required placeholder="e.g. தவிடு, டீ செலவு, கூலி" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-sm outline-none">
+          <input type="text" id="expDesc" required placeholder="e.g. 1 மூட்டை தவிடு, ஆள் கூலி" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">பிரிவு (Category)</label>
-          <select id="expCategory" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-sm outline-none">
+          <select id="expCategory" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
             <option value="Feed & Fodder">தீவனம் (Feed & Mineral Salt)</option>
             <option value="Labour & Wages">கூலி (Labour / Tips)</option>
             <option value="Medical & Vet">மருத்துவம் / AI ஊசி</option>
@@ -414,13 +637,13 @@
             <option value="Misc">இதர செலவுகள் (Misc)</option>
           </select>
         </div>
-        <button type="submit" class="w-full bg-rose-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Expense</button>
+        <button type="submit" class="w-full bg-rose-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Daily Expense</button>
       </form>
     </div>
   </div>
 
   <!-- MODAL: SALE ENTRY -->
-  <div id="saleModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+  <div id="saleModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
         <h3 class="font-bold text-white text-base">வரவுப் பதிவு (Direct Sale)</h3>
@@ -433,24 +656,50 @@
         </div>
         <div>
           <label class="block text-xs text-slate-400 mb-1">விற்பனைப் பொருள்*</label>
-          <select id="saleItem" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-sm outline-none">
+          <select id="saleItem" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
             <option value="Milk Settlement">பால் பில் தொகை (Milk Settlement)</option>
             <option value="Cow Dung Load">சாணம் டிராக்டர் லோடு (Cow Dung)</option>
             <option value="Goat Manure Bag">ஆட்டுப் புழுக்கை மூட்டை</option>
             <option value="Country Eggs">நாட்டுக் கோழி முட்டை</option>
+            <option value="Live Bird / Goat">ஆடு / சேவல் விற்பனை</option>
             <option value="Napier Stems">தீவனக் குச்சிகள்</option>
           </select>
         </div>
-        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Income</button>
+        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-xl shadow-lg">Save Direct Income</button>
       </form>
     </div>
   </div>
 
-  <!-- MODAL: RECEIVE CUSTOMER PAYMENT -->
-  <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+  <!-- MODAL: ADD CUSTOMER -->
+  <div id="customerModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
       <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-        <h3 class="font-bold text-white text-base">பணம் வரவு (Receive Payment)</h3>
+        <h3 class="font-bold text-white text-base">புதிய வாடிக்கையாளர் (Customer Ledger)</h3>
+        <button onclick="closeModal('customerModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="handleCustomerSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">பெயர் (Customer Name)*</label>
+          <input type="text" id="custName" required placeholder="e.g. Murugan Tea Stall" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">மொபைல் எண் (WhatsApp Mobile No)*</label>
+          <input type="tel" id="custPhone" required placeholder="10 Digit Number" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <div>
+          <label class="block text-xs text-slate-400 mb-1">நிர்ணயிக்கப்பட்ட பால் விலை (₹ / Litre)*</label>
+          <input type="number" id="custRate" required value="46" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+        <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-lg">Save Customer</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: CUSTOMER PAYMENT IN -->
+  <div id="paymentModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-t-3xl sm:rounded-2xl p-5 w-full max-w-md space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+        <h3 class="font-bold text-white text-base">பணம் வரவு (Customer Payment)</h3>
         <button onclick="closeModal('paymentModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <form onsubmit="handleCustomerPaymentSubmit(event)" class="space-y-3">
@@ -464,13 +713,13 @@
     </div>
   </div>
 
-  <!-- TOAST -->
+  <!-- TOAST NOTIFICATION -->
   <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-800 border border-slate-700 text-white px-4 py-2 rounded-full shadow-2xl text-xs font-medium z-50 transition opacity-0 pointer-events-none flex items-center gap-2">
     <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
     <span id="toastMsg">Saved</span>
   </div>
 
-  <!-- SCRIPT INTEGRATION -->
+  <!-- ==================== LOGIC ENGINE (FIREBASE & EVENT HANDLERS) ==================== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
     import { 
@@ -481,6 +730,7 @@
       doc, 
       getDoc, 
       updateDoc, 
+      deleteDoc, 
       onSnapshot, 
       query, 
       orderBy, 
@@ -488,7 +738,7 @@
       serverTimestamp 
     } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-    // EXACT FIREBASE CREDENTIALS
+    // EXACT LIVE BACKEND FIREBASE KEYS
     const firebaseConfig = {
       apiKey: "AIzaSyBJ2C0V2U8PGroB8xeHeKknzS5znY3XFE",
       authDomain: "dfarm-tracker.firebaseapp.com",
@@ -503,88 +753,102 @@
     try {
       const app = initializeApp(firebaseConfig);
       db = getFirestore(app);
-      document.getElementById('syncStatusText').textContent = 'Cloud Live';
+      document.getElementById('syncStatus').textContent = 'Cloud Live';
     } catch (e) {
-      console.warn("Firebase local fallback:", e);
-      document.getElementById('syncStatusText').textContent = 'Offline';
+      console.warn("Offline Fallback:", e);
+      document.getElementById('syncStatus').textContent = 'Offline';
     }
 
-    // TAB NAVIGATION
-    window.switchTab = function(tab) {
-      ['ops', 'ledger', 'radar', 'store'].forEach(t => {
-        const view = document.getElementById(`view${t.charAt(0).toUpperCase() + t.slice(1)}`);
-        const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
-        if (t === tab) {
+    // STATE CACHE
+    let animalsCache = [];
+    let customersCache = [];
+    let capexCache = [];
+
+    // TABS
+    window.switchTab = function(t) {
+      const tabs = ['ops', 'animals', 'capex', 'bills', 'store'];
+      tabs.forEach(item => {
+        const view = document.getElementById(`view${item.charAt(0).toUpperCase() + item.slice(1)}`);
+        const btn = document.getElementById(`tab${item.charAt(0).toUpperCase() + item.slice(1)}`);
+        if (item === t) {
           view.classList.remove('hidden');
-          btn.className = "flex-1 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-emerald-600 text-white shadow-md";
+          btn.className = "flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-emerald-600 text-white shadow-sm";
         } else {
           view.classList.add('hidden');
-          btn.className = "flex-1 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200";
+          btn.className = "flex-shrink-0 px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-400 hover:text-white";
         }
       });
       lucide.createIcons();
     };
 
-    // MODAL HANDLERS
+    // MODAL HELPERS
     window.openModal = function(id, session = null) {
-      if (session && id === 'milkModal') {
-        document.getElementById('milkSession').value = session;
-        document.getElementById('milkModalTitle').textContent = session === 'AM' ? 'காலை பால் பதிவு (Morning Milk)' : 'மாலை பால் பதிவு (Evening Milk)';
+      if (session && id === 'cowMilkModal') {
+        document.getElementById('cowMilkSession').value = session;
+        document.getElementById('cowMilkModalTitle').textContent = session === 'AM' ? 'காலை பால் பதிவு (Morning Milk)' : 'மாலை பால் பதிவு (Evening Milk)';
       }
       document.getElementById(id).classList.remove('hidden');
     };
     window.closeModal = function(id) {
       document.getElementById(id).classList.add('hidden');
     };
-
     window.showToast = function(msg) {
-      const toast = document.getElementById('toast');
+      const t = document.getElementById('toast');
       document.getElementById('toastMsg').textContent = msg;
-      toast.classList.remove('opacity-0', 'pointer-events-none');
-      setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2500);
+      t.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => t.classList.add('opacity-0', 'pointer-events-none'), 2200);
     };
 
-    // OPERATIONS: MILK / EXPENSE / SALE
-    window.handleMilkSubmit = async function(e) {
+    // ==================== OPS: COW MILK / EXPENSE / SALE ====================
+    window.handleCowMilkSubmit = async function(e) {
       e.preventDefault();
-      const qty = parseFloat(document.getElementById('milkQuantity').value);
-      const session = document.getElementById('milkSession').value;
-      const fat = document.getElementById('milkFat').value || 4.2;
-      const snf = document.getElementById('milkSnf').value || 8.5;
+      const cowTag = document.getElementById('cowSelectMilk').value;
+      const qty = parseFloat(document.getElementById('cowMilkQty').value);
+      const session = document.getElementById('cowMilkSession').value;
+      const fat = parseFloat(document.getElementById('cowMilkFat').value || 4.2);
+      const snf = parseFloat(document.getElementById('cowMilkSnf').value || 8.5);
 
-      const record = {
+      await addDoc(collection(db, 'milk_records'), {
         type: 'milk',
-        session,
+        cowTag,
         quantity: qty,
-        fat: parseFloat(fat),
-        snf: parseFloat(snf),
+        session,
+        fat,
+        snf,
         date: new Date().toISOString().split('T')[0],
         timestamp: serverTimestamp ? serverTimestamp() : new Date()
-      };
-      await addDoc(collection(db, 'milk_records'), record);
-      closeModal('milkModal');
-      document.getElementById('milkQuantity').value = '';
-      showToast(`பால் பதிவு: ${qty} L (${session})`);
+      });
+
+      closeModal('cowMilkModal');
+      document.getElementById('cowMilkQty').value = '';
+      showToast(`Saved ${qty}L milk for ${cowTag}`);
     };
 
     window.handleExpenseSubmit = async function(e) {
       e.preventDefault();
+      const id = document.getElementById('editExpId').value;
       const amount = parseFloat(document.getElementById('expAmount').value);
       const desc = document.getElementById('expDesc').value;
       const category = document.getElementById('expCategory').value;
 
-      await addDoc(collection(db, 'expenses'), {
-        type: 'expense',
-        amount,
-        description: desc,
-        category,
-        date: new Date().toISOString().split('T')[0],
-        timestamp: serverTimestamp ? serverTimestamp() : new Date()
-      });
+      if (id) {
+        await updateDoc(doc(db, 'expenses', id), { amount, description: desc, category });
+        document.getElementById('editExpId').value = '';
+        showToast('Expense updated!');
+      } else {
+        await addDoc(collection(db, 'expenses'), {
+          type: 'expense',
+          amount,
+          description: desc,
+          category,
+          date: new Date().toISOString().split('T')[0],
+          timestamp: serverTimestamp ? serverTimestamp() : new Date()
+        });
+        showToast(`Saved ₹${amount} expense`);
+      }
       closeModal('expenseModal');
       document.getElementById('expAmount').value = '';
       document.getElementById('expDesc').value = '';
-      showToast(`செலவு சேமிக்கப்பட்டது: ₹${amount}`);
     };
 
     window.quickExpense = async function(amount, desc, category) {
@@ -596,7 +860,7 @@
         date: new Date().toISOString().split('T')[0],
         timestamp: serverTimestamp ? serverTimestamp() : new Date()
       });
-      showToast(`₹${amount} பதிவு: ${desc}`);
+      showToast(`Quick ₹${amount} logged (${desc})`);
     };
 
     window.handleSaleSubmit = async function(e) {
@@ -613,12 +877,176 @@
       });
       closeModal('saleModal');
       document.getElementById('saleAmount').value = '';
-      showToast(`வரவு சேர்க்கப்பட்டது: ₹${amount}`);
+      showToast(`Income added: ₹${amount}`);
     };
 
-    // ==================== TAB 2: CUSTOMERS & LEDGER ====================
-    let customersList = [];
+    window.editExpenseItem = function(id, amount, desc, category) {
+      document.getElementById('editExpId').value = id;
+      document.getElementById('expAmount').value = amount;
+      document.getElementById('expDesc').value = desc;
+      document.getElementById('expCategory').value = category;
+      document.getElementById('expenseModalTitle').textContent = 'செலவைத் திருத்து (Edit Expense)';
+      openModal('expenseModal');
+    };
 
+    window.deleteExpenseItem = async function(id) {
+      if (confirm('Are you sure you want to delete this expense record?')) {
+        await deleteDoc(doc(db, 'expenses', id));
+        showToast('Record deleted');
+      }
+    };
+
+    // ==================== ANIMALS 360° MANAGEMENT ====================
+    window.handleAnimalSubmit = async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('editAnimalId').value;
+      const tag = document.getElementById('animalTag').value.trim().toUpperCase();
+      const type = document.getElementById('animalType').value;
+      const breed = document.getElementById('animalBreed').value.trim();
+      const initWeight = parseFloat(document.getElementById('animalInitWeight').value || 0);
+      const dob = document.getElementById('animalDob').value;
+      const cost = parseFloat(document.getElementById('animalPurchaseCost').value || 0);
+      const aiDate = document.getElementById('animalAiDate').value;
+
+      let expectedCalving = '', dryOffDate = '';
+      if (aiDate && type === 'Cow') {
+        const ai = new Date(aiDate);
+        const calving = new Date(ai.getTime() + (280 * 86400000));
+        expectedCalving = calving.toISOString().split('T')[0];
+        const dry = new Date(calving.getTime() - (60 * 86400000));
+        dryOffDate = dry.toISOString().split('T')[0];
+      }
+
+      const payload = {
+        tag,
+        type,
+        breed,
+        initWeight,
+        currentWeight: initWeight,
+        dob,
+        cost,
+        aiDate: aiDate || null,
+        expectedCalving,
+        dryOffDate
+      };
+
+      if (id) {
+        await updateDoc(doc(db, 'animals', id), payload);
+        document.getElementById('editAnimalId').value = '';
+        showToast('Animal profile updated!');
+      } else {
+        await addDoc(collection(db, 'animals'), {
+          ...payload,
+          createdAt: serverTimestamp ? serverTimestamp() : new Date()
+        });
+        showToast(`Animal ${tag} registered!`);
+      }
+
+      closeModal('animalModal');
+    };
+
+    window.handleWeightSubmit = async function(e) {
+      e.preventDefault();
+      const tag = document.getElementById('weightAnimalSelect').value;
+      const weight = parseFloat(document.getElementById('weightVal').value);
+      const date = document.getElementById('weightDate').value;
+      const notes = document.getElementById('weightNotes').value;
+
+      await addDoc(collection(db, 'animal_weights'), {
+        tag,
+        weight,
+        date,
+        notes,
+        timestamp: serverTimestamp ? serverTimestamp() : new Date()
+      });
+
+      // Update current weight in animal doc
+      const animalDoc = animalsCache.find(a => a.tag === tag);
+      if (animalDoc && animalDoc.id) {
+        await updateDoc(doc(db, 'animals', animalDoc.id), { currentWeight: weight });
+      }
+
+      closeModal('weightModal');
+      document.getElementById('weightVal').value = '';
+      showToast(`Weight updated for ${tag}: ${weight} kg`);
+    };
+
+    window.handleMedicalSubmit = async function(e) {
+      e.preventDefault();
+      const tag = document.getElementById('medAnimalSelect').value;
+      const type = document.getElementById('medType').value;
+      const cost = parseFloat(document.getElementById('medCost').value || 0);
+      const desc = document.getElementById('medDesc').value;
+
+      await addDoc(collection(db, 'animal_medical'), {
+        tag,
+        type,
+        cost,
+        desc,
+        date: new Date().toISOString().split('T')[0],
+        timestamp: serverTimestamp ? serverTimestamp() : new Date()
+      });
+
+      if (cost > 0) {
+        // Also log as farm expense
+        await addDoc(collection(db, 'expenses'), {
+          type: 'expense',
+          amount: cost,
+          description: `${tag} - ${type}: ${desc}`,
+          category: 'Medical & Vet',
+          date: new Date().toISOString().split('T')[0],
+          timestamp: serverTimestamp ? serverTimestamp() : new Date()
+        });
+      }
+
+      closeModal('medicalModal');
+      document.getElementById('medCost').value = '';
+      document.getElementById('medDesc').value = '';
+      showToast(`Medical record saved for ${tag}`);
+    };
+
+    window.deleteAnimal = async function(id) {
+      if (confirm('Delete this animal and all associated history?')) {
+        await deleteDoc(doc(db, 'animals', id));
+        showToast('Animal removed');
+      }
+    };
+
+    window.filterAnimals = function() {
+      const q = document.getElementById('animalSearchInput').value.toUpperCase();
+      const filtered = animalsCache.filter(a => a.tag.toUpperCase().includes(q) || a.breed.toUpperCase().includes(q));
+      renderAnimalCards(filtered);
+    };
+
+    // ==================== CAPEX PROJECT TRACKER ====================
+    window.handleCapexSubmit = async function(e) {
+      e.preventDefault();
+      const amount = parseFloat(document.getElementById('capexAmount').value);
+      const category = document.getElementById('capexCategory').value;
+      const desc = document.getElementById('capexDesc').value;
+
+      await addDoc(collection(db, 'capex'), {
+        amount,
+        category,
+        desc,
+        date: new Date().toISOString().split('T')[0],
+        timestamp: serverTimestamp ? serverTimestamp() : new Date()
+      });
+
+      closeModal('capexModal');
+      document.getElementById('capexAmount').value = '';
+      document.getElementById('capexDesc').value = '';
+      showToast(`CAPEX ₹${amount} logged!`);
+    };
+
+    window.deleteCapex = async function(id) {
+      if (confirm('Delete this CAPEX entry?')) {
+        await deleteDoc(doc(db, 'capex', id));
+        showToast('CAPEX entry deleted');
+      }
+    };
+
+    // ==================== CUSTOMER LEDGER & BILLS ====================
     window.handleCustomerSubmit = async function(e) {
       e.preventDefault();
       const name = document.getElementById('custName').value.trim();
@@ -633,19 +1061,17 @@
         balanceDue: 0,
         createdAt: serverTimestamp ? serverTimestamp() : new Date()
       });
+
       closeModal('customerModal');
       showToast(`Customer added: ${name}`);
     };
 
-    window.recordCustomerDrop = async function() {
-      const phone = document.getElementById('ledgerCustomerSelect').value;
-      const liters = parseFloat(document.getElementById('ledgerDropLiters').value);
-      if (!phone || isNaN(liters) || liters <= 0) {
-        alert("Please select customer and valid liters");
-        return;
-      }
+    window.saveCustomerDailyDrop = async function() {
+      const phone = document.getElementById('custSelectDrop').value;
+      const liters = parseFloat(document.getElementById('custDropLiters').value);
+      if (!phone || isNaN(liters) || liters <= 0) return alert('Select customer and valid liters!');
 
-      const cust = customersList.find(c => c.phone === phone);
+      const cust = customersCache.find(c => c.phone === phone);
       const cost = liters * cust.rate;
 
       await addDoc(collection(db, 'customer_deliveries'), {
@@ -658,14 +1084,13 @@
         timestamp: serverTimestamp ? serverTimestamp() : new Date()
       });
 
-      // Update customer balance
       await updateDoc(doc(db, 'customers', phone), {
         totalLiters: (cust.totalLiters || 0) + liters,
         balanceDue: (cust.balanceDue || 0) + cost
       });
 
-      document.getElementById('ledgerDropLiters').value = '';
-      showToast(`${liters}L added for ${cust.name}`);
+      document.getElementById('custDropLiters').value = '';
+      showToast(`${liters}L logged for ${cust.name}`);
     };
 
     window.openPaymentModal = function(phone) {
@@ -677,7 +1102,7 @@
       e.preventDefault();
       const phone = document.getElementById('payCustPhone').value;
       const amount = parseFloat(document.getElementById('payAmount').value);
-      const cust = customersList.find(c => c.phone === phone);
+      const cust = customersCache.find(c => c.phone === phone);
 
       await addDoc(collection(db, 'customer_payments'), {
         customerPhone: phone,
@@ -697,40 +1122,41 @@
     };
 
     // WHATSAPP BILL SHARE
-    window.shareBillWhatsApp = function(phone) {
-      const cust = customersList.find(c => c.phone === phone);
+    window.shareCustomerBillWhatsApp = function(phone) {
+      const cust = customersCache.find(c => c.phone === phone);
       const currentMonth = new Intl.DateTimeFormat('en-IN', { month: 'long', year: 'numeric' }).format(new Date());
 
       const text = `🥛 *D-FARM (Polur) - மாதாந்திர பால் கணக்கு*\n` +
                    `👤 *வாடிக்கையாளர்:* ${cust.name}\n` +
                    `📅 *மாதம்:* ${currentMonth}\n` +
                    `------------------------------------\n` +
-                   `• மொத்த பால்: *${(cust.totalLiters || 0).toFixed(1)} Ltrs*\n` +
+                   `• மொத்த பால்: *${(cust.totalLiters || 0).toFixed(1)} Litres*\n` +
                    `• விலை / Litre: *₹${cust.rate}*\n` +
                    `------------------------------------\n` +
                    `🔴 *செலுத்த வேண்டிய பாக்கி: ₹${(cust.balanceDue || 0).toLocaleString('en-IN')}*\n\n` +
-                   `📱 *GPay / PhonePe: [Unga UPI / Mobile Number]*\n` +
+                   `📱 *Google Pay / PhonePe:* 7200752628\n` +
+                   `💳 *UPI ID:* 7200752628@upi\n` +
                    `நன்றி! D-FARM Polur.`;
 
       const url = `https://wa.me/91${cust.phone}?text=${encodeURIComponent(text)}`;
       window.open(url, '_blank');
     };
 
-    // PROFESSIONAL PDF BILL GENERATION
-    window.downloadBillPDF = function(phone) {
+    // INSTANT BRANDED PDF BILL
+    window.downloadCustomerPDF = function(phone) {
       const { jsPDF } = window.jspdf;
       const docPdf = new jsPDF();
-      const cust = customersList.find(c => c.phone === phone);
+      const cust = customersCache.find(c => c.phone === phone);
       const currentMonth = new Intl.DateTimeFormat('en-IN', { month: 'long', year: 'numeric' }).format(new Date());
 
       // Header Branding
-      docPdf.setFillColor(6, 78, 59); // Emerald Brand Color
+      docPdf.setFillColor(6, 78, 59);
       docPdf.rect(0, 0, 210, 32, 'F');
       docPdf.setFontSize(18);
       docPdf.setTextColor(255, 255, 255);
       docPdf.text("D-FARM POLUR", 14, 18);
       docPdf.setFontSize(10);
-      docPdf.text("Pure Farm Direct Milk & Natural Agro Products", 14, 25);
+      docPdf.text("Pure Farm Direct Milk & Natural Agro Products | Tiruvannamalai Dt", 14, 25);
 
       // Customer Info
       docPdf.setTextColor(30, 41, 59);
@@ -740,11 +1166,10 @@
       docPdf.setFontSize(10);
       docPdf.text(`Customer Name: ${cust.name}`, 14, 52);
       docPdf.text(`Mobile Number: ${cust.phone}`, 14, 58);
-      docPdf.text(`Billing Date: ${new Date().toLocaleDateString('en-IN')}`, 14, 64);
+      docPdf.text(`Statement Date: ${new Date().toLocaleDateString('en-IN')}`, 14, 64);
 
-      // Table Data
       const tableData = [
-        ["1", "Fresh Farm Cow Milk (Total Delivered)", `${(cust.totalLiters || 0).toFixed(1)} Litres`, `Rs. ${cust.rate}`, `Rs. ${((cust.totalLiters || 0) * cust.rate).toLocaleString('en-IN')}`],
+        ["1", "Fresh Farm Cow Milk (Total Delivered)", `${(cust.totalLiters || 0).toFixed(1)} L`, `Rs. ${cust.rate}`, `Rs. ${((cust.totalLiters || 0) * cust.rate).toLocaleString('en-IN')}`],
       ];
 
       docPdf.autoTable({
@@ -756,93 +1181,81 @@
       });
 
       const finalY = docPdf.lastAutoTable.finalY + 12;
-
-      // Summary Box
-      docPdf.setFontSize(12);
+      docPdf.setFontSize(13);
       docPdf.setTextColor(220, 38, 38);
       docPdf.text(`TOTAL OUTSTANDING DUE: Rs. ${(cust.balanceDue || 0).toLocaleString('en-IN')}`, 14, finalY);
 
       docPdf.setFontSize(9);
       docPdf.setTextColor(100, 116, 139);
-      docPdf.text("Payment Mode: Google Pay / PhonePe / Cash", 14, finalY + 8);
-      docPdf.text("Thank you for choosing pure farm produce! | D-FARM Polur", 14, finalY + 14);
+      docPdf.text("Payment Mode: Google Pay / PhonePe: 7200752628 | UPI: 7200752628@upi", 14, finalY + 8);
+      docPdf.text("Thank you for supporting pure natural farm produce! | D-FARM Polur", 14, finalY + 14);
 
       docPdf.save(`D-FARM_${cust.name}_${cust.phone}.pdf`);
     };
 
-    // ==================== TAB 3: LIVESTOCK & CALVING RADAR ====================
-    window.handleLivestockSubmit = async function(e) {
-      e.preventDefault();
-      const tag = document.getElementById('animalTag').value.trim();
-      const breed = document.getElementById('animalBreed').value;
-      const aiDate = document.getElementById('animalAiDate').value;
-
-      let expectedCalving = '';
-      let dryOffDate = '';
-
-      if (aiDate) {
-        const ai = new Date(aiDate);
-        // Cows ~280 days gestation
-        const calving = new Date(ai.getTime() + (280 * 24 * 60 * 60 * 1000));
-        expectedCalving = calving.toISOString().split('T')[0];
-
-        // Dry off 60 days before calving
-        const dry = new Date(calving.getTime() - (60 * 24 * 60 * 60 * 1000));
-        dryOffDate = dry.toISOString().split('T')[0];
-      }
-
-      await addDoc(collection(db, 'livestock'), {
-        tag,
-        breed,
-        aiDate: aiDate || null,
-        expectedCalving,
-        dryOffDate,
-        createdAt: serverTimestamp ? serverTimestamp() : new Date()
-      });
-
-      closeModal('livestockModal');
-      showToast(`Animal registered: ${tag}`);
-    };
-
-    // ==================== TAB 4: STOREFRONT WHATSAPP ORDER ====================
-    window.orderViaWhatsApp = function(item, price) {
-      const message = `வணக்கம் D-FARM Polur! 👋\nநான் உங்கள் பண்ணையிலிருந்து ஆர்டர் செய்ய விரும்புகிறேன்:\n\n• பொருள்: *${item}*\n• விலை: ₹${price}\n\nதயவுசெய்து கிடைக்கும் விவரங்களை தெரிவிக்கவும்.`;
-      const url = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+    // ==================== STOREFRONT WHATSAPP ORDER ====================
+    window.orderStoreItem = function(item, price) {
+      const message = `வணக்கம் D-FARM Polur! 👋\nநான் உங்கள் பண்ணையிலிருந்து ஆர்டர் செய்ய விரும்புகிறேன்:\n\n• பொருள்: *${item}*\n• விலை: ₹${price}\n\nதயவுசெய்து விநியோக விவரங்களை தெரிவிக்கவும்.`;
+      const url = `https://wa.me/917200752628?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     };
 
-    // ==================== REALTIME FIRESTORE SYNC ====================
+    // ==================== REALTIME FIRESTORE LISTENERS ====================
     if (db) {
-      // 1. Live Customers Listener
-      onSnapshot(collection(db, 'customers'), (snapshot) => {
-        customersList = [];
-        const select = document.getElementById('ledgerCustomerSelect');
-        select.innerHTML = '<option value="">Select Customer...</option>';
+      // 1. Animals Listener
+      onSnapshot(collection(db, 'animals'), (snap) => {
+        animalsCache = [];
+        const cowSelect = document.getElementById('cowSelectMilk');
+        const weightSelect = document.getElementById('weightAnimalSelect');
+        const medSelect = document.getElementById('medAnimalSelect');
+
+        cowSelect.innerHTML = '<option value="GENERAL">பொதுவான பண்ணைப் பால் (All Cows Aggregate)</option>';
+        weightSelect.innerHTML = '<option value="">Select Animal...</option>';
+        medSelect.innerHTML = '<option value="">Select Animal...</option>';
+
+        snap.forEach(docSnap => {
+          const a = { id: docSnap.id, ...docSnap.data() };
+          animalsCache.push(a);
+
+          if (a.type === 'Cow') {
+            cowSelect.innerHTML += `<option value="${a.tag}">${a.tag} (${a.breed})</option>`;
+          }
+          weightSelect.innerHTML += `<option value="${a.tag}">${a.tag} (${a.type} - ${a.breed})</option>`;
+          medSelect.innerHTML += `<option value="${a.tag}">${a.tag} (${a.type})</option>`;
+        });
+
+        renderAnimalCards(animalsCache);
+      });
+
+      // 2. Customers Listener
+      onSnapshot(collection(db, 'customers'), (snap) => {
+        customersCache = [];
+        const dropSelect = document.getElementById('custSelectDrop');
+        dropSelect.innerHTML = '<option value="">வாடிக்கையாளரைத் தேர்வு செய்...</option>';
 
         let html = '';
-        snapshot.forEach(docSnap => {
+        snap.forEach(docSnap => {
           const c = docSnap.data();
-          customersList.push(c);
-
-          select.innerHTML += `<option value="${c.phone}">${c.name} (${c.phone}) - ₹${c.rate}/L</option>`;
+          customersCache.push(c);
+          dropSelect.innerHTML += `<option value="${c.phone}">${c.name} (${c.phone}) - ₹${c.rate}/L</option>`;
 
           html += `
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+            <div class="glass-card rounded-2xl p-4 space-y-3">
               <div class="flex justify-between items-start">
                 <div>
                   <h4 class="font-bold text-white text-sm">${c.name}</h4>
                   <p class="text-xs text-slate-400">📱 ${c.phone} • ₹${c.rate}/Litre</p>
                 </div>
                 <div class="text-right">
-                  <span class="text-xs text-slate-400 block">Pending Due</span>
+                  <span class="text-[10px] text-slate-400 block uppercase">Pending Due</span>
                   <span class="text-base font-black text-rose-400">₹${(c.balanceDue || 0).toLocaleString('en-IN')}</span>
                 </div>
               </div>
               <div class="flex items-center gap-2 pt-2 border-t border-slate-800">
-                <button onclick="shareBillWhatsApp('${c.phone}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 py-2 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-1">
+                <button onclick="shareCustomerBillWhatsApp('${c.phone}')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 py-2 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-1">
                   <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp Bill
                 </button>
-                <button onclick="downloadBillPDF('${c.phone}')" class="flex-1 bg-slate-800 hover:bg-slate-700 py-2 rounded-xl text-xs font-bold text-blue-400 border border-slate-700 flex items-center justify-center gap-1">
+                <button onclick="downloadCustomerPDF('${c.phone}')" class="flex-1 bg-slate-800 hover:bg-slate-700 py-2 rounded-xl text-xs font-bold text-blue-400 border border-slate-700 flex items-center justify-center gap-1">
                   <i data-lucide="file-text" class="w-3.5 h-3.5"></i> PDF Bill
                 </button>
                 <button onclick="openPaymentModal('${c.phone}')" class="bg-slate-800 hover:bg-slate-700 px-3 py-2 rounded-xl text-xs font-bold text-emerald-400 border border-slate-700">
@@ -856,108 +1269,141 @@
         lucide.createIcons();
       });
 
-      // 2. Live Livestock & Calving Radar Listener
-      onSnapshot(collection(db, 'livestock'), (snapshot) => {
+      // 3. CAPEX Listener
+      onSnapshot(collection(db, 'capex'), (snap) => {
+        let total = 0;
         let html = '';
-        snapshot.forEach(docSnap => {
-          const a = docSnap.data();
-          const today = new Date();
-          let calvingText = 'சினைக் கணக்கு இல்லை';
-          let badgeColor = 'slate';
-
-          if (a.expectedCalving) {
-            const daysLeft = Math.ceil((new Date(a.expectedCalving) - today) / (1000 * 60 * 60 * 24));
-            if (daysLeft > 0) {
-              calvingText = `கன்று ஈன இன்னும் ${daysLeft} நாட்கள் (ETA: ${a.expectedCalving})`;
-              badgeColor = daysLeft <= 30 ? 'rose' : 'amber';
-            } else {
-              calvingText = `Delivery Time Reached! (${a.expectedCalving})`;
-              badgeColor = 'rose';
-            }
-          }
-
+        snap.forEach(docSnap => {
+          const d = { id: docSnap.id, ...docSnap.data() };
+          total += (d.amount || 0);
           html += `
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
-              <div class="flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">
-                    🐄
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-white text-sm">${a.tag}</h4>
-                    <span class="text-[11px] text-slate-400">${a.breed}</span>
-                  </div>
-                </div>
-                <span class="text-[10px] px-2 py-0.5 rounded-md bg-${badgeColor}-950 text-${badgeColor}-400 border border-${badgeColor}-800">
-                  ${a.aiDate ? 'சினை ஊசி போடப்பட்டது' : 'Regular'}
-                </span>
+            <div class="glass-card rounded-2xl p-3.5 flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-indigo-400 px-2 py-0.5 rounded bg-indigo-950 border border-indigo-800">${d.category}</span>
+                <h4 class="font-bold text-white text-xs mt-1">${d.desc}</h4>
+                <p class="text-[10px] text-slate-400">${d.date}</p>
               </div>
-              ${a.expectedCalving ? `
-                <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 text-xs space-y-1">
-                  <p class="text-amber-400 font-medium flex items-center gap-1">
-                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i> ${calvingText}
-                  </p>
-                  <p class="text-slate-400 text-[10px]">பால் வற்ற வைக்க வேண்டிய நாள் (Dry Off): ${a.dryOffDate}</p>
-                </div>
-              ` : ''}
+              <div class="flex items-center gap-3">
+                <span class="font-extrabold text-sm text-emerald-400">₹${d.amount.toLocaleString('en-IN')}</span>
+                <button onclick="deleteCapex('${d.id}')" class="text-slate-500 hover:text-rose-400 p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+              </div>
             </div>
           `;
         });
-        document.getElementById('livestockCardsContainer').innerHTML = html || '<div class="text-center py-8 text-slate-500 text-xs">கால்நடைகள் எதுவும் சேர்க்கப்படவில்லை.</div>';
+        document.getElementById('totalCapexAmount').textContent = total.toLocaleString('en-IN');
+        document.getElementById('capexListContainer').innerHTML = html || '<div class="text-center py-8 text-slate-500 text-xs">முதலீட்டுப் பதிவுகள் எதுவும் இல்லை.</div>';
         lucide.createIcons();
       });
 
-      // 3. Live Expenses Snapshot
-      const qExp = query(collection(db, "expenses"), orderBy("timestamp", "desc"), limit(12));
-      onSnapshot(qExp, (snapshot) => {
-        let totalToday = 0;
+      // 4. Expenses Feed Listener
+      const qExp = query(collection(db, 'expenses'), orderBy('timestamp', 'desc'), limit(15));
+      onSnapshot(qExp, (snap) => {
+        let todayTotal = 0;
         const todayStr = new Date().toISOString().split('T')[0];
         const items = [];
-        snapshot.forEach(docSnap => {
-          const d = docSnap.data();
-          if (d.date === todayStr) totalToday += (d.amount || 0);
-          items.push({ id: docSnap.id, ...d });
+        snap.forEach(docSnap => {
+          const d = { id: docSnap.id, ...docSnap.data() };
+          if (d.date === todayStr) todayTotal += (d.amount || 0);
+          items.push(d);
         });
-        document.getElementById('todayExpenseTotal').textContent = totalToday.toLocaleString('en-IN');
-        renderFeed(items);
+        document.getElementById('todayExpTotal').textContent = todayTotal.toLocaleString('en-IN');
+        renderOpsFeed(items);
       });
 
-      // 4. Live Milk Snapshot
-      const qMilk = query(collection(db, "milk_records"), orderBy("timestamp", "desc"), limit(10));
-      onSnapshot(qMilk, (snapshot) => {
-        let amTotal = 0, pmTotal = 0;
+      // 5. Milk Listener
+      const qMilk = query(collection(db, 'milk_records'), orderBy('timestamp', 'desc'), limit(15));
+      onSnapshot(qMilk, (snap) => {
+        let am = 0, pm = 0;
         const todayStr = new Date().toISOString().split('T')[0];
-        snapshot.forEach(docSnap => {
+        snap.forEach(docSnap => {
           const d = docSnap.data();
           if (d.date === todayStr) {
-            if (d.session === 'AM') amTotal += (d.quantity || 0);
-            if (d.session === 'PM') pmTotal += (d.quantity || 0);
+            if (d.session === 'AM') am += (d.quantity || 0);
+            if (d.session === 'PM') pm += (d.quantity || 0);
           }
         });
-        document.getElementById('todayMilkLiters').textContent = (amTotal + pmTotal).toFixed(1);
-        document.getElementById('todayMilkBreakdown').textContent = `AM: ${amTotal.toFixed(1)}L | PM: ${pmTotal.toFixed(1)}L`;
+        document.getElementById('todayMilkTotal').textContent = (am + pm).toFixed(1);
+        document.getElementById('todayMilkSplit').textContent = `AM: ${am.toFixed(1)}L | PM: ${pm.toFixed(1)}L`;
       });
     }
 
-    function renderFeed(items) {
-      const feed = document.getElementById('activityFeed');
-      if (!items || items.length === 0) {
-        feed.innerHTML = `<div class="text-center py-6 text-slate-500">பதிவுகள் எதுவும் இல்லை.</div>`;
+    function renderAnimalCards(list) {
+      const container = document.getElementById('animalCardsList');
+      if (!list || list.length === 0) {
+        container.innerHTML = '<div class="text-center py-8 text-slate-500 text-xs">கால்நடைகள் எதுவும் சேர்க்கப்படவில்லை.</div>';
         return;
       }
-      document.getElementById('feedCount').textContent = `${items.length} recent`;
-      feed.innerHTML = items.map(item => `
-        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/80 border border-slate-800">
-          <div class="flex items-center gap-2">
-            <div class="w-7 h-7 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center">
-              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+
+      container.innerHTML = list.map(a => {
+        const gain = (a.currentWeight && a.initWeight) ? (a.currentWeight - a.initWeight).toFixed(1) : 0;
+        const isGainPositive = gain >= 0;
+        let radarAlert = '';
+
+        if (a.expectedCalving) {
+          const days = Math.ceil((new Date(a.expectedCalving) - new Date()) / 86400000);
+          radarAlert = `<div class="bg-amber-950/40 border border-amber-800/80 rounded-xl p-2 text-[11px] text-amber-300 flex items-center justify-between">
+            <span>🤰 சினை: கன்று ஈன இன்னும் <b>${days}</b> நாட்கள் (ETA: ${a.expectedCalving})</span>
+            <span class="text-[10px] text-slate-400">Dry-off: ${a.dryOffDate}</span>
+          </div>`;
+        }
+
+        return `
+          <div class="glass-card rounded-2xl p-4 space-y-3">
+            <div class="flex justify-between items-start">
+              <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+                  ${a.type === 'Cow' ? '🐄' : (a.type === 'Goat' ? '🐐' : (a.type === 'Rabbit' ? '🐇' : '🐓'))}
+                </div>
+                <div>
+                  <h4 class="font-extrabold text-white text-sm">${a.tag}</h4>
+                  <p class="text-xs text-slate-400">${a.breed} • ${a.type}</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-[10px] text-slate-400 block uppercase">Weight Audit</span>
+                <span class="text-sm font-black text-white">${a.currentWeight || '-'} kg</span>
+                <span class="text-[10px] ${isGainPositive ? 'text-emerald-400' : 'text-rose-400'} block">
+                  ${isGainPositive ? '▲ +' : '▼ '}${gain} kg
+                </span>
+              </div>
             </div>
-            <div>
-              <p class="font-semibold text-white leading-tight">${item.description}</p>
-              <p class="text-[10px] text-slate-400">${item.category} • ${item.date || 'Today'}</p>
+
+            ${radarAlert}
+
+            <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-[11px] text-slate-400">
+              <span>Cost: ₹${(a.cost || 0).toLocaleString('en-IN')}</span>
+              <button onclick="deleteAnimal('${a.id}')" class="text-rose-400 hover:text-rose-300 flex items-center gap-1">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Remove
+              </button>
             </div>
           </div>
-          <span class="font-bold text-rose-400">-₹${item.amount}</span>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function renderOpsFeed(items) {
+      const container = document.getElementById('opsFeedList');
+      if (!items || items.length === 0) {
+        container.innerHTML = '<div class="text-center py-6 text-slate-500">பதிவுகள் எதுவும் இல்லை.</div>';
+        return;
+      }
+      document.getElementById('opsFeedCount').textContent = `${items.length} items`;
+      container.innerHTML = items.map(d => `
+        <div class="glass-card rounded-xl p-2.5 flex items-center justify-between">
+          <div>
+            <h5 class="font-bold text-white text-xs">${d.description}</h5>
+            <span class="text-[10px] text-slate-400">${d.category} • ${d.date}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-rose-400 text-xs">-₹${d.amount}</span>
+            <button onclick="editExpenseItem('${d.id}', ${d.amount}, '${d.description}', '${d.category}')" class="text-slate-400 hover:text-blue-400 p-1">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="deleteExpenseItem('${d.id}')" class="text-slate-400 hover:text-rose-400 p-1">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
         </div>
       `).join('');
       lucide.createIcons();
