@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D-FARM POLUR | Smart Agro Ecosystem</title>
+  <title>D-FARM POLUR | Smart Agro Ecosystem & Organic Store</title>
   <meta name="theme-color" content="#143627">
   <link rel="icon" type="image/png" href="https://iili.io/nPh3Ia9.png">
 
-  <!-- Tailwind CSS Direct CDN -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- jsPDF & autoTable -->
+  <!-- jsPDF & autoTable for Billing -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
@@ -45,15 +45,15 @@
     }
     .organic-card:hover {
       box-shadow: 0 20px 35px -8px rgba(20, 54, 39, 0.12);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
 
-    /* Override auto-injected universal moneymart footer if script injects */
+    /* Strict isolation: prevent any external auto-injected footers */
     footer:not(#dfarmFooter), div[class*="universal-footer"], .site-footer {
       display: none !important;
     }
 
-    .custom-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+    .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
   </style>
 </head>
@@ -66,7 +66,7 @@
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         <span id="topAnnounceText">🥛 தூய பசும்பால் • போளூர் நேரடி பண்ணை சப்ளை • WhatsApp: 7200752628</span>
       </div>
-      <div class="flex items-center gap-1.5 bg-black/40 px-2 py-0.5 rounded-lg border border-emerald-800/60">
+      <div class="flex items-center gap-1.5 bg-black/40 px-2.5 py-1 rounded-lg border border-emerald-800/60 flex-shrink-0">
         <button onclick="changeLanguage('en')" id="btnEn" class="text-xs px-1.5 py-0.5 font-bold transition text-slate-300 hover:text-white">EN</button>
         <span class="text-emerald-500 text-[10px]">|</span>
         <button onclick="changeLanguage('ta')" id="btnTa" class="text-xs px-1.5 py-0.5 font-bold transition text-amber-300">தமிழ்</button>
@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <!-- ==================== HEADER ==================== -->
+  <!-- ==================== MAIN HEADER ==================== -->
   <header class="bg-[#FAF6EE]/95 backdrop-blur-md border-b border-[#143627]/10 px-4 sm:px-8 py-3.5 sticky top-[37px] z-40">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3 cursor-pointer" onclick="showPublicView()">
@@ -89,17 +89,21 @@
       </div>
 
       <div class="flex items-center gap-4">
-        <nav class="hidden md:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-[#143627]">
+        <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-[#143627]">
           <a href="#products" class="hover:text-amber-700 transition" data-t="navShop">Shop</a>
+          <a href="#subscribe" class="hover:text-amber-700 transition" data-t="navSub">Subscription</a>
+          <a href="#purity" class="hover:text-amber-700 transition" data-t="navPurity">Purity Check</a>
+          <a href="#circular" class="hover:text-amber-700 transition" data-t="navCycle">Eco-Cycle</a>
           <a href="#story" class="hover:text-amber-700 transition" data-t="navStory">About Us</a>
-          <a href="#process" class="hover:text-amber-700 transition" data-t="navProcess">Process</a>
           <a href="#visit" class="hover:text-amber-700 transition" data-t="navVisit">Visit Farm</a>
         </nav>
 
+        <!-- Secret Admin ERP Toggle -->
         <button onclick="handleOwnerPortalClick()" title="Owner ERP" class="p-2 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition">
           <i data-lucide="lock" class="w-4 h-4 text-amber-700"></i>
         </button>
 
+        <!-- Cart Trigger -->
         <button onclick="toggleCart(true)" class="bg-[#143627] hover:bg-[#0D241A] text-white px-4 py-2.5 rounded-xl flex items-center gap-2 shadow-md active:scale-95 transition">
           <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-300"></i>
           <span id="cartCountBadge" class="text-xs font-black">0</span>
@@ -109,10 +113,10 @@
   </header>
 
   <!-- ==================== PUBLIC STOREFRONT ==================== -->
-  <div id="publicContainer" class="flex-1 space-y-16 pb-20">
+  <div id="publicContainer" class="flex-1 space-y-20 pb-20">
 
     <!-- HERO -->
-    <section class="max-w-6xl mx-auto px-4 pt-10 pb-6">
+    <section class="max-w-6xl mx-auto px-4 pt-10 pb-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div class="space-y-5 text-center md:text-left">
           <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-[#143627] text-xs uppercase font-extrabold tracking-wider" data-t="heroBadge">
@@ -128,8 +132,8 @@
             <a href="#products" class="bg-[#143627] hover:bg-[#0D241A] text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-2xl shadow-lg active:scale-95 transition" data-t="heroBtnOrder">
               Buy Farm Milk
             </a>
-            <a href="#visit" class="bg-white border border-[#143627]/20 text-[#143627] font-bold text-xs sm:text-sm px-6 py-3 rounded-2xl hover:bg-slate-50 active:scale-95 transition" data-t="heroBtnVisit">
-              Book Farm Visit
+            <a href="#subscribe" class="bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-2xl shadow-lg active:scale-95 transition" data-t="heroBtnSub">
+              Monthly Subscription
             </a>
           </div>
         </div>
@@ -138,6 +142,45 @@
           <div class="w-64 sm:w-80 h-96 sm:h-[420px] rounded-3xl bg-white border border-[#143627]/10 shadow-xl p-4 flex flex-col items-center justify-center relative overflow-hidden">
             <img src="https://iili.io/nPhGB5P.jpg" class="h-72 sm:h-80 object-contain rounded-2xl filter drop-shadow-md" alt="D-FARM Bottle">
             <span class="text-xs font-bold text-[#143627] mt-2 block">D-FARM Pure Milk 1L Bottle</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE BATCH PURITY & LAB REPORT TRANSPARENCY CARD -->
+    <section id="purity" class="max-w-6xl mx-auto px-4">
+      <div class="bg-white border-2 border-emerald-900/15 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md" data-t="purityBadge">TODAY'S MORNING BATCH AUDIT</span>
+            <h3 class="font-serif-title font-bold text-2xl text-[#143627] mt-1" data-t="purityTitle">Live Milk Purity & Quality Transparency</h3>
+          </div>
+          <span class="text-xs font-bold text-emerald-800 bg-emerald-100/70 px-3 py-1.5 rounded-full flex items-center gap-1.5 self-start">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-700"></i> <span data-t="purityStatus">100% Unadulterated Lab Certified</span>
+          </span>
+        </div>
+
+        <!-- Metric Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span class="text-xs text-slate-500 font-semibold block">Milk Fat %</span>
+            <span class="text-3xl font-serif-title font-bold text-[#143627]">4.4%</span>
+            <span class="text-[10px] text-emerald-700 font-bold block mt-0.5">High Creamy Quality</span>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span class="text-xs text-slate-500 font-semibold block">SNF (Solids Not Fat)</span>
+            <span class="text-3xl font-serif-title font-bold text-[#143627]">8.65</span>
+            <span class="text-[10px] text-emerald-700 font-bold block mt-0.5">Natural Protein Rich</span>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span class="text-xs text-slate-500 font-semibold block">Chilling Temp</span>
+            <span class="text-3xl font-serif-title font-bold text-blue-700">4° C</span>
+            <span class="text-[10px] text-slate-500 font-medium block mt-0.5">Cold Chain Preserved</span>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <span class="text-xs text-slate-500 font-semibold block">Batch Milking Time</span>
+            <span class="text-3xl font-serif-title font-bold text-amber-700">06:15 AM</span>
+            <span class="text-[10px] text-slate-500 font-medium block mt-0.5">Polur Farm Morning Batch</span>
           </div>
         </div>
       </div>
@@ -266,8 +309,109 @@
       </div>
     </section>
 
+    <!-- DAILY / MONTHLY MILK SUBSCRIPTION BUILDER -->
+    <section id="subscribe" class="max-w-6xl mx-auto px-4">
+      <div class="bg-gradient-to-br from-[#143627] to-[#0A1F16] text-white rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
+        <div class="text-center max-w-xl mx-auto space-y-2">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-300 bg-emerald-950 px-3 py-1 rounded-full border border-emerald-700/60" data-t="subBadge">
+            DAILY MILK SUBSCRIPTION PLAN
+          </span>
+          <h2 class="font-serif-title text-3xl font-bold" data-t="subTitle">Design Your Morning Milk Subscription</h2>
+          <p class="text-xs text-emerald-200/80" data-t="subDesc">
+            Pick your daily litres, preferred container, and delivery session for hassle-free doorstep supply in Polur.
+          </p>
+        </div>
+
+        <div class="bg-white text-[#143627] p-6 rounded-2xl max-w-2xl mx-auto space-y-5 shadow-2xl">
+          <!-- Selection Controls -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1" data-t="subQtyLabel">Daily Quantity</label>
+              <select id="subLiters" onchange="calculateSubEstimate()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 font-bold outline-none">
+                <option value="0.5">0.5 Litre (அரை லிட்டர்)</option>
+                <option value="1" selected>1 Litre (ஒரு லிட்டர்)</option>
+                <option value="1.5">1.5 Litres</option>
+                <option value="2">2 Litres (இரண்டு லிட்டர்)</option>
+                <option value="3">3 Litres</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1" data-t="subPackLabel">Packaging Type</label>
+              <select id="subPack" onchange="calculateSubEstimate()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 font-bold outline-none">
+                <option value="pouch" selected>Daily Fresh Pouch (₹50/L)</option>
+                <option value="bottle">Glass Bottle (₹60/L)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1" data-t="subTimeLabel">Delivery Window</label>
+              <select id="subTime" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 font-bold outline-none">
+                <option value="Morning 06:00 AM - 07:30 AM" selected>காலை (06:00 - 07:30 AM)</option>
+                <option value="Evening 05:30 PM - 07:00 PM">மாலை (05:30 - 07:00 PM)</option>
+                <option value="Both Sessions">இரு வேளையும் (AM & PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Calculation Summary Box -->
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div>
+              <span class="text-xs text-slate-500 font-semibold block" data-t="subEstTitle">Estimated 30-Day Monthly Cost:</span>
+              <span id="subMonthlyTotal" class="font-serif-title text-3xl font-bold text-emerald-900">₹1,500</span>
+              <span id="subBreakdown" class="text-[11px] text-slate-500 block mt-0.5">30 Litres @ ₹50 per Litre</span>
+            </div>
+            <button onclick="requestSubscriptionWhatsApp()" class="w-full sm:w-auto bg-[#143627] hover:bg-[#0D241A] text-white font-bold text-xs px-6 py-3 rounded-xl shadow active:scale-95 transition flex items-center justify-center gap-2">
+              <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+              <span data-t="subBtn">Start Subscription via WhatsApp</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIRCULAR SMART FARM INTERACTIVE LOOP -->
+    <section id="circular" class="max-w-6xl mx-auto px-4 space-y-8">
+      <div class="text-center space-y-2">
+        <span class="text-xs uppercase tracking-widest font-bold text-amber-700" data-t="circTag">ZERO-WASTE ECOSYSTEM</span>
+        <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-[#143627]" data-t="circTitle">Circular Farm: Nature & Technology in Harmony</h2>
+        <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto" data-t="circDesc">
+          எங்கள் பண்ணையில் எந்தவொரு கழிவும் வீணடிக்கப்படுவதில்லை. அனைத்தும் ஒன்றுக்கொன்று ஊட்டமளிக்கும் தொடர் சுழற்சி.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div class="bg-white p-5 rounded-3xl border border-[#143627]/10 text-center space-y-3 shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-lime-100 text-lime-900 flex items-center justify-center mx-auto text-xl">
+            🌱
+          </div>
+          <h4 class="font-bold text-sm text-[#143627]" data-t="c1">1. Fodder Cultivation</h4>
+          <p class="text-xs text-slate-500 leading-relaxed" data-t="c1d">மாடுகளின் சாண உரத்தில் விளையும் அடர் ஊட்டச்சத்து நிறைந்த Super Napier புல்.</p>
+        </div>
+        <div class="bg-white p-5 rounded-3xl border border-[#143627]/10 text-center space-y-3 shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-900 flex items-center justify-center mx-auto text-xl">
+            🐄
+          </div>
+          <h4 class="font-bold text-sm text-[#143627]" data-t="c2">2. Gentle Cattle Care</h4>
+          <p class="text-xs text-slate-500 leading-relaxed" data-t="c2d">இயற்கை தீவனத்தை உண்டு மகிழும் மாடுகள் தரும் தூய, கலப்படமற்ற பசும்பால்.</p>
+        </div>
+        <div class="bg-white p-5 rounded-3xl border border-[#143627]/10 text-center space-y-3 shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center mx-auto text-xl">
+            ⚡
+          </div>
+          <h4 class="font-bold text-sm text-[#143627]" data-t="c3">3. Solar & Biogas</h4>
+          <p class="text-xs text-slate-500 leading-relaxed" data-t="c3d">சூரிய சக்தி மற்றும் சாண எரிவாயு மூலம் இயங்கும் ஆட்டோமேஷன் நீர் & புல் நறுக்கும் அமைப்புகள்.</p>
+        </div>
+        <div class="bg-white p-5 rounded-3xl border border-[#143627]/10 text-center space-y-3 shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-900 flex items-center justify-center mx-auto text-xl">
+            🔄
+          </div>
+          <h4 class="font-bold text-sm text-[#143627]" data-t="c4">4. Soil Enrichment</h4>
+          <p class="text-xs text-slate-500 leading-relaxed" data-t="c4d">மட்கிய எரு உரம் மீண்டும் நிலத்திற்கு சென்று மண்ணை வளம் கொழிக்க வைக்கிறது.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ABOUT US SECTION -->
-    <section id="story" class="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    <section id="story" class="max-w-6xl mx-auto px-4 py-4 space-y-10">
       <div class="text-center space-y-2">
         <span class="text-xs uppercase font-extrabold tracking-widest text-amber-700" data-t="storyTag">OUR JOURNEY</span>
         <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-[#143627]" data-t="storyTitle">From Our Farm to Your Family</h2>
@@ -317,8 +461,51 @@
       </div>
     </section>
 
+    <!-- CUSTOMER REVIEWS & TESTIMONIALS -->
+    <section class="max-w-6xl mx-auto px-4 space-y-8">
+      <div class="text-center space-y-2">
+        <span class="text-xs uppercase tracking-widest font-bold text-amber-700" data-t="revTag">COMMUNITY TRUST</span>
+        <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-[#143627]" data-t="revTitle">What Our Polur Families Say</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="organic-card p-6 space-y-3">
+          <div class="flex text-amber-500 text-xs">★★★★★</div>
+          <p class="text-xs text-slate-600 leading-relaxed italic">
+            "குழந்தைகளுக்கு பாக்கெட் பால் வாங்கி கவலைப்பட்டோம். D-FARM பாட்டில் பால் வந்ததில் இருந்து உண்மையான பசும்பால் வாசம், திக்கான ஏடு கிடைக்குது!"
+          </p>
+          <div class="pt-2 border-t border-slate-100">
+            <span class="font-bold text-xs text-[#143627] block">S. Meenakshi</span>
+            <span class="text-[10px] text-slate-400">Polur Town</span>
+          </div>
+        </div>
+
+        <div class="organic-card p-6 space-y-3">
+          <div class="flex text-amber-500 text-xs">★★★★★</div>
+          <p class="text-xs text-slate-600 leading-relaxed italic">
+            "எங்கள் டீ கடைக்கு தினமும் காலையில் 10 லிட்டர் எடுக்கிறோம். டீ சுவை அலாதியா இருக்கு, கஸ்டமர்ஸ் விரும்பி குடிக்கிறாங்க."
+          </p>
+          <div class="pt-2 border-t border-slate-100">
+            <span class="font-bold text-xs text-[#143627] block">Murugan Tea Stall</span>
+            <span class="text-[10px] text-slate-400">Polur Bazaar</span>
+          </div>
+        </div>
+
+        <div class="organic-card p-6 space-y-3">
+          <div class="flex text-amber-500 text-xs">★★★★★</div>
+          <p class="text-xs text-slate-600 leading-relaxed italic">
+            "தோட்டத்துல 50 தென்னை மரங்களுக்கு ஆட்டுப் புழுக்கை உரம் வாங்கினோம். மரங்கள் நல்லா துளிர் விட்டு காய் பிடிக்குது. 100% இயற்கை!"
+          </p>
+          <div class="pt-2 border-t border-slate-100">
+            <span class="font-bold text-xs text-[#143627] block">K. Venkatesan</span>
+            <span class="text-[10px] text-slate-400">Farmer, Kalambur Road</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- FARM VISIT BOOKING -->
-    <section id="visit" class="max-w-6xl mx-auto px-4 py-6">
+    <section id="visit" class="max-w-6xl mx-auto px-4 py-4">
       <div class="bg-gradient-to-br from-[#143627] to-[#0A1F16] text-white rounded-3xl p-8 sm:p-12 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div class="space-y-4">
           <span class="text-[10px] uppercase font-bold tracking-widest text-amber-300 bg-emerald-950 px-3 py-1 rounded-full border border-emerald-700/60" data-t="visitBadge">
@@ -335,7 +522,7 @@
           </div>
         </div>
 
-        <!-- High-Contrast Booking Form -->
+        <!-- Booking Form -->
         <div class="bg-white text-[#143627] p-6 sm:p-8 rounded-3xl shadow-2xl space-y-4 border border-slate-200">
           <h4 class="font-serif-title font-bold text-lg text-[#143627]" data-t="vFormTitle">Register Your Visit Slot</h4>
           <form onsubmit="handleVisitSubmit(event)" class="space-y-3 text-xs">
@@ -369,76 +556,83 @@
       </div>
     </section>
 
+    <!-- FREQUENTLY ASKED QUESTIONS (FAQ ACCORDION) -->
+    <section class="max-w-4xl mx-auto px-4 space-y-6">
+      <div class="text-center space-y-2">
+        <span class="text-xs uppercase tracking-widest font-bold text-amber-700" data-t="faqTag">HAVE QUESTIONS?</span>
+        <h2 class="font-serif-title text-3xl font-bold text-[#143627]" data-t="faqTitle">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="space-y-3 text-xs sm:text-sm">
+        <div class="organic-card p-4 space-y-1.5 cursor-pointer" onclick="toggleFaq(1)">
+          <div class="flex justify-between items-center font-bold text-[#143627]">
+            <span data-t="q1">1. D-FARM பாலை காய்ச்சாமல் அப்படியே அருந்தலாமா?</span>
+            <span id="faqIcon1">+</span>
+          </div>
+          <p id="faqAns1" class="text-slate-600 leading-relaxed hidden pt-1 text-xs" data-t="a1">
+            எங்கள் பால் சுகாதாரமான முறையில் கறக்கப்பட்டு உடனடியாக 4°C வெப்பநிலைக்கு குளிர்விக்கப்படுகிறது. எனினும், வழக்கமான பயன்பாட்டிற்கு ஒரு கொதி கொதிக்க வைத்து பருகுவதே ஆரோக்கியத்திற்கு சிறந்தது.
+          </p>
+        </div>
+
+        <div class="organic-card p-4 space-y-1.5 cursor-pointer" onclick="toggleFaq(2)">
+          <div class="flex justify-between items-center font-bold text-[#143627]">
+            <span data-t="q2">2. கண்ணாடி பாட்டில்களை மீண்டும் திருப்பிக் கொடுக்க வேண்டுமா?</span>
+            <span id="faqIcon2">+</span>
+          </div>
+          <p id="faqAns2" class="text-slate-600 leading-relaxed hidden pt-1 text-xs" data-t="a2">
+            ஆம், இயற்கை சூழலைப் பாதுகாக்கும் பொருட்டு அடுத்த நாள் காலை புதிய பால் பாட்டில் வரும் போது முந்தைய நாள் பாட்டிலை கழுவி கொடுத்துவிடலாம் (Bottle Swap Model).
+          </p>
+        </div>
+
+        <div class="organic-card p-4 space-y-1.5 cursor-pointer" onclick="toggleFaq(3)">
+          <div class="flex justify-between items-center font-bold text-[#143627]">
+            <span data-t="q3">3. போளூரில் எந்தெந்த பகுதிகளில் தினசரி விநியோகம் உள்ளது?</span>
+            <span id="faqIcon3">+</span>
+          </div>
+          <p id="faqAns3" class="text-slate-600 leading-relaxed hidden pt-1 text-xs" data-t="a3">
+            போளூர் டவுன், பஜார், ரயில்வே ஸ்டேஷன் சாலை மற்றும் சுற்றியுள்ள 5 கி.மீ எல்லைக்குள் தினசரி காலை & மாலை நேரடியாக இல்லங்களுக்கு விநியோகம் செய்கிறோம்.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- CLEAN D-FARM ORGANIC FOOTER -->
-    <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
+    <footer id="dfarmFooter" class="bg-[#143627] text-white rounded-t-3xl sm:rounded-t-[2.5rem] mt-20 pt-12 pb-16 px-6 sm:px-12 border-t-2 border-emerald-900">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 border-b border-emerald-800/60 pb-8 text-xs sm:text-sm">
+        <div class="space-y-3">
+          <div class="flex items-center gap-2.5">
+            <img src="https://iili.io/nPh3Ia9.png" class="w-11 h-11 rounded-full border border-emerald-700" alt="D-FARM">
+            <div>
+              <h3 class="font-serif-title text-xl font-bold">D-FARM POLUR</h3>
+              <span class="text-[10px] text-amber-300 font-semibold tracking-wider">SMART AGRO ECOSYSTEM</span>
+            </div>
+          </div>
+          <p class="text-emerald-200/80 leading-relaxed text-xs" data-t="ftDesc">
+            தூய பசும்பால், நாட்டுக் கோழி முட்டை மற்றும் இயற்கை எரு உரம் — நேரடியாக உங்கள் இல்லத்திற்கு.
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-bold uppercase tracking-wider text-amber-300 text-xs">Direct Contacts</h4>
+          <p class="text-emerald-200">📞 Phone: <b>8870804123</b> (Appa - Field Ops)</p>
+          <p class="text-emerald-200">📱 WhatsApp: <b>7200752628</b> (Orders & Support)</p>
+          <p class="text-emerald-200">✉️ Email: <b>dfarmpolur@gmail.com</b></p>
+          <p class="text-emerald-200">📍 Polur, Tiruvannamalai Dt, Tamil Nadu</p>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-bold uppercase tracking-wider text-amber-300 text-xs">Digital Payments</h4>
+          <p class="text-emerald-200">Google Pay / PhonePe: <b>7200752628</b></p>
+          <p class="text-emerald-200">UPI ID: <b>7200752628@upi</b></p>
+          <p class="text-emerald-200">Direct Delivery: Polur Surrounding Areas</p>
+        </div>
       </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
+
+      <div class="max-w-6xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-400 gap-3">
+        <span>© 2026 D-FARM Polur. All rights reserved.</span>
+        <span>Pure Farm Direct Agro Operations</span>
       </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-<script src="/cookie-consent.js" defer></script>
+    </footer>
 
   </div>
 
@@ -861,15 +1055,20 @@
       en: {
         tagline: "Pure • Traditional • Honest",
         navShop: "Shop",
+        navSub: "Subscription",
+        navPurity: "Purity Check",
+        navCycle: "Eco-Cycle",
         navStory: "About Us",
-        navProcess: "Process",
         navVisit: "Visit Farm",
         topAnnounce: "🥛 Pure Cow Milk • Polur Farm Direct Delivery • WhatsApp: 7200752628",
         heroBadge: "🌱 FROM FARM TO HOME • DIRECT FROM POLUR",
         heroTitle: "Pure, Fresh Cow Milk Delivered From Our Farm",
         heroDesc: "Unadulterated, raw fresh cow milk and pure natural farm bio-fertilizers delivered straight from Polur farm to your doorstep.",
         heroBtnOrder: "Buy Farm Milk",
-        heroBtnVisit: "Book Farm Visit",
+        heroBtnSub: "Monthly Subscription",
+        purityBadge: "TODAY'S MORNING BATCH AUDIT",
+        purityTitle: "Live Milk Purity & Quality Transparency",
+        purityStatus: "100% Unadulterated Lab Certified",
         prodTag: "OUR FRESH RANGE",
         prodTitle: "Our Farm Fresh Products",
         prodDesc: "From raw pure cow milk to organic compost manure — delivered with honesty and care.",
@@ -886,6 +1085,25 @@
         p5Desc: "High NPK nutrients for coconut trees and plants.",
         p6Title: "Super Napier Fodder Stems (Bundle)",
         p6Desc: "High-yield organic fodder grass seed cuttings.",
+        subBadge: "DAILY MILK SUBSCRIPTION PLAN",
+        subTitle: "Design Your Morning Milk Subscription",
+        subDesc: "Pick your daily litres, preferred container, and delivery session for hassle-free doorstep supply in Polur.",
+        subQtyLabel: "Daily Quantity",
+        subPackLabel: "Packaging Type",
+        subTimeLabel: "Delivery Window",
+        subEstTitle: "Estimated 30-Day Monthly Cost:",
+        subBtn: "Start Subscription via WhatsApp",
+        circTag: "ZERO-WASTE ECOSYSTEM",
+        circTitle: "Circular Farm: Nature & Technology in Harmony",
+        circDesc: "Nothing goes to waste in our smart farm. A continuous cycle where everything nourishes each other.",
+        c1: "1. Fodder Cultivation",
+        c1d: "Lush Super Napier grass grown exclusively using organic cow dung manure.",
+        c2: "2. Gentle Cattle Care",
+        c2d: "Cows feeding on natural green fodder produce creamy, nutrient-rich raw milk.",
+        c3: "3. Solar & Biogas",
+        c3d: "Automated solar pumping and chaff cutting systems powering daily operations.",
+        c4: "4. Soil Enrichment",
+        c4d: "Composted bio-manure returns directly to the soil, preserving natural fertility.",
         storyTag: "OUR JOURNEY",
         storyTitle: "From Our Farm to Your Family",
         storySub: "A seamless union of passion for the soil, traditional farming experience, and modern smart technology.",
@@ -895,6 +1113,8 @@
         aRole: "Co-Founder • Farm Field Operations",
         aQuote: '"We care for our cattle like family. Pure milk begins with organic Super Napier green fodder, clean open sheds, and gentle care. The milk from cows nourished solely by farm-grown fodder without chemical fertilizers is the true strength of D-FARM."',
         aCardSub: "Farm Operations Head",
+        revTag: "COMMUNITY TRUST",
+        revTitle: "What Our Polur Families Say",
         visitBadge: "AGRI-TOURISM & FARM EXPERIENCE",
         visitTitle: "Book a Farm Visit",
         visitDesc: "Visit our farm with your family! Experience free-range grazing, automated watering systems, and lush green fodder pastures in person.",
@@ -905,6 +1125,14 @@
         vfGuests: "Number of Guests*",
         vfDate: "Visit Date*",
         vfBtn: "Confirm Slot via WhatsApp",
+        faqTag: "HAVE QUESTIONS?",
+        faqTitle: "Frequently Asked Questions",
+        q1: "1. Can we consume D-FARM milk without boiling?",
+        a1: "Our milk is hygienically sourced and immediately chilled to 4°C. However, we recommend a gentle boil before consumption as traditional practice.",
+        q2: "2. Do we need to return the glass bottles?",
+        a2: "Yes, to uphold environmental eco-sustainability, we run a daily bottle-swap system. Empty rinsed bottles are collected during next morning's delivery.",
+        q3: "3. Which areas in Polur have direct doorstep delivery?",
+        a3: "Polur Town, Bazaar, Railway Station road, and surrounding areas within a 5 km radius receive direct morning and evening doorstep delivery.",
         ftDesc: "Pure Farm Direct Milk, Free-Range Country Eggs and Organic Soil Fertilizers.",
         cartTitle: "Your Farm Cart",
         cartEmpty: "Cart is empty.",
@@ -913,15 +1141,20 @@
       ta: {
         tagline: "தூய • பாரம்பரிய • நேர்மையான",
         navShop: "அங்காடி",
+        navSub: "மாத சந்தா",
+        navPurity: "தரம் & லேப்",
+        navCycle: "சுழற்சி முறை",
         navStory: "நமது கதை",
-        navProcess: "செயல்முறை",
         navVisit: "பண்ணை பார்வை",
         topAnnounce: "🥛 தூய பசும்பால் • போளூர் நேரடி பண்ணை சப்ளை • WhatsApp: 7200752628",
         heroBadge: "🌱 FROM FARM TO HOME • DIRECT FROM POLUR",
         heroTitle: "தூய பசும்பால் எங்கள் பண்ணையிலிருந்து உங்கள் இல்லத்திற்கு",
         heroDesc: "தண்ணீர் கலக்காத, பதப்படுத்தப்படாத தூய பசும்பால் மற்றும் பாரம்பரிய இயற்கை உரங்கள் உங்கள் இல்லத்திற்கு நேரடியாக.",
         heroBtnOrder: "பால் வாங்க",
-        heroBtnVisit: "பண்ணை பார்வை பதிவு",
+        heroBtnSub: "மாத சந்தா பதிவு",
+        purityBadge: "இன்றைய காலை கறவை தணிக்கை",
+        purityTitle: "பாலின் தூய்மை மற்றும் தர வெளிப்படைத்தன்மை",
+        purityStatus: "100% கலப்படமற்ற சான்றிதழ்",
         prodTag: "இயற்கை அங்காடி",
         prodTitle: "எங்கள் பண்ணைப் பொருட்கள்",
         prodDesc: "தூய பசும்பாலில் தொடங்கி நாட்டு முட்டை மற்றும் இயற்கை எரு உரம் வரை.",
@@ -938,6 +1171,25 @@
         p5Desc: "தென்னை மற்றும் தோட்டச் செடிகளுக்கான உயர் NPK உரம்.",
         p6Title: "Super Napier தீவனக் குச்சிகள் (Bundle)",
         p6Desc: "அடர் பசுந்தீவன வளர்ப்பிற்கான உயர் விளைச்சல் விதை கரணைகள்.",
+        subBadge: "தினசரி பால் சந்தா திட்டம்",
+        subTitle: "உங்கள் காலை பால் சந்தாவை தேர்வு செய்யுங்கள்",
+        subDesc: "உங்கள் தினசரி லிட்டர் அளவு, பாட்டில்/பவுச் மற்றும் நேரத்தை தேர்வு செய்து போளூரில் தடையின்றி பால் பெறுங்கள்.",
+        subQtyLabel: "தினசரி பால் அளவு",
+        subPackLabel: "பேக்கேஜிங் முறை",
+        subTimeLabel: "விநியோக நேரம்",
+        subEstTitle: "மதிப்பிடப்பட்ட 30-நாள் மாத கட்டணம்:",
+        subBtn: "WhatsApp மூலம் சந்தாவை தொடங்குங்கள்",
+        circTag: "பூஜ்ஜிய கழிவு சுழற்சி",
+        circTitle: "சுழற்சி முறை பண்ணை: இயற்கையும் தொழில்நுட்பமும்",
+        circDesc: "எங்கள் பண்ணையில் எந்தவொரு கழிவும் வீணடிக்கப்படுவதில்லை. அனைத்தும் ஒன்றுக்கொன்று ஊட்டமளிக்கும் தொடர் சுழற்சி.",
+        c1: "1. பசுந்தீவன வளர்ப்பு",
+        c1d: "மாடுகளின் சாண உரத்தில் விளையும் அடர் ஊட்டச்சத்து நிறைந்த Super Napier புல்.",
+        c2: "2. கனிவான பராமரிப்பு",
+        c2d: "இயற்கை தீவனத்தை உண்டு மகிழும் மாடுகள் தரும் தூய, கலப்படமற்ற பசும்பால்.",
+        c3: "3. சோலார் & பயோ-கேஸ்",
+        c3d: "சூரிய சக்தி மற்றும் சாண எரிவாயு மூலம் இயங்கும் ஆட்டோமேஷன் நீர் & புல் நறுக்கும் அமைப்புகள்.",
+        c4: "4. நில மேம்பாடு",
+        c4d: "மட்கிய எரு உரம் மீண்டும் நிலத்திற்கு சென்று மண்ணை வளம் கொழிக்க வைக்கிறது.",
         storyTag: "விதைத்த கதை",
         storyTitle: "எங்கள் பண்ணையிலிருந்து உங்கள் குடும்பத்திற்கு",
         storySub: "மண்ணின் மீதான பற்று, முன்னோர்களின் விவசாய அனுபவம் மற்றும் நவீனத் தொழில்நுட்பத்தின் அழகான கூட்டணி.",
@@ -947,6 +1199,8 @@
         aRole: "Co-Founder • Farm Field Operations",
         aQuote: '"கால்நடைகளை குடும்ப உறுப்பினர்களாக நேசித்து வளர்க்கிறோம். ஆரோக்கியமான பசுந்தீவனம், சுத்தமான கொட்டகை மற்றும் கனிவான பராமரிப்பு இருந்தால் தான் பால் அமிர்தமாக இருக்கும். விவசாய நிலத்திற்கு ரசாயனம் இடாமல் சாண எரு மட்டுமே இட்டு வளர்க்கப்படும் தீவனத்தை உண்டு மாடுகள் தரும் பால் தான் எங்கள் D-FARM-ன் பலம்."',
         aCardSub: "களப் பராமரிப்பு தலைவர்",
+        revTag: "வாடிக்கையாளர் நம்பிக்கை",
+        revTitle: "நமது போளூர் குடும்பங்களின் கருத்துக்கள்",
         visitBadge: "AGRI-TOURISM & FARM EXPERIENCE",
         visitTitle: "நேரடி பண்ணை பார்வை பதிவு",
         visitDesc: "எங்கள் பண்ணையை குடும்பத்துடன் வந்து நேரில் பார்வையிடுங்கள். மாடுகள் மேய்ச்சல், ஆட்டோமேஷன் தண்ணீர் முறை மற்றும் பசுந்தீவன வளர்ப்பை இலவசமாகப் பார்த்து மகிழுங்கள்!",
@@ -957,6 +1211,14 @@
         vfGuests: "பார்வையாளர்கள் எண்ணிக்கை*",
         vfDate: "வருகை தேதி*",
         vfBtn: "WhatsApp-ல் உறுதி செய்",
+        faqTag: "சந்தேகங்கள் உள்ளதா?",
+        faqTitle: "அடிக்கடி கேட்கப்படும் கேள்விகள்",
+        q1: "1. D-FARM பாலை காய்ச்சாமல் அப்படியே அருந்தலாமா?",
+        a1: "எங்கள் பால் சுகாதாரமான முறையில் கறக்கப்பட்டு உடனடியாக 4°C வெப்பநிலைக்கு குளிர்விக்கப்படுகிறது. எனினும், வழக்கமான பயன்பாட்டிற்கு ஒரு கொதி கொதிக்க வைத்து பருகுவதே ஆரோக்கியத்திற்கு சிறந்தது.",
+        q2: "2. கண்ணாடி பாட்டில்களை மீண்டும் திருப்பிக் கொடுக்க வேண்டுமா?",
+        a2: "ஆம், இயற்கை சூழலைப் பாதுகாக்கும் பொருட்டு அடுத்த நாள் காலை புதிய பால் பாட்டில் வரும் போது முந்தைய நாள் பாட்டிலை கழுவி கொடுத்துவிடலாம் (Bottle Swap Model).",
+        q3: "3. போளூரில் எந்தெந்த பகுதிகளில் தினசரி விநியோகம் உள்ளது?",
+        a3: "போளூர் டவுன், பஜார், ரயில்வே ஸ்டேஷன் சாலை மற்றும் சுற்றியுள்ள 5 கி.மீ எல்லைக்குள் தினசரி காலை & மாலை நேரடியாக இல்லங்களுக்கு விநியோகம் செய்கிறோம்.",
         ftDesc: "தூய பசும்பால், நாட்டுக் கோழி முட்டை மற்றும் இயற்கை எரு உரம் — நேரடியாக உங்கள் இல்லத்திற்கு.",
         cartTitle: "உங்கள் பண்ணைக் கூடை",
         cartEmpty: "கூடை காலியாக உள்ளது.",
@@ -979,9 +1241,44 @@
         document.getElementById('btnTa').className = "text-xs px-1.5 py-0.5 font-bold text-amber-300";
         document.getElementById('btnEn').className = "text-xs px-1.5 py-0.5 font-bold text-slate-300 hover:text-white";
       }
+      calculateSubEstimate();
     };
 
-    // CART
+    // SUBSCRIPTION ESTIMATION
+    window.calculateSubEstimate = function() {
+      const l = parseFloat(document.getElementById('subLiters').value);
+      const pack = document.getElementById('subPack').value;
+      const rate = pack === 'bottle' ? 60 : 50;
+      const totalMonth = l * rate * 30;
+
+      document.getElementById('subMonthlyTotal').textContent = `₹${totalMonth.toLocaleString('en-IN')}`;
+      document.getElementById('subBreakdown').textContent = `${(l * 30).toFixed(1)} Litres/Month @ ₹${rate} per Litre (${pack === 'bottle' ? 'Glass Bottle' : 'Fresh Pouch'})`;
+    };
+
+    window.requestSubscriptionWhatsApp = function() {
+      const l = document.getElementById('subLiters').value;
+      const pack = document.getElementById('subPack').value === 'bottle' ? 'Glass Bottle (₹60/L)' : 'Daily Pouch (₹50/L)';
+      const win = document.getElementById('subTime').value;
+      const est = document.getElementById('subMonthlyTotal').textContent;
+
+      const text = `🥛 *D-FARM (Polur) - NEW MILK SUBSCRIPTION*\n------------------------------------\n• Daily Litres: *${l} Litre(s)*\n• Packaging: *${pack}*\n• Preferred Window: *${win}*\n• Est. Monthly Total: *${est}*\n------------------------------------\n📍 *Location:* Polur Doorstep Delivery\nதயவுசெய்து சந்தா விநியோகத்தை உறுதிப்படுத்தவும்.`;
+      window.open(`https://wa.me/917200752628?text=${encodeURIComponent(text)}`, '_blank');
+    };
+
+    // FAQ ACCORDION
+    window.toggleFaq = function(idx) {
+      const ans = document.getElementById(`faqAns${idx}`);
+      const icon = document.getElementById(`faqIcon${idx}`);
+      if (ans.classList.contains('hidden')) {
+        ans.classList.remove('hidden');
+        icon.textContent = '−';
+      } else {
+        ans.classList.add('hidden');
+        icon.textContent = '+';
+      }
+    };
+
+    // CART OPERATIONS
     window.toggleCart = function(show) {
       const d = document.getElementById('cartDrawer');
       if (show) d.classList.remove('hidden');
@@ -1431,6 +1728,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
+      calculateSubEstimate();
     });
   </script>
 </body>
