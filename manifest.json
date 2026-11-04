@@ -1,0 +1,21 @@
+{
+  "name": "D-FARM POLUR",
+  "short_name": "D-FARM",
+  "start_url": "/dfarm.html",
+  "display": "standalone",
+  "background_color": "#FAF6EE",
+  "theme_color": "#143627",
+  "description": "Smart Agro Ecosystem, Pure Cow Milk & Organic Store Polur",
+  "icons": [
+    {
+      "src": "https://iili.io/nPh3Ia9.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://iili.io/nPh3Ia9.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
