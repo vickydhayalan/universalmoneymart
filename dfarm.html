@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D-FARM POLUR | Smart Agro Ecosystem, Dairy & Organic Store</title>
+  <title>D-FARM POLUR | Smart Agro Ecosystem & Organic Farm Store</title>
   <meta name="theme-color" content="#143627">
   <link rel="icon" type="image/png" href="https://iili.io/nPh3Ia9.png">
 
@@ -45,7 +45,6 @@
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    /* Touch & Hover Glow Effect */
     .organic-card:hover, .organic-card:active {
       box-shadow: 0 20px 40px -10px rgba(27, 67, 50, 0.22), 0 0 25px rgba(217, 119, 6, 0.2);
       transform: translateY(-4px);
@@ -60,10 +59,6 @@
       transform: scale(1.04);
     }
 
-    footer:not(#dfarmFooter), div[class*="universal-footer"], .site-footer {
-      display: none !important;
-    }
-
     .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
   </style>
@@ -71,15 +66,15 @@
 <body class="h-full flex flex-col antialiased">
 
   <!-- ==================== TOP ANNOUNCEMENT ==================== -->
-  <div class="bg-[#143627] text-amber-200 py-2 px-4 text-xs font-semibold shadow-sm sticky top-0 z-50">
+  <div class="bg-[#143627] text-amber-200 py-2.5 px-4 text-xs font-semibold shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2 truncate">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         <span id="topAnnounceText">🥛 தூய பசும்பால் • மரச்செக்கு எண்ணெய்கள் • போளூர் நேரடி பண்ணை சப்ளை • WhatsApp: 7200752628</span>
       </div>
       <div class="flex items-center gap-2 flex-shrink-0">
-        <button onclick="shareFarmQR()" class="bg-amber-600/80 hover:bg-amber-600 text-white px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 transition">
-          <i data-lucide="qr-code" class="w-3 h-3"></i> Share QR
+        <button onclick="openQrModal()" class="bg-amber-600/90 hover:bg-amber-600 text-white px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition shadow">
+          <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> Farm QR
         </button>
         <div class="flex items-center gap-1 bg-black/40 px-2 py-0.5 rounded-lg border border-emerald-800/60">
           <button onclick="changeLanguage('en')" id="btnEn" class="text-xs px-1 font-bold text-slate-300 hover:text-white">EN</button>
@@ -91,9 +86,8 @@
   </div>
 
   <!-- ==================== MAIN HEADER ==================== -->
-  <header class="bg-[#FAF6EE]/95 backdrop-blur-md border-b border-[#143627]/10 px-4 sm:px-8 py-3.5 sticky top-[33px] z-40">
+  <header class="bg-[#FAF6EE]/95 backdrop-blur-md border-b border-[#143627]/10 px-4 sm:px-8 py-3.5 sticky top-[37px] z-40">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
-      <!-- Logo Branding -->
       <div class="flex items-center space-x-3 cursor-pointer" onclick="showPublicView()">
         <img src="https://iili.io/nPh3Ia9.png" class="w-12 h-12 rounded-full object-cover border-2 border-[#143627]/20 shadow-sm" alt="D-FARM Logo">
         <div>
@@ -105,38 +99,30 @@
         </div>
       </div>
 
-      <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-6 text-xs font-bold uppercase tracking-wider text-[#143627]">
         <a href="#products" class="hover:text-amber-700 transition" data-t="navShop">Shop</a>
         <a href="#livestock" class="hover:text-amber-700 transition" data-t="navLivestock">Live Stocks</a>
-        <a href="#gallery" class="hover:text-amber-700 transition" data-t="navGallery">Farm Gallery</a>
-        <a href="#videos" class="hover:text-amber-700 transition" data-t="navVideos">Videos</a>
+        <a href="#fodder" class="hover:text-amber-700 transition">தீவன வகைகள்</a>
         <a href="#about-farm" class="hover:text-amber-700 transition" data-t="navFarm">About Farm</a>
         <a href="#story" class="hover:text-amber-700 transition" data-t="navStory">Founders</a>
-        <a href="#visit" class="hover:text-amber-700 transition" data-t="navVisit">Visit Farm</a>
-        <a href="#contact-form" class="hover:text-amber-700 transition" data-t="navContact">Contact Us</a>
+        <a href="#visit" class="hover:text-amber-700 transition" data-t="navVisit">Visit & Map</a>
       </nav>
 
-      <!-- Action Cluster -->
       <div class="flex items-center gap-3">
-        <!-- Customer Portal / Ledger View Trigger -->
         <button onclick="openCustomerLedgerModal()" title="Customer Ledger" class="p-2 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition flex items-center gap-1 text-xs font-bold">
-          <i data-lucide="user" class="w-4 h-4 text-emerald-800"></i>
-          <span class="hidden sm:inline">My Due</span>
+          <i data-lucide="receipt" class="w-4 h-4 text-emerald-800"></i>
+          <span class="hidden sm:inline">My Ledger</span>
         </button>
 
-        <!-- Secret Admin ERP Toggle (Passcode: 6734) -->
-        <button onclick="handleOwnerPortalClick()" title="Owner ERP" class="p-2 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition">
+        <button onclick="handleOwnerPortalClick()" title="Owner ERP (PIN: 6734)" class="p-2 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition">
           <i data-lucide="lock" class="w-4 h-4 text-amber-700"></i>
         </button>
 
-        <!-- Cart Trigger -->
         <button onclick="toggleCart(true)" class="bg-[#143627] hover:bg-[#0D241A] text-white px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-md active:scale-95 transition">
           <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-300"></i>
           <span id="cartCountBadge" class="text-xs font-black">0</span>
         </button>
 
-        <!-- Mobile Hamburger Button -->
         <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-[#143627] rounded-xl hover:bg-slate-100">
           <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
@@ -147,17 +133,16 @@
     <div id="mobileMenu" class="hidden lg:hidden pt-4 pb-2 border-t border-slate-200 mt-3 space-y-2 text-xs font-bold uppercase tracking-wider text-[#143627]">
       <a href="#products" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">Shop Products</a>
       <a href="#livestock" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">Livestock</a>
-      <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">Farm Gallery</a>
-      <a href="#videos" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">YouTube Videos</a>
+      <a href="#fodder" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">Fodder Varieties (தீவனங்கள்)</a>
       <a href="#about-farm" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">About Farm</a>
       <a href="#story" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">Founders</a>
-      <a href="#visit" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">Visit Farm</a>
+      <a href="#visit" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">Farm Location & Map</a>
       <a href="#contact-form" onclick="toggleMobileMenu()" class="block py-2 px-3 hover:bg-emerald-50 rounded-lg">Contact Us</a>
     </div>
   </header>
 
   <!-- ==================== PUBLIC STOREFRONT ==================== -->
-  <div id="publicContainer" class="flex-1 space-y-20 pb-20">
+  <div id="publicContainer" class="flex-1 space-y-20 pb-16">
 
     <!-- HERO SECTION -->
     <section class="max-w-6xl mx-auto px-4 pt-10 pb-4">
@@ -186,85 +171,6 @@
           <div class="w-64 sm:w-80 h-96 sm:h-[420px] rounded-3xl bg-white border border-[#143627]/10 shadow-xl p-4 flex flex-col items-center justify-center relative overflow-hidden group">
             <img src="https://iili.io/nPhGB5P.jpg" class="h-72 sm:h-80 object-contain rounded-2xl filter drop-shadow-md glow-img" alt="D-FARM Bottle">
             <span class="text-xs font-bold text-[#143627] mt-2 block">D-FARM Pure Milk 1L Bottle</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5-SEC AUTO SCROLLING FARM PHOTO GALLERY -->
-    <section id="gallery" class="max-w-6xl mx-auto px-4 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-        <div>
-          <span class="text-[10px] uppercase font-bold tracking-widest text-amber-700">FARM LIFE IN FRAMES</span>
-          <h3 class="font-serif-title font-bold text-2xl text-[#143627]">D-FARM Polur Live Moments</h3>
-        </div>
-        <span class="text-xs text-slate-500 flex items-center gap-1 font-semibold">
-          <i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin text-emerald-700"></i> Auto 5s Scroll
-        </span>
-      </div>
-
-      <!-- Scrolling Carousel Container -->
-      <div id="farmGalleryCarousel" class="flex gap-4 overflow-x-auto custom-scroll scroll-smooth py-2">
-        <div class="w-72 sm:w-80 flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
-          <img src="https://iili.io/nPhGB5P.jpg" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
-          <div class="bg-white p-2.5 text-center text-xs font-bold text-[#143627]">Cold-Sealed Raw Milk Bottling</div>
-        </div>
-        <div class="w-72 sm:w-80 flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
-          <img src="https://iili.io/nPjdrve.jpg" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" alt="Super Napier Pastures">
-          <div class="bg-white p-2.5 text-center text-xs font-bold text-[#143627]">Lush Super Napier Pastures</div>
-        </div>
-        <div class="w-72 sm:w-80 flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
-          <img src="https://iili.io/nPjJdHg.jpg" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" alt="Free-Range Poultry">
-          <div class="bg-white p-2.5 text-center text-xs font-bold text-[#143627]">Organic Free-Range Country Eggs</div>
-        </div>
-        <div class="w-72 sm:w-80 flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
-          <img src="https://iili.io/nPPShba.jpg" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" alt="Wood-Pressed Oils">
-          <div class="bg-white p-2.5 text-center text-xs font-bold text-[#143627]">Traditional Marachekku Oil Extraction</div>
-        </div>
-        <div class="w-72 sm:w-80 flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
-          <img src="https://iili.io/nPiN3kG.jpg" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" alt="Vegetables Harvest">
-          <div class="bg-white p-2.5 text-center text-xs font-bold text-[#143627]">Daily Organic Vegetables Harvest</div>
-        </div>
-        <div class="w-72 sm:w-80 flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-slate-200 group">
-          <img src="https://iili.io/nPjFV3B.jpg" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500" alt="Bio Compost">
-          <div class="bg-white p-2.5 text-center text-xs font-bold text-[#143627]">Aged Microbial Soil Compost</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- LIVE BATCH PURITY AUDIT -->
-    <section id="purity" class="max-w-6xl mx-auto px-4">
-      <div class="bg-white border-2 border-emerald-900/15 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
-          <div>
-            <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md" data-t="purityBadge">TODAY'S MORNING BATCH AUDIT</span>
-            <h3 class="font-serif-title font-bold text-2xl text-[#143627] mt-1" data-t="purityTitle">Live Milk Purity & Quality Transparency</h3>
-          </div>
-          <span class="text-xs font-bold text-emerald-800 bg-emerald-100/70 px-3 py-1.5 rounded-full flex items-center gap-1.5 self-start">
-            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-700"></i> <span data-t="purityStatus">100% Unadulterated Lab Certified</span>
-          </span>
-        </div>
-
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-            <span class="text-xs text-slate-500 font-semibold block">Milk Fat %</span>
-            <span class="text-3xl font-serif-title font-bold text-[#143627]">4.4%</span>
-            <span class="text-[10px] text-emerald-700 font-bold block mt-0.5">High Creamy Quality</span>
-          </div>
-          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-            <span class="text-xs text-slate-500 font-semibold block">SNF (Solids Not Fat)</span>
-            <span class="text-3xl font-serif-title font-bold text-[#143627]">8.65</span>
-            <span class="text-[10px] text-emerald-700 font-bold block mt-0.5">Natural Protein Rich</span>
-          </div>
-          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-            <span class="text-xs text-slate-500 font-semibold block">Chilling Temp</span>
-            <span class="text-3xl font-serif-title font-bold text-blue-700">4° C</span>
-            <span class="text-[10px] text-slate-500 font-medium block mt-0.5">Cold Chain Preserved</span>
-          </div>
-          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
-            <span class="text-xs text-slate-500 font-semibold block">Milking Time</span>
-            <span class="text-3xl font-serif-title font-bold text-amber-700">06:15 AM</span>
-            <span class="text-[10px] text-slate-500 font-medium block mt-0.5">Polur Farm Morning Batch</span>
           </div>
         </div>
       </div>
@@ -456,6 +362,75 @@
       </div>
     </section>
 
+    <!-- NEW SECTION: DIVERSIFIED SMART GREEN FODDERS (பல்வகை அடர் பசுந்தீவனங்கள்) -->
+    <section id="fodder" class="max-w-6xl mx-auto px-4 space-y-8">
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-[#143627]/10 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">100% ORGANIC CATTLE NUTRITION</span>
+            <h3 class="font-serif-title font-bold text-2xl sm:text-3xl text-[#143627] mt-1">D-FARM Diverse Green Fodder Pastures</h3>
+          </div>
+          <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1.5 rounded-full self-start">
+            Soil-to-Milk Purity
+          </span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          எங்கள் பண்ணையில் Super Napier மட்டுமல்லாது, மாடுகளின் ஆரோக்கியம், செரிமானம் மற்றும் அடர் கொழுப்பு நிறைந்த பாலுக்காக பலவிதமான பாரம்பரிய பசுந்தீவனங்கள் மற்றும் மரப்பயிர்கள் பயிரிடப்படுகின்றன:
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="text-2xl">🌿</span>
+            <h4 class="font-bold text-[#143627] text-sm">மல்பெரி (Mulberry)</h4>
+            <p class="text-[11px] text-slate-500">அதிக புரதம் (20%+ Protein) மற்றும் மாடுகளுக்கு செரிமானத்தை தூண்டும் அற்புத இலை.</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="text-2xl">🌱</span>
+            <h4 class="font-bold text-[#143627] text-sm">முருங்கை மரம்</h4>
+            <p class="text-[11px] text-slate-500">இயற்கை மினரல்ஸ், வைட்டமின்கள் மற்றும் நோய் எதிர்ப்புச் சக்தியை அதிகரிக்கும் பசுந்தழை.</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="text-2xl">🌾</span>
+            <h4 class="font-bold text-[#143627] text-sm">மக்காச்சோளம் & சோளம்</h4>
+            <p class="text-[11px] text-slate-500">பால் உற்பத்தியை பெருக்குவதோடு மாடுகளுக்கு உடனடி எனர்ஜி தரும் மாவுச்சத்து பயிர்.</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="text-2xl">🍃</span>
+            <h4 class="font-bold text-[#143627] text-sm">அசோலா (Azolla Culture)</h4>
+            <p class="text-[11px] text-slate-500">தண்ணீர் தொட்டியில் வளர்க்கப்படும் அதிபுரத ஆல்கா பயிர்; அடர் தீவனச் செலவை குறைக்கும் சத்து.</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="text-2xl">🥜</span>
+            <h4 class="font-bold text-[#143627] text-sm">கடலைக் கொடி (காய்ஞ்ச செடி)</h4>
+            <p class="text-[11px] text-slate-500">போளூர் செம்மண் வேர்க்கடலை செடிகள்; கறவை மாடுகளின் பால் கொழுப்பை (Fat%) அதிகரிக்கும் உலர் தீவனம்.</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="text-2xl">🌾</span>
+            <h4 class="font-bold text-[#143627] text-sm">கேழ்வரகு & தானிய தட்டை</h4>
+            <p class="text-[11px] text-slate-500">கால்சிய சத்துக்கள் நிறைந்த பாரம்பரிய கேழ்வரகு மற்றும் நவதானிய வைக்கோல் வகை.</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="text-2xl">🥗</span>
+            <h4 class="font-bold text-[#143627] text-sm">முள்ளங்கி கீரை & கழிவு</h4>
+            <p class="text-[11px] text-slate-500">பண்ணை காய்கறி அறுவடைக்கு பின் கிடைக்கும் நீர்ச்சத்து மற்றும் நார்ச்சத்து மிகுந்த பசுந்தழை.</p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+            <span class="text-2xl">🌾</span>
+            <h4 class="font-bold text-[#143627] text-sm">Super Napier CO-5</h4>
+            <p class="text-[11px] text-slate-500">வருடம் முழுவதும் இடைவிடாது பசுமையை கொடுக்கும் அடர் கரும்பு நேப்பியர் புல்.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- LIVE STOCKS SECTION (FARM GATE PURCHASE) -->
     <section id="livestock" class="max-w-6xl mx-auto px-4 space-y-8">
       <div class="bg-white rounded-3xl p-6 sm:p-10 border border-[#143627]/10 shadow-sm space-y-6">
@@ -504,53 +479,6 @@
       </div>
     </section>
 
-    <!-- 5-SEC AUTO SCROLLING YOUTUBE VIDEO SECTION -->
-    <section id="videos" class="max-w-6xl mx-auto px-4 space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-        <div>
-          <span class="text-[10px] uppercase font-bold tracking-widest text-rose-600 bg-rose-50 px-2 py-0.5 rounded">YOUTUBE AGRO VLOGS</span>
-          <h3 class="font-serif-title font-bold text-2xl sm:text-3xl text-[#143627] mt-1">Farm Tour & AgriTech Education</h3>
-        </div>
-        <a href="https://www.youtube.com/channel/UCksIgkWEAAWBbmOMx59W8mA?sub_confirmation=1" target="_blank" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md flex items-center gap-2 self-start active:scale-95 transition">
-          <i data-lucide="youtube" class="w-4 h-4"></i> Subscribe @Vignesh Dhayalan
-        </a>
-      </div>
-
-      <!-- Scrolling Video Cards -->
-      <div id="ytVideosCarousel" class="flex gap-4 overflow-x-auto custom-scroll scroll-smooth py-2">
-        <div class="w-80 flex-shrink-0 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-          <div class="h-44 bg-slate-900 flex items-center justify-center text-white relative">
-            <i data-lucide="play-circle" class="w-12 h-12 text-rose-500 opacity-90"></i>
-            <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded">Episode 1</span>
-          </div>
-          <div class="p-4 space-y-1">
-            <h4 class="font-bold text-xs text-[#143627]">D-FARM Starting Journey from Scratch</h4>
-            <p class="text-[11px] text-slate-500">How we set up Super Napier grass and sheds in Polur.</p>
-          </div>
-        </div>
-        <div class="w-80 flex-shrink-0 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-          <div class="h-44 bg-slate-800 flex items-center justify-center text-white relative">
-            <i data-lucide="play-circle" class="w-12 h-12 text-rose-500 opacity-90"></i>
-            <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded">Episode 2</span>
-          </div>
-          <div class="p-4 space-y-1">
-            <h4 class="font-bold text-xs text-[#143627]">Smart Cattle Nutrition & Pure Raw Milk Yield</h4>
-            <p class="text-[11px] text-slate-500">Step-by-step cattle health & automated watering demo.</p>
-          </div>
-        </div>
-        <div class="w-80 flex-shrink-0 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-          <div class="h-44 bg-slate-900 flex items-center justify-center text-white relative">
-            <i data-lucide="play-circle" class="w-12 h-12 text-rose-500 opacity-90"></i>
-            <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded">Episode 3</span>
-          </div>
-          <div class="p-4 space-y-1">
-            <h4 class="font-bold text-xs text-[#143627]">Organic Farm Gate Experience & Tourism</h4>
-            <p class="text-[11px] text-slate-500">Visitors sharing feedback at our Polur eco-farm.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ABOUT THE FARM SECTION -->
     <section id="about-farm" class="max-w-6xl mx-auto px-4 space-y-8">
       <div class="text-center space-y-2">
@@ -588,7 +516,7 @@
       </div>
     </section>
 
-    <!-- ABOUT US SECTION: FOUNDERS (EMOTIONAL & HEART-TOUCHING) -->
+    <!-- ABOUT US SECTION: FOUNDERS -->
     <section id="story" class="max-w-6xl mx-auto px-4 py-4 space-y-10">
       <div class="text-center space-y-2">
         <span class="text-xs uppercase font-extrabold tracking-widest text-amber-700" data-t="storyTag">OUR JOURNEY</span>
@@ -647,7 +575,7 @@
       </div>
     </section>
 
-    <!-- FARM VISIT & LOCATION GOOGLE MAPS -->
+    <!-- FARM VISIT & GOOGLE MAPS EMBED -->
     <section id="visit" class="max-w-6xl mx-auto px-4 py-4 space-y-6">
       <div class="bg-gradient-to-br from-[#143627] to-[#0A1F16] text-white rounded-3xl p-8 sm:p-12 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div class="space-y-4">
@@ -661,7 +589,7 @@
           <div class="flex flex-col gap-2 text-xs text-amber-300 font-semibold pt-1">
             <span>✓ Free Entry & Direct Farm Gate Purchase</span>
             <a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="inline-flex items-center gap-1.5 text-white underline hover:text-amber-300">
-              <i data-lucide="map-pin" class="w-4 h-4 text-rose-400"></i> Open Farm Location in Google Maps →
+              <i data-lucide="map-pin" class="w-4 h-4 text-rose-400"></i> Open Live Google Maps Route →
             </a>
           </div>
         </div>
@@ -697,9 +625,33 @@
           </form>
         </div>
       </div>
+
+      <!-- LIVE GOOGLE MAPS EMBED -->
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i data-lucide="map-pin" class="w-5 h-5 text-rose-600"></i>
+            <h3 class="font-serif-title font-bold text-lg text-[#143627]">D-FARM Location Map (Polur)</h3>
+          </div>
+          <a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="bg-[#143627] text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow">
+            Navigate in Maps App
+          </a>
+        </div>
+        <div class="w-full h-72 sm:h-96 rounded-2xl overflow-hidden border border-slate-200">
+          <iframe 
+            src="https://maps.google.com/maps?q=12.5085,79.1245&hl=en&z=15&output=embed" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
     </section>
 
-    <!-- CONTACT US FORM (EMAIL INTEGRATION) -->
+    <!-- CONTACT FORM -->
     <section id="contact-form" class="max-w-4xl mx-auto px-4">
       <div class="bg-white rounded-3xl p-6 sm:p-10 border border-[#143627]/10 shadow-sm space-y-6">
         <div class="text-center space-y-2">
@@ -741,76 +693,98 @@
     </section>
 
     <!-- ULTRA-LUXURY D-FARM ORGANIC FOOTER WITH DISCLAIMER -->
-    <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-<script src="/cookie-consent.js" defer></script>
+    <div id="dfarmFooter" class="bg-[#0F291E] text-white rounded-t-3xl sm:rounded-t-[2.5rem] mt-24 pt-16 pb-16 px-6 sm:px-12 border-t-4 border-[#D97706]/40 shadow-2xl relative overflow-hidden block">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-emerald-900/70 pb-12 text-xs sm:text-sm relative z-10">
+        
+        <!-- Brand Info -->
+        <div class="space-y-4 md:col-span-1">
+          <div class="flex items-center gap-3">
+            <img src="https://iili.io/nPh3Ia9.png" class="w-12 h-12 rounded-full border-2 border-amber-400 shadow-md" alt="D-FARM">
+            <div>
+              <h3 class="font-serif-title text-xl font-bold text-white tracking-wide">D-FARM</h3>
+              <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-900 text-amber-300 font-bold uppercase tracking-widest border border-emerald-700">POLUR • EST. 2027</span>
+            </div>
+          </div>
+          <p class="text-emerald-200/80 leading-relaxed text-xs">
+            தூய பசும்பால், மரச்செக்கு எண்ணெய்கள், நவதானியங்கள் மற்றும் இயற்கை எரு உரம் — நேரடியாக உங்கள் இல்லத்திற்கு அல்லது பண்ணையிலேயே பெற்றுக் கொள்ளலாம்.
+          </p>
+          <button onclick="openQrModal()" class="inline-flex items-center gap-2 bg-emerald-900/60 border border-emerald-700 px-3 py-1.5 rounded-xl text-[11px] text-amber-300 hover:bg-emerald-800 transition">
+            <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> View & Download Farm QR
+          </button>
+        </div>
 
+        <!-- Quick Links -->
+        <div class="space-y-3">
+          <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block">Quick Links</h4>
+          <ul class="space-y-2 text-xs text-emerald-200/80 font-medium">
+            <li><a href="#products" class="hover:text-white transition">Fresh Products Catalog</a></li>
+            <li><a href="#livestock" class="hover:text-white transition">Farm Livestock Sales</a></li>
+            <li><a href="#fodder" class="hover:text-white transition">Fodder Pastures (தீவனங்கள்)</a></li>
+            <li><a href="#about-farm" class="hover:text-white transition">Smart Farm Operations</a></li>
+            <li><a href="#story" class="hover:text-white transition">Founders & Vision</a></li>
+            <li><a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="hover:text-white transition">Google Maps Route</a></li>
+          </ul>
+        </div>
+
+        <!-- Direct Contacts -->
+        <div class="space-y-3">
+          <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block">Direct Contacts</h4>
+          <div class="space-y-2 text-xs text-emerald-200/80">
+            <p><span class="text-slate-400 block text-[10px]">Field & Livestock Operations:</span> 📞 <b>8870804123</b> (Dhayalan Kuppusamy)</p>
+            <p><span class="text-slate-400 block text-[10px]">Orders & Financial Strategy:</span> 📱 <b>7200752628</b> (Vignesh Dhayalan)</p>
+            <p><span class="text-slate-400 block text-[10px]">Official Email:</span> ✉️ <b>dfarmpolur@gmail.com</b></p>
+            <p><span class="text-slate-400 block text-[10px]">Farm Location:</span> 📍 Polur, Tiruvannamalai District, Tamil Nadu</p>
+          </div>
+        </div>
+
+        <!-- Farm Gate & UPI -->
+        <div class="space-y-3">
+          <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block">Farm Gate & UPI</h4>
+          <div class="space-y-2 text-xs text-emerald-200/80">
+            <p class="text-white font-bold">Visiting Hours:</p>
+            <p class="text-amber-200 text-xs">07:00 AM – 06:00 PM (Daily)</p>
+            <p class="pt-2 text-white font-bold">Instant UPI Payments:</p>
+            <p class="bg-black/30 p-2 rounded-xl border border-emerald-800 text-[11px] text-amber-300 font-mono">7200752628@upi</p>
+            <p class="text-[10px] text-slate-400">GPay • PhonePe • Paytm Accepted</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Statutory Disclaimer -->
+      <div class="max-w-6xl mx-auto pt-6 border-b border-emerald-950 pb-6 text-[10px] text-slate-400 leading-relaxed space-y-1">
+        <p><b>DISCLAIMER:</b> D-FARM POLUR produces natural, raw, unprocessed farm-direct cow milk and cold-pressed agro commodities. Raw milk should be gently boiled prior to consumption according to traditional household practices. Livestock sales are finalized solely based on live physical on-farm inspection and weight verification.</p>
+        <p><b>FINANCIAL SERVICES:</b> Vignesh Dhayalan is an AMFI-Registered Mutual Fund Distributor (ARN-288927, EUIN E543710). Mutual Fund investments are subject to market risks; read all scheme-related documents carefully before investing.</p>
+      </div>
+
+      <div class="max-w-6xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-400/90 gap-3 relative z-10">
+        <span>© 2026 D-FARM Polur. All rights reserved.</span>
+        <span class="text-emerald-500 text-[11px]">Crafted with Modern AgroTech, IoT & Financial Analytics</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==================== QR CODE POPUP MODAL (DIRECT IMAGE DOWNLOAD) ==================== -->
+  <div id="qrModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 w-full max-w-sm space-y-4 text-[#143627] text-center shadow-2xl">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-serif-title font-bold text-base">D-FARM Digital Card & QR</h3>
+        <button onclick="closeQrModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl flex justify-center">
+        <img src="https://iili.io/nPtxqFI.png" class="w-56 h-56 object-contain rounded-xl shadow-sm" alt="D-FARM QR">
+      </div>
+      <p class="text-xs text-slate-500">Scan to visit website, or save this image to share on your WhatsApp status!</p>
+      <div class="flex gap-2">
+        <button onclick="downloadQrImageDirect()" class="flex-1 bg-[#143627] text-white text-xs font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow">
+          <i data-lucide="download" class="w-4 h-4"></i> Download QR Image
+        </button>
+        <button onclick="shareQrViaWhatsApp()" class="flex-1 bg-emerald-600 text-white text-xs font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow">
+          <i data-lucide="share-2" class="w-4 h-4"></i> Share WhatsApp
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- ==================== CUSTOMER LEDGER POPUP MODAL ==================== -->
@@ -888,10 +862,10 @@
 
   <!-- ==================== OWNER PRIVATE ERP PORTAL (PASSCODE: 6734) ==================== -->
   <div id="ownerPortalContainer" class="hidden flex-1 bg-slate-100 text-[#143627] pb-20">
-    <div class="bg-[#143627] text-white px-4 py-3 sticky top-[33px] z-30 flex items-center justify-between shadow-md">
+    <div class="bg-[#143627] text-white px-4 py-3 sticky top-[37px] z-30 flex items-center justify-between shadow-md">
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="text-xs font-bold tracking-wider uppercase">D-FARM ERP • PRIVATE OWNER MODE (PIN 6734)</span>
+        <span class="text-xs font-bold tracking-wider uppercase">D-FARM ERP • OWNER MODE (PIN 6734)</span>
       </div>
       <div class="flex items-center gap-2">
         <button onclick="downloadMasterFarmReportPDF()" class="bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1">
@@ -903,8 +877,7 @@
       </div>
     </div>
 
-    <!-- ERP Navigation Tabs -->
-    <nav class="bg-white border-b border-slate-200 px-4 py-2.5 flex gap-2 overflow-x-auto custom-scroll max-w-4xl mx-auto w-full sticky top-[75px] z-30">
+    <nav class="bg-white border-b border-slate-200 px-4 py-2.5 flex gap-2 overflow-x-auto custom-scroll max-w-4xl mx-auto w-full sticky top-[79px] z-30">
       <button onclick="switchErpTab('ops')" id="erpTabOps" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#143627] text-white shadow">
         Daily Ops
       </button>
@@ -1244,7 +1217,7 @@
     <span id="toastMsg">Saved</span>
   </div>
 
-  <!-- ==================== SCRIPT ENGINE (FIREBASE V10 + PDF + LOGIC) ==================== -->
+  <!-- ==================== SCRIPT ENGINE (FIREBASE V10 + PDF + QR DOWNLOAD) ==================== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
     import { 
@@ -1293,19 +1266,48 @@
       m.classList.toggle('hidden');
     };
 
+    // QR MODAL CONTROLS & DIRECT IMAGE DOWNLOAD
+    window.openQrModal = function() {
+      document.getElementById('qrModal').classList.remove('hidden');
+    };
+    window.closeQrModal = function() {
+      document.getElementById('qrModal').classList.add('hidden');
+    };
+
+    window.downloadQrImageDirect = async function() {
+      try {
+        const response = await fetch('https://iili.io/nPtxqFI.png');
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = 'D-FARM_POLUR_QR.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(blobUrl);
+        showToast("QR Image Downloaded!");
+      } catch (e) {
+        window.open('https://iili.io/nPtxqFI.png', '_blank');
+      }
+    };
+
+    window.shareQrViaWhatsApp = function() {
+      const shareUrl = "https://universalmoneymart.onrender.com/dfarm.html";
+      const qrImg = "https://iili.io/nPtxqFI.png";
+      const text = `🌱 *D-FARM POLUR* - Smart Farm Direct Milk, Oils & Organics!\n\n🌐 Visit: ${shareUrl}\n📱 Orders: 7200752628\n📍 Google Maps: https://maps.app.goo.gl/epyhsWxU1CKrnucp8\n\nScan our Official QR: ${qrImg}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    };
+
     // BILINGUAL DICTIONARY
     const dict = {
       en: {
         tagline: "Pure • Traditional • Honest",
         navShop: "Shop",
         navLivestock: "Live Stocks",
-        navGallery: "Gallery",
-        navVideos: "Videos",
         navFarm: "About Farm",
         navStory: "Founders",
-        navSub: "Subscription",
-        navVisit: "Visit Farm",
-        navContact: "Contact Us",
+        navVisit: "Visit & Map",
         heroBadge: "🌱 FROM FARM TO HOME • DIRECT FROM POLUR",
         heroTitle: "Pure Farm Milk, Cold-Pressed Oils & Organic Produce",
         heroDesc: "Unadulterated raw cow milk, traditional wood-pressed oils, fresh country vegetables, and organic fertilizers delivered straight to your home or picked up directly at the farm.",
@@ -1323,7 +1325,7 @@
         aboutFarmTitle: "About D-FARM Polur",
         aboutFarmSub: "A modern integrated smart circular agro enterprise nestled in the fertile soils of Polur, Tiruvannamalai.",
         af1Title: "Organic Fodder Pastures",
-        af1Desc: "Super Napier high-yield hybrid green fodder grown purely using fermented aged cow dung manure without chemical sprays.",
+        af1Desc: "Super Napier, Mulberry, Moringa, and Azolla grown purely using fermented aged cow dung manure without chemical sprays.",
         af2Title: "Hygienic Cold Chain",
         af2Desc: "Automated purified watering and sanitized milking sheds. Sourced milk is immediately filtered and cold-chilled at 4°C.",
         af3Title: "Solar & Zero Waste Cycle",
@@ -1352,13 +1354,9 @@
         tagline: "தூய • பாரம்பரிய • நேர்மையான",
         navShop: "அங்காடி",
         navLivestock: "கால்நடைகள்",
-        navGallery: "புகைப்படங்கள்",
-        navVideos: "வீடியோக்கள்",
         navFarm: "பண்ணை பற்றி",
         navStory: "நிறுவனர்கள்",
-        navSub: "மாத சந்தா",
         navVisit: "பண்ணை பார்வை",
-        navContact: "தொடர்பு",
         heroBadge: "🌱 FROM FARM TO HOME • DIRECT FROM POLUR",
         heroTitle: "தூய பசும்பால், மரச்செக்கு எண்ணெய்கள் & இயற்கை பொருட்கள்",
         heroDesc: "தண்ணீர் கலக்காத தூய பசும்பால், மரச்செக்கு எண்ணெய்கள், நாட்டுக் காய்கறிகள் மற்றும் இயற்கை பண்ணைப் பொருட்கள் — உங்கள் இல்லத்திற்கோ அல்லது பண்ணையிலோ நேரடியாகப் பெறலாம்.",
@@ -1376,7 +1374,7 @@
         aboutFarmTitle: "D-FARM போளூர் பற்றி",
         aboutFarmSub: "திருவண்ணாமலை மாவட்டம் போளூரின் வளமான செம்மண் பூமியில் அமைந்த முழுமையான ஒருங்கிணைந்த இயற்கை அக்ரிடெக் பண்ணை.",
         af1Title: "இயற்கை பசுந்தீவனம்",
-        af1Desc: "ரசாயன உரங்கள் இல்லாத மாட்டுச் சாண எருவில் மட்டுமே பயிரிடப்படும் Super Napier அடர் பசுந்தீவனம். கால்நடைகளுக்கு தேவையான சமச்சீர் ஊட்டச்சத்துக்கள் இயற்கையாகவே கிடைக்கிறது.",
+        af1Desc: "Super Napier, மல்பெரி, முருங்கை, அசோலா என மாடுகளுக்குத் தேவையான ஊட்டச்சத்துகள் சாண எருவில் மட்டுமே பயிரிடப்படுகிறது.",
         af2Title: "சுத்தமான சுகாதார கறவை",
         af2Desc: "தானியங்கி சுத்திகரிக்கப்பட்ட நீர் மற்றும் சுகாதாரமான கொட்டகை பராமரிப்பு. கறந்த பால் உடனடியாக வடிகட்டப்பட்டு 4°C வெப்பநிலைக்கு குளிர்விக்கப்பட்டு வாடிக்கையாளர்களுக்கு அனுப்பி வைக்கப்படுகிறது.",
         af3Title: "சூரிய சக்தி & ஜீரோ வேஸ்ட்",
@@ -1416,33 +1414,6 @@
       } else {
         document.getElementById('btnTa').className = "text-xs px-1 font-bold text-amber-300";
         document.getElementById('btnEn').className = "text-xs px-1 font-bold text-slate-300 hover:text-white";
-      }
-    };
-
-    // 5-SEC AUTO SCROLLING SYSTEM (GALLERY & VIDEOS)
-    setInterval(() => {
-      const gal = document.getElementById('farmGalleryCarousel');
-      if (gal) {
-        if (gal.scrollLeft + gal.clientWidth >= gal.scrollWidth - 10) gal.scrollTo({ left: 0, behavior: 'smooth' });
-        else gal.scrollBy({ left: 320, behavior: 'smooth' });
-      }
-      const vid = document.getElementById('ytVideosCarousel');
-      if (vid) {
-        if (vid.scrollLeft + vid.clientWidth >= vid.scrollWidth - 10) vid.scrollTo({ left: 0, behavior: 'smooth' });
-        else vid.scrollBy({ left: 320, behavior: 'smooth' });
-      }
-    }, 5000);
-
-    // SHARE FARM QR CODE (https://iili.io/nPtxqFI.png)
-    window.shareFarmQR = function() {
-      const shareUrl = "https://universalmoneymart.onrender.com/dfarm.html";
-      const qrImage = "https://iili.io/nPtxqFI.png";
-      const text = `🌱 *D-FARM POLUR* - Pure Farm Direct Milk, Cold-Pressed Oils & Organic Produce!\n\n🌐 Website: ${shareUrl}\n📱 WhatsApp Orders: 7200752628\n📍 Google Maps: https://maps.app.goo.gl/epyhsWxU1CKrnucp8\n\nScan our Digital Farm QR Code: ${qrImage}`;
-      
-      if (navigator.share) {
-        navigator.share({ title: 'D-FARM POLUR', text: text, url: shareUrl }).catch(() => {});
-      } else {
-        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
       }
     };
 
@@ -1594,7 +1565,7 @@
       e.target.reset();
     };
 
-    // OWNER PORTAL AUTH & TABS (NEW PIN: 6734)
+    // OWNER PORTAL AUTH & TABS (PIN: 6734)
     window.handleOwnerPortalClick = function() {
       const pin = prompt('Enter Owner Passcode to access Private Farm ERP:');
       if (pin === '6734') {
@@ -1803,7 +1774,7 @@
       showToast(`${liters}L saved for ${c.name}`);
     };
 
-    // PDF ENGINE 1: MASTER FARM SUMMARY REPORT
+    // PDF ENGINE 1: MASTER FARM REPORT
     window.downloadMasterFarmReportPDF = function() {
       const { jsPDF } = window.jspdf;
       const docPdf = new jsPDF();
