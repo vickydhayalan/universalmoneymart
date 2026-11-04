@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+
+:root {
+  --bg-cream: #FAF6EE;
+  --brand-green: #143627;
+  --brand-emerald: #1B4332;
+  --gold-accent: #D97706;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background-color: var(--bg-cream);
+  color: #143627;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.font-serif-title {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Luxury Organic Cards */
+.organic-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(20, 54, 39, 0.08);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(20, 54, 39, 0.05);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Touch & Hover Glow Effects */
+.organic-card:hover, 
+.organic-card:active {
+  box-shadow: 0 20px 40px -10px rgba(27, 67, 50, 0.22), 0 0 25px rgba(217, 119, 6, 0.2);
+  transform: translateY(-4px);
+  border-color: rgba(217, 119, 6, 0.4);
+}
+
+.glow-img {
+  transition: all 0.3s ease;
+}
+
+.glow-img:hover {
+  filter: drop-shadow(0 0 15px rgba(27, 67, 50, 0.35));
+  transform: scale(1.04);
+}
+
+/* Clean Custom Scrollbar */
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
