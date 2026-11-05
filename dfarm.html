@@ -14,38 +14,32 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <!-- Google Fonts & Custom CSS -->
+  <!-- Google Fonts: Preconnect & Display Swap for Instant Paint -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./dfarm/css/style.css">
-<style>
-    /* F5 Refresh Layout Lock */
-    html, body {
-      overflow-x: hidden;
-      min-height: 100%;
-    }
-    .organic-card {
-      height: auto !important;
-      min-height: 310px !important;
-    }
-  </style>
+  <link rel="stylesheet" href="./dfarm/css/style.css?v=3.2">
+
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
     .font-serif-title { font-family: 'Playfair Display', serif; }
     .glass-nav { background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); }
     .custom-scroll::-webkit-scrollbar { height: 4px; width: 4px; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #143627; border-radius: 9999px; }
+    
+    /* Product Card Responsive Lock: Eliminates Ctrl+F5 Card Cut Glitch */
     .organic-card { 
-      border: 1px solid rgba(20, 54, 39, 0.1); 
+      border: 1px solid rgba(20, 54, 39, 0.12); 
       transition: all 0.25s ease;
-      min-height: 310px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      min-height: 330px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      overflow: visible !important;
     }
-    .organic-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -10px rgba(20, 54, 39, 0.15); }
-    /* Native Clean Styling for Footer */
+    .organic-card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px -10px rgba(20, 54, 39, 0.15); }
+
+    /* Footer CSS Restored */
     .ft-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
     .ft-desc { font-size: 11px; line-height: 1.6; color: #94a3b8; margin-top: 0.5rem; }
     .ft-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; }
@@ -98,25 +92,30 @@
 
         <!-- Right Side Utility Action Buttons -->
         <div class="flex items-center gap-1.5 sm:gap-2.5">
+          <!-- Dynamic Language Toggle -->
           <button onclick="window.toggleLanguage()" id="langToggleBtn" title="Switch Language" class="px-2 py-1.5 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition text-[11px] sm:text-xs font-bold flex items-center gap-1 bg-white shadow-sm">
             <i data-lucide="globe" class="w-3.5 h-3.5 text-emerald-800"></i>
             <span id="langLabel">EN</span>
           </button>
 
+          <!-- Customer Self Ledger -->
           <button onclick="window.openCustomerLedgerModal()" title="Customer Ledger" class="p-1.5 sm:px-2.5 sm:py-1.5 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition text-xs font-bold flex items-center gap-1 bg-white shadow-sm">
             <i data-lucide="receipt" class="w-4 h-4 text-emerald-800"></i>
             <span class="hidden md:inline">My Ledger</span>
           </button>
 
-          <button onclick="window.handleOwnerPortalClick()" title="Owner ERP (PIN: 6734)" class="p-1.5 sm:p-2 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-amber-50 transition bg-white shadow-sm">
+          <!-- Owner ERP Lock (PIN: 6734) -->
+          <button onclick="window.handleOwnerPortalClick()" title="Owner ERP Portal (PIN: 6734)" class="p-1.5 sm:p-2 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-amber-50 transition bg-white shadow-sm">
             <i data-lucide="lock" class="w-4 h-4 text-amber-700"></i>
           </button>
 
+          <!-- Store Cart Drawer Button -->
           <button onclick="window.toggleCart(true)" class="bg-[#143627] hover:bg-[#0D241A] text-white px-2.5 sm:px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold shadow-md active:scale-95 transition">
             <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-300"></i>
             <span id="cartCountBadge" class="bg-amber-400 text-black text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">0</span>
           </button>
 
+          <!-- Mobile Hamburger -->
           <button onclick="window.toggleMobileMenu()" class="lg:hidden p-1.5 text-[#143627] rounded-xl hover:bg-slate-100">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
@@ -327,7 +326,7 @@
       </div>
     </section>
 
-    <!-- 11 FARM DIRECT PRODUCTS CATALOG (FIXED PROPORTIONAL CARDS) -->
+    <!-- 11 FARM DIRECT PRODUCTS CATALOG (RESPONSIVE CARDS) -->
     <section id="products" class="max-w-6xl mx-auto px-4 space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
@@ -829,75 +828,82 @@
     </section>
 
     <!-- FOOTER WITH SOCIALS & LEGAL -->
-    <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
+    <footer class="bg-[#0b1424] text-slate-300 p-6 md:p-10 border-t border-slate-800 rounded-t-3xl mt-12">
+      <div class="max-w-6xl mx-auto">
+        <div class="ft-grid">
+          <div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shrink-0">
+                <img src="/Logo.png" alt="UMM" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='₹'">
+              </div>
+              <div class="font-bold text-white text-sm">Universal <span class="text-amber-400">Money</span> Mart</div>
+            </div>
+            <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
+            <div class="ft-badges">
+              <span class="ft-badge">AMFI MFD</span>
+              <span class="ft-badge">ARN 288927</span>
+              <span class="ft-badge">EUIN E543710</span>
+              <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
+              <span class="ft-badge">Bangalore</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="ft-col-h">Finance Guides</div>
+            <div class="ft-links">
+              <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
+              <a href="/blog/what-is-sip.html">SIP Guide</a>
+              <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
+              <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
+              <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
+              <a href="/blog/index.html" class="text-amber-400">→ All Articles</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="ft-col-h">Tools & Services</div>
+            <div class="ft-links">
+              <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+              <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
+              <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
+              <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
+              <a href="/tools/sip-calculator.html">SIP Calculator</a>
+              <a href="/tools/fd-calculator.html">FD Calculator</a>
+              <a href="/tools/rd-calculator.html">RD Calculator</a>
+              <a href="/tools/budget-calculator.html">Budget Planner</a>
+              <a href="#consultation" class="text-emerald-400">🎯 Free Consultation</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="ft-col-h">Quick Links</div>
+            <div class="ft-links">
+              <a href="/about.html">About Us</a>
+              <a href="/contact.html">Contact Us</a>
+              <a href="/privacy-policy.html">Privacy Policy</a>
+              <a href="/disclaimer.html">Disclaimer</a>
+              <a href="/terms-and-conditions.html">Terms & Rules</a>
+              <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="text-emerald-400">💬 WhatsApp</a>
+            </div>
+            <div class="mt-4 p-3 bg-white/5 rounded-xl border border-white/10 text-[10px] text-slate-400 leading-relaxed">
+              <span class="text-amber-400 block font-mono font-bold mb-1">DISCLAIMER</span>
+              Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform.
+            </div>
+          </div>
+        </div>
+
+        <div class="ft-bottom">
+          <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
+          <div class="flex gap-4">
+            <a href="/privacy-policy.html" class="hover:text-slate-200">Privacy Policy</a>
+            <a href="/disclaimer.html" class="hover:text-slate-200">Disclaimer</a>
+            <a href="/terms-and-conditions.html" class="hover:text-slate-200">Terms & Rules</a>
+            <a href="/contact.html" class="hover:text-slate-200">Contact</a>
+          </div>
+        </div>
       </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-<script src="/cookie-consent.js" defer></script>
+    </footer>
+    <script src="/cookie-consent.js" defer></script>
 
   </div>
   <!-- PUBLIC STOREFRONT CONTAINER END -->
@@ -1023,7 +1029,7 @@
     </div>
   </div>
 
-  <!-- ================= ALL MODALS & DRAWERS ================= -->
+  <!-- ================= ALL 10 INTERACTIVE MODALS & DRAWERS ================= -->
 
   <!-- 1. COW MILK ENTRY MODAL -->
   <div id="cowMilkModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
@@ -1332,7 +1338,7 @@
         <button onclick="window.closeCustomerLedgerModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
       <div class="space-y-3 text-xs">
-        <input type="tel" id="selfLedgerPhone" placeholder="Enter 10-digit Mobile Number" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-bold text-center">
+        <input type="tel" id="selfLedgerPhone" placeholder="Enter 10-digit Mobile Number" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-base font-bold text-center outline-none">
         <button onclick="window.checkCustomerLedger()" class="w-full bg-[#143627] text-white font-bold py-2.5 rounded-xl shadow">View My Monthly Statement</button>
         <div id="selfLedgerResult" class="hidden p-3 bg-slate-50 rounded-xl space-y-2 border"></div>
       </div>
@@ -1414,13 +1420,18 @@
       if (menu) menu.classList.toggle('hidden');
     };
 
-    // Owner Portal Security Passcode (PIN: 6734)
+    // Owner Portal Security PIN: 6734 (Direct Choice: In-Page ERP or High-Tech Kiosk Dashboard)
     window.handleOwnerPortalClick = () => {
       const pin = prompt('Enter D-FARM Owner ERP Passcode:');
       if (pin === '6734') {
-        document.getElementById('publicContainer').classList.add('hidden');
-        document.getElementById('erpContainer').classList.remove('hidden');
-        lucide.createIcons();
+        const choice = confirm("Press OK for Full Executive Kiosk Command Center (/admin),\nor Cancel for In-Page Local ERP.");
+        if (choice) {
+          window.location.href = "/dfarm/admin/index.html";
+        } else {
+          document.getElementById('publicContainer').classList.add('hidden');
+          document.getElementById('erpContainer').classList.remove('hidden');
+          lucide.createIcons();
+        }
       } else if (pin) {
         alert('Invalid Passcode!');
       }
@@ -1526,7 +1537,7 @@
       showToast(`Language: ${currentLang === 'ta' ? 'தமிழ்' : 'English'}`);
     };
 
-    // Initialize Realtime Listeners & Service Worker
+    // Initialize Realtime Listeners & Prevent Ctrl+F5 FOUC
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       calculateSubEstimate();
@@ -1535,6 +1546,7 @@
       initAnimalsListener();
       initCustomerListener();
     });
+
     window.addEventListener('load', () => {
       if (window.lucide) {
         window.lucide.createIcons();
