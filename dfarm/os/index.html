@@ -9,6 +9,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- jsPDF & AutoTable for Automated Audit PDFs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
   <!-- Google Fonts: High Contrast Mono & Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +72,7 @@
       <div class="flex items-center gap-6">
         <div class="text-right">
           <span class="text-xs font-mono-val text-amber-300 font-bold block" id="osClock">05:30:00 AM</span>
-          <span class="text-[9px] text-slate-400 font-bold" id="sessionTag">MORNING FEEDING & MILKING</span>
+          <span class="text-[9px] text-slate-400 font-bold" id="sessionTag">SCHEDULE SYSTEM ACTIVE</span>
         </div>
 
         <!-- 45s Idle Countdown Badge -->
@@ -337,14 +341,32 @@
         </div>
       </div>
 
+      <!-- Quick PDF Dispatch & WhatsApp Triggers -->
+      <div class="grid grid-cols-3 gap-2 pt-2">
+        <button onclick="triggerWeeklyPDFDownload()" class="bg-slate-800 hover:bg-slate-700 text-white text-[11px] font-bold py-2.5 rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 active:scale-95 transition">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-slate-300"></i>
+          <span>Weekly PDF</span>
+        </button>
+        <button onclick="triggerMonthlyPDFDownload()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 text-[11px] font-bold py-2.5 rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 active:scale-95 transition">
+          <i data-lucide="bar-chart-3" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>Monthly P&L</span>
+        </button>
+        <button onclick="triggerDailyWhatsApp()" class="bg-emerald-700 hover:bg-emerald-600 text-white text-[11px] font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 active:scale-95 transition">
+          <i data-lucide="send" class="w-3.5 h-3.5 text-emerald-300"></i>
+          <span>08:00 PM WA</span>
+        </button>
+      </div>
+
       <div class="text-center">
         <span class="text-[10px] text-slate-500 font-mono-val">Auto-Syncing with Polur Firebase Cloud</span>
       </div>
     </div>
   </div>
 
-  <!-- SCRIPT ENGINE -->
+  <!-- SCRIPT ENGINE (MODULAR REPORTING ENGINE INLINE ATTACHED) -->
   <script>
+    const FARM_PHONE = "917200752628";
+
     // --- 1. IDLE TIMEOUT & AUTO-KIOSK CCTV ENGINE ---
     let idleCounter = 45;
     let idleTimer = null;
@@ -355,7 +377,6 @@
       if (el) el.textContent = `${idleCounter}s`;
     }
 
-    // Any interaction resets the 45s timer
     ['touchstart', 'mousedown', 'mousemove', 'keydown'].forEach(evt => {
       window.addEventListener(evt, resetIdleTimer, { passive: true });
     });
@@ -391,7 +412,7 @@
       closeFinancialVault();
     }
 
-    // Clock
+    // Live Clock & Session Tag
     setInterval(() => {
       const now = new Date();
       const timeStr = now.toLocaleTimeString('en-US', { hour12: true });
@@ -399,13 +420,30 @@
       const c2 = document.getElementById('osClock');
       if (c1) c1.textContent = timeStr;
       if (c2) c2.textContent = timeStr;
+
+      const hrs = now.getHours();
+      const mins = now.getMinutes();
+      const totalMins = hrs * 60 + mins;
+      const tag = document.getElementById('sessionTag');
+      if (tag) {
+        if (totalMins >= 330 && totalMins <= 420) {
+          tag.textContent = "MORNING SESSION: 05:30 - 07:00 AM (MUSIC ON)";
+          tag.className = "text-[9px] text-emerald-400 font-bold";
+        } else if (totalMins >= 1020 && totalMins <= 1110) {
+          tag.textContent = "EVENING SESSION: 05:00 - 06:30 PM (MUSIC ON)";
+          tag.className = "text-[9px] text-emerald-400 font-bold";
+        } else {
+          tag.textContent = "STANDBY: SCHEDULE SYSTEM ACTIVE";
+          tag.className = "text-[9px] text-slate-400 font-bold";
+        }
+      }
     }, 1000);
 
     // --- 2. HERD DATA & WATCHDOG ---
     const cattleHerd = [
       { id: "COW-01", name: "காவேரி (Country)", stage: "Milking", yield: 14.0, prevYield: 14.5, sennai: false, weight: 390 },
       { id: "COW-02", name: "HF Cross 02", stage: "Milking", yield: 18.5, prevYield: 18.0, sennai: true, weight: 430 },
-      { id: "COW-03", name: "Jersey Cross 03", stage: "Milking", yield: 12.0, prevYield: 14.5, sennai: false, weight: 360 }, // Milk Drop Alert!
+      { id: "COW-03", name: "Jersey Cross 03", stage: "Milking", yield: 12.0, prevYield: 14.5, sennai: false, weight: 360 },
       { id: "COW-04", name: "கங்கேயம் 04", stage: "Dry (சினை)", yield: 0.0, prevYield: 0.0, sennai: true, weight: 380 }
     ];
 
@@ -611,6 +649,138 @@
 
     function confirmBiogasValveCleared() {
       alert('Biogas Slurry Valve Cycle Cleared! Next reminder set for 7 days later.');
+    }
+
+    // --- 6. AUTOMATED WHATSAPP PAYLOAD & PDF DISPATCH ENGINE ---
+    function triggerDailyWhatsApp() {
+      const dateStr = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      const text = `*🌾 D-FARM POLUR • DAILY DISPATCH REPORT*
+*Date:* ${dateStr} | *Time:* 08:00 PM
+━━━━━━━━━━━━━━━━━━━━━
+🥛 *MILK PRODUCTION:*
+• Morning Yield (AM): 28.5 L
+• Evening Yield (PM): 24.0 L
+• *Total Day Yield: 52.5 L*
+• Average Fat: 4.3% | SNF: 8.6
+
+💰 *DAILY CASHFLOW:*
+• Spot Direct Milk Sales: ₹2,150
+• By-Product / Manure Sales: ₹450
+• Daily Operating Spend (OPEX): ₹600
+• *Net Daily Cash Inflow: ₹2,000*
+
+🐄 *HERD & SHED STATUS:*
+• Animals Milked: 3 Nos
+• Feeding Status: AM & PM Completed ✅
+• Biogas Out-Valve: Normal (3 Days to Next Cycle)
+• Drop Watchlist: COW-03 (17% Drop - Under Observation)
+━━━━━━━━━━━━━━━━━━━━━
+_System Generated via D-FARM Shed OS_`;
+
+      const url = `https://wa.me/${FARM_PHONE}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    function triggerWeeklyPDFDownload() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFillColor(20, 54, 39);
+      doc.rect(0, 0, 210, 28, 'F');
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
+      doc.text("D-FARM POLUR • WEEKLY AUDIT REPORT", 14, 13);
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "normal");
+      doc.text("Week Period: Past 7 Days | Generated for: +91 7200752628", 14, 20);
+
+      doc.autoTable({
+        startY: 34,
+        head: [['Weekly Metric', 'Volume / Count', 'Financial Impact (INR)']],
+        body: [
+          ['Total Pure Milk Yield', '368 Litres', '₹18,400'],
+          ['Spot Direct Cash Collected', '28 Txns', '₹12,200'],
+          ['Customer Subscription Dues Pending', '4 Accounts', '₹3,200'],
+          ['Total Concentrate Feed Consumed', '140 kg', '-₹4,200'],
+          ['Green Fodder Harvested (Super Napier)', '850 kg', 'Farm Field Asset'],
+          ['Helper Wages & Local Spend', '7 Days Labour', '-₹2,100'],
+        ],
+        theme: 'grid',
+        headStyles: { fillColor: [27, 67, 50], textColor: [255, 255, 255] },
+        styles: { fontSize: 9 }
+      });
+
+      const finalY = doc.lastAutoTable.finalY + 10;
+      doc.setTextColor(20, 54, 39);
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "bold");
+      doc.text("Animal Milk Drop & Health Watchlist", 14, finalY);
+
+      doc.autoTable({
+        startY: finalY + 4,
+        head: [['Tag ID', 'Animal Breed', '7-Day Avg (L)', 'Variance %', 'Status / Prescribed Action']],
+        body: [
+          ['COW-01', 'Country Pure (Cauvery)', '14.2 L', '+2.1%', 'Healthy & Normal Yield'],
+          ['COW-02', 'HF Cross 02', '18.4 L', '-1.2%', 'Optimal Lactation'],
+          ['COW-03', 'Jersey Cross 03', '12.0 L', '-17.2%', 'Alert: Milk drop detected. Vet inspection advised.'],
+          ['COW-04', 'Kangeyam 04', '0.0 L', '0.0%', 'Dry / Gestation 6th Month']
+        ],
+        theme: 'striped',
+        headStyles: { fillColor: [15, 23, 42] },
+        styles: { fontSize: 8.5 }
+      });
+
+      doc.save(`DFARM_Weekly_Audit_${new Date().toISOString().slice(0,10)}.pdf`);
+    }
+
+    function triggerMonthlyPDFDownload() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFillColor(15, 23, 42);
+      doc.rect(0, 0, 210, 30, 'F');
+      
+      doc.setTextColor(217, 119, 6);
+      doc.setFontSize(16);
+      doc.setFont("helvetica", "bold");
+      doc.text("D-FARM POLUR • MONTHLY EXECUTIVE P&L STATEMENT", 14, 14);
+      
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "normal");
+      doc.text("Registered: ARN-288927 / Udyam Compliant | Polur Enterprise", 14, 22);
+
+      doc.autoTable({
+        startY: 36,
+        head: [['Operating Revenue Streams', 'Amount (INR)', 'Operating Expenses (OPEX)', 'Amount (INR)']],
+        body: [
+          ['Direct Spot Milk Sales', '₹54,000', 'Concentrate Feed & Thavudu', '₹24,000'],
+          ['Monthly Milk Subscription Bills', '₹18,400', 'Fodder Cultivation & Irrigation', '₹3,500'],
+          ['Live Goats & Livestock Sales', '₹22,000', 'Farm Helpers & Labour Wages', '₹9,000'],
+          ['Country Eggs & Meat Sales', '₹3,200', 'Veterinary, AI Semen & Medicines', '₹2,400'],
+          ['Cured Dung Manure & Vermicompost', '₹4,500', 'Electricity, Fuel & Transport', '₹1,800'],
+          ['Total Gross Revenue', '₹1,02,100', 'Total Operating Expenses', '₹40,700']
+        ],
+        theme: 'grid',
+        headStyles: { fillColor: [20, 54, 39] },
+        styles: { fontSize: 8.5 }
+      });
+
+      const netProfit = 102100 - 40700;
+      const finalY = doc.lastAutoTable.finalY + 12;
+
+      doc.setFillColor(240, 253, 244);
+      doc.setDrawColor(22, 101, 52);
+      doc.roundedRect(14, finalY, 182, 22, 3, 3, 'FD');
+
+      doc.setFontSize(11);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(20, 83, 45);
+      doc.text(`NET OPERATING PROFIT: INR ${netProfit.toLocaleString('en-IN')}`, 20, finalY + 14);
+
+      doc.save(`DFARM_Monthly_PL_${new Date().toISOString().slice(0,7)}.pdf`);
     }
 
     // Boot
