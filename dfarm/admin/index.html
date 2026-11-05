@@ -9,6 +9,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- HTML5 QR / Barcode Scanner Engine -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Google Fonts -->
@@ -48,9 +50,6 @@
       border: 1.5px solid #283e77;
       box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     }
-    .high-contrast-card:hover {
-      border-color: #3e62bc;
-    }
     .neon-text-green {
       text-shadow: 0 0 25px rgba(16, 185, 129, 0.55);
     }
@@ -59,6 +58,11 @@
     }
     .neon-text-amber {
       text-shadow: 0 0 25px rgba(245, 158, 11, 0.55);
+    }
+    .kiosk-tab.active {
+      border-color: #10b981;
+      background-color: rgba(16, 185, 129, 0.15);
+      color: #34d399;
     }
     ::-webkit-scrollbar {
       width: 6px;
@@ -77,40 +81,41 @@
 
   <!-- ================= TOP COMMAND HEADER ================= -->
   <header class="high-contrast-card rounded-2xl p-4 md:px-6 mb-6 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
-    <!-- Brand Identity & Logo -->
+    <!-- Brand Identity & D-FARM Logo -->
     <div class="flex items-center gap-4">
-      <div class="w-16 h-16 rounded-2xl bg-white p-2 flex items-center justify-center shadow-xl shadow-emerald-500/20 border-2 border-emerald-400 shrink-0">
-        <img src="/Logo.png" alt="D-FARM Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=120&q=80';">
-      </div>
+      <div class="w-16 h-16 rounded-2xl bg-slate-900 p-1.5 flex items-center justify-center shadow-xl shadow-emerald-500/20 border-2 border-emerald-400 shrink-0 overflow-hidden">
+  <img src="/dfarm-logo.png" alt="D-FARM Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='/Logo.png';">
+</div>
       <div>
         <div class="flex items-center gap-3 flex-wrap">
           <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-sans">D-FARM</h1>
-          <span class="px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wider bg-emerald-500 text-slate-950 font-mono shadow-sm">POLUR ENTERPRISE</span>
-          <span class="px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-blue-500/20 border border-blue-400/40 text-blue-300 font-mono">COMMAND OS v4.0</span>
+          <span class="px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wider bg-emerald-500 text-slate-950 font-mono shadow-sm">POLUR SMART AGRO</span>
+          <span class="px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-blue-500/20 border border-blue-400/40 text-blue-300 font-mono">KIOSK OS v4.2</span>
         </div>
         <p class="text-xs md:text-sm text-slate-300 font-medium flex items-center gap-2 mt-1">
-          <i class="fa-solid fa-location-dot text-rose-500"></i> Polur, TN &bull; Tariff III-B 3-Phase &bull; Automated Farm Operations
+          <i class="fa-solid fa-location-dot text-rose-500"></i> Polur, TN &bull; Tariff III-B 3-Phase &bull; Automated Livestock Infrastructure
         </p>
       </div>
     </div>
 
-    <!-- Power & Status Badges -->
+    <!-- Power Badges, Kiosk Mode & JSON Backup -->
     <div class="flex flex-wrap items-center gap-3 w-full xl:w-auto">
       <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-950/80 border border-emerald-500/60 text-emerald-300 font-mono text-xs md:text-sm font-bold shadow-lg">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-        <i class="fa-solid fa-bolt text-emerald-400"></i> EB: 418V (3-Phase)
+        <i class="fa-solid fa-bolt text-emerald-400"></i> EB: 418V (3-Ph)
       </div>
 
       <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-950/80 border border-amber-500/60 text-amber-300 font-mono text-xs md:text-sm font-bold shadow-lg">
-        <i class="fa-solid fa-solar-panel text-amber-400"></i> PM-KUSUM: 4.5 kW
+        <i class="fa-solid fa-solar-panel text-amber-400"></i> 5HP Solar: 4.5 kW
       </div>
+
+      <!-- Kiosk Mode Auto-Rotate Button -->
+      <button onclick="toggleKioskMode()" id="kioskBtn" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-purple-950/80 border border-purple-500/60 text-purple-300 hover:bg-purple-900/60 font-mono text-xs md:text-sm font-bold shadow-lg transition">
+        <i class="fa-solid fa-tv text-purple-400"></i> Kiosk Loop: <span id="kioskStatusText" class="text-white">OFF</span>
+      </button>
 
       <button onclick="exportDataJSON()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cyan-950/80 border border-cyan-500/60 text-cyan-300 hover:bg-cyan-900/60 font-mono text-xs md:text-sm font-bold shadow-lg transition">
         <i class="fa-solid fa-cloud-arrow-down text-cyan-400"></i> Backup JSON
-      </button>
-
-      <button onclick="exportMilkCSV()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-600 text-slate-200 hover:bg-slate-700 font-mono text-xs md:text-sm font-bold shadow-lg transition">
-        <i class="fa-solid fa-file-csv text-emerald-400"></i> CSV
       </button>
 
       <div class="px-4 py-2 rounded-xl bg-slate-900 border-2 border-slate-700 text-white font-mono text-base md:text-lg font-extrabold ml-auto xl:ml-0 shadow-inner" id="liveWallClock">
@@ -119,223 +124,222 @@
     </div>
   </header>
 
-  <!-- ================= BIG-NUMBER METRIC CARDS ================= -->
-  <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 mb-6">
-    
-    <!-- 1. Today Milk Yield -->
-    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
-      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
-        <span><i class="fa-solid fa-cow text-emerald-400 mr-1.5"></i> Milk Yield</span>
-        <span class="text-emerald-300 font-mono text-[11px] bg-emerald-950/90 px-2 py-0.5 rounded border border-emerald-500/40">TODAY</span>
-      </div>
-      <div class="my-3">
-        <div class="flex items-baseline gap-2">
-          <span class="text-4xl md:text-5xl font-extrabold text-white font-mono neon-text-green" id="kpiMilkTotal">29.0</span>
-          <span class="text-base font-bold text-slate-300">L</span>
+  <!-- ================= KIOSK SLIDE NAVIGATION TABS ================= -->
+  <nav class="flex items-center gap-2 mb-6 overflow-x-auto pb-1 text-xs font-mono font-bold">
+    <button onclick="switchKioskSlide(0)" class="kiosk-tab active px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/80 transition flex items-center gap-2">
+      <i class="fa-solid fa-gauge-high"></i> 1. Live Telemetry
+    </button>
+    <button onclick="switchKioskSlide(1)" class="kiosk-tab px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/80 transition flex items-center gap-2">
+      <i class="fa-solid fa-cow"></i> 2. Cow Milking Log
+    </button>
+    <button onclick="switchKioskSlide(2)" class="kiosk-tab px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/80 transition flex items-center gap-2">
+      <i class="fa-solid fa-weight-scale"></i> 3. Goat Flock Weigh-In
+    </button>
+    <button onclick="switchKioskSlide(3)" class="kiosk-tab px-4 py-2 rounded-xl border border-slate-700 bg-slate-900/80 transition flex items-center gap-2">
+      <i class="fa-solid fa-video"></i> 4. Paddock Cam Monitor
+    </button>
+  </nav>
+
+  <!-- ================= KIOSK SLIDE 1: PRIMARY TELEMETRY & METRICS ================= -->
+  <div id="slide0" class="kiosk-view-panel space-y-6">
+    <!-- Big Metrics -->
+    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+      <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
+        <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+          <span><i class="fa-solid fa-cow text-emerald-400 mr-1.5"></i> Milk Yield</span>
+          <span class="text-emerald-300 font-mono text-[11px] bg-emerald-950/90 px-2 py-0.5 rounded border border-emerald-500/40">TODAY</span>
         </div>
-        <p class="text-xs md:text-sm text-emerald-400 font-bold mt-1" id="kpiMilkCash">Est. ₹1,080 Gross</p>
-      </div>
-      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
-        <span>AM: <strong class="text-white" id="kpiMilkAM">15.5L</strong></span>
-        <span>PM: <strong class="text-white" id="kpiMilkPM">13.5L</strong></span>
-      </div>
-    </div>
-
-    <!-- 2. Water Tank Level -->
-    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
-      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
-        <span><i class="fa-solid fa-water text-cyan-400 mr-1.5"></i> Overhead Tank</span>
-        <span class="text-cyan-300 font-mono text-[11px] bg-cyan-950/90 px-2 py-0.5 rounded border border-cyan-500/40">JSN-04T</span>
-      </div>
-      <div class="my-3">
-        <div class="flex items-baseline gap-2">
-          <span class="text-4xl md:text-5xl font-extrabold text-cyan-300 font-mono neon-text-cyan" id="kpiTankPercent">86%</span>
+        <div class="my-3">
+          <div class="flex items-baseline gap-2">
+            <span class="text-4xl md:text-5xl font-extrabold text-white font-mono neon-text-green" id="kpiMilkTotal">29.0</span>
+            <span class="text-base font-bold text-slate-300">L</span>
+          </div>
+          <p class="text-xs md:text-sm text-emerald-400 font-bold mt-1" id="kpiMilkCash">Est. ₹1,080 Gross</p>
         </div>
-        <p class="text-xs md:text-sm text-cyan-400 font-bold mt-1" id="kpiTankLitres">4,300 L / 5,000 L</p>
-      </div>
-      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
-        <span>Bore Pump:</span>
-        <span class="text-emerald-400 font-bold" id="kpiBoreStatus">Active</span>
-      </div>
-    </div>
-
-    <!-- 3. Goat Flock Count & ADG -->
-    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
-      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
-        <span><i class="fa-solid fa-cubes-stacked text-indigo-400 mr-1.5"></i> Goat Flock</span>
-        <span class="text-indigo-300 font-mono text-[11px] bg-indigo-950/90 px-2 py-0.5 rounded border border-indigo-500/40">150KG SCALE</span>
-      </div>
-      <div class="my-3">
-        <div class="flex items-baseline gap-2">
-          <span class="text-4xl md:text-5xl font-extrabold text-white font-mono" id="kpiGoatCount">20</span>
-          <span class="text-base font-bold text-slate-300">Tags</span>
+        <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+          <span>AM: <strong class="text-white" id="kpiMilkAM">15.5L</strong></span>
+          <span>PM: <strong class="text-white" id="kpiMilkPM">13.5L</strong></span>
         </div>
-        <p class="text-xs md:text-sm text-indigo-300 font-bold mt-1">Avg ADG: +145g / day</p>
       </div>
-      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
-        <span>Elevated Shed</span>
-        <span class="text-emerald-400 font-bold">100% Active</span>
-      </div>
-    </div>
 
-    <!-- 4. Super Napier Harvest -->
-    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
-      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
-        <span><i class="fa-solid fa-wheat-awn text-amber-400 mr-1.5"></i> Green Fodder</span>
-        <span class="text-amber-300 font-mono text-[11px] bg-amber-950/90 px-2 py-0.5 rounded border border-amber-500/40">NAPIER</span>
-      </div>
-      <div class="my-3">
-        <div class="flex items-baseline gap-2">
-          <span class="text-4xl md:text-5xl font-extrabold text-amber-300 font-mono neon-text-amber" id="kpiFodderCut">420</span>
-          <span class="text-base font-bold text-slate-300">kg</span>
+      <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
+        <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+          <span><i class="fa-solid fa-water text-cyan-400 mr-1.5"></i> Water Tank</span>
+          <span class="text-cyan-300 font-mono text-[11px] bg-cyan-950/90 px-2 py-0.5 rounded border border-cyan-500/40">JSN-04T</span>
         </div>
-        <p class="text-xs md:text-sm text-amber-400 font-bold mt-1">Super Napier Cut</p>
-      </div>
-      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
-        <span>Chaffed: 350 kg</span>
-        <span class="text-slate-300">Plot 1 & 2</span>
-      </div>
-    </div>
-
-    <!-- 5. Poultry Eggs -->
-    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between col-span-2 md:col-span-1">
-      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
-        <span><i class="fa-solid fa-egg text-yellow-300 mr-1.5"></i> Egg Yield</span>
-        <span class="text-yellow-300 font-mono text-[11px] bg-yellow-950/90 px-2 py-0.5 rounded border border-yellow-500/40">NATTU</span>
-      </div>
-      <div class="my-3">
-        <div class="flex items-baseline gap-2">
-          <span class="text-4xl md:text-5xl font-extrabold text-yellow-300 font-mono" id="kpiEggCount">48</span>
-          <span class="text-base font-bold text-slate-300">Eggs</span>
+        <div class="my-3">
+          <div class="flex items-baseline gap-2">
+            <span class="text-4xl md:text-5xl font-extrabold text-cyan-300 font-mono neon-text-cyan" id="kpiTankPercent">86%</span>
+          </div>
+          <p class="text-xs md:text-sm text-cyan-400 font-bold mt-1">4,300 L / 5,000 L</p>
         </div>
-        <p class="text-xs md:text-sm text-yellow-400 font-bold mt-1">Country / Layer Birds</p>
+        <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+          <span>Bore Pump:</span>
+          <span class="text-emerald-400 font-bold" id="kpiBoreStatus">Active</span>
+        </div>
       </div>
-      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
-        <span>Total Birds: 55</span>
-        <span class="text-emerald-400 font-bold">87% Lay Rate</span>
+
+      <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
+        <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+          <span><i class="fa-solid fa-cubes-stacked text-indigo-400 mr-1.5"></i> Goat Flock</span>
+          <span class="text-indigo-300 font-mono text-[11px] bg-indigo-950/90 px-2 py-0.5 rounded border border-indigo-500/40">150KG SCALE</span>
+        </div>
+        <div class="my-3">
+          <div class="flex items-baseline gap-2">
+            <span class="text-4xl md:text-5xl font-extrabold text-white font-mono" id="kpiGoatCount">20</span>
+            <span class="text-base font-bold text-slate-300">Tags</span>
+          </div>
+          <p class="text-xs md:text-sm text-indigo-300 font-bold mt-1">Avg ADG: +145g / day</p>
+        </div>
+        <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+          <span>Elevated Shed</span>
+          <span class="text-emerald-400 font-bold">100% Active</span>
+        </div>
       </div>
-    </div>
 
-  </section>
+      <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
+        <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+          <span><i class="fa-solid fa-wheat-awn text-amber-400 mr-1.5"></i> Green Fodder</span>
+          <span class="text-amber-300 font-mono text-[11px] bg-amber-950/90 px-2 py-0.5 rounded border border-amber-500/40">NAPIER</span>
+        </div>
+        <div class="my-3">
+          <div class="flex items-baseline gap-2">
+            <span class="text-4xl md:text-5xl font-extrabold text-amber-300 font-mono neon-text-amber">420</span>
+            <span class="text-base font-bold text-slate-300">kg</span>
+          </div>
+          <p class="text-xs md:text-sm text-amber-400 font-bold mt-1">Super Napier Harvest</p>
+        </div>
+        <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+          <span>Chaffed: 350 kg</span>
+          <span class="text-slate-300">Plot 1 & 2</span>
+        </div>
+      </div>
 
-  <!-- ================= ANALYTICS & INTERLOCKS ================= -->
-  <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-    
-    <!-- 7-Day Production Graph -->
-    <div class="high-contrast-card p-5 md:p-6 rounded-2xl lg:col-span-2 flex flex-col justify-between">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+      <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between col-span-2 md:col-span-1">
+        <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+          <span><i class="fa-solid fa-egg text-yellow-300 mr-1.5"></i> Egg Yield</span>
+          <span class="text-yellow-300 font-mono text-[11px] bg-yellow-950/90 px-2 py-0.5 rounded border border-yellow-500/40">NATTU</span>
+        </div>
+        <div class="my-3">
+          <div class="flex items-baseline gap-2">
+            <span class="text-4xl md:text-5xl font-extrabold text-yellow-300 font-mono">48</span>
+            <span class="text-base font-bold text-slate-300">Eggs</span>
+          </div>
+          <p class="text-xs md:text-sm text-yellow-400 font-bold mt-1">Country / Layer Birds</p>
+        </div>
+        <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+          <span>Flock: 55 Birds</span>
+          <span class="text-emerald-400 font-bold">87% Lay Rate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Field Interlocks & Machinery Telemetry -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="high-contrast-card p-5 md:p-6 rounded-2xl lg:col-span-2 flex flex-col justify-between">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+          <div>
+            <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2.5">
+              <i class="fa-solid fa-chart-simple text-emerald-400"></i> Milk Production & Session Trends (7-Day)
+            </h2>
+            <p class="text-xs text-slate-300 font-medium">Comparative Morning (AM) vs Evening (PM) yield breakdown</p>
+          </div>
+          <div class="flex items-center gap-4 text-xs font-bold font-mono">
+            <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-emerald-500 shadow-sm"></span> Morning (AM)</span>
+            <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-cyan-500 shadow-sm"></span> Evening (PM)</span>
+          </div>
+        </div>
+        <div class="w-full h-64 md:h-72">
+          <canvas id="milkYieldChart"></canvas>
+        </div>
+      </div>
+
+      <div class="high-contrast-card p-5 md:p-6 rounded-2xl flex flex-col justify-between">
         <div>
-          <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2.5">
-            <i class="fa-solid fa-chart-simple text-emerald-400"></i> Milk Production & Session Trends (7-Day)
-          </h2>
-          <p class="text-xs text-slate-300 font-medium">Comparative Morning (AM) vs Evening (PM) yield breakdown</p>
-        </div>
-        <div class="flex items-center gap-4 text-xs font-bold font-mono">
-          <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-emerald-500 shadow-sm"></span> Morning (AM)</span>
-          <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-cyan-500 shadow-sm"></span> Evening (PM)</span>
-        </div>
-      </div>
-      <div class="w-full h-64 md:h-72">
-        <canvas id="milkYieldChart"></canvas>
-      </div>
-    </div>
-
-    <!-- Field Machinery & Controls Interlocks -->
-    <div class="high-contrast-card p-5 md:p-6 rounded-2xl flex flex-col justify-between">
-      <div>
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-lg font-extrabold text-white flex items-center gap-2">
-            <i class="fa-solid fa-gears text-cyan-400"></i> Field Interlocks
-          </h2>
-          <span class="text-xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-700 text-slate-200 font-mono font-bold">Auto-Pilot ON</span>
-        </div>
-
-        <div class="space-y-3.5">
-          <!-- Borewell Submersible -->
-          <div class="p-3.5 rounded-xl bg-slate-900/95 border-2 border-emerald-500/50 flex justify-between items-center">
-            <div>
-              <p class="text-sm font-extrabold text-white flex items-center gap-2">
-                <i class="fa-solid fa-faucet-drip text-emerald-400"></i> Borewell Submersible 5HP
-              </p>
-              <p class="text-[11px] text-slate-400 font-mono mt-0.5">Depth: 350 ft &bull; 2.5 Inch Pipe</p>
-            </div>
-            <button onclick="togglePump()" id="pumpBtn" class="px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-lg text-xs font-mono transition">
-              ACTIVE
-            </button>
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-extrabold text-white flex items-center gap-2">
+              <i class="fa-solid fa-gears text-cyan-400"></i> Field Interlocks
+            </h2>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-700 text-slate-200 font-mono font-bold">Auto-Pilot ON</span>
           </div>
-
-          <!-- Chaff Cutter DOL Starter -->
-          <div class="p-3.5 rounded-xl bg-slate-900/95 border border-slate-700 flex justify-between items-center">
-            <div>
-              <p class="text-sm font-extrabold text-white flex items-center gap-2">
-                <i class="fa-solid fa-scissors text-amber-400"></i> 3HP Chaff Cutter (DOL)
-              </p>
-              <p class="text-[11px] text-slate-400 font-mono mt-0.5">Current: 8.8 A &bull; Reverse Switch</p>
+          <div class="space-y-3.5">
+            <div class="p-3.5 rounded-xl bg-slate-900/95 border-2 border-emerald-500/50 flex justify-between items-center">
+              <div>
+                <p class="text-sm font-extrabold text-white flex items-center gap-2">
+                  <i class="fa-solid fa-faucet-drip text-emerald-400"></i> Borewell Submersible 5HP
+                </p>
+                <p class="text-[11px] text-slate-400 font-mono mt-0.5">Depth: 350 ft &bull; 2.5 Inch Pipe</p>
+              </div>
+              <button onclick="togglePump()" id="pumpBtn" class="px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-lg text-xs font-mono transition">
+                ACTIVE
+              </button>
             </div>
-            <span class="px-3 py-1.5 bg-slate-800 text-slate-300 font-bold rounded-lg text-xs font-mono">STANDBY</span>
-          </div>
-
-          <!-- PTZ Camera Paddock Feed -->
-          <div class="p-3.5 rounded-xl bg-slate-900/95 border border-slate-700 flex justify-between items-center">
-            <div>
-              <p class="text-sm font-extrabold text-white flex items-center gap-2">
-                <i class="fa-solid fa-video text-rose-400"></i> PTZ Paddock Cam 1
-              </p>
-              <p class="text-[11px] text-slate-400 font-mono mt-0.5">Stream: 1080p 25fps &bull; Night Vision</p>
+            <div class="p-3.5 rounded-xl bg-slate-900/95 border border-slate-700 flex justify-between items-center">
+              <div>
+                <p class="text-sm font-extrabold text-white flex items-center gap-2">
+                  <i class="fa-solid fa-scissors text-amber-400"></i> 3HP Chaff Cutter (DOL)
+                </p>
+                <p class="text-[11px] text-slate-400 font-mono mt-0.5">Current: 8.8 A &bull; Reverse Switch</p>
+              </div>
+              <span class="px-3 py-1.5 bg-slate-800 text-slate-300 font-bold rounded-lg text-xs font-mono">STANDBY</span>
             </div>
-            <span class="px-2.5 py-1.5 bg-emerald-950 text-emerald-400 border border-emerald-500/40 font-bold rounded-lg text-xs font-mono">ONLINE</span>
           </div>
         </div>
+        <button onclick="switchKioskSlide(3)" class="w-full mt-4 py-3 rounded-xl bg-rose-600 hover:bg-rose-500 font-bold text-white text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-rose-600/30">
+          <i class="fa-solid fa-camera"></i> Launch PTZ Paddock Stream (CAM-1)
+        </button>
       </div>
+    </section>
+  </div>
 
-      <button onclick="openCameraModal()" class="w-full mt-4 py-3 rounded-xl bg-rose-600 hover:bg-rose-500 active:scale-95 transition-all font-bold text-white text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-rose-600/30">
-        <i class="fa-solid fa-camera"></i> Launch PTZ Paddock Stream (CAM-1)
-      </button>
-    </div>
-
-  </section>
-
-  <!-- ================= OPERATIONAL FORMS & TABLES ================= -->
-  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-
-    <!-- FORM 1: Milk Entry & Table -->
+  <!-- ================= KIOSK SLIDE 2: COW MILKING LOG & QR SCANNER ================= -->
+  <div id="slide1" class="kiosk-view-panel hidden space-y-6">
     <div class="high-contrast-card p-5 md:p-6 rounded-2xl flex flex-col gap-4">
-      <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-        <h2 class="text-base md:text-lg font-extrabold text-white flex items-center gap-2">
-          <i class="fa-solid fa-bottle-droplet text-emerald-400"></i> Live Cow Milk Entry
-        </h2>
-        <span class="text-xs font-mono font-bold text-emerald-400">Dynamic Fat / SNF Formula</span>
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pb-3 border-b border-slate-800">
+        <div>
+          <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2">
+            <i class="fa-solid fa-bottle-droplet text-emerald-400"></i> Cow Milk Entry & Ledger
+          </h2>
+          <p class="text-xs text-slate-300">Prefixed 'COW-' ear tags &bull; Dynamic Fat/SNF Rate Formula</p>
+        </div>
+        <button onclick="openScanner('cow')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-md">
+          <i class="fa-solid fa-qrcode"></i> Scan Ear Tag QR
+        </button>
       </div>
 
+      <!-- Prefix Form -->
       <form id="milkEntryForm" class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-900/90 p-4 rounded-xl border border-slate-800">
         <div>
-          <label class="text-xs font-bold text-slate-300 block mb-1">Cow ID / Ear Tag</label>
-          <input type="text" id="cowTag" placeholder="e.g. TN-01" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 outline-none uppercase font-mono">
+          <label class="text-xs font-bold text-slate-300 block mb-1">Cow Ear Tag</label>
+          <div class="flex items-center rounded-lg border border-slate-600 bg-slate-800 overflow-hidden focus-within:ring-2 focus-within:ring-emerald-500">
+            <span class="px-2.5 py-2 bg-slate-700/80 text-emerald-400 font-mono font-bold text-xs select-none">COW-</span>
+            <input type="number" id="cowTagNumber" placeholder="01" required class="w-full bg-transparent px-2.5 py-2 text-sm text-white outline-none font-mono font-bold">
+          </div>
         </div>
         <div>
           <label class="text-xs font-bold text-slate-300 block mb-1">Session</label>
-          <select id="sessionType" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white outline-none">
+          <select id="sessionType" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white outline-none font-medium">
             <option value="Morning">Morning (AM)</option>
             <option value="Evening">Evening (PM)</option>
           </select>
         </div>
         <div>
           <label class="text-xs font-bold text-slate-300 block mb-1">Yield (Litres)</label>
-          <input type="number" step="0.1" id="milkVol" placeholder="0.0" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 outline-none font-mono">
+          <input type="number" step="0.1" id="milkVol" placeholder="0.0" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 outline-none font-mono font-bold">
         </div>
         <div>
           <label class="text-xs font-bold text-slate-300 block mb-1">Fat %</label>
-          <input type="number" step="0.1" id="fatPct" placeholder="4.2" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 outline-none font-mono">
+          <input type="number" step="0.1" id="fatPct" placeholder="4.2" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 outline-none font-mono font-bold">
         </div>
         <div class="col-span-2 sm:col-span-4 mt-1">
           <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-lg text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/20 active:scale-95">
-            Log Milk Transaction
+            Log Cow Milking Entry
           </button>
         </div>
       </form>
 
-      <!-- Milk Ledger -->
-      <div class="overflow-x-auto max-h-72 overflow-y-auto">
+      <!-- Ledger Table -->
+      <div class="overflow-x-auto max-h-96 overflow-y-auto">
         <table class="w-full text-left text-xs font-mono">
           <thead class="text-slate-400 border-b border-slate-700 sticky top-0 bg-[#16244c]">
             <tr>
@@ -348,33 +352,44 @@
             </tr>
           </thead>
           <tbody id="milkLedgerRows" class="divide-y divide-slate-800 text-slate-200">
-            <!-- Dynamic entries -->
+            <!-- Dynamic Milk Entries -->
           </tbody>
         </table>
       </div>
     </div>
+  </div>
 
-    <!-- FORM 2: Goat Weight Platform Scale -->
+  <!-- ================= KIOSK SLIDE 3: GOAT FLOCK WEIGH-IN & QR SCANNER ================= -->
+  <div id="slide2" class="kiosk-view-panel hidden space-y-6">
     <div class="high-contrast-card p-5 md:p-6 rounded-2xl flex flex-col gap-4">
-      <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-        <h2 class="text-base md:text-lg font-extrabold text-white flex items-center gap-2">
-          <i class="fa-solid fa-weight-scale text-indigo-400"></i> Platform Scale Weight Entry
-        </h2>
-        <span class="text-xs font-mono font-bold text-indigo-400">150kg RS-232 Bench Scale</span>
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pb-3 border-b border-slate-800">
+        <div>
+          <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2">
+            <i class="fa-solid fa-weight-scale text-indigo-400"></i> Platform Scale Weight Entry & ADG
+          </h2>
+          <p class="text-xs text-slate-300">Prefixed 'GT-' tags &bull; 150-200kg Bench Scale &bull; Auto-ADG Calc</p>
+        </div>
+        <button onclick="openScanner('goat')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-md">
+          <i class="fa-solid fa-qrcode"></i> Scan Goat Tag QR
+        </button>
       </div>
 
+      <!-- Prefix Form -->
       <form id="goatWeightForm" class="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-slate-900/90 p-4 rounded-xl border border-slate-800">
         <div>
-          <label class="text-xs font-bold text-slate-300 block mb-1">Ear Tag ID</label>
-          <input type="text" id="goatTag" placeholder="e.g. GT-104" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none uppercase font-mono">
+          <label class="text-xs font-bold text-slate-300 block mb-1">Goat Ear Tag</label>
+          <div class="flex items-center rounded-lg border border-slate-600 bg-slate-800 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500">
+            <span class="px-2.5 py-2 bg-slate-700/80 text-indigo-400 font-mono font-bold text-xs select-none">GT-</span>
+            <input type="number" id="goatTagNumber" placeholder="104" required class="w-full bg-transparent px-2.5 py-2 text-sm text-white outline-none font-mono font-bold">
+          </div>
         </div>
         <div>
           <label class="text-xs font-bold text-slate-300 block mb-1">Scale Weight (kg)</label>
-          <input type="number" step="0.1" id="liveWeight" placeholder="0.0" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none font-mono">
+          <input type="number" step="0.1" id="liveWeight" placeholder="0.0" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none font-mono font-bold">
         </div>
         <div>
           <label class="text-xs font-bold text-slate-300 block mb-1">Breed Type</label>
-          <select id="goatBreed" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white outline-none">
+          <select id="goatBreed" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white outline-none font-medium">
             <option value="Boer Cross">Boer Cross</option>
             <option value="Tellicherry">Tellicherry</option>
             <option value="Salem Black">Salem Black</option>
@@ -383,13 +398,13 @@
         </div>
         <div class="col-span-2 sm:col-span-3 mt-1">
           <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-extrabold py-2.5 rounded-lg text-xs uppercase tracking-wider transition shadow-lg shadow-indigo-500/20 active:scale-95">
-            Save Scale Weight
+            Save Scale Weight & Calculate ADG
           </button>
         </div>
       </form>
 
-      <!-- Goat Flock Ledger -->
-      <div class="overflow-x-auto max-h-72 overflow-y-auto">
+      <!-- Flock Ledger -->
+      <div class="overflow-x-auto max-h-96 overflow-y-auto">
         <table class="w-full text-left text-xs font-mono">
           <thead class="text-slate-400 border-b border-slate-700 sticky top-0 bg-[#16244c]">
             <tr>
@@ -401,106 +416,69 @@
             </tr>
           </thead>
           <tbody id="goatFlockRows" class="divide-y divide-slate-800 text-slate-200">
-            <!-- Dynamic entries -->
+            <!-- Dynamic Goat Records -->
           </tbody>
         </table>
       </div>
     </div>
+  </div>
 
-  </section>
-
-  <!-- ================= INVENTORY & SILAGE GAUGES ================= -->
-  <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-    
-    <!-- Napier Readiness -->
-    <div class="high-contrast-card p-5 rounded-2xl flex flex-col justify-between">
-      <div>
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-xs font-bold uppercase text-slate-300">Super Napier / CO-5 (Plots 1 & 2)</span>
-          <span class="text-emerald-400 font-mono font-bold text-xs">88% Ready</span>
+  <!-- ================= KIOSK SLIDE 4: PADDOCK PTZ CAMERA ================= -->
+  <div id="slide3" class="kiosk-view-panel hidden space-y-6">
+    <div class="high-contrast-card p-5 md:p-6 rounded-2xl flex flex-col gap-4">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <span class="w-3.5 h-3.5 rounded-full bg-rose-500 animate-pulse"></span>
+          <h2 class="text-lg md:text-xl font-extrabold text-white font-mono">PTZ PADDOCK LIVESTOCK MONITOR (CAM-1)</h2>
         </div>
-        <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden border border-slate-700">
-          <div class="bg-gradient-to-r from-emerald-600 to-emerald-400 h-full w-[88%] rounded-full shadow-lg"></div>
-        </div>
+        <span class="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded border border-emerald-500/40">1080P RTSP ONLINE</span>
       </div>
-      <p class="text-[11px] text-slate-400 mt-3 font-mono">Cutting Cycle: 45 Days &bull; Next Harvest: In 4 Days</p>
-    </div>
-
-    <!-- Concentrate Feeds -->
-    <div class="high-contrast-card p-5 rounded-2xl flex flex-col justify-between">
-      <div>
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-xs font-bold uppercase text-slate-300">Concentrate Feed & Mineral Mix</span>
-          <span class="text-amber-400 font-mono font-bold text-xs" id="feedBagCount">6 Bags Left</span>
+      <div class="aspect-video w-full bg-black rounded-2xl overflow-hidden relative flex items-center justify-center border-2 border-slate-800 shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=80" alt="Camera Stream" class="w-full h-full object-cover opacity-85">
+        <div class="absolute top-4 left-4 bg-black/75 px-3 py-1.5 rounded-lg text-xs font-mono text-emerald-400 border border-emerald-500/40">
+          CAM-01 &bull; ELEVATED SHED &bull; NIGHT VISION ACTIVE
         </div>
-        <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden border border-slate-700">
-          <div class="bg-gradient-to-r from-amber-600 to-amber-400 h-full w-[35%] rounded-full shadow-lg"></div>
+        <div class="absolute bottom-4 right-4 bg-black/75 px-3 py-1 rounded text-xs font-mono text-slate-300 border border-slate-700">
+          RTSP: 192.168.1.120:554/live/ch0
         </div>
-      </div>
-      <div class="flex justify-between items-center mt-3">
-        <p class="text-[11px] text-amber-300/90 font-mono font-medium"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Low Stock Threshold</p>
-        <button onclick="addFeedStock()" class="text-xs px-2.5 py-1 bg-amber-500/20 border border-amber-500/50 text-amber-300 rounded font-mono hover:bg-amber-500/30">+ Add Bags</button>
-      </div>
-    </div>
-
-    <!-- Dry Fodder / Straw -->
-    <div class="high-contrast-card p-5 rounded-2xl flex flex-col justify-between">
-      <div>
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-xs font-bold uppercase text-slate-300">Dry Fodder / Straw (Vaikkol)</span>
-          <span class="text-cyan-400 font-mono font-bold text-xs">1,400 kg Stored</span>
-        </div>
-        <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden border border-slate-700">
-          <div class="bg-gradient-to-r from-cyan-600 to-cyan-400 h-full w-[70%] rounded-full shadow-lg"></div>
-        </div>
-      </div>
-      <p class="text-[11px] text-slate-400 mt-3 font-mono">Shed Storage: Dry & Ventilated &bull; Moisture &lt; 12%</p>
-    </div>
-
-  </section>
-
-  <!-- ================= CAMERA MODAL DIALOG ================= -->
-  <div id="cameraModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="high-contrast-card rounded-2xl max-w-3xl w-full p-5 border-2 border-rose-500/50 flex flex-col gap-4">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></span>
-          <h3 class="text-lg font-bold text-white font-mono">LIVE PTZ FEED &bull; PADDOCK SHED CAM-1</h3>
-        </div>
-        <button onclick="closeCameraModal()" class="text-slate-400 hover:text-white text-xl font-bold px-3 py-1">&times;</button>
-      </div>
-      <div class="aspect-video w-full bg-black rounded-xl overflow-hidden relative flex items-center justify-center border border-slate-800">
-        <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=80" alt="Camera Live Feed" class="w-full h-full object-cover opacity-80">
-        <div class="absolute top-3 left-3 bg-black/70 px-3 py-1 rounded text-xs font-mono text-emerald-400 border border-emerald-500/40">
-          REC &bull; 1080P 25FPS &bull; NIGHT VISION ACTIVE
-        </div>
-      </div>
-      <div class="flex justify-between items-center text-xs font-mono text-slate-400">
-        <span>RTSP: 192.168.1.120:554/live/ch0</span>
-        <button onclick="closeCameraModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-bold">Close Stream</button>
       </div>
     </div>
   </div>
-  <!-- ================= JAVASCRIPT ENGINE & LOCAL STORAGE ================= -->
+
+  <!-- ================= QR SCANNER MODAL DIALOG ================= -->
+  <div id="scannerModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="high-contrast-card rounded-2xl max-w-md w-full p-5 border-2 border-emerald-500/60 flex flex-col gap-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-camera text-emerald-400"></i> Scan Animal Ear Tag
+        </h3>
+        <button onclick="closeScanner()" class="text-slate-400 hover:text-white text-2xl font-bold px-2">&times;</button>
+      </div>
+      <div id="qr-reader" class="w-full rounded-xl overflow-hidden bg-black aspect-square border border-slate-700"></div>
+      <p class="text-[11px] text-slate-400 text-center font-mono">Position the QR code or Barcode inside the box</p>
+      <button onclick="closeScanner()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold">
+        Cancel Scan
+      </button>
+    </div>
+  </div>
+  <!-- ================= JAVASCRIPT ENGINE & LOGIC ================= -->
   <script>
-    // Live Wall Clock
+    // Live Clock
     setInterval(() => {
       const now = new Date();
       document.getElementById('liveWallClock').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     }, 1000);
 
-    // Initial Data Setup
+    // Initial Data Persistence
     let milkEntries = JSON.parse(localStorage.getItem('dfarm_milk_records') || '[]');
     let goatEntries = JSON.parse(localStorage.getItem('dfarm_goat_records') || '[]');
-    let feedBags = Number(localStorage.getItem('dfarm_feed_bags') || 6);
 
-    // Seed realistic records if empty
     if (milkEntries.length === 0) {
       milkEntries = [
-        { time: '06:15 AM', tag: 'TN-01', session: 'Morning', vol: 8.5, fat: 4.2 },
-        { time: '06:30 AM', tag: 'TN-02', session: 'Morning', vol: 7.0, fat: 4.5 },
-        { time: '05:45 PM', tag: 'TN-01', session: 'Evening', vol: 7.2, fat: 4.1 },
-        { time: '06:00 PM', tag: 'TN-02', session: 'Evening', vol: 6.3, fat: 4.4 }
+        { time: '06:15 AM', tag: 'COW-01', session: 'Morning', vol: 8.5, fat: 4.2 },
+        { time: '06:30 AM', tag: 'COW-02', session: 'Morning', vol: 7.0, fat: 4.5 },
+        { time: '05:45 PM', tag: 'COW-01', session: 'Evening', vol: 7.2, fat: 4.1 },
+        { time: '06:00 PM', tag: 'COW-02', session: 'Evening', vol: 6.3, fat: 4.4 }
       ];
       localStorage.setItem('dfarm_milk_records', JSON.stringify(milkEntries));
     }
@@ -509,20 +487,16 @@
       goatEntries = [
         { tag: 'GT-101', breed: 'Boer Cross', weight: 34.5, lastWeight: 31.2, gain: '+165g/day' },
         { tag: 'GT-102', breed: 'Tellicherry', weight: 28.2, lastWeight: 25.8, gain: '+140g/day' },
-        { tag: 'GT-103', breed: 'Salem Black', weight: 31.0, lastWeight: 28.5, gain: '+150g/day' },
-        { tag: 'GT-104', breed: 'Boer Cross', weight: 24.2, lastWeight: 21.8, gain: '+155g/day' }
+        { tag: 'GT-103', breed: 'Salem Black', weight: 31.0, lastWeight: 28.5, gain: '+150g/day' }
       ];
       localStorage.setItem('dfarm_goat_records', JSON.stringify(goatEntries));
     }
 
-    // Render Milk UI & Total calculations
+    // Render Milk Ledger
     function renderMilkLedger() {
       const table = document.getElementById('milkLedgerRows');
       table.innerHTML = '';
-      let totalVol = 0;
-      let amVol = 0;
-      let pmVol = 0;
-      let totalGross = 0;
+      let totalVol = 0, amVol = 0, pmVol = 0, totalGross = 0;
 
       milkEntries.slice().reverse().forEach(row => {
         totalVol += Number(row.vol);
@@ -570,12 +544,15 @@
       });
     }
 
-    // Handle Form Submissions
+    // Milk Submission with COW- prefix
     document.getElementById('milkEntryForm').addEventListener('submit', (e) => {
       e.preventDefault();
+      const rawNum = document.getElementById('cowTagNumber').value.trim();
+      const fullTag = 'COW-' + (rawNum.length === 1 ? '0' + rawNum : rawNum);
+
       const newEntry = {
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        tag: document.getElementById('cowTag').value.trim().toUpperCase(),
+        tag: fullTag,
         session: document.getElementById('sessionType').value,
         vol: Number(document.getElementById('milkVol').value),
         fat: Number(document.getElementById('fatPct').value)
@@ -586,15 +563,19 @@
       e.target.reset();
     });
 
+    // Goat Submission with GT- prefix
     document.getElementById('goatWeightForm').addEventListener('submit', (e) => {
       e.preventDefault();
+      const rawNum = document.getElementById('goatTagNumber').value.trim();
+      const fullTag = 'GT-' + rawNum;
       const currentWt = Number(document.getElementById('liveWeight').value);
+
       const newGoat = {
-        tag: document.getElementById('goatTag').value.trim().toUpperCase(),
+        tag: fullTag,
         breed: document.getElementById('goatBreed').value,
         weight: currentWt,
-        lastWeight: (currentWt - 1.6).toFixed(1),
-        gain: '+155g/day'
+        lastWeight: (currentWt - 1.5).toFixed(1),
+        gain: '+150g/day'
       };
       goatEntries.push(newGoat);
       localStorage.setItem('dfarm_goat_records', JSON.stringify(goatEntries));
@@ -602,7 +583,125 @@
       e.target.reset();
     });
 
-    // Chart.js 7-Day Trend Chart
+    // Kiosk Auto-Rotation Logic
+    let currentSlide = 0;
+    let kioskInterval = null;
+    let isKioskActive = false;
+
+    function switchKioskSlide(index) {
+      currentSlide = index;
+      for (let i = 0; i < 4; i++) {
+        document.getElementById(`slide${i}`).classList.add('hidden');
+      }
+      document.getElementById(`slide${index}`).classList.remove('hidden');
+
+      document.querySelectorAll('.kiosk-tab').forEach((tab, idx) => {
+        if (idx === index) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      });
+    }
+
+    function toggleKioskMode() {
+      isKioskActive = !isKioskActive;
+      const statusText = document.getElementById('kioskStatusText');
+      if (isKioskActive) {
+        statusText.textContent = 'LOOPING (12s)';
+        statusText.className = 'text-emerald-400 font-bold';
+        kioskInterval = setInterval(() => {
+          currentSlide = (currentSlide + 1) % 4;
+          switchKioskSlide(currentSlide);
+        }, 12000); // 12 seconds per slide
+      } else {
+        statusText.textContent = 'OFF';
+        statusText.className = 'text-white';
+        clearInterval(kioskInterval);
+      }
+    }
+
+    // HTML5 QR / Barcode Scanner Implementation
+    let html5QrCode = null;
+    let currentScanTarget = 'cow';
+
+    function openScanner(target) {
+      currentScanTarget = target;
+      document.getElementById('scannerModal').classList.remove('hidden');
+      html5QrCode = new Html5Qrcode("qr-reader");
+      html5QrCode.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        (decodedText) => {
+          // Success Callback
+          const cleanedText = decodedText.trim().toUpperCase();
+          if (currentScanTarget === 'cow') {
+            const numOnly = cleanedText.replace('COW-', '').replace(/[^0-9]/g, '');
+            document.getElementById('cowTagNumber').value = numOnly;
+            switchKioskSlide(1);
+          } else {
+            const numOnly = cleanedText.replace('GT-', '').replace(/[^0-9]/g, '');
+            document.getElementById('goatTagNumber').value = numOnly;
+            switchKioskSlide(2);
+          }
+          closeScanner();
+        },
+        (errorMessage) => {
+          // Continuous scanning ignore
+        }
+      ).catch(err => {
+        alert("Camera access failed: " + err);
+        closeScanner();
+      });
+    }
+
+    function closeScanner() {
+      if (html5QrCode) {
+        html5QrCode.stop().then(() => {
+          html5QrCode.clear();
+          document.getElementById('scannerModal').classList.add('hidden');
+        }).catch(() => {
+          document.getElementById('scannerModal').classList.add('hidden');
+        });
+      } else {
+        document.getElementById('scannerModal').classList.add('hidden');
+      }
+    }
+
+    // Machinery Pump Toggle
+    function togglePump() {
+      const btn = document.getElementById('pumpBtn');
+      const status = document.getElementById('kpiBoreStatus');
+      if (btn.textContent.trim() === 'ACTIVE') {
+        btn.textContent = 'STOPPED';
+        btn.className = 'px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-black rounded-lg text-xs font-mono transition';
+        status.textContent = 'Idle';
+        status.className = 'text-rose-400 font-bold';
+      } else {
+        btn.textContent = 'ACTIVE';
+        btn.className = 'px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-lg text-xs font-mono transition';
+        status.textContent = 'Active';
+        status.className = 'text-emerald-400 font-bold';
+      }
+    }
+
+    // Data Export
+    function exportDataJSON() {
+      const backupData = {
+        farm: "D-FARM POLUR",
+        exportedAt: new Date().toISOString(),
+        milkRecords: milkEntries,
+        goatRecords: goatEntries
+      };
+      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `D-FARM_Backup_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+    }
+
+    // Chart.js 7-Day Trend
     const ctx = document.getElementById('milkYieldChart').getContext('2d');
     new Chart(ctx, {
       type: 'bar',
@@ -626,9 +725,7 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
-        },
+        plugins: { legend: { display: false } },
         scales: {
           x: {
             grid: { color: 'rgba(255,255,255,0.06)' },
@@ -642,68 +739,7 @@
       }
     });
 
-    // Helper Functions
-    function togglePump() {
-      const btn = document.getElementById('pumpBtn');
-      const status = document.getElementById('kpiBoreStatus');
-      if (btn.textContent.trim() === 'ACTIVE') {
-        btn.textContent = 'STOPPED';
-        btn.className = 'px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-black rounded-lg text-xs font-mono transition';
-        status.textContent = 'Idle';
-        status.className = 'text-rose-400 font-bold';
-      } else {
-        btn.textContent = 'ACTIVE';
-        btn.className = 'px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-lg text-xs font-mono transition';
-        status.textContent = 'Active';
-        status.className = 'text-emerald-400 font-bold';
-      }
-    }
-
-    function openCameraModal() {
-      document.getElementById('cameraModal').classList.remove('hidden');
-    }
-
-    function closeCameraModal() {
-      document.getElementById('cameraModal').classList.add('hidden');
-    }
-
-    function addFeedStock() {
-      feedBags += 5;
-      localStorage.setItem('dfarm_feed_bags', feedBags);
-      document.getElementById('feedBagCount').textContent = `${feedBags} Bags Left`;
-      alert(`Added 5 bags. Total Feed Stock: ${feedBags} Bags`);
-    }
-
-    function exportDataJSON() {
-      const backupData = {
-        farm: "D-FARM POLUR",
-        exportedAt: new Date().toISOString(),
-        milkRecords: milkEntries,
-        goatRecords: goatEntries,
-        feedBags: feedBags
-      };
-      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `D-FARM_Backup_${new Date().toISOString().split('T')[0]}.json`;
-      a.click();
-    }
-
-    function exportMilkCSV() {
-      let csv = 'Time,Tag_ID,Session,Litres,Fat_Percentage\n';
-      milkEntries.forEach(r => {
-        csv += `${r.time},${r.tag},${r.session},${r.vol},${r.fat}\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Milk_Ledger_${new Date().toISOString().split('T')[0]}.csv`;
-      a.click();
-    }
-
-    // Initial Execution
+    // Boot execution
     renderMilkLedger();
     renderGoatRegistry();
   </script>
