@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
-
 :root {
   --bg-cream: #FAF6EE;
   --brand-green: #143627;
@@ -7,10 +5,10 @@
   --gold-accent: #D97706;
 }
 
-body {
+html, body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   background-color: var(--bg-cream);
-  color: #143627;
+  color: var(--brand-green);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -18,21 +16,19 @@ body {
 .font-serif-title {
   font-family: 'Playfair Display', Georgia, serif;
 }
-html, body {
-      overflow-x: hidden;
-      min-height: 100%;
-    }
-    .organic-card {
-      height: auto !important;
-      min-height: 310px !important;
-    }
-/* Luxury Organic Cards */
+
+/* Luxury Organic Cards: Responsive Sizing & Alignment */
 .organic-card {
   background-color: #FFFFFF;
   border: 1px solid rgba(20, 54, 39, 0.08);
   border-radius: 1.5rem;
   box-shadow: 0 10px 25px -5px rgba(20, 54, 39, 0.05);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 320px !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
 }
 
 /* Touch & Hover Glow Effects */
