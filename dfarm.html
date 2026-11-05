@@ -19,7 +19,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./dfarm/css/style.css">
-
+<style>
+    /* F5 Refresh Layout Lock */
+    html, body {
+      overflow-x: hidden;
+      min-height: 100%;
+    }
+    .organic-card {
+      height: auto !important;
+      min-height: 310px !important;
+    }
+  </style>
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-serif-title { font-family: 'Playfair Display', serif; }
@@ -1524,6 +1534,11 @@
       initOpsListeners();
       initAnimalsListener();
       initCustomerListener();
+    });
+    window.addEventListener('load', () => {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
     });
   </script>
 </body>
