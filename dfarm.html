@@ -1786,6 +1786,11 @@
       initAnimalsListener();
       initCustomerListener();
       initFinancialListener();
+      if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('D-FARM PWA Service Worker Registered!'))
+        .catch((err) => console.log('SW Registration Failed:', err));
+    }
     });
   </script>
 </body>
