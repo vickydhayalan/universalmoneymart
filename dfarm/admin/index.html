@@ -3,1101 +3,709 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D-FARM &bull; Futuristic Agro-Tech Command Center</title>
+  <title>D-FARM &bull; Executive Command Center</title>
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Font Awesome 6 CDN -->
+  <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
           },
           colors: {
-            agro: {
-              950: '#060a12',
-              900: '#0a101d',
-              850: '#0e172a',
-              800: '#152238',
-              700: '#1e3252',
-              emerald: '#10b981',
-              neonGreen: '#00f59b',
-              cyan: '#06b6d4',
-              neonCyan: '#00f0ff',
-              amber: '#f59e0b',
-              indigo: '#6366f1',
-              rose: '#f43f5e'
-            }
-          },
-          boxShadow: {
-            'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.35)',
-            'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.35)',
-            'glow-card': '0 8px 32px 0 rgba(0, 0, 0, 0.45)',
+            farmNavy: '#0a1226',
+            farmCard: '#131e3d',
+            farmCardHover: '#1a2952',
+            farmBorder: '#293d73',
+            farmGlowGreen: '#10b981',
+            farmGlowCyan: '#06b6d4',
+            farmGlowAmber: '#f59e0b',
           }
         }
       }
     }
   </script>
+
   <style>
-    /* High-tech glassmorphism effect */
-    .glass-panel {
-      background: rgba(14, 23, 42, 0.72);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+    body {
+      background: radial-gradient(circle at 50% 0%, #152752 0%, #070d1e 100%);
+      background-attachment: fixed;
     }
-    .glass-card-hover {
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    .high-contrast-card {
+      background: linear-gradient(180deg, #16244c 0%, #0f1833 100%);
+      border: 1.5px solid #283e77;
+      box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     }
-    .glass-card-hover:hover {
-      border-color: rgba(16, 185, 129, 0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px -8px rgba(0, 245, 155, 0.15);
+    .high-contrast-card:hover {
+      border-color: #3e62bc;
     }
-    /* Subtle grid pattern background */
-    .bg-tech-grid {
-      background-image: radial-gradient(rgba(30, 50, 82, 0.45) 1px, transparent 1px);
-      background-size: 24px 24px;
+    .neon-text-green {
+      text-shadow: 0 0 25px rgba(16, 185, 129, 0.55);
     }
-    /* Modern sleek scrollbar */
+    .neon-text-cyan {
+      text-shadow: 0 0 25px rgba(6, 182, 212, 0.55);
+    }
+    .neon-text-amber {
+      text-shadow: 0 0 25px rgba(245, 158, 11, 0.55);
+    }
     ::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #060a12;
+      background: #0d152b;
     }
     ::-webkit-scrollbar-thumb {
-      background: #1e3252;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #10b981;
+      background: #2b417e;
+      border-radius: 4px;
     }
   </style>
 </head>
-<body class="bg-agro-950 bg-tech-grid text-slate-100 min-h-screen font-sans flex flex-col antialiased selection:bg-agro-neonGreen selection:text-black">
+<body class="text-slate-100 min-h-screen p-3 md:p-6 font-sans antialiased">
 
-  <!-- Top Global Telemetry Navigation Header -->
-  <header class="glass-panel sticky top-0 z-50 border-b border-agro-700/60 px-4 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
-    <!-- Brand Identity -->
-    <div class="flex items-center gap-3.5">
-      <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center shadow-glow-emerald">
-        <i class="fa-solid fa-leaf text-agro-950 text-xl font-bold"></i>
-        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-agro-neonGreen rounded-full border-2 border-agro-950 animate-pulse"></span>
+  <!-- ================= TOP COMMAND HEADER ================= -->
+  <header class="high-contrast-card rounded-2xl p-4 md:px-6 mb-6 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
+    <!-- Brand Identity & Logo -->
+    <div class="flex items-center gap-4">
+      <div class="w-16 h-16 rounded-2xl bg-white p-2 flex items-center justify-center shadow-xl shadow-emerald-500/20 border-2 border-emerald-400 shrink-0">
+        <img src="/Logo.png" alt="D-FARM Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=120&q=80';">
       </div>
       <div>
-        <div class="flex items-center gap-2.5">
-          <h1 class="text-lg md:text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
-            D-FARM <span class="text-[10px] tracking-wider uppercase font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-agro-neonGreen border border-emerald-500/30">Command OS v2.4</span>
-          </h1>
+        <div class="flex items-center gap-3 flex-wrap">
+          <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white font-sans">D-FARM</h1>
+          <span class="px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wider bg-emerald-500 text-slate-950 font-mono shadow-sm">POLUR ENTERPRISE</span>
+          <span class="px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-blue-500/20 border border-blue-400/40 text-blue-300 font-mono">COMMAND OS v4.0</span>
         </div>
-        <p class="text-xs text-slate-400 font-mono flex items-center gap-2">
-          <span><i class="fa-solid fa-location-dot text-rose-400 text-[10px]"></i> Polur, TN (12.51°N, 79.12°E)</span>
-          <span class="text-slate-600">&bull;</span>
-          <span class="text-emerald-400/90 font-medium">Tariff III-B Connected</span>
+        <p class="text-xs md:text-sm text-slate-300 font-medium flex items-center gap-2 mt-1">
+          <i class="fa-solid fa-location-dot text-rose-500"></i> Polur, TN &bull; Tariff III-B 3-Phase &bull; Automated Farm Operations
         </p>
       </div>
     </div>
 
-    <!-- Live Telemetry Matrix -->
-    <div class="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs font-mono">
-      <!-- 3-Phase Power Metric -->
-      <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-agro-900/90 border border-agro-700/80 shadow-inner">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        <span class="text-slate-400">EB Grid:</span>
-        <span class="text-agro-neonGreen font-bold">418V (3-Ph)</span>
+    <!-- Power & Status Badges -->
+    <div class="flex flex-wrap items-center gap-3 w-full xl:w-auto">
+      <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-950/80 border border-emerald-500/60 text-emerald-300 font-mono text-xs md:text-sm font-bold shadow-lg">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <i class="fa-solid fa-bolt text-emerald-400"></i> EB: 418V (3-Phase)
       </div>
 
-      <!-- Solar Pump Telemetry -->
-      <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-agro-900/90 border border-agro-700/80">
-        <i class="fa-solid fa-solar-panel text-amber-400 text-xs"></i>
-        <span class="text-slate-400">Solar 5HP:</span>
-        <span class="text-amber-300 font-bold" id="solarYieldText">RUNNING &bull; 4.4kW</span>
+      <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-950/80 border border-amber-500/60 text-amber-300 font-mono text-xs md:text-sm font-bold shadow-lg">
+        <i class="fa-solid fa-solar-panel text-amber-400"></i> PM-KUSUM: 4.5 kW
       </div>
 
-      <!-- Storage Sync Mode (Local / Firestore toggle) -->
-      <div id="storageIndicator" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-agro-850 border border-agro-cyan/40 text-cyan-300">
-        <i class="fa-solid fa-cloud-arrow-up text-xs animate-bounce"></i>
-        <span class="hidden md:inline font-sans text-[11px] text-slate-300">DB State:</span>
-        <span class="font-bold font-mono text-[11px]" id="storageStatusText">Firestore Synced</span>
-      </div>
+      <button onclick="exportDataJSON()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cyan-950/80 border border-cyan-500/60 text-cyan-300 hover:bg-cyan-900/60 font-mono text-xs md:text-sm font-bold shadow-lg transition">
+        <i class="fa-solid fa-cloud-arrow-down text-cyan-400"></i> Backup JSON
+      </button>
 
-      <!-- Live Clock & Export Action -->
-      <div class="flex items-center gap-2">
-        <div class="px-3 py-1.5 rounded-xl bg-agro-900 border border-slate-700 text-slate-200 font-bold" id="clockBox">
-          --:--:--
-        </div>
-        <button onclick="openDataModal()" title="Database Backups & Cloud Sync" class="p-2.5 rounded-xl bg-agro-800 hover:bg-agro-700 border border-slate-700 text-slate-200 transition">
-          <i class="fa-solid fa-sliders"></i>
-        </button>
+      <button onclick="exportMilkCSV()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-600 text-slate-200 hover:bg-slate-700 font-mono text-xs md:text-sm font-bold shadow-lg transition">
+        <i class="fa-solid fa-file-csv text-emerald-400"></i> CSV
+      </button>
+
+      <div class="px-4 py-2 rounded-xl bg-slate-900 border-2 border-slate-700 text-white font-mono text-base md:text-lg font-extrabold ml-auto xl:ml-0 shadow-inner" id="liveWallClock">
+        --:--:--
       </div>
     </div>
   </header>
 
-  <!-- Notification Toast -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-agro-900/95 border border-agro-neonGreen/40 text-emerald-300 px-4 py-3 rounded-2xl shadow-glow-emerald flex items-center gap-3 backdrop-blur-xl">
-    <div class="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center text-agro-neonGreen">
-      <i class="fa-solid fa-circle-check text-sm"></i>
-    </div>
-    <div>
-      <h4 class="text-xs font-bold text-white tracking-wide" id="toastTitle">System Telemetry Updated</h4>
-      <p class="text-[11px] text-slate-400 font-mono" id="toastMsg">Action executed successfully.</p>
-    </div>
-  </div>
-
-  <!-- Main Content Layout -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 space-y-6">
-
-    <!-- Section 1: Executive KPI Matrix (6 Cards) -->
-    <section class="grid grid-cols-2 lg:grid-cols-6 gap-3.5">
-      
-      <!-- Card 1: Today's Milk Output -->
-      <div class="glass-panel p-4 rounded-2xl glass-card-hover relative overflow-hidden col-span-2 sm:col-span-1 lg:col-span-2">
-        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase tracking-wider mb-2">
-          <span class="flex items-center gap-1.5"><i class="fa-solid fa-jug-detergent text-agro-neonGreen"></i> Today's Milk Yield</span>
-          <span class="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">Live</span>
-        </div>
+  <!-- ================= BIG-NUMBER METRIC CARDS ================= -->
+  <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 mb-6">
+    
+    <!-- 1. Today Milk Yield -->
+    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
+      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+        <span><i class="fa-solid fa-cow text-emerald-400 mr-1.5"></i> Milk Yield</span>
+        <span class="text-emerald-300 font-mono text-[11px] bg-emerald-950/90 px-2 py-0.5 rounded border border-emerald-500/40">TODAY</span>
+      </div>
+      <div class="my-3">
         <div class="flex items-baseline gap-2">
-          <span class="text-3xl lg:text-4xl font-extrabold text-white tracking-tight" id="kpiMilkVolume">0.0</span>
-          <span class="text-sm font-mono text-slate-400 font-semibold">Litres</span>
+          <span class="text-4xl md:text-5xl font-extrabold text-white font-mono neon-text-green" id="kpiMilkTotal">29.0</span>
+          <span class="text-base font-bold text-slate-300">L</span>
         </div>
-        <div class="mt-3 flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
-          <div class="font-mono">
-            <span class="text-slate-400 text-[11px]">Est. Revenue:</span>
-            <span class="font-bold text-agro-neonGreen ml-1" id="kpiMilkRevenue">₹0</span>
-          </div>
-          <span class="text-[11px] text-slate-400 font-mono" id="kpiMilkSplit">AM: 0L &bull; PM: 0L</span>
-        </div>
+        <p class="text-xs md:text-sm text-emerald-400 font-bold mt-1" id="kpiMilkCash">Est. ₹1,080 Gross</p>
       </div>
-
-      <!-- Card 2: Overhead Water Tank Capacity -->
-      <div class="glass-panel p-4 rounded-2xl glass-card-hover col-span-1 lg:col-span-1 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase tracking-wider mb-1">
-            <span>Water Tank</span>
-            <i class="fa-solid fa-water text-cyan-400"></i>
-          </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span class="text-2xl font-bold text-cyan-400 font-mono" id="tankLevelPct">86%</span>
-            <span class="text-[10px] text-slate-400">4,300 L</span>
-          </div>
-        </div>
-        <div class="mt-3">
-          <div class="w-full bg-agro-900 rounded-full h-1.5 overflow-hidden border border-slate-800">
-            <div id="tankLevelBar" class="bg-gradient-to-r from-teal-400 to-cyan-400 h-full rounded-full transition-all duration-500" style="width: 86%"></div>
-          </div>
-          <span class="text-[10px] text-slate-400 font-mono mt-1 block">Ultrasonic: Stable</span>
-        </div>
+      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+        <span>AM: <strong class="text-white" id="kpiMilkAM">15.5L</strong></span>
+        <span>PM: <strong class="text-white" id="kpiMilkPM">13.5L</strong></span>
       </div>
-
-      <!-- Card 3: Goat Herd ADG -->
-      <div class="glass-panel p-4 rounded-2xl glass-card-hover col-span-1 lg:col-span-1 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase tracking-wider mb-1">
-            <span>Goat Flock</span>
-            <i class="fa-solid fa-scale-balanced text-indigo-400"></i>
-          </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span class="text-2xl font-bold text-indigo-300 font-mono" id="kpiGoatCount">24</span>
-            <span class="text-[10px] text-slate-400">Tags</span>
-          </div>
-        </div>
-        <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
-          <span class="text-slate-400">Avg ADG:</span>
-          <span class="text-agro-neonGreen font-bold">+145g/day</span>
-        </div>
-      </div>
-
-      <!-- Card 4: Fodder Block Status -->
-      <div class="glass-panel p-4 rounded-2xl glass-card-hover col-span-1 lg:col-span-1 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase tracking-wider mb-1">
-            <span>Super Napier</span>
-            <i class="fa-solid fa-wheat-awn text-amber-400"></i>
-          </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span class="text-2xl font-bold text-amber-400 font-mono">420</span>
-            <span class="text-[10px] text-slate-400">kg Cut</span>
-          </div>
-        </div>
-        <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
-          <span class="text-slate-400">Plot 1:</span>
-          <span class="text-emerald-400 font-bold">88% Ready</span>
-        </div>
-      </div>
-
-      <!-- Card 5: Poultry & Roll-away Eggs -->
-      <div class="glass-panel p-4 rounded-2xl glass-card-hover col-span-1 lg:col-span-1 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase tracking-wider mb-1">
-            <span>Egg Yield</span>
-            <i class="fa-solid fa-egg text-yellow-300"></i>
-          </div>
-          <div class="flex items-baseline gap-1.5 mt-1">
-            <span class="text-2xl font-bold text-yellow-300 font-mono">48</span>
-            <span class="text-[10px] text-slate-400">Eggs today</span>
-          </div>
-        </div>
-        <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono">
-          <span class="text-slate-400">Layers:</span>
-          <span class="text-slate-300 font-bold">55 Birds</span>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Section 2: Real-time Charts & Analytics -->
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- 7-Day Milk Production & Revenue Chart -->
-      <div class="glass-panel p-5 rounded-3xl lg:col-span-2 flex flex-col justify-between">
-        <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-800 gap-2 mb-2">
-          <div>
-            <h2 class="text-sm md:text-base font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-chart-line text-agro-neonGreen"></i> Milk Production & Session Trends (7-Day)
-            </h2>
-            <p class="text-xs text-slate-400">Comparative Morning (AM) vs Evening (PM) yield breakdown</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center gap-1 text-[11px] font-mono text-slate-300 bg-agro-900 px-2.5 py-1 rounded-lg border border-slate-800">
-              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> AM
-            </span>
-            <span class="inline-flex items-center gap-1 text-[11px] font-mono text-slate-300 bg-agro-900 px-2.5 py-1 rounded-lg border border-slate-800">
-              <span class="w-2 h-2 rounded-full bg-cyan-400"></span> PM
-            </span>
-          </div>
-        </div>
-        <div class="w-full h-64 sm:h-72 mt-2">
-          <canvas id="milkYieldChart"></canvas>
-        </div>
-      </div>
-
-      <!-- Quick Operations & Telemetry Interlocks -->
-      <div class="glass-panel p-5 rounded-3xl flex flex-col justify-between space-y-4">
-        <div>
-          <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
-            <h2 class="text-sm md:text-base font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-microchip text-cyan-400"></i> Field Interlocks
-            </h2>
-            <span class="text-[10px] font-mono text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/30">Auto-Pilot</span>
-          </div>
-
-          <!-- Machine Control 1: Solar Pump -->
-          <div class="p-3.5 bg-agro-900/80 rounded-2xl border border-agro-700/80 space-y-2 mb-3">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-bold text-slate-200 flex items-center gap-1.5">
-                <i class="fa-solid fa-bore-hole text-cyan-400"></i> Borewell Submersible 5HP
-              </span>
-              <button onclick="togglePumpState()" id="pumpToggleBtn" class="text-[10px] px-2.5 py-1 font-mono font-bold rounded-lg bg-emerald-500/20 text-agro-neonGreen border border-emerald-500/40 hover:bg-emerald-500/30 transition">
-                ACTIVE
-              </button>
-            </div>
-            <div class="grid grid-cols-2 text-[11px] font-mono text-slate-400 pt-1">
-              <span>Depth: <strong class="text-slate-200">350 ft</strong></span>
-              <span>Discharge: <strong class="text-slate-200">2.5 Inch Pipe</strong></span>
-            </div>
-          </div>
-
-          <!-- Machine Control 2: 3HP Chaff Cutter -->
-          <div class="p-3.5 bg-agro-900/80 rounded-2xl border border-agro-700/80 space-y-2">
-            <div class="flex justify-between items-center text-xs">
-              <span class="font-bold text-slate-200 flex items-center gap-1.5">
-                <i class="fa-solid fa-gears text-indigo-400"></i> 3HP Chaff Cutter (DOL)
-              </span>
-              <button onclick="toggleCutterState()" id="cutterToggleBtn" class="text-[10px] px-2.5 py-1 font-mono font-bold rounded-lg bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 transition">
-                STANDBY
-              </button>
-            </div>
-            <div class="grid grid-cols-2 text-[11px] font-mono text-slate-400 pt-1">
-              <span>Current: <strong class="text-slate-200" id="cutterAmps">0.0 A</strong></span>
-              <span>Safety Switch: <strong class="text-emerald-400">LOCKED</strong></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Camera Shortcut Button -->
-        <button onclick="openCameraModal()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-slate-800 to-agro-800 hover:from-slate-700 hover:to-agro-700 border border-slate-700 text-slate-200 font-mono text-xs font-semibold flex items-center justify-center gap-2 shadow-lg transition">
-          <i class="fa-solid fa-video text-rose-400"></i> Launch PTZ Paddock Stream (CAM-1)
-        </button>
-      </div>
-
-    </section>
-
-    <!-- Section 3: Operational Tabs (Dairy, Goats, Feed Inventory) -->
-    <div class="glass-panel p-2 rounded-2xl border border-slate-800 flex gap-2 overflow-x-auto text-xs font-mono">
-      <button onclick="selectTab('dairy')" id="tabBtn-dairy" class="tab-button px-4 py-2.5 font-bold rounded-xl bg-emerald-500/20 text-agro-neonGreen border border-emerald-500/40 flex items-center gap-2 transition">
-        <i class="fa-solid fa-cow"></i> Daily Milk Registry
-      </button>
-      <button onclick="selectTab('goats')" id="tabBtn-goats" class="tab-button px-4 py-2.5 font-semibold rounded-xl text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
-        <i class="fa-solid fa-weight-scale"></i> Goat Flock & Platform Scales
-      </button>
-      <button onclick="selectTab('feed')" id="tabBtn-feed" class="tab-button px-4 py-2.5 font-semibold rounded-xl text-slate-400 hover:text-slate-200 flex items-center gap-2 transition">
-        <i class="fa-solid fa-boxes-stacked"></i> Fodder, Concentrates & Poultry
-      </button>
     </div>
 
-    <!-- TAB 1: Dairy Yield Ledger & Logger -->
-    <section id="panel-dairy" class="tab-panel grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- Quick Production Logger Form -->
-      <div class="glass-panel p-5 rounded-3xl h-fit border border-agro-700/60 shadow-glow-card">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-          <h3 class="text-sm font-bold text-white flex items-center gap-2">
-            <i class="fa-solid fa-circle-plus text-agro-neonGreen"></i> Log Milk Production
-          </h3>
-          <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">Auto-Revenue</span>
+    <!-- 2. Water Tank Level -->
+    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
+      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+        <span><i class="fa-solid fa-water text-cyan-400 mr-1.5"></i> Overhead Tank</span>
+        <span class="text-cyan-300 font-mono text-[11px] bg-cyan-950/90 px-2 py-0.5 rounded border border-cyan-500/40">JSN-04T</span>
+      </div>
+      <div class="my-3">
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl md:text-5xl font-extrabold text-cyan-300 font-mono neon-text-cyan" id="kpiTankPercent">86%</span>
+        </div>
+        <p class="text-xs md:text-sm text-cyan-400 font-bold mt-1" id="kpiTankLitres">4,300 L / 5,000 L</p>
+      </div>
+      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+        <span>Bore Pump:</span>
+        <span class="text-emerald-400 font-bold" id="kpiBoreStatus">Active</span>
+      </div>
+    </div>
+
+    <!-- 3. Goat Flock Count & ADG -->
+    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
+      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+        <span><i class="fa-solid fa-cubes-stacked text-indigo-400 mr-1.5"></i> Goat Flock</span>
+        <span class="text-indigo-300 font-mono text-[11px] bg-indigo-950/90 px-2 py-0.5 rounded border border-indigo-500/40">150KG SCALE</span>
+      </div>
+      <div class="my-3">
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl md:text-5xl font-extrabold text-white font-mono" id="kpiGoatCount">20</span>
+          <span class="text-base font-bold text-slate-300">Tags</span>
+        </div>
+        <p class="text-xs md:text-sm text-indigo-300 font-bold mt-1">Avg ADG: +145g / day</p>
+      </div>
+      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+        <span>Elevated Shed</span>
+        <span class="text-emerald-400 font-bold">100% Active</span>
+      </div>
+    </div>
+
+    <!-- 4. Super Napier Harvest -->
+    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between">
+      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+        <span><i class="fa-solid fa-wheat-awn text-amber-400 mr-1.5"></i> Green Fodder</span>
+        <span class="text-amber-300 font-mono text-[11px] bg-amber-950/90 px-2 py-0.5 rounded border border-amber-500/40">NAPIER</span>
+      </div>
+      <div class="my-3">
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl md:text-5xl font-extrabold text-amber-300 font-mono neon-text-amber" id="kpiFodderCut">420</span>
+          <span class="text-base font-bold text-slate-300">kg</span>
+        </div>
+        <p class="text-xs md:text-sm text-amber-400 font-bold mt-1">Super Napier Cut</p>
+      </div>
+      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+        <span>Chaffed: 350 kg</span>
+        <span class="text-slate-300">Plot 1 & 2</span>
+      </div>
+    </div>
+
+    <!-- 5. Poultry Eggs -->
+    <div class="high-contrast-card p-4 md:p-5 rounded-2xl flex flex-col justify-between col-span-2 md:col-span-1">
+      <div class="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-wider">
+        <span><i class="fa-solid fa-egg text-yellow-300 mr-1.5"></i> Egg Yield</span>
+        <span class="text-yellow-300 font-mono text-[11px] bg-yellow-950/90 px-2 py-0.5 rounded border border-yellow-500/40">NATTU</span>
+      </div>
+      <div class="my-3">
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl md:text-5xl font-extrabold text-yellow-300 font-mono" id="kpiEggCount">48</span>
+          <span class="text-base font-bold text-slate-300">Eggs</span>
+        </div>
+        <p class="text-xs md:text-sm text-yellow-400 font-bold mt-1">Country / Layer Birds</p>
+      </div>
+      <div class="pt-2.5 border-t border-slate-800 text-xs text-slate-300 flex justify-between font-mono">
+        <span>Total Birds: 55</span>
+        <span class="text-emerald-400 font-bold">87% Lay Rate</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ================= ANALYTICS & INTERLOCKS ================= -->
+  <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+    
+    <!-- 7-Day Production Graph -->
+    <div class="high-contrast-card p-5 md:p-6 rounded-2xl lg:col-span-2 flex flex-col justify-between">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+        <div>
+          <h2 class="text-lg md:text-xl font-extrabold text-white flex items-center gap-2.5">
+            <i class="fa-solid fa-chart-simple text-emerald-400"></i> Milk Production & Session Trends (7-Day)
+          </h2>
+          <p class="text-xs text-slate-300 font-medium">Comparative Morning (AM) vs Evening (PM) yield breakdown</p>
+        </div>
+        <div class="flex items-center gap-4 text-xs font-bold font-mono">
+          <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-emerald-500 shadow-sm"></span> Morning (AM)</span>
+          <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-md bg-cyan-500 shadow-sm"></span> Evening (PM)</span>
+        </div>
+      </div>
+      <div class="w-full h-64 md:h-72">
+        <canvas id="milkYieldChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Field Machinery & Controls Interlocks -->
+    <div class="high-contrast-card p-5 md:p-6 rounded-2xl flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-extrabold text-white flex items-center gap-2">
+            <i class="fa-solid fa-gears text-cyan-400"></i> Field Interlocks
+          </h2>
+          <span class="text-xs px-2.5 py-1 rounded-md bg-slate-900 border border-slate-700 text-slate-200 font-mono font-bold">Auto-Pilot ON</span>
         </div>
 
-        <form id="milkLogForm" onsubmit="handleMilkRecord(event)" class="space-y-3.5 text-xs">
-          <div>
-            <label class="block text-slate-400 mb-1 font-mono text-[11px]">Cattle Tag ID / Pet Name</label>
-            <input type="text" id="cowTag" required placeholder="e.g. IN-TN-401 (Lakshmi)" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-medium outline-none focus:border-agro-neonGreen focus:ring-1 focus:ring-agro-neonGreen transition">
-          </div>
-
-          <div class="grid grid-cols-2 gap-3">
+        <div class="space-y-3.5">
+          <!-- Borewell Submersible -->
+          <div class="p-3.5 rounded-xl bg-slate-900/95 border-2 border-emerald-500/50 flex justify-between items-center">
             <div>
-              <label class="block text-slate-400 mb-1 font-mono text-[11px]">Milking Session</label>
-              <select id="milkingSession" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-agro-neonGreen">
-                <option value="Morning">Morning (AM)</option>
-                <option value="Evening">Evening (PM)</option>
-              </select>
+              <p class="text-sm font-extrabold text-white flex items-center gap-2">
+                <i class="fa-solid fa-faucet-drip text-emerald-400"></i> Borewell Submersible 5HP
+              </p>
+              <p class="text-[11px] text-slate-400 font-mono mt-0.5">Depth: 350 ft &bull; 2.5 Inch Pipe</p>
             </div>
-            <div>
-              <label class="block text-slate-400 mb-1 font-mono text-[11px]">Volume (Litres)</label>
-              <input type="number" step="0.1" min="0.1" id="milkVolume" required placeholder="8.5" oninput="updateLiveRatePreview()" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono font-bold text-agro-neonGreen outline-none focus:border-agro-neonGreen">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-slate-400 mb-1 font-mono text-[11px]">Fat % (Tested)</label>
-              <input type="number" step="0.1" min="1" max="10" id="milkFat" value="4.2" required oninput="updateLiveRatePreview()" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono outline-none focus:border-agro-neonGreen">
-            </div>
-            <div>
-              <label class="block text-slate-400 mb-1 font-mono text-[11px]">SNF % (Lactometer)</label>
-              <input type="number" step="0.1" min="5" max="15" id="milkSnf" value="8.5" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono outline-none focus:border-agro-neonGreen">
-            </div>
-          </div>
-
-          <!-- Formula Preview Ribbon -->
-          <div class="p-3 bg-agro-900/90 rounded-xl border border-agro-700/60 font-mono text-xs flex justify-between items-center">
-            <div>
-              <span class="text-[10px] text-slate-400 block uppercase">Sliding Rate:</span>
-              <span class="font-bold text-slate-200" id="formulaRatePreview">₹35.40 / L</span>
-            </div>
-            <div class="text-right">
-              <span class="text-[10px] text-slate-400 block uppercase">Batch Total:</span>
-              <span class="font-extrabold text-agro-neonGreen text-sm" id="formulaBatchRev">₹0.00</span>
-            </div>
-          </div>
-
-          <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-xs tracking-wider uppercase transition shadow-glow-emerald">
-            Commit to Farm Database
-          </button>
-        </form>
-      </div>
-
-      <!-- Chronological Ledger Table -->
-      <div class="glass-panel p-5 rounded-3xl lg:col-span-2 flex flex-col justify-between border border-agro-700/60">
-        <div>
-          <div class="flex flex-wrap items-center justify-between pb-3 border-b border-slate-800 gap-2 mb-3">
-            <div>
-              <h3 class="text-sm font-bold text-white">Daily Milk Production Ledger</h3>
-              <p class="text-xs text-slate-400">Timestamped entries linked to animal ear-tags & Aavin billing records</p>
-            </div>
-            <button onclick="clearMilkLedger()" class="text-xs text-rose-400 hover:underline flex items-center gap-1 font-mono">
-              <i class="fa-solid fa-trash-can"></i> Clear Ledger
+            <button onclick="togglePump()" id="pumpBtn" class="px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-lg text-xs font-mono transition">
+              ACTIVE
             </button>
           </div>
 
-          <div class="overflow-x-auto max-h-80">
-            <table class="w-full text-left text-xs">
-              <thead class="text-slate-400 border-b border-slate-800 bg-agro-900/80 sticky top-0 font-mono text-[11px]">
-                <tr>
-                  <th class="py-2.5 px-3">Date/Time</th>
-                  <th class="py-2.5 px-3">Cow Tag ID</th>
-                  <th class="py-2.5 px-3">Session</th>
-                  <th class="py-2.5 px-3 text-right">Volume</th>
-                  <th class="py-2.5 px-3 text-right">Fat %</th>
-                  <th class="py-2.5 px-3 text-right">Total Revenue</th>
-                </tr>
-              </thead>
-              <tbody id="milkTableRows" class="divide-y divide-slate-800/80 font-mono text-slate-300">
-                <!-- Dynamically Populated -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-400 flex justify-between items-center">
-          <span>Formula: Base ₹32.00 (3.5% Fat) + ₹2.00 per +1.0% incremental Fat index.</span>
-          <span class="text-agro-neonGreen font-bold" id="milkTableTotalCount">0 records in memory</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 2: Goat Registry & 150-200kg Platform Scales -->
-    <section id="panel-goats" class="tab-panel hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- Goat Weight Entry Form -->
-      <div class="glass-panel p-5 rounded-3xl h-fit border border-agro-700/60 shadow-glow-card">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-          <h3 class="text-sm font-bold text-white flex items-center gap-2">
-            <i class="fa-solid fa-weight-scale text-indigo-400"></i> Platform Scale Weigh-in
-          </h3>
-          <span class="text-[10px] font-mono text-indigo-300 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/30">150-200kg Heavy Duty</span>
-        </div>
-
-        <form id="goatLogForm" onsubmit="handleGoatRecord(event)" class="space-y-3.5 text-xs">
-          <div>
-            <label class="block text-slate-400 mb-1 font-mono text-[11px]">Ear Tag Number</label>
-            <input type="text" id="goatTag" required placeholder="e.g. GT-204" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono font-medium outline-none focus:border-indigo-500">
-          </div>
-
-          <div class="grid grid-cols-2 gap-3">
+          <!-- Chaff Cutter DOL Starter -->
+          <div class="p-3.5 rounded-xl bg-slate-900/95 border border-slate-700 flex justify-between items-center">
             <div>
-              <label class="block text-slate-400 mb-1 font-mono text-[11px]">Breed Variety</label>
-              <select id="goatBreed" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-indigo-500">
-                <option value="Tellicherry">Tellicherry</option>
-                <option value="Boer Cross">Boer Cross</option>
-                <option value="Salem Black">Salem Black</option>
-                <option value="Kanni">Kanni</option>
-              </select>
+              <p class="text-sm font-extrabold text-white flex items-center gap-2">
+                <i class="fa-solid fa-scissors text-amber-400"></i> 3HP Chaff Cutter (DOL)
+              </p>
+              <p class="text-[11px] text-slate-400 font-mono mt-0.5">Current: 8.8 A &bull; Reverse Switch</p>
             </div>
+            <span class="px-3 py-1.5 bg-slate-800 text-slate-300 font-bold rounded-lg text-xs font-mono">STANDBY</span>
+          </div>
+
+          <!-- PTZ Camera Paddock Feed -->
+          <div class="p-3.5 rounded-xl bg-slate-900/95 border border-slate-700 flex justify-between items-center">
             <div>
-              <label class="block text-slate-400 mb-1 font-mono text-[11px]">Live Weight (kg)</label>
-              <input type="number" step="0.1" min="2" max="150" id="goatWeight" required placeholder="24.5" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono font-bold text-indigo-400 outline-none focus:border-indigo-500">
+              <p class="text-sm font-extrabold text-white flex items-center gap-2">
+                <i class="fa-solid fa-video text-rose-400"></i> PTZ Paddock Cam 1
+              </p>
+              <p class="text-[11px] text-slate-400 font-mono mt-0.5">Stream: 1080p 25fps &bull; Night Vision</p>
             </div>
+            <span class="px-2.5 py-1.5 bg-emerald-950 text-emerald-400 border border-emerald-500/40 font-bold rounded-lg text-xs font-mono">ONLINE</span>
           </div>
-
-          <div>
-            <label class="block text-slate-400 mb-1 font-mono text-[11px]">Medical / Deworming Status</label>
-            <input type="text" id="goatStatus" placeholder="Deworming complete, healthy" class="w-full bg-agro-900 border border-slate-700 rounded-xl px-3 py-2 text-white outline-none focus:border-indigo-500">
-          </div>
-
-          <button type="submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-500 hover:from-indigo-500 hover:to-violet-400 text-white font-bold text-xs tracking-wider uppercase transition shadow-lg">
-            Record Animal Weigh-in
-          </button>
-        </form>
-      </div>
-
-      <!-- Goat Growth Registry Table -->
-      <div class="glass-panel p-5 rounded-3xl lg:col-span-2 flex flex-col justify-between border border-agro-700/60">
-        <div>
-          <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
-            <div>
-              <h3 class="text-sm font-bold text-white">Goat Herd Weight & ADG Performance</h3>
-              <p class="text-xs text-slate-400">Automatic computation of Average Daily Gain (Target: 120-160g/day)</p>
-            </div>
-            <span class="text-xs font-mono px-3 py-1 bg-agro-900 text-indigo-300 rounded-xl border border-slate-800" id="goatFlockBadge">4 Tagged Goats</span>
-          </div>
-
-          <div class="overflow-x-auto max-h-80">
-            <table class="w-full text-left text-xs font-mono">
-              <thead class="text-slate-400 border-b border-slate-800 bg-agro-900/80 sticky top-0 text-[11px]">
-                <tr>
-                  <th class="py-2.5 px-3">Ear Tag</th>
-                  <th class="py-2.5 px-3">Breed</th>
-                  <th class="py-2.5 px-3 text-right">Current Weight</th>
-                  <th class="py-2.5 px-3 text-right">Previous Weight</th>
-                  <th class="py-2.5 px-3 text-right">ADG Growth</th>
-                  <th class="py-2.5 px-3">Clinical Notes</th>
-                </tr>
-              </thead>
-              <tbody id="goatTableRows" class="divide-y divide-slate-800/80 text-slate-300">
-                <!-- Dynamically Populated -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] font-mono text-slate-400 flex justify-between items-center">
-          <span>Weighing protocol: Fasted morning platform weigh-in prior to feeding Super Napier.</span>
         </div>
       </div>
 
-    </section>
+      <button onclick="openCameraModal()" class="w-full mt-4 py-3 rounded-xl bg-rose-600 hover:bg-rose-500 active:scale-95 transition-all font-bold text-white text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-rose-600/30">
+        <i class="fa-solid fa-camera"></i> Launch PTZ Paddock Stream (CAM-1)
+      </button>
+    </div>
 
-    <!-- TAB 3: Feed, Fodder & Poultry Telemetry -->
-    <section id="panel-feed" class="tab-panel hidden grid grid-cols-1 md:grid-cols-3 gap-6">
-      
-      <!-- Super Napier Fodder Plots -->
-      <div class="glass-panel p-5 rounded-3xl border border-agro-700/60 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-agro-neonGreen uppercase tracking-wider">Plots 1 & 2</span>
-            <i class="fa-solid fa-wheat-awn text-agro-neonGreen"></i>
-          </div>
-          <h3 class="text-base font-bold text-white">Super Napier / CO-5</h3>
-          <p class="text-xs text-slate-400 mt-1">High-biomass green fodder under drip irrigation & organic bio-slurry overflow.</p>
+  </section>
 
-          <div class="mt-4 p-3.5 bg-agro-900/80 rounded-2xl border border-slate-800 space-y-2.5 font-mono text-xs">
-            <div class="flex justify-between">
-              <span class="text-slate-400">Available Biomass:</span>
-              <span class="font-bold text-agro-neonGreen">2,200 kg Standing</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-slate-400">Growth Stage:</span>
-              <span class="font-bold text-slate-200">Day 52 of 60 (Ratoon)</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-slate-400">Boundary Tree Fodder:</span>
-              <span class="font-bold text-teal-300">Agathi / Murungai OK</span>
-            </div>
-          </div>
-        </div>
+  <!-- ================= OPERATIONAL FORMS & TABLES ================= -->
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
 
-        <div class="mt-4">
-          <button onclick="logNapierHarvest(50)" class="w-full py-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-agro-neonGreen border border-emerald-500/30 rounded-xl text-xs font-mono font-semibold transition">
-            + Log 50kg Fresh Cut to Paddock
-          </button>
-        </div>
-      </div>
-
-      <!-- Concentrates Inventory Store -->
-      <div class="glass-panel p-5 rounded-3xl border border-agro-700/60 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">Feed Storage</span>
-            <i class="fa-solid fa-sack-xmark text-amber-400"></i>
-          </div>
-          <h3 class="text-base font-bold text-white">Compound Concentrates</h3>
-          <p class="text-xs text-slate-400 mt-1">Dairy cattle feed pellets, maize bran, broken rice & mineral supplements.</p>
-
-          <div class="mt-4 p-3.5 bg-agro-900/80 rounded-2xl border border-slate-800 space-y-2.5 font-mono text-xs">
-            <div class="flex justify-between">
-              <span class="text-slate-400">50kg Sacks in Loft:</span>
-              <span class="font-bold text-amber-400" id="concentrateBagsBadge">7 Bags (Low Stock)</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-slate-400">Daily Consumption:</span>
-              <span class="font-bold text-slate-200">1.5 Bags / day</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-4 flex gap-2 font-mono">
-          <button onclick="adjustBags(-1)" class="flex-1 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-semibold text-slate-200 border border-slate-700 transition">
-            - 1 Bag Used
-          </button>
-          <button onclick="adjustBags(10)" class="flex-1 py-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-semibold transition">
-            + Restock 10
-          </button>
-        </div>
-      </div>
-
-      <!-- Poultry & Roll-Away Nest Egg Module -->
-      <div class="glass-panel p-5 rounded-3xl border border-agro-700/60 flex flex-col justify-between">
-        <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-yellow-300 uppercase tracking-wider">Under-Goat Raised Shed</span>
-            <i class="fa-solid fa-egg text-yellow-300"></i>
-          </div>
-          <h3 class="text-base font-bold text-white">Country Chicken & Layer Unit</h3>
-          <p class="text-xs text-slate-400 mt-1">Automated roll-away nest crates utilizing dry shade underneath the elevated goat house.</p>
-
-          <div class="mt-4 p-3.5 bg-agro-900/80 rounded-2xl border border-slate-800 space-y-2.5 font-mono text-xs">
-            <div class="flex justify-between">
-              <span class="text-slate-400">Egg Crates Filled:</span>
-              <span class="font-bold text-yellow-300">2 Crates (60 Eggs)</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-slate-400">Auto Water Nipples:</span>
-              <span class="font-bold text-emerald-400">20L Gravity Float OK</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-4">
-          <button onclick="showToast('Egg collection batch verified and registered.')" class="w-full py-2.5 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 rounded-xl text-xs font-mono font-semibold transition">
-            Register Today's Egg Collection
-          </button>
-        </div>
-      </div>
-
-    </section>
-
-  </main>
-
-  <!-- MODAL 1: PTZ Surveillance Camera Live Stream Viewport -->
-  <div id="cameraModal" class="fixed inset-0 z-50 bg-agro-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="glass-panel border border-agro-700/80 w-full max-w-2xl rounded-3xl p-6 shadow-2xl space-y-4">
+    <!-- FORM 1: Milk Entry & Table -->
+    <div class="high-contrast-card p-5 md:p-6 rounded-2xl flex flex-col gap-4">
       <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+        <h2 class="text-base md:text-lg font-extrabold text-white flex items-center gap-2">
+          <i class="fa-solid fa-bottle-droplet text-emerald-400"></i> Live Cow Milk Entry
+        </h2>
+        <span class="text-xs font-mono font-bold text-emerald-400">Dynamic Fat / SNF Formula</span>
+      </div>
+
+      <form id="milkEntryForm" class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-900/90 p-4 rounded-xl border border-slate-800">
         <div>
-          <h3 class="text-base font-bold text-white flex items-center gap-2">
-            <i class="fa-solid fa-video text-rose-400"></i> PTZ Live Stream: Elevated Goat Shed & Paddock
-          </h3>
-          <p class="text-xs text-slate-400 font-mono">Camera ID: CAM-POLUR-01 &bull; 1080p 25fps Night Vision</p>
+          <label class="text-xs font-bold text-slate-300 block mb-1">Cow ID / Ear Tag</label>
+          <input type="text" id="cowTag" placeholder="e.g. TN-01" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 outline-none uppercase font-mono">
         </div>
-        <button onclick="closeCameraModal()" class="text-slate-400 hover:text-white text-lg">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <div>
+          <label class="text-xs font-bold text-slate-300 block mb-1">Session</label>
+          <select id="sessionType" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white outline-none">
+            <option value="Morning">Morning (AM)</option>
+            <option value="Evening">Evening (PM)</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-300 block mb-1">Yield (Litres)</label>
+          <input type="number" step="0.1" id="milkVol" placeholder="0.0" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 outline-none font-mono">
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-300 block mb-1">Fat %</label>
+          <input type="number" step="0.1" id="fatPct" placeholder="4.2" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 outline-none font-mono">
+        </div>
+        <div class="col-span-2 sm:col-span-4 mt-1">
+          <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-lg text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-500/20 active:scale-95">
+            Log Milk Transaction
+          </button>
+        </div>
+      </form>
+
+      <!-- Milk Ledger -->
+      <div class="overflow-x-auto max-h-72 overflow-y-auto">
+        <table class="w-full text-left text-xs font-mono">
+          <thead class="text-slate-400 border-b border-slate-700 sticky top-0 bg-[#16244c]">
+            <tr>
+              <th class="py-2.5">Time</th>
+              <th class="py-2.5">Tag ID</th>
+              <th class="py-2.5">Session</th>
+              <th class="py-2.5 text-emerald-300">Litres</th>
+              <th class="py-2.5">Fat%</th>
+              <th class="py-2.5 text-right text-emerald-400">Total (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="milkLedgerRows" class="divide-y divide-slate-800 text-slate-200">
+            <!-- Dynamic entries -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FORM 2: Goat Weight Platform Scale -->
+    <div class="high-contrast-card p-5 md:p-6 rounded-2xl flex flex-col gap-4">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+        <h2 class="text-base md:text-lg font-extrabold text-white flex items-center gap-2">
+          <i class="fa-solid fa-weight-scale text-indigo-400"></i> Platform Scale Weight Entry
+        </h2>
+        <span class="text-xs font-mono font-bold text-indigo-400">150kg RS-232 Bench Scale</span>
       </div>
 
-      <!-- Live Stream Screen Simulation -->
-      <div class="relative w-full h-64 sm:h-80 bg-agro-900 rounded-2xl border border-slate-800 overflow-hidden flex items-center justify-center">
-        <!-- Visual Grid Overlay -->
-        <div class="absolute inset-0 bg-[radial-gradient(#1e3252_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
-        <div class="text-center z-10 space-y-2">
-          <i class="fa-solid fa-tower-broadcast text-4xl text-emerald-400 animate-pulse"></i>
-          <p class="text-xs text-slate-300 font-mono">STREAM BUFFER: RTSP://192.168.1.105:554/live/ch0</p>
-          <span class="inline-block px-3 py-1 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/40 text-[10px] font-mono font-bold">
-            <span class="inline-block w-2 h-2 rounded-full bg-rose-500 animate-ping mr-1"></span> LIVE FEED ACTIVE
-          </span>
+      <form id="goatWeightForm" class="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-slate-900/90 p-4 rounded-xl border border-slate-800">
+        <div>
+          <label class="text-xs font-bold text-slate-300 block mb-1">Ear Tag ID</label>
+          <input type="text" id="goatTag" placeholder="e.g. GT-104" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none uppercase font-mono">
         </div>
-        <!-- Stream corner timestamps -->
-        <span class="absolute top-3 left-3 text-[10px] font-mono bg-black/70 px-2 py-1 rounded text-slate-400">CAM-01 [PADDOCK]</span>
-        <span class="absolute top-3 right-3 text-[10px] font-mono bg-black/70 px-2 py-1 rounded text-emerald-400">BITRATE: 4,120 kbps</span>
-      </div>
+        <div>
+          <label class="text-xs font-bold text-slate-300 block mb-1">Scale Weight (kg)</label>
+          <input type="number" step="0.1" id="liveWeight" placeholder="0.0" required class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:ring-2 focus:ring-indigo-500 outline-none font-mono">
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-300 block mb-1">Breed Type</label>
+          <select id="goatBreed" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white outline-none">
+            <option value="Boer Cross">Boer Cross</option>
+            <option value="Tellicherry">Tellicherry</option>
+            <option value="Salem Black">Salem Black</option>
+            <option value="Kanni">Kanni</option>
+          </select>
+        </div>
+        <div class="col-span-2 sm:col-span-3 mt-1">
+          <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-extrabold py-2.5 rounded-lg text-xs uppercase tracking-wider transition shadow-lg shadow-indigo-500/20 active:scale-95">
+            Save Scale Weight
+          </button>
+        </div>
+      </form>
 
-      <!-- PTZ Movement Controls -->
-      <div class="flex justify-between items-center pt-2">
-        <div class="flex gap-2">
-          <button onclick="showToast('PTZ Pan Left executing')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono border border-slate-700">
-            <i class="fa-solid fa-arrow-left"></i> Pan L
-          </button>
-          <button onclick="showToast('PTZ Pan Right executing')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono border border-slate-700">
-            Pan R <i class="fa-solid fa-arrow-right"></i>
-          </button>
-          <button onclick="showToast('PTZ Optical Zoom In 2.0x')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono border border-slate-700">
-            <i class="fa-solid fa-magnifying-glass-plus"></i> Zoom
-          </button>
+      <!-- Goat Flock Ledger -->
+      <div class="overflow-x-auto max-h-72 overflow-y-auto">
+        <table class="w-full text-left text-xs font-mono">
+          <thead class="text-slate-400 border-b border-slate-700 sticky top-0 bg-[#16244c]">
+            <tr>
+              <th class="py-2.5">Tag ID</th>
+              <th class="py-2.5">Breed</th>
+              <th class="py-2.5 text-indigo-300">Weight</th>
+              <th class="py-2.5">Prev Wt</th>
+              <th class="py-2.5 text-right text-emerald-400">Gain (ADG)</th>
+            </tr>
+          </thead>
+          <tbody id="goatFlockRows" class="divide-y divide-slate-800 text-slate-200">
+            <!-- Dynamic entries -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ================= INVENTORY & SILAGE GAUGES ================= -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    
+    <!-- Napier Readiness -->
+    <div class="high-contrast-card p-5 rounded-2xl flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs font-bold uppercase text-slate-300">Super Napier / CO-5 (Plots 1 & 2)</span>
+          <span class="text-emerald-400 font-mono font-bold text-xs">88% Ready</span>
         </div>
-        <button onclick="closeCameraModal()" class="px-4 py-1.5 rounded-xl bg-agro-700 text-slate-200 text-xs font-mono font-semibold">
-          Minimize
-        </button>
+        <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden border border-slate-700">
+          <div class="bg-gradient-to-r from-emerald-600 to-emerald-400 h-full w-[88%] rounded-full shadow-lg"></div>
+        </div>
+      </div>
+      <p class="text-[11px] text-slate-400 mt-3 font-mono">Cutting Cycle: 45 Days &bull; Next Harvest: In 4 Days</p>
+    </div>
+
+    <!-- Concentrate Feeds -->
+    <div class="high-contrast-card p-5 rounded-2xl flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs font-bold uppercase text-slate-300">Concentrate Feed & Mineral Mix</span>
+          <span class="text-amber-400 font-mono font-bold text-xs" id="feedBagCount">6 Bags Left</span>
+        </div>
+        <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden border border-slate-700">
+          <div class="bg-gradient-to-r from-amber-600 to-amber-400 h-full w-[35%] rounded-full shadow-lg"></div>
+        </div>
+      </div>
+      <div class="flex justify-between items-center mt-3">
+        <p class="text-[11px] text-amber-300/90 font-mono font-medium"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Low Stock Threshold</p>
+        <button onclick="addFeedStock()" class="text-xs px-2.5 py-1 bg-amber-500/20 border border-amber-500/50 text-amber-300 rounded font-mono hover:bg-amber-500/30">+ Add Bags</button>
+      </div>
+    </div>
+
+    <!-- Dry Fodder / Straw -->
+    <div class="high-contrast-card p-5 rounded-2xl flex flex-col justify-between">
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-xs font-bold uppercase text-slate-300">Dry Fodder / Straw (Vaikkol)</span>
+          <span class="text-cyan-400 font-mono font-bold text-xs">1,400 kg Stored</span>
+        </div>
+        <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden border border-slate-700">
+          <div class="bg-gradient-to-r from-cyan-600 to-cyan-400 h-full w-[70%] rounded-full shadow-lg"></div>
+        </div>
+      </div>
+      <p class="text-[11px] text-slate-400 mt-3 font-mono">Shed Storage: Dry & Ventilated &bull; Moisture &lt; 12%</p>
+    </div>
+
+  </section>
+
+  <!-- ================= CAMERA MODAL DIALOG ================= -->
+  <div id="cameraModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="high-contrast-card rounded-2xl max-w-3xl w-full p-5 border-2 border-rose-500/50 flex flex-col gap-4">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></span>
+          <h3 class="text-lg font-bold text-white font-mono">LIVE PTZ FEED &bull; PADDOCK SHED CAM-1</h3>
+        </div>
+        <button onclick="closeCameraModal()" class="text-slate-400 hover:text-white text-xl font-bold px-3 py-1">&times;</button>
+      </div>
+      <div class="aspect-video w-full bg-black rounded-xl overflow-hidden relative flex items-center justify-center border border-slate-800">
+        <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=80" alt="Camera Live Feed" class="w-full h-full object-cover opacity-80">
+        <div class="absolute top-3 left-3 bg-black/70 px-3 py-1 rounded text-xs font-mono text-emerald-400 border border-emerald-500/40">
+          REC &bull; 1080P 25FPS &bull; NIGHT VISION ACTIVE
+        </div>
+      </div>
+      <div class="flex justify-between items-center text-xs font-mono text-slate-400">
+        <span>RTSP: 192.168.1.120:554/live/ch0</span>
+        <button onclick="closeCameraModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-bold">Close Stream</button>
       </div>
     </div>
   </div>
-
-  <!-- MODAL 2: Database Storage, Firestore & Backup Control -->
-  <div id="dataModal" class="fixed inset-0 z-50 bg-agro-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="glass-panel border border-agro-700/80 w-full max-w-md rounded-3xl p-6 shadow-2xl space-y-4">
-      <div class="flex justify-between items-center pb-3 border-b border-slate-800">
-        <h3 class="text-base font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-database text-agro-neonGreen"></i> Storage & Cloud Firestore Sync
-        </h3>
-        <button onclick="closeDataModal()" class="text-slate-400 hover:text-white text-lg">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <p class="text-xs text-slate-300 leading-relaxed font-sans">
-        D-FARM Command Center is configured for automatic <strong>Dual-State Persistence</strong>. Data entered on your phone or computer writes to your browser's persistent cache and instantly commits to your Cloud Firestore cluster when online.
-      </p>
-
-      <div class="p-3.5 bg-agro-900 rounded-2xl border border-slate-800 space-y-2 text-xs font-mono">
-        <div class="flex justify-between">
-          <span class="text-slate-400">Total Dairy Yield Records:</span>
-          <span class="font-bold text-agro-neonGreen" id="modalMilkCount">0</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-slate-400">Goat Flock Registry:</span>
-          <span class="font-bold text-indigo-400" id="modalGoatCount">0</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-slate-400">Cloud Sync Status:</span>
-          <span class="font-bold text-emerald-400">100% Synced</span>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-2.5 pt-2 font-mono">
-        <button onclick="exportDataToJson()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-glow-emerald">
-          <i class="fa-solid fa-download"></i> Download D-FARM JSON Backup
-        </button>
-        <button onclick="closeDataModal()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold border border-slate-700 transition">
-          Close Window
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Core JavaScript State & Analytics -->
+  <!-- ================= JAVASCRIPT ENGINE & LOCAL STORAGE ================= -->
   <script>
-    // --- 1. Real-time Clock Initialization ---
-    function updateClock() {
+    // Live Wall Clock
+    setInterval(() => {
       const now = new Date();
-      document.getElementById('clockBox').textContent = now.toLocaleTimeString('en-IN', { hour12: false });
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+      document.getElementById('liveWallClock').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }, 1000);
 
-    // --- 2. System State Defaults ---
-    const defaultMilkEntries = [
-      { id: '1', date: '05 Nov 06:30', cowTag: 'IN-TN-401 (Lakshmi)', session: 'Morning', volume: 8.5, fat: 4.4, snf: 8.6, revenue: 304 },
-      { id: '2', date: '05 Nov 06:45', cowTag: 'IN-TN-402 (Gowri)', session: 'Morning', volume: 7.2, fat: 4.1, snf: 8.5, revenue: 253 },
-      { id: '3', date: '05 Nov 17:00', cowTag: 'IN-TN-401 (Lakshmi)', session: 'Evening', volume: 6.8, fat: 4.3, snf: 8.6, revenue: 242 },
-      { id: '4', date: '05 Nov 17:15', cowTag: 'IN-TN-402 (Gowri)', session: 'Evening', volume: 6.5, fat: 4.2, snf: 8.5, revenue: 230 }
-    ];
+    // Initial Data Setup
+    let milkEntries = JSON.parse(localStorage.getItem('dfarm_milk_records') || '[]');
+    let goatEntries = JSON.parse(localStorage.getItem('dfarm_goat_records') || '[]');
+    let feedBags = Number(localStorage.getItem('dfarm_feed_bags') || 6);
 
-    const defaultGoatFlock = [
-      { tag: 'GT-201', breed: 'Tellicherry', currentWt: 24.5, prevWt: 20.3, adg: '+140g', status: 'Vaccinated & Tagged' },
-      { tag: 'GT-202', breed: 'Boer Cross', currentWt: 31.2, prevWt: 26.4, adg: '+160g', status: 'Healthy, Growing' },
-      { tag: 'GT-203', breed: 'Salem Black', currentWt: 19.8, prevWt: 16.5, adg: '+110g', status: 'Healthy' },
-      { tag: 'GT-204', breed: 'Kanni', currentWt: 22.0, prevWt: 18.2, adg: '+125g', status: 'Deworming Due' }
-    ];
-
-    // Local Storage Recovery
-    let milkLedger = JSON.parse(localStorage.getItem('dfarm_milk_records')) || defaultMilkEntries;
-    let goatFlock = JSON.parse(localStorage.getItem('dfarm_goat_flock')) || defaultGoatFlock;
-    let concentrateBags = parseInt(localStorage.getItem('dfarm_concentrate_bags') || '7');
-
-    let pumpActive = true;
-    let cutterActive = false;
-    let milkChart = null;
-
-    // --- 3. UI Toast Messenger ---
-    function showToast(message, title = "System Telemetry Updated") {
-      const toast = document.getElementById('toast');
-      document.getElementById('toastTitle').textContent = title;
-      document.getElementById('toastMsg').textContent = message;
-      toast.classList.remove('translate-y-24', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-24', 'opacity-0');
-      }, 2800);
+    // Seed realistic records if empty
+    if (milkEntries.length === 0) {
+      milkEntries = [
+        { time: '06:15 AM', tag: 'TN-01', session: 'Morning', vol: 8.5, fat: 4.2 },
+        { time: '06:30 AM', tag: 'TN-02', session: 'Morning', vol: 7.0, fat: 4.5 },
+        { time: '05:45 PM', tag: 'TN-01', session: 'Evening', vol: 7.2, fat: 4.1 },
+        { time: '06:00 PM', tag: 'TN-02', session: 'Evening', vol: 6.3, fat: 4.4 }
+      ];
+      localStorage.setItem('dfarm_milk_records', JSON.stringify(milkEntries));
     }
 
-    // --- 4. Tab Navigation Switcher ---
-    function selectTab(tabKey) {
-      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
-      document.querySelectorAll('.tab-button').forEach(btn => {
-        btn.classList.remove('bg-emerald-500/20', 'text-agro-neonGreen', 'border', 'border-emerald-500/40');
-        btn.classList.add('text-slate-400');
-      });
-
-      document.getElementById('panel-' + tabKey).classList.remove('hidden');
-      const activeBtn = document.getElementById('tabBtn-' + tabKey);
-      activeBtn.classList.remove('text-slate-400');
-      activeBtn.classList.add('bg-emerald-500/20', 'text-agro-neonGreen', 'border', 'border-emerald-500/40');
+    if (goatEntries.length === 0) {
+      goatEntries = [
+        { tag: 'GT-101', breed: 'Boer Cross', weight: 34.5, lastWeight: 31.2, gain: '+165g/day' },
+        { tag: 'GT-102', breed: 'Tellicherry', weight: 28.2, lastWeight: 25.8, gain: '+140g/day' },
+        { tag: 'GT-103', breed: 'Salem Black', weight: 31.0, lastWeight: 28.5, gain: '+150g/day' },
+        { tag: 'GT-104', breed: 'Boer Cross', weight: 24.2, lastWeight: 21.8, gain: '+155g/day' }
+      ];
+      localStorage.setItem('dfarm_goat_records', JSON.stringify(goatEntries));
     }
 
-    // --- 5. Dairy Pricing Sliding Formula (Tamil Nadu Standard) ---
-    function calculateAavinRate(volume, fat) {
-      const baseFat = 3.5;
-      const baseRate = 32.00;
-      const ratePerLitre = baseRate + Math.max(0, (fat - baseFat) * 2.00);
-      const totalRev = volume * ratePerLitre;
-      return { ratePerLitre, totalRev };
-    }
+    // Render Milk UI & Total calculations
+    function renderMilkLedger() {
+      const table = document.getElementById('milkLedgerRows');
+      table.innerHTML = '';
+      let totalVol = 0;
+      let amVol = 0;
+      let pmVol = 0;
+      let totalGross = 0;
 
-    function updateLiveRatePreview() {
-      const vol = parseFloat(document.getElementById('milkVolume').value) || 0;
-      const fat = parseFloat(document.getElementById('milkFat').value) || 4.2;
-      const { ratePerLitre, totalRev } = calculateAavinRate(vol, fat);
+      milkEntries.slice().reverse().forEach(row => {
+        totalVol += Number(row.vol);
+        if (row.session === 'Morning') amVol += Number(row.vol);
+        if (row.session === 'Evening') pmVol += Number(row.vol);
 
-      document.getElementById('formulaRatePreview').textContent = `₹${ratePerLitre.toFixed(2)} / L`;
-      document.getElementById('formulaBatchRev').textContent = `₹${totalRev.toFixed(2)}`;
-    }
-
-    // --- 6. Dairy Production Ledger Handlers ---
-    function renderDairyLedger() {
-      const tbody = document.getElementById('milkTableRows');
-      tbody.innerHTML = '';
-      let totalL = 0;
-      let totalRev = 0;
-      let amL = 0;
-      let pmL = 0;
-
-      milkLedger.slice(-10).reverse().forEach(item => {
-        totalL += Number(item.volume);
-        totalRev += Number(item.revenue);
-        if (item.session === 'Morning') amL += Number(item.volume);
-        else pmL += Number(item.volume);
+        const ratePerLitre = 33 + (Number(row.fat) - 3.5) * 3.5;
+        const total = (Number(row.vol) * ratePerLitre).toFixed(0);
+        totalGross += Number(total);
 
         const tr = document.createElement('tr');
-        tr.className = "hover:bg-agro-900/40 transition";
         tr.innerHTML = `
-          <td class="py-2.5 px-3 text-slate-400 text-[11px]">${item.date}</td>
-          <td class="py-2.5 px-3 font-semibold text-white">${item.cowTag}</td>
-          <td class="py-2.5 px-3">
-            <span class="px-2 py-0.5 rounded text-[10px] ${item.session === 'Morning' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'}">
-              ${item.session}
-            </span>
-          </td>
-          <td class="py-2.5 px-3 text-right font-bold text-agro-neonGreen">${Number(item.volume).toFixed(1)} L</td>
-          <td class="py-2.5 px-3 text-right text-slate-300">${Number(item.fat).toFixed(1)}%</td>
-          <td class="py-2.5 px-3 text-right text-white font-bold">₹${Math.round(item.revenue)}</td>
+          <td class="py-2.5 text-slate-400">${row.time}</td>
+          <td class="py-2.5 font-bold text-white uppercase">${row.tag}</td>
+          <td class="py-2.5">${row.session}</td>
+          <td class="py-2.5 text-emerald-400 font-extrabold text-sm">${Number(row.vol).toFixed(1)} L</td>
+          <td class="py-2.5">${row.fat}%</td>
+          <td class="py-2.5 text-right text-emerald-300 font-extrabold">₹${total}</td>
         `;
-        tbody.appendChild(tr);
+        table.appendChild(tr);
       });
 
-      // Update Top KPIs
-      document.getElementById('kpiMilkVolume').textContent = totalL.toFixed(1);
-      document.getElementById('kpiMilkRevenue').textContent = `₹${Math.round(totalRev).toLocaleString('en-IN')}`;
-      document.getElementById('kpiMilkSplit').textContent = `AM: ${amL.toFixed(1)}L • PM: ${pmL.toFixed(1)}L`;
-      document.getElementById('milkTableTotalCount').textContent = `${milkLedger.length} production entries recorded`;
-      document.getElementById('modalMilkCount').textContent = milkLedger.length;
-
-      updateMilkChart();
+      document.getElementById('kpiMilkTotal').textContent = totalVol.toFixed(1);
+      document.getElementById('kpiMilkCash').textContent = `Est. ₹${totalGross.toLocaleString('en-IN')} Gross`;
+      document.getElementById('kpiMilkAM').textContent = `${amVol.toFixed(1)}L`;
+      document.getElementById('kpiMilkPM').textContent = `${pmVol.toFixed(1)}L`;
     }
 
-    function handleMilkRecord(e) {
+    // Render Goat Registry
+    function renderGoatRegistry() {
+      const table = document.getElementById('goatFlockRows');
+      table.innerHTML = '';
+      document.getElementById('kpiGoatCount').textContent = goatEntries.length;
+
+      goatEntries.slice().reverse().forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-2.5 font-bold text-white uppercase">${row.tag}</td>
+          <td class="py-2.5 text-slate-300">${row.breed}</td>
+          <td class="py-2.5 text-indigo-300 font-extrabold text-sm">${Number(row.weight).toFixed(1)} kg</td>
+          <td class="py-2.5 text-slate-400">${Number(row.lastWeight).toFixed(1)} kg</td>
+          <td class="py-2.5 text-right text-emerald-400 font-extrabold">${row.gain}</td>
+        `;
+        table.appendChild(tr);
+      });
+    }
+
+    // Handle Form Submissions
+    document.getElementById('milkEntryForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const cowTag = document.getElementById('cowTag').value.trim();
-      const session = document.getElementById('milkingSession').value;
-      const volume = parseFloat(document.getElementById('milkVolume').value);
-      const fat = parseFloat(document.getElementById('milkFat').value);
-      const snf = parseFloat(document.getElementById('milkSnf').value);
-
-      const { totalRev } = calculateAavinRate(volume, fat);
-
-      const newRecord = {
-        id: Date.now().toString(),
-        date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + ' ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        cowTag,
-        session,
-        volume,
-        fat,
-        snf,
-        revenue: totalRev
+      const newEntry = {
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        tag: document.getElementById('cowTag').value.trim().toUpperCase(),
+        session: document.getElementById('sessionType').value,
+        vol: Number(document.getElementById('milkVol').value),
+        fat: Number(document.getElementById('fatPct').value)
       };
-
-      milkLedger.push(newRecord);
-      localStorage.setItem('dfarm_milk_records', JSON.stringify(milkLedger));
-      renderDairyLedger();
-
+      milkEntries.push(newEntry);
+      localStorage.setItem('dfarm_milk_records', JSON.stringify(milkEntries));
+      renderMilkLedger();
       e.target.reset();
-      document.getElementById('milkFat').value = '4.2';
-      document.getElementById('milkSnf').value = '8.5';
-      updateLiveRatePreview();
-      showToast(`Committed ${volume}L from ${cowTag} to database`);
-    }
+    });
 
-    function clearMilkLedger() {
-      if (milkLedger.length === 0) return;
-      milkLedger = [];
-      localStorage.removeItem('dfarm_milk_records');
-      renderDairyLedger();
-      showToast('Milk production ledger cleared');
-    }
-
-    // --- 7. Goat Flock & ADG Weigh-in Handlers ---
-    function renderGoatTable() {
-      const tbody = document.getElementById('goatTableRows');
-      tbody.innerHTML = '';
-
-      goatFlock.forEach(goat => {
-        const tr = document.createElement('tr');
-        tr.className = "hover:bg-agro-900/40 transition";
-        tr.innerHTML = `
-          <td class="py-2.5 px-3 font-bold text-white">${goat.tag}</td>
-          <td class="py-2.5 px-3 text-slate-400 font-sans">${goat.breed}</td>
-          <td class="py-2.5 px-3 text-right font-bold text-indigo-300">${Number(goat.currentWt).toFixed(1)} kg</td>
-          <td class="py-2.5 px-3 text-right text-slate-400">${Number(goat.prevWt).toFixed(1)} kg</td>
-          <td class="py-2.5 px-3 text-right text-agro-neonGreen font-bold">${goat.adg}</td>
-          <td class="py-2.5 px-3 font-sans">
-            <span class="text-[10px] bg-agro-900 px-2 py-0.5 rounded text-slate-300 border border-slate-700">
-              ${goat.status}
-            </span>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      document.getElementById('kpiGoatCount').textContent = goatFlock.length;
-      document.getElementById('goatFlockBadge').textContent = `${goatFlock.length} Tagged Goats`;
-      document.getElementById('modalGoatCount').textContent = goatFlock.length;
-    }
-
-    function handleGoatRecord(e) {
+    document.getElementById('goatWeightForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const tag = document.getElementById('goatTag').value.trim();
-      const breed = document.getElementById('goatBreed').value;
-      const weight = parseFloat(document.getElementById('goatWeight').value);
-      const note = document.getElementById('goatStatus').value.trim() || 'Healthy';
-
-      const match = goatFlock.find(g => g.tag.toLowerCase() === tag.toLowerCase());
-      if (match) {
-        match.prevWt = match.currentWt;
-        match.currentWt = weight;
-        match.adg = '+145g';
-        match.status = note;
-      } else {
-        goatFlock.push({
-          tag,
-          breed,
-          currentWt: weight,
-          prevWt: (weight - 1.8).toFixed(1),
-          adg: '+140g',
-          status: note
-        });
-      }
-
-      localStorage.setItem('dfarm_goat_flock', JSON.stringify(goatFlock));
-      renderGoatTable();
+      const currentWt = Number(document.getElementById('liveWeight').value);
+      const newGoat = {
+        tag: document.getElementById('goatTag').value.trim().toUpperCase(),
+        breed: document.getElementById('goatBreed').value,
+        weight: currentWt,
+        lastWeight: (currentWt - 1.6).toFixed(1),
+        gain: '+155g/day'
+      };
+      goatEntries.push(newGoat);
+      localStorage.setItem('dfarm_goat_records', JSON.stringify(goatEntries));
+      renderGoatRegistry();
       e.target.reset();
-      showToast(`Weigh-in recorded for ${tag}: ${weight} kg`);
-    }
+    });
 
-    // --- 8. Feed Stock Adjusters ---
-    function adjustBags(delta) {
-      concentrateBags = Math.max(0, concentrateBags + delta);
-      document.getElementById('concentrateBagsBadge').textContent = `${concentrateBags} Bags (${concentrateBags <= 5 ? 'Critical' : 'Normal'})`;
-      localStorage.setItem('dfarm_concentrate_bags', concentrateBags.toString());
-      showToast(`Feed store balance: ${concentrateBags} bags available`);
-    }
+    // Chart.js 7-Day Trend Chart
+    const ctx = document.getElementById('milkYieldChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['30 Oct', '31 Oct', '01 Nov', '02 Nov', '03 Nov', '04 Nov', '05 Nov'],
+        datasets: [
+          {
+            label: 'Morning (AM)',
+            data: [14.8, 15.2, 15.8, 15.4, 16.2, 15.5, 15.5],
+            backgroundColor: '#10b981',
+            borderRadius: 6
+          },
+          {
+            label: 'Evening (PM)',
+            data: [12.8, 13.0, 13.4, 13.6, 13.8, 13.2, 13.5],
+            backgroundColor: '#06b6d4',
+            borderRadius: 6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 11, weight: 'bold' } }
+          },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 11, weight: 'bold' } }
+          }
+        }
+      }
+    });
 
-    function logNapierHarvest(kg) {
-      showToast(`Added ${kg}kg freshly chopped Super Napier to feeding paddock`);
-    }
-
-    // --- 9. Machine Automation Toggles ---
-    function togglePumpState() {
-      pumpActive = !pumpActive;
-      const btn = document.getElementById('pumpToggleBtn');
-      const text = document.getElementById('solarYieldText');
-      if (pumpActive) {
-        btn.className = "text-[10px] px-2.5 py-1 font-mono font-bold rounded-lg bg-emerald-500/20 text-agro-neonGreen border border-emerald-500/40 hover:bg-emerald-500/30 transition";
-        btn.textContent = "ACTIVE";
-        text.textContent = "RUNNING • 4.4kW";
-        showToast("Solar Submersible 5HP Pump energized");
+    // Helper Functions
+    function togglePump() {
+      const btn = document.getElementById('pumpBtn');
+      const status = document.getElementById('kpiBoreStatus');
+      if (btn.textContent.trim() === 'ACTIVE') {
+        btn.textContent = 'STOPPED';
+        btn.className = 'px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white font-black rounded-lg text-xs font-mono transition';
+        status.textContent = 'Idle';
+        status.className = 'text-rose-400 font-bold';
       } else {
-        btn.className = "text-[10px] px-2.5 py-1 font-mono font-bold rounded-lg bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 transition";
-        btn.textContent = "IDLE";
-        text.textContent = "STANDBY • 0.0kW";
-        showToast("Solar Submersible 5HP Pump switched OFF");
+        btn.textContent = 'ACTIVE';
+        btn.className = 'px-3.5 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-lg text-xs font-mono transition';
+        status.textContent = 'Active';
+        status.className = 'text-emerald-400 font-bold';
       }
     }
 
-    function toggleCutterState() {
-      cutterActive = !cutterActive;
-      const btn = document.getElementById('cutterToggleBtn');
-      const amp = document.getElementById('cutterAmps');
-      if (cutterActive) {
-        btn.className = "text-[10px] px-2.5 py-1 font-mono font-bold rounded-lg bg-emerald-500/20 text-agro-neonGreen border border-emerald-500/40 hover:bg-emerald-500/30 transition";
-        btn.textContent = "RUNNING";
-        amp.textContent = "4.8 A";
-        showToast("3HP Chaff Cutter DOL Starter engaged");
-      } else {
-        btn.className = "text-[10px] px-2.5 py-1 font-mono font-bold rounded-lg bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700 transition";
-        btn.textContent = "STANDBY";
-        amp.textContent = "0.0 A";
-        showToast("3HP Chaff Cutter disengaged");
-      }
-    }
-
-    // --- 10. PTZ Camera Modal Helpers ---
     function openCameraModal() {
       document.getElementById('cameraModal').classList.remove('hidden');
     }
+
     function closeCameraModal() {
       document.getElementById('cameraModal').classList.add('hidden');
     }
 
-    // --- 11. Cloud Firestore / JSON Backup Modal ---
-    function openDataModal() {
-      document.getElementById('dataModal').classList.remove('hidden');
-    }
-    function closeDataModal() {
-      document.getElementById('dataModal').classList.add('hidden');
+    function addFeedStock() {
+      feedBags += 5;
+      localStorage.setItem('dfarm_feed_bags', feedBags);
+      document.getElementById('feedBagCount').textContent = `${feedBags} Bags Left`;
+      alert(`Added 5 bags. Total Feed Stock: ${feedBags} Bags`);
     }
 
-    function exportDataToJson() {
-      const backupPayload = {
-        farmEnterprise: "D-FARM Polur",
-        state: "Tamil Nadu",
-        tariffCategory: "Tariff III-B LT Allied Agri",
-        exportTimestamp: new Date().toISOString(),
-        milkLedger,
-        goatFlock,
-        concentrateBags
+    function exportDataJSON() {
+      const backupData = {
+        farm: "D-FARM POLUR",
+        exportedAt: new Date().toISOString(),
+        milkRecords: milkEntries,
+        goatRecords: goatEntries,
+        feedBags: feedBags
       };
-
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupPayload, null, 2));
-      const downloadNode = document.createElement('a');
-      downloadNode.setAttribute("href", dataStr);
-      downloadNode.setAttribute("download", `D-FARM_Cloud_Backup_${new Date().toISOString().slice(0,10)}.json`);
-      document.body.appendChild(downloadNode);
-      downloadNode.click();
-      downloadNode.remove();
-      showToast("Cloud JSON Backup archive successfully downloaded");
+      const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `D-FARM_Backup_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
     }
 
-    // --- 12. Chart.js Milk Trends Rendering ---
-    function updateMilkChart() {
-      const ctx = document.getElementById('milkYieldChart').getContext('2d');
-      const labels = ['30 Oct', '31 Oct', '01 Nov', '02 Nov', '03 Nov', '04 Nov', '05 Nov'];
-      const amData = [14.5, 15.2, 16.0, 15.8, 16.2, 15.5, 15.7];
-      const pmData = [12.8, 13.0, 13.5, 13.2, 14.0, 13.4, 13.3];
-
-      if (milkChart) {
-        milkChart.destroy();
-      }
-
-      milkChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              label: 'Morning (AM) Litres',
-              data: amData,
-              backgroundColor: 'rgba(16, 185, 129, 0.75)',
-              borderColor: '#10b981',
-              borderRadius: 6,
-              borderWidth: 1
-            },
-            {
-              label: 'Evening (PM) Litres',
-              data: pmData,
-              backgroundColor: 'rgba(6, 182, 212, 0.75)',
-              borderColor: '#06b6d4',
-              borderRadius: 6,
-              borderWidth: 1
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            },
-            tooltip: {
-              backgroundColor: '#0a101d',
-              borderColor: '#1e3252',
-              borderWidth: 1,
-              titleFont: { family: 'JetBrains Mono', size: 12 },
-              bodyFont: { family: 'JetBrains Mono', size: 12 }
-            }
-          },
-          scales: {
-            x: {
-              grid: { color: 'rgba(255, 255, 255, 0.04)' },
-              ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 11 } }
-            },
-            y: {
-              grid: { color: 'rgba(255, 255, 255, 0.05)' },
-              ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 11 } }
-            }
-          }
-        }
+    function exportMilkCSV() {
+      let csv = 'Time,Tag_ID,Session,Litres,Fat_Percentage\n';
+      milkEntries.forEach(r => {
+        csv += `${r.time},${r.tag},${r.session},${r.vol},${r.fat}\n`;
       });
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Milk_Ledger_${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
     }
 
-    // --- On Window Ready ---
-    window.addEventListener('DOMContentLoaded', () => {
-      renderDairyLedger();
-      renderGoatTable();
-      updateLiveRatePreview();
-    });
+    // Initial Execution
+    renderMilkLedger();
+    renderGoatRegistry();
   </script>
 </body>
 </html>
