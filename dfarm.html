@@ -63,6 +63,11 @@
       </nav>
 
       <div class="flex items-center gap-3">
+        <!-- Language Switcher Toggle -->
+        <button onclick="window.toggleLanguage()" id="langToggleBtn" title="Switch Language" class="px-2.5 py-1.5 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition text-xs font-bold flex items-center gap-1">
+          <i data-lucide="globe" class="w-3.5 h-3.5 text-emerald-800"></i>
+          <span id="langLabel">EN</span>
+        </button>
         <button onclick="window.openCustomerLedgerModal()" title="Customer Ledger" class="p-2 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition flex items-center gap-1 text-xs font-bold">
           <i data-lucide="receipt" class="w-4 h-4 text-emerald-800"></i>
           <span class="hidden sm:inline">My Ledger</span>
@@ -1165,6 +1170,10 @@
             <span class="block text-emerald-900 font-bold text-xs">வரவுப் பதிவு</span>
             <span class="text-[10px] text-emerald-600">Direct Income</span>
           </button>
+          <button onclick="window.openModal('feedStockModal')" class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center active:scale-95 transition">
+            <span class="block text-amber-900 font-bold text-xs">தீவன இருப்பு (Fodder)</span>
+            <span class="text-[10px] text-amber-600">Green / Dry Stock</span>
+          </button>
         </div>
 
         <div class="bg-white border border-slate-200 rounded-3xl p-5 space-y-3 shadow-sm">
@@ -1621,6 +1630,37 @@
     </div>
   </div>
 
+  <!-- FEED & FODDER STOCK MODAL -->
+  <div id="feedStockModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl p-6 w-full max-w-md space-y-4 text-[#143627]">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="font-bold text-sm">தீவன அறுவடை & இருப்புப் பதிவு</h3>
+        <button onclick="window.closeModal('feedStockModal')" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <form onsubmit="window.handleFeedStockSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">Fodder / Feed Variety*</label>
+          <select id="feedItemSelect" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-bold">
+            <option value="Super Napier (CO-5) Harvest">Super Napier பசுந்தீவனம் (kg)</option>
+            <option value="Mulberry Green Leaves">மல்பெரி தழை (kg)</option>
+            <option value="Azolla Harvest">அசோலா அறுவடை (kg)</option>
+            <option value="Dry Groundnut Hay">கடலைக் கொடி வைக்கோல் (Bales/Bags)</option>
+            <option value="Cattle Feed / Thavudu Bags">அடர் தீவனம் / தவிடு மூட்டை (Bags)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">Quantity Harvested / In Stock*</label>
+          <input type="number" step="0.5" id="feedQtyVal" required placeholder="e.g. 50 kg or 2 Bags" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xl font-bold text-[#143627]">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-600 mb-1">Notes / Plot Location</label>
+          <input type="text" id="feedNotes" placeholder="e.g. Plot 1 Napier cut or Polur shop bought" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2">
+        </div>
+        <button type="submit" class="w-full bg-[#143627] text-white font-bold py-2.5 rounded-xl shadow">Save Fodder Log</button>
+      </form>
+    </div>
+  </div>
+  
   <!-- TOAST -->
   <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#143627] border border-emerald-500/40 text-white px-5 py-2.5 rounded-full shadow-2xl text-xs font-semibold z-50 transition opacity-0 pointer-events-none flex items-center gap-2">
     <i data-lucide="check-circle" class="w-4 h-4 text-emerald-300"></i>
@@ -1642,6 +1682,35 @@
     window.showToast = showToast;
     window.openModal = openModal;
     window.closeModal = closeModal;
+
+    // Dynamic Language Switcher (Tamil <-> English)
+    let currentLang = 'ta';
+    window.toggleLanguage = () => {
+      currentLang = currentLang === 'ta' ? 'en' : 'ta';
+      const btnText = document.getElementById('langLabel');
+      const topText = document.getElementById('topAnnounceText');
+      if (btnText) btnText.textContent = currentLang === 'ta' ? 'EN' : 'தமிழ்';
+      if (topText) {
+        topText.textContent = currentLang === 'ta'
+          ? '🥛 தூய பசும்பால் • மரச்செக்கு எண்ணெய்கள் • போளூர் நேரடி பண்ணை சப்ளை • WhatsApp: 7200752628'
+          : '🥛 100% Pure Raw Cow Milk • Cold-Pressed Oils • Direct Farm Delivery in Polur • WhatsApp: 7200752628';
+      }
+      showToast(`Language: ${currentLang === 'ta' ? 'தமிழ்' : 'English'}`);
+    };
+
+    // Feed Stock Submit
+    window.handleFeedStockSubmit = (e) => {
+      e.preventDefault();
+      const item = document.getElementById('feedItemSelect')?.value;
+      const qty = parseFloat(document.getElementById('feedQtyVal')?.value || 0);
+      const notes = document.getElementById('feedNotes')?.value || '';
+
+      if (isNaN(qty) || qty <= 0) return alert('Enter valid quantity!');
+
+      closeModal('feedStockModal');
+      showToast(`Fodder logged: ${qty} (${item})`);
+      e.target.reset();
+    };
 
     window.handleCowMilkSubmit = handleCowMilkSubmit;
     window.handleExpenseSubmit = handleExpenseSubmit;
