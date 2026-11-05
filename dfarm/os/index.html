@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D-FARM Shed OS • Kiosk & Cattle Command Center</title>
+  
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: High Contrast Mono & Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #F9FAFB;
+      user-select: none;
+      -webkit-user-select: none;
+      overflow: hidden;
+    }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace; }
+    .kiosk-btn {
+      touch-action: manipulation;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .kiosk-btn:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="h-screen w-screen relative">
+
+  <!-- ================= 1. DEFAULT CCTV STANDBY VIEW ================= -->
+  <div id="cctvLayer" class="absolute inset-0 z-10 bg-black cursor-pointer" onclick="wakeKioskDashboard()">
+    <!-- Simulated 1080p RTSP/HTTP Live Stream -->
+    <div class="relative w-full h-full flex items-center justify-center overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1920&q=80" alt="CCTV Stream Live" class="w-full h-full object-cover opacity-80 filter brightness-90">
+      
+      <!-- CCTV HUD Overlay -->
+      <div class="absolute top-4 left-6 flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-xs font-mono-val">
+        <span class="w-3 h-3 rounded-full bg-rose-600 animate-ping"></span>
+        <span class="font-bold text-rose-400">REC • CAM 01 (MAIN BARN PADDOCK)</span>
+        <span class="text-slate-400" id="cctvClock">10:45:12 AM</span>
+      </div>
+
+      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/20 text-xs font-bold text-amber-300 animate-pulse flex items-center gap-2">
+        <i data-lucide="hand" class="w-4 h-4"></i>
+        <span>Touch anywhere to open Farm OS Dashboard</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. ACTIVE FARM OS CONTROL CENTER ================= -->
+  <div id="dashboardLayer" class="absolute inset-0 z-20 bg-slate-950 flex flex-col hidden">
+    
+    <!-- Top System Header Bar -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+        <span class="font-bold text-base font-mono-val tracking-wide text-emerald-400">D-FARM SHED OS v3.2</span>
+        <span class="text-[11px] bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-md font-mono-val">POLUR</span>
+      </div>
+
+      <!-- Schedule Timers & Quick Clock -->
+      <div class="flex items-center gap-6">
+        <div class="text-right">
+          <span class="text-xs font-mono-val text-amber-300 font-bold block" id="osClock">05:30:00 AM</span>
+          <span class="text-[9px] text-slate-400 font-bold" id="sessionTag">MORNING FEEDING & MILKING</span>
+        </div>
+
+        <!-- 45s Idle Countdown Badge -->
+        <div class="flex items-center gap-1.5 bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-mono-val">
+          <i data-lucide="shield" class="w-3.5 h-3.5 text-slate-400"></i>
+          <span class="text-slate-400">Lock in:</span>
+          <span class="text-amber-400 font-bold" id="idleSeconds">45s</span>
+        </div>
+
+        <!-- Exit to CCTV -->
+        <button onclick="lockToCctv()" class="kiosk-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-700 flex items-center gap-1.5">
+          <i data-lucide="camera" class="w-4 h-4 text-emerald-400"></i>
+          <span>CCTV</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Navigation & Modules -->
+    <div class="flex-1 p-6 grid grid-cols-12 gap-6 overflow-hidden">
+      
+      <!-- LEFT PRIMARY WORKSPACE (8 COLUMNS) -->
+      <div class="col-span-8 flex flex-col space-y-4">
+        
+        <!-- Big Kiosk Touch Action Bar -->
+        <div class="grid grid-cols-3 gap-4">
+          <button onclick="startFoodTimeWizard()" class="kiosk-btn bg-gradient-to-br from-emerald-600 to-teal-800 p-5 rounded-2xl flex items-center gap-4 shadow-lg border border-emerald-500/30 text-left">
+            <div class="w-12 h-12 rounded-xl bg-black/30 flex items-center justify-center text-amber-300">
+              <i data-lucide="utensils" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <span class="text-[11px] uppercase tracking-wider text-emerald-200 font-bold block">Smart Automation</span>
+              <span class="text-lg font-bold text-white block">Food Time Wizard</span>
+            </div>
+          </button>
+
+          <button onclick="openMilkLogModal()" class="kiosk-btn bg-gradient-to-br from-indigo-700 to-indigo-900 p-5 rounded-2xl flex items-center gap-4 shadow-lg border border-indigo-500/30 text-left">
+            <div class="w-12 h-12 rounded-xl bg-black/30 flex items-center justify-center text-indigo-300">
+              <i data-lucide="milestone" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <span class="text-[11px] uppercase tracking-wider text-indigo-200 font-bold block">Yield Tracking</span>
+              <span class="text-lg font-bold text-white block">Milk Collection</span>
+            </div>
+          </button>
+
+          <button onclick="openFinancialVault()" class="kiosk-btn bg-gradient-to-br from-amber-700 to-amber-950 p-5 rounded-2xl flex items-center gap-4 shadow-lg border border-amber-500/30 text-left">
+            <div class="w-12 h-12 rounded-xl bg-black/30 flex items-center justify-center text-amber-300">
+              <i data-lucide="lock" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <span class="text-[11px] uppercase tracking-wider text-amber-200 font-bold block">PIN: 6734</span>
+              <span class="text-lg font-bold text-white block">Financial Vault</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Real-Time Watchdog & Animal Registry Tabs -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 flex-1 flex flex-col space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div class="flex items-center gap-3">
+              <i data-lucide="activity" class="w-5 h-5 text-emerald-400"></i>
+              <span class="font-bold text-sm text-slate-200">Active Herd Watchdog</span>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="filterHerd('cows')" id="tabCows" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold">Cattle (4)</button>
+              <button onclick="filterHerd('goats')" id="tabGoats" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 text-xs font-bold">Goats (24)</button>
+              <button onclick="filterHerd('poultry')" id="tabPoultry" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 text-xs font-bold">Poultry (10)</button>
+            </div>
+          </div>
+
+          <!-- Herd List (Auto Generated) -->
+          <div id="herdListContainer" class="flex-1 overflow-y-auto space-y-2 pr-1">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR: SENSORS, SCHEDULE & ALERTS (4 COLUMNS) -->
+      <div class="col-span-4 flex flex-col space-y-4">
+        
+        <!-- Smart Farm Environmental Status -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Shed Telemetry</span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 font-mono-val">
+            <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800/80">
+              <span class="text-[10px] text-slate-500 block">MILK CHILLER</span>
+              <span class="text-xl font-bold text-emerald-400">3.8° C</span>
+              <span class="text-[9px] text-slate-400 block mt-0.5">Optimal Chilling</span>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800/80">
+              <span class="text-[10px] text-slate-500 block">SHED TEMP</span>
+              <span class="text-xl font-bold text-amber-400">28.4° C</span>
+              <span class="text-[9px] text-slate-400 block mt-0.5">Humidity: 62%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Automated Schedule Timers & Horn Alerts -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 flex-1 flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
+              <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Sound & Schedules</span>
+              <i data-lucide="volume-2" class="w-4 h-4 text-amber-400"></i>
+            </div>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                <div>
+                  <span class="font-bold text-white block">Morning Session</span>
+                  <span class="text-[10px] text-slate-500 font-mono-val">05:30 AM – 07:00 AM</span>
+                </div>
+                <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">Melodies Active</span>
+              </div>
+
+              <div class="flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                <div>
+                  <span class="font-bold text-white block">Evening Session</span>
+                  <span class="text-[10px] text-slate-500 font-mono-val">05:00 PM – 06:30 PM</span>
+                </div>
+                <span class="text-[10px] font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Scheduled</span>
+              </div>
+
+              <div class="flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                <div>
+                  <span class="font-bold text-amber-300 block">Biogas Slurry Valve</span>
+                  <span class="text-[10px] text-slate-500 font-mono-val">Weekly (Every 7 Days)</span>
+                </div>
+                <button onclick="confirmBiogasValveCleared()" class="text-[10px] font-bold text-amber-400 bg-amber-950 px-2.5 py-1 rounded-lg border border-amber-800 hover:bg-amber-900">Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Test Speaker Horn Siren Button -->
+          <button onclick="triggerVoiceAlert('கவனம்: பண்ணை ஒளிபெருக்கி மற்றும் குரல் எச்சரிக்கை சோதனை வெற்றிகரமானது.')" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold py-2.5 rounded-xl border border-slate-700 flex items-center justify-center gap-2">
+            <i data-lucide="bell-ring" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>Test Shed Horn & Tamil Voice</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ================= 3. FOOD TIME STEP-THROUGH WIZARD MODAL ================= -->
+  <div id="foodWizardModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-6">
+    <div class="bg-slate-900 border border-emerald-500/40 rounded-3xl w-full max-w-2xl p-7 space-y-6 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Interactive Feeding Assistant</span>
+          <h2 class="text-xl font-bold text-white mt-0.5" id="wizardTargetTitle">Feeding Wizard</h2>
+        </div>
+        <span class="text-xs font-mono-val bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-xl" id="wizardStepCount">Step 1 of 5</span>
+      </div>
+
+      <!-- Center Dynamic Animal Card -->
+      <div class="bg-slate-950 rounded-2xl p-6 border border-slate-800 space-y-5" id="wizardCardBody">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center justify-between pt-2">
+        <button onclick="closeFoodWizard()" class="text-slate-400 hover:text-white text-xs font-bold px-4 py-2">Cancel</button>
+        <button onclick="nextFeedingStep()" class="kiosk-btn bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm px-8 py-3 rounded-2xl shadow-xl flex items-center gap-2">
+          <span>Tub Ready / Next Animal</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 4. MILK ENTRY MODAL ================= -->
+  <div id="milkEntryModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-6">
+    <div class="bg-slate-900 border border-indigo-500/40 rounded-3xl w-full max-w-md p-6 space-y-5 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-base text-white">கறவை பால் பதிவு (Milk Entry)</h3>
+        <button onclick="closeMilkLogModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form onsubmit="handleMilkSubmit(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-400 mb-1">Select Cattle Tag</label>
+          <select id="milkEntryCowTag" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white font-bold outline-none text-sm">
+            <option value="COW-01">COW-01 (நாட்டுப் பசு - காவேரி)</option>
+            <option value="COW-02">COW-02 (HF கலப்பினம்)</option>
+            <option value="COW-03">COW-03 (ஜெர்சி கலப்பினம்)</option>
+            <option value="COW-04">COW-04 (கங்கேயம்)</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Shift</label>
+            <select id="milkEntryShift" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
+              <option value="AM">காலை (Morning)</option>
+              <option value="PM">மாலை (Evening)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Milk Yield (Litres)*</label>
+            <input type="number" step="0.1" id="milkEntryQty" required placeholder="e.g. 14.5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono-val font-bold text-lg outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Fat %</label>
+            <input type="number" step="0.1" id="milkEntryFat" placeholder="4.2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">SNF</label>
+            <input type="number" step="0.1" id="milkEntrySnf" placeholder="8.6" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Save Collection</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= 5. FINANCIAL VAULT (PIN 6734) ================= -->
+  <div id="financialVaultModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-6">
+    <div class="bg-slate-900 border border-amber-500/40 rounded-3xl w-full max-w-xl p-7 space-y-6 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-5 h-5 text-amber-400"></i>
+          <h3 class="font-bold text-base text-white">D-FARM Financial Vault</h3>
+        </div>
+        <button onclick="closeFinancialVault()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <div class="grid grid-cols-3 gap-3 font-mono-val text-center">
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <span class="text-[10px] text-slate-400 uppercase block">Monthly Revenue</span>
+          <span class="text-xl font-bold text-emerald-400">₹72,400</span>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <span class="text-[10px] text-slate-400 uppercase block">Monthly Expenses</span>
+          <span class="text-xl font-bold text-rose-400">₹26,150</span>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <span class="text-[10px] text-slate-400 uppercase block">Net Operating Profit</span>
+          <span class="text-xl font-bold text-amber-400">+₹46,250</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2 text-xs">
+        <span class="font-bold text-slate-300 block">Recent Cashflow Actions</span>
+        <div class="flex justify-between text-slate-400">
+          <span>Raw Milk Direct Cash Sales (Today)</span>
+          <span class="text-emerald-400 font-mono-val font-bold">+₹1,850</span>
+        </div>
+        <div class="flex justify-between text-slate-400">
+          <span>Super Napier Cutting Helper Wage</span>
+          <span class="text-rose-400 font-mono-val font-bold">-₹300</span>
+        </div>
+        <div class="flex justify-between text-slate-400">
+          <span>Cottonseed Cake & Thavudu Bags (Polur)</span>
+          <span class="text-rose-400 font-mono-val font-bold">-₹1,400</span>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <span class="text-[10px] text-slate-500 font-mono-val">Auto-Syncing with Polur Firebase Cloud</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    // --- 1. IDLE TIMEOUT & AUTO-KIOSK CCTV ENGINE ---
+    let idleCounter = 45;
+    let idleTimer = null;
+
+    function resetIdleTimer() {
+      idleCounter = 45;
+      const el = document.getElementById('idleSeconds');
+      if (el) el.textContent = `${idleCounter}s`;
+    }
+
+    // Any interaction resets the 45s timer
+    ['touchstart', 'mousedown', 'mousemove', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, resetIdleTimer, { passive: true });
+    });
+
+    function startKioskLoop() {
+      clearInterval(idleTimer);
+      idleTimer = setInterval(() => {
+        const dashboard = document.getElementById('dashboardLayer');
+        if (!dashboard.classList.contains('hidden')) {
+          idleCounter--;
+          const el = document.getElementById('idleSeconds');
+          if (el) el.textContent = `${idleCounter}s`;
+
+          if (idleCounter <= 0) {
+            lockToCctv();
+          }
+        }
+      }, 1000);
+    }
+
+    function wakeKioskDashboard() {
+      document.getElementById('cctvLayer').classList.add('hidden');
+      document.getElementById('dashboardLayer').classList.remove('hidden');
+      resetIdleTimer();
+      lucide.createIcons();
+    }
+
+    function lockToCctv() {
+      document.getElementById('dashboardLayer').classList.add('hidden');
+      document.getElementById('cctvLayer').classList.remove('hidden');
+      closeFoodWizard();
+      closeMilkLogModal();
+      closeFinancialVault();
+    }
+
+    // Clock
+    setInterval(() => {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-US', { hour12: true });
+      const c1 = document.getElementById('cctvClock');
+      const c2 = document.getElementById('osClock');
+      if (c1) c1.textContent = timeStr;
+      if (c2) c2.textContent = timeStr;
+    }, 1000);
+
+    // --- 2. HERD DATA & WATCHDOG ---
+    const cattleHerd = [
+      { id: "COW-01", name: "காவேரி (Country)", stage: "Milking", yield: 14.0, prevYield: 14.5, sennai: false, weight: 390 },
+      { id: "COW-02", name: "HF Cross 02", stage: "Milking", yield: 18.5, prevYield: 18.0, sennai: true, weight: 430 },
+      { id: "COW-03", name: "Jersey Cross 03", stage: "Milking", yield: 12.0, prevYield: 14.5, sennai: false, weight: 360 }, // Milk Drop Alert!
+      { id: "COW-04", name: "கங்கேயம் 04", stage: "Dry (சினை)", yield: 0.0, prevYield: 0.0, sennai: true, weight: 380 }
+    ];
+
+    function renderHerdList(type) {
+      const c = document.getElementById('herdListContainer');
+      if (!c) return;
+
+      if (type === 'cows') {
+        c.innerHTML = cattleHerd.map(cow => {
+          const drop = cow.prevYield > 0 && ((cow.prevYield - cow.yield) / cow.prevYield) >= 0.15;
+          return `
+            <div class="flex items-center justify-between p-3.5 bg-slate-950 rounded-2xl border ${drop ? 'border-rose-600/80' : 'border-slate-800'}">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">🐄</span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-sm text-white font-mono-val">${cow.id}</span>
+                    <span class="text-xs text-slate-400">(${cow.name})</span>
+                    ${cow.sennai ? '<span class="text-[9px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded font-bold">சினை (AI Done)</span>' : ''}
+                  </div>
+                  <span class="text-[10px] text-slate-500">${cow.stage} • ${cow.weight} kg</span>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-bold font-mono-val ${drop ? 'text-rose-400' : 'text-emerald-400'}">${cow.yield} L/day</span>
+                ${drop ? '<span class="text-[9px] text-rose-500 font-bold block animate-pulse">⚠️ 17% Drop Alert</span>' : '<span class="text-[9px] text-slate-500 block">Normal Yield</span>'}
+              </div>
+            </div>
+          `;
+        }).join('');
+      } else if (type === 'goats') {
+        c.innerHTML = `
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 space-y-2 text-xs">
+            <h4 class="font-bold text-amber-300">Goat Partitions (24 Animals)</h4>
+            <div class="grid grid-cols-2 gap-2 text-slate-300">
+              <div class="p-2.5 bg-slate-900 rounded-xl">Section A (Kids 0-3m): 6 Nos</div>
+              <div class="p-2.5 bg-slate-900 rounded-xl">Section B (Sennai Does): 8 Nos</div>
+              <div class="p-2.5 bg-slate-900 rounded-xl">Section C (Stud Bucks): 3 Nos</div>
+              <div class="p-2.5 bg-slate-900 rounded-xl">Section D (Bakrid Ready): 7 Nos (32kg avg)</div>
+            </div>
+          </div>
+        `;
+      } else {
+        c.innerHTML = `
+          <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-xs text-slate-300 space-y-2">
+            <h4 class="font-bold text-amber-300">Poultry Batch (10 Country Birds)</h4>
+            <p>Daily Egg Production: 7 to 8 Eggs | Free pasture range active.</p>
+          </div>
+        `;
+      }
+    }
+
+    function filterHerd(type) {
+      ['Cows', 'Goats', 'Poultry'].forEach(t => {
+        const btn = document.getElementById(`tab${t}`);
+        if (btn) {
+          if (t.toLowerCase() === type) {
+            btn.className = "px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-bold";
+          } else {
+            btn.className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 text-xs font-bold";
+          }
+        }
+      });
+      renderHerdList(type);
+    }
+
+    // --- 3. DYNAMIC FOOD TIME WIZARD ---
+    let wizardStep = 0;
+    const wizardQueue = [
+      { type: "cow", id: "COW-01", name: "காவேரி", milk: 14.0, sennai: false },
+      { type: "cow", id: "COW-02", name: "HF Cross 02", milk: 18.5, sennai: true },
+      { type: "cow", id: "COW-03", name: "Jersey Cross", milk: 12.0, sennai: false },
+      { type: "goats_sec_B", title: "Section B: சினை மற்றும் தாய் ஆடுகள் (8 Nos)", count: 8 },
+      { type: "goats_sec_D", title: "Section D: கொழுக்க வைக்கும் ஆடுகள் (Bakrid Lot - 7 Nos)", count: 7 }
+    ];
+
+    function startFoodTimeWizard() {
+      wizardStep = 0;
+      document.getElementById('foodWizardModal').classList.remove('hidden');
+      renderWizardStep();
+    }
+
+    function closeFoodWizard() {
+      document.getElementById('foodWizardModal').classList.add('hidden');
+    }
+
+    function calculateCattleConcentrate(milkYield, isSennai) {
+      const base = 1.5;
+      const milkFactor = milkYield / 2.5;
+      const sennaiExtra = isSennai ? 1.0 : 0.0;
+      const total = base + milkFactor + sennaiExtra;
+      return total.toFixed(1);
+    }
+
+    function renderWizardStep() {
+      const item = wizardQueue[wizardStep];
+      const countEl = document.getElementById('wizardStepCount');
+      const bodyEl = document.getElementById('wizardCardBody');
+      const titleEl = document.getElementById('wizardTargetTitle');
+
+      countEl.textContent = `Step ${wizardStep + 1} of ${wizardQueue.length}`;
+
+      if (item.type === 'cow') {
+        titleEl.textContent = `Cattle Feeding: ${item.id} (${item.name})`;
+        const concKg = calculateCattleConcentrate(item.milk, item.sennai);
+        const thavuduKg = (concKg * 0.45).toFixed(1);
+        const cakeKg = (concKg * 0.35).toFixed(1);
+
+        bodyEl.innerHTML = `
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-3xl font-extrabold text-amber-400 font-mono-val">${concKg} kg</span>
+              <span class="text-xs text-slate-400 block">Total Aadaar Theevanam Mix</span>
+            </div>
+            <div class="text-right">
+              <span class="text-xs text-emerald-400 font-bold block">${item.milk} L Yield</span>
+              <span class="text-[10px] text-slate-400">${item.sennai ? 'சினை (+1.0 kg)' : 'Regular Feed'}</span>
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <span class="font-bold text-slate-300 block">Tub Mixing Ratio:</span>
+            <div class="grid grid-cols-3 gap-2 text-center font-mono-val">
+              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-400 block">தவிடு (45%)</span>
+                <span class="font-bold text-white">${thavuduKg} kg</span>
+              </div>
+              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-400 block">புண்ணாக்கு (35%)</span>
+                <span class="font-bold text-white">${cakeKg} kg</span>
+              </div>
+              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-400 block">தாது உப்பு</span>
+                <span class="font-bold text-amber-400">60 grams</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-400 italic mt-2">+ 25 kg Super Napier Green Fodder in trough.</p>
+          </div>
+        `;
+
+        triggerVoiceAlert(`${item.id} ${item.name}க்கு ${concKg} கிலோ அடர் தீவனம் வைக்கவும்.`);
+      } else {
+        titleEl.textContent = item.title;
+        const totalKg = (item.count * 0.4).toFixed(1);
+        bodyEl.innerHTML = `
+          <div class="border-b border-slate-800 pb-3">
+            <span class="text-3xl font-extrabold text-amber-400 font-mono-val">${totalKg} kg</span>
+            <span class="text-xs text-slate-400 block">Section Shared Concentrate Tub</span>
+          </div>
+          <p class="text-xs text-slate-300">Place ${totalKg} kg crushed grain mixture in the designated partition feeder trough.</p>
+        `;
+        triggerVoiceAlert(`${item.title} தொட்டியில் ${totalKg} கிலோ அடர் தீவனம் வைக்கவும்.`);
+      }
+
+      lucide.createIcons();
+    }
+
+    function nextFeedingStep() {
+      wizardStep++;
+      if (wizardStep < wizardQueue.length) {
+        renderWizardStep();
+      } else {
+        closeFoodWizard();
+        triggerVoiceAlert('அனைத்து கால்நடைகளுக்கும் தீவனம் வைக்கும் பணி நிறைவடைந்தது.');
+      }
+    }
+
+    // --- 4. AUDIO & TAMIL TEXT-TO-SPEECH VOICE ENGINE ---
+    function triggerVoiceAlert(tamilText) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(tamilText);
+        utterance.lang = 'ta-IN';
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // --- 5. MODAL TRIGGERS ---
+    function openMilkLogModal() { document.getElementById('milkEntryModal').classList.remove('hidden'); }
+    function closeMilkLogModal() { document.getElementById('milkEntryModal').classList.add('hidden'); }
+
+    function handleMilkSubmit(e) {
+      e.preventDefault();
+      const cow = document.getElementById('milkEntryCowTag').value;
+      const qty = document.getElementById('milkEntryQty').value;
+      closeMilkLogModal();
+      triggerVoiceAlert(`${cow}க்கு ${qty} லிட்டர் பால் பதிவு செய்யப்பட்டது.`);
+      e.target.reset();
+    }
+
+    function openFinancialVault() {
+      const pin = prompt('Enter 4-Digit Financial Security PIN:');
+      if (pin === '6734') {
+        document.getElementById('financialVaultModal').classList.remove('hidden');
+        lucide.createIcons();
+      } else if (pin) {
+        alert('Access Denied: Invalid PIN!');
+      }
+    }
+
+    function closeFinancialVault() { document.getElementById('financialVaultModal').classList.add('hidden'); }
+
+    function confirmBiogasValveCleared() {
+      alert('Biogas Slurry Valve Cycle Cleared! Next reminder set for 7 days later.');
+    }
+
+    // Boot
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderHerdList('cows');
+      startKioskLoop();
+    });
+  </script>
+</body>
+</html>
