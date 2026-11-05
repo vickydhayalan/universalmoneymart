@@ -26,8 +26,24 @@
     .glass-nav { background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(12px); }
     .custom-scroll::-webkit-scrollbar { height: 4px; width: 4px; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #143627; border-radius: 9999px; }
-    .organic-card { border: 1px solid rgba(20, 54, 39, 0.08); transition: all 0.25s ease; }
+    .organic-card { 
+      border: 1px solid rgba(20, 54, 39, 0.1); 
+      transition: all 0.25s ease;
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
     .organic-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px -10px rgba(20, 54, 39, 0.15); }
+    /* Native Clean Styling for Footer */
+    .ft-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+    .ft-desc { font-size: 11px; line-height: 1.6; color: #94a3b8; margin-top: 0.5rem; }
+    .ft-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.75rem; }
+    .ft-badge { font-size: 9px; font-family: monospace; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; }
+    .ft-col-h { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #f8fafc; margin-bottom: 0.75rem; font-family: monospace; }
+    .ft-links { display: flex; flex-direction: column; gap: 0.4rem; font-size: 11px; color: #94a3b8; }
+    .ft-links a:hover { color: #34d399; }
+    .ft-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; margin-top: 2rem; display: flex; flex-direction: column; sm:flex-row; justify-content: space-between; font-size: 11px; color: #64748b; gap: 0.75rem; }
   </style>
 </head>
 <body class="bg-[#FBFBFA] text-[#143627] antialiased selection:bg-[#143627] selection:text-white">
@@ -44,13 +60,13 @@
       </div>
     </div>
 
-    <!-- RESPONSIVE HEADER (NO OVERLAP IN MOBILE) -->
+    <!-- RESPONSIVE HEADER -->
     <header class="glass-nav border-b border-slate-200/80 sticky top-[33px] sm:top-[35px] z-40">
       <div class="max-w-6xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3.5 flex items-center justify-between">
         
         <!-- Brand Logo & Original POLUR Title -->
         <a href="#home" class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <img src="https://iili.io/nPh3Ia9.png" alt="D-FARM Logo" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-emerald-800 shadow-sm object-cover">
+          <img src="/dfarm-logo.png" alt="D-FARM Logo" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-emerald-800 shadow-sm object-cover" onerror="this.onerror=null; this.src='https://iili.io/nPh3Ia9.png';">
           <div>
             <div class="flex items-center gap-1.5">
               <span class="font-serif-title font-extrabold text-base sm:text-xl text-[#143627] tracking-tight">D-FARM</span>
@@ -65,7 +81,6 @@
           <a href="#products" class="hover:text-amber-700 transition">Products</a>
           <a href="#fodder" class="hover:text-amber-700 transition">Green Fodder</a>
           <a href="#livestock" class="hover:text-amber-700 transition">Livestock</a>
-          <a href="#about-farm" class="hover:text-amber-700 transition">About Farm</a>
           <a href="#story" class="hover:text-amber-700 transition">Founders</a>
           <a href="#subscribe" class="hover:text-amber-700 transition">Subscription</a>
           <a href="#visit" class="hover:text-amber-700 transition">Visit & Map</a>
@@ -73,30 +88,25 @@
 
         <!-- Right Side Utility Action Buttons -->
         <div class="flex items-center gap-1.5 sm:gap-2.5">
-          <!-- Dynamic Language Toggle Button -->
           <button onclick="window.toggleLanguage()" id="langToggleBtn" title="Switch Language" class="px-2 py-1.5 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition text-[11px] sm:text-xs font-bold flex items-center gap-1 bg-white shadow-sm">
             <i data-lucide="globe" class="w-3.5 h-3.5 text-emerald-800"></i>
             <span id="langLabel">EN</span>
           </button>
 
-          <!-- Customer Self Ledger -->
           <button onclick="window.openCustomerLedgerModal()" title="Customer Ledger" class="p-1.5 sm:px-2.5 sm:py-1.5 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-emerald-50 transition text-xs font-bold flex items-center gap-1 bg-white shadow-sm">
             <i data-lucide="receipt" class="w-4 h-4 text-emerald-800"></i>
             <span class="hidden md:inline">My Ledger</span>
           </button>
 
-          <!-- Owner ERP Lock -->
           <button onclick="window.handleOwnerPortalClick()" title="Owner ERP (PIN: 6734)" class="p-1.5 sm:p-2 border border-[#143627]/20 rounded-xl text-[#143627] hover:bg-amber-50 transition bg-white shadow-sm">
             <i data-lucide="lock" class="w-4 h-4 text-amber-700"></i>
           </button>
 
-          <!-- Store Cart Drawer Button -->
           <button onclick="window.toggleCart(true)" class="bg-[#143627] hover:bg-[#0D241A] text-white px-2.5 sm:px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold shadow-md active:scale-95 transition">
             <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-300"></i>
             <span id="cartCountBadge" class="bg-amber-400 text-black text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">0</span>
           </button>
 
-          <!-- Mobile Hamburger -->
           <button onclick="window.toggleMobileMenu()" class="lg:hidden p-1.5 text-[#143627] rounded-xl hover:bg-slate-100">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
@@ -109,7 +119,6 @@
         <a href="#products" onclick="window.toggleMobileMenu()" class="block py-1.5 border-b border-slate-100">Products Catalog</a>
         <a href="#fodder" onclick="window.toggleMobileMenu()" class="block py-1.5 border-b border-slate-100">Green Fodders (பசுந்தீவனம்)</a>
         <a href="#livestock" onclick="window.toggleMobileMenu()" class="block py-1.5 border-b border-slate-100">Livestock Sales</a>
-        <a href="#about-farm" onclick="window.toggleMobileMenu()" class="block py-1.5 border-b border-slate-100">Smart Farm Operations</a>
         <a href="#story" onclick="window.toggleMobileMenu()" class="block py-1.5 border-b border-slate-100">Founders Story</a>
         <a href="#subscribe" onclick="window.toggleMobileMenu()" class="block py-1.5 border-b border-slate-100">Monthly Milk Subscription</a>
         <a href="#visit" onclick="window.toggleMobileMenu()" class="block py-1.5">Book Farm Visit (Bakmarpettai, Polur)</a>
@@ -162,10 +171,9 @@
       </div>
     </section>
 
-    <!-- 1. DYNAMIC AUTO CAROUSEL & FARM STORY SHOWCASE -->
+    <!-- 1. DYNAMIC AUTO CAROUSEL -->
     <section class="max-w-6xl mx-auto px-4">
       <div class="relative rounded-3xl overflow-hidden bg-slate-900 border border-emerald-900/40 shadow-xl aspect-[16/9] sm:aspect-[21/9]">
-        <!-- Carousel Slides -->
         <div id="carouselTrack" class="flex transition-transform duration-700 ease-out h-full">
           <div class="min-w-full h-full relative">
             <img src="https://images.unsplash.com/photo-1527153857715-3908f2bae5e8?auto=format&fit=crop&w=1600&q=80" alt="D-FARM Pasture" class="w-full h-full object-cover opacity-60">
@@ -189,7 +197,6 @@
           </div>
         </div>
 
-        <!-- Carousel Indicators -->
         <div class="absolute bottom-3 right-4 flex gap-1.5 z-20">
           <button onclick="window.goToSlide(0)" class="w-2.5 h-1.5 rounded-full bg-white"></button>
           <button onclick="window.goToSlide(1)" class="w-1.5 h-1.5 rounded-full bg-white/40"></button>
@@ -197,7 +204,7 @@
       </div>
     </section>
 
-    <!-- 2. SMART IOT STATS & POLUR MILK ATM 100L TARGET PROGRESS -->
+    <!-- 2. SMART STATS -->
     <section class="max-w-6xl mx-auto px-4">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
         <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
@@ -310,7 +317,7 @@
       </div>
     </section>
 
-    <!-- 11 FARM DIRECT PRODUCTS CATALOG -->
+    <!-- 11 FARM DIRECT PRODUCTS CATALOG (FIXED PROPORTIONAL CARDS) -->
     <section id="products" class="max-w-6xl mx-auto px-4 space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
         <div>
@@ -329,14 +336,14 @@
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
 
         <!-- 1. Pure Raw Cow Milk -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🥛</span>
               <span class="absolute top-2 left-2 bg-[#143627] text-white text-[9px] font-bold px-2 py-0.5 rounded">Fresh Raw</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">தூய பசும்பால் (100% Raw Milk)</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">நாட்டு மற்றும் கலப்பின பசுக்களின் கறந்த தூய பால். தண்ணீர் கலக்காதது.</p>
+            <p class="text-[10px] text-slate-500">நாட்டு மற்றும் கலப்பின பசுக்களின் கறந்த தூய பால். தண்ணீர் கலக்காதது.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -350,14 +357,14 @@
         </div>
 
         <!-- 2. Wood-Pressed Groundnut Oil -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🥜</span>
               <span class="absolute top-2 left-2 bg-amber-700 text-white text-[9px] font-bold px-2 py-0.5 rounded">Cold Pressed</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">மரச்செக்கு கடலை எண்ணெய்</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">பாரம்பரிய மரச்செக்கில் ஆட்டிய சுத்தமான வாசனையுள்ள கடலை எண்ணெய்.</p>
+            <p class="text-[10px] text-slate-500">பாரம்பரிய மரச்செக்கில் ஆட்டிய சுத்தமான வாசனையுள்ள கடலை எண்ணெய்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -370,15 +377,15 @@
           </div>
         </div>
 
-        <!-- 3. Wood-Pressed Sesame (Gingelly) Oil -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <!-- 3. Wood-Pressed Sesame Oil -->
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🌱</span>
               <span class="absolute top-2 left-2 bg-amber-800 text-white text-[9px] font-bold px-2 py-0.5 rounded">Palm Jaggery</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">மரச்செக்கு நல்லெண்ணெய்</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">கருப்பு எள் & பனங்கருப்பட்டி சேர்த்து மரச்செக்கில் பிழிந்த பாரம்பரிய நல்லெண்ணெய்.</p>
+            <p class="text-[10px] text-slate-500">கருப்பு எள் & பனங்கருப்பட்டி சேர்த்து மரச்செக்கில் பிழிந்த பாரம்பரிய நல்லெண்ணெய்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -392,14 +399,14 @@
         </div>
 
         <!-- 4. Pure Farm Cow Ghee -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🧈</span>
               <span class="absolute top-2 left-2 bg-amber-500 text-black text-[9px] font-bold px-2 py-0.5 rounded">Bilona Style</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">மணமணக்கும் தூய பசு நெய்</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">தூய வெண்ணெயில் பாரம்பரிய முறையில் காய்ச்சிய மணல் மணலான பசு நெய்.</p>
+            <p class="text-[10px] text-slate-500">தூய வெண்ணெயில் பாரம்பரிய முறையில் காய்ச்சிய மணல் மணலான பசு நெய்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -413,14 +420,14 @@
         </div>
 
         <!-- 5. Wood-Pressed Coconut Oil -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🥥</span>
               <span class="absolute top-2 left-2 bg-emerald-800 text-white text-[9px] font-bold px-2 py-0.5 rounded">Sun Dried</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">மரச்செக்கு தேங்காய் எண்ணெய்</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">வெயிலில் உலர்த்திய கொப்பரை தேங்காய் கொண்டு ஆட்டப்பட்ட சுத்தமான எண்ணெய்.</p>
+            <p class="text-[10px] text-slate-500">வெயிலில் உலர்த்திய கொப்பரை தேங்காய் கொண்டு ஆட்டப்பட்ட சுத்தமான எண்ணெய்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -434,14 +441,14 @@
         </div>
 
         <!-- 6. Country Chicken Eggs -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🥚</span>
               <span class="absolute top-2 left-2 bg-orange-700 text-white text-[9px] font-bold px-2 py-0.5 rounded">Free Range</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">நாட்டுக்கோழி முட்டை (Pack of 10)</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">இயற்கை வெளியில் மேய்ந்து வளர்ந்த நாட்டுக் கோழிகளின் சத்துமிக்க முட்டைகள்.</p>
+            <p class="text-[10px] text-slate-500">இயற்கை வெளியில் மேய்ந்து வளர்ந்த நாட்டுக் கோழிகளின் சத்துமிக்க முட்டைகள்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -455,14 +462,14 @@
         </div>
 
         <!-- 7. Organic Farm Cow Dung Manure -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🍂</span>
               <span class="absolute top-2 left-2 bg-amber-900 text-white text-[9px] font-bold px-2 py-0.5 rounded">Cured 60 Days</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">மக்கிய இயற்கை சாண எரு</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">மாடித் தோட்டம் மற்றும் விவசாய நிலங்களுக்கு சிறந்த நுண்ணூட்ட இயற்கை எரு உரம்.</p>
+            <p class="text-[10px] text-slate-500">மாடித் தோட்டம் மற்றும் விவசாய நிலங்களுக்கு சிறந்த நுண்ணூட்ட இயற்கை எரு உரம்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -476,14 +483,14 @@
         </div>
 
         <!-- 8. Premium Vermicompost -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🪱</span>
               <span class="absolute top-2 left-2 bg-emerald-900 text-white text-[9px] font-bold px-2 py-0.5 rounded">Enriched</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">மண்புழு உரம் (Vermicompost)</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">செடிகளின் உடனடி வளர்ச்சிக்குத் தேவையான உன்னதமான இயற்கை மண்புழு உரம்.</p>
+            <p class="text-[10px] text-slate-500">செடிகளின் உடனடி வளர்ச்சிக்குத் தேவையான உன்னதமான இயற்கை மண்புழு உரம்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -497,14 +504,14 @@
         </div>
 
         <!-- 9. Dry Groundnut Hay Bales -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🌾</span>
               <span class="absolute top-2 left-2 bg-yellow-700 text-white text-[9px] font-bold px-2 py-0.5 rounded">High Protein</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">கடலைக் கொடி வைக்கோல்</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">கால்நடைகளுக்கு சத்துமிக்க உலர் தீவனம். பாலின் கொழுப்பு அளவை அதிகரிக்கும்.</p>
+            <p class="text-[10px] text-slate-500">கால்நடைகளுக்கு சத்துமிக்க உலர் தீவனம். பாலின் கொழுப்பு அளவை அதிகரிக்கும்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -518,14 +525,14 @@
         </div>
 
         <!-- 10. Super Napier Green Fodder -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">🌿</span>
               <span class="absolute top-2 left-2 bg-green-700 text-white text-[9px] font-bold px-2 py-0.5 rounded">Daily Cut</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">சூப்பர் நேப்பியர் பசுந்தீவனம்</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">தினமும் புதியதாக அறுவடை செய்யப்படும் பசுந்தீவனம் (Green Fodder).</p>
+            <p class="text-[10px] text-slate-500">தினமும் புதியதாக அறுவடை செய்யப்படும் பசுந்தீவனம் (Green Fodder).</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -539,14 +546,14 @@
         </div>
 
         <!-- 11. Pure Organic Cow Dung Cakes -->
-        <div class="organic-card bg-white rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between shadow-sm">
+        <div class="organic-card bg-white rounded-2xl p-4 shadow-sm">
           <div class="space-y-2">
-            <div class="relative rounded-xl overflow-hidden bg-slate-100 aspect-video flex items-center justify-center">
+            <div class="relative rounded-xl overflow-hidden bg-slate-100 h-28 flex items-center justify-center">
               <span class="text-3xl">☀️</span>
               <span class="absolute top-2 left-2 bg-slate-800 text-white text-[9px] font-bold px-2 py-0.5 rounded">Pooja & Homa</span>
             </div>
             <h3 class="font-bold text-xs sm:text-sm text-[#143627] leading-tight">இயற்கை வரட்டி (Cow Dung Cakes)</h3>
-            <p class="text-[10px] text-slate-500 line-clamp-2">பூஜை மற்றும் ஹோமங்களுக்குப் பயன்படும் காய்ந்த நாட்டுப் பசு சாண வரட்டிகள்.</p>
+            <p class="text-[10px] text-slate-500">பூஜை மற்றும் ஹோமங்களுக்குப் பயன்படும் காய்ந்த நாட்டுப் பசு சாண வரட்டிகள்.</p>
           </div>
           <div class="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between">
             <div>
@@ -561,6 +568,7 @@
 
       </div>
     </section>
+
     <!-- DIVERSIFIED GREEN FODDER PASTURES -->
     <section id="fodder" class="max-w-6xl mx-auto px-4 space-y-6">
       <div class="bg-gradient-to-r from-emerald-950 via-[#143627] to-[#0A1F16] text-white rounded-3xl p-6 sm:p-8 space-y-5 border border-emerald-800/50">
@@ -580,7 +588,7 @@
           <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5 space-y-1">
             <span class="text-2xl">🌱</span>
             <h4 class="font-bold text-amber-300">Super Napier (CO-5)</h4>
-            <p class="text-[10px] text-emerald-100/70">18% அதிக புரதம் நிறைந்த துரித வளர்ச்சி பசுந்தீவனம். (கரணை கிடைக்கும்).</p>
+            <p class="text-[10px] text-emerald-100/70">18% அதிக புரதம் நிறைந்த துரித வளர்ச்சி பசுந்தீவனம்.</p>
           </div>
           <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5 space-y-1">
             <span class="text-2xl">🍃</span>
@@ -686,7 +694,6 @@
           </div>
         </div>
 
-        <!-- Karuppan Security Badge -->
         <div class="bg-emerald-50 rounded-2xl p-3 sm:p-4 border border-emerald-200 flex items-center gap-3">
           <span class="text-2xl">🐕</span>
           <div class="text-[11px]">
@@ -734,7 +741,7 @@
       </div>
     </section>
 
-    <!-- FARM VISIT & LOCATION MAP (BAKMARPETTAI, POLUR) -->
+    <!-- FARM VISIT & LOCATION MAP -->
     <section id="visit" class="max-w-6xl mx-auto px-4 space-y-6">
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#143627]/10 shadow-sm space-y-6">
         <div>
@@ -750,25 +757,24 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <!-- Visit Booking Form -->
           <form onsubmit="window.handleVisitSubmit(event)" class="space-y-3 text-xs bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200">
             <h4 class="font-bold text-sm text-[#143627] border-b pb-2">வருகை முன்பதிவு (Schedule Farm Visit)</h4>
             <div>
               <label class="block font-bold text-slate-700 mb-1">உங்கள் பெயர் (Your Name)*</label>
-              <input type="text" id="visitName" required placeholder="e.g. Anand Kumar" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2">
+              <input type="text" id="visitName" required placeholder="e.g. Anand Kumar" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 outline-none">
             </div>
             <div>
               <label class="block font-bold text-slate-700 mb-1">மொபைல் எண் (WhatsApp Mobile)*</label>
-              <input type="tel" id="visitPhone" required placeholder="e.g. 9876543210" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2">
+              <input type="tel" id="visitPhone" required placeholder="e.g. 9876543210" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 outline-none">
             </div>
             <div class="grid grid-cols-2 gap-2">
               <div>
                 <label class="block font-bold text-slate-700 mb-1">தேதி (Date)*</label>
-                <input type="date" id="visitDate" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 font-bold text-[#143627]">
+                <input type="date" id="visitDate" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 font-bold text-[#143627] outline-none">
               </div>
               <div>
                 <label class="block font-bold text-slate-700 mb-1">நபர்கள் (Visitors)</label>
-                <select id="visitGuests" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 font-bold">
+                <select id="visitGuests" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 font-bold outline-none">
                   <option value="1-2 Persons">1-2 நபர்கள்</option>
                   <option value="Family (3-5)">குடும்பம் (3-5 நபர்கள்)</option>
                   <option value="Group (5+)">குழு (5+ நபர்கள்)</option>
@@ -781,15 +787,14 @@
             </button>
           </form>
 
-          <!-- EXACT LOCATION MAP CARD (BAKMARPETTAI, POLUR) -->
-          <div class="border border-slate-200 rounded-2xl p-3 sm:p-4 bg-slate-50 space-y-3">
+          <div class="border border-slate-200 rounded-2xl p-4 bg-slate-50 space-y-3">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2 text-xs font-bold text-[#143627]">
                 <i data-lucide="map-pin" class="w-4 h-4 text-rose-600"></i>
-                <span>D-FARM Exact Location Map (Bakmarpettai, Polur)</span>
+                <span>D-FARM Location Map (Bakmarpettai, Polur)</span>
               </div>
               <a href="https://maps.google.com/?q=D-FARM,Bakmarpettai,Polur" target="_blank" rel="noopener" class="bg-[#143627] text-white text-[10px] font-bold px-3 py-1.5 rounded-xl hover:bg-[#0D241A] transition">
-                Navigate in Maps App
+                Maps App
               </a>
             </div>
 
@@ -814,75 +819,82 @@
     </section>
 
     <!-- FOOTER WITH SOCIALS & LEGAL -->
-    <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
+    <footer class="bg-[#0b1424] text-slate-300 p-6 md:p-10 border-t border-slate-800 rounded-t-3xl mt-12">
+      <div class="max-w-6xl mx-auto">
+        <div class="ft-grid">
+          <div>
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shrink-0">
+                <img src="/Logo.png" alt="UMM" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='₹'">
+              </div>
+              <div class="font-bold text-white text-sm">Universal <span class="text-amber-400">Money</span> Mart</div>
+            </div>
+            <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
+            <div class="ft-badges">
+              <span class="ft-badge">AMFI MFD</span>
+              <span class="ft-badge">ARN 288927</span>
+              <span class="ft-badge">EUIN E543710</span>
+              <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
+              <span class="ft-badge">Bangalore</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="ft-col-h">Finance Guides</div>
+            <div class="ft-links">
+              <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
+              <a href="/blog/what-is-sip.html">SIP Guide</a>
+              <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
+              <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
+              <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
+              <a href="/blog/index.html" class="text-amber-400">→ All Articles</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="ft-col-h">Tools & Services</div>
+            <div class="ft-links">
+              <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+              <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
+              <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
+              <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
+              <a href="/tools/sip-calculator.html">SIP Calculator</a>
+              <a href="/tools/fd-calculator.html">FD Calculator</a>
+              <a href="/tools/rd-calculator.html">RD Calculator</a>
+              <a href="/tools/budget-calculator.html">Budget Planner</a>
+              <a href="#consultation" class="text-emerald-400">🎯 Free Consultation</a>
+            </div>
+          </div>
+
+          <div>
+            <div class="ft-col-h">Quick Links</div>
+            <div class="ft-links">
+              <a href="/about.html">About Us</a>
+              <a href="/contact.html">Contact Us</a>
+              <a href="/privacy-policy.html">Privacy Policy</a>
+              <a href="/disclaimer.html">Disclaimer</a>
+              <a href="/terms-and-conditions.html">Terms & Rules</a>
+              <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="text-emerald-400">💬 WhatsApp</a>
+            </div>
+            <div class="mt-4 p-3 bg-white/5 rounded-xl border border-white/10 text-[10px] text-slate-400 leading-relaxed">
+              <span class="text-amber-400 block font-mono font-bold mb-1">DISCLAIMER</span>
+              Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform.
+            </div>
+          </div>
+        </div>
+
+        <div class="ft-bottom">
+          <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
+          <div class="flex gap-4">
+            <a href="/privacy-policy.html" class="hover:text-slate-200">Privacy Policy</a>
+            <a href="/disclaimer.html" class="hover:text-slate-200">Disclaimer</a>
+            <a href="/terms-and-conditions.html" class="hover:text-slate-200">Terms & Rules</a>
+            <a href="/contact.html" class="hover:text-slate-200">Contact</a>
+          </div>
+        </div>
       </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-<script src="/cookie-consent.js" defer></script>
+    </footer>
+    <script src="/cookie-consent.js" defer></script>
 
   </div>
   <!-- PUBLIC STOREFRONT CONTAINER END -->
@@ -1008,9 +1020,9 @@
     </div>
   </div>
 
-  <!-- ALL MODALS & DRAWERS -->
+  <!-- ================= ALL MODALS & DRAWERS ================= -->
 
-  <!-- 1. COW MILK ENTRY MODAL (AM / PM YIELD) -->
+  <!-- 1. COW MILK ENTRY MODAL -->
   <div id="cowMilkModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white rounded-t-3xl sm:rounded-3xl p-6 w-full max-w-md space-y-4 text-[#143627]">
       <div class="flex justify-between items-center border-b pb-2">
@@ -1056,7 +1068,7 @@
     </div>
   </div>
 
-  <!-- 2. FARM EXPENSE MODAL (DAILY SPEND) -->
+  <!-- 2. FARM EXPENSE MODAL -->
   <div id="expenseModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white rounded-t-3xl sm:rounded-3xl p-6 w-full max-w-md space-y-4 text-[#143627]">
       <div class="flex justify-between items-center border-b pb-2">
@@ -1088,7 +1100,7 @@
     </div>
   </div>
 
-  <!-- 3. DIRECT SALE MODAL (CASH / SPOT UPI INCOME) -->
+  <!-- 3. DIRECT SALE MODAL -->
   <div id="saleModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white rounded-t-3xl sm:rounded-3xl p-6 w-full max-w-md space-y-4 text-[#143627]">
       <div class="flex justify-between items-center border-b pb-2">
@@ -1131,7 +1143,7 @@
     </div>
   </div>
 
-  <!-- 4. ANIMAL REGISTRATION MODAL (CATTLE & GOATS) -->
+  <!-- 4. ANIMAL REGISTRATION MODAL -->
   <div id="animalModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white rounded-t-3xl sm:rounded-3xl p-6 w-full max-w-md space-y-4 text-[#143627] max-h-[90vh] overflow-y-auto custom-scroll">
       <div class="flex justify-between items-center border-b pb-2">
@@ -1356,7 +1368,7 @@
     <span id="toastMsg">Saved successfully!</span>
   </div>
 
-  <!-- MODULAR SCRIPT CONNECTION -->
+  <!-- ================= MODULAR SCRIPT CONNECTION ================= -->
   <script type="module">
     import { farmState, showToast, openModal, closeModal } from "./dfarm/js/firebase-config.js";
     import { handleCowMilkSubmit, handleExpenseSubmit, quickExpense, handleSaleSubmit, initOpsListeners } from "./dfarm/js/erp-ops.js";
