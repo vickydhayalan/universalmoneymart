@@ -1,0 +1,23 @@
+{
+  "cattle": {
+    "base_maintenance_kg": 1.5,
+    "milk_ratio_divisor": 2.5,
+    "pregnancy_allowance_kg": 1.0,
+    "dry_cow_fixed_kg": 2.0,
+    "mix_ratio": {
+      "thavudu_percentage": 45,
+      "cottonseed_cake_percentage": 35,
+      "chana_crush_percentage": 15,
+      "mineral_mixture_salt_grams": 60
+    }
+  },
+  "goats": {
+    "section_A_kids_grams_per_head": 150,
+    "section_B_pregnant_does_grams_per_head": 400,
+    "section_C_stud_bucks_grams_per_head": 500,
+    "section_D_fattening_grams_per_head": 450
+  },
+  "poultry": {
+    "grams_per_adult_bird_day": 110
+  }
+}
