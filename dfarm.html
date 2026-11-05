@@ -1524,13 +1524,6 @@
       initOpsListeners();
       initAnimalsListener();
       initCustomerListener();
-
-      // PWA Service Worker Registration
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js')
-          .then(() => console.log('D-FARM PWA Engine Active!'))
-          .catch((err) => console.log('SW Error:', err));
-      }
     });
   </script>
 </body>
