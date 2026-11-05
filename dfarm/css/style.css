@@ -18,7 +18,14 @@ body {
 .font-serif-title {
   font-family: 'Playfair Display', Georgia, serif;
 }
-
+html, body {
+      overflow-x: hidden;
+      min-height: 100%;
+    }
+    .organic-card {
+      height: auto !important;
+      min-height: 310px !important;
+    }
 /* Luxury Organic Cards */
 .organic-card {
   background-color: #FFFFFF;
