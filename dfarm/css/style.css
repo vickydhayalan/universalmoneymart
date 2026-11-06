@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-/* ==========================================================================
-   1. CORE VARIABLES & GLOBAL RESETS
-   ========================================================================== */
 :root {
   --df-cream: #FAF6EE !important;
   --df-forest: #143627 !important;
@@ -25,9 +22,6 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ==========================================================================
-   2. TYPOGRAPHY
-   ========================================================================== */
 .font-serif-title {
   font-family: 'Playfair Display', Georgia, serif !important;
 }
@@ -36,9 +30,7 @@ html, body {
   font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* ==========================================================================
-   3. CARDS & GLOW EFFECTS
-   ========================================================================== */
+/* Organic Card Styles */
 .organic-card {
   background: #FFFFFF !important;
   border: 1px solid rgba(20, 54, 39, 0.12) !important;
@@ -61,9 +53,7 @@ html, body {
   filter: drop-shadow(0 10px 15px rgba(20, 54, 39, 0.15));
 }
 
-/* ==========================================================================
-   4. FLOATING BACKGROUND DAIRY GLYPHS
-   ========================================================================== */
+/* Floating Background Emojis */
 .bg-emoji-layer {
   position: fixed !important;
   top: 0 !important;
@@ -87,9 +77,7 @@ html, body {
   100% { transform: translateY(-10vh) rotate(360deg); }
 }
 
-/* ==========================================================================
-   5. 16:9 AUTO-SCROLLING MARQUEE GALLERY
-   ========================================================================== */
+/* 16:9 Infinite Marquee */
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -105,9 +93,7 @@ html, body {
   animation-play-state: paused !important;
 }
 
-/* ==========================================================================
-   6. FLOATING ACTION BUTTONS (AI & WHATSAPP)
-   ========================================================================== */
+/* Floating Buttons */
 .wa-float-btn {
   position: fixed !important;
   bottom: 24px !important;
@@ -134,35 +120,15 @@ html, body {
   transform: scale(1.08) !important;
 }
 
-/* ==========================================================================
-   7. UNIVERSAL MONEY MART FOOTER SUPPRESSION & D-FARM FOOTER RETENTION
-   ========================================================================== */
-#dfarmMasterApp ~ footer,
-#dfarmMasterApp ~ div.finance-footer,
-body > footer:not(#dfarmFooter),
-body > div:not(#dfarmMasterApp):has([class*="money"]),
-div[class*="universal-money-mart"],
-footer.site-footer:not(#dfarmFooter) {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
+/* Ensure D-FARM Footer Stays Visible */
 #dfarmFooter {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
   position: relative !important;
-  z-index: 40 !important;
+  z-index: 30 !important;
 }
 
-/* ==========================================================================
-   8. SCROLLBAR STYLING
-   ========================================================================== */
 .custom-scroll::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -171,8 +137,4 @@ footer.site-footer:not(#dfarmFooter) {
 .custom-scroll::-webkit-scrollbar-thumb {
   background: #CBD5E1;
   border-radius: 999px;
-}
-
-.custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--df-forest);
 }
