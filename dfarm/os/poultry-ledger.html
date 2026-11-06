@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D-FARM • Poultry & Daily Egg Production Ledger</title>
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #F9FAFB;
+      overflow-x: hidden;
+    }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace; }
+    .kiosk-btn {
+      touch-action: manipulation;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .kiosk-btn:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-8">
+
+  <!-- TOP BAR -->
+  <header class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-8">
+    <div class="flex items-center gap-3">
+      <a href="/dfarm/os/index.html" class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-emerald-400"></i>
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl sm:text-2xl font-extrabold font-mono-val text-white">D-FARM POULTRY & EGG LEDGER</h1>
+          <span class="text-[10px] bg-amber-950 text-amber-400 border border-amber-800 px-2 py-0.5 rounded font-bold">BATCH & EGG AUDIT</span>
+        </div>
+        <p class="text-xs text-slate-400">Free-range Country Chicken, Egg harvest logs, and live bird market valuation.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <button onclick="openLogEggModal()" class="kiosk-btn bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="egg" class="w-4 h-4"></i>
+        <span>Log Daily Egg Harvest (முட்டை பதிவு)</span>
+      </button>
+      <button onclick="openNewBatchModal()" class="kiosk-btn bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>New Bird Batch (DF-P Tag)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto space-y-8">
+
+    <!-- CENSUS STATS -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-val text-xs">
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Total Live Birds</span>
+        <span class="text-xl font-bold text-white mt-1 block" id="statLiveBirds">0 Nos</span>
+        <span class="text-[10px] text-amber-400">Active Free-Range</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Active Laying Hens</span>
+        <span class="text-xl font-bold text-emerald-400 mt-1 block" id="statLayingHens">0 Nos</span>
+        <span class="text-[10px] text-slate-500">Egg Producers</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Total Eggs Harvested</span>
+        <span class="text-xl font-bold text-amber-300 mt-1 block" id="statTotalEggs">0</span>
+        <span class="text-[10px] text-emerald-500">All-time count</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Net Poultry Revenue</span>
+        <span class="text-xl font-bold text-emerald-400 mt-1 block" id="statPoultryNet">₹0</span>
+        <span class="text-[10px] text-slate-500">Eggs & Bird Asset</span>
+      </div>
+    </div>
+
+    <!-- BATCH CARDS LIST -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="layers" class="w-5 h-5 text-amber-400"></i>
+          <h2 class="font-bold text-base text-white">Active Poultry Batches</h2>
+        </div>
+      </div>
+
+      <div id="batchCardsContainer" class="space-y-4">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= LOG DAILY EGGS MODAL ================= -->
+  <div id="logEggModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-500/40 rounded-3xl w-full max-w-md p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-base text-white">தினசரி முட்டை பதிவு (Daily Egg Harvest)</h3>
+        <button onclick="closeLogEggModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form onsubmit="handleEggSubmit(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-400 mb-1">Select Batch*</label>
+          <select id="eggBatchId" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono-val font-bold outline-none">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Eggs Collected (முட்டைகள்)*</label>
+            <input type="number" id="eggCount" required placeholder="e.g. 18" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-amber-400 font-mono-val font-bold text-lg outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Damaged / Broken</label>
+            <input type="number" id="eggBroken" value="0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-rose-400 font-mono-val outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-400 mb-1">Harvest Date*</label>
+          <input type="date" id="eggDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono-val outline-none">
+        </div>
+
+        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Save Harvest Record</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= NEW BATCH MODAL ================= -->
+  <div id="newBatchModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-emerald-500/40 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-base text-white">புதிய கோழி பேட்ச் பதிவு (New Bird Batch)</h3>
+        <button onclick="closeNewBatchModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form onsubmit="handleNewBatchSubmit(event)" class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">System Batch ID</label>
+            <input type="text" id="newBatchId" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Breed (இனம்)*</label>
+            <select id="newBatchBreed" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
+              <option value="அசல் நாட்டுக் கோழி (Aseel Cross)">அசல் நாட்டுக் கோழி (Aseel Cross)</option>
+              <option value="கருங்கோழி (Kadaknath Pure)">கருங்கோழி (Kadaknath)</option>
+              <option value="கிராமப்பிரியா">கிராமப்பிரியா (Gramapriya)</option>
+              <option value="சிறுவிடை நாட்டுக் கோழி">சிறுவிடை நாட்டுக் கோழி</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Total Birds Sourced*</label>
+            <input type="number" id="newBatchCount" required placeholder="e.g. 30" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Start Date*</label>
+            <input type="date" id="newBatchDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono-val outline-none">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Create Batch & Assign Tag</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    let batches = [];
+
+    function getNextBatchId() {
+      let maxNum = 0;
+      batches.forEach(b => {
+        const m = b.batchId.match(/^DF-P-(\d+)$/);
+        if (m) {
+          const num = parseInt(m[1], 10);
+          if (num > maxNum) maxNum = num;
+        }
+      });
+      return `DF-P-${String(maxNum + 1).padStart(3, '0')}`;
+    }
+
+    async function loadPoultry() {
+      try {
+        const res = await fetch('../data/poultry.json');
+        batches = await res.json();
+      } catch (e) {
+        console.warn("Poultry fallback data");
+        batches = [];
+      }
+      renderPoultry();
+    }
+
+    function renderPoultry() {
+      const container = document.getElementById('batchCardsContainer');
+      if (!container) return;
+
+      const totalLive = batches.reduce((a, b) => a + (b.currentLiveBirds || 0), 0);
+      const totalHens = batches.reduce((a, b) => a + (b.layingHens || 0), 0);
+      const totalEggs = batches.reduce((a, b) => a + (b.totalEggsCollected || 0), 0);
+      const totalEggRev = batches.reduce((a, b) => a + (b.eggRevenue || 0), 0);
+      const totalExpense = batches.reduce((a, b) => a + (b.feedExpense || 0), 0);
+      const net = totalEggRev - totalExpense;
+
+      document.getElementById('statLiveBirds').textContent = `${totalLive} Nos`;
+      document.getElementById('statLayingHens').textContent = `${totalHens} Nos`;
+      document.getElementById('statTotalEggs').textContent = totalEggs.toLocaleString('en-IN');
+      document.getElementById('statPoultryNet').textContent = `${net >= 0 ? '+' : ''}₹${net.toLocaleString('en-IN')}`;
+
+      container.innerHTML = batches.map(b => `
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-4 hover:border-slate-700 transition">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🐓</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold font-mono-val text-white text-base">${b.batchId}</span>
+                  <span class="text-sm font-bold text-amber-300">(${b.breed})</span>
+                  <span class="text-[9px] bg-amber-950 text-amber-400 border border-amber-800 px-2 py-0.5 rounded font-bold">${b.status}</span>
+                </div>
+                <span class="text-xs text-slate-400">Batch Started: ${b.startDate} • Feed: ${b.feedType}</span>
+              </div>
+            </div>
+
+            <div class="text-left sm:text-right font-mono-val">
+              <span class="text-[10px] text-slate-500 uppercase block">Daily Harvest Rate</span>
+              <span class="text-lg font-bold text-amber-400">${b.avgDailyEggs} Eggs / Day</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono-val">
+            <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+              <span class="text-[10px] text-slate-500 block">LIVE BIRDS</span>
+              <span class="font-bold text-white">${b.currentLiveBirds} / ${b.initialCount} <span class="text-[10px] text-rose-400 font-normal">(${b.mortality} mort.)</span></span>
+            </div>
+            <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+              <span class="text-[10px] text-slate-500 block">LAYING HENS</span>
+              <span class="font-bold text-emerald-400">${b.layingHens} Hens (${b.roosters} Roosters)</span>
+            </div>
+            <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+              <span class="text-[10px] text-slate-500 block">TOTAL EGGS</span>
+              <span class="font-bold text-amber-300">${b.totalEggsCollected} Eggs (₹${b.eggRevenue})</span>
+            </div>
+            <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+              <span class="text-[10px] text-slate-500 block">FEED COST</span>
+              <span class="font-bold text-rose-400">₹${b.feedExpense}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // Modal Operations
+    function openLogEggModal() {
+      const select = document.getElementById('eggBatchId');
+      select.innerHTML = batches.map(b => `<option value="${b.batchId}">${b.batchId} (${b.breed})</option>`).join('');
+      document.getElementById('eggDate').value = new Date().toISOString().slice(0, 10);
+      document.getElementById('logEggModal').classList.remove('hidden');
+    }
+    function closeLogEggModal() { document.getElementById('logEggModal').classList.add('hidden'); }
+
+    function openNewBatchModal() {
+      document.getElementById('newBatchId').value = getNextBatchId();
+      document.getElementById('newBatchDate').value = new Date().toISOString().slice(0, 10);
+      document.getElementById('newBatchModal').classList.remove('hidden');
+    }
+    function closeNewBatchModal() { document.getElementById('newBatchModal').classList.add('hidden'); }
+
+    function handleEggSubmit(e) {
+      e.preventDefault();
+      const bId = document.getElementById('eggBatchId').value;
+      const count = parseInt(document.getElementById('eggCount').value, 10) || 0;
+      
+      const b = batches.find(x => x.batchId === bId);
+      if (b) {
+        b.totalEggsCollected = (b.totalEggsCollected || 0) + count;
+        b.eggRevenue = (b.eggRevenue || 0) + (count * 12);
+        b.avgDailyEggs = count;
+      }
+
+      renderPoultry();
+      closeLogEggModal();
+      alert(`Success: ${count} eggs recorded for ${bId}. Value: ₹${count * 12}`);
+      e.target.reset();
+    }
+
+    function handleNewBatchSubmit(e) {
+      e.preventDefault();
+      const bId = document.getElementById('newBatchId').value;
+      const breed = document.getElementById('newBatchBreed').value;
+      const count = parseInt(document.getElementById('newBatchCount').value, 10) || 0;
+      const date = document.getElementById('newBatchDate').value;
+
+      const newB = {
+        batchId: bId,
+        breed: breed,
+        startDate: date,
+        initialCount: count,
+        currentLiveBirds: count,
+        mortality: 0,
+        layingHens: Math.round(count * 0.7),
+        roosters: Math.round(count * 0.3),
+        feedType: "Pasture + Azolla Grains",
+        avgDailyEggs: 0,
+        totalEggsCollected: 0,
+        eggRevenue: 0,
+        feedExpense: 0,
+        status: "Growing / Nursery"
+      };
+
+      batches.unshift(newB);
+      renderPoultry();
+      closeNewBatchModal();
+      alert(`Success: Batch ${bId} created!`);
+      e.target.reset();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      loadPoultry();
+    });
+  </script>
+</body>
+</html>
