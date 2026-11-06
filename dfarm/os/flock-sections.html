@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D-FARM • Flock & Goat Partition Shed Manager</title>
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #F9FAFB;
+      overflow-x: hidden;
+    }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace; }
+    .kiosk-btn {
+      touch-action: manipulation;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .kiosk-btn:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-8">
+
+  <!-- TOP BAR -->
+  <header class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-8">
+    <div class="flex items-center gap-3">
+      <a href="/dfarm/os/index.html" class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-emerald-400"></i>
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl sm:text-2xl font-extrabold font-mono-val text-white">D-FARM GOAT PARTITION MANAGER</h1>
+          <span class="text-[10px] bg-purple-950 text-purple-400 border border-purple-800 px-2 py-0.5 rounded font-bold">SHED ZONING & ADG</span>
+        </div>
+        <p class="text-xs text-slate-400">Sectional Nursery, Gestation, Stud Breeding & Intensive Bakrid Fattening Lots.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <button onclick="openRegisterGoatModal()" class="kiosk-btn bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Register New Goat (DF-G Tag)</span>
+      </button>
+      <button onclick="openPartitionTubModal()" class="kiosk-btn bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="layers" class="w-4 h-4"></i>
+        <span>Partition Feed Calculation</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto space-y-8">
+
+    <!-- FLOCK CENSUS STATS -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-val text-xs">
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Total Flock Size</span>
+        <span class="text-xl font-bold text-white mt-1 block" id="statTotalFlock">0 Nos</span>
+        <span class="text-[10px] text-purple-400">Live on Farm</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Bakrid Ready (30kg+)</span>
+        <span class="text-xl font-bold text-amber-400 mt-1 block" id="statBakridReady">0 Nos</span>
+        <span class="text-[10px] text-amber-500">Market Standard</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Total Flock Biomass</span>
+        <span class="text-xl font-bold text-emerald-400 mt-1 block" id="statBiomass">0 kg</span>
+        <span class="text-[10px] text-slate-500">Live Body Weight</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Live Asset Valuation</span>
+        <span class="text-xl font-bold text-purple-400 mt-1 block" id="statFlockVal">₹0</span>
+        <span class="text-[10px] text-emerald-500">@ ₹420/kg Avg</span>
+      </div>
+    </div>
+
+    <!-- 4 PARTITION SHED HUDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- Section A -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+          <div>
+            <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block font-mono-val">SECTION A</span>
+            <h3 class="font-bold text-sm text-white">Nursery (0-3 Mos)</h3>
+          </div>
+          <span class="text-2xl">🍼</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Young kids, creep feed, mother colostrum milk cycle.</p>
+        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 font-mono-val text-xs flex justify-between">
+          <span class="text-slate-400">Feed / Head:</span>
+          <span class="text-white font-bold">150g Creep Feed</span>
+        </div>
+      </div>
+
+      <!-- Section B -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+          <div>
+            <span class="text-[10px] font-bold text-amber-400 uppercase tracking-wider block font-mono-val">SECTION B</span>
+            <h3 class="font-bold text-sm text-white">Sennai & Does</h3>
+          </div>
+          <span class="text-2xl">🐐</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Pregnant mother does, extra calcium, high nutrition.</p>
+        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 font-mono-val text-xs flex justify-between">
+          <span class="text-slate-400">Feed / Head:</span>
+          <span class="text-white font-bold">400g Balanced Mix</span>
+        </div>
+      </div>
+
+      <!-- Section C -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+          <div>
+            <span class="text-[10px] font-bold text-rose-400 uppercase tracking-wider block font-mono-val">SECTION C</span>
+            <h3 class="font-bold text-sm text-white">Stud Bucks</h3>
+          </div>
+          <span class="text-2xl">👑</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Breeding stud males, isolated pens to prevent fighting.</p>
+        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 font-mono-val text-xs flex justify-between">
+          <span class="text-slate-400">Feed / Head:</span>
+          <span class="text-white font-bold">500g High Stamina</span>
+        </div>
+      </div>
+
+      <!-- Section D -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+          <div>
+            <span class="text-[10px] font-bold text-purple-400 uppercase tracking-wider block font-mono-val">SECTION D</span>
+            <h3 class="font-bold text-sm text-white">Bakrid Fattening</h3>
+          </div>
+          <span class="text-2xl">⚖️</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Target 30-35kg lot. High energy corn & cottonseed cake.</p>
+        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 font-mono-val text-xs flex justify-between">
+          <span class="text-slate-400">Feed / Head:</span>
+          <span class="text-white font-bold">450g Intensive Mix</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FILTER & FLOCK LISTING TABLE -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="clipboard-list" class="w-5 h-5 text-purple-400"></i>
+          <h2 class="font-bold text-base text-white">Goat Census & Weight Gain Records</h2>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5 text-xs font-bold">
+          <button onclick="filterFlock('all')" id="btnAll" class="px-3 py-1.5 rounded-xl bg-purple-600 text-white">All (அனைத்தும்)</button>
+          <button onclick="filterFlock('Section D')" id="btnSecD" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700">Sec D (Fattening)</button>
+          <button onclick="filterFlock('Section B')" id="btnSecB" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700">Sec B (Sennai)</button>
+          <button onclick="filterFlock('Section C')" id="btnSecC" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700">Sec C (Stud)</button>
+          <button onclick="filterFlock('Section A')" id="btnSecA" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700">Sec A (Nursery)</button>
+        </div>
+      </div>
+
+      <div id="flockTableContainer" class="space-y-3">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= REGISTER GOAT MODAL ================= -->
+  <div id="registerGoatModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-purple-500/40 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-base text-white">ஆடு பதிவு (Register Goat Tag)</h3>
+        <button onclick="closeRegisterGoatModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form onsubmit="handleRegisterGoat(event)" class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">System Assigned Tag</label>
+            <input type="text" id="goatRegTag" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-purple-400 font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Breed (இனம்)*</label>
+            <select id="goatRegBreed" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
+              <option value="செம்மறி ஆடு">செம்மறி ஆடு (Sheep)</option>
+              <option value="வெள்ளாடு">நாட்டு வெள்ளாடு</option>
+              <option value="தலைச்சேரி கலப்பினம்">தலைச்சேரி கலப்பினம்</option>
+              <option value="கொடாலி ஆடு">கொடாலி ஆடு</option>
+              <option value="சிரோகி கலப்பினம்">சிரோகி கலப்பினம்</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Assigned Partition*</label>
+            <select id="goatRegSection" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
+              <option value="Section D">Section D (Bakrid Fattening)</option>
+              <option value="Section B">Section B (Sennai & Mother Does)</option>
+              <option value="Section C">Section C (Stud Bucks)</option>
+              <option value="Section A">Section A (Kids Nursery)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Initial Weight (kg)*</label>
+            <input type="number" step="0.5" id="goatRegWeight" required placeholder="e.g. 24.5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-purple-400 font-mono-val font-bold outline-none">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Issue Tag & Assign Section</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    let flockList = [];
+    let currentFilter = 'all';
+
+    function getNextGoatId() {
+      let maxNum = 0;
+      flockList.forEach(g => {
+        const match = g.id.match(/^DF-G-(\d+)$/);
+        if (match) {
+          const num = parseInt(match[1], 10);
+          if (num > maxNum) maxNum = num;
+        }
+      });
+      return `DF-G-${String(maxNum + 1).padStart(3, '0')}`;
+    }
+
+    async function loadFlock() {
+      try {
+        const res = await fetch('../data/flock.json');
+        flockList = await res.json();
+      } catch (e) {
+        console.warn("Flock fallback data");
+        flockList = [];
+      }
+      renderFlock();
+    }
+
+    function renderFlock() {
+      const container = document.getElementById('flockTableContainer');
+      if (!container) return;
+
+      const totalBiomass = flockList.reduce((acc, g) => acc + (g.currentWeight || 0), 0);
+      const bakridCount = flockList.filter(g => g.currentWeight >= 30.0).length;
+      const totalValuation = flockList.reduce((acc, g) => acc + (g.valuation || (g.currentWeight * 420)), 0);
+
+      document.getElementById('statTotalFlock').textContent = `${flockList.length} Nos`;
+      document.getElementById('statBakridReady').textContent = `${bakridCount} Nos`;
+      document.getElementById('statBiomass').textContent = `${totalBiomass.toFixed(1)} kg`;
+      document.getElementById('statFlockVal').textContent = `₹${totalValuation.toLocaleString('en-IN')}`;
+
+      const filtered = currentFilter === 'all' ? flockList : flockList.filter(g => g.section === currentFilter);
+
+      if (!filtered.length) {
+        container.innerHTML = `<div class="p-6 text-center text-slate-500 italic text-xs">No goats registered in this partition.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(g => {
+        const isReady = g.currentWeight >= 30.0;
+        return `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-950 rounded-2xl border border-slate-800 hover:border-slate-700 transition gap-3">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">${g.section === 'Section D' ? '⚖️' : g.section === 'Section C' ? '👑' : '🐐'}</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold font-mono-val text-white text-sm">${g.id}</span>
+                  <span class="text-xs text-slate-300 font-bold">(${g.breed})</span>
+                  <span class="text-[9px] bg-purple-950 text-purple-300 border border-purple-800 px-2 py-0.5 rounded font-bold">${g.section}</span>
+                  ${isReady ? '<span class="text-[9px] bg-amber-950 text-amber-300 border border-amber-800 px-2 py-0.5 rounded font-bold">Bakrid Ready 🌟</span>' : ''}
+                </div>
+                <span class="text-[11px] text-slate-500">Status: ${g.status} • Target: ${g.targetDate}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-6 font-mono-val text-xs text-right">
+              <div>
+                <span class="text-[10px] text-slate-500 block">DAILY FEED</span>
+                <span class="text-slate-300 font-bold">${g.dailyFeedGrams}g / day</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 block">CURRENT WEIGHT</span>
+                <span class="text-base font-bold ${isReady ? 'text-amber-400' : 'text-purple-400'}">${g.currentWeight} kg</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 block">VALUATION</span>
+                <span class="text-emerald-400 font-bold">₹${(g.valuation || g.currentWeight * 420).toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterFlock(sec) {
+      currentFilter = sec;
+      ['All', 'SecD', 'SecB', 'SecC', 'SecA'].forEach(b => {
+        const btn = document.getElementById(`btn${b}`);
+        if (btn) {
+          const match = (b === 'All' && sec === 'all') || (b === 'SecD' && sec === 'Section D') || (b === 'SecB' && sec === 'Section B') || (b === 'SecC' && sec === 'Section C') || (b === 'SecA' && sec === 'Section A');
+          if (match) {
+            btn.className = "px-3 py-1.5 rounded-xl bg-purple-600 text-white font-bold";
+          } else {
+            btn.className = "px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:bg-slate-700 font-bold";
+          }
+        }
+      });
+      renderFlock();
+    }
+
+    function openRegisterGoatModal() {
+      document.getElementById('goatRegTag').value = getNextGoatId();
+      document.getElementById('registerGoatModal').classList.remove('hidden');
+    }
+    function closeRegisterGoatModal() { document.getElementById('registerGoatModal').classList.add('hidden'); }
+
+    function handleRegisterGoat(e) {
+      e.preventDefault();
+      const tag = document.getElementById('goatRegTag').value;
+      const breed = document.getElementById('goatRegBreed').value;
+      const sec = document.getElementById('goatRegSection').value;
+      const weight = parseFloat(document.getElementById('goatRegWeight').value) || 0;
+
+      const newGoat = {
+        id: tag,
+        breed: breed,
+        gender: "Male",
+        section: sec,
+        currentWeight: weight,
+        prevWeight: weight,
+        adgGrams: 0,
+        status: weight >= 30.0 ? "Bakrid Ready 🌟" : "Active Stock",
+        targetDate: "Next Season",
+        dailyFeedGrams: sec === 'Section D' ? 450 : sec === 'Section C' ? 500 : sec === 'Section B' ? 400 : 150,
+        valuation: Math.round(weight * 420)
+      };
+
+      flockList.unshift(newGoat);
+      renderFlock();
+      closeRegisterGoatModal();
+      alert(`Success: ${tag} registered under ${sec}!`);
+      e.target.reset();
+    }
+
+    function openPartitionTubModal() {
+      const secDCount = flockList.filter(g => g.section === 'Section D').length;
+      const secBCount = flockList.filter(g => g.section === 'Section B').length;
+      alert(`Feed Tub Mix Calculation:\n\n• Section D (${secDCount} Heads): ${(secDCount * 0.45).toFixed(1)} kg intensive concentrate mix.\n• Section B (${secBCount} Heads): ${(secBCount * 0.40).toFixed(1)} kg mother mix.\n\nPlace tubs in respective shed partition bays.`);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      loadFlock();
+    });
+  </script>
+</body>
+</html>
