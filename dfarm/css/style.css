@@ -1,87 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-dark: #020617;
-  --panel-bg: rgba(15, 23, 42, 0.75);
-  --panel-border: rgba(255, 255, 255, 0.08);
-  --accent-emerald: #10b981;
-  --accent-glow: rgba(16, 185, 129, 0.2);
+  --df-bg-cream: #FAF8F5 !important;
+  --df-forest: #143225 !important;
+  --df-deep: #0B2017 !important;
+  --df-gold: #D4A373 !important;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
+/* Force body styling to prevent white template clashes */
+body#dfarm-body {
+  background-color: #FAF8F5 !important;
+  color: #1F2937 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
 }
 
-body {
-  font-family: 'Space Grotesk', sans-serif;
-  background-color: var(--bg-dark);
-  color: #f8fafc;
-  overflow-x: hidden;
-  line-height: 1.5;
+.df-font-serif {
+  font-family: 'Playfair Display', Georgia, serif !important;
 }
 
-.font-mono-val {
-  font-family: 'JetBrains Mono', monospace;
+.df-font-mono {
+  font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Glassmorphism Containers */
-.glass-panel {
-  background: var(--panel-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--panel-border);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+/* Glow & Hover Effects */
+.df-glow-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E7EB !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.df-glow-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 32px -8px rgba(20, 50, 37, 0.15) !important;
+  border-color: #34D399 !important;
 }
 
-.glass-card-hover {
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+/* 16:9 Infinite Carousel */
+@keyframes autoScrollFrames {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.glass-card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 15px 35px -5px var(--accent-glow);
+.df-carousel-track {
+  display: flex !important;
+  width: max-content !important;
+  animation: autoScrollFrames 30s linear infinite !important;
+}
+.df-carousel-track:hover {
+  animation-play-state: paused !important;
 }
 
-/* Pulse Animation for Status Badges */
-.pulse-emerald {
-  box-shadow: 0 0 12px #10b981;
-  animation: pulse-glow 2s infinite ease-in-out;
+/* Hide universal financial footer clash if rendered by layout engines */
+body#dfarm-body > footer:not(#dfarm-official-footer),
+body#dfarm-body > div.finance-footer,
+body#dfarm-body > div:has(> .universal-money-mart) {
+  display: none !important;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(1.15); }
+/* Floating Actions */
+.df-wa-btn {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 9999 !important;
+  box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5) !important;
+  transition: transform 0.2s ease !important;
+}
+.df-wa-btn:hover {
+  transform: scale(1.08) !important;
 }
 
-/* Custom Scrollbars */
-.custom-scroll::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+.df-ai-btn {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 24px !important;
+  z-index: 9999 !important;
+  box-shadow: 0 10px 25px -5px rgba(20, 50, 37, 0.4) !important;
+  transition: transform 0.2s ease !important;
 }
-.custom-scroll::-webkit-scrollbar-track {
-  background: #020617;
-}
-.custom-scroll::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 9999px;
-}
-.custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: #10b981;
+.df-ai-btn:hover {
+  transform: scale(1.08) !important;
 }
 
-/* Floating WhatsApp Button Pulse */
-.wa-float {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 999;
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.5);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.wa-float:hover {
-  transform: scale(1.08);
-}
+.df-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+.df-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
