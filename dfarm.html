@@ -16,116 +16,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --df-cream: #FAF6EE;
-      --df-forest: #143627;
-      --df-deep: #0F291E;
-      --df-gold: #D97706;
-    }
-
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif !important;
-      background-color: var(--df-cream) !important;
-      color: #1F2937 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow-x: hidden !important;
-      position: relative !important;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .font-serif-title { font-family: 'Playfair Display', Georgia, serif !important; }
-    .font-mono-val { font-family: 'JetBrains Mono', monospace !important; }
-
-    /* Floating Low-Brightness Dairy Emojis */
-    .bg-emoji-layer {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      pointer-events: none !important;
-      z-index: 0 !important;
-      overflow: hidden !important;
-      opacity: 0.22 !important;
-    }
-    .floating-glyph {
-      position: absolute !important;
-      font-size: 2.2rem !important;
-      animation: floatSlow 20s infinite linear !important;
-    }
-    @keyframes floatSlow {
-      0% { transform: translateY(105vh) rotate(0deg); }
-      100% { transform: translateY(-10vh) rotate(360deg); }
-    }
-
-    /* Organic Card Styles */
-    .organic-card {
-      background: #FFFFFF !important;
-      border: 1px solid rgba(20, 54, 39, 0.12) !important;
-      border-radius: 1.5rem !important;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    }
-    .organic-card:hover {
-      transform: translateY(-4px) !important;
-      box-shadow: 0 16px 32px -8px rgba(20, 54, 39, 0.14) !important;
-      border-color: #34D399 !important;
-    }
-    .glow-img:hover {
-      transform: scale(1.04);
-      filter: drop-shadow(0 10px 15px rgba(20, 54, 39, 0.15));
-    }
-
-    /* 16:9 Live Infinite Marquee Gallery */
-    @keyframes marqueeScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .carousel-track {
-      display: flex !important;
-      width: max-content !important;
-      animation: marqueeScroll 25s linear infinite !important;
-    }
-    .carousel-track:hover {
-      animation-play-state: paused !important;
-    }
-
-    /* Floating Action Buttons */
-    .wa-float-btn {
-      position: fixed !important;
-      bottom: 24px !important;
-      right: 24px !important;
-      z-index: 9999 !important;
-      box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5) !important;
-      transition: transform 0.2s ease !important;
-    }
-    .wa-float-btn:hover { transform: scale(1.08) !important; }
-
-    .ai-float-btn {
-      position: fixed !important;
-      bottom: 86px !important;
-      right: 24px !important;
-      z-index: 9999 !important;
-      box-shadow: 0 10px 25px -5px rgba(20, 54, 39, 0.4) !important;
-      transition: transform 0.2s ease !important;
-    }
-    .ai-float-btn:hover { transform: scale(1.08) !important; }
-
-    /* Hide external finance footer clash */
-    body > footer:not(#dfarmFooter),
-    body > div.finance-footer,
-    body > div:has(> .universal-money-mart) {
-      display: none !important;
-    }
-
-    .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
-  </style>
+  <link rel="stylesheet" href="dfarm/css/style.css">
 </head>
 <body class="h-full flex flex-col antialiased relative selection:bg-emerald-900 selection:text-white">
 
-  <!-- ==================== FLOATING EMOJI BACKGROUND LAYER ==================== -->
+  <!-- ==================== FLOATING BACKGROUND GLYPHS ==================== -->
   <div class="bg-emoji-layer" aria-hidden="true">
     <span class="floating-glyph" style="left: 8%; animation-delay: 0s;">🐄</span>
     <span class="floating-glyph" style="left: 28%; animation-delay: 4s;">🥛</span>
@@ -151,18 +46,16 @@
       </div>
     </div>
 
-    <!-- ==================== HEADER NAVBAR ==================== -->
+    <!-- ==================== HEADER NAVBAR (LEFT MENU + ADMIN | RIGHT LOGO + LANG) ==================== -->
     <header class="bg-[#FAF6EE]/95 backdrop-blur-md border-b border-[#143627]/10 px-4 sm:px-8 py-3.5 sticky top-[37px] z-40">
       <div class="max-w-6xl mx-auto flex items-center justify-between">
         
-        <!-- Left Side: Hamburger Menu + Admin OS Button -->
+        <!-- Left Side: Hamburger Menu + Admin Passcode Button -->
         <div class="flex items-center gap-2.5">
-          <!-- 1. Left-most: Hamburger Menu -->
           <button onclick="toggleLeftDrawer(true)" class="p-2 text-[#143627] bg-white border border-[#143627]/20 rounded-xl hover:bg-slate-100 transition shadow-sm" aria-label="Menu">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
 
-          <!-- 2. Next: Admin Button with Passcode -->
           <button onclick="promptAdminPin()" title="Admin Shed OS (PIN: 6734)" class="px-3 py-1.5 border border-[#143627]/20 bg-stone-900 hover:bg-black text-amber-200 rounded-xl transition flex items-center gap-1.5 text-xs font-mono-val font-bold shadow-sm">
             <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
             <span class="hidden sm:inline">Admin</span>
@@ -180,15 +73,13 @@
           <a href="#visit" class="hover:text-amber-700 transition">Visit & Map</a>
         </nav>
 
-        <!-- Right Side: Language Switcher + Brand Logo -->
+        <!-- Right Side: Language Toggle + Brand Logo -->
         <div class="flex items-center gap-3">
-          <!-- Language Toggle Button -->
           <button onclick="toggleAppLanguage()" class="px-2.5 py-1.5 rounded-xl bg-white border border-[#143627]/20 hover:bg-emerald-50 text-[#143627] text-xs font-bold transition flex items-center gap-1 shadow-sm font-mono-val">
             <i data-lucide="globe" class="w-3.5 h-3.5 text-emerald-800"></i>
             <span id="langDisplayBadge">தமிழ் / EN</span>
           </button>
 
-          <!-- Right-side Logo -->
           <a href="./dfarm.html" class="flex items-center gap-2">
             <div class="text-right hidden sm:block">
               <span class="font-serif-title font-bold text-lg text-[#143627] block leading-tight">D-FARM</span>
@@ -210,7 +101,7 @@
             <img src="https://iili.io/nPh3Ia9.png" class="w-9 h-9 rounded-full border border-emerald-900" alt="D-FARM">
             <div>
               <span class="font-serif-title font-bold text-base text-[#143627] block">D-FARM POLUR</span>
-              <span class="text-[10px] text-slate-400 font-mono-val">Navigation Highway</span>
+              <span class="text-[10px] text-slate-400 font-mono-val">Navigation Portal</span>
             </div>
           </div>
           <button onclick="toggleLeftDrawer(false)" class="p-1 rounded-lg hover:bg-slate-100 text-slate-500">
@@ -248,12 +139,12 @@
       <div class="pt-6 border-t border-slate-200 text-center text-xs text-slate-400 font-mono-val space-y-2">
         <p>Bakmarpettai, Polur • Tamil Nadu</p>
         <a href="https://wa.me/917200752628" target="_blank" class="w-full py-2.5 bg-[#143627] text-amber-200 font-bold rounded-xl flex items-center justify-center gap-2 text-xs">
-          <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i> WhatsApp Support
+          <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i> WhatsApp Support Desk
         </a>
       </div>
     </aside>
 
-    <!-- ==================== HERO SECTION ==================== -->
+    <!-- ==================== MAIN HERO & STOREFRONT ==================== -->
     <main class="flex-1 space-y-20 pb-16">
       <section class="max-w-6xl mx-auto px-4 pt-10 pb-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -283,14 +174,14 @@
 
           <div class="flex justify-center">
             <div class="w-64 sm:w-80 h-96 sm:h-[420px] rounded-3xl bg-white border border-[#143627]/10 shadow-xl p-4 flex flex-col items-center justify-center relative overflow-hidden group">
-              <img src="https://iili.io/nPhGB5P.jpg" class="h-72 sm:h-80 object-contain rounded-2xl filter drop-shadow-md glow-img" alt="D-FARM Bottle">
+              <img src="https://iili.io/nPhGB5P.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x500/143627/FFFFFF?text=D-FARM+Milk+Bottle';" class="h-72 sm:h-80 object-contain rounded-2xl filter drop-shadow-md glow-img" alt="D-FARM Bottle">
               <span class="text-xs font-bold text-[#143627] mt-2 block">D-FARM Pure Milk 1L Bottle</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ==================== 16:9 INFINITE AUTO MARQUEE GALLERY ==================== -->
+      <!-- ==================== 16:9 AUTO MARQUEE GALLERY ==================== -->
       <section id="gallery" class="max-w-6xl mx-auto px-4 space-y-4 overflow-hidden">
         <div class="flex items-center justify-between border-b border-slate-200 pb-3">
           <div>
@@ -303,38 +194,29 @@
         </div>
 
         <div class="carousel-track space-x-4 py-2">
-          <!-- 16:9 Image Cards -->
           <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPhGB5P.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
+            <img src="https://iili.io/nPhGB5P.jpg" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/FFFFFF?text=Cold-Sealed+Raw+Milk';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
             <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Cold-Sealed Raw Milk</div>
           </div>
           <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPjdrve.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Super Napier">
+            <img src="https://iili.io/nPjdrve.jpg" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/A7F3D0?text=Super+Napier+Pastures';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Super Napier">
             <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Lush Super Napier Pastures</div>
           </div>
           <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPjJdHg.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Country Eggs">
+            <img src="https://iili.io/nPjJdHg.jpg" onerror="this.onerror=null; this.src='https://placehold.co/640x360/334155/FFFFFF?text=Free-Range+Country+Eggs';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Country Eggs">
             <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Free-Range Country Eggs</div>
           </div>
           <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPPShba.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Wood-Pressed Oils">
+            <img src="https://iili.io/nPPShba.jpg" onerror="this.onerror=null; this.src='https://placehold.co/640x360/0B2017/D4A373?text=Marachekku+Oils';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Wood-Pressed Oils">
             <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Marachekku Oil Extraction</div>
           </div>
+          <!-- Loop Clones -->
           <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPiN3kG.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Vegetables Harvest">
-            <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Daily Fresh Harvest</div>
-          </div>
-          <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPjFV3B.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Compost">
-            <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Aged Soil Compost</div>
-          </div>
-          <!-- Loop Duplicates -->
-          <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPhGB5P.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
+            <img src="https://iili.io/nPhGB5P.jpg" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/FFFFFF?text=Cold-Sealed+Raw+Milk';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
             <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Cold-Sealed Raw Milk</div>
           </div>
           <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPjdrve.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Super Napier">
+            <img src="https://iili.io/nPjdrve.jpg" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/A7F3D0?text=Super+Napier+Pastures';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Super Napier">
             <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Lush Super Napier Pastures</div>
           </div>
         </div>
@@ -393,7 +275,7 @@
           <!-- 1: Glass Bottle -->
           <div class="organic-card p-5 flex flex-col justify-between text-center space-y-4 shadow-sm">
             <div class="bg-slate-50 rounded-2xl p-3 flex items-center justify-center h-48 relative">
-              <img src="https://iili.io/nPhGB5P.jpg" class="h-40 object-contain rounded-xl glow-img" alt="Glass Bottle">
+              <img src="https://iili.io/nPhGB5P.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x500/143627/FFFFFF?text=Milk+Bottle';" class="h-40 object-contain rounded-xl glow-img" alt="Glass Bottle">
               <span class="absolute top-2 right-2 bg-emerald-100 text-emerald-900 text-[10px] font-bold px-2 py-0.5 rounded-full font-mono-val">Doorstep</span>
             </div>
             <div class="space-y-1">
@@ -409,7 +291,7 @@
           <!-- 2: Matte Pouch -->
           <div class="organic-card p-5 flex flex-col justify-between text-center space-y-4 shadow-sm">
             <div class="bg-slate-50 rounded-2xl p-3 flex items-center justify-center h-48 relative">
-              <img src="https://iili.io/nPh8YPI.jpg" class="h-40 object-contain rounded-xl glow-img" alt="Pouch">
+              <img src="https://iili.io/nPh8YPI.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x500/143627/FFFFFF?text=Milk+Pouch';" class="h-40 object-contain rounded-xl glow-img" alt="Pouch">
               <span class="absolute top-2 right-2 bg-blue-100 text-blue-900 text-[10px] font-bold px-2 py-0.5 rounded-full font-mono-val">Daily Pouch</span>
             </div>
             <div class="space-y-1">
@@ -425,7 +307,7 @@
           <!-- 3: Country Eggs -->
           <div class="organic-card p-5 flex flex-col justify-between text-center space-y-4 shadow-sm">
             <div class="bg-slate-50 rounded-2xl p-3 flex items-center justify-center h-48 relative">
-              <img src="https://iili.io/nPjJdHg.jpg" class="h-40 object-contain rounded-xl glow-img" alt="Country Eggs">
+              <img src="https://iili.io/nPjJdHg.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x500/334155/FFFFFF?text=Country+Eggs';" class="h-40 object-contain rounded-xl glow-img" alt="Country Eggs">
               <span class="absolute top-2 right-2 bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full font-mono-val">Organic</span>
             </div>
             <div class="space-y-1">
@@ -441,7 +323,7 @@
           <!-- 4: Coconut Oil -->
           <div class="organic-card p-5 flex flex-col justify-between text-center space-y-4 shadow-sm">
             <div class="bg-slate-50 rounded-2xl p-3 flex items-center justify-center h-48 relative">
-              <img src="https://iili.io/nPPShba.jpg" class="h-40 object-contain rounded-xl glow-img" alt="Coconut Oil">
+              <img src="https://iili.io/nPPShba.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x500/0B2017/D4A373?text=Coconut+Oil';" class="h-40 object-contain rounded-xl glow-img" alt="Coconut Oil">
               <span class="absolute top-2 right-2 bg-emerald-100 text-emerald-900 text-[10px] font-bold px-2 py-0.5 rounded-full font-mono-val">Wood Pressed</span>
             </div>
             <div class="space-y-1">
@@ -456,7 +338,6 @@
 
         </div>
 
-        <!-- 3rd Image Fixed: Direct Action Button to Open Full Store Modal -->
         <div class="text-center pt-2">
           <button onclick="openFullCatalogModal()" class="px-8 py-3.5 bg-white hover:bg-slate-50 border-2 border-[#143627] text-[#143627] font-bold text-xs sm:text-sm rounded-2xl transition shadow-md inline-flex items-center gap-2">
             <span>View All 11+ Farm Products (முழு கடைக்குச் செல்க)</span>
@@ -527,77 +408,7 @@
         </div>
       </section>
 
-      <!-- ==================== LIVESTOCK SALES ==================== -->
-      <section id="livestock" class="max-w-6xl mx-auto px-4 space-y-8">
-        <div class="bg-white rounded-3xl p-6 sm:p-10 border border-[#143627]/10 shadow-sm space-y-6">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
-            <div>
-              <span class="text-[10px] uppercase font-bold tracking-widest text-amber-800 bg-amber-50 px-2.5 py-1 rounded-md font-mono-val">FARM GATE LIVESTOCK SALES</span>
-              <h3 class="font-serif-title font-bold text-2xl sm:text-3xl text-[#143627] mt-1">Organic Livestock (ஆடு, மாடு & நாட்டுக் கோழி)</h3>
-            </div>
-            <span class="text-xs font-bold text-amber-800 bg-amber-100 px-3 py-1.5 rounded-full self-start font-mono-val">
-              Direct Farm Inspection & Purchase
-            </span>
-          </div>
-
-          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            எங்கள் பண்ணையில் வளர்க்கப்படும் நாட்டு ஆடுகள், மாடுகள் மற்றும் அசல் நாட்டுக் கோழிகளை பண்ணைக்கு நேரில் வந்து பார்த்து எடை மற்றும் ஆரோக்கியத்தை சரிபார்த்து வாங்கிக் கொள்ளலாம்.
-          </p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
-            <div class="border border-slate-200 rounded-2xl p-5 text-center space-y-2 hover:border-amber-500 transition">
-              <div class="text-4xl">🐐</div>
-              <h4 class="font-bold text-sm text-[#143627]">நாட்டு ஆடுகள் (Goats)</h4>
-              <p class="text-xs text-slate-500">வளர்ப்பு மற்றும் சுப காரியங்களுக்கான தரமான ஆடுகள் (Weight Based Live Rate).</p>
-              <button onclick="enquireLiveStockDirect('Country Goats (ஆடு)')" class="w-full bg-[#143627] hover:bg-[#0D241A] text-white text-xs font-bold py-2 rounded-xl transition">
-                Enquire Live Stock
-              </button>
-            </div>
-            <div class="border border-slate-200 rounded-2xl p-5 text-center space-y-2 hover:border-amber-500 transition">
-              <div class="text-4xl">🐄</div>
-              <h4 class="font-bold text-sm text-[#143627]">கறவை மாடுகள் & கன்றுகள்</h4>
-              <p class="text-xs text-slate-500">ஆரோக்கியமான கறவை மாடுகள் மற்றும் இளங்கன்றுகள் (Live Farm Inspection).</p>
-              <button onclick="enquireLiveStockDirect('Milking Cows & Calves (மாடு)')" class="w-full bg-[#143627] hover:bg-[#0D241A] text-white text-xs font-bold py-2 rounded-xl transition">
-                Enquire Live Stock
-              </button>
-            </div>
-            <div class="border border-slate-200 rounded-2xl p-5 text-center space-y-2 hover:border-amber-500 transition">
-              <div class="text-4xl">🐓</div>
-              <h4 class="font-bold text-sm text-[#143627]">அசல் நாட்டுக் கோழிகள்</h4>
-              <p class="text-xs text-slate-500">சுதந்திரமாக திறந்தவெளியில் மேயும் ஆரோக்கியமான நாட்டுக் கோழிகள் & சேவல்கள்.</p>
-              <button onclick="enquireLiveStockDirect('Authentic Country Chicken (நாட்டுக் கோழி)')" class="w-full bg-[#143627] hover:bg-[#0D241A] text-white text-xs font-bold py-2 rounded-xl transition">
-                Enquire Live Stock
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== KARUPPAN KOMBAI GUARDIAN ==================== -->
-      <section class="max-w-6xl mx-auto px-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#143627]/10 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          <div class="flex justify-center">
-            <div class="w-52 h-64 rounded-2xl overflow-hidden border-2 border-amber-600/30 shadow-md relative group">
-              <img src="https://iili.io/ni3pK2S.jpg" class="w-full h-full object-cover group-hover:scale-105 transition" alt="Karuppan Farm Dog">
-              <div class="absolute bottom-2 left-2 right-2 bg-black/70 backdrop-blur-md rounded-xl p-1.5 text-center text-white">
-                <span class="font-bold text-xs block font-serif-title">Karuppan (கருப்பா)</span>
-                <span class="text-[10px] text-amber-300 font-mono-val">Official Farm Guardian</span>
-              </div>
-            </div>
-          </div>
-          <div class="md:col-span-2 space-y-3">
-            <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full font-mono-val">
-              FARM INFRASTRUCTURE & SECURITY
-            </span>
-            <h3 class="font-serif-title font-bold text-2xl text-[#143627]">24/7 Smart Machinery, CCTV & Loyal Guardian</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              D-FARM பண்ணை முழுவதும் 360° AI CCTV கண்காணிப்பு, சோலார் மின்வேலி பாதுகாப்பு, தானியங்கி புல் நறுக்கும் கருவிகள் (Chaff Cutter) மற்றும் பைப்லைன் செட்டப் செய்யப்பட்டுள்ளது. இவற்றுடன் பண்ணையின் உண்மையான காவலனாக கம்பீரமாக காக்கும் நமது பாசமிகு பண்ணை நாய் <b>கருப்பன்</b> 24 மணி நேரமும் அரணாக நிற்கிறான்.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== YOUTUBE & SOCIAL HUB ==================== -->
+      <!-- ==================== 4 YOUTUBE VIDEOS BALANCED GRID (FIXED 1st IMAGE) ==================== -->
       <section id="videos" class="max-w-6xl mx-auto px-4 space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
           <div>
@@ -609,35 +420,49 @@
           </a>
         </div>
 
-        <div id="ytVideosCarousel" class="flex gap-4 overflow-x-auto custom-scroll scroll-smooth py-2">
-          <div class="w-80 flex-shrink-0 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-            <div class="h-44 bg-slate-900 flex items-center justify-center text-white relative">
+        <!-- 4-Column Balanced Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="h-40 bg-slate-900 flex items-center justify-center text-white relative">
               <i data-lucide="play-circle" class="w-12 h-12 text-rose-500 opacity-90"></i>
-              <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded font-mono-val">Episode 1</span>
+              <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded font-mono-val">Ep 1</span>
             </div>
-            <div class="p-4 space-y-1">
-              <h4 class="font-bold text-xs text-[#143627]">D-FARM Starting Journey from Scratch</h4>
-              <p class="text-[11px] text-slate-500">How we set up Super Napier grass and sheds in Polur.</p>
+            <div class="p-3.5 space-y-1">
+              <h4 class="font-bold text-xs text-[#143627] line-clamp-1">D-FARM Journey from Scratch</h4>
+              <p class="text-[11px] text-slate-500 line-clamp-2">How we set up Super Napier grass and automated sheds in Polur.</p>
             </div>
           </div>
-          <div class="w-80 flex-shrink-0 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-            <div class="h-44 bg-slate-800 flex items-center justify-center text-white relative">
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="h-40 bg-slate-800 flex items-center justify-center text-white relative">
               <i data-lucide="play-circle" class="w-12 h-12 text-rose-500 opacity-90"></i>
-              <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded font-mono-val">Episode 2</span>
+              <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded font-mono-val">Ep 2</span>
             </div>
-            <div class="p-4 space-y-1">
-              <h4 class="font-bold text-xs text-[#143627]">Smart Cattle Nutrition & Pure Raw Milk Yield</h4>
-              <p class="text-[11px] text-slate-500">Step-by-step cattle health & automated watering demo.</p>
+            <div class="p-3.5 space-y-1">
+              <h4 class="font-bold text-xs text-[#143627] line-clamp-1">Smart Cattle Nutrition & Care</h4>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Daily green feed balance & automated clean watering pipeline.</p>
             </div>
           </div>
-          <div class="w-80 flex-shrink-0 bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
-            <div class="h-44 bg-slate-900 flex items-center justify-center text-white relative">
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="h-40 bg-slate-900 flex items-center justify-center text-white relative">
               <i data-lucide="play-circle" class="w-12 h-12 text-rose-500 opacity-90"></i>
-              <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded font-mono-val">Episode 3</span>
+              <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded font-mono-val">Ep 3</span>
             </div>
-            <div class="p-4 space-y-1">
-              <h4 class="font-bold text-xs text-[#143627]">Organic Farm Gate Experience & Tourism</h4>
-              <p class="text-[11px] text-slate-500">Visitors sharing feedback at our Polur eco-farm.</p>
+            <div class="p-3.5 space-y-1">
+              <h4 class="font-bold text-xs text-[#143627] line-clamp-1">Organic Farm Gate Experience</h4>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Visitors exploring our 4-bay goat shed and native chicken flock.</p>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="h-40 bg-slate-800 flex items-center justify-center text-white relative">
+              <i data-lucide="play-circle" class="w-12 h-12 text-rose-500 opacity-90"></i>
+              <span class="absolute bottom-2 right-2 bg-black/80 text-[10px] px-1.5 py-0.5 rounded font-mono-val">Ep 4</span>
+            </div>
+            <div class="p-3.5 space-y-1">
+              <h4 class="font-bold text-xs text-[#143627] line-clamp-1">Zero-Waste Solar & Biogas Hub</h4>
+              <p class="text-[11px] text-slate-500 line-clamp-2">Cattle dung to biogas energy loop & solar chilling process.</p>
             </div>
           </div>
         </div>
@@ -653,7 +478,6 @@
           </p>
         </div>
 
-        <!-- Vignesh Dhayalan -->
         <div class="organic-card p-6 sm:p-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div class="md:col-span-8 space-y-4">
             <div class="flex flex-wrap items-center gap-2 font-mono-val text-[11px]">
@@ -672,7 +496,7 @@
           </div>
           <div class="md:col-span-4 flex justify-center">
             <div class="w-64 h-80 rounded-3xl bg-slate-100 border-2 border-emerald-900/10 p-2 shadow-inner relative overflow-hidden group">
-              <img src="https://iili.io/nPgSsbR.jpg" class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition duration-300" alt="Vignesh Dhayalan">
+              <img src="https://iili.io/nPgSsbR.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x500/143627/FFFFFF?text=Vignesh+Dhayalan';" class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition duration-300" alt="Vignesh Dhayalan">
               <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded-xl p-2 text-white text-center">
                 <span class="font-serif-title font-bold text-xs block">Vignesh Dhayalan</span>
                 <span class="text-[10px] text-emerald-300 font-mono-val">Founder & Financial Specialist</span>
@@ -680,29 +504,9 @@
             </div>
           </div>
         </div>
-
-        <!-- Dhayalan Kuppusamy -->
-        <div class="organic-card p-6 sm:p-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div class="md:col-span-4 flex justify-center order-2 md:order-1">
-            <div class="w-64 h-80 rounded-3xl bg-amber-50 border-2 border-amber-900/10 p-2 shadow-inner relative overflow-hidden group">
-              <img src="https://iili.io/nPgyco7.jpg" class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition duration-300" alt="Dhayalan Kuppusamy">
-              <div class="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded-xl p-2 text-white text-center">
-                <span class="font-serif-title font-bold text-xs block">Dhayalan Kuppusamy</span>
-                <span class="text-[10px] text-amber-300 font-mono-val">Co-Founder • Field Operations</span>
-              </div>
-            </div>
-          </div>
-          <div class="md:col-span-8 space-y-4 order-1 md:order-2">
-            <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-full font-mono-val">Co-Founder • Farm Field Operations</span>
-            <h3 class="font-serif-title text-2xl sm:text-3xl font-bold text-[#143627]">Dhayalan Kuppusamy</h3>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-              "மாடு என்பது எங்களுக்கு வெறும் மிருகமல்ல; எங்கள் வீட்டுக் குழந்தை. அதிகாலை 4 மணிக்கே கொட்டகைக்கு போய் அதன் முதுகைத் தடவி கொடுக்கும் போது அது காட்டும் பாசத்திற்கு ஈடு இணையே இல்லை. நிலத்திற்கு ரசாயன உரம் போடாமல், சாண எரு போட்டு வளர்த்த புல்லைத் தின்று அது தரும் பால் அமிர்தம் போன்றது. கலப்படமில்லாத உணவை மனிதர்களுக்கு கொடுப்பதை விட புண்ணியம் உலகில் வேறு எதுவுமே இல்லை."
-            </p>
-          </div>
-        </div>
       </section>
 
-      <!-- ==================== MILK SUBSCRIPTION CALCULATOR ==================== -->
+      <!-- ==================== MILK SUBSCRIPTION BUILDER ==================== -->
       <section id="subscribe" class="max-w-6xl mx-auto px-4">
         <div class="bg-gradient-to-br from-[#143627] to-[#0A1F16] text-white rounded-3xl p-6 sm:p-10 shadow-xl space-y-6">
           <div class="text-center max-w-xl mx-auto space-y-2">
@@ -735,7 +539,7 @@
               </div>
               <div>
                 <label class="block font-bold text-slate-700 mb-1 font-sans">Delivery Window</label>
-                <select id="subTime" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 font-bold outline-none font-sans">
+                <select class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 font-bold outline-none font-sans">
                   <option selected>காலை (06:00 - 07:30 AM)</option>
                   <option>மாலை (05:30 - 07:00 PM)</option>
                 </select>
@@ -807,144 +611,79 @@
             </form>
           </div>
         </div>
+      </section>
 
-        <!-- LIVE MAP EMBED -->
-        <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <i data-lucide="map-pin" class="w-5 h-5 text-rose-600"></i>
-              <h3 class="font-serif-title font-bold text-lg text-[#143627]">D-FARM Exact Location Map (Polur)</h3>
+      <!-- ==================== EXACT LUXURY OLD FOOTER (2nd IMAGE RESTORED) ==================== -->
+      <footer id="dfarmFooter" class="bg-[#0F291E] text-white rounded-t-3xl sm:rounded-t-[2.5rem] mt-24 pt-16 pb-16 px-6 sm:px-12 border-t-4 border-[#D97706]/40 shadow-2xl relative overflow-hidden block">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-emerald-900/70 pb-12 text-xs sm:text-sm relative z-10 font-mono-val">
+          
+          <div class="space-y-4 md:col-span-1">
+            <div class="flex items-center gap-3">
+              <img src="https://iili.io/nPh3Ia9.png" class="w-12 h-12 rounded-full border-2 border-amber-400 shadow-md" alt="D-FARM">
+              <div>
+                <h3 class="font-serif-title text-xl font-bold text-white tracking-wide">D-FARM</h3>
+                <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-900 text-amber-300 font-bold uppercase tracking-widest border border-emerald-700">POLUR • EST. 2027</span>
+              </div>
             </div>
-            <a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="bg-[#143627] text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow font-mono-val">
-              Navigate in Maps App
+            <p class="text-emerald-200/80 leading-relaxed text-xs font-sans">
+              தூய பசும்பால், மரச்செக்கு எண்ணெய்கள், நவதானியங்கள் மற்றும் இயற்கை எரு உரம் — நேரடியாக உங்கள் இல்லத்திற்கு அல்லது பண்ணையிலேயே பெற்றுக் கொள்ளலாம்.
+            </p>
+            <div class="text-xs text-amber-300 font-semibold font-sans">
+              Proprietor: <b class="text-white">D. Malar (Polur)</b>
+            </div>
+            <a href="https://iili.io/nPtxqFI.png" target="_blank" class="inline-flex items-center gap-2 bg-emerald-900/60 border border-emerald-700 px-3 py-1.5 rounded-xl text-[11px] text-amber-300 hover:bg-emerald-800 transition">
+              <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> View Farm QR
             </a>
           </div>
-          <div class="w-full h-80 rounded-2xl overflow-hidden border border-slate-200">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d296.98239966589693!2d79.15538002341977!3d12.545474990403381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bacd9ef25157737%3A0xa4eb2fdd0a833a35!2sD-FARM!5e1!3m2!1sen!2sin!4v1793764491861!5m2!1sen!2sin" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy">
-            </iframe>
-          </div>
-        </div>
-      </section>
 
-      <!-- ==================== CONTACT FORM ==================== -->
-      <section id="contact-form" class="max-w-4xl mx-auto px-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-10 border border-[#143627]/10 shadow-sm space-y-6">
-          <div class="text-center space-y-2">
-            <span class="text-xs uppercase font-bold tracking-widest text-amber-700 font-mono-val">GET IN TOUCH</span>
-            <h3 class="font-serif-title font-bold text-3xl text-[#143627]">Send a Direct Message to D-FARM</h3>
-            <p class="text-xs text-slate-500">Need bulk supply, institutional delivery, or feed stock advisory? Write to us.</p>
+          <div class="space-y-3 font-sans">
+            <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Quick Links</h4>
+            <ul class="space-y-2 text-xs text-emerald-200/80 font-medium">
+              <li><a href="#products" class="hover:text-white transition">Fresh Products Catalog</a></li>
+              <li><a href="#livestock" class="hover:text-white transition">Farm Livestock Sales</a></li>
+              <li><a href="#fodder" class="hover:text-white transition">Fodder Pastures (தீவனங்கள்)</a></li>
+              <li><a href="#about-farm" class="hover:text-white transition">Smart Farm Operations</a></li>
+              <li><a href="#story" class="hover:text-white transition">Founders & Vision</a></li>
+              <li><a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="hover:text-white transition">Google Maps Route</a></li>
+            </ul>
           </div>
 
-          <form onsubmit="handleDirectEmail(event)" class="space-y-4 text-xs font-mono-val">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block font-bold text-slate-700 mb-1 font-sans">Your Name*</label>
-                <input type="text" id="contactName" required placeholder="Name" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 outline-none">
-              </div>
-              <div>
-                <label class="block font-bold text-slate-700 mb-1 font-sans">Your Email or Mobile*</label>
-                <input type="text" id="contactContact" required placeholder="Email or 10-digit Phone" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 outline-none">
-              </div>
+          <div class="space-y-3 font-sans">
+            <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Direct Contacts</h4>
+            <div class="space-y-2 text-xs text-emerald-200/80">
+              <p><span class="text-slate-400 block text-[10px]">Field & Livestock Operations:</span> 📞 <b>8870804123</b> (Dhayalan Kuppusamy)</p>
+              <p><span class="text-slate-400 block text-[10px]">Orders & Financial Strategy:</span> 📱 <b>7200752628</b> (Vignesh Dhayalan)</p>
+              <p><span class="text-slate-400 block text-[10px]">Official Email:</span> ✉️ <b>dfarmpolur@gmail.com</b></p>
+              <p><span class="text-slate-400 block text-[10px]">Farm Location:</span> 📍 Bakmar Pettai, Murugapadi, Polur, Tamil Nadu</p>
             </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1 font-sans">Subject / Category*</label>
-              <select id="contactSubject" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 outline-none font-sans font-medium">
-                <option>Dairy & Farm Produce Orders</option>
-                <option>Goats & Cattle Livestock Purchase</option>
-                <option>Farm Tour & Agro-Tourism</option>
-                <option>Mutual Fund & Financial Consultation</option>
-              </select>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1 font-sans">Your Message*</label>
-              <textarea id="contactMessage" rows="4" required placeholder="Tell us your requirement..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 outline-none font-sans"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-[#143627] hover:bg-[#0D241A] text-white font-bold py-3 rounded-xl shadow transition text-xs flex items-center justify-center gap-2 font-sans">
-              <i data-lucide="send" class="w-4 h-4 text-emerald-400"></i> Send Message to dfarmpolur@gmail.com
-            </button>
-          </form>
-        </div>
-      </section>
+          </div>
 
-      <!-- ==================== OFFICIAL D-FARM ISOLATED FOOTER ==================== -->
-      <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-<script src="/cookie-consent.js" defer></script>
+          <div class="space-y-3 font-sans">
+            <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Farm Gate & UPI</h4>
+            <div class="space-y-2 text-xs text-emerald-200/80">
+              <p class="text-white font-bold">Visiting Hours:</p>
+              <p class="text-amber-200 text-xs font-mono-val">07:00 AM – 06:00 PM (Daily)</p>
+              <p class="pt-2 text-white font-bold">Instant UPI Payments:</p>
+              <p class="bg-black/30 p-2 rounded-xl border border-emerald-800 text-[11px] text-amber-300 font-mono-val">7200752628@upi</p>
+              <p class="text-[10px] text-slate-400">GPay • PhonePe • Paytm Accepted</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="max-w-6xl mx-auto pt-6 border-b border-emerald-950 pb-6 text-[10px] text-slate-400 leading-relaxed space-y-1 font-mono-val">
+          <p><b>DISCLAIMER:</b> D-FARM POLUR produces natural, raw, unprocessed farm-direct cow milk and cold-pressed agro commodities. Raw milk should be gently boiled prior to consumption according to traditional household practices. Livestock sales are finalized solely based on live physical on-farm inspection and weight verification.</p>
+          <p><b>FINANCIAL SERVICES:</b> Vignesh Dhayalan is an AMFI-Registered Mutual Fund Distributor (ARN-288927, EUIN E543710). Mutual Fund investments are subject to market risks; read all scheme-related documents carefully before investing.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-400/90 gap-3 relative z-10 font-mono-val">
+          <span>© 2026 D-FARM Polur. All rights reserved. Sole Proprietor: D. Malar.</span>
+          <span class="text-emerald-500 text-[11px]">Crafted with Modern AgroTech, IoT & Financial Analytics</span>
+        </div>
+      </footer>
     </main>
 
-    <!-- ==================== POPUP: FULL 11+ FARM STORE CATALOG ==================== -->
+    <!-- ==================== POPUP: FULL 11+ FARM PRODUCTS CATALOG ==================== -->
     <div id="fullStoreModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-6">
       <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-2xl overflow-hidden text-[#143627]">
         <div class="flex items-center justify-between border-b pb-3">
@@ -957,7 +696,6 @@
           </button>
         </div>
 
-        <!-- Filter tabs & search -->
         <div class="py-3 flex flex-col sm:flex-row gap-2.5 items-center justify-between text-xs font-mono-val">
           <div class="flex flex-wrap gap-1.5 font-bold">
             <button onclick="filterCatalogItems('all')" id="tabAll" class="px-3 py-1 rounded-xl bg-[#143627] text-white">All</button>
@@ -969,7 +707,7 @@
         </div>
 
         <div id="catalogGridTarget" class="overflow-y-auto custom-scroll pr-1 py-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-mono-val">
-          <!-- Dynamically Rendered by JS -->
+          <!-- Rendered by JS -->
         </div>
 
         <div class="pt-3 border-t flex items-center justify-between text-xs font-mono-val">
@@ -980,44 +718,57 @@
     </div>
 
     <!-- ==================== FLOATING ACTION BUTTONS ==================== -->
-    <!-- 1. AI Farm Assistant Button (Above WhatsApp) -->
+    <!-- 1. Interactive AI Assistant Button -->
     <button onclick="toggleAiBox()" class="ai-float-btn px-3.5 py-2.5 bg-[#143627] text-amber-200 border border-emerald-700 rounded-full flex items-center gap-2 shadow-2xl text-xs font-mono-val font-bold">
       <i data-lucide="bot" class="w-4 h-4 text-emerald-400"></i>
       <span class="hidden sm:inline">Farm AI Help</span>
     </button>
 
-    <!-- 2. WhatsApp Floating Button (Direct SVG Icon) -->
+    <!-- 2. WhatsApp Floating Button (Direct SVG) -->
     <a href="https://wa.me/917200752628?text=Hello%20D-FARM%20Polur,%20I%20would%20like%20to%20order%20farm%20products." target="_blank" class="wa-float-btn w-14 h-14 bg-[#25D366] hover:bg-[#1ebd5a] text-white rounded-full flex items-center justify-center shadow-2xl" aria-label="WhatsApp">
       <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
       </svg>
     </a>
 
-    <!-- Interactive AI Assistant Modal -->
-    <div id="aiBox" class="fixed bottom-24 right-6 w-80 bg-white rounded-3xl shadow-2xl border border-stone-200 p-4 z-50 hidden font-mono-val text-xs space-y-2">
-      <div class="flex items-center justify-between border-b border-stone-100 pb-2">
-        <div class="flex items-center gap-1.5">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="font-bold text-[#143627]">D-FARM AI Assistant</span>
+    <!-- ==================== REAL-TIME INTERACTIVE AI CHAT BOX ==================== -->
+    <div id="aiChatBox" class="fixed bottom-24 right-6 w-84 max-w-[90vw] bg-white rounded-3xl shadow-2xl border border-stone-200 z-50 hidden flex-col overflow-hidden font-mono-val text-xs">
+      <!-- Chat Header -->
+      <div class="bg-[#143627] text-white p-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div>
+            <h4 class="font-bold text-xs">D-FARM Smart Assistant</h4>
+            <span class="text-[9px] text-emerald-300 block">Instant Automated Replies</span>
+          </div>
         </div>
-        <button onclick="toggleAiBox()" class="text-slate-400 hover:text-black"><i data-lucide="x" class="w-4 h-4"></i></button>
+        <button onclick="toggleAiBox()" class="text-stone-300 hover:text-white p-1">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
       </div>
-      <div class="space-y-1.5 text-[11px] text-slate-600">
-        <p class="font-sans">Ask instant farm questions:</p>
-        <button onclick="resolveAiAnswer('timing')" class="w-full text-left p-2 rounded-xl bg-stone-50 hover:bg-emerald-50 text-slate-800 transition">⏰ Delivery Timings in Polur?</button>
-        <button onclick="resolveAiAnswer('manure')" class="w-full text-left p-2 rounded-xl bg-stone-50 hover:bg-emerald-50 text-slate-800 transition">🌱 Goat Manure & Compost?</button>
-        <button onclick="resolveAiAnswer('visit')" class="w-full text-left p-2 rounded-xl bg-stone-50 hover:bg-emerald-50 text-slate-800 transition">📍 Visiting the Farm Paddock?</button>
+
+      <!-- Messages Stream -->
+      <div id="aiChatMessages" class="p-3.5 max-h-72 overflow-y-auto custom-scroll space-y-2.5 bg-stone-50 text-[11px] font-sans">
+        <div class="bg-emerald-100/70 text-emerald-950 p-2.5 rounded-2xl rounded-tl-none max-w-[85%] border border-emerald-200">
+          வணக்கம்! D-FARM Polur AI உதவியாளர். பால் விலை, டெலிவரி நேரம், ஆட்டுப் புழுக்கை உரம் அல்லது பண்ணை பார்வை பற்றி கேளுங்கள்!
+        </div>
       </div>
-      <div id="aiAnswerDisplay" class="p-2.5 bg-emerald-50 text-emerald-950 rounded-xl text-[11px] hidden font-sans leading-relaxed"></div>
+
+      <!-- Input Bar -->
+      <form onsubmit="handleUserChatSubmit(event)" class="p-2.5 bg-white border-t border-stone-200 flex gap-1.5">
+        <input type="text" id="aiUserChatInput" required placeholder="Type question (e.g. பால் விலை)..." class="flex-1 bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-sans outline-none focus:border-emerald-700">
+        <button type="submit" class="bg-[#143627] text-white p-2 rounded-xl hover:bg-black transition flex items-center justify-center">
+          <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+      </form>
     </div>
 
   </div>
 
-  <!-- ==================== SCRIPT LOGIC ==================== -->
+  <!-- ==================== SCRIPT ENGINE ==================== -->
   <script>
-    // 11 Products Inventory Data
-    const productsCatalogData = [
-      { name: 'Raw Cow Milk (Glass Bottle 1L)', price: 60, img: 'https://iili.io/nPhGB5P.jpg', cat: 'dairy', desc: 'Cold sealed vintage bottle for utmost purity & freshness.' },
+    const inventoryCatalog = [
+      { name: 'Raw Cow Milk (Glass Bottle 1L)', price: 60, img: 'https://iili.io/nPhGB5P.jpg', cat: 'dairy', desc: 'Cold sealed vintage bottle for purity & freshness.' },
       { name: 'Raw Cow Milk (1 Litre Pouch)', price: 50, img: 'https://iili.io/nPh8YPI.jpg', cat: 'dairy', desc: 'Freshly packed daily morning/evening milk pouch.' },
       { name: 'Country Eggs (6 Pack)', price: 72, img: 'https://iili.io/nPjJdHg.jpg', cat: 'dairy', desc: 'Healthy nutrient-rich free-range natural eggs.' },
       { name: 'Marachekku Coconut Oil (1L)', price: 260, img: 'https://iili.io/nPPShba.jpg', cat: 'oils', desc: 'மரச்செக்கில் ஆட்டிய 100% தூய தேங்காய் எண்ணெய்.' },
@@ -1030,10 +781,10 @@
       { name: 'Super Napier Stems (100 Bundle)', price: 100, img: 'https://iili.io/nPjdrve.jpg', cat: 'manures', desc: 'அடர் பசுந்தீவன வளர்ப்பிற்கான உயர் விளைச்சல் கரணைகள்.' }
     ];
 
-    let currentSelectedFilter = 'all';
-    let currentAppLanguage = 'ta';
+    let activeFilter = 'all';
+    let appLanguage = 'ta';
 
-    // Left Drawer Controls
+    // Left Drawer Control
     function toggleLeftDrawer(show) {
       const drawer = document.getElementById('leftNavDrawer');
       const backdrop = document.getElementById('drawerBackdrop');
@@ -1046,70 +797,70 @@
       }
     }
 
-    // Protected Admin PIN (6734)
+    // Protected PIN Portal (Code: 6734)
     function promptAdminPin() {
       const pin = prompt("Enter 4-Digit D-FARM Shed OS Passcode:");
       if (pin === "6734") {
-        alert("Access Granted! Launching D-FARM Shed OS...");
+        alert("PIN Verified. Opening D-FARM Shed OS...");
         window.location.href = "/dfarm/os/index.html";
       } else if (pin !== null) {
         alert("Access Denied: Incorrect Security PIN.");
       }
     }
 
-    // Bilingual Language Switcher
+    // Language Toggle
     function toggleAppLanguage() {
-      currentAppLanguage = currentAppLanguage === 'ta' ? 'en' : 'ta';
-      document.getElementById('langDisplayBadge').textContent = currentAppLanguage === 'ta' ? 'தமிழ் / EN' : 'EN / தமிழ்';
+      appLanguage = appLanguage === 'ta' ? 'en' : 'ta';
+      document.getElementById('langDisplayBadge').textContent = appLanguage === 'ta' ? 'தமிழ் / EN' : 'EN / தமிழ்';
       document.querySelectorAll('.dyn-lang-text').forEach(node => {
-        const textVal = node.getAttribute(`data-${currentAppLanguage}`);
-        if (textVal) node.textContent = textVal;
+        const val = node.getAttribute(`data-${appLanguage}`);
+        if (val) node.textContent = val;
       });
     }
 
-    // Full Catalog Store Modal Controls
+    // Full 11+ Products Catalog Modal
     function openFullCatalogModal() {
       document.getElementById('fullStoreModal').classList.remove('hidden');
-      renderCatalogGridItems();
+      renderModalCatalog();
     }
     function closeFullCatalogModal() {
       document.getElementById('fullStoreModal').classList.add('hidden');
     }
 
-    function filterCatalogItems(cat) {
-      currentSelectedFilter = cat;
+    function filterCatalogItems(category) {
+      activeFilter = category;
       ['all', 'dairy', 'oils', 'manures'].forEach(c => {
         const btn = document.getElementById(`tab${c.charAt(0).toUpperCase() + c.slice(1)}`);
         if (!btn) return;
-        btn.className = c === cat 
+        btn.className = c === category 
           ? "px-3 py-1 rounded-xl bg-[#143627] text-white" 
           : "px-3 py-1 rounded-xl bg-slate-100 text-slate-700";
       });
-      renderCatalogGridItems();
+      renderModalCatalog();
     }
 
     function filterCatalogSearch() {
       const q = document.getElementById('catalogSearchInput').value.toLowerCase();
-      renderCatalogGridItems(q);
+      renderModalCatalog(q);
     }
 
-    function renderCatalogGridItems(searchQuery = '') {
-      const grid = document.getElementById('catalogGridTarget');
-      const filtered = productsCatalogData.filter(i => {
-        const matchesCategory = currentSelectedFilter === 'all' || i.cat === currentSelectedFilter;
-        const matchesQuery = i.name.toLowerCase().includes(searchQuery);
-        return matchesCategory && matchesQuery;
+    function renderModalCatalog(query = '') {
+      const target = document.getElementById('catalogGridTarget');
+      const filtered = inventoryCatalog.filter(item => {
+        const matchCategory = activeFilter === 'all' || item.cat === activeFilter;
+        const matchQuery = item.name.toLowerCase().includes(query);
+        return matchCategory && matchQuery;
       });
 
       if (!filtered.length) {
-        grid.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400">No items match your search.</div>`;
+        target.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400">No items match your search.</div>`;
         return;
       }
 
-      grid.innerHTML = filtered.map(item => `
+      target.innerHTML = filtered.map(item => `
         <div class="organic-card p-3.5 flex flex-col justify-between text-center space-y-2 border border-slate-200">
           <div class="h-32 bg-slate-50 rounded-xl p-2 flex items-center justify-center">
-            <img src="${item.img}" class="h-28 object-contain rounded-lg glow-img" alt="${item.name}">
+            <img src="${item.img}" onerror="this.onerror=null; this.src='https://placehold.co/200x200/143627/FFFFFF?text=${encodeURIComponent(item.name)}';" class="h-28 object-contain rounded-lg glow-img" alt="${item.name}">
           </div>
           <div class="space-y-0.5">
             <h4 class="font-bold text-xs text-[#143627] line-clamp-1">${item.name}</h4>
@@ -1117,7 +868,7 @@
             <span class="font-bold text-sm text-[#143627] block pt-1">₹${item.price}</span>
           </div>
           <button onclick="orderViaWhatsAppDirect('${item.name}', ${item.price}); closeFullCatalogModal();" class="w-full bg-[#143627] hover:bg-[#0D241A] text-white text-[11px] font-bold py-2 rounded-xl transition flex items-center justify-center gap-1 shadow">
-            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Order via WhatsApp
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add to Cart
           </button>
         </div>
       `).join('');
@@ -1126,7 +877,7 @@
 
     // Direct WhatsApp Ordering
     function orderViaWhatsAppDirect(name, price) {
-      const text = `*🌾 D-FARM POLUR • PRODUCT ORDER*\nHello! I would like to order:\n*Item:* ${name}\n*Price:* ₹${price}\n\nPlease share delivery confirmation and payment details.`;
+      const text = `*🌾 D-FARM POLUR • PRODUCT ORDER*\nHello! I would like to order:\n*Item:* ${name}\n*Price:* ₹${price}\n\nPlease share delivery availability and UPI payment details.`;
       window.open(`https://wa.me/917200752628?text=${encodeURIComponent(text)}`, '_blank');
     }
 
@@ -1135,7 +886,7 @@
       window.open(`https://wa.me/917200752628?text=${encodeURIComponent(text)}`, '_blank');
     }
 
-    // Milk Subscription Calculation
+    // Milk Subscription
     function calculateSubscriptionTotal() {
       const q = parseFloat(document.getElementById('subLiters').value);
       const rate = parseFloat(document.getElementById('subPack').value);
@@ -1161,30 +912,55 @@
       window.open(`https://wa.me/917200752628?text=${encodeURIComponent(text)}`, '_blank');
     }
 
-    function handleDirectEmail(e) {
-      e.preventDefault();
-      const n = document.getElementById('contactName').value;
-      const c = document.getElementById('contactContact').value;
-      const s = document.getElementById('contactSubject').value;
-      const m = document.getElementById('contactMessage').value;
-      const body = `Name: ${n}\nContact: ${c}\nSubject: ${s}\n\nMessage:\n${m}`;
-      window.location.href = `mailto:dfarmpolur@gmail.com?subject=${encodeURIComponent('D-FARM Enquiry: ' + s)}&body=${encodeURIComponent(body)}`;
-    }
-
-    // AI Assistant Mini Drawer
+    // ==================== INTERACTIVE AI CHATBOT LOGIC ====================
     function toggleAiBox() {
-      document.getElementById('aiBox').classList.toggle('hidden');
+      const chat = document.getElementById('aiChatBox');
+      chat.classList.toggle('hidden');
+      chat.classList.toggle('flex');
     }
 
-    function resolveAiAnswer(type) {
-      const box = document.getElementById('aiAnswerDisplay');
-      box.classList.remove('hidden');
-      if (type === 'timing') {
-        box.textContent = "Morning raw milk delivery in Polur is between 06:00 AM - 07:30 AM daily.";
-      } else if (type === 'manure') {
-        box.textContent = "Sun-dried goat manure pellets are ₹150 for 10kg bags. Compost is ₹250 for 25kg bags. Direct delivery or farm gate pickup.";
+    function handleUserChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('aiUserChatInput');
+      const query = input.value.trim();
+      if (!query) return;
+
+      appendChatMessage(query, 'user');
+      input.value = '';
+
+      // Generate context-aware reply
+      setTimeout(() => {
+        const reply = generateAiReply(query.toLowerCase());
+        appendChatMessage(reply, 'bot');
+      }, 400);
+    }
+
+    function appendChatMessage(text, sender) {
+      const stream = document.getElementById('aiChatMessages');
+      const msgDiv = document.createElement('div');
+      if (sender === 'user') {
+        msgDiv.className = "bg-[#143627] text-white p-2.5 rounded-2xl rounded-tr-none ml-auto max-w-[85%]";
       } else {
-        box.textContent = "D-FARM is located at Bakmarpettai, Murugapadi road, Polur. Visiting hours: 7 AM - 6 PM daily.";
+        msgDiv.className = "bg-emerald-100/70 text-emerald-950 p-2.5 rounded-2xl rounded-tl-none mr-auto max-w-[85%] border border-emerald-200";
+      }
+      msgDiv.textContent = text;
+      stream.appendChild(msgDiv);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function generateAiReply(q) {
+      if (q.includes('விலை') || q.includes('rate') || q.includes('price') || q.includes('cost')) {
+        return "தூய பசும்பால் பாக்கெட் ₹50/L, பாட்டில் ₹60/L. மரச்செக்கு தேங்காய் எண்ணெய் ₹260/L, ஆட்டுப் புழுக்கை உரம் ₹150/10kg!";
+      } else if (q.includes('நேரம்') || q.includes('time') || q.includes('timing') || q.includes('delivery')) {
+        return "காலை 06:00 AM முதல் 07:30 AM வரை போளூர் டவுன் முழுவதும் தினசரி வீடு தேடி விநியோகம் செய்கிறோம்.";
+      } else if (q.includes('ஆடு') || q.includes('மாடு') || q.includes('livestock') || q.includes('goat') || q.includes('cow')) {
+        return "நாட்டு ஆடுகள் மற்றும் கறவை மாடுகள் நேரடி எடை சரிபார்த்து வாங்கலாம். WhatsApp: 7200752628-ல் தெரிவிக்கவும்!";
+      } else if (q.includes('எங்கே') || q.includes('place') || q.includes('location') || q.includes('route') || q.includes('map')) {
+        return "D-FARM போளூர் தாலுக்கா பக்மார்பேட்டை (முருகப்பாடி சாலை) பகுதியில் அமைந்துள்ளது. Google Maps-ல் 'D-FARM Polur' என தேடலாம்.";
+      } else if (q.includes('order') || q.includes('வாங்குவது') || q.includes('buy')) {
+        return "பொருட்களை Add to Cart செய்து WhatsApp வழியே நேரடியாக ஆர்டர் செய்யலாம். UPI ID: 7200752628@upi";
+      } else {
+        return "உங்கள் கேள்விக்கு நன்றி! மேலும் விவரங்களுக்கு எங்கள் உதவி எண் 7200752628 அல்லது WhatsApp-ல் தொடர்பு கொள்ளவும்.";
       }
     }
 
