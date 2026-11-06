@@ -1,0 +1,67 @@
+[
+  {
+    "id": "DF-G-001",
+    "breed": "செம்மறி கிடா",
+    "gender": "Male",
+    "section": "Section D",
+    "currentWeight": 32.5,
+    "prevWeight": 29.0,
+    "adgGrams": 116,
+    "status": "Bakrid Ready 🌟",
+    "targetDate": "2027-06-01",
+    "dailyFeedGrams": 450,
+    "valuation": 13650
+  },
+  {
+    "id": "DF-G-002",
+    "breed": "வெள்ளாடு கிடா",
+    "gender": "Male",
+    "section": "Section D",
+    "currentWeight": 30.5,
+    "prevWeight": 27.0,
+    "adgGrams": 116,
+    "status": "Bakrid Ready 🌟",
+    "targetDate": "2027-06-01",
+    "dailyFeedGrams": 450,
+    "valuation": 12810
+  },
+  {
+    "id": "DF-G-003",
+    "breed": "நாட்டு வெள்ளாடு",
+    "gender": "Female",
+    "section": "Section B",
+    "currentWeight": 26.0,
+    "prevWeight": 25.0,
+    "adgGrams": 33,
+    "status": "Pregnant (3rd Month)",
+    "targetDate": "2027-01-20",
+    "dailyFeedGrams": 400,
+    "valuation": 10400
+  },
+  {
+    "id": "DF-G-004",
+    "breed": "தலைச்சேரி கலப்பினம்",
+    "gender": "Male",
+    "section": "Section C",
+    "currentWeight": 48.0,
+    "prevWeight": 47.5,
+    "adgGrams": 16,
+    "status": "Active Stud Buck",
+    "targetDate": "Breeding",
+    "dailyFeedGrams": 500,
+    "valuation": 22000
+  },
+  {
+    "id": "DF-G-005",
+    "breed": "கொடி ஆடு குட்டி",
+    "gender": "Female",
+    "section": "Section A",
+    "currentWeight": 11.5,
+    "prevWeight": 8.0,
+    "adgGrams": 116,
+    "status": "Nursery Stage",
+    "targetDate": "2027-03-15",
+    "dailyFeedGrams": 150,
+    "valuation": 4600
+  }
+]
