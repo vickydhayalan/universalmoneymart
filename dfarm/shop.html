@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ta" class="h-full scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D-FARM POLUR Store | Farm-Direct Dairy, Oils & Organics</title>
+  <meta name="theme-color" content="#143627">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" type="image/png" href="https://iili.io/nPh3Ia9.png">
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="dfarm/css/style.css">
+</head>
+<body class="h-full flex flex-col antialiased relative selection:bg-emerald-900 selection:text-white">
+
+  <!-- Floating Background Emojis -->
+  <div class="bg-emoji-layer" aria-hidden="true">
+    <span class="floating-glyph" style="left: 8%; animation-delay: 0s;">🐄</span>
+    <span class="floating-glyph" style="left: 28%; animation-delay: 4s;">🥛</span>
+    <span class="floating-glyph" style="left: 50%; animation-delay: 9s;">🌱</span>
+    <span class="floating-glyph" style="left: 72%; animation-delay: 2s;">🍯</span>
+    <span class="floating-glyph" style="left: 90%; animation-delay: 14s;">🌾</span>
+  </div>
+
+  <div id="dfarmShopMaster" class="relative z-10 flex flex-col justify-between min-h-screen">
+
+    <!-- Top Bar -->
+    <div class="bg-[#143627] text-amber-200 py-2.5 px-4 text-xs font-semibold shadow-sm sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-2 truncate">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>🌾 போளூர் பண்ணை நேரடி விளைபொருட்கள் • 100% தூய்மை • WhatsApp: 7200752628</span>
+        </div>
+        <div class="flex items-center gap-2 flex-shrink-0 font-mono-val">
+          <a href="tel:7200752628" class="text-amber-200 font-bold hover:underline flex items-center gap-1">
+            <i data-lucide="phone" class="w-3.5 h-3.5"></i> 7200752628
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Navbar -->
+    <header class="bg-[#FAF6EE]/95 backdrop-blur-md border-b border-[#143627]/10 px-4 sm:px-8 py-3.5 sticky top-[37px] z-40">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        
+        <!-- Left: Logo & Back Link -->
+        <div class="flex items-center gap-3">
+          <a href="./dfarm.html" class="p-2 bg-white border border-[#143627]/20 rounded-xl hover:bg-slate-100 transition shadow-sm text-xs font-bold text-[#143627] flex items-center gap-1">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Back to Farm</span>
+          </a>
+          <a href="./dfarm.html" class="flex items-center gap-2">
+            <img src="https://iili.io/nPh3Ia9.png" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/80x80/143627/FFFFFF?text=D';" class="w-9 h-9 rounded-full object-cover border border-[#143627]" alt="D-FARM">
+            <span class="font-serif-title font-bold text-lg sm:text-xl text-[#143627]">D-FARM <span class="text-xs bg-emerald-100 text-[#143627] px-2 py-0.5 rounded-full font-mono-val uppercase">STORE</span></span>
+          </a>
+        </div>
+
+        <!-- Right: Cart & Quick WhatsApp -->
+        <div class="flex items-center gap-2.5">
+          <button onclick="toggleCartDrawer(true)" class="bg-[#143627] hover:bg-[#0D241A] text-white px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-md active:scale-95 transition">
+            <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-300"></i>
+            <span id="shopCartBadge" class="text-xs font-bold font-mono-val">0 Items</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Store Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8 flex-1 w-full">
+      
+      <!-- Store Banner -->
+      <div class="text-center space-y-2 max-w-2xl mx-auto">
+        <span class="text-xs uppercase tracking-widest font-bold text-amber-700 font-mono-val">100% UNADULTERATED DIRECT HARVEST</span>
+        <h1 class="font-serif-title text-3xl sm:text-5xl font-bold text-[#143627]">D-FARM Polur Online Store</h1>
+        <p class="text-xs sm:text-sm text-slate-600">
+          பசுவின் கறவை பால் முதல் இயற்கை முறையில் விளைவிக்கப்பட்ட எண்ணெய், முட்டை மற்றும் உரம் வரை அனைத்தும் உங்களின் இல்லத்திற்கே நேரடியாக வந்து சேரும்.
+        </p>
+      </div>
+
+      <!-- Filters & Live Search Bar -->
+      <div class="bg-white p-4 rounded-3xl border border-[#143627]/10 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
+        <div class="flex flex-wrap gap-2 text-xs font-mono-val font-bold w-full md:w-auto">
+          <button onclick="filterShop('all')" id="btn-all" class="px-4 py-2 rounded-xl bg-[#143627] text-white">All Products</button>
+          <button onclick="filterShop('dairy')" id="btn-dairy" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700">Pure Dairy & Eggs</button>
+          <button onclick="filterShop('oils')" id="btn-oils" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700">Cold-Pressed Oils</button>
+          <button onclick="filterShop('manures')" id="btn-manures" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700">Farm Organics & Manures</button>
+        </div>
+        <div class="w-full md:w-72 relative">
+          <input type="text" id="shopSearchInput" oninput="searchShop()" placeholder="Search milk, oil, compost..." class="w-full bg-slate-50 border border-slate-300 rounded-2xl pl-10 pr-4 py-2.5 text-xs font-mono-val outline-none focus:border-emerald-700">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+        </div>
+      </div>
+
+      <!-- Product Catalog Grid -->
+      <div id="shopCatalogGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+
+    </main>
+
+    <!-- Cart Slide Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex justify-end">
+      <div class="bg-white w-full max-w-md h-full flex flex-col p-6 shadow-2xl text-[#143627]">
+        <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shopping-bag" class="w-5 h-5 text-emerald-800"></i>
+            <h3 class="font-serif-title font-bold text-lg">Your Farm Cart</h3>
+          </div>
+          <button onclick="toggleCartDrawer(false)" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+        </div>
+
+        <div id="cartItemsList" class="flex-1 overflow-y-auto py-4 space-y-3 custom-scroll">
+          <div class="text-center py-12 text-slate-400 text-xs font-mono-val">கூடை காலியாக உள்ளது (Cart is empty).</div>
+        </div>
+
+        <div class="border-t border-slate-200 pt-4 space-y-3 bg-white">
+          <div class="flex justify-between items-center text-sm font-bold">
+            <span class="text-slate-600">Total Amount:</span>
+            <span id="cartTotalPrice" class="font-serif-title text-2xl text-[#143627]">₹0</span>
+          </div>
+
+          <div class="space-y-2 pb-2">
+            <button onclick="checkoutCartWhatsApp()" class="w-full bg-[#143627] hover:bg-[#0D241A] active:scale-95 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2 text-xs">
+              <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+              Order Entire Cart via WhatsApp
+            </button>
+            <button onclick="checkoutCartUPI()" class="w-full bg-amber-600 hover:bg-amber-500 active:scale-95 text-white font-bold py-2.5 rounded-xl shadow flex items-center justify-center gap-2 text-xs font-mono-val">
+              <i data-lucide="credit-card" class="w-4 h-4"></i>
+              Pay via UPI (7200752628@upi)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Official D-FARM Footer -->
+    <footer id="dfarmFooter" class="bg-[#0F291E] text-white rounded-t-3xl sm:rounded-t-[2.5rem] mt-24 pt-16 pb-16 px-6 sm:px-12 border-t-4 border-[#D97706]/40 shadow-2xl relative overflow-hidden block">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-emerald-900/70 pb-12 text-xs sm:text-sm relative z-10 font-mono-val">
+        <div class="space-y-4 md:col-span-1">
+          <div class="flex items-center gap-3">
+            <img src="https://iili.io/nPh3Ia9.png" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/80x80/143627/FFFFFF?text=D';" class="w-12 h-12 rounded-full border-2 border-amber-400 shadow-md" alt="D-FARM">
+            <div>
+              <h3 class="font-serif-title text-xl font-bold text-white tracking-wide">D-FARM</h3>
+              <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-900 text-amber-300 font-bold uppercase tracking-widest border border-emerald-700">POLUR • EST. 2027</span>
+            </div>
+          </div>
+          <p class="text-emerald-200/80 leading-relaxed text-xs font-sans">
+            தூய பசும்பால், மரச்செக்கு எண்ணெய்கள், நவதானியங்கள் மற்றும் இயற்கை எரு உரம் — நேரடியாக உங்கள் இல்லத்திற்கு அல்லது பண்ணையிலேயே பெற்றுக் கொள்ளலாம்.
+          </p>
+          <div class="text-xs text-amber-300 font-semibold font-sans">
+            Proprietor: <b class="text-white">D. Malar (Polur)</b>
+          </div>
+        </div>
+
+        <div class="space-y-3 font-sans">
+          <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Store Links</h4>
+          <ul class="space-y-2 text-xs text-emerald-200/80 font-medium">
+            <li><a href="./dfarm.html" class="hover:text-white transition">← Farm Homepage</a></li>
+            <li><a href="./dfarm.html#visit" class="hover:text-white transition">Book Farm Visit</a></li>
+            <li><a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="hover:text-white transition">Google Maps Route</a></li>
+          </ul>
+        </div>
+
+        <div class="space-y-3 font-sans">
+          <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Orders & Deliveries</h4>
+          <div class="space-y-2 text-xs text-emerald-200/80">
+            <p><span class="text-slate-400 block text-[10px]">Orders Hotline:</span> 📱 <b>7200752628</b> (Vignesh Dhayalan)</p>
+            <p><span class="text-slate-400 block text-[10px]">Field Queries:</span> 📞 <b>8870804123</b> (Dhayalan Kuppusamy)</p>
+            <p><span class="text-slate-400 block text-[10px]">Official Email:</span> ✉️ <b>dfarmpolur@gmail.com</b></p>
+          </div>
+        </div>
+
+        <div class="space-y-3 font-sans">
+          <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Instant UPI</h4>
+          <div class="space-y-2 text-xs text-emerald-200/80">
+            <p class="text-white font-bold">Verified UPI ID:</p>
+            <p class="bg-black/30 p-2 rounded-xl border border-emerald-800 text-[11px] text-amber-300 font-mono-val">7200752628@upi</p>
+            <p class="text-[10px] text-slate-400">GPay • PhonePe • Paytm Accepted</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-400/90 gap-3 relative z-10 font-mono-val">
+        <span>© 2026 D-FARM Polur. All rights reserved. Sole Proprietor: D. Malar.</span>
+        <span class="text-emerald-500 text-[11px]">Crafted with Modern AgroTech, IoT & Financial Analytics</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript Engine -->
+  <script>
+    const inventory = [
+      { id: 1, name: 'Raw Cow Milk (Glass Bottle 1L)', price: 60, unit: '1 Litre Bottle', img: 'https://iili.io/nPhGB5P.jpg', cat: 'dairy', desc: 'Cold sealed vintage bottle for utmost purity & freshness.' },
+      { id: 2, name: 'Raw Cow Milk (1 Litre Pouch)', price: 50, unit: '1 Litre Pouch', img: 'https://iili.io/nPh8YPI.jpg', cat: 'dairy', desc: 'Freshly packed daily morning/evening milk pouch.' },
+      { id: 3, name: 'Free-Range Country Eggs (6 Pack)', price: 72, unit: 'Box of 6', img: 'https://iili.io/nPjJdHg.jpg', cat: 'dairy', desc: 'Healthy nutrient-rich free-range natural eggs.' },
+      { id: 4, name: 'Marachekku Coconut Oil (1L)', price: 260, unit: '1 Litre Bottle', img: 'https://iili.io/nPPShba.jpg', cat: 'oils', desc: 'மரச்செக்கில் ஆட்டிய 100% தூய தேங்காய் எண்ணெய்.' },
+      { id: 5, name: 'Marachekku Groundnut Oil (1L)', price: 210, unit: '1 Litre Bottle', img: 'https://iili.io/nPinmaj.jpg', cat: 'oils', desc: 'மணமும் சத்தும் நிறைந்த தூய மரச்செக்கு கடலை எண்ணெய்.' },
+      { id: 6, name: 'Farm Coconuts (தேங்காய்)', price: 30, unit: '1 Piece', img: 'https://iili.io/nPPMuj9.jpg', cat: 'manures', desc: 'எங்கள் தோப்பில் பறித்த இயற்கை உரம் இட்ட தேங்காய்.' },
+      { id: 7, name: 'Raw Groundnuts (பச்சை கடலை 1kg)', price: 90, unit: '1 kg Pack', img: 'https://iili.io/nPPmU2n.jpg', cat: 'manures', desc: 'போளூர் செம்மண் காட்டில் விளைந்த நாட்டு வேர்க்கடலை.' },
+      { id: 8, name: 'Fresh Veggie Basket (காய்கறி கூடை)', price: 120, unit: 'Basket (~2.5kg)', img: 'https://iili.io/nPiN3kG.jpg', cat: 'manures', desc: 'கத்தரி, வெண்டை, தக்காளி அடங்கிய இயற்கை காய்கறி கூடை.' },
+      { id: 9, name: 'Aged Cow Dung Compost (25kg)', price: 250, unit: '25kg Bag', img: 'https://iili.io/nPjFV3B.jpg', cat: 'manures', desc: 'மட்கிய ஊட்டச்சத்து நிறைந்த இயற்கை எரு உரம்.' },
+      { id: 10, name: 'Goat Manure Pellet (10kg)', price: 150, unit: '10kg Bag', img: 'https://iili.io/nPjTtYG.jpg', cat: 'manures', desc: 'தென்னை மற்றும் தோட்டச் செடிகளுக்கான உயர் NPK உரம்.' },
+      { id: 11, name: 'Super Napier Stems (100 Bundle)', price: 100, unit: '100 Stems Bundle', img: 'https://iili.io/nPjdrve.jpg', cat: 'manures', desc: 'அடர் பசுந்தீவன வளர்ப்பிற்கான உயர் விளைச்சல் கரணைகள்.' }
+    ];
+
+    let cart = [];
+    let currentFilter = 'all';
+
+    function renderShop(query = '') {
+      const grid = document.getElementById('shopCatalogGrid');
+      const filtered = inventory.filter(item => {
+        const matchesCategory = currentFilter === 'all' || item.cat === currentFilter;
+        const matchesQuery = item.name.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query);
+        return matchesCategory && matchesQuery;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="col-span-full py-16 text-center text-slate-400 font-mono-val">No farm products match your criteria.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="organic-card p-5 flex flex-col justify-between text-center space-y-4 shadow-sm">
+          <div class="bg-slate-50 rounded-2xl p-3 flex items-center justify-center h-48 relative">
+            <img src="${item.img}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/400x500/143627/FFFFFF?text=${encodeURIComponent(item.name)}';" class="h-40 object-contain rounded-xl glow-img" alt="${item.name}">
+            <span class="absolute top-2 right-2 bg-emerald-100 text-emerald-900 text-[10px] font-bold px-2 py-0.5 rounded-full font-mono-val">${item.unit}</span>
+          </div>
+          <div class="space-y-1">
+            <h3 class="font-serif-title font-bold text-base text-[#143627]">${item.name}</h3>
+            <p class="text-xs text-slate-600 line-clamp-2">${item.desc}</p>
+            <div class="pt-2"><span class="font-serif-title text-2xl font-bold text-[#143627]">₹${item.price}</span></div>
+          </div>
+          <button onclick="addToCart('${item.name}', ${item.price}, '${item.img}')" class="w-full bg-[#143627] hover:bg-[#0D241A] active:scale-95 text-white font-bold text-xs py-3 rounded-xl shadow transition flex items-center justify-center gap-1.5 font-mono-val">
+            <i data-lucide="plus" class="w-4 h-4"></i> <span>Add to Cart</span>
+          </button>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function filterShop(category) {
+      currentFilter = category;
+      ['all', 'dairy', 'oils', 'manures'].forEach(c => {
+        const btn = document.getElementById(`btn-${c}`);
+        if (!btn) return;
+        btn.className = c === category 
+          ? "px-4 py-2 rounded-xl bg-[#143627] text-white" 
+          : "px-4 py-2 rounded-xl bg-slate-100 text-slate-700";
+      });
+      renderShop();
+    }
+
+    function searchShop() {
+      const q = document.getElementById('shopSearchInput').value.toLowerCase();
+      renderShop(q);
+    }
+
+    // Cart Logic
+    function addToCart(name, price, img) {
+      const existing = cart.find(i => i.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, img, qty: 1 });
+      }
+      updateCartDisplay();
+      toggleCartDrawer(true);
+    }
+
+    function updateCartQty(name, delta) {
+      const item = cart.find(i => i.name === name);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.name !== name);
+      }
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const totalCount = cart.reduce((acc, i) => acc + i.qty, 0);
+      const totalPrice = cart.reduce((acc, i) => acc + (i.qty * i.price), 0);
+      
+      document.getElementById('shopCartBadge').textContent = `${totalCount} Items`;
+      document.getElementById('cartTotalPrice').textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
+
+      const list = document.getElementById('cartItemsList');
+      if (!cart.length) {
+        list.innerHTML = `<div class="text-center py-12 text-slate-400 text-xs font-mono-val">கூடை காலியாக உள்ளது (Cart is empty).</div>`;
+        return;
+      }
+
+      list.innerHTML = cart.map(item => `
+        <div class="flex items-center justify-between p-3 bg-stone-50 rounded-2xl border border-stone-200 font-mono-val text-xs">
+          <div class="flex items-center gap-2.5">
+            <img src="${item.img}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/100x100/143627/FFFFFF?text=Item';" class="w-11 h-11 object-contain rounded-xl bg-white p-1 border" alt="${item.name}">
+            <div>
+              <h4 class="font-bold text-slate-900 text-xs line-clamp-1 font-sans">${item.name}</h4>
+              <span class="text-emerald-800 font-bold">₹${item.price} each</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="updateCartQty('${item.name}', -1)" class="w-6 h-6 rounded-lg bg-stone-200 text-slate-700 font-bold flex items-center justify-center hover:bg-stone-300">-</button>
+            <span class="font-bold w-4 text-center">${item.qty}</span>
+            <button onclick="updateCartQty('${item.name}', 1)" class="w-6 h-6 rounded-lg bg-emerald-800 text-white font-bold flex items-center justify-center hover:bg-emerald-900">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleCartDrawer(show) {
+      const drawer = document.getElementById('cartDrawer');
+      if (show) {
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.add('hidden');
+      }
+    }
+
+    function checkoutCartWhatsApp() {
+      if (!cart.length) {
+        alert("உங்கள் கூடை காலியாக உள்ளது!");
+        return;
+      }
+      let itemsSummary = cart.map(i => `• ${i.name} x ${i.qty} = ₹${i.qty * i.price}`).join('\n');
+      let grandTotal = cart.reduce((acc, i) => acc + (i.qty * i.price), 0);
+      const text = `*🌾 D-FARM POLUR • STORE ORDER*\n------------------------------------\n${itemsSummary}\n------------------------------------\n*Grand Total: ₹${grandTotal}*\n\nPlease confirm availability and delivery in Polur!`;
+      window.open(`https://wa.me/917200752628?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function checkoutCartUPI() {
+      if (!cart.length) {
+        alert("உங்கள் கூடை காலியாக உள்ளது!");
+        return;
+      }
+      let grandTotal = cart.reduce((acc, i) => acc + (i.qty * i.price), 0);
+      prompt(`Instant UPI Payment ID:\n7200752628@upi\nTotal Amount: ₹${grandTotal}\n\nCopy UPI ID to pay via GPay / PhonePe:`, "7200752628@upi");
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderShop();
+    });
+  </script>
+</body>
+</html>
