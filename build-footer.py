@@ -1,83 +1,128 @@
 #!/usr/bin/env python3
 """
-build-footer.py — Universal Money Mart footer sync tool (v2 — dedup fix)
-
-Edit ONLY partials/footer.html (footer markup only — no script tags in it).
-Then run this script before every git push, or let the GitHub Action run it.
-
-It:
-  1. Replaces the first <footer>...</footer> block in every .html file
-     (except files inside partials/) with the current master footer.
-  2. Removes ALL existing /cookie-consent.js script tags in the file,
-     then inserts exactly ONE right after the footer.
-This makes it safe to re-run any number of times — it will never
-accumulate duplicate script tags again.
-
-Usage:
-    python3 build-footer.py            # apply changes
-    python3 build-footer.py --dry-run  # show which files WOULD change, no writes
+Universal Money Mart - Automated Footer Builder
+Injects/Updates global Money Mart footer on content pages while safely
+ignoring standalone sub-brands like D-FARM Polur.
 """
-import re
-import sys
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-FOOTER_PARTIAL = ROOT / "partials" / "footer.html"
-FOOTER_RE = re.compile(r"<footer\b.*?</footer>", re.DOTALL | re.IGNORECASE)
-COOKIE_SCRIPT_RE = re.compile(r'\s*<script\s+src="/cookie-consent\.js"[^>]*></script>', re.IGNORECASE)
-COOKIE_SCRIPT_TAG = '\n<script src="/cookie-consent.js" defer></script>'
+import os
+import re
+
+FOOTER_HTML = """<footer>
+  <div class="ft-grid">
+    <div>
+      <div class="logo" style="gap:10px">
+        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
+        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
+      </div>
+      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
+      <div class="ft-badges">
+        <span class="ft-badge">AMFI MFD</span>
+        <span class="ft-badge">ARN 288927</span>
+        <span class="ft-badge">EUIN E543710</span>
+        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
+        <span class="ft-badge">Bangalore</span>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Finance Guides</div>
+      <div class="ft-links">
+        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
+        <a href="/blog/what-is-sip.html">SIP Guide</a>
+        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
+        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
+        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
+        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Tools & Services</div>
+      <div class="ft-links">
+        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
+        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
+        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
+        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
+        <a href="/tools/sip-calculator.html">SIP Calculator</a>
+        <a href="/tools/fd-calculator.html">FD Calculator</a>
+        <a href="/tools/rd-calculator.html">RD Calculator</a>
+        <a href="/tools/budget-calculator.html">Budget Planner</a>
+        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
+        <a href="/prompt-library.html">AI Prompt Library</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Quick Links</div>
+      <div class="ft-links">
+        <a href="/about.html">About Us</a>
+        <a href="/contact.html">Contact Us</a>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/disclaimer.html">Disclaimer</a>
+        <a href="/terms-and-conditions.html">Terms & Rules</a>
+        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
+      </div>
+      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
+        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
+        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
+    <div class="ft-legal">
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/disclaimer.html">Disclaimer</a>
+      <a href="/terms-and-conditions.html">Terms & Rules</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </div>
+</footer>"""
+
+EXCLUDED_FILES = {
+    "dfarm.html",
+}
+
+def should_skip(filepath):
+    normalized = filepath.replace("\\", "/")
+    filename = os.path.basename(normalized)
+    
+    # 1. Skip if file is explicitly excluded
+    if filename in EXCLUDED_FILES:
+        return True
+    
+    # 2. Skip anything inside dfarm subfolders
+    if "dfarm/" in normalized or "/dfarm" in normalized or "dfarm" in filename:
+        return True
+        
+    return False
+
+def update_footer_in_file(filepath):
+    if should_skip(filepath):
+        print(f"Skipping (Protected Standalone): {filepath}")
+        return
+
+    with open(filepath, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    # Replace existing footer or insert before closing body
+    if "<footer>" in content and "</footer>" in content:
+        pattern = re.compile(r"<footer>.*?</footer>", re.DOTALL)
+        new_content = pattern.sub(FOOTER_HTML, content)
+    elif "</body>" in content:
+        new_content = content.replace("</body>", f"{FOOTER_HTML}\n</body>")
+    else:
+        new_content = content + "\n" + FOOTER_HTML
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(new_content)
+    print(f"Updated: {filepath}")
 
 def main():
-    dry_run = "--dry-run" in sys.argv
-
-    if not FOOTER_PARTIAL.exists():
-        print(f"ERROR: {FOOTER_PARTIAL} not found. Create it first.")
-        sys.exit(1)
-
-    master_footer = FOOTER_PARTIAL.read_text(encoding="utf-8").strip()
-    # Safety: make sure the partial itself never carries a script tag anymore
-    master_footer = COOKIE_SCRIPT_RE.sub('', master_footer).strip()
-
-    html_files = [
-        p for p in ROOT.rglob("*.html")
-        if "partials" not in p.parts and ".git" not in p.parts
-    ]
-
-    changed, unchanged, no_footer = [], [], []
-
-    for f in html_files:
-        text = f.read_text(encoding="utf-8")
-        if not FOOTER_RE.search(text):
-            no_footer.append(f)
-            continue
-
-        # 1. Swap the footer block
-        new_text, _ = FOOTER_RE.subn(master_footer, text, count=1)
-
-        # 2. Strip every existing cookie-consent script tag (dedup)
-        new_text = COOKIE_SCRIPT_RE.sub('', new_text)
-
-        # 3. Insert exactly one, right after the (new) </footer>
-        if '</footer>' in new_text:
-            new_text = new_text.replace('</footer>', '</footer>' + COOKIE_SCRIPT_TAG, 1)
-
-        if new_text != text:
-            changed.append(f)
-            if not dry_run:
-                f.write_text(new_text, encoding="utf-8")
-        else:
-            unchanged.append(f)
-
-    print(f"Scanned {len(html_files)} HTML files")
-    print(f"  Updated : {len(changed)}")
-    print(f"  Already up to date : {len(unchanged)}")
-    print(f"  No <footer> found (skipped) : {len(no_footer)}")
-    if no_footer:
-        print("\nFiles with no <footer> tag (check these manually):")
-        for f in no_footer:
-            print(f"  - {f.relative_to(ROOT)}")
-    if dry_run:
-        print("\nDRY RUN — no files were written. Re-run without --dry-run to apply.")
+    root_dir = "."
+    for root, _, files in os.walk(root_dir):
+        for file in files:
+            if file.endswith(".html"):
+                full_path = os.path.join(root, file)
+                update_footer_in_file(full_path)
 
 if __name__ == "__main__":
     main()
