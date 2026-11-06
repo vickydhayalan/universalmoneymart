@@ -1,0 +1,66 @@
+[
+  {
+    "id": "DF-CUST-001",
+    "phone": "9876543210",
+    "name": "Senthil Kumar",
+    "address": "Gandhi Road, Near Bus Stand, Polur",
+    "category": "Daily Milk + Organic",
+    "dailyMilkPlan": {
+      "am": 1.0,
+      "pm": 0.5,
+      "ratePerLiter": 50
+    },
+    "currentMonthLiters": 42.0,
+    "currentMonthBill": 2100,
+    "balanceDue": 0,
+    "lifetimeSpend": 16400,
+    "status": "Active",
+    "history": [
+      { "date": "2026-11-01", "type": "Daily Milk", "description": "Morning 1.0L + Evening 0.5L", "amount": 75, "status": "Delivered" },
+      { "date": "2026-11-03", "type": "Farm Product", "description": "Wood-Pressed Groundnut Oil (1 Litre)", "amount": 230, "status": "Paid" },
+      { "date": "2026-11-04", "type": "Payment", "description": "GPay UPI Payment Received", "amount": -305, "status": "Settled" },
+      { "date": "2026-11-05", "type": "Daily Milk", "description": "Morning 1.0L (Evening Absent Marked)", "amount": 50, "status": "Delivered" }
+    ]
+  },
+  {
+    "id": "DF-CUST-002",
+    "phone": "9789123456",
+    "name": "Anand Babu",
+    "address": "Bazaar Street, Polur",
+    "category": "Daily Pure Cow Milk",
+    "dailyMilkPlan": {
+      "am": 2.0,
+      "pm": 0.0,
+      "ratePerLiter": 50
+    },
+    "currentMonthLiters": 58.0,
+    "currentMonthBill": 2900,
+    "balanceDue": 2900,
+    "lifetimeSpend": 22100,
+    "status": "Active",
+    "history": [
+      { "date": "2026-10-31", "type": "Monthly Bill", "description": "October Milk Subscription (58 Litres)", "amount": 2900, "status": "Pending Due" },
+      { "date": "2026-11-02", "type": "Egg Harvest", "description": "Desi Country Chicken Eggs (10 Nos)", "amount": 120, "status": "Pending Due" }
+    ]
+  },
+  {
+    "id": "DF-CUST-003",
+    "phone": "9443198765",
+    "name": "Meenakshi Ammal",
+    "address": "Pillaiyar Koil Street, Bakmarpettai, Polur",
+    "category": "Daily Milk",
+    "dailyMilkPlan": {
+      "am": 0.5,
+      "pm": 0.5,
+      "ratePerLiter": 50
+    },
+    "currentMonthLiters": 30.0,
+    "currentMonthBill": 1500,
+    "balanceDue": 1500,
+    "lifetimeSpend": 8500,
+    "status": "Active",
+    "history": [
+      { "date": "2026-11-01", "type": "Daily Milk", "description": "Morning 0.5L + Evening 0.5L", "amount": 50, "status": "Delivered" }
+    ]
+  }
+]
