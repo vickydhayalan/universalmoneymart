@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D-FARM • Universal Customer CRM & History Ledger</title>
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- jsPDF & AutoTable for Statement Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #F9FAFB;
+      overflow-x: hidden;
+    }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace; }
+    .kiosk-btn {
+      touch-action: manipulation;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .kiosk-btn:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-8">
+
+  <!-- TOP BAR -->
+  <header class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-8">
+    <div class="flex items-center gap-3">
+      <a href="/dfarm/os/index.html" class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-emerald-400"></i>
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl sm:text-2xl font-extrabold font-mono-val text-white">D-FARM CUSTOMER 360° LEDGER</h1>
+          <span class="text-[10px] bg-blue-950 text-blue-400 border border-blue-800 px-2 py-0.5 rounded font-bold">MOBILE & UNIQUE ID CRM</span>
+        </div>
+        <p class="text-xs text-slate-400">Universal customer database, mobile lookup, lifetime purchase audit & billing statements.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <button onclick="openNewCustomerModal()" class="kiosk-btn bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="user-plus" class="w-4 h-4"></i>
+        <span>Register New Customer (DF-CUST)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto space-y-8">
+
+    <!-- CENSUS STATS -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-val text-xs">
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Total Customers</span>
+        <span class="text-xl font-bold text-white mt-1 block" id="statTotalCust">0 Nos</span>
+        <span class="text-[10px] text-blue-400">Unique Mobile IDs</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Daily Route Volume</span>
+        <span class="text-xl font-bold text-emerald-400 mt-1 block" id="statDailyVolume">0 L / day</span>
+        <span class="text-[10px] text-slate-500">Pure Cow Milk</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Lifetime Farm Revenue</span>
+        <span class="text-xl font-bold text-amber-300 mt-1 block" id="statLifetimeSpend">₹0</span>
+        <span class="text-[10px] text-emerald-500">All-time customer sales</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Total Pending Dues</span>
+        <span class="text-xl font-bold text-rose-400 mt-1 block" id="statPendingDues">₹0</span>
+        <span class="text-[10px] text-rose-500">To be collected</span>
+      </div>
+    </div>
+
+    <!-- UNIVERSAL SEARCH BAR -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-3">
+      <div class="relative flex-1 w-full">
+        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+        <input 
+          type="text" 
+          id="customerSearchInput" 
+          oninput="handleSearch(this.value)" 
+          placeholder="Search by Mobile Number (e.g. 9876543210), Customer ID (DF-CUST-001), or Name..." 
+          class="w-full bg-slate-950 border border-slate-800 rounded-2xl pl-11 pr-4 py-3 text-xs sm:text-sm text-white placeholder-slate-500 font-mono-val outline-none focus:border-blue-500 transition"
+        >
+      </div>
+      <button onclick="clearSearch()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-2xl text-xs font-bold font-mono-val w-full sm:w-auto">
+        Clear Filter
+      </button>
+    </div>
+
+    <!-- CUSTOMER CARDS CONTAINER -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="users" class="w-5 h-5 text-blue-400"></i>
+          <h2 class="font-bold text-base text-white">Registered Customer Directory</h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono-val" id="searchCountBadge">Showing All</span>
+      </div>
+
+      <div id="customersListContainer" class="space-y-4">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= 360° CUSTOMER HISTORY & LEDGER MODAL ================= -->
+  <div id="historyModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-blue-500/40 rounded-3xl w-full max-w-3xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-3">
+          <span class="text-3xl">👤</span>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-bold text-lg text-white font-mono-val" id="histCustName">Customer Name</h3>
+              <span class="text-[10px] bg-blue-950 text-blue-400 border border-blue-800 px-2 py-0.5 rounded font-bold font-mono-val" id="histCustId">DF-CUST-001</span>
+            </div>
+            <span class="text-xs text-slate-400" id="histCustPhone">📞 -- | 📍 --</span>
+          </div>
+        </div>
+        <button onclick="closeHistoryModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <!-- Quick Metrics Ribbon -->
+      <div class="grid grid-cols-3 gap-3 font-mono-val text-xs text-center">
+        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+          <span class="text-[10px] text-slate-500 block">LIFETIME REVENUE</span>
+          <span class="text-base font-bold text-emerald-400" id="histLifetimeSpend">₹0</span>
+        </div>
+        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+          <span class="text-[10px] text-slate-500 block">THIS MONTH BILL</span>
+          <span class="text-base font-bold text-amber-300" id="histMonthBill">₹0</span>
+        </div>
+        <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
+          <span class="text-[10px] text-slate-500 block">CURRENT DUE BALANCE</span>
+          <span class="text-base font-bold text-rose-400" id="histDueBalance">₹0</span>
+        </div>
+      </div>
+
+      <!-- Timeline Records -->
+      <div class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs" id="historyTimelineContainer">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Footer Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-800 pt-3">
+        <button onclick="addSpotTransactionPrompt()" class="w-full sm:w-auto px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5">
+          <i data-lucide="plus" class="w-3.5 h-3.5 text-blue-400"></i>
+          <span>Add Spot Sale / Payment Entry</span>
+        </button>
+
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button onclick="generateCustomerPDFStatement()" class="flex-1 sm:flex-initial px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold border border-slate-700 flex items-center justify-center gap-1.5">
+            <i data-lucide="file-text" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>Statement PDF</span>
+          </button>
+          <button onclick="sendDirectWhatsAppStatement()" class="flex-1 sm:flex-initial px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5">
+            <i data-lucide="send" class="w-3.5 h-3.5 text-emerald-200"></i>
+            <span>Send Statement WA</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= REGISTER NEW CUSTOMER MODAL ================= -->
+  <div id="newCustomerModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-emerald-500/40 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-base text-white">புதிய வாடிக்கையாளர் பதிவு (Unique Customer Tag)</h3>
+        <button onclick="closeNewCustomerModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form onsubmit="handleNewCustomerSubmit(event)" class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">System Assigned ID</label>
+            <input type="text" id="custSubId" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Customer Full Name*</label>
+            <input type="text" id="custName" required placeholder="e.g. Ramesh Kumar" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Primary Mobile Number*</label>
+            <input type="tel" id="custPhone" required maxlength="10" placeholder="e.g. 9876543210" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Delivery Address*</label>
+            <input type="text" id="custAddress" required placeholder="Street / Area, Polur" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Morning (AM) L</label>
+            <input type="number" step="0.5" id="custAmLiters" value="1.0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Evening (PM) L</label>
+            <input type="number" step="0.5" id="custPmLiters" value="0.0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Rate (₹/L)</label>
+            <input type="number" id="custRate" value="50" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-amber-400 font-mono-val font-bold outline-none">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Issue Customer ID & Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE (SEARCH, LIFETIME TIMELINE & STATEMENTS) -->
+  <script>
+    let customers = [];
+    let filteredCustomers = [];
+    let activeCustomer = null;
+
+    // Unique Sequential Customer ID Generator
+    function getNextCustId() {
+      let maxNum = 0;
+      customers.forEach(c => {
+        const m = c.id.match(/^DF-CUST-(\d+)$/);
+        if (m) {
+          const num = parseInt(m[1], 10);
+          if (num > maxNum) maxNum = num;
+        }
+      });
+      return `DF-CUST-${String(maxNum + 1).padStart(3, '0')}`;
+    }
+
+    async function loadCustomers() {
+      try {
+        const res = await fetch('../data/customers.json');
+        customers = await res.json();
+      } catch (e) {
+        console.warn("Customers fallback mode");
+        customers = [];
+      }
+      filteredCustomers = [...customers];
+      renderCustomerDirectory();
+    }
+
+    function renderCustomerDirectory() {
+      const container = document.getElementById('customersListContainer');
+      if (!container) return;
+
+      const totalLitersDay = customers.reduce((a, c) => a + ((c.dailyMilkPlan ? c.dailyMilkPlan.am + c.dailyMilkPlan.pm : 0)), 0);
+      const totalLifetime = customers.reduce((a, c) => a + (c.lifetimeSpend || 0), 0);
+      const pendingDues = customers.reduce((a, c) => a + (c.balanceDue || 0), 0);
+
+      document.getElementById('statTotalCust').textContent = `${customers.length} Nos`;
+      document.getElementById('statDailyVolume').textContent = `${totalLitersDay.toFixed(1)} L / day`;
+      document.getElementById('statLifetimeSpend').textContent = `₹${totalLifetime.toLocaleString('en-IN')}`;
+      document.getElementById('statPendingDues').textContent = `₹${pendingDues.toLocaleString('en-IN')}`;
+
+      document.getElementById('searchCountBadge').textContent = `Showing ${filteredCustomers.length} of ${customers.length}`;
+
+      if (!filteredCustomers.length) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-500 italic text-xs">
+            No matching customers found for your search query. Try searching by last 4 digits of phone or ID.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filteredCustomers.map(c => {
+        const isPaid = c.balanceDue <= 0;
+        const totalDaily = c.dailyMilkPlan ? (c.dailyMilkPlan.am + c.dailyMilkPlan.pm) : 0;
+
+        return `
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-5 space-y-4 hover:border-slate-700 transition">
+            
+            <!-- Header Row -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+              <div class="flex items-center gap-3">
+                <span class="text-3xl">🥛</span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold font-mono-val text-white text-base">${c.id}</span>
+                    <span class="text-sm font-bold text-slate-200">${c.name}</span>
+                    <span class="text-[9px] px-2 py-0.5 rounded font-bold font-mono-val ${isPaid ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-rose-950 text-rose-400 border border-rose-800'}">
+                      ${isPaid ? 'Settled ✅' : 'Due ₹' + c.balanceDue}
+                    </span>
+                  </div>
+                  <span class="text-xs text-slate-400">📞 <strong class="text-slate-300 font-mono-val">${c.phone}</strong> • 📍 ${c.address}</span>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex items-center gap-2">
+                <button onclick="openHistoryModal('${c.id}')" class="px-3 py-1.5 bg-blue-900/60 hover:bg-blue-800 text-blue-200 border border-blue-700/50 rounded-xl text-xs font-bold flex items-center gap-1.5 active:scale-95 transition">
+                  <i data-lucide="history" class="w-3.5 h-3.5"></i>
+                  <span>Full 360° History</span>
+                </button>
+                <button onclick="sendQuickWhatsAppBill('${c.id}')" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 active:scale-95 transition">
+                  <i data-lucide="send" class="w-3.5 h-3.5 text-emerald-200"></i>
+                  <span>WA Bill</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Stats Ribbon -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono-val">
+              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-500 block">DAILY PLAN</span>
+                <span class="font-bold text-white">${totalDaily} L <span class="text-[10px] text-slate-400 font-normal">(${c.dailyMilkPlan ? c.dailyMilkPlan.am : 0}AM / ${c.dailyMilkPlan ? c.dailyMilkPlan.pm : 0}PM)</span></span>
+              </div>
+              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-500 block">CURRENT MONTH</span>
+                <span class="font-bold text-emerald-400">${c.currentMonthLiters || 0} Litres (₹${c.currentMonthBill || 0})</span>
+              </div>
+              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-500 block">LIFETIME PURCHASES</span>
+                <span class="font-bold text-amber-300">₹${(c.lifetimeSpend || 0).toLocaleString('en-IN')}</span>
+              </div>
+              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-500 block">PENDING BALANCE</span>
+                <span class="font-bold ${c.balanceDue > 0 ? 'text-rose-400' : 'text-slate-400'}">₹${c.balanceDue || 0}</span>
+              </div>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // --- SEARCH LOGIC (MOBILE NUMBER OR ID) ---
+    function handleSearch(q) {
+      const cleanQuery = q.trim().toLowerCase();
+      if (!cleanQuery) {
+        filteredCustomers = [...customers];
+      } else {
+        filteredCustomers = customers.filter(c => 
+          c.phone.includes(cleanQuery) ||
+          c.id.toLowerCase().includes(cleanQuery) ||
+          c.name.toLowerCase().includes(cleanQuery) ||
+          c.address.toLowerCase().includes(cleanQuery)
+        );
+      }
+      renderCustomerDirectory();
+    }
+
+    function clearSearch() {
+      document.getElementById('customerSearchInput').value = '';
+      filteredCustomers = [...customers];
+      renderCustomerDirectory();
+    }
+
+    // --- 360° HISTORY & TIMELINE MODAL ---
+    function openHistoryModal(id) {
+      activeCustomer = customers.find(c => c.id === id);
+      if (!activeCustomer) return;
+
+      document.getElementById('histCustName').textContent = activeCustomer.name;
+      document.getElementById('histCustId').textContent = activeCustomer.id;
+      document.getElementById('histCustPhone').textContent = `📞 ${activeCustomer.phone} | 📍 ${activeCustomer.address}`;
+
+      document.getElementById('histLifetimeSpend').textContent = `₹${(activeCustomer.lifetimeSpend || 0).toLocaleString('en-IN')}`;
+      document.getElementById('histMonthBill').textContent = `₹${(activeCustomer.currentMonthBill || 0).toLocaleString('en-IN')}`;
+      document.getElementById('histDueBalance').textContent = `₹${(activeCustomer.balanceDue || 0).toLocaleString('en-IN')}`;
+
+      renderTimeline(activeCustomer.history || []);
+      document.getElementById('historyModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeHistoryModal() {
+      document.getElementById('historyModal').classList.add('hidden');
+      activeCustomer = null;
+    }
+
+    function renderTimeline(historyList) {
+      const container = document.getElementById('historyTimelineContainer');
+      if (!historyList.length) {
+        container.innerHTML = `<div class="p-6 text-center text-slate-500 italic">No transaction history recorded yet.</div>`;
+        return;
+      }
+
+      container.innerHTML = historyList.map(h => {
+        const isPayment = h.type === 'Payment';
+        return `
+          <div class="flex items-center justify-between p-3 bg-slate-950 rounded-2xl border border-slate-800">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">${isPayment ? '💰' : h.type.includes('Milk') ? '🥛' : '📦'}</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-xs font-mono-val">${h.date}</span>
+                  <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold">${h.type}</span>
+                  <span class="text-[9px] text-slate-500">${h.status}</span>
+                </div>
+                <span class="text-[11px] text-slate-400">${h.description}</span>
+              </div>
+            </div>
+            <div class="text-right font-mono-val">
+              <span class="text-sm font-bold ${isPayment ? 'text-emerald-400' : 'text-amber-400'}">
+                ${isPayment ? '-' : '+'}₹${Math.abs(h.amount)}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function addSpotTransactionPrompt() {
+      if (!activeCustomer) return;
+      const desc = prompt("Enter item description (e.g., Pure Ghee 500ml or Spot Cash Payment):");
+      if (!desc) return;
+      const amtStr = prompt("Enter Amount in ₹ (use negative for payment e.g. -250):");
+      const amt = parseFloat(amtStr);
+      if (isNaN(amt)) return;
+
+      const newEntry = {
+        date: new Date().toISOString().slice(0, 10),
+        type: amt < 0 ? "Payment" : "Spot Product",
+        description: desc,
+        amount: amt,
+        status: amt < 0 ? "Settled" : "Delivered"
+      };
+
+      if (!activeCustomer.history) activeCustomer.history = [];
+      activeCustomer.history.unshift(newEntry);
+      
+      if (amt > 0) {
+        activeCustomer.lifetimeSpend = (activeCustomer.lifetimeSpend || 0) + amt;
+        activeCustomer.balanceDue = (activeCustomer.balanceDue || 0) + amt;
+      } else {
+        activeCustomer.balanceDue = Math.max(0, (activeCustomer.balanceDue || 0) + amt);
+      }
+
+      renderTimeline(activeCustomer.history);
+      renderCustomerDirectory();
+      alert("Entry saved to customer's permanent ledger!");
+    }
+
+    // --- PDF STATEMENT GENERATION ---
+    function generateCustomerPDFStatement() {
+      if (!activeCustomer) return;
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFontSize(16);
+      doc.text("D-FARM POLUR • CUSTOMER ACCOUNT STATEMENT", 14, 18);
+      doc.setFontSize(10);
+      doc.text(`Customer: ${activeCustomer.name} (${activeCustomer.id})`, 14, 26);
+      doc.text(`Mobile: ${activeCustomer.phone} | Address: ${activeCustomer.address}`, 14, 32);
+      doc.text(`Statement Date: ${new Date().toLocaleDateString('en-IN')}`, 14, 38);
+
+      const tableData = (activeCustomer.history || []).map(h => [
+        h.date,
+        h.type,
+        h.description,
+        h.amount < 0 ? `-Rs. ${Math.abs(h.amount)}` : `+Rs. ${h.amount}`,
+        h.status
+      ]);
+
+      doc.autoTable({
+        startY: 44,
+        head: [['Date', 'Type', 'Description', 'Amount', 'Status']],
+        body: tableData,
+        theme: 'striped',
+        headStyles: { fillColor: [16, 185, 129] }
+      });
+
+      const finalY = doc.lastAutoTable.finalY + 10;
+      doc.setFontSize(11);
+      doc.text(`Total Lifetime Spend: Rs. ${activeCustomer.lifetimeSpend || 0}`, 14, finalY);
+      doc.text(`Current Outstanding Balance: Rs. ${activeCustomer.balanceDue || 0}`, 14, finalY + 6);
+      doc.text("UPI Payment: 917200752628@okbizaxis (D-FARM)", 14, finalY + 12);
+
+      doc.save(`DFARM_Statement_${activeCustomer.id}_${activeCustomer.phone}.pdf`);
+    }
+
+    // --- WHATSAPP MESSAGING ---
+    function sendQuickWhatsAppBill(id) {
+      const c = customers.find(x => x.id === id);
+      if (!c) return;
+
+      const monthStr = new Date().toLocaleString('en-IN', { month: 'long', year: 'numeric' });
+      const text = `*🌾 D-FARM POLUR • CUSTOMER BILL*
+*Customer:* ${c.name} (${c.id})
+*Mobile:* ${c.phone}
+*Billing Month:* ${monthStr}
+━━━━━━━━━━━━━━━━━━━━━
+🥛 *MILK DELIVERIES:*
+• Daily Commitment: ${c.dailyMilkPlan ? (c.dailyMilkPlan.am + c.dailyMilkPlan.pm) : 0} L / Day
+• Total Pure Milk Delivered: ${c.currentMonthLiters || 0} Litres
+• Monthly Milk Bill: ₹${c.currentMonthBill || 0}
+
+💰 *TOTAL OUTSTANDING DUE: ₹${c.balanceDue || 0}*
+━━━━━━━━━━━━━━━━━━━━━
+📲 *PAY VIA UPI:*
+UPI ID: 917200752628@okbizaxis
+(GPay / PhonePe / Paytm)
+
+_D-FARM, Bakmarpettai, Polur. Helpline: 7200752628_`;
+
+      window.open(`https://wa.me/91${c.phone}?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function sendDirectWhatsAppStatement() {
+      if (!activeCustomer) return;
+      sendQuickWhatsAppBill(activeCustomer.id);
+    }
+
+    // --- NEW CUSTOMER REGISTRATION ---
+    function openNewCustomerModal() {
+      document.getElementById('custSubId').value = getNextCustId();
+      document.getElementById('newCustomerModal').classList.remove('hidden');
+    }
+    function closeNewCustomerModal() { 
+      document.getElementById('newCustomerModal').classList.add('hidden'); 
+    }
+
+    function handleNewCustomerSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById('custSubId').value;
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value.trim();
+      const address = document.getElementById('custAddress').value;
+      const am = parseFloat(document.getElementById('custAmLiters').value) || 0;
+      const pm = parseFloat(document.getElementById('custPmLiters').value) || 0;
+      const rate = parseFloat(document.getElementById('custRate').value) || 50;
+
+      // Duplicate phone check
+      const exists = customers.find(c => c.phone === phone);
+      if (exists) {
+        alert(`Error: Mobile number ${phone} is already registered under ID ${exists.id} (${exists.name})!`);
+        return;
+      }
+
+      const newCustomer = {
+        id: id,
+        phone: phone,
+        name: name,
+        address: address,
+        category: "Daily Pure Cow Milk",
+        dailyMilkPlan: { am: am, pm: pm, ratePerLiter: rate },
+        currentMonthLiters: 0,
+        currentMonthBill: 0,
+        balanceDue: 0,
+        lifetimeSpend: 0,
+        status: "Active",
+        history: [
+          {
+            date: new Date().toISOString().slice(0, 10),
+            type: "Registration",
+            description: `Account opened with daily plan ${am + pm}L @ ₹${rate}/L`,
+            amount: 0,
+            status: "Active"
+          }
+        ]
+      };
+
+      customers.unshift(newCustomer);
+      filteredCustomers = [...customers];
+      renderCustomerDirectory();
+      closeNewCustomerModal();
+      alert(`Success: Customer ${name} registered with unique tag ${id} and mobile ${phone}.`);
+      e.target.reset();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      loadCustomers();
+    });
+  </script>
+</body>
+</html>
