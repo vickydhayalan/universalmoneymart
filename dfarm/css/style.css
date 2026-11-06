@@ -21,11 +21,11 @@ body {
   font-family: 'Playfair Display', Georgia, serif !important;
 }
 
-.df-font-mono {
+.font-mono-val {
   font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Card Styling & Interactive Hover Glow */
+/* Organic Card Styling & Hover */
 .organic-card {
   background: #FFFFFF !important;
   border: 1px solid rgba(20, 54, 39, 0.12) !important;
@@ -38,15 +38,7 @@ body {
   border-color: #34D399 !important;
 }
 
-.glow-img {
-  transition: transform 0.3s ease, filter 0.3s ease !important;
-}
-.glow-img:hover {
-  transform: scale(1.04) !important;
-  filter: drop-shadow(0 10px 15px rgba(20, 54, 39, 0.15)) !important;
-}
-
-/* Background Low-Brightness Floating Emojis */
+/* Low-Brightness Floating Background Glyphs */
 .bg-emoji-layer {
   position: fixed !important;
   top: 0 !important;
@@ -56,34 +48,59 @@ body {
   pointer-events: none !important;
   z-index: 0 !important;
   overflow: hidden !important;
-  opacity: 0.08 !important;
+  opacity: 0.18 !important;
 }
 .floating-glyph {
   position: absolute !important;
-  font-size: 2.5rem !important;
-  animation: floatSlow 24s infinite linear !important;
+  font-size: 2.2rem !important;
+  animation: floatSlow 22s infinite linear !important;
 }
 @keyframes floatSlow {
-  0% { transform: translateY(100vh) rotate(0deg); }
+  0% { transform: translateY(105vh) rotate(0deg); }
   100% { transform: translateY(-10vh) rotate(360deg); }
 }
 
-/* Custom Scrollbars */
-.custom-scroll::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+/* Infinite 16:9 Marquee Strip */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-.custom-scroll::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 9999px;
+.carousel-track {
+  display: flex !important;
+  width: max-content !important;
+  animation: marqueeScroll 28s linear infinite !important;
 }
-.custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: #143627;
+.carousel-track:hover {
+  animation-play-state: paused !important;
 }
 
-/* Strict Layout Isolation: Prevent External Universal Money Mart Finance Footer Clashing */
+/* Floating Actions */
+.wa-float-btn {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 9999 !important;
+  box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5) !important;
+  transition: transform 0.2s ease !important;
+}
+.wa-float-btn:hover { transform: scale(1.08) !important; }
+
+.ai-float-btn {
+  position: fixed !important;
+  bottom: 86px !important;
+  right: 24px !important;
+  z-index: 9999 !important;
+  box-shadow: 0 10px 25px -5px rgba(20, 54, 39, 0.4) !important;
+  transition: transform 0.2s ease !important;
+}
+.ai-float-btn:hover { transform: scale(1.08) !important; }
+
+/* Isolate External Global Footers */
 body > footer:not(#dfarmFooter),
 body > div.finance-footer,
 body > div:has(> .universal-money-mart) {
   display: none !important;
 }
+
+.custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+.custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
