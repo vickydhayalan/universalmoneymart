@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --df-cream: #FAF6EE !important;
-  --df-forest: #143627 !important;
-  --df-deep: #0F291E !important;
-  --df-gold: #D97706 !important;
+  --df-cream: #FAF6EE;
+  --df-forest: #143627;
+  --df-deep: #0F291E;
+  --df-gold: #D97706;
 }
 
 * {
@@ -93,7 +93,7 @@ html, body {
   animation-play-state: paused !important;
 }
 
-/* Floating Buttons */
+/* Floating Action Buttons */
 .wa-float-btn {
   position: fixed !important;
   bottom: 24px !important;
@@ -120,7 +120,7 @@ html, body {
   transform: scale(1.08) !important;
 }
 
-/* Ensure D-FARM Footer Stays Visible */
+/* Official D-FARM Footer Guarantee */
 #dfarmFooter {
   display: block !important;
   visibility: visible !important;
