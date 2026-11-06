@@ -1,22 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+/* ==========================================================================
+   1. CORE VARIABLES & GLOBAL RESETS
+   ========================================================================== */
 :root {
-  --df-bg-cream: #FAF6EE !important;
+  --df-cream: #FAF6EE !important;
   --df-forest: #143627 !important;
   --df-deep: #0F291E !important;
   --df-gold: #D97706 !important;
 }
 
-body {
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   font-family: 'Plus Jakarta Sans', sans-serif !important;
-  background-color: var(--df-bg-cream) !important;
+  background-color: var(--df-cream) !important;
   color: #1F2937 !important;
   margin: 0 !important;
   padding: 0 !important;
   overflow-x: hidden !important;
   position: relative !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* ==========================================================================
+   2. TYPOGRAPHY
+   ========================================================================== */
 .font-serif-title {
   font-family: 'Playfair Display', Georgia, serif !important;
 }
@@ -25,20 +36,34 @@ body {
   font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Card Styling */
+/* ==========================================================================
+   3. CARDS & GLOW EFFECTS
+   ========================================================================== */
 .organic-card {
   background: #FFFFFF !important;
   border: 1px solid rgba(20, 54, 39, 0.12) !important;
   border-radius: 1.5rem !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
+
 .organic-card:hover {
   transform: translateY(-4px) !important;
   box-shadow: 0 16px 32px -8px rgba(20, 54, 39, 0.14) !important;
   border-color: #34D399 !important;
 }
 
-/* Floating Glyphs */
+.glow-img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.glow-img:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 10px 15px rgba(20, 54, 39, 0.15));
+}
+
+/* ==========================================================================
+   4. FLOATING BACKGROUND DAIRY GLYPHS
+   ========================================================================== */
 .bg-emoji-layer {
   position: fixed !important;
   top: 0 !important;
@@ -50,31 +75,39 @@ body {
   overflow: hidden !important;
   opacity: 0.18 !important;
 }
+
 .floating-glyph {
   position: absolute !important;
   font-size: 2.2rem !important;
-  animation: floatSlow 22s infinite linear !important;
+  animation: floatSlow 24s infinite linear !important;
 }
+
 @keyframes floatSlow {
   0% { transform: translateY(105vh) rotate(0deg); }
   100% { transform: translateY(-10vh) rotate(360deg); }
 }
 
-/* Infinite Marquee */
+/* ==========================================================================
+   5. 16:9 AUTO-SCROLLING MARQUEE GALLERY
+   ========================================================================== */
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
 .carousel-track {
   display: flex !important;
   width: max-content !important;
   animation: marqueeScroll 28s linear infinite !important;
 }
+
 .carousel-track:hover {
   animation-play-state: paused !important;
 }
 
-/* Floating Actions */
+/* ==========================================================================
+   6. FLOATING ACTION BUTTONS (AI & WHATSAPP)
+   ========================================================================== */
 .wa-float-btn {
   position: fixed !important;
   bottom: 24px !important;
@@ -83,7 +116,10 @@ body {
   box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5) !important;
   transition: transform 0.2s ease !important;
 }
-.wa-float-btn:hover { transform: scale(1.08) !important; }
+
+.wa-float-btn:hover {
+  transform: scale(1.08) !important;
+}
 
 .ai-float-btn {
   position: fixed !important;
@@ -93,20 +129,50 @@ body {
   box-shadow: 0 10px 25px -5px rgba(20, 54, 39, 0.4) !important;
   transition: transform 0.2s ease !important;
 }
-.ai-float-btn:hover { transform: scale(1.08) !important; }
 
-/* Suppress External Footers */
+.ai-float-btn:hover {
+  transform: scale(1.08) !important;
+}
+
+/* ==========================================================================
+   7. UNIVERSAL MONEY MART FOOTER SUPPRESSION & D-FARM FOOTER RETENTION
+   ========================================================================== */
+#dfarmMasterApp ~ footer,
+#dfarmMasterApp ~ div.finance-footer,
 body > footer:not(#dfarmFooter),
-body > div:has(> .universal-money-mart),
-body > div.finance-footer,
-div[class*="universal"],
-div[class*="moneymart"] {
+body > div:not(#dfarmMasterApp):has([class*="money"]),
+div[class*="universal-money-mart"],
+footer.site-footer:not(#dfarmFooter) {
   display: none !important;
   visibility: hidden !important;
   height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
 }
 
-.custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
-.custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
+#dfarmFooter {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 40 !important;
+}
+
+/* ==========================================================================
+   8. SCROLLBAR STYLING
+   ========================================================================== */
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--df-forest);
+}
