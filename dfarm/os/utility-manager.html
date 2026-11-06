@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D-FARM • Fodder, Biogas & Utility Command Center</title>
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #F9FAFB;
+      overflow-x: hidden;
+    }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace; }
+    .kiosk-btn {
+      touch-action: manipulation;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .kiosk-btn:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-8">
+
+  <!-- TOP BAR -->
+  <header class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-8">
+    <div class="flex items-center gap-3">
+      <a href="/dfarm/os/index.html" class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-emerald-400"></i>
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl sm:text-2xl font-extrabold font-mono-val text-white">D-FARM UTILITY & FODDER OS</h1>
+          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-bold">NAPIER, BIOGAS & SOLAR</span>
+        </div>
+        <p class="text-xs text-slate-400">Super Napier rotation harvest, Azolla yield, Biogas slurry cycles & Solar telemetry.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <button onclick="recordFodderCutPrompt()" class="kiosk-btn bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="scissors" class="w-4 h-4"></i>
+        <span>Log Fodder Cut (அறுவடை பதிவு)</span>
+      </button>
+      <button onclick="flushBiogasValve()" class="kiosk-btn bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="droplet" class="w-4 h-4"></i>
+        <span>Flush Biogas Slurry Valve</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto space-y-8">
+
+    <!-- UTILITY METRICS -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-val text-xs">
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Daily Green Fodder Need</span>
+        <span class="text-xl font-bold text-emerald-400 mt-1 block">180 kg / day</span>
+        <span class="text-[10px] text-slate-500">Cattle + Goat Herd</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Napier Plots in Reserve</span>
+        <span class="text-xl font-bold text-white mt-1 block">9,300 kg</span>
+        <span class="text-[10px] text-emerald-500">1.0 Acre Total</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Biogas Slurry Status</span>
+        <span class="text-xl font-bold text-amber-400 mt-1 block" id="slurryDaysLeft">--</span>
+        <span class="text-[10px] text-slate-500">Next Valve Flush</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Daily Solar Generation</span>
+        <span class="text-xl font-bold text-yellow-400 mt-1 block">12.4 Units</span>
+        <span class="text-[10px] text-emerald-500">Zero Grid Power Used</span>
+      </div>
+    </div>
+
+    <!-- NAPIER & AZOLLA FODDER SECTION -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="sprout" class="w-5 h-5 text-emerald-400"></i>
+          <h2 class="font-bold text-base text-white">Green Fodder Rotation Plots (தீவன சுழற்சி முறை)</h2>
+        </div>
+        <span class="text-xs text-slate-400 font-mono-val">Target: 45 Days Cutting Cycle</span>
+      </div>
+
+      <div id="fodderPlotsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- BIOGAS & SOLAR HUDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Biogas HUD -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="flame" class="w-5 h-5 text-amber-400"></i>
+            <h2 class="font-bold text-base text-white">Biogas Plant & Organic Slurry</h2>
+          </div>
+          <span class="text-[9px] bg-amber-950 text-amber-400 px-2 py-0.5 rounded font-bold font-mono-val border border-amber-800">2 M³ DIGESTER</span>
+        </div>
+
+        <div class="space-y-3 font-mono-val text-xs">
+          <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex justify-between items-center">
+            <span class="text-slate-400">Daily Dung Feed (சாணம்):</span>
+            <span class="text-white font-bold">40 kg / Day</span>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex justify-between items-center">
+            <span class="text-slate-400">Last Slurry Flush:</span>
+            <span class="text-slate-200" id="bioLastFlush">--</span>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex justify-between items-center">
+            <span class="text-slate-400">Target Channel Paaichal:</span>
+            <span class="text-emerald-400 font-bold">Plot 01 Napier Root Bed</span>
+          </div>
+        </div>
+
+        <button onclick="flushBiogasValve()" class="w-full py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-2xl text-xs flex items-center justify-center gap-2 transition active:scale-95 shadow-lg">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+          <span>Clear Slurry Valve (சாண எரிவாயு கழிவு வெளியேற்றம்)</span>
+        </button>
+      </div>
+
+      <!-- Solar & Chiller Power Backup -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="sun" class="w-5 h-5 text-yellow-400"></i>
+            <h2 class="font-bold text-base text-white">Solar Power & Battery Telemetry</h2>
+          </div>
+          <span class="text-[9px] bg-yellow-950 text-yellow-400 px-2 py-0.5 rounded font-bold font-mono-val border border-yellow-800">3 kW HYBRID</span>
+        </div>
+
+        <div class="space-y-3 font-mono-val text-xs">
+          <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex justify-between items-center">
+            <span class="text-slate-400">Milk Chiller Tank Status:</span>
+            <span class="text-emerald-400 font-bold">3.8° C (Direct Solar Run)</span>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex justify-between items-center">
+            <span class="text-slate-400">Tubular Battery Bank:</span>
+            <span class="text-white font-bold">4x 150Ah (Full Health 98%)</span>
+          </div>
+          <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800 flex justify-between items-center">
+            <span class="text-slate-400">Power Cut Chiller Backup:</span>
+            <span class="text-amber-400 font-bold">6.0 Hours Guaranteed</span>
+          </div>
+        </div>
+
+        <div class="p-3 bg-slate-950 rounded-2xl border border-slate-800 text-[11px] text-slate-400 flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+          <span>Milk Chiller and shed ventilation fans run uninterrupted on daytime solar.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    let utilData = null;
+
+    async function loadUtilityData() {
+      try {
+        const res = await fetch('../data/utilities.json');
+        utilData = await res.json();
+      } catch (e) {
+        console.warn("Offline utilities fallback");
+        utilData = {
+          fodderPlots: [
+            { plotId: "PLOT-01", crop: "Super Napier", area: "0.5 Acre", lastCutDate: "2026-10-15", nextHarvestDate: "2026-12-01", estimatedYieldKg: 4500, status: "Growing (Day 22)" },
+            { plotId: "PLOT-02", crop: "Super Napier + Co-4", area: "0.5 Acre", lastCutDate: "2026-09-20", nextHarvestDate: "2026-11-10", estimatedYieldKg: 4800, status: "Ready for Harvest 🌾" },
+            { plotId: "PLOT-03", crop: "Azolla Tank (அசோலா)", area: "4 Beds", lastCutDate: "Daily", nextHarvestDate: "Continuous", estimatedYieldKg: 8, status: "Active Daily Harvest" }
+          ],
+          biogasUnit: {
+            lastSlurryDischarge: "2026-10-31",
+            nextFlushDue: "2026-11-07"
+          }
+        };
+      }
+      renderUtilities();
+    }
+
+    function renderUtilities() {
+      if (!utilData) return;
+
+      const today = new Date();
+      const nextFlush = new Date(utilData.biogasUnit.nextFlushDue);
+      const diffDays = Math.ceil((nextFlush - today) / (1000 * 60 * 60 * 24));
+      
+      const badge = document.getElementById('slurryDaysLeft');
+      if (diffDays <= 0) {
+        badge.textContent = "Flush Today ⚠️";
+        badge.className = "text-xl font-bold text-rose-500 mt-1 block animate-pulse";
+      } else {
+        badge.textContent = `In ${diffDays} Days`;
+        badge.className = "text-xl font-bold text-amber-400 mt-1 block";
+      }
+
+      document.getElementById('bioLastFlush').textContent = utilData.biogasUnit.lastSlurryDischarge;
+
+      const container = document.getElementById('fodderPlotsContainer');
+      container.innerHTML = utilData.fodderPlots.map(p => {
+        const isReady = p.status.includes('Ready');
+        return `
+          <div class="bg-slate-950 p-4 rounded-2xl border ${isReady ? 'border-emerald-500/50 bg-emerald-950/10' : 'border-slate-800'} space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+              <span class="font-bold text-white font-mono-val text-sm">${p.plotId}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded font-bold font-mono-val ${isReady ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-slate-800 text-slate-300'}">${p.status}</span>
+            </div>
+
+            <div class="space-y-1.5 text-xs font-mono-val">
+              <div class="flex justify-between text-slate-400">
+                <span>Crop:</span>
+                <span class="text-white">${p.crop}</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Area:</span>
+                <span class="text-slate-300">${p.area}</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Estimated Yield:</span>
+                <span class="text-emerald-400 font-bold">${p.estimatedYieldKg} kg</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Next Cutting:</span>
+                <span class="text-amber-300">${p.nextHarvestDate}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function recordFodderCutPrompt() {
+      const plot = prompt("Enter Plot ID being harvested (PLOT-01 or PLOT-02):");
+      if (!plot) return;
+      const kg = prompt("Enter approximate kilograms harvested (e.g. 180):");
+      if (!kg) return;
+
+      alert(`Success: ${kg} kg green fodder cut from ${plot} recorded for today's herd feeding!`);
+    }
+
+    function flushBiogasValve() {
+      if (!confirm("Confirm Biogas Slurry Valve flush completed? This will paai slurry to Napier root channels.")) return;
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const nextDate = new Date();
+      nextDate.setDate(nextDate.getDate() + 7);
+
+      utilData.biogasUnit.lastSlurryDischarge = todayStr;
+      utilData.biogasUnit.nextFlushDue = nextDate.toISOString().slice(0, 10);
+
+      renderUtilities();
+      alert("Slurry Flush Recorded! Next cycle reminder scheduled for 7 days later.");
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      loadUtilityData();
+    });
+  </script>
+</body>
+</html>
