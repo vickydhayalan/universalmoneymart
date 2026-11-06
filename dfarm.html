@@ -16,7 +16,114 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="dfarm/css/style.css">
+  <style>
+    :root {
+      --df-cream: #FAF6EE;
+      --df-forest: #143627;
+      --df-deep: #0F291E;
+      --df-gold: #D97706;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      background-color: var(--df-cream) !important;
+      color: #1F2937 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow-x: hidden !important;
+      position: relative !important;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .font-serif-title { font-family: 'Playfair Display', Georgia, serif !important; }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace !important; }
+
+    /* Floating Low-Brightness Dairy Emojis */
+    .bg-emoji-layer {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      pointer-events: none !important;
+      z-index: 0 !important;
+      overflow: hidden !important;
+      opacity: 0.16 !important;
+    }
+    .floating-glyph {
+      position: absolute !important;
+      font-size: 2.2rem !important;
+      animation: floatSlow 24s infinite linear !important;
+    }
+    @keyframes floatSlow {
+      0% { transform: translateY(105vh) rotate(0deg); }
+      100% { transform: translateY(-10vh) rotate(360deg); }
+    }
+
+    /* Organic Card Styles */
+    .organic-card {
+      background: #FFFFFF !important;
+      border: 1px solid rgba(20, 54, 39, 0.12) !important;
+      border-radius: 1.5rem !important;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .organic-card:hover {
+      transform: translateY(-4px) !important;
+      box-shadow: 0 16px 32px -8px rgba(20, 54, 39, 0.14) !important;
+      border-color: #34D399 !important;
+    }
+    .glow-img:hover {
+      transform: scale(1.04);
+      filter: drop-shadow(0 10px 15px rgba(20, 54, 39, 0.15));
+    }
+
+    /* 16:9 Infinite Marquee */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .carousel-track {
+      display: flex !important;
+      width: max-content !important;
+      animation: marqueeScroll 28s linear infinite !important;
+    }
+    .carousel-track:hover {
+      animation-play-state: paused !important;
+    }
+
+    /* Floating Action Buttons */
+    .wa-float-btn {
+      position: fixed !important;
+      bottom: 24px !important;
+      right: 24px !important;
+      z-index: 9999 !important;
+      box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.5) !important;
+      transition: transform 0.2s ease !important;
+    }
+    .wa-float-btn:hover { transform: scale(1.08) !important; }
+
+    .ai-float-btn {
+      position: fixed !important;
+      bottom: 86px !important;
+      right: 24px !important;
+      z-index: 9999 !important;
+      box-shadow: 0 10px 25px -5px rgba(20, 54, 39, 0.4) !important;
+      transition: transform 0.2s ease !important;
+    }
+    .ai-float-btn:hover { transform: scale(1.08) !important; }
+
+    /* Safe Isolation: Hide ONLY outside siblings after D-FARM Container */
+    #dfarmMasterApp ~ footer,
+    #dfarmMasterApp ~ div.finance-footer,
+    body > footer:not(#dfarmFooter) {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+    }
+
+    .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
+  </style>
 </head>
 <body class="h-full flex flex-col antialiased relative selection:bg-emerald-900 selection:text-white">
 
@@ -29,7 +136,7 @@
     <span class="floating-glyph" style="left: 90%; animation-delay: 14s;">🌾</span>
   </div>
 
-  <div class="relative z-10 flex flex-col justify-between min-h-screen">
+  <div id="dfarmMasterApp" class="relative z-10 flex flex-col justify-between min-h-screen">
 
     <!-- ==================== TOP ANNOUNCEMENT ==================== -->
     <div class="bg-[#143627] text-amber-200 py-2.5 px-4 text-xs font-semibold shadow-sm sticky top-0 z-50">
@@ -51,7 +158,7 @@
       <div class="max-w-6xl mx-auto flex items-center justify-between">
         
         <!-- Left Side: Hamburger Menu + Admin Passcode Button -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2.5">
           <button onclick="toggleLeftDrawer(true)" class="p-2 text-[#143627] bg-white border border-[#143627]/20 rounded-xl hover:bg-slate-100 transition shadow-sm" aria-label="Menu">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
@@ -75,7 +182,7 @@
 
         <!-- Right Side: Cart + Language Toggle + Brand Logo -->
         <div class="flex items-center gap-2.5">
-          <!-- Interactive Cart Trigger Button -->
+          <!-- Cart Drawer Button -->
           <button onclick="toggleCartDrawer(true)" class="bg-[#143627] hover:bg-[#0D241A] text-white px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition">
             <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-300"></i>
             <span id="cartCountBadge" class="text-xs font-bold font-mono-val">0</span>
@@ -93,7 +200,7 @@
               <span class="font-serif-title font-bold text-lg text-[#143627] block leading-tight">D-FARM</span>
               <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-100 text-[#143627] font-black uppercase tracking-widest font-mono-val">POLUR</span>
             </div>
-            <img src="https://iili.io/nPh3Ia9.png" class="w-10 h-10 rounded-full object-cover border-2 border-[#143627]/20 shadow-sm" alt="D-FARM">
+            <img src="https://iili.io/nPh3Ia9.png" onerror="this.src='https://placehold.co/80x80/143627/FFFFFF?text=D-FARM';" class="w-10 h-10 rounded-full object-cover border-2 border-[#143627]/20 shadow-sm" alt="D-FARM">
           </a>
         </div>
 
@@ -106,7 +213,7 @@
       <div class="space-y-6">
         <div class="flex items-center justify-between border-b border-slate-200 pb-3">
           <div class="flex items-center gap-2">
-            <img src="https://iili.io/nPh3Ia9.png" class="w-9 h-9 rounded-full border border-emerald-900" alt="D-FARM">
+            <img src="https://iili.io/nPh3Ia9.png" onerror="this.src='https://placehold.co/80x80/143627/FFFFFF?text=D';" class="w-9 h-9 rounded-full border border-emerald-900" alt="D-FARM">
             <div>
               <span class="font-serif-title font-bold text-base text-[#143627] block">D-FARM POLUR</span>
               <span class="text-[10px] text-slate-400 font-mono-val">Navigation Portal</span>
@@ -218,7 +325,7 @@
             <img src="https://iili.io/nPPShba.jpg" onerror="this.onerror=null; this.src='https://placehold.co/640x360/0B2017/D4A373?text=Marachekku+Oils';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Wood-Pressed Oils">
             <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Marachekku Oil Extraction</div>
           </div>
-          <!-- Loop Clones -->
+          <!-- Loop Duplicates -->
           <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
             <img src="https://iili.io/nPhGB5P.jpg" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/FFFFFF?text=Cold-Sealed+Raw+Milk';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
             <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Cold-Sealed Raw Milk</div>
@@ -416,7 +523,7 @@
         </div>
       </section>
 
-      <!-- ==================== 4 YOUTUBE VIDEOS BALANCED GRID ==================== -->
+      <!-- ==================== 4 BALANCED YOUTUBE VIDEOS ==================== -->
       <section id="videos" class="max-w-6xl mx-auto px-4 space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
           <div>
@@ -620,76 +727,74 @@
         </div>
       </section>
 
-      <!-- ==================== EXACT LUXURY OLD FOOTER (RESTORED) ==================== -->
-      <footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-<script src="/cookie-consent.js" defer></script>
+      <!-- ==================== EXACT LUXURY OLD FOOTER ==================== -->
+      <footer id="dfarmFooter" class="bg-[#0F291E] text-white rounded-t-3xl sm:rounded-t-[2.5rem] mt-24 pt-16 pb-16 px-6 sm:px-12 border-t-4 border-[#D97706]/40 shadow-2xl relative overflow-hidden block">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-emerald-900/70 pb-12 text-xs sm:text-sm relative z-10 font-mono-val">
+          
+          <div class="space-y-4 md:col-span-1">
+            <div class="flex items-center gap-3">
+              <img src="https://iili.io/nPh3Ia9.png" onerror="this.src='https://placehold.co/80x80/143627/FFFFFF?text=D';" class="w-12 h-12 rounded-full border-2 border-amber-400 shadow-md" alt="D-FARM">
+              <div>
+                <h3 class="font-serif-title text-xl font-bold text-white tracking-wide">D-FARM</h3>
+                <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-900 text-amber-300 font-bold uppercase tracking-widest border border-emerald-700">POLUR • EST. 2027</span>
+              </div>
+            </div>
+            <p class="text-emerald-200/80 leading-relaxed text-xs font-sans">
+              தூய பசும்பால், மரச்செக்கு எண்ணெய்கள், நவதானியங்கள் மற்றும் இயற்கை எரு உரம் — நேரடியாக உங்கள் இல்லத்திற்கு அல்லது பண்ணையிலேயே பெற்றுக் கொள்ளலாம்.
+            </p>
+            <div class="text-xs text-amber-300 font-semibold font-sans">
+              Proprietor: <b class="text-white">D. Malar (Polur)</b>
+            </div>
+            <a href="https://iili.io/nPtxqFI.png" target="_blank" class="inline-flex items-center gap-2 bg-emerald-900/60 border border-emerald-700 px-3 py-1.5 rounded-xl text-[11px] text-amber-300 hover:bg-emerald-800 transition">
+              <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> View Farm QR
+            </a>
+          </div>
+
+          <div class="space-y-3 font-sans">
+            <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Quick Links</h4>
+            <ul class="space-y-2 text-xs text-emerald-200/80 font-medium">
+              <li><a href="#products" class="hover:text-white transition">Fresh Products Catalog</a></li>
+              <li><a href="#livestock" class="hover:text-white transition">Farm Livestock Sales</a></li>
+              <li><a href="#fodder" class="hover:text-white transition">Fodder Pastures (தீவனங்கள்)</a></li>
+              <li><a href="#about-farm" class="hover:text-white transition">Smart Farm Operations</a></li>
+              <li><a href="#story" class="hover:text-white transition">Founders & Vision</a></li>
+              <li><a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="hover:text-white transition">Google Maps Route</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-3 font-sans">
+            <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Direct Contacts</h4>
+            <div class="space-y-2 text-xs text-emerald-200/80">
+              <p><span class="text-slate-400 block text-[10px]">Field & Livestock Operations:</span> 📞 <b>8870804123</b> (Dhayalan Kuppusamy)</p>
+              <p><span class="text-slate-400 block text-[10px]">Orders & Financial Strategy:</span> 📱 <b>7200752628</b> (Vignesh Dhayalan)</p>
+              <p><span class="text-slate-400 block text-[10px]">Official Email:</span> ✉️ <b>dfarmpolur@gmail.com</b></p>
+              <p><span class="text-slate-400 block text-[10px]">Farm Location:</span> 📍 Bakmar Pettai, Murugapadi, Polur, Tamil Nadu</p>
+            </div>
+          </div>
+
+          <div class="space-y-3 font-sans">
+            <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Farm Gate & UPI</h4>
+            <div class="space-y-2 text-xs text-emerald-200/80">
+              <p class="text-white font-bold">Visiting Hours:</p>
+              <p class="text-amber-200 text-xs font-mono-val">07:00 AM – 06:00 PM (Daily)</p>
+              <p class="pt-2 text-white font-bold">Instant UPI Payments:</p>
+              <p class="bg-black/30 p-2 rounded-xl border border-emerald-800 text-[11px] text-amber-300 font-mono-val">7200752628@upi</p>
+              <p class="text-[10px] text-slate-400">GPay • PhonePe • Paytm Accepted</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="max-w-6xl mx-auto pt-6 border-b border-emerald-950 pb-6 text-[10px] text-slate-400 leading-relaxed space-y-1 font-mono-val">
+          <p><b>DISCLAIMER:</b> D-FARM POLUR produces natural, raw, unprocessed farm-direct cow milk and cold-pressed agro commodities. Raw milk should be gently boiled prior to consumption according to traditional household practices. Livestock sales are finalized solely based on live physical on-farm inspection and weight verification.</p>
+          <p><b>FINANCIAL SERVICES:</b> Vignesh Dhayalan is an AMFI-Registered Mutual Fund Distributor (ARN-288927, EUIN E543710). Mutual Fund investments are subject to market risks; read all scheme-related documents carefully before investing.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-400/90 gap-3 relative z-10 font-mono-val">
+          <span>© 2026 D-FARM Polur. All rights reserved. Sole Proprietor: D. Malar.</span>
+          <span class="text-emerald-500 text-[11px]">Crafted with Modern AgroTech, IoT & Financial Analytics</span>
+        </div>
+      </footer>
     </main>
 
     <!-- ==================== POPUP: FULL 11+ FARM PRODUCTS CATALOG ==================== -->
@@ -1066,27 +1171,15 @@
       } else if (q.includes('எங்கே') || q.includes('place') || q.includes('location') || q.includes('route') || q.includes('map')) {
         return "D-FARM போளூர் தாலுக்கா பக்மார்பேட்டை (முருகப்பாடி சாலை) பகுதியில் அமைந்துள்ளது. Google Maps-ல் 'D-FARM Polur' என தேடலாம்.";
       } else if (q.includes('order') || q.includes('வாங்குவது') || q.includes('buy')) {
-        return "பொருட்களை Add to Cart செய்து WhatsApp வழியே நேரடியாக ஆர்டர் செய்யலாம். UPI ID: 7200752628@upi";
+        return "பொருட்களை Add to Cart செய்து Cart Drawer வழியே மொத்தமாக WhatsApp-ல் ஆர்டர் செய்யலாம். UPI ID: 7200752628@upi";
       } else {
         return "உங்கள் கேள்விக்கு நன்றி! மேலும் விவரங்களுக்கு எங்கள் உதவி எண் 7200752628 அல்லது WhatsApp-ல் தொடர்பு கொள்ளவும்.";
       }
     }
 
-    // Clean any unwanted injected elements from external layout frameworks
-    function purgeInjectedFooters() {
-      const allDivs = document.querySelectorAll('div, footer');
-      allDivs.forEach(el => {
-        if (el.id !== 'dfarmFooter' && (el.innerText.includes('Universal Money Mart') || el.innerText.includes('Vignesh Dhayalan & Ramya'))) {
-          el.remove();
-        }
-      });
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       calculateSubscriptionTotal();
-      purgeInjectedFooters();
-      setInterval(purgeInjectedFooters, 1000);
     });
   </script>
 </body>
