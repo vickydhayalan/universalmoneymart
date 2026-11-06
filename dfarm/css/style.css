@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+/* ==========================================================================
+   1. CORE VARIABLES & RESETS
+   ========================================================================== */
 :root {
   --df-cream: #FAF6EE;
   --df-forest: #143627;
@@ -22,6 +25,9 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* ==========================================================================
+   2. TYPOGRAPHY
+   ========================================================================== */
 .font-serif-title {
   font-family: 'Playfair Display', Georgia, serif !important;
 }
@@ -30,7 +36,9 @@ html, body {
   font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Organic Card Styles */
+/* ==========================================================================
+   3. CARDS & HOVER EFFECTS
+   ========================================================================== */
 .organic-card {
   background: #FFFFFF !important;
   border: 1px solid rgba(20, 54, 39, 0.12) !important;
@@ -53,7 +61,9 @@ html, body {
   filter: drop-shadow(0 10px 15px rgba(20, 54, 39, 0.15));
 }
 
-/* Floating Background Emojis */
+/* ==========================================================================
+   4. FLOATING BACKGROUND GLYPHS
+   ========================================================================== */
 .bg-emoji-layer {
   position: fixed !important;
   top: 0 !important;
@@ -77,7 +87,9 @@ html, body {
   100% { transform: translateY(-10vh) rotate(360deg); }
 }
 
-/* 16:9 Infinite Marquee */
+/* ==========================================================================
+   5. 16:9 AUTO MARQUEE
+   ========================================================================== */
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -93,7 +105,9 @@ html, body {
   animation-play-state: paused !important;
 }
 
-/* Floating Action Buttons */
+/* ==========================================================================
+   6. FLOATING ACTION BUTTONS
+   ========================================================================== */
 .wa-float-btn {
   position: fixed !important;
   bottom: 24px !important;
@@ -120,7 +134,9 @@ html, body {
   transform: scale(1.08) !important;
 }
 
-/* Official D-FARM Footer Guarantee */
+/* ==========================================================================
+   7. D-FARM LUXURY FOOTER
+   ========================================================================== */
 #dfarmFooter {
   display: block !important;
   visibility: visible !important;
@@ -129,6 +145,9 @@ html, body {
   z-index: 30 !important;
 }
 
+/* ==========================================================================
+   8. CUSTOM SCROLLBARS
+   ========================================================================== */
 .custom-scroll::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -137,4 +156,8 @@ html, body {
 .custom-scroll::-webkit-scrollbar-thumb {
   background: #CBD5E1;
   border-radius: 999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--df-forest);
 }
