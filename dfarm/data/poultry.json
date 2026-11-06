@@ -1,0 +1,34 @@
+[
+  {
+    "batchId": "DF-P-001",
+    "breed": "அசல் நாட்டுக் கோழி (Aseel Cross)",
+    "startDate": "2026-02-15",
+    "initialCount": 35,
+    "currentLiveBirds": 32,
+    "mortality": 3,
+    "layingHens": 22,
+    "roosters": 10,
+    "feedType": "Farm Grains + Azolla Free Range",
+    "avgDailyEggs": 16,
+    "totalEggsCollected": 1840,
+    "eggRevenue": 22080,
+    "feedExpense": 8200,
+    "status": "Active Laying"
+  },
+  {
+    "batchId": "DF-P-002",
+    "breed": "கருங்கோழி (Kadaknath Pure)",
+    "startDate": "2026-05-10",
+    "initialCount": 20,
+    "currentLiveBirds": 19,
+    "mortality": 1,
+    "layingHens": 14,
+    "roosters": 5,
+    "feedType": "Broken Corn & Pasture Grazing",
+    "avgDailyEggs": 8,
+    "totalEggsCollected": 720,
+    "eggRevenue": 14400,
+    "feedExpense": 5100,
+    "status": "Active Laying"
+  }
+]
