@@ -1,0 +1,48 @@
+{
+  "fodderPlots": [
+    {
+      "plotId": "PLOT-01",
+      "crop": "Super Napier (பச்சை தீவனம்)",
+      "area": "0.5 Acre",
+      "lastCutDate": "2026-10-15",
+      "nextHarvestDate": "2026-12-01",
+      "estimatedYieldKg": 4500,
+      "status": "Growing (Day 22)",
+      "wateredDate": "2026-11-04"
+    },
+    {
+      "plotId": "PLOT-02",
+      "crop": "Super Napier + Co-4",
+      "area": "0.5 Acre",
+      "lastCutDate": "2026-09-20",
+      "nextHarvestDate": "2026-11-10",
+      "estimatedYieldKg": 4800,
+      "status": "Ready for Harvest 🌾",
+      "wateredDate": "2026-11-02"
+    },
+    {
+      "plotId": "PLOT-03",
+      "crop": "Azolla Tank Unit (அசோலா)",
+      "area": "4 Beds (10x6 ft)",
+      "lastCutDate": "Daily",
+      "nextHarvestDate": "Continuous",
+      "estimatedYieldKg": 8,
+      "status": "Active Daily Harvest",
+      "wateredDate": "Daily"
+    }
+  ],
+  "biogasUnit": {
+    "capacity": "2 Cubic Meter (Fixed Dome)",
+    "dailyDungInputKg": 40,
+    "lastSlurryDischarge": "2026-10-31",
+    "nextFlushDue": "2026-11-07",
+    "slurryDestination": "Plot 01 & 02 Napier Channels",
+    "valveStatus": "Optimal Pressure"
+  },
+  "solarPower": {
+    "systemSize": "3 kW On-Grid / Hybrid",
+    "batteryBank": "4x 150Ah Tubular",
+    "chillerLoadBackup": "6 Hours",
+    "dailySolarGenerationUnits": 12.4
+  }
+}
