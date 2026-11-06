@@ -135,18 +135,40 @@ html, body {
 }
 
 /* ==========================================================================
-   7. D-FARM LUXURY FOOTER
+   7. TARGETED KILL FOR INJECTED MONEY MART FOOTER CLASSES
+   ========================================================================== */
+footer:has(.ft-grid),
+footer:has(.ft-bottom),
+.ft-grid,
+.ft-bottom,
+.ft-desc,
+.ft-badges,
+.ft-legal,
+.ft-copy {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0px !important;
+  min-height: 0px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+/* ==========================================================================
+   8. OFFICIAL D-FARM LUXURY FOOTER
    ========================================================================== */
 #dfarmFooter {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
   position: relative !important;
-  z-index: 30 !important;
+  z-index: 40 !important;
 }
 
 /* ==========================================================================
-   8. CUSTOM SCROLLBARS
+   9. SCROLLBARS
    ========================================================================== */
 .custom-scroll::-webkit-scrollbar {
   width: 5px;
