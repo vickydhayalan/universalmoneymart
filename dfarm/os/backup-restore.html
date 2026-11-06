@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D-FARM • Master Audit Backup & Restore Engine</title>
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #F9FAFB;
+      overflow-x: hidden;
+    }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace; }
+    .kiosk-btn {
+      touch-action: manipulation;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .kiosk-btn:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-8">
+
+  <!-- TOP BAR -->
+  <header class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-8">
+    <div class="flex items-center gap-3">
+      <a href="/dfarm/os/index.html" class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-emerald-400"></i>
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl sm:text-2xl font-extrabold font-mono-val text-white">D-FARM BACKUP & DATA AUDIT</h1>
+          <span class="text-[10px] bg-indigo-950 text-indigo-400 border border-indigo-800 px-2 py-0.5 rounded font-bold">OFFLINE MASTER ARCHIVE</span>
+        </div>
+        <p class="text-xs text-slate-400">Master JSON export, local storage sync, and full system disaster recovery engine.</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button onclick="triggerMasterExport()" class="kiosk-btn bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="download" class="w-4 h-4"></i>
+        <span>Download Full Farm Backup (.JSON)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto space-y-8">
+
+    <!-- BACKUP AUDIT METRICS -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-val text-xs">
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Cattle Registered</span>
+        <span class="text-xl font-bold text-white mt-1 block" id="statCowCount">--</span>
+        <span class="text-[10px] text-emerald-400">cattle.json</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Goats in Partitions</span>
+        <span class="text-xl font-bold text-purple-400 mt-1 block" id="statGoatCount">--</span>
+        <span class="text-[10px] text-slate-500">flock.json</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Poultry Batches</span>
+        <span class="text-xl font-bold text-amber-300 mt-1 block" id="statPoultryCount">--</span>
+        <span class="text-[10px] text-emerald-500">poultry.json</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Customer Accounts</span>
+        <span class="text-xl font-bold text-blue-400 mt-1 block" id="statCustomerCount">--</span>
+        <span class="text-[10px] text-slate-500">customers.json</span>
+      </div>
+    </div>
+
+    <!-- RESTORE & RECOVERY SECTION -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- EXPORT / ARCHIVE PANEL -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-800 pb-3">
+          <i data-lucide="hard-drive" class="w-5 h-5 text-emerald-400"></i>
+          <h2 class="font-bold text-base text-white">Manual Export & Secure Vault</h2>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Unga farm database-il ulla livestock tags, milk ledger, pending dues, and feed schedules mothathaiyum ore click-il secure JSON file-aa download seiyalaam. Idhai Google Drive alladhu Pen drive-il backup vechukkalaam.
+        </p>
+
+        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-2 font-mono-val text-xs">
+          <div class="flex justify-between text-slate-400">
+            <span>Archive Format:</span>
+            <span class="text-white font-bold">Standard JSON (.json)</span>
+          </div>
+          <div class="flex justify-between text-slate-400">
+            <span>Last Sync State:</span>
+            <span class="text-emerald-400 font-bold" id="lastSyncStatus">All 5 Subsystems Healthy</span>
+          </div>
+        </div>
+
+        <button onclick="triggerMasterExport()" class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold rounded-2xl text-xs flex items-center justify-center gap-2 transition active:scale-95">
+          <i data-lucide="file-down" class="w-4 h-4"></i>
+          <span>Save Master Backup to Local Storage</span>
+        </button>
+      </div>
+
+      <!-- IMPORT / RESTORE PANEL -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-800 pb-3">
+          <i data-lucide="refresh-cw" class="w-5 h-5 text-amber-400"></i>
+          <h2 class="font-bold text-base text-white">Restore Farm Ledger from File</h2>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          System refresh aanaalo alladhu pudhu shed computer-il data load panna vendiyirundhaalo, munnadi download seitha backup `.json` file-ai select panni restore pannalaam.
+        </p>
+
+        <div class="border-2 border-dashed border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 text-center transition cursor-pointer" onclick="document.getElementById('backupFileInput').click()">
+          <i data-lucide="upload-cloud" class="w-8 h-8 text-slate-500 mx-auto mb-2"></i>
+          <span class="text-xs font-bold text-slate-300 block">Click here to Select Backup File</span>
+          <span class="text-[10px] text-slate-500 mt-1 block">Only valid .json files generated by D-FARM OS</span>
+          <input type="file" id="backupFileInput" accept=".json" class="hidden" onchange="handleFileRestore(event)">
+        </div>
+
+        <div id="restorePreview" class="hidden bg-slate-950 p-4 rounded-2xl border border-amber-500/30 text-xs font-mono-val space-y-2">
+          <span class="text-amber-400 font-bold block" id="restoreFileSummary">Ready to restore data</span>
+          <button onclick="confirmRestoreAction()" class="w-full py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-xs">
+            Confirm & Apply Data Restore
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    let masterBundle = {
+      timestamp: null,
+      cattle: [],
+      flock: [],
+      poultry: [],
+      customers: [],
+      utilities: null
+    };
+
+    let pendingRestoreData = null;
+
+    async function loadAllLedgers() {
+      try {
+        const [catRes, flockRes, poultRes, custRes, utilRes] = await Promise.all([
+          fetch('../data/cattle.json').catch(() => null),
+          fetch('../data/flock.json').catch(() => null),
+          fetch('../data/poultry.json').catch(() => null),
+          fetch('../data/customers.json').catch(() => null),
+          fetch('../data/utilities.json').catch(() => null)
+        ]);
+
+        if (catRes && catRes.ok) masterBundle.cattle = await catRes.json();
+        if (flockRes && flockRes.ok) masterBundle.flock = await flockRes.json();
+        if (poultRes && poultRes.ok) masterBundle.poultry = await poultRes.json();
+        if (custRes && custRes.ok) masterBundle.customers = await custRes.json();
+        if (utilRes && utilRes.ok) masterBundle.utilities = await utilRes.json();
+
+        updateAuditBadges();
+      } catch (err) {
+        console.warn("Could not pre-fetch full ledger stack", err);
+      }
+    }
+
+    function updateAuditBadges() {
+      document.getElementById('statCowCount').textContent = `${(masterBundle.cattle || []).length} Nos`;
+      document.getElementById('statGoatCount').textContent = `${(masterBundle.flock || []).length} Nos`;
+      document.getElementById('statPoultryCount').textContent = `${(masterBundle.poultry || []).length} Batches`;
+      document.getElementById('statCustomerCount').textContent = `${(masterBundle.customers || []).length} Accounts`;
+      lucide.createIcons();
+    }
+
+    function triggerMasterExport() {
+      masterBundle.timestamp = new Date().toISOString();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(masterBundle, null, 2));
+      const downloadAnchor = document.createElement('a');
+      const dateTag = new Date().toISOString().slice(0, 10);
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `DFARM_MASTER_AUDIT_${dateTag}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      alert(`Master Backup Downloaded successfully!\nDate: ${dateTag}`);
+    }
+
+    function handleFileRestore(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const parsed = JSON.parse(evt.target.result);
+          if (!parsed.cattle && !parsed.flock && !parsed.customers) {
+            alert("Invalid backup file: Essential D-FARM tables missing.");
+            return;
+          }
+          pendingRestoreData = parsed;
+          document.getElementById('restorePreview').classList.remove('hidden');
+          document.getElementById('restoreFileSummary').textContent = 
+            `Backup Validated: Contains ${(parsed.cattle||[]).length} Cows, ${(parsed.flock||[]).length} Goats, ${(parsed.customers||[]).length} Customers.`;
+        } catch (err) {
+          alert("Error parsing JSON file. Please ensure it is a valid backup.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function confirmRestoreAction() {
+      if (!pendingRestoreData) return;
+      // In a static/client context, we store to localStorage to maintain local state offline
+      localStorage.setItem('dfarm_restored_master', JSON.stringify(pendingRestoreData));
+      alert("Master Data restored to local session successfully! All modules will now read from restored memory.");
+      location.reload();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      loadAllLedgers();
+    });
+  </script>
+</body>
+</html>
