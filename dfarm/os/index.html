@@ -3,977 +3,460 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>D-FARM Shed OS • Enterprise Livestock Command Center</title>
-  
+  <title>D-FARM POLUR • Autonomous Smart Agro OS</title>
+
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- jsPDF & AutoTable for Audit Reports -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
-
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;0,800;1,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #030712;
-      color: #F9FAFB;
-      user-select: none;
-      -webkit-user-select: none;
-      overflow: hidden;
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+      overflow-x: hidden;
     }
     .font-mono-val { font-family: 'JetBrains Mono', monospace; }
-    .kiosk-btn {
-      touch-action: manipulation;
-      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
-    .kiosk-btn:active { transform: scale(0.96); }
+    .glass-card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-2px);
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 12px 30px -5px rgba(16, 185, 129, 0.15);
+    }
+
+    .pulse-dot {
+      box-shadow: 0 0 12px #10b981;
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.15); }
+    }
+
+    .custom-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #0b1329; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 999px; }
   </style>
 </head>
-<body class="h-screen w-screen relative">
+<body class="min-h-screen bg-slate-950 text-slate-100 p-3 sm:p-6 lg:p-8 flex flex-col justify-between">
 
-  <!-- ================= 1. DEFAULT CCTV STANDBY LAYER ================= -->
-  <div id="cctvLayer" class="absolute inset-0 z-10 bg-black cursor-pointer" onclick="wakeKioskDashboard()">
-    <div class="relative w-full h-full flex items-center justify-center overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1920&q=80" alt="CCTV Stream Live" class="w-full h-full object-cover opacity-80 filter brightness-90">
-      
-      <div class="absolute top-4 left-6 flex items-center gap-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-xs font-mono-val">
-        <span class="w-3 h-3 rounded-full bg-rose-600 animate-ping"></span>
-        <span class="font-bold text-rose-400">LIVE • CAM 01 (SHED BARN)</span>
-        <span class="text-slate-400" id="cctvClock">--:--:--</span>
+  <div class="max-w-7xl mx-auto w-full space-y-6">
+
+    <!-- TOP HEADER -->
+    <header class="glass-panel rounded-3xl p-4 sm:p-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border-slate-800/80">
+      <div class="flex items-center gap-4">
+        <div class="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-800 p-0.5 flex items-center justify-center shadow-lg shadow-emerald-950">
+          <div class="w-full h-full bg-slate-950 rounded-2xl flex items-center justify-center">
+            <span class="text-2xl font-black font-mono-val text-emerald-400">D</span>
+          </div>
+          <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-slate-950 pulse-dot"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl sm:text-2xl font-black tracking-wider text-white">D-FARM POLUR</h1>
+            <span class="text-[10px] font-mono-val font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full">SHED OS PRO</span>
+          </div>
+          <p class="text-xs text-slate-400 font-mono-val flex items-center gap-2 mt-0.5">
+            <span>📍 Bakmarpettai, Polur</span>
+            <span>•</span>
+            <span class="text-teal-400 font-bold">Solar Powered Smart Shed</span>
+          </p>
+        </div>
       </div>
 
-      <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md px-6 py-2.5 rounded-full border border-white/20 text-xs font-bold text-amber-300 animate-pulse flex items-center gap-2">
-        <i data-lucide="hand" class="w-4 h-4"></i>
-        <span>Touch anywhere to open D-FARM OS Dashboard</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= 2. ACTIVE FARM OS CONTROL DASHBOARD ================= -->
-  <div id="dashboardLayer" class="absolute inset-0 z-20 bg-slate-950 flex flex-col hidden">
-    
-    <!-- Top System Header Bar -->
-    <header class="bg-slate-900 border-b border-slate-800 px-6 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-        <span class="font-bold text-base font-mono-val tracking-wide text-emerald-400">D-FARM SHED OS v4.2</span>
-        <span class="text-[11px] bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-md font-mono-val">POLUR</span>
-      </div>
-
-      <div class="flex items-center gap-6">
-        <div class="text-right">
-          <span class="text-xs font-mono-val text-amber-300 font-bold block" id="osClock">--:--:--</span>
-          <span class="text-[9px] text-slate-400 font-bold" id="sessionTag">SCHEDULE ACTIVE</span>
+      <!-- Quick Status Badges -->
+      <div class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto font-mono-val text-xs">
+        <div class="bg-slate-900/90 border border-slate-800 px-3 py-2 rounded-2xl flex items-center gap-2">
+          <i data-lucide="sun" class="w-4 h-4 text-amber-400"></i>
+          <div>
+            <span class="text-slate-500 text-[9px] block uppercase">Chiller Tank</span>
+            <span class="text-emerald-400 font-bold">3.8°C (Solar)</span>
+          </div>
         </div>
 
-        <div class="flex items-center gap-1.5 bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-mono-val">
-          <i data-lucide="shield" class="w-3.5 h-3.5 text-slate-400"></i>
-          <span class="text-slate-400">Lock:</span>
-          <span class="text-amber-400 font-bold" id="idleSeconds">45s</span>
+        <div class="bg-slate-900/90 border border-slate-800 px-3 py-2 rounded-2xl flex items-center gap-2">
+          <i data-lucide="flame" class="w-4 h-4 text-rose-400"></i>
+          <div>
+            <span class="text-slate-500 text-[9px] block uppercase">Biogas Slurry</span>
+            <span class="text-amber-300 font-bold" id="topBiogasStatus">7 Days Cycle</span>
+          </div>
         </div>
 
-        <button onclick="lockToCctv()" class="kiosk-btn bg-slate-800 hover:bg-slate-700 text-slate-300 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-700 flex items-center gap-1.5">
-          <i data-lucide="camera" class="w-4 h-4 text-emerald-400"></i>
-          <span>CCTV</span>
-        </button>
+        <a href="./backup-restore.html" class="p-2.5 bg-indigo-950/60 hover:bg-indigo-900 border border-indigo-700/50 rounded-2xl text-indigo-300 transition" title="Backup Engine">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </a>
       </div>
     </header>
 
-    <!-- Main Grid -->
-    <div class="flex-1 p-6 grid grid-cols-12 gap-6 overflow-hidden">
-      
-      <!-- LEFT WORKSPACE (8 COLUMNS) -->
-      <div class="col-span-8 flex flex-col space-y-4 overflow-hidden">
-        
-        <!-- Big Action Buttons -->
-        <div class="grid grid-cols-4 gap-3">
-          <button onclick="startFoodTimeWizard()" class="kiosk-btn bg-gradient-to-br from-emerald-600 to-teal-800 p-4 rounded-2xl flex flex-col justify-between shadow border border-emerald-500/30">
-            <i data-lucide="utensils" class="w-6 h-6 text-amber-300 mb-1"></i>
-            <div>
-              <span class="text-[10px] uppercase text-emerald-200 font-bold block">Automation</span>
-              <span class="text-sm font-bold text-white block">Food Wizard</span>
-            </div>
-          </button>
+    <!-- HORIZONTAL QUICK APP BAR -->
+    <nav class="overflow-x-auto custom-scroll pb-1">
+      <div class="flex items-center gap-2 min-w-max">
+        <a href="./cattle-ledger.html" class="glass-panel glass-card-hover px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-bold border-rose-500/30 text-rose-300">
+          <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+          <span>Cattle Ledger</span>
+          <span class="text-[9px] font-mono-val bg-rose-950 text-rose-400 px-1.5 py-0.5 rounded border border-rose-800">Red Tag</span>
+        </a>
 
-          <button onclick="openMilkLogModal()" class="kiosk-btn bg-gradient-to-br from-indigo-700 to-indigo-900 p-4 rounded-2xl flex flex-col justify-between shadow border border-indigo-500/30">
-            <i data-lucide="milestone" class="w-6 h-6 text-indigo-300 mb-1"></i>
-            <div>
-              <span class="text-[10px] uppercase text-indigo-200 font-bold block">Cattle Log</span>
-              <span class="text-sm font-bold text-white block">Milk Collection</span>
-            </div>
-          </button>
+        <a href="./flock-sections.html" class="glass-panel glass-card-hover px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-bold border-blue-500/30 text-blue-300">
+          <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+          <span>Flock 4-Bay OS</span>
+          <span class="text-[9px] font-mono-val bg-blue-950 text-blue-400 px-1.5 py-0.5 rounded border border-blue-800">Blue Tag</span>
+        </a>
 
-          <button onclick="openGoatWeightModal()" class="kiosk-btn bg-gradient-to-br from-purple-700 to-purple-950 p-4 rounded-2xl flex flex-col justify-between shadow border border-purple-500/30">
-            <i data-lucide="scale" class="w-6 h-6 text-purple-300 mb-1"></i>
-            <div>
-              <span class="text-[10px] uppercase text-purple-200 font-bold block">Growth Track</span>
-              <span class="text-sm font-bold text-white block">Goat Weight Entry</span>
-            </div>
-          </button>
+        <a href="./poultry-ledger.html" class="glass-panel glass-card-hover px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-bold border-amber-500/30 text-amber-300">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+          <span>Poultry OS</span>
+          <span class="text-[9px] font-mono-val bg-amber-950 text-amber-400 px-1.5 py-0.5 rounded border border-amber-800">Batch Tag</span>
+        </a>
 
-          <button onclick="openFinancialVault()" class="kiosk-btn bg-gradient-to-br from-amber-700 to-amber-950 p-4 rounded-2xl flex flex-col justify-between shadow border border-amber-500/30">
-            <i data-lucide="lock" class="w-6 h-6 text-amber-300 mb-1"></i>
-            <div>
-              <span class="text-[10px] uppercase text-amber-200 font-bold block">PIN: 6734</span>
-              <span class="text-sm font-bold text-white block">Financial Vault</span>
-            </div>
-          </button>
-        </div>
+        <a href="./customer-ledger.html" class="glass-panel glass-card-hover px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-bold border-cyan-500/30 text-cyan-300">
+          <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+          <span>Customer 360° CRM</span>
+          <span class="text-[9px] font-mono-val bg-cyan-950 text-cyan-400 px-1.5 py-0.5 rounded border border-cyan-800">Mobile ID</span>
+        </a>
 
-        <!-- Real-Time Cross-Check Tables & Active Herd Registry -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 flex-1 flex flex-col space-y-3 overflow-hidden">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+        <a href="./utility-manager.html" class="glass-panel glass-card-hover px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-bold border-teal-500/30 text-teal-300">
+          <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+          <span>Utilities & Napier</span>
+          <span class="text-[9px] font-mono-val bg-teal-950 text-teal-400 px-1.5 py-0.5 rounded border border-teal-800">Plots</span>
+        </a>
+
+        <a href="./backup-restore.html" class="glass-panel glass-card-hover px-3.5 py-2 rounded-2xl flex items-center gap-2 text-xs font-bold border-indigo-500/30 text-indigo-300">
+          <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+          <span>Master Backup</span>
+          <span class="text-[9px] font-mono-val bg-indigo-950 text-indigo-400 px-1.5 py-0.5 rounded border border-indigo-800">JSON</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- METRICS RIBBON -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono-val text-xs">
+      <div class="glass-panel p-4 rounded-3xl border-slate-800">
+        <span class="text-[10px] text-slate-400 uppercase block">Active Cattle</span>
+        <span class="text-2xl font-black text-white mt-1 block" id="statCattle">5 Nos</span>
+        <span class="text-[10px] text-rose-400 font-bold">Kangeyam & Dairy</span>
+      </div>
+
+      <div class="glass-panel p-4 rounded-3xl border-slate-800">
+        <span class="text-[10px] text-slate-400 uppercase block">Flock Goats</span>
+        <span class="text-2xl font-black text-blue-400 mt-1 block" id="statFlock">24 Nos</span>
+        <span class="text-[10px] text-slate-400">4 Partition Bays</span>
+      </div>
+
+      <div class="glass-panel p-4 rounded-3xl border-slate-800">
+        <span class="text-[10px] text-slate-400 uppercase block">Live Poultry</span>
+        <span class="text-2xl font-black text-amber-300 mt-1 block" id="statPoultry">51 Birds</span>
+        <span class="text-[10px] text-emerald-400">Aseel + Kadaknath</span>
+      </div>
+
+      <div class="glass-panel p-4 rounded-3xl border-slate-800">
+        <span class="text-[10px] text-slate-400 uppercase block">Subscribers</span>
+        <span class="text-2xl font-black text-cyan-400 mt-1 block" id="statCustomers">3 Accounts</span>
+        <span class="text-[10px] text-slate-400">Polur Daily Delivery</span>
+      </div>
+    </div>
+
+    <!-- MAIN TWO-COLUMN WORKSPACE -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- LEFT & CENTER (2 COLS): INTERACTIVE LIVE AUDIT TABLES -->
+      <div class="lg:col-span-2 space-y-6">
+
+        <!-- INLINE LOGS CONTAINER -->
+        <div class="glass-panel rounded-3xl p-5 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
             <div class="flex items-center gap-2">
-              <i data-lucide="database" class="w-4 h-4 text-emerald-400"></i>
-              <span class="font-bold text-xs text-slate-200">Realtime Cloud Logs (Click ✏️ to Edit)</span>
+              <i data-lucide="database" class="w-5 h-5 text-emerald-400"></i>
+              <h2 class="font-bold text-white text-base">Realtime Cloud Logs (Click ✏️ to Edit)</h2>
             </div>
-            <div class="flex flex-wrap gap-1.5">
-  <button onclick="switchView('entries')" id="tabEntries" class="px-3 py-1 rounded-xl bg-emerald-600 text-white text-[11px] font-bold">Recent Cloud Logs</button>
-  <button onclick="switchView('cows')" id="tabCows" class="px-3 py-1 rounded-xl bg-slate-800 text-slate-400 text-[11px] font-bold">Cattle (5)</button>
-  <button onclick="switchView('goats')" id="tabGoats" class="px-3 py-1 rounded-xl bg-slate-800 text-slate-400 text-[11px] font-bold">Goats (24)</button>
-  <a href="./cattle-ledger.html" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 text-[11px] font-bold flex items-center gap-1">
-    <span>Cattle Ledger</span>
-    <i data-lucide="external-link" class="w-3 h-3"></i>
-  </a>
-  <a href="./flock-sections.html" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-purple-400 text-[11px] font-bold flex items-center gap-1">
-    <span>Flock OS</span>
-    <i data-lucide="external-link" class="w-3 h-3"></i>
-  </a>
-              <a href="./poultry-ledger.html" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 text-[11px] font-bold flex items-center gap-1">
-  <span>Poultry OS</span>
-  <i data-lucide="external-link" class="w-3 h-3"></i>
-</a>
-              <a href="./customer-ledger.html" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-blue-400 text-[11px] font-bold flex items-center gap-1">
-  <span>Customers</span>
-  <i data-lucide="external-link" class="w-3 h-3"></i>
-</a>
-              <a href="./utility-manager.html" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-teal-400 text-[11px] font-bold flex items-center gap-1">
-  <span>Utilities</span>
-  <i data-lucide="external-link" class="w-3 h-3"></i>
-</a>
-              <a href="./backup-restore.html" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-indigo-400 text-[11px] font-bold flex items-center gap-1">
-  <span>Backup</span>
-  <i data-lucide="external-link" class="w-3 h-3"></i>
-</a>
-</div>          
+
+            <!-- VIEW SELECTOR BUTTONS -->
+            <div class="flex flex-wrap gap-1.5 font-mono-val text-xs">
+              <button onclick="switchView('entries')" id="tabEntries" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold transition">Recent Logs</button>
+              <button onclick="switchView('cows')" id="tabCows" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold transition">Cattle (5)</button>
+              <button onclick="switchView('goats')" id="tabGoats" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold transition">Goats (24)</button>
+            </div>
           </div>
 
-          <!-- Dynamic Container -->
-          <div id="mainDataContainer" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs">
+          <!-- Dynamic Container for Live Logs & Livestock -->
+          <div id="mainDataContainer" class="space-y-2.5 max-h-[460px] overflow-y-auto custom-scroll pr-1 font-mono-val text-xs">
             <!-- Injected by JS -->
           </div>
         </div>
 
-      </div>
-
-      <!-- RIGHT SIDEBAR (4 COLUMNS) -->
-      <div class="col-span-4 flex flex-col space-y-4">
-        
-        <!-- Shed Environment -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Shed Telemetry</span>
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+        <!-- PHYSICAL TAG GUIDELINES -->
+        <div class="glass-panel rounded-3xl p-5 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+            <span class="font-bold text-white text-xs flex items-center gap-2">
+              <i data-lucide="tag" class="w-4 h-4 text-teal-400"></i>
+              <span>D-FARM Physical Tagging Standard</span>
+            </span>
+            <span class="text-[10px] text-slate-500 font-mono-val">SOP Protocol</span>
           </div>
 
-          <div class="grid grid-cols-2 gap-3 font-mono-val">
-            <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
-              <span class="text-[10px] text-slate-500 block">CHILLER TANK</span>
-              <span class="text-xl font-bold text-emerald-400">3.8° C</span>
-              <span class="text-[9px] text-slate-400 block mt-0.5">Optimal Quality</span>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono-val">
+            <div class="bg-slate-950 p-3 rounded-2xl border border-rose-500/20">
+              <span class="font-bold text-rose-400 block">CATTLE (DF-C-001+)</span>
+              <span class="text-[11px] text-slate-400 mt-1 block">Red Large TPU Tag. Waterproof UV marker serialization.</span>
             </div>
-            <div class="bg-slate-950 p-3 rounded-2xl border border-slate-800">
-              <span class="text-[10px] text-slate-500 block">SHED TEMP</span>
-              <span class="text-xl font-bold text-amber-400">28.4° C</span>
-              <span class="text-[9px] text-slate-400 block mt-0.5">Humidity: 62%</span>
+            <div class="bg-slate-950 p-3 rounded-2xl border border-blue-500/20">
+              <span class="font-bold text-blue-400 block">GOATS (DF-G-001+)</span>
+              <span class="text-[11px] text-slate-400 mt-1 block">Blue Round Stud Tag. Anti-snag pasture safe design.</span>
             </div>
-          </div>
-        </div>
-
-        <!-- Schedule & Audio Alert Box -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 flex-1 flex flex-col justify-between space-y-3">
-          <div>
-            <div class="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
-              <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Sound & Schedules</span>
-              <i data-lucide="volume-2" class="w-4 h-4 text-amber-400"></i>
-            </div>
-
-            <div class="space-y-2.5 text-xs">
-              <div class="flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800">
-                <div>
-                  <span class="font-bold text-white block">Morning Session</span>
-                  <span class="text-[10px] text-slate-500 font-mono-val">05:30 AM – 07:00 AM</span>
-                </div>
-                <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">Melodies Active</span>
-              </div>
-
-              <div class="flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800">
-                <div>
-                  <span class="font-bold text-white block">Evening Session</span>
-                  <span class="text-[10px] text-slate-500 font-mono-val">05:00 PM – 06:30 PM</span>
-                </div>
-                <span class="text-[10px] font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">Scheduled</span>
-              </div>
-
-              <div class="flex items-center justify-between p-2.5 bg-slate-950 rounded-xl border border-slate-800">
-                <div>
-                  <span class="font-bold text-amber-300 block">Biogas Slurry Valve</span>
-                  <span class="text-[10px] text-slate-500 font-mono-val">Weekly (Every 7 Days)</span>
-                </div>
-                <button onclick="confirmBiogasValveCleared()" class="text-[10px] font-bold text-amber-400 bg-amber-950 px-2.5 py-1 rounded-lg border border-amber-800 hover:bg-amber-900">Clear</button>
-              </div>
+            <div class="bg-slate-950 p-3 rounded-2xl border border-amber-500/20">
+              <span class="font-bold text-amber-300 block">BIRDS (DF-P-001+)</span>
+              <span class="text-[11px] text-slate-400 mt-1 block">Net Enclosure Batch Tagging. Zero overhead cost.</span>
             </div>
           </div>
-
-          <button onclick="playBuzzerChime(); alert('கவனம்: பண்ணை ஒளிபெருக்கி சோதனை வெற்றிகரமானது.');" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold py-2.5 rounded-xl border border-slate-700 flex items-center justify-center gap-2">
-            <i data-lucide="bell-ring" class="w-3.5 h-3.5 text-amber-400"></i>
-            <span>Test Shed Horn Chime</span>
-          </button>
         </div>
 
       </div>
 
-    </div>
+      <!-- RIGHT COLUMN (1 COL): SHED ACTIONS & SHORTCUTS -->
+      <div class="space-y-6">
 
-  </div>
+        <!-- Kiosk Fast Actions -->
+        <div class="glass-panel rounded-3xl p-5 space-y-4">
+          <h2 class="font-bold text-white text-base flex items-center gap-2">
+            <i data-lucide="zap" class="w-5 h-5 text-amber-400"></i>
+            <span>Shed Action Center</span>
+          </h2>
 
-  <!-- ================= 3. FOOD TIME STEP-THROUGH WIZARD MODAL ================= -->
-  <div id="foodWizardModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-6">
-    <div class="bg-slate-900 border border-emerald-500/40 rounded-3xl w-full max-w-2xl p-7 space-y-6 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div>
-          <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">Feeding Assistant</span>
-          <h2 class="text-xl font-bold text-white mt-0.5" id="wizardTargetTitle">Feeding Wizard</h2>
-        </div>
-        <span class="text-xs font-mono-val bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-xl" id="wizardStepCount">Step 1 of 5</span>
-      </div>
-
-      <div class="bg-slate-950 rounded-2xl p-6 border border-slate-800 space-y-5" id="wizardCardBody">
-        <!-- Injected by JS -->
-      </div>
-
-      <div class="flex items-center justify-between pt-2">
-        <button onclick="closeFoodWizard()" class="text-slate-400 hover:text-white text-xs font-bold px-4 py-2">Cancel</button>
-        <button onclick="nextFeedingStep()" class="kiosk-btn bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm px-8 py-3 rounded-2xl shadow-xl flex items-center gap-2">
-          <span>Tub Ready / Next Animal</span>
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= 4. MILK ENTRY MODAL ================= -->
-  <div id="milkEntryModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-6">
-    <div class="bg-slate-900 border border-indigo-500/40 rounded-3xl w-full max-w-md p-6 space-y-5 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <h3 class="font-bold text-base text-white">கறவை பால் பதிவு (Milk Entry)</h3>
-        <button onclick="closeMilkLogModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-
-      <form onsubmit="handleMilkSubmit(event)" class="space-y-4 text-xs">
-        <div>
-          <label class="block font-bold text-slate-400 mb-1">Select Cattle Tag (DF-C-Series)</label>
-          <select id="milkEntryCowTag" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white font-bold outline-none text-sm font-mono-val">
-            <option value="DF-C-001">DF-C-001 (காவேரி - Country)</option>
-            <option value="DF-C-002">DF-C-002 (HF Cross 02)</option>
-            <option value="DF-C-003">DF-C-003 (Jersey Cross 03)</option>
-            <option value="DF-C-004">DF-C-004 (கங்கேயம் 04)</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Shift</label>
-            <select id="milkEntryShift" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
-              <option value="AM">காலை (Morning)</option>
-              <option value="PM">மாலை (Evening)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Milk Yield (Litres)*</label>
-            <input type="number" step="0.1" id="milkEntryQty" required placeholder="e.g. 14.5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono-val font-bold text-lg outline-none">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Fat %</label>
-            <input type="number" step="0.1" id="milkEntryFat" placeholder="4.2" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
-          </div>
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">SNF</label>
-            <input type="number" step="0.1" id="milkEntrySnf" placeholder="8.6" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
-          </div>
-        </div>
-
-        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Save Collection to Firebase</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ================= 5. GOAT WEIGHT ENTRY MODAL ================= -->
-  <div id="goatWeightModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-6">
-    <div class="bg-slate-900 border border-purple-500/40 rounded-3xl w-full max-w-md p-6 space-y-5 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <h3 class="font-bold text-base text-white">ஆடு எடைப் பதிவு (Goat Weight Track)</h3>
-        <button onclick="closeGoatWeightModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-
-      <form onsubmit="handleGoatWeightSubmit(event)" class="space-y-4 text-xs">
-        <div>
-          <label class="block font-bold text-slate-400 mb-1">Select Goat Tag ID (DF-G-Series)</label>
-          <select id="goatEntryTag" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white font-bold outline-none text-sm font-mono-val">
-            <option value="DF-G-001">DF-G-001 (செம்மறி கிடா - Section D)</option>
-            <option value="DF-G-002">DF-G-002 (வெள்ளாடு - Section D)</option>
-            <option value="DF-G-003">DF-G-003 (சினை ஆடு - Section B)</option>
-            <option value="DF-G-004">DF-G-004 (வளர் ஆடு - Section A)</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Current Weight (kg)*</label>
-            <input type="number" step="0.5" id="goatCurrentWeight" required placeholder="e.g. 31.5" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-purple-400 font-mono-val font-bold text-lg outline-none">
-          </div>
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Section</label>
-            <select id="goatEntrySection" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
-              <option value="Section D">Section D (Fattening)</option>
-              <option value="Section B">Section B (Sennai)</option>
-              <option value="Section C">Section C (Stud)</option>
-              <option value="Section A">Section A (Kids)</option>
-            </select>
-          </div>
-        </div>
-
-        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Save Weight to Firebase</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ================= 6. EDIT ENTRY MODAL (CLOUD UPDATE) ================= -->
-  <div id="editLogModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-6">
-    <div class="bg-slate-900 border border-amber-500/40 rounded-3xl w-full max-w-md p-6 space-y-5 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <h3 class="font-bold text-base text-white">பதிவை மாற்றியமைக்க (Edit Entry)</h3>
-        <button onclick="closeEditModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-
-      <form onsubmit="handleLogUpdate(event)" class="space-y-4 text-xs">
-        <input type="hidden" id="editLogId">
-        <input type="hidden" id="editLogType">
-        <div>
-          <label class="block font-bold text-slate-400 mb-1">Animal Tag</label>
-          <input type="text" id="editLogTag" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white font-bold font-mono-val outline-none text-sm">
-        </div>
-
-        <div>
-          <label class="block font-bold text-slate-400 mb-1" id="editValLabel">New Value</label>
-          <input type="number" step="0.1" id="editLogVal" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-amber-400 font-mono-val font-bold text-lg outline-none">
-        </div>
-
-        <div id="editMilkSubFields" class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">Fat %</label>
-            <input type="number" step="0.1" id="editLogFat" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
-          </div>
-          <div>
-            <label class="block font-bold text-slate-400 mb-1">SNF</label>
-            <input type="number" step="0.1" id="editLogSnf" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
-          </div>
-        </div>
-
-        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Update in Firebase Cloud</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ================= 7. FINANCIAL VAULT (PIN 6734) ================= -->
-  <div id="financialVaultModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-6">
-    <div class="bg-slate-900 border border-amber-500/40 rounded-3xl w-full max-w-xl p-7 space-y-6 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
-          <i data-lucide="shield-check" class="w-5 h-5 text-amber-400"></i>
-          <h3 class="font-bold text-base text-white">D-FARM Financial Vault</h3>
-        </div>
-        <button onclick="closeFinancialVault()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
-      </div>
-
-      <div class="grid grid-cols-3 gap-3 font-mono-val text-center">
-        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-          <span class="text-[10px] text-slate-400 uppercase block">Monthly Revenue</span>
-          <span class="text-xl font-bold text-emerald-400">₹72,400</span>
-        </div>
-        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-          <span class="text-[10px] text-slate-400 uppercase block">Monthly Expenses</span>
-          <span class="text-xl font-bold text-rose-400">₹26,150</span>
-        </div>
-        <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
-          <span class="text-[10px] text-slate-400 uppercase block">Net Operating Profit</span>
-          <span class="text-xl font-bold text-amber-400">+₹46,250</span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-3 gap-2 pt-2">
-        <button onclick="triggerWeeklyPDFDownload()" class="bg-slate-800 hover:bg-slate-700 text-white text-[11px] font-bold py-2.5 rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 active:scale-95 transition">
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-slate-300"></i>
-          <span>Weekly PDF</span>
-        </button>
-        <button onclick="triggerMonthlyPDFDownload()" class="bg-slate-800 hover:bg-slate-700 text-amber-300 text-[11px] font-bold py-2.5 rounded-xl border border-slate-700 flex items-center justify-center gap-1.5 active:scale-95 transition">
-          <i data-lucide="bar-chart-3" class="w-3.5 h-3.5 text-amber-400"></i>
-          <span>Monthly P&L</span>
-        </button>
-        <button onclick="triggerDailyWhatsApp()" class="bg-emerald-700 hover:bg-emerald-600 text-white text-[11px] font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 active:scale-95 transition">
-          <i data-lucide="send" class="w-3.5 h-3.5 text-emerald-300"></i>
-          <span>08:00 PM WA</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCRIPT ENGINE (FIREBASE CRUD & AUDIO CHIME) -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, doc, updateDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-
-    // 1. FIREBASE INITIALIZATION
-    const firebaseConfig = {
-      apiKey: "AIzaSyBJ2C0V2U8PGroB8xeHeKknzS5znY3XFE",
-      authDomain: "dfarm-tracker.firebaseapp.com",
-      projectId: "dfarm-tracker",
-      storageBucket: "dfarm-tracker.firebasestorage.app",
-      messagingSenderId: "1043858263056",
-      appId: "1:1043858263056:web:d1304e8537ba74c9620e95",
-      measurementId: "G-H10VRWX9CY"
-    };
-
-    let db = null;
-    let recentEntriesList = [];
-
-    try {
-      const app = initializeApp(firebaseConfig);
-      db = getFirestore(app);
-      listenToRecentCloudEntries();
-    } catch (e) {
-      console.warn("Firebase Fallback Mode:", e);
-    }
-
-    const FARM_PHONE = "917200752628";
-
-    // --- 2. AUDIO BUZZER CHIME (WEB AUDIO API - 100% RELIABLE SOUND) ---
-    window.playBuzzerChime = function() {
-      try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime); // 880Hz A5
-        osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.25);
-
-        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
-
-        osc.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.25);
-      } catch (err) {
-        console.warn("Web Audio chime fallback:", err);
-      }
-    };
-
-    // --- 3. REALTIME CLOUD LISTENER (FIREBASE ON-SNAPSHOT) ---
-    function listenToRecentCloudEntries() {
-      if (!db) return;
-      const q = query(collection(db, "farm_logs"), orderBy("createdAt", "desc"), limit(8));
-      onSnapshot(q, (snapshot) => {
-        recentEntriesList = [];
-        snapshot.forEach((d) => {
-          recentEntriesList.push({ id: d.id, ...d.data() });
-        });
-        if (currentView === 'entries') renderMainData();
-      }, (err) => console.log("Realtime stream:", err));
-    }
-
-    // --- 4. FORM SUBMITS (MILK & GOAT WEIGHT) ---
-    window.handleMilkSubmit = async function(e) {
-      e.preventDefault();
-      const cow = document.getElementById('milkEntryCowTag').value;
-      const shift = document.getElementById('milkEntryShift').value;
-      const qty = parseFloat(document.getElementById('milkEntryQty').value) || 0;
-      const fat = parseFloat(document.getElementById('milkEntryFat').value) || 0;
-      const snf = parseFloat(document.getElementById('milkEntrySnf').value) || 0;
-      const todayStr = new Date().toISOString().slice(0, 10);
-      const timeStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-
-      const logData = {
-        type: "MILK",
-        tag: cow,
-        shift: shift,
-        rawVal: qty,
-        val: `${qty} L`,
-        fat: fat,
-        snf: snf,
-        metric: `Fat: ${fat}% | SNF: ${snf}`,
-        date: todayStr,
-        time: timeStr,
-        createdAt: serverTimestamp()
-      };
-
-      if (db) {
-        try {
-          await addDoc(collection(db, "farm_logs"), logData);
-        } catch (err) {
-          recentEntriesList.unshift({ id: 'local_' + Date.now(), ...logData });
-        }
-      } else {
-        recentEntriesList.unshift({ id: 'local_' + Date.now(), ...logData });
-      }
-
-      playBuzzerChime();
-      closeMilkLogModal();
-      currentView = 'entries';
-      renderMainData();
-      e.target.reset();
-    };
-
-    window.handleGoatWeightSubmit = async function(e) {
-      e.preventDefault();
-      const tag = document.getElementById('goatEntryTag').value;
-      const weight = parseFloat(document.getElementById('goatCurrentWeight').value) || 0;
-      const sec = document.getElementById('goatEntrySection').value;
-      const todayStr = new Date().toISOString().slice(0, 10);
-      const timeStr = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-
-      const readyForMarket = weight >= 30.0;
-      const logData = {
-        type: "GOAT_WEIGHT",
-        tag: tag,
-        shift: sec,
-        rawVal: weight,
-        val: `${weight} kg`,
-        metric: `Target: ${readyForMarket ? 'Bakrid Ready 🌟' : 'Fattening Lot'}`,
-        date: todayStr,
-        time: timeStr,
-        createdAt: serverTimestamp()
-      };
-
-      if (db) {
-        try {
-          await addDoc(collection(db, "farm_logs"), logData);
-        } catch (err) {
-          recentEntriesList.unshift({ id: 'local_' + Date.now(), ...logData });
-        }
-      } else {
-        recentEntriesList.unshift({ id: 'local_' + Date.now(), ...logData });
-      }
-
-      playBuzzerChime();
-      closeGoatWeightModal();
-      currentView = 'entries';
-      renderMainData();
-      e.target.reset();
-    };
-
-    // --- 5. EDIT & CLOUD UPDATE ENGINE ---
-    window.openEditModal = function(id) {
-      const item = recentEntriesList.find(i => i.id === id);
-      if (!item) return;
-
-      document.getElementById('editLogId').value = item.id;
-      document.getElementById('editLogType').value = item.type;
-      document.getElementById('editLogTag').value = item.tag;
-      document.getElementById('editLogVal').value = item.rawVal || parseFloat(item.val);
-
-      const subFields = document.getElementById('editMilkSubFields');
-      const label = document.getElementById('editValLabel');
-
-      if (item.type === 'MILK') {
-        label.textContent = "New Milk Yield (Litres)*";
-        subFields.classList.remove('hidden');
-        document.getElementById('editLogFat').value = item.fat || '';
-        document.getElementById('editLogSnf').value = item.snf || '';
-      } else {
-        label.textContent = "New Weight (kg)*";
-        subFields.classList.add('hidden');
-      }
-
-      document.getElementById('editLogModal').classList.remove('hidden');
-    };
-
-    window.closeEditModal = function() {
-      document.getElementById('editLogModal').classList.add('hidden');
-    };
-
-    window.handleLogUpdate = async function(e) {
-      e.preventDefault();
-      const id = document.getElementById('editLogId').value;
-      const type = document.getElementById('editLogType').value;
-      const newVal = parseFloat(document.getElementById('editLogVal').value) || 0;
-
-      let updatePayload = {};
-      if (type === 'MILK') {
-        const fat = parseFloat(document.getElementById('editLogFat').value) || 0;
-        const snf = parseFloat(document.getElementById('editLogSnf').value) || 0;
-        updatePayload = {
-          rawVal: newVal,
-          val: `${newVal} L`,
-          fat: fat,
-          snf: snf,
-          metric: `Fat: ${fat}% | SNF: ${snf} (Edited ✏️)`
-        };
-      } else {
-        const ready = newVal >= 30.0;
-        updatePayload = {
-          rawVal: newVal,
-          val: `${newVal} kg`,
-          metric: `Target: ${ready ? 'Bakrid Ready 🌟' : 'Fattening Lot'} (Edited ✏️)`
-        };
-      }
-
-      if (db && !id.startsWith('local_')) {
-        try {
-          const docRef = doc(db, "farm_logs", id);
-          await updateDoc(docRef, updatePayload);
-        } catch (err) {
-          console.error("Firebase update failed:", err);
-        }
-      }
-
-      const localItem = recentEntriesList.find(i => i.id === id);
-      if (localItem) {
-        Object.assign(localItem, updatePayload);
-      }
-
-      playBuzzerChime();
-      closeEditModal();
-      renderMainData();
-    };
-
-    // --- 6. DATA RENDERER (RECENT LOGS WITH EDIT BUTTON) ---
-    let currentView = 'entries';
-
-    const cattleHerd = [
-      { id: "DF-C-001", name: "காவேரி (Country)", stage: "Milking Cow", yield: 14.0, prevYield: 14.5, sennai: false, weight: 390 },
-      { id: "DF-C-002", name: "HF Cross 02", stage: "Milking & Sennai", yield: 18.5, prevYield: 18.0, sennai: true, weight: 430 },
-      { id: "DF-C-003", name: "Jersey Cross 03", stage: "Milking Cow", yield: 12.0, prevYield: 14.5, sennai: false, weight: 360 },
-      { id: "DF-C-004", name: "கங்கேயம் 04", stage: "Dry (சினைக் காலம்)", yield: 0.0, prevYield: 0.0, sennai: true, weight: 380 },
-      { id: "DF-C-005", name: "காவேரி கன்று 1", stage: "Heifer (கிடாரி)", yield: 0.0, prevYield: 0.0, sennai: false, weight: 140 }
-    ];
-
-    const goatHerd = [
-      { id: "DF-G-001", breed: "செம்மறி கிடா", section: "Section D", weight: 32.5, target: "Bakrid Ready" },
-      { id: "DF-G-002", breed: "வெள்ளாடு", section: "Section D", weight: 30.5, target: "Bakrid Ready" },
-      { id: "DF-G-003", breed: "நாட்டு ஆடு", section: "Section B", weight: 26.0, target: "Sennai Does" },
-      { id: "DF-G-004", breed: "கொடாலி ஆடு", section: "Section A", weight: 14.0, target: "Kid Growing" }
-    ];
-
-    function renderMainData() {
-      const c = document.getElementById('mainDataContainer');
-      if (!c) return;
-
-      if (currentView === 'entries') {
-        if (!recentEntriesList.length) {
-          c.innerHTML = `<div class="p-6 text-center text-slate-500 italic">No cloud logs yet. Add milk or goat weight to test!</div>`;
-          return;
-        }
-
-        c.innerHTML = `
           <div class="space-y-2">
-            <span class="text-[10px] uppercase font-bold text-emerald-400 block tracking-wider">Spot Verification & Edit List</span>
-            ${recentEntriesList.map(item => `
-              <div class="flex items-center justify-between p-3 bg-slate-950 rounded-2xl border border-slate-800 hover:border-slate-700 transition">
-                <div class="flex items-center gap-3">
-                  <span class="text-xl">${item.type === 'MILK' ? '🥛' : '🐐'}</span>
-                  <div>
-                    <div class="flex items-center gap-2">
-                      <span class="font-bold text-white font-mono-val text-sm">${item.tag}</span>
-                      <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold">${item.shift}</span>
-                      <span class="text-[10px] text-slate-500 font-mono-val">${item.time || ''}</span>
-                    </div>
-                    <span class="text-[10px] text-slate-400">${item.metric}</span>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="text-right">
-                    <span class="text-base font-bold font-mono-val ${item.type === 'MILK' ? 'text-emerald-400' : 'text-purple-400'}">${item.val}</span>
-                    <span class="text-[9px] text-emerald-500 font-bold block">✓ Verified</span>
-                  </div>
-                  <button onclick="openEditModal('${item.id}')" class="p-2 bg-slate-800 hover:bg-amber-600 text-slate-300 hover:text-white rounded-xl transition active:scale-90" title="Edit Entry">
-                    <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
+            <button onclick="promptLogMilking()" class="w-full py-3 px-4 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-2xl flex items-center justify-between text-xs font-bold transition">
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="milk" class="w-4 h-4 text-emerald-400"></i>
+                <span class="text-white">Record Morning/Evening Milk</span>
               </div>
-            `).join('')}
+              <i data-lucide="plus" class="w-4 h-4 text-slate-500"></i>
+            </button>
+
+            <a href="./customer-ledger.html" class="w-full py-3 px-4 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-2xl flex items-center justify-between text-xs font-bold transition">
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="search" class="w-4 h-4 text-cyan-400"></i>
+                <span class="text-white">Search Customer Mobile</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+            </a>
+
+            <a href="./poultry-ledger.html" class="w-full py-3 px-4 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-2xl flex items-center justify-between text-xs font-bold transition">
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="egg" class="w-4 h-4 text-amber-400"></i>
+                <span class="text-white">Log Daily Egg Harvest</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+            </a>
+
+            <a href="./utility-manager.html" class="w-full py-3 px-4 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-2xl flex items-center justify-between text-xs font-bold transition">
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="scissors" class="w-4 h-4 text-teal-400"></i>
+                <span class="text-white">Napier Harvest & Biogas Slurry</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+            </a>
+
+            <a href="./backup-restore.html" class="w-full py-3 px-4 bg-slate-900/90 hover:bg-slate-800 border border-slate-800 rounded-2xl flex items-center justify-between text-xs font-bold transition">
+              <div class="flex items-center gap-2.5">
+                <i data-lucide="download-cloud" class="w-4 h-4 text-indigo-400"></i>
+                <span class="text-white">Full Farm Backup (.JSON)</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500"></i>
+            </a>
           </div>
-        `;
-      } else if (currentView === 'cows') {
-        c.innerHTML = cattleHerd.map(cow => {
-          const drop = cow.prevYield > 0 && ((cow.prevYield - cow.yield) / cow.prevYield) >= 0.15;
-          return `
-            <div class="flex items-center justify-between p-3 bg-slate-950 rounded-2xl border ${drop ? 'border-rose-600/80' : 'border-slate-800'}">
-              <div class="flex items-center gap-3">
-                <span class="text-2xl">${cow.stage.includes('Calf') || cow.stage.includes('Heifer') ? '🐂' : '🐄'}</span>
-                <div>
-                  <div class="flex items-center gap-2">
-                    <span class="font-bold text-sm text-white font-mono-val">${cow.id}</span>
-                    <span class="text-xs text-slate-400">(${cow.name})</span>
-                    ${cow.sennai ? '<span class="text-[9px] bg-amber-950 text-amber-300 px-2 py-0.5 rounded font-bold">சினை</span>' : ''}
-                  </div>
-                  <span class="text-[10px] text-slate-500">${cow.stage} • ${cow.weight} kg</span>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="text-base font-bold font-mono-val ${drop ? 'text-rose-400' : 'text-emerald-400'}">${cow.yield} L/day</span>
-                ${drop ? '<span class="text-[9px] text-rose-500 font-bold block animate-pulse">⚠️ 17% Drop</span>' : '<span class="text-[9px] text-slate-500 block">Normal Yield</span>'}
-              </div>
+        </div>
+
+        <!-- Micro-Climate & Solar -->
+        <div class="glass-panel rounded-3xl p-5 space-y-3 font-mono-val text-xs">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <span class="font-bold text-white flex items-center gap-2">
+              <i data-lucide="sun-medium" class="w-4 h-4 text-yellow-400"></i>
+              <span>Solar Telemetry</span>
+            </span>
+            <span class="text-emerald-400 font-bold">12.4 Units / Day</span>
+          </div>
+
+          <div class="space-y-2 text-slate-400 text-[11px]">
+            <div class="flex justify-between">
+              <span>Battery Health:</span>
+              <span class="text-white font-bold">98% (4x 150Ah)</span>
             </div>
-          `;
-        }).join('');
-      } else if (currentView === 'goats') {
-        c.innerHTML = goatHerd.map(g => `
-          <div class="flex items-center justify-between p-3 bg-slate-950 rounded-2xl border border-slate-800">
-            <div class="flex items-center gap-3">
-              <span class="text-2xl">🐐</span>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-sm text-white font-mono-val">${g.id}</span>
-                  <span class="text-xs text-slate-400">(${g.breed})</span>
-                  <span class="text-[9px] bg-purple-950 text-purple-300 px-2 py-0.5 rounded font-bold">${g.section}</span>
-                </div>
-                <span class="text-[10px] text-slate-500">Status: ${g.target}</span>
+            <div class="flex justify-between">
+              <span>Napier Irrigation:</span>
+              <span class="text-emerald-400 font-bold">Plot 01 Drip Active</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Borewell Run:</span>
+              <span class="text-amber-300 font-bold">Scheduled 04:30 PM</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- INLINE DATA ENGINE -->
+  <script>
+    let activeView = 'entries';
+    let cattleData = [];
+    let flockData = [];
+    let recentLogs = [
+      { time: "07:15 AM", type: "Milk Harvest", desc: "Cow DF-C-001 (Kamadhenu HF): 8.5 L morning yield recorded.", val: "+8.5 L", tag: "Cattle" },
+      { time: "08:00 AM", type: "Fodder Feed", desc: "Super Napier Plot 02: 60 kg cut and distributed to 4 bays.", val: "60 kg", tag: "Fodder" },
+      { time: "Yesterday", type: "Egg Harvest", desc: "Batch DF-P-001 (Aseel Cross): 18 eggs crated.", val: "18 Eggs", tag: "Poultry" },
+      { time: "Yesterday", type: "Milk Harvest", desc: "Cow DF-C-002 (Ganga Kangeyam): 3.5 L pure A2 milk.", val: "+3.5 L", tag: "Cattle" }
+    ];
+
+    async function loadData() {
+      try {
+        const [cRes, fRes, pRes, custRes] = await Promise.all([
+          fetch('../data/cattle.json').catch(() => null),
+          fetch('../data/flock.json').catch(() => null),
+          fetch('../data/poultry.json').catch(() => null),
+          fetch('../data/customers.json').catch(() => null)
+        ]);
+
+        if (cRes && cRes.ok) cattleData = await cRes.json();
+        if (fRes && fRes.ok) flockData = await fRes.json();
+        if (pRes && pRes.ok) {
+          const poultry = await pRes.json();
+          const totalBirds = poultry.reduce((a, b) => a + (b.currentLiveBirds || 0), 0);
+          document.getElementById('statPoultry').textContent = `${totalBirds} Birds`;
+        }
+        if (custRes && custRes.ok) {
+          const cust = await custRes.json();
+          document.getElementById('statCustomers').textContent = `${cust.length} Accounts`;
+        }
+
+        document.getElementById('statCattle').textContent = `${cattleData.length || 5} Nos`;
+        document.getElementById('statFlock').textContent = `${flockData.length || 24} Nos`;
+      } catch (e) {
+        console.warn("Using inline fallback");
+      }
+      renderView();
+    }
+
+    function switchView(view) {
+      activeView = view;
+      ['Entries', 'Cows', 'Goats'].forEach(t => {
+        const btn = document.getElementById(`tab${t}`);
+        if (!btn) return;
+        if (t.toLowerCase() === view) {
+          btn.className = "px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold transition";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 font-bold transition";
+        }
+      });
+      renderView();
+    }
+
+    function renderView() {
+      const container = document.getElementById('mainDataContainer');
+      if (!container) return;
+
+      if (activeView === 'entries') {
+        container.innerHTML = recentLogs.map(l => `
+          <div class="p-3 bg-slate-950/80 border border-slate-800 rounded-2xl flex items-center justify-between gap-3 hover:border-slate-700 transition">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-white text-xs">${l.type}</span>
+                <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded font-mono-val">${l.time}</span>
+                <span class="text-[9px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-1.5 py-0.5 rounded font-bold">${l.tag}</span>
               </div>
+              <p class="text-[11px] text-slate-400 mt-1">${l.desc}</p>
             </div>
             <div class="text-right">
-              <span class="text-base font-bold font-mono-val text-purple-400">${g.weight} kg</span>
-              ${g.weight >= 30 ? '<span class="text-[9px] text-amber-400 font-bold block">🌟 Ready for Sale</span>' : '<span class="text-[9px] text-slate-500 block">In Fattening</span>'}
+              <span class="text-xs font-bold text-emerald-400">${l.val}</span>
             </div>
+          </div>
+        `).join('');
+      } else if (activeView === 'cows') {
+        if (!cattleData.length) {
+          container.innerHTML = `<div class="p-6 text-center text-slate-500">Loading cattle records...</div>`;
+          return;
+        }
+        container.innerHTML = cattleData.map(c => `
+          <div class="p-3 bg-slate-950/80 border border-rose-500/20 rounded-2xl flex items-center justify-between gap-3 hover:border-rose-500/40 transition">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🐄</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-xs">${c.tagId || c.id}</span>
+                  <span class="text-xs text-rose-300 font-bold">${c.name}</span>
+                  <span class="text-[9px] bg-rose-950 text-rose-400 border border-rose-800 px-1.5 py-0.5 rounded">${c.breed}</span>
+                </div>
+                <span class="text-[10px] text-slate-400">Daily Milk: ${c.dailyMilkYieldLiters || c.dailyMilk || '8.5'} L • Status: ${c.status || 'Active'}</span>
+              </div>
+            </div>
+            <a href="./cattle-ledger.html" class="p-1.5 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 hover:text-white">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        `).join('');
+      } else if (activeView === 'goats') {
+        if (!flockData.length) {
+          container.innerHTML = `<div class="p-6 text-center text-slate-500">Loading flock partition records...</div>`;
+          return;
+        }
+        container.innerHTML = flockData.map(g => `
+          <div class="p-3 bg-slate-950/80 border border-blue-500/20 rounded-2xl flex items-center justify-between gap-3 hover:border-blue-500/40 transition">
+            <div class="flex items-center gap-3">
+              <span class="text-xl">🐐</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-xs">${g.tagId || g.id}</span>
+                  <span class="text-xs text-blue-300 font-bold">${g.breed}</span>
+                  <span class="text-[9px] bg-blue-950 text-blue-400 border border-blue-800 px-1.5 py-0.5 rounded">${g.section || g.bay || 'Bay 1'}</span>
+                </div>
+                <span class="text-[10px] text-slate-400">Weight: ${g.weightKg || '28'} kg • Age: ${g.ageMonths || '14'} Mos</span>
+              </div>
+            </div>
+            <a href="./flock-sections.html" class="p-1.5 bg-slate-900 border border-slate-800 rounded-xl text-slate-400 hover:text-white">
+              <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+            </a>
           </div>
         `).join('');
       }
       lucide.createIcons();
     }
 
-    window.switchView = function(view) {
-      currentView = view;
-      ['Entries', 'Cows', 'Goats'].forEach(v => {
-        const btn = document.getElementById(`tab${v}`);
-        if (btn) {
-          if (v.toLowerCase() === view) {
-            btn.className = "px-3 py-1 rounded-xl bg-emerald-600 text-white text-[11px] font-bold";
-          } else {
-            btn.className = "px-3 py-1 rounded-xl bg-slate-800 text-slate-400 text-[11px] font-bold";
-          }
-        }
+    function promptLogMilking() {
+      const cowTag = prompt("Enter Cow Tag ID (e.g. DF-C-001):", "DF-C-001");
+      if (!cowTag) return;
+      const liters = prompt("Enter Milk Collected in Litres (e.g. 8.5):", "8.5");
+      if (!liters) return;
+
+      recentLogs.unshift({
+        time: "Just Now",
+        type: "Milk Harvest",
+        desc: `Cow ${cowTag}: ${liters} L spot harvest recorded.`,
+        val: `+${liters} L`,
+        tag: "Cattle"
       });
-      renderMainData();
-    };
 
-    // --- 7. FOOD TIME WIZARD ---
-    let wizardStep = 0;
-    const wizardQueue = [
-      { type: "cow", id: "DF-C-001", name: "காவேரி", milk: 14.0, sennai: false },
-      { type: "cow", id: "DF-C-002", name: "HF Cross 02", milk: 18.5, sennai: true },
-      { type: "cow", id: "DF-C-003", name: "Jersey Cross", milk: 12.0, sennai: false },
-      { type: "goats_sec_B", title: "Section B: சினை மற்றும் தாய் ஆடுகள் (8 Nos)", count: 8 },
-      { type: "goats_sec_D", title: "Section D: கொழுக்க வைக்கும் ஆடுகள் (Bakrid Lot - 7 Nos)", count: 7 }
-    ];
-
-    window.startFoodTimeWizard = function() {
-      wizardStep = 0;
-      document.getElementById('foodWizardModal').classList.remove('hidden');
-      renderWizardStep();
-    };
-
-    window.closeFoodWizard = function() {
-      document.getElementById('foodWizardModal').classList.add('hidden');
-    };
-
-    function calculateCattleConcentrate(milkYield, isSennai) {
-      const base = 1.5;
-      const milkFactor = milkYield / 2.5;
-      const sennaiExtra = isSennai ? 1.0 : 0.0;
-      return (base + milkFactor + sennaiExtra).toFixed(1);
+      renderView();
+      alert(`Recorded: ${liters} L milk from ${cowTag}!`);
     }
 
-    function renderWizardStep() {
-      const item = wizardQueue[wizardStep];
-      const countEl = document.getElementById('wizardStepCount');
-      const bodyEl = document.getElementById('wizardCardBody');
-      const titleEl = document.getElementById('wizardTargetTitle');
-
-      countEl.textContent = `Step ${wizardStep + 1} of ${wizardQueue.length}`;
-
-      if (item.type === 'cow') {
-        titleEl.textContent = `Cattle Feeding: ${item.id} (${item.name})`;
-        const concKg = calculateCattleConcentrate(item.milk, item.sennai);
-        const thavuduKg = (concKg * 0.45).toFixed(1);
-        const cakeKg = (concKg * 0.35).toFixed(1);
-
-        bodyEl.innerHTML = `
-          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div>
-              <span class="text-3xl font-extrabold text-amber-400 font-mono-val">${concKg} kg</span>
-              <span class="text-xs text-slate-400 block">Total Aadaar Theevanam Mix</span>
-            </div>
-            <div class="text-right">
-              <span class="text-xs text-emerald-400 font-bold block">${item.milk} L Yield</span>
-              <span class="text-[10px] text-slate-400">${item.sennai ? 'சினை (+1.0 kg)' : 'Regular Feed'}</span>
-            </div>
-          </div>
-
-          <div class="space-y-2 text-xs">
-            <span class="font-bold text-slate-300 block">Tub Mixing Ratio:</span>
-            <div class="grid grid-cols-3 gap-2 text-center font-mono-val">
-              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                <span class="text-[10px] text-slate-400 block">தவிடு (45%)</span>
-                <span class="font-bold text-white">${thavuduKg} kg</span>
-              </div>
-              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                <span class="text-[10px] text-slate-400 block">புண்ணாக்கு (35%)</span>
-                <span class="font-bold text-white">${cakeKg} kg</span>
-              </div>
-              <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800">
-                <span class="text-[10px] text-slate-400 block">தாது உப்பு</span>
-                <span class="font-bold text-amber-400">60 grams</span>
-              </div>
-            </div>
-          </div>
-        `;
-      } else {
-        titleEl.textContent = item.title;
-        const totalKg = (item.count * 0.4).toFixed(1);
-        bodyEl.innerHTML = `
-          <div class="border-b border-slate-800 pb-3">
-            <span class="text-3xl font-extrabold text-amber-400 font-mono-val">${totalKg} kg</span>
-            <span class="text-xs text-slate-400 block">Section Shared Concentrate Tub</span>
-          </div>
-          <p class="text-xs text-slate-300">Place ${totalKg} kg crushed grain mixture in the designated partition feeder trough.</p>
-        `;
-      }
-      playBuzzerChime();
-      lucide.createIcons();
-    }
-
-    window.nextFeedingStep = function() {
-      wizardStep++;
-      if (wizardStep < wizardQueue.length) {
-        renderWizardStep();
-      } else {
-        closeFoodWizard();
-        playBuzzerChime();
-        alert('அனைத்து கால்நடைகளுக்கும் தீவனம் வைக்கும் பணி நிறைவடைந்தது!');
-      }
-    };
-
-    // --- 8. KIOSK & TIMERS ---
-    let idleCounter = 45;
-    let idleTimer = null;
-
-    window.resetIdleTimer = function() {
-      idleCounter = 45;
-      const el = document.getElementById('idleSeconds');
-      if (el) el.textContent = `${idleCounter}s`;
-    };
-
-    ['touchstart', 'mousedown', 'mousemove', 'keydown'].forEach(evt => {
-      window.addEventListener(evt, resetIdleTimer, { passive: true });
-    });
-
-    function startKioskLoop() {
-      clearInterval(idleTimer);
-      idleTimer = setInterval(() => {
-        const dashboard = document.getElementById('dashboardLayer');
-        if (!dashboard.classList.contains('hidden')) {
-          idleCounter--;
-          const el = document.getElementById('idleSeconds');
-          if (el) el.textContent = `${idleCounter}s`;
-          if (idleCounter <= 0) lockToCctv();
-        }
-      }, 1000);
-    }
-
-    window.wakeKioskDashboard = function() {
-      document.getElementById('cctvLayer').classList.add('hidden');
-      document.getElementById('dashboardLayer').classList.remove('hidden');
-      resetIdleTimer();
-      renderMainData();
-    };
-
-    window.lockToCctv = function() {
-      document.getElementById('dashboardLayer').classList.add('hidden');
-      document.getElementById('cctvLayer').classList.remove('hidden');
-      closeFoodWizard();
-      closeMilkLogModal();
-      closeGoatWeightModal();
-      closeEditModal();
-      closeFinancialVault();
-    };
-
-    setInterval(() => {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('en-US', { hour12: true });
-      const c1 = document.getElementById('cctvClock');
-      const c2 = document.getElementById('osClock');
-      if (c1) c1.textContent = timeStr;
-      if (c2) c2.textContent = timeStr;
-    }, 1000);
-
-    window.openMilkLogModal = function() { document.getElementById('milkEntryModal').classList.remove('hidden'); };
-    window.closeMilkLogModal = function() { document.getElementById('milkEntryModal').classList.add('hidden'); };
-
-    window.openGoatWeightModal = function() { document.getElementById('goatWeightModal').classList.remove('hidden'); };
-    window.closeGoatWeightModal = function() { document.getElementById('goatWeightModal').classList.add('hidden'); };
-
-    window.openFinancialVault = function() {
-      const pin = prompt('Enter 4-Digit Financial Security PIN:');
-      if (pin === '6734') {
-        document.getElementById('financialVaultModal').classList.remove('hidden');
-        lucide.createIcons();
-      } else if (pin) {
-        alert('Access Denied: Invalid PIN!');
-      }
-    };
-    window.closeFinancialVault = function() { document.getElementById('financialVaultModal').classList.add('hidden'); };
-
-    window.confirmBiogasValveCleared = function() {
-      alert('Biogas Slurry Valve Cycle Cleared! Next reminder set for 7 days later.');
-    };
-
-    // --- 9. AUDIT DISPATCHERS ---
-    window.triggerDailyWhatsApp = function() {
-      const dateStr = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
-      const text = `*🌾 D-FARM POLUR • DAILY DISPATCH REPORT*%0A*Date:* ${dateStr} | *Time:* 08:00 PM%0A━━━━━━━━━━━━━━━━━━━━━%0A🥛 *MILK PRODUCTION:*%0A• Total Day Yield: 52.5 L%0A• Average Fat: 4.3% | SNF: 8.6%0A%0A💰 *DAILY CASHFLOW:*%0A• Spot Direct Milk Sales: ₹2,150%0A• Daily Spend: ₹600%0A• *Net Cash Inflow: ₹1,550*%0A━━━━━━━━━━━━━━━━━━━━━%0A_Sent via D-FARM Shed OS_`;
-      window.open(`https://wa.me/${FARM_PHONE}?text=${text}`, '_blank');
-    };
-
-    window.triggerWeeklyPDFDownload = function() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.text("D-FARM POLUR • WEEKLY AUDIT REPORT", 14, 15);
-      doc.save(`DFARM_Weekly_Audit_${new Date().toISOString().slice(0,10)}.pdf`);
-    };
-
-    window.triggerMonthlyPDFDownload = function() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      doc.text("D-FARM POLUR • MONTHLY P&L", 14, 15);
-      doc.save(`DFARM_Monthly_PL_${new Date().toISOString().slice(0,7)}.pdf`);
-    };
-
-    // Boot
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      renderMainData();
-      startKioskLoop();
+      loadData();
     });
   </script>
 </body>
