@@ -133,16 +133,19 @@
               <i data-lucide="database" class="w-4 h-4 text-emerald-400"></i>
               <span class="font-bold text-xs text-slate-200">Realtime Cloud Logs (Click ✏️ to Edit)</span>
             </div>
-            <div class="flex gap-1.5">
-              <button onclick="switchView('entries')" id="tabEntries" class="px-3 py-1 rounded-xl bg-emerald-600 text-white text-[11px] font-bold">Recent Cloud Logs</button>
-              <button onclick="switchView('cows')" id="tabCows" class="px-3 py-1 rounded-xl bg-slate-800 text-slate-400 text-[11px] font-bold">Cattle (5)</button>
-              <button onclick="switchView('goats')" id="tabGoats" class="px-3 py-1 rounded-xl bg-slate-800 text-slate-400 text-[11px] font-bold">Goats (24)</button>
-              <a href="./cattle-ledger.html" class="px-3 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 text-[11px] font-bold flex items-center gap-1">
-                <span>Master Ledger</span>
-                <i data-lucide="external-link" class="w-3 h-3"></i>
-              </a>
-            </div>
-          </div>
+            <div class="flex flex-wrap gap-1.5">
+  <button onclick="switchView('entries')" id="tabEntries" class="px-3 py-1 rounded-xl bg-emerald-600 text-white text-[11px] font-bold">Recent Cloud Logs</button>
+  <button onclick="switchView('cows')" id="tabCows" class="px-3 py-1 rounded-xl bg-slate-800 text-slate-400 text-[11px] font-bold">Cattle (5)</button>
+  <button onclick="switchView('goats')" id="tabGoats" class="px-3 py-1 rounded-xl bg-slate-800 text-slate-400 text-[11px] font-bold">Goats (24)</button>
+  <a href="./cattle-ledger.html" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 text-[11px] font-bold flex items-center gap-1">
+    <span>Cattle Ledger</span>
+    <i data-lucide="external-link" class="w-3 h-3"></i>
+  </a>
+  <a href="./flock-sections.html" class="px-2.5 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-purple-400 text-[11px] font-bold flex items-center gap-1">
+    <span>Flock OS</span>
+    <i data-lucide="external-link" class="w-3 h-3"></i>
+  </a>
+</div>          </div>
 
           <!-- Dynamic Container -->
           <div id="mainDataContainer" class="flex-1 overflow-y-auto space-y-2 pr-1 text-xs">
