@@ -25,7 +25,7 @@ body {
   font-family: 'JetBrains Mono', monospace !important;
 }
 
-/* Organic Card Styling & Hover */
+/* Card Styling */
 .organic-card {
   background: #FFFFFF !important;
   border: 1px solid rgba(20, 54, 39, 0.12) !important;
@@ -38,7 +38,7 @@ body {
   border-color: #34D399 !important;
 }
 
-/* Low-Brightness Floating Background Glyphs */
+/* Floating Glyphs */
 .bg-emoji-layer {
   position: fixed !important;
   top: 0 !important;
@@ -60,7 +60,7 @@ body {
   100% { transform: translateY(-10vh) rotate(360deg); }
 }
 
-/* Infinite 16:9 Marquee Strip */
+/* Infinite Marquee */
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -95,11 +95,17 @@ body {
 }
 .ai-float-btn:hover { transform: scale(1.08) !important; }
 
-/* Isolate External Global Footers */
+/* Suppress External Footers */
 body > footer:not(#dfarmFooter),
+body > div:has(> .universal-money-mart),
 body > div.finance-footer,
-body > div:has(> .universal-money-mart) {
+div[class*="universal"],
+div[class*="moneymart"] {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
