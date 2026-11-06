@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>D-FARM • Universal Cattle Master Ledger</title>
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #F9FAFB;
+      overflow-x: hidden;
+    }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace; }
+    .kiosk-btn {
+      touch-action: manipulation;
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .kiosk-btn:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-8">
+
+  <!-- TOP BAR -->
+  <header class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-8">
+    <div class="flex items-center gap-3">
+      <a href="/dfarm/os/index.html" class="p-2.5 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-emerald-400"></i>
+      </a>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl sm:text-2xl font-extrabold font-mono-val text-white">D-FARM CATTLE MASTER REGISTRY</h1>
+          <span class="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-bold">LIFETIME UNIQUE IDS</span>
+        </div>
+        <p class="text-xs text-slate-400">Standard Sequential Tagging (DF-C-001...). Non-reusable lifecycle audit ledger.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <button onclick="openRegisterModal()" class="kiosk-btn bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Register Purchased Cattle</span>
+      </button>
+      <button onclick="openCalfModal()" class="kiosk-btn bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2">
+        <i data-lucide="heart" class="w-4 h-4"></i>
+        <span>Register Farm Calving</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto space-y-6">
+
+    <!-- CENSUS & AUDIT METRICS -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-val text-xs">
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">All-Time Registered</span>
+        <span class="text-xl font-bold text-white mt-1 block" id="statAllTime">0</span>
+        <span class="text-[10px] text-slate-500">Unique IDs Issued</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Active Herd in Shed</span>
+        <span class="text-xl font-bold text-emerald-400 mt-1 block" id="statActive">0</span>
+        <span class="text-[10px] text-emerald-500">Present in Shed</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Sold / Closed</span>
+        <span class="text-xl font-bold text-blue-400 mt-1 block" id="statSold">0</span>
+        <span class="text-[10px] text-slate-500">Never Re-used</span>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+        <span class="text-slate-400 text-[10px] uppercase block">Mortality Log</span>
+        <span class="text-xl font-bold text-rose-400 mt-1 block" id="statMortality">0</span>
+        <span class="text-[10px] text-rose-500">Permanent Record</span>
+      </div>
+    </div>
+
+    <!-- CATTLE CARDS LIST -->
+    <div id="cattleCardsContainer" class="space-y-4">
+      <div class="p-8 text-center text-slate-500 italic text-xs">Loading master registry...</div>
+    </div>
+
+  </main>
+
+  <!-- ================= REGISTER PURCHASED MODAL ================= -->
+  <div id="registerModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-emerald-500/40 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-base text-white">புதிய மாடு பதிவு (Purchase Entry)</h3>
+        <button onclick="closeRegisterModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form onsubmit="handleRegisterSubmit(event)" class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">System Assigned Tag</label>
+            <input type="text" id="regTag" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Cattle Name / Nickname</label>
+            <input type="text" id="regName" placeholder="e.g. பொன்னி" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Breed (இனம்)*</label>
+            <select id="regBreed" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
+              <option value="நாட்டுப் பசு (Desi Sahiwal Cross)">நாட்டுப் பசு (Sahiwal Cross)</option>
+              <option value="Holstein Friesian Cross">HF Cross</option>
+              <option value="Jersey Cross">Jersey Cross</option>
+              <option value="கங்கேயம் பாரம்பரியம்">கங்கேயம்</option>
+              <option value="சிந்தி கலப்பினம்">சிந்தி கலப்பினம்</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Purchase Date*</label>
+            <input type="date" id="regDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono-val outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Purchase Cost (விலை ₹)*</label>
+            <input type="number" id="regCost" required placeholder="52000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-emerald-400 font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Source / Vendor*</label>
+            <input type="text" id="regSource" required placeholder="e.g. Vellore Farmer" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white outline-none">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Issue Lifetime Tag & Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= REGISTER CALVING MODAL ================= -->
+  <div id="calfModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-500/40 rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-base text-white">பண்ணைக் கன்று பிறப்பு (Farm Calving Entry)</h3>
+        <button onclick="closeCalfModal()" class="text-slate-400"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+
+      <form onsubmit="handleCalfSubmit(event)" class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">System Assigned Tag</label>
+            <input type="text" id="calfTag" readonly class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-amber-400 font-mono-val font-bold outline-none">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Mother Cow (தாய் மாடு)*</label>
+            <select id="calfMother" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
+              <!-- Populated by JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Gender (பாலினம்)*</label>
+            <select id="calfGender" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-bold outline-none">
+              <option value="Female">கிடாரிக் கன்று (Heifer)</option>
+              <option value="Male">காளைக் கன்று (Bull Calf)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-400 mb-1">Birth Date*</label>
+            <input type="date" id="calfDate" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white font-mono-val outline-none">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-xl shadow-lg text-sm">Issue Lifetime Tag & Link Lineage</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    let cattleList = [];
+
+    // Next Sequential ID Generator (Never Re-used)
+    function getNextCattleId() {
+      let maxNum = 0;
+      cattleList.forEach(c => {
+        const match = c.id.match(/^DF-C-(\d+)$/);
+        if (match) {
+          const num = parseInt(match[1], 10);
+          if (num > maxNum) maxNum = num;
+        }
+      });
+      const nextNum = maxNum + 1;
+      return `DF-C-${String(nextNum).padStart(3, '0')}`;
+    }
+
+    async function loadCattleData() {
+      try {
+        const res = await fetch('../data/cattle.json');
+        cattleList = await res.json();
+      } catch (e) {
+        console.warn("Offline cattle fallback");
+        cattleList = [];
+      }
+      renderCards();
+    }
+
+    function renderCards() {
+      const container = document.getElementById('cattleCardsContainer');
+      if (!container) return;
+
+      // Stats Update
+      document.getElementById('statAllTime').textContent = cattleList.length;
+      document.getElementById('statActive').textContent = cattleList.filter(c => c.status === 'Active').length;
+      document.getElementById('statSold').textContent = cattleList.filter(c => c.status === 'Sold').length;
+      document.getElementById('statMortality').textContent = cattleList.filter(c => c.status === 'Deceased').length;
+
+      container.innerHTML = cattleList.map(c => {
+        const isProfitable = c.netProfit >= 0;
+        const isActive = c.status === 'Active';
+
+        return `
+          <div class="bg-slate-900 border ${isActive ? 'border-slate-800' : 'border-slate-800/40 opacity-75'} rounded-3xl p-5 sm:p-6 space-y-4 hover:border-slate-700 transition">
+            
+            <!-- Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+              <div class="flex items-center gap-3">
+                <span class="text-3xl">${c.stage.includes('Calf') || c.stage.includes('Heifer') ? '🐂' : '🐄'}</span>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-base font-mono-val text-white">${c.id}</span>
+                    <span class="text-sm text-slate-300 font-bold">${c.name}</span>
+                    <span class="text-[10px] bg-slate-800 text-emerald-400 border border-emerald-900 px-2 py-0.5 rounded font-bold">${c.stage}</span>
+                    <span class="text-[9px] px-2 py-0.5 rounded font-bold ${isActive ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-slate-800 text-slate-400'}">${c.status}</span>
+                  </div>
+                  <span class="text-xs text-slate-400">${c.breed} • Source: ${c.sourceLocation} (${c.purchaseDate})</span>
+                </div>
+              </div>
+
+              <div class="text-left sm:text-right font-mono-val">
+                <span class="text-[10px] text-slate-400 uppercase block">Animal Lifetime P&L</span>
+                <span class="text-lg font-bold ${isProfitable ? 'text-emerald-400' : 'text-rose-400'}">
+                  ${isProfitable ? '+' : ''}₹${(c.netProfit || 0).toLocaleString('en-IN')}
+                </span>
+              </div>
+            </div>
+
+            <!-- Financials Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono-val">
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-500 block">INITIAL COST</span>
+                <span class="font-bold text-white">₹${(c.purchaseCost || 0).toLocaleString('en-IN')}</span>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-500 block">LIFETIME MILK SALES</span>
+                <span class="font-bold text-emerald-400">₹${(c.milkRevenue || 0).toLocaleString('en-IN')} (${c.lifetimeLiters || 0} L)</span>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-500 block">FEED COST</span>
+                <span class="font-bold text-rose-400">₹${(c.feedExpense || 0).toLocaleString('en-IN')}</span>
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <span class="text-[10px] text-slate-500 block">VET & MEDICAL</span>
+                <span class="font-bold text-amber-400">₹${(c.vetExpense || 0).toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            <!-- Lineage & Action Footnote -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 border-t border-slate-800/60 pt-2 gap-2">
+              <div class="flex items-center gap-2">
+                <i data-lucide="git-branch" class="w-3.5 h-3.5 text-slate-500"></i>
+                <span>Mother Lineage: <strong class="text-slate-300 font-mono-val">${c.motherTag}</strong></span>
+                ${c.calvesBorn && c.calvesBorn.length ? `<span class="bg-slate-800 px-2 py-0.5 rounded text-[10px]">Offspring: ${c.calvesBorn.join(', ')}</span>` : ''}
+              </div>
+
+              ${isActive ? `
+                <div class="flex gap-2">
+                  ${c.stage.includes('Calf') || c.stage.includes('Heifer') ? `
+                    <button onclick="promoteToMilking('${c.id}')" class="px-3 py-1 bg-emerald-950 border border-emerald-800 hover:bg-emerald-900 text-emerald-300 rounded-lg text-[10px] font-bold">Promote to Milking Cow</button>
+                  ` : ''}
+                  <button onclick="markSoldOrDead('${c.id}', 'Sold')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-[10px] font-bold">Sell Entry</button>
+                  <button onclick="markSoldOrDead('${c.id}', 'Deceased')" class="px-2.5 py-1 bg-rose-950 border border-rose-900 hover:bg-rose-900 text-rose-300 rounded-lg text-[10px] font-bold">Mortality Log</button>
+                </div>
+              ` : `
+                <span class="text-[10px] text-slate-500 font-mono-val">Tag permanently archived. Cannot be reassigned.</span>
+              `}
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // Modal Operations
+    function openRegisterModal() {
+      document.getElementById('regTag').value = getNextCattleId();
+      document.getElementById('registerModal').classList.remove('hidden');
+    }
+    function closeRegisterModal() { document.getElementById('registerModal').classList.add('hidden'); }
+
+    function openCalfModal() {
+      document.getElementById('calfTag').value = getNextCattleId();
+      const motherSelect = document.getElementById('calfMother');
+      motherSelect.innerHTML = cattleList
+        .filter(c => c.status === 'Active' && !c.stage.includes('Calf'))
+        .map(c => `<option value="${c.id}">${c.id} (${c.name} - ${c.breed})</option>`).join('');
+      document.getElementById('calfModal').classList.remove('hidden');
+    }
+    function closeCalfModal() { document.getElementById('calfModal').classList.add('hidden'); }
+
+    function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const newTag = document.getElementById('regTag').value;
+      const cost = parseFloat(document.getElementById('regCost').value) || 0;
+      
+      const newCow = {
+        id: newTag,
+        name: document.getElementById('regName').value,
+        breed: document.getElementById('regBreed').value,
+        purchaseDate: document.getElementById('regDate').value,
+        purchaseCost: cost,
+        sourceLocation: document.getElementById('regSource').value,
+        status: "Active",
+        stage: "Milking Cow",
+        dailyYield: 10.0,
+        lifetimeLiters: 0,
+        milkRevenue: 0,
+        feedExpense: 0,
+        vetExpense: 0,
+        netProfit: -cost,
+        motherTag: "External Purchase",
+        calvesBorn: []
+      };
+
+      cattleList.unshift(newCow);
+      renderCards();
+      closeRegisterModal();
+      alert(`Success: ${newTag} registered with permanent lifetime ID.`);
+      e.target.reset();
+    }
+
+    function handleCalfSubmit(e) {
+      e.preventDefault();
+      const calfTag = document.getElementById('calfTag').value;
+      const motherTag = document.getElementById('calfMother').value;
+      const gender = document.getElementById('calfGender').value;
+      const bDate = document.getElementById('calfDate').value;
+
+      const newCalf = {
+        id: calfTag,
+        name: `${motherTag} Offspring`,
+        breed: "Farm Lineage Cross",
+        purchaseDate: bDate,
+        purchaseCost: 0,
+        sourceLocation: "D-FARM Polur (Born at Farm)",
+        status: "Active",
+        stage: gender === 'Female' ? "Heifer (கிடாரி)" : "Bull Calf (காளைக் கன்று)",
+        dailyYield: 0.0,
+        lifetimeLiters: 0,
+        milkRevenue: 0,
+        feedExpense: 0,
+        vetExpense: 0,
+        netProfit: 0,
+        motherTag: motherTag,
+        calvesBorn: []
+      };
+
+      // Link to mother
+      const mother = cattleList.find(c => c.id === motherTag);
+      if (mother) {
+        if (!mother.calvesBorn) mother.calvesBorn = [];
+        mother.calvesBorn.push(calfTag);
+      }
+
+      cattleList.unshift(newCalf);
+      renderCards();
+      closeCalfModal();
+      alert(`Success: Born Calf issued permanent lifetime ID ${calfTag} and linked to Mother ${motherTag}.`);
+      e.target.reset();
+    }
+
+    function promoteToMilking(id) {
+      const cow = cattleList.find(c => c.id === id);
+      if (cow) {
+        cow.stage = "Milking Cow";
+        cow.dailyYield = 8.0;
+        renderCards();
+        alert(`${id} has been promoted to Active Milking Cow! Ready for daily milk log entries.`);
+      }
+    }
+
+    function markSoldOrDead(id, newStatus) {
+      const cow = cattleList.find(c => c.id === id);
+      if (!cow) return;
+
+      const reason = prompt(`Confirm marking ${id} as ${newStatus}. Enter sale price or mortality reason:`);
+      if (reason) {
+        cow.status = newStatus;
+        if (newStatus === 'Sold') {
+          const saleVal = parseFloat(reason) || 0;
+          cow.netProfit += saleVal;
+        }
+        renderCards();
+        alert(`${id} updated to ${newStatus}. Tag is permanently closed and will never be reused.`);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      loadCattleData();
+    });
+  </script>
+</body>
+</html>
