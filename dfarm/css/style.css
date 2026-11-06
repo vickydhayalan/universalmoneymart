@@ -1,60 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+
 :root {
-  --bg-cream: #FAF6EE;
-  --brand-green: #143627;
-  --brand-emerald: #1B4332;
-  --gold-accent: #D97706;
+  --bg-dark: #020617;
+  --panel-bg: rgba(15, 23, 42, 0.75);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --accent-emerald: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.2);
 }
 
-html, body {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  background-color: var(--bg-cream);
-  color: var(--brand-green);
-  min-height: 100vh;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--bg-dark);
+  color: #f8fafc;
   overflow-x: hidden;
+  line-height: 1.5;
 }
 
-.font-serif-title {
-  font-family: 'Playfair Display', Georgia, serif;
+.font-mono-val {
+  font-family: 'JetBrains Mono', monospace;
 }
 
-/* Luxury Organic Cards: Responsive Sizing & Alignment */
-.organic-card {
-  background-color: #FFFFFF;
-  border: 1px solid rgba(20, 54, 39, 0.08);
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 25px -5px rgba(20, 54, 39, 0.05);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 320px !important;
-  height: auto !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
+/* Glassmorphism Containers */
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
-/* Touch & Hover Glow Effects */
-.organic-card:hover, 
-.organic-card:active {
-  box-shadow: 0 20px 40px -10px rgba(27, 67, 50, 0.22), 0 0 25px rgba(217, 119, 6, 0.2);
+.glass-card-hover {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
   transform: translateY(-4px);
-  border-color: rgba(217, 119, 6, 0.4);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 15px 35px -5px var(--accent-glow);
 }
 
-.glow-img {
-  transition: all 0.3s ease;
+/* Pulse Animation for Status Badges */
+.pulse-emerald {
+  box-shadow: 0 0 12px #10b981;
+  animation: pulse-glow 2s infinite ease-in-out;
 }
 
-.glow-img:hover {
-  filter: drop-shadow(0 0 15px rgba(27, 67, 50, 0.35));
-  transform: scale(1.04);
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.15); }
 }
 
-/* Clean Custom Scrollbar */
+/* Custom Scrollbars */
 .custom-scroll::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
-
+.custom-scroll::-webkit-scrollbar-track {
+  background: #020617;
+}
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 4px;
+  background: #334155;
+  border-radius: 9999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+/* Floating WhatsApp Button Pulse */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.5);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.wa-float:hover {
+  transform: scale(1.08);
 }
