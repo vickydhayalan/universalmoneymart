@@ -1171,12 +1171,19 @@
       lucide.createIcons();
       calculateSubscriptionTotal();
     });
-  </script>
-  <script>
+ <script>
+  // Mobile Cache & Service Worker Complete Auto-Purge
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function(registrations) {
-      for(let registration of registrations) {
+      for (let registration of registrations) {
         registration.unregister();
+      }
+    });
+  }
+  if ('caches' in window) {
+    caches.keys().then(function(names) {
+      for (let name of names) {
+        caches.delete(name);
       }
     });
   }
