@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- Firebase App & Firestore SDKs (v9 Compat) -->
+  <!-- Firebase App & Firestore SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
@@ -97,12 +97,12 @@
       <!-- 4 Core Live Stat Cards -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 font-mono-val">
         <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
-          <span class="text-[11px] text-slate-500 font-bold block uppercase">Today's Milk Yield</span>
+          <span class="text-[11px] text-slate-500 font-bold block uppercase">Today's Milk Harvest</span>
           <div class="flex items-baseline gap-1 mt-1">
             <span id="statTodayMilk" class="text-2xl sm:text-3xl font-extrabold text-[#143627]">0.0</span>
             <span class="text-xs text-slate-400 font-bold">Litres</span>
           </div>
-          <span class="text-[10px] text-emerald-700 font-semibold block mt-1">Morning + Evening Batch</span>
+          <span class="text-[10px] text-emerald-700 font-semibold block mt-1">Total Herd Yield</span>
         </div>
 
         <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
@@ -135,8 +135,8 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs">
           <div class="flex items-center justify-between mb-3 border-b pb-2">
-            <h3 class="font-bold text-xs sm:text-sm text-slate-800 font-mono-val">7-Day Milk Yield Curve (L)</h3>
-            <span class="text-[10px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded font-mono-val font-bold">Daily Lactation</span>
+            <h3 class="font-bold text-xs sm:text-sm text-slate-800 font-mono-val">7-Day Milk Harvest (L)</h3>
+            <span class="text-[10px] bg-emerald-50 text-emerald-800 px-2 py-0.5 rounded font-mono-val font-bold">Yield Curve</span>
           </div>
           <div class="h-56">
             <canvas id="milkYieldChart"></canvas>
@@ -154,7 +154,7 @@
         </div>
       </div>
 
-      <!-- Quick Action Alert Bar -->
+      <!-- Biogas Action Reminder -->
       <div class="bg-emerald-900 text-amber-200 p-4 rounded-2xl shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3 font-mono-val text-xs">
         <div class="flex items-center gap-2.5">
           <i data-lucide="bell" class="w-5 h-5 text-amber-400 flex-shrink-0"></i>
@@ -172,7 +172,6 @@
 
     <!-- 2. LIVESTOCK REGISTRY TAB -->
     <section id="view-livestock" class="space-y-4 hidden">
-      <!-- Species Filter Bar & Add Button -->
       <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-2.5 font-mono-val text-xs">
         <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
           <button onclick="filterLivestock('all')" id="flt-all" class="px-3 py-1.5 rounded-xl bg-[#143627] text-white font-bold">All</button>
@@ -187,30 +186,40 @@
         </button>
       </div>
 
-      <!-- Livestock Grid Target -->
+      <!-- Livestock Grid -->
       <div id="livestockCardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         <!-- Injected via JS -->
       </div>
     </section>
 
-    <!-- 3. DAILY MILK LOG TAB -->
-    <section id="view-milk" class="space-y-4 hidden">
+    <!-- 3. DAILY MILK LOG (SPLIT: PRODUCTION vs SALES) -->
+    <section id="view-milk" class="space-y-6 hidden">
+      
+      <!-- SUB-SECTION A: INDIVIDUAL COW MILK PRODUCTION -->
       <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs font-mono-val">
         <div class="flex items-center justify-between border-b pb-3 mb-4">
           <div>
-            <h3 class="font-bold text-sm text-[#143627]">Record Today's Milk Harvest</h3>
-            <span class="text-[11px] text-slate-500">Individual Cow Yield & Local Dealer Rate</span>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+              <h3 class="font-bold text-sm text-[#143627]">1. மாடுகள் கறவை பதிவு (Individual Cow Milk Harvest)</h3>
+            </div>
+            <span class="text-[11px] text-slate-500">Record morning/evening litres for each cow separately.</span>
           </div>
           <span id="currentDateBadge" class="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg font-bold"></span>
         </div>
 
-        <form onsubmit="handleMilkLogSubmit(event)" class="space-y-3 text-xs">
+        <form onsubmit="handleMilkProductionSubmit(event)" class="space-y-3 text-xs">
+          <input type="hidden" id="editMilkProdIndex" value="-1">
           <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div>
-              <label class="block font-bold text-slate-700 mb-1">Select Cow (Unique ID)*</label>
+              <label class="block font-bold text-slate-700 mb-1">Select Cow*</label>
               <select id="milkCowId" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
-                <!-- Populated dynamically with active milking cows -->
+                <!-- Cows list -->
               </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Date*</label>
+              <input type="date" id="milkHarvestDate" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
             </div>
             <div>
               <label class="block font-bold text-slate-700 mb-1">Morning (AM) Litres*</label>
@@ -220,56 +229,121 @@
               <label class="block font-bold text-slate-700 mb-1">Evening (PM) Litres*</label>
               <input type="number" step="0.1" id="milkPmLiters" required placeholder="e.g. 5.0" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
             </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">Fat % / SNF (Optional)</label>
-              <input type="number" step="0.01" id="milkFat" placeholder="e.g. 4.4" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
-            </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
             <div>
-              <label class="block font-bold text-slate-700 mb-1">Dealer / Direct Rate per Litre (₹)*</label>
-              <input type="number" id="milkPricePerLiter" value="50" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
+              <label class="block font-bold text-slate-700 mb-1">Fat % / SNF (Optional)</label>
+              <input type="number" step="0.01" id="milkFat" placeholder="e.g. 4.4" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
             </div>
             <div>
-              <label class="block font-bold text-slate-700 mb-1">Buyer / Channel</label>
-              <input type="text" id="milkBuyer" placeholder="e.g. Local Society / Farm Gate" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none">
+              <label class="block font-bold text-slate-700 mb-1">Milker / Health Note</label>
+              <input type="text" id="milkCowNote" placeholder="e.g. Normal milking / good appetite" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none">
             </div>
-            <div class="flex items-end">
-              <button type="submit" class="w-full bg-[#143627] hover:bg-black text-amber-300 font-bold py-2 rounded-xl transition shadow flex items-center justify-center gap-1.5">
+            <div class="flex items-end gap-2">
+              <button type="submit" id="btnSaveMilkProd" class="flex-1 bg-[#143627] hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
                 <i data-lucide="check" class="w-4 h-4"></i>
-                <span>Save Milk Entry</span>
+                <span>Save Cow Yield</span>
               </button>
+              <button type="button" id="btnCancelMilkProd" onclick="resetMilkProdForm()" class="hidden px-3 py-2.5 bg-slate-200 text-slate-700 font-bold rounded-xl text-xs">Cancel</button>
             </div>
           </div>
         </form>
-      </div>
 
-      <!-- Milk Entries Table -->
-      <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden font-mono-val text-xs">
-        <div class="p-3 bg-slate-50 border-b border-slate-200 font-bold text-slate-700 flex justify-between">
-          <span>Recent Milking Entries</span>
-          <span class="text-[11px] text-emerald-800">Directly Synced to Cloud</span>
-        </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left">
+        <!-- Milking Table -->
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-left text-xs">
             <thead class="bg-slate-100 text-slate-600 text-[11px]">
               <tr>
                 <th class="p-2.5">Date</th>
-                <th class="p-2.5">Cow Tag</th>
+                <th class="p-2.5">Cow ID</th>
                 <th class="p-2.5">AM (L)</th>
                 <th class="p-2.5">PM (L)</th>
-                <th class="p-2.5">Total (L)</th>
-                <th class="p-2.5">Fat%</th>
-                <th class="p-2.5">Value (₹)</th>
+                <th class="p-2.5 font-bold">Total (L)</th>
+                <th class="p-2.5">Fat %</th>
+                <th class="p-2.5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody id="milkEntriesTableBody" class="divide-y divide-slate-100">
+            <tbody id="milkHarvestTableBody" class="divide-y divide-slate-100">
               <!-- Rendered via JS -->
             </tbody>
           </table>
         </div>
       </div>
+
+      <!-- SUB-SECTION B: MILK SALES & DISPATCH DISTRIBUTION -->
+      <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs font-mono-val">
+        <div class="flex items-center justify-between border-b pb-3 mb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+              <h3 class="font-bold text-sm text-[#143627]">2. பால் விற்பனை & விநியோகம் (Dealer vs Customer Sales)</h3>
+            </div>
+            <span class="text-[11px] text-slate-500">Track milk split between local dealer and direct farm-gate buyers.</span>
+          </div>
+        </div>
+
+        <form onsubmit="handleMilkSaleSubmit(event)" class="space-y-3 text-xs">
+          <input type="hidden" id="editMilkSaleIndex" value="-1">
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Sale Date*</label>
+              <input type="date" id="saleDate" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Dealer Quantity (Litres)</label>
+              <input type="number" step="0.5" id="saleDealerLiters" placeholder="0" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Dealer Rate / L (₹)</label>
+              <input type="number" id="saleDealerRate" value="45" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Customer / Gate (Litres)</label>
+              <input type="number" step="0.5" id="saleCustLiters" placeholder="0" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold text-emerald-800">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-1">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Customer Rate / L (₹)</label>
+              <input type="number" id="saleCustRate" value="60" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold text-emerald-800">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">Retained (Calf/Home) (L)</label>
+              <input type="number" step="0.5" id="saleCalfLiters" value="2" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
+            </div>
+            <div class="sm:col-span-2 flex items-end gap-2">
+              <button type="submit" id="btnSaveMilkSale" class="flex-1 bg-[#143627] hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>Log Sales & Sync Revenue</span>
+              </button>
+              <button type="button" id="btnCancelMilkSale" onclick="resetMilkSaleForm()" class="hidden px-3 py-2.5 bg-slate-200 text-slate-700 font-bold rounded-xl text-xs">Cancel</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Sales Table -->
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100 text-slate-600 text-[11px]">
+              <tr>
+                <th class="p-2.5">Date</th>
+                <th class="p-2.5">Dealer (L @ Rate)</th>
+                <th class="p-2.5">Customers (L @ Rate)</th>
+                <th class="p-2.5">Calf/Home</th>
+                <th class="p-2.5 font-bold">Total Dispatched</th>
+                <th class="p-2.5 font-bold text-emerald-800">Revenue (₹)</th>
+                <th class="p-2.5 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="milkSalesTableBody" class="divide-y divide-slate-100">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </section>
 
     <!-- 4. CASH FLOW (CAPEX & OPEX) TAB -->
@@ -278,6 +352,7 @@
         <h3 class="font-bold text-sm text-[#143627] border-b pb-2 mb-3">Record Farm Cash Flow (Income / Expense)</h3>
         
         <form onsubmit="handleFinanceEntry(event)" class="space-y-3 text-xs">
+          <input type="hidden" id="editFinanceIndex" value="-1">
           <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div>
               <label class="block font-bold text-slate-700 mb-1">Transaction Type*</label>
@@ -298,10 +373,13 @@
               <input type="text" id="finNote" required placeholder="e.g. 2 Bags Concentrate Feed / Farm Workers Lunch" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none">
             </div>
           </div>
-          <button type="submit" class="w-full sm:w-auto px-6 py-2.5 bg-[#143627] hover:bg-black text-amber-300 font-bold rounded-xl transition shadow flex items-center justify-center gap-1.5">
-            <i data-lucide="plus-circle" class="w-4 h-4"></i>
-            <span>Log Financial Record</span>
-          </button>
+          <div class="flex gap-2">
+            <button type="submit" id="btnSaveFinance" class="px-6 py-2.5 bg-[#143627] hover:bg-black text-amber-300 font-bold rounded-xl transition shadow flex items-center justify-center gap-1.5">
+              <i data-lucide="plus-circle" class="w-4 h-4"></i>
+              <span>Log Financial Record</span>
+            </button>
+            <button type="button" id="btnCancelFinance" onclick="resetFinanceForm()" class="hidden px-4 py-2.5 bg-slate-200 text-slate-700 font-bold rounded-xl text-xs">Cancel</button>
+          </div>
         </form>
       </div>
 
@@ -319,6 +397,7 @@
                 <th class="p-2.5">Type</th>
                 <th class="p-2.5">Description</th>
                 <th class="p-2.5">Amount (₹)</th>
+                <th class="p-2.5 text-right">Actions</th>
               </tr>
             </thead>
             <tbody id="financeTableBody" class="divide-y divide-slate-100">
@@ -332,9 +411,10 @@
     <!-- 5. CUSTOMER CRM & WHATSAPP TAB -->
     <section id="view-crm" class="space-y-4 hidden">
       <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs font-mono-val">
-        <h3 class="font-bold text-sm text-[#143627] border-b pb-2 mb-3">Register New Customer / Visitor</h3>
+        <h3 class="font-bold text-sm text-[#143627] border-b pb-2 mb-3">Register / Edit Customer</h3>
         
         <form onsubmit="handleCustomerRegistration(event)" class="space-y-3 text-xs">
+          <input type="hidden" id="editCrmIndex" value="-1">
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label class="block font-bold text-slate-700 mb-1">Customer Name*</label>
@@ -360,11 +440,12 @@
                 <option value="Wood Pressed Oils">Chekku Oils & Honey</option>
               </select>
             </div>
-            <div class="sm:col-span-2 flex items-end">
-              <button type="submit" class="w-full bg-[#143627] hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
+            <div class="sm:col-span-2 flex items-end gap-2">
+              <button type="submit" id="btnSaveCustomer" class="flex-1 bg-[#143627] hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-1.5">
                 <i data-lucide="user-plus" class="w-4 h-4"></i>
-                <span>Save Customer & Send WhatsApp Welcome</span>
+                <span>Save Customer & Send WhatsApp</span>
               </button>
+              <button type="button" id="btnCancelCustomer" onclick="resetCustomerForm()" class="hidden px-4 py-2.5 bg-slate-200 text-slate-700 font-bold rounded-xl text-xs">Cancel</button>
             </div>
           </div>
         </form>
@@ -378,22 +459,23 @@
 
   </main>
 
-  <!-- ==================== MODAL: ANIMAL REGISTRATION ==================== -->
+  <!-- ==================== MODAL: ANIMAL REGISTRATION / EDIT ==================== -->
   <div id="animalModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex items-center justify-center p-3 sm:p-6">
     <div class="bg-white w-full max-w-xl rounded-3xl p-5 sm:p-6 shadow-2xl font-mono-val text-xs space-y-4 max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between border-b pb-3">
         <div class="flex items-center gap-2">
           <i data-lucide="tag" class="w-5 h-5 text-emerald-800"></i>
-          <h3 class="font-bold text-sm text-[#143627]">New Livestock Registration</h3>
+          <h3 id="animalModalTitle" class="font-bold text-sm text-[#143627]">New Livestock Registration</h3>
         </div>
         <button onclick="closeAnimalModal()" class="p-1 rounded-lg text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
       </div>
 
       <form onsubmit="handleAnimalSubmit(event)" class="space-y-3">
+        <input type="hidden" id="editAnimalOriginalId" value="">
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-bold text-slate-700 mb-1">Species Category*</label>
-            <select id="regSpecies" onchange="autoGenerateTagId()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
+            <select id="regSpecies" onchange="autoGenerateTagId(); toggleWeightField();" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
               <option value="Cattle">Cattle (மாடு)</option>
               <option value="Goat">Goat (ஆடு)</option>
               <option value="Poultry">Country Chicken (கோழி)</option>
@@ -440,11 +522,13 @@
               <option value="Pregnant">Pregnant (சினையில் உள்ளது)</option>
               <option value="Growing">Growing Kid / Calf</option>
               <option value="Ready for Sale">Ready for Festival Sale</option>
+              <option value="Sold">Sold</option>
+              <option value="Deceased">Deceased</option>
             </select>
           </div>
-          <div>
+          <div id="initialWeightCol">
             <label class="block font-bold text-slate-700 mb-1">Live Weight (kg)</label>
-            <input type="number" step="0.5" id="regWeight" placeholder="e.g. 350 for Cow / 28 for Goat" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none">
+            <input type="number" step="0.5" id="regWeight" placeholder="e.g. 28 for Goat" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none">
           </div>
         </div>
 
@@ -461,17 +545,64 @@
 
         <button type="submit" class="w-full bg-[#143627] hover:bg-black text-amber-300 font-bold py-3 rounded-xl transition shadow flex items-center justify-center gap-2">
           <i data-lucide="check-circle" class="w-4 h-4"></i>
-          <span>Save to Cloud & Master Ledger</span>
+          <span id="btnAnimalSubmitText">Save to Cloud & Master Ledger</span>
         </button>
       </form>
     </div>
   </div>
 
-  <!-- ==================== QUICK MEDICAL & BREEDING MODAL (1-TAP SELECTION) ==================== -->
+  <!-- ==================== MODAL: GOAT & SMALL ANIMALS WEIGHT LOG ==================== -->
+  <div id="goatWeightModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-white w-full max-w-md rounded-3xl p-5 shadow-2xl font-mono-val text-xs space-y-4">
+      <div class="flex items-center justify-between border-b pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold">
+            <i data-lucide="scale" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-[#143627]">Update Animal Weight (தேதியுடன்)</h3>
+            <span id="weightTargetTag" class="text-[11px] text-amber-800 font-bold">GT-01</span>
+          </div>
+        </div>
+        <button onclick="closeGoatWeightModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleSaveAnimalWeight(event)" class="space-y-3">
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Date Measured*</label>
+            <input type="date" id="weightLogDate" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Live Weight (kg)*</label>
+            <input type="number" step="0.1" id="weightLogVal" required placeholder="e.g. 32.5" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none font-bold text-emerald-800">
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Growth / Feed Notes</label>
+          <input type="text" id="weightLogNote" placeholder="e.g. Healthy weight gain on Super Napier" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 outline-none">
+        </div>
+        <button type="submit" class="w-full bg-[#143627] hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-2">
+          <i data-lucide="check" class="w-4 h-4"></i>
+          <span>Save Weight Entry</span>
+        </button>
+      </form>
+
+      <!-- Past Weight Records for this Animal -->
+      <div class="pt-2 border-t">
+        <span class="font-bold text-slate-600 block mb-1">Weight History (கடந்த எடை விவரங்கள்):</span>
+        <div id="pastWeightsList" class="max-h-36 overflow-y-auto space-y-1 text-[11px]">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: QUICK MEDICAL & BREEDING ==================== -->
   <div id="quickMedicalModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex items-center justify-center p-3 sm:p-6">
     <div class="bg-white w-full max-w-md rounded-3xl p-5 shadow-2xl font-mono-val text-xs space-y-4">
-      
-      <!-- Modal Header -->
       <div class="flex items-center justify-between border-b pb-3">
         <div class="flex items-center gap-2">
           <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
@@ -487,25 +618,21 @@
         </button>
       </div>
 
-      <!-- 1-Tap Ready Selection Chips -->
       <div class="space-y-2">
-        <label class="block font-bold text-slate-700">Select Event (1-Tap Selection):</label>
+        <label class="block font-bold text-slate-700">Select Event (1-Tap):</label>
         <div class="grid grid-cols-2 gap-2">
           <button type="button" onclick="selectQuickTag('Deworming (பூச்சி மருந்து)', 90)" class="quick-med-chip p-2.5 rounded-xl border border-slate-200 text-left hover:border-emerald-500 hover:bg-emerald-50 transition active:scale-95">
             <span class="block font-bold text-slate-800">💊 Deworming</span>
             <span class="text-[10px] text-slate-500">Auto +90 Days Due</span>
           </button>
-
           <button type="button" onclick="selectQuickTag('AI - Semen Insemination (சினை ஊசி)', 60)" class="quick-med-chip p-2.5 rounded-xl border border-slate-200 text-left hover:border-emerald-500 hover:bg-emerald-50 transition active:scale-95">
             <span class="block font-bold text-slate-800">💉 சினை ஊசி (AI)</span>
             <span class="text-[10px] text-slate-500">Auto +60 Days Check</span>
           </button>
-
           <button type="button" onclick="selectQuickTag('FMD Vaccine (கோமாரி)', 180)" class="quick-med-chip p-2.5 rounded-xl border border-slate-200 text-left hover:border-emerald-500 hover:bg-emerald-50 transition active:scale-95">
             <span class="block font-bold text-slate-800">🛡️ FMD தடுப்பூசி</span>
             <span class="text-[10px] text-slate-500">Auto +180 Days Booster</span>
           </button>
-
           <button type="button" onclick="selectQuickTag('Pregnancy Confirmed (சினை உறுதி)', 220)" class="quick-med-chip p-2.5 rounded-xl border border-slate-200 text-left hover:border-emerald-500 hover:bg-emerald-50 transition active:scale-95">
             <span class="block font-bold text-slate-800">🍼 சினை உறுதி</span>
             <span class="text-[10px] text-slate-500">Calving Alert (280D)</span>
@@ -513,13 +640,11 @@
         </div>
       </div>
 
-      <!-- Details Form -->
       <form onsubmit="handleQuickMedicalSubmit(event)" class="space-y-3 pt-1">
         <div>
           <label class="block font-bold text-slate-700 mb-1">Treatment / Medicine Name*</label>
           <input type="text" id="quickMedTitle" required placeholder="Select chip above or type..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none font-bold text-emerald-950">
         </div>
-
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block font-bold text-slate-700 mb-1">Administered Date</label>
@@ -530,50 +655,24 @@
             <input type="date" id="quickMedNextDue" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs outline-none font-bold text-rose-700">
           </div>
         </div>
-
         <div>
-          <label class="block font-bold text-slate-700 mb-1">Doctor / Inseminator / Note</label>
-          <input type="text" id="quickMedNote" placeholder="e.g. Dr. Murugan / Gir Semen Batch #401" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none">
+          <label class="block font-bold text-slate-700 mb-1">Doctor / Note</label>
+          <input type="text" id="quickMedNote" placeholder="e.g. Dr. Murugan / Semen Batch #401" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none">
         </div>
-
-        <button type="submit" class="w-full bg-[#143627] hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-2 active:scale-95">
+        <button type="submit" class="w-full bg-[#143627] hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-2">
           <i data-lucide="check-circle" class="w-4 h-4"></i>
           <span>Save to Animal Medical Record</span>
         </button>
       </form>
-
     </div>
   </div>
 
   <!-- ==================== SCRIPT ENGINE ==================== -->
   <script>
-    // 1. Firebase Initialization with Local Fallback
-    const firebaseConfig = {
-      apiKey: "AIzaSyDummyKeyReplaceWhenAvailable",
-      authDomain: "dfarm-polur.firebaseapp.com",
-      projectId: "dfarm-polur",
-      storageBucket: "dfarm-polur.appspot.com",
-      messagingSenderId: "123456789",
-      appId: "1:123456789:web:abcdef"
-    };
-
-    let isCloudOnline = false;
-    let db = null;
-
-    try {
-      if (typeof firebase !== 'undefined' && firebase.initializeApp) {
-        firebase.initializeApp(firebaseConfig);
-        db = firebase.firestore();
-        isCloudOnline = true;
-      }
-    } catch (e) {
-      console.warn("Cloud Firestore using Offline Local Storage Engine fallback.");
-      isCloudOnline = false;
-    }
-
     // Local Storage Master State
     let livestockDB = JSON.parse(localStorage.getItem('dfarm_livestock') || '[]');
-    let milkLedgerDB = JSON.parse(localStorage.getItem('dfarm_milk_ledger') || '[]');
+    let milkHarvestDB = JSON.parse(localStorage.getItem('dfarm_milk_harvest') || '[]');
+    let milkSalesDB = JSON.parse(localStorage.getItem('dfarm_milk_sales') || '[]');
     let financeDB = JSON.parse(localStorage.getItem('dfarm_finance') || '[]');
     let customerDB = JSON.parse(localStorage.getItem('dfarm_customers') || '[]');
 
@@ -581,36 +680,45 @@
     let chartMilkInstance = null;
     let chartFinanceInstance = null;
     let currentMedicalAnimalId = null;
+    let currentWeightAnimalId = null;
 
-    // Seed Data If Empty for Instant Visual Testing
+    // Seed Data If Empty
     if (!livestockDB.length) {
       livestockDB = [
-        { id: "COW-01", species: "Cattle", breed: "HF Cross", origin: "Purchased", status: "Milking", weight: 380, cost: 48000, bay: "Bay 1 (West)", motherId: "-", medicalHistory: [] },
-        { id: "COW-02", species: "Cattle", breed: "Jersey", origin: "Purchased", status: "Milking", weight: 340, cost: 42000, bay: "Bay 1 (West)", motherId: "-", medicalHistory: [] },
-        { id: "GT-01", species: "Goat", breed: "Thalassery", origin: "Purchased", status: "Ready for Sale", weight: 32, cost: 9500, bay: "Bay 3 (East)", motherId: "-", medicalHistory: [] },
-        { id: "GT-02", species: "Goat", breed: "Salem Black", origin: "Farm Born", status: "Growing", weight: 22, cost: 5000, bay: "Bay 4 (East)", motherId: "GT-01", medicalHistory: [] }
+        { id: "COW-01", species: "Cattle", breed: "HF Cross", origin: "Purchased", status: "Milking", weight: 0, cost: 48000, bay: "Bay 1 (West)", motherId: "-", medicalHistory: [], weightHistory: [] },
+        { id: "COW-02", species: "Cattle", breed: "Jersey", origin: "Purchased", status: "Milking", weight: 0, cost: 42000, bay: "Bay 1 (West)", motherId: "-", medicalHistory: [], weightHistory: [] },
+        { id: "GT-01", species: "Goat", breed: "Thalassery", origin: "Purchased", status: "Ready for Sale", weight: 32, cost: 9500, bay: "Bay 3 (East)", motherId: "-", medicalHistory: [], weightHistory: [{ date: "2026-10-15", weight: 30, note: "Initial" }, { date: "2026-11-05", weight: 32, note: "Pre-Bakrid prime" }] },
+        { id: "GT-02", species: "Goat", breed: "Salem Black", origin: "Farm Born", status: "Growing", weight: 22, cost: 5000, bay: "Bay 4 (East)", motherId: "GT-01", medicalHistory: [], weightHistory: [{ date: "2026-11-01", weight: 22, note: "Growing" }] }
       ];
       localStorage.setItem('dfarm_livestock', JSON.stringify(livestockDB));
     }
 
-    if (!milkLedgerDB.length) {
+    if (!milkHarvestDB.length) {
       const today = new Date().toISOString().split('T')[0];
-      milkLedgerDB = [
-        { date: today, cowId: "COW-01", am: 7.5, pm: 6.0, total: 13.5, fat: 4.4, price: 50, value: 675, buyer: "Farm Gate Pickup" },
-        { date: today, cowId: "COW-02", am: 6.0, pm: 5.5, total: 11.5, fat: 4.2, price: 50, value: 575, buyer: "Local Society" }
+      milkHarvestDB = [
+        { date: today, cowId: "COW-01", am: 7.5, pm: 6.0, total: 13.5, fat: 4.4, note: "Good feed intake" },
+        { date: today, cowId: "COW-02", am: 6.0, pm: 5.5, total: 11.5, fat: 4.2, note: "Morning normal" }
       ];
-      localStorage.setItem('dfarm_milk_ledger', JSON.stringify(milkLedgerDB));
+      localStorage.setItem('dfarm_milk_harvest', JSON.stringify(milkHarvestDB));
+    }
+
+    if (!milkSalesDB.length) {
+      const today = new Date().toISOString().split('T')[0];
+      milkSalesDB = [
+        { date: today, dealerLiters: 18, dealerRate: 45, custLiters: 5, custRate: 60, calfLiters: 2, totalDispatched: 25, totalRevenue: (18*45 + 5*60) }
+      ];
+      localStorage.setItem('dfarm_milk_sales', JSON.stringify(milkSalesDB));
     }
 
     function syncStateToStorage() {
       localStorage.setItem('dfarm_livestock', JSON.stringify(livestockDB));
-      localStorage.setItem('dfarm_milk_ledger', JSON.stringify(milkLedgerDB));
+      localStorage.setItem('dfarm_milk_harvest', JSON.stringify(milkHarvestDB));
+      localStorage.setItem('dfarm_milk_sales', JSON.stringify(milkSalesDB));
       localStorage.setItem('dfarm_finance', JSON.stringify(financeDB));
       localStorage.setItem('dfarm_customers', JSON.stringify(customerDB));
       refreshAllViews();
     }
 
-    // Tab Navigation
     function switchTab(tabId) {
       ['overview', 'livestock', 'milk', 'finance', 'crm'].forEach(t => {
         const view = document.getElementById(`view-${t}`);
@@ -629,16 +737,62 @@
       lucide.createIcons();
     }
 
-    // Animal Registration Flow
-    function openAnimalModal() {
-      document.getElementById('animalModal').classList.remove('hidden');
-      autoGenerateTagId();
+    // ==================== LIVESTOCK MANAGEMENT ====================
+    function openAnimalModal(editId = null) {
+      const modal = document.getElementById('animalModal');
+      const title = document.getElementById('animalModalTitle');
+      const submitText = document.getElementById('btnAnimalSubmitText');
+      const originalIdField = document.getElementById('editAnimalOriginalId');
+
+      if (editId) {
+        const animal = livestockDB.find(a => a.id === editId);
+        if (!animal) return;
+        title.textContent = `Edit Livestock Details (${animal.id})`;
+        submitText.textContent = "Update Livestock Details";
+        originalIdField.value = animal.id;
+
+        document.getElementById('regSpecies').value = animal.species;
+        document.getElementById('regTagId').value = animal.id;
+        document.getElementById('regBreed').value = animal.breed;
+        document.getElementById('regOrigin').value = animal.origin;
+        document.getElementById('regStatus').value = animal.status;
+        document.getElementById('regWeight').value = animal.weight || '';
+        document.getElementById('regCost').value = animal.cost || '';
+        document.getElementById('regBay').value = animal.bay || '';
+        document.getElementById('regMotherId').value = animal.motherId || '';
+      } else {
+        title.textContent = "New Livestock Registration";
+        submitText.textContent = "Save to Master Ledger";
+        originalIdField.value = "";
+        document.getElementById('regBreed').value = '';
+        document.getElementById('regWeight').value = '';
+        document.getElementById('regCost').value = '';
+        document.getElementById('regBay').value = '';
+        autoGenerateTagId();
+      }
+
+      toggleMotherIdField();
+      toggleWeightField();
+      modal.classList.remove('hidden');
     }
+
     function closeAnimalModal() {
       document.getElementById('animalModal').classList.add('hidden');
     }
 
+    function toggleWeightField() {
+      const species = document.getElementById('regSpecies').value;
+      const col = document.getElementById('initialWeightCol');
+      // Hide weight entry for cows completely
+      if (species === 'Cattle') {
+        col.classList.add('hidden');
+      } else {
+        col.classList.remove('hidden');
+      }
+    }
+
     function autoGenerateTagId() {
+      if (document.getElementById('editAnimalOriginalId').value) return; // Don't overwrite when editing
       const species = document.getElementById('regSpecies').value;
       const prefix = species === 'Cattle' ? 'COW-' : (species === 'Goat' ? 'GT-' : (species === 'Poultry' ? 'CK-' : 'RB-'));
       const count = livestockDB.filter(a => a.species === species).length + 1;
@@ -657,23 +811,45 @@
 
     function handleAnimalSubmit(e) {
       e.preventDefault();
-      const newAnimal = {
-        id: document.getElementById('regTagId').value.trim(),
-        species: document.getElementById('regSpecies').value,
-        breed: document.getElementById('regBreed').value.trim() || 'Native Cross',
-        origin: document.getElementById('regOrigin').value,
-        motherId: document.getElementById('regMotherId').value.trim() || '-',
-        status: document.getElementById('regStatus').value,
-        weight: parseFloat(document.getElementById('regWeight').value) || 0,
-        cost: parseFloat(document.getElementById('regCost').value) || 0,
-        bay: document.getElementById('regBay').value.trim() || 'Main Shed',
-        medicalHistory: []
-      };
+      const originalId = document.getElementById('editAnimalOriginalId').value;
+      const id = document.getElementById('regTagId').value.trim();
+      const species = document.getElementById('regSpecies').value;
+      const breed = document.getElementById('regBreed').value.trim() || 'Native Cross';
+      const origin = document.getElementById('regOrigin').value;
+      const motherId = document.getElementById('regMotherId').value.trim() || '-';
+      const status = document.getElementById('regStatus').value;
+      const weight = species === 'Cattle' ? 0 : (parseFloat(document.getElementById('regWeight').value) || 0);
+      const cost = parseFloat(document.getElementById('regCost').value) || 0;
+      const bay = document.getElementById('regBay').value.trim() || 'Main Shed';
 
-      livestockDB.unshift(newAnimal);
+      if (originalId) {
+        // Edit Existing
+        const idx = livestockDB.findIndex(a => a.id === originalId);
+        if (idx !== -1) {
+          livestockDB[idx] = {
+            ...livestockDB[idx],
+            id, species, breed, origin, motherId, status, weight, cost, bay
+          };
+        }
+      } else {
+        // Add New
+        livestockDB.unshift({
+          id, species, breed, origin, motherId, status, weight, cost, bay,
+          medicalHistory: [],
+          weightHistory: weight > 0 ? [{ date: new Date().toISOString().split('T')[0], weight, note: 'Initial registration' }] : []
+        });
+      }
+
       syncStateToStorage();
       closeAnimalModal();
-      alert(`Animal ${newAnimal.id} registered successfully!`);
+      alert(`Livestock ${id} saved successfully!`);
+    }
+
+    function deleteAnimal(id) {
+      if (confirm(`Are you sure you want to remove ${id} from livestock registry?`)) {
+        livestockDB = livestockDB.filter(a => a.id !== id);
+        syncStateToStorage();
+      }
     }
 
     function filterLivestock(species) {
@@ -698,63 +874,128 @@
         return;
       }
 
-      target.innerHTML = filtered.map(item => `
-        <div class="bg-white rounded-2xl p-4 border border-slate-200/90 shadow-xs flex flex-col justify-between font-mono-val text-xs space-y-3">
-          <div class="flex items-center justify-between border-b pb-2">
-            <div>
-              <span class="text-sm font-extrabold text-[#143627]">${item.id}</span>
-              <span class="text-[10px] text-slate-500 block">${item.breed}</span>
+      target.innerHTML = filtered.map(item => {
+        const isCattle = item.species === 'Cattle';
+        return `
+          <div class="bg-white rounded-2xl p-4 border border-slate-200/90 shadow-xs flex flex-col justify-between font-mono-val text-xs space-y-3">
+            <div class="flex items-center justify-between border-b pb-2">
+              <div>
+                <span class="text-sm font-extrabold text-[#143627]">${item.id}</span>
+                <span class="text-[10px] text-slate-500 block">${item.breed}</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${
+                  item.status === 'Milking' ? 'bg-emerald-100 text-emerald-800' :
+                  item.status === 'Ready for Sale' ? 'bg-amber-100 text-amber-900 border border-amber-300' :
+                  'bg-slate-100 text-slate-700'
+                }">${item.status}</span>
+                <button onclick="openAnimalModal('${item.id}')" class="p-1 text-slate-400 hover:text-emerald-800" title="Edit Animal Details">
+                  <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                </button>
+                <button onclick="deleteAnimal('${item.id}')" class="p-1 text-slate-400 hover:text-rose-600" title="Delete">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
             </div>
-            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${
-              item.status === 'Milking' ? 'bg-emerald-100 text-emerald-800' :
-              item.status === 'Ready for Sale' ? 'bg-amber-100 text-amber-900 border border-amber-300' :
-              'bg-slate-100 text-slate-700'
-            }">${item.status}</span>
-          </div>
 
-          <div class="space-y-1 text-[11px] text-slate-600">
-            <div class="flex justify-between"><span>Origin:</span><b class="text-slate-800">${item.origin} ${item.motherId !== '-' ? '(Mom: ' + item.motherId + ')' : ''}</b></div>
-            <div class="flex justify-between"><span>Weight:</span><b class="text-slate-800">${item.weight} kg</b></div>
-            <div class="flex justify-between"><span>Location:</span><b class="text-slate-800">${item.bay}</b></div>
-            <div class="flex justify-between"><span>Cost / Val:</span><b class="text-slate-800">₹${item.cost.toLocaleString('en-IN')}</b></div>
-          </div>
+            <div class="space-y-1 text-[11px] text-slate-600">
+              <div class="flex justify-between"><span>Origin:</span><b class="text-slate-800">${item.origin} ${item.motherId !== '-' ? '(Mom: ' + item.motherId + ')' : ''}</b></div>
+              
+              <!-- WEIGHT ROW: Only for Goats/Other animals. COWS ARE EXCLUDED! -->
+              ${!isCattle ? `
+                <div class="flex justify-between">
+                  <span>Current Weight:</span>
+                  <b class="text-slate-900 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">${item.weight || 0} kg</b>
+                </div>
+              ` : `
+                <div class="flex justify-between text-slate-400"><span>Weight Check:</span><i>N/A (Cow)</i></div>
+              `}
 
-          <div class="pt-1 flex gap-1.5">
-            <button onclick="logAnimalWeight('${item.id}')" class="flex-1 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-xl text-[10px] font-bold text-slate-700">Update Wt</button>
-            <button onclick="recordAnimalMedical('${item.id}')" class="flex-1 py-1.5 bg-emerald-50 hover:bg-emerald-100 rounded-xl text-[10px] font-bold text-emerald-800">Medical / AI</button>
+              <div class="flex justify-between"><span>Location:</span><b class="text-slate-800">${item.bay}</b></div>
+              <div class="flex justify-between"><span>Cost / Val:</span><b class="text-slate-800">₹${item.cost ? item.cost.toLocaleString('en-IN') : 0}</b></div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="pt-1 flex gap-1.5">
+              ${!isCattle ? `
+                <button onclick="openGoatWeightModal('${item.id}')" class="flex-1 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-xl text-[10px] font-bold flex items-center justify-center gap-1">
+                  <i data-lucide="scale" class="w-3 h-3"></i>
+                  <span>Log Wt (Date)</span>
+                </button>
+              ` : ''}
+              <button onclick="recordAnimalMedical('${item.id}')" class="flex-1 py-1.5 bg-emerald-50 hover:bg-emerald-100 rounded-xl text-[10px] font-bold text-emerald-800 flex items-center justify-center gap-1">
+                <i data-lucide="activity" class="w-3 h-3"></i>
+                <span>Medical / AI</span>
+              </button>
+            </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
       lucide.createIcons();
     }
 
-    function logAnimalWeight(id) {
-      const cur = livestockDB.find(a => a.id === id);
-      const wt = prompt(`Enter updated live weight for ${id} (in kg):`, cur ? cur.weight : 0);
-      if (wt && !isNaN(wt)) {
-        cur.weight = parseFloat(wt);
-        if (cur.species === 'Goat' && cur.weight >= 28) {
-          cur.status = 'Ready for Sale';
+    // ==================== GOAT WEIGHT MODAL WITH DATE ====================
+    function openGoatWeightModal(id) {
+      currentWeightAnimalId = id;
+      const animal = livestockDB.find(a => a.id === id);
+      document.getElementById('weightTargetTag').textContent = `${animal.id} (${animal.breed})`;
+      document.getElementById('weightLogDate').value = new Date().toISOString().split('T')[0];
+      document.getElementById('weightLogVal').value = animal.weight || '';
+      document.getElementById('weightLogNote').value = '';
+
+      // Render past weights
+      const pastList = document.getElementById('pastWeightsList');
+      if (animal.weightHistory && animal.weightHistory.length) {
+        pastList.innerHTML = animal.weightHistory.map(w => `
+          <div class="flex justify-between p-1.5 bg-slate-50 rounded-lg border border-slate-200">
+            <span class="text-slate-500">${w.date}</span>
+            <span class="font-bold text-emerald-900">${w.weight} kg</span>
+            <span class="text-slate-400">${w.note || '-'}</span>
+          </div>
+        `).join('');
+      } else {
+        pastList.innerHTML = `<span class="text-slate-400 italic">No past weight logs found.</span>`;
+      }
+
+      document.getElementById('goatWeightModal').classList.remove('hidden');
+    }
+
+    function closeGoatWeightModal() {
+      document.getElementById('goatWeightModal').classList.add('hidden');
+    }
+
+    function handleSaveAnimalWeight(e) {
+      e.preventDefault();
+      const date = document.getElementById('weightLogDate').value;
+      const weight = parseFloat(document.getElementById('weightLogVal').value);
+      const note = document.getElementById('weightLogNote').value.trim();
+
+      const animal = livestockDB.find(a => a.id === currentWeightAnimalId);
+      if (animal) {
+        animal.weight = weight;
+        if (!animal.weightHistory) animal.weightHistory = [];
+        animal.weightHistory.unshift({ date, weight, note });
+
+        // Auto festival readiness status for goats
+        if (animal.species === 'Goat' && animal.weight >= 28) {
+          animal.status = 'Ready for Sale';
         }
         syncStateToStorage();
       }
+
+      closeGoatWeightModal();
+      alert(`Weight of ${currentWeightAnimalId} updated to ${weight} kg on ${date}!`);
     }
 
-    // ==================== VISUAL QUICK MEDICAL MODAL SYSTEM ====================
+    // ==================== MEDICAL MODAL ====================
     function recordAnimalMedical(id) {
       currentMedicalAnimalId = id;
-      const targetBadge = document.getElementById('medTargetAnimalBadge');
-      const targetInputDate = document.getElementById('quickMedDate');
-      
-      if (targetBadge) targetBadge.textContent = id;
-      if (targetInputDate) targetInputDate.value = new Date().toISOString().split('T')[0];
-      
+      document.getElementById('medTargetAnimalBadge').textContent = id;
+      document.getElementById('quickMedDate').value = new Date().toISOString().split('T')[0];
       document.getElementById('quickMedTitle').value = '';
       document.getElementById('quickMedNextDue').value = '';
       document.getElementById('quickMedNote').value = '';
-      
       document.getElementById('quickMedicalModal').classList.remove('hidden');
-      lucide.createIcons();
     }
 
     function closeQuickMedicalModal() {
@@ -763,7 +1004,6 @@
 
     function selectQuickTag(title, dueDays) {
       document.getElementById('quickMedTitle').value = title;
-      
       const today = new Date();
       today.setDate(today.getDate() + dueDays);
       document.getElementById('quickMedNextDue').value = today.toISOString().split('T')[0];
@@ -780,8 +1020,6 @@
       if (animal) {
         if (!animal.medicalHistory) animal.medicalHistory = [];
         animal.medicalHistory.unshift({ date, title, nextDue, note });
-        
-        // Update animal status on pregnancy confirmation
         if (title.includes('Pregnancy') || title.includes('சினை உறுதி')) {
           animal.status = 'Pregnant';
         }
@@ -789,10 +1027,10 @@
       }
 
       closeQuickMedicalModal();
-      alert(`✓ Recorded for ${currentMedicalAnimalId}: ${title}\nNext Due: ${nextDue || 'N/A'}`);
+      alert(`Recorded for ${currentMedicalAnimalId}: ${title}\nDue: ${nextDue || 'N/A'}`);
     }
 
-    // Milk Logging Engine
+    // ==================== MILK LOG PART 1: COW PRODUCTION ====================
     function populateMilkingCows() {
       const target = document.getElementById('milkCowId');
       const cows = livestockDB.filter(a => a.species === 'Cattle');
@@ -801,68 +1039,214 @@
       `).join('');
     }
 
-    function handleMilkLogSubmit(e) {
+    function handleMilkProductionSubmit(e) {
       e.preventDefault();
+      const editIdx = parseInt(document.getElementById('editMilkProdIndex').value);
       const cowId = document.getElementById('milkCowId').value;
+      const date = document.getElementById('milkHarvestDate').value;
       const am = parseFloat(document.getElementById('milkAmLiters').value) || 0;
       const pm = parseFloat(document.getElementById('milkPmLiters').value) || 0;
       const fat = parseFloat(document.getElementById('milkFat').value) || 4.4;
-      const price = parseFloat(document.getElementById('milkPricePerLiter').value) || 50;
-      const buyer = document.getElementById('milkBuyer').value.trim() || 'Direct Supply';
+      const note = document.getElementById('milkCowNote').value.trim();
       const total = am + pm;
-      const value = Math.round(total * price);
-      const today = new Date().toISOString().split('T')[0];
 
-      milkLedgerDB.unshift({
-        date: today,
-        cowId, am, pm, total, fat, price, value, buyer
-      });
+      const record = { date, cowId, am, pm, total, fat, note };
 
-      // Auto financial income logging
-      financeDB.unshift({
-        date: today,
-        type: "Income-Milk",
-        amount: value,
-        note: `Milk Sale: ${total}L from ${cowId} (${buyer})`
-      });
+      if (editIdx >= 0) {
+        milkHarvestDB[editIdx] = record;
+      } else {
+        milkHarvestDB.unshift(record);
+      }
 
       syncStateToStorage();
-      e.target.reset();
-      alert(`Milking entry for ${cowId} recorded: ${total} Litres (₹${value})!`);
+      resetMilkProdForm();
     }
 
-    function renderMilkTable() {
-      const tbody = document.getElementById('milkEntriesTableBody');
-      tbody.innerHTML = milkLedgerDB.slice(0, 15).map(m => `
+    function editMilkProduction(index) {
+      const m = milkHarvestDB[index];
+      if (!m) return;
+      document.getElementById('editMilkProdIndex').value = index;
+      document.getElementById('milkCowId').value = m.cowId;
+      document.getElementById('milkHarvestDate').value = m.date;
+      document.getElementById('milkAmLiters').value = m.am;
+      document.getElementById('milkPmLiters').value = m.pm;
+      document.getElementById('milkFat').value = m.fat;
+      document.getElementById('milkCowNote').value = m.note || '';
+      
+      document.getElementById('btnSaveMilkProd').innerHTML = `<span>Update Yield Record</span>`;
+      document.getElementById('btnCancelMilkProd').classList.remove('hidden');
+    }
+
+    function resetMilkProdForm() {
+      document.getElementById('editMilkProdIndex').value = -1;
+      document.getElementById('milkAmLiters').value = '';
+      document.getElementById('milkPmLiters').value = '';
+      document.getElementById('milkFat').value = '';
+      document.getElementById('milkCowNote').value = '';
+      document.getElementById('btnSaveMilkProd').innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Save Cow Yield</span>`;
+      document.getElementById('btnCancelMilkProd').classList.add('hidden');
+      lucide.createIcons();
+    }
+
+    function deleteMilkProduction(index) {
+      if (confirm("Delete this cow milking yield entry?")) {
+        milkHarvestDB.splice(index, 1);
+        syncStateToStorage();
+      }
+    }
+
+    function renderMilkHarvestTable() {
+      const tbody = document.getElementById('milkHarvestTableBody');
+      tbody.innerHTML = milkHarvestDB.slice(0, 15).map((m, idx) => `
         <tr class="hover:bg-slate-50">
           <td class="p-2.5 text-slate-500">${m.date}</td>
           <td class="p-2.5 font-bold text-[#143627]">${m.cowId}</td>
-          <td class="p-2.5">${m.am}</td>
-          <td class="p-2.5">${m.pm}</td>
-          <td class="p-2.5 font-bold text-emerald-800">${m.total}</td>
+          <td class="p-2.5">${m.am} L</td>
+          <td class="p-2.5">${m.pm} L</td>
+          <td class="p-2.5 font-extrabold text-blue-900">${m.total} L</td>
           <td class="p-2.5">${m.fat}%</td>
-          <td class="p-2.5 font-bold text-slate-900">₹${m.value}</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editMilkProduction(${idx})" class="p-1 text-slate-400 hover:text-emerald-800" title="Edit"><i data-lucide="edit-3" class="w-3.5 h-3.5"></i></button>
+            <button onclick="deleteMilkProduction(${idx})" class="p-1 text-slate-400 hover:text-rose-600" title="Delete"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+          </td>
         </tr>
       `).join('');
     }
 
-    // Cashflow & Ledger
+    // ==================== MILK LOG PART 2: SALES & DISPATCH ====================
+    function handleMilkSaleSubmit(e) {
+      e.preventDefault();
+      const editIdx = parseInt(document.getElementById('editMilkSaleIndex').value);
+      const date = document.getElementById('saleDate').value;
+      const dealerLiters = parseFloat(document.getElementById('saleDealerLiters').value) || 0;
+      const dealerRate = parseFloat(document.getElementById('saleDealerRate').value) || 0;
+      const custLiters = parseFloat(document.getElementById('saleCustLiters').value) || 0;
+      const custRate = parseFloat(document.getElementById('saleCustRate').value) || 0;
+      const calfLiters = parseFloat(document.getElementById('saleCalfLiters').value) || 0;
+
+      const totalDispatched = dealerLiters + custLiters + calfLiters;
+      const totalRevenue = Math.round((dealerLiters * dealerRate) + (custLiters * custRate));
+
+      const record = { date, dealerLiters, dealerRate, custLiters, custRate, calfLiters, totalDispatched, totalRevenue };
+
+      if (editIdx >= 0) {
+        milkSalesDB[editIdx] = record;
+      } else {
+        milkSalesDB.unshift(record);
+        // Also auto log into Finance Inflow
+        financeDB.unshift({
+          date,
+          type: "Income-Milk",
+          amount: totalRevenue,
+          note: `Milk Dispatch: ${dealerLiters}L Dealer + ${custLiters}L Customers`
+        });
+      }
+
+      syncStateToStorage();
+      resetMilkSaleForm();
+    }
+
+    function editMilkSale(index) {
+      const s = milkSalesDB[index];
+      if (!s) return;
+      document.getElementById('editMilkSaleIndex').value = index;
+      document.getElementById('saleDate').value = s.date;
+      document.getElementById('saleDealerLiters').value = s.dealerLiters;
+      document.getElementById('saleDealerRate').value = s.dealerRate;
+      document.getElementById('saleCustLiters').value = s.custLiters;
+      document.getElementById('saleCustRate').value = s.custRate;
+      document.getElementById('saleCalfLiters').value = s.calfLiters;
+
+      document.getElementById('btnSaveMilkSale').innerHTML = `<span>Update Sales Record</span>`;
+      document.getElementById('btnCancelMilkSale').classList.remove('hidden');
+    }
+
+    function resetMilkSaleForm() {
+      document.getElementById('editMilkSaleIndex').value = -1;
+      document.getElementById('saleDealerLiters').value = '';
+      document.getElementById('saleCustLiters').value = '';
+      document.getElementById('btnSaveMilkSale').innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i><span>Log Sales & Sync Revenue</span>`;
+      document.getElementById('btnCancelMilkSale').classList.add('hidden');
+      lucide.createIcons();
+    }
+
+    function deleteMilkSale(index) {
+      if (confirm("Delete this milk sales dispatch entry?")) {
+        milkSalesDB.splice(index, 1);
+        syncStateToStorage();
+      }
+    }
+
+    function renderMilkSalesTable() {
+      const tbody = document.getElementById('milkSalesTableBody');
+      tbody.innerHTML = milkSalesDB.slice(0, 15).map((s, idx) => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-2.5 text-slate-500">${s.date}</td>
+          <td class="p-2.5">${s.dealerLiters} L @ ₹${s.dealerRate}</td>
+          <td class="p-2.5 font-bold text-emerald-800">${s.custLiters} L @ ₹${s.custRate}</td>
+          <td class="p-2.5 text-slate-500">${s.calfLiters} L</td>
+          <td class="p-2.5 font-bold">${s.totalDispatched} L</td>
+          <td class="p-2.5 font-extrabold text-[#143627]">₹${s.totalRevenue.toLocaleString('en-IN')}</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editMilkSale(${idx})" class="p-1 text-slate-400 hover:text-emerald-800" title="Edit"><i data-lucide="edit-3" class="w-3.5 h-3.5"></i></button>
+            <button onclick="deleteMilkSale(${idx})" class="p-1 text-slate-400 hover:text-rose-600" title="Delete"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // ==================== CASH FLOW LEDGER (WITH EDIT/DELETE) ====================
     function handleFinanceEntry(e) {
       e.preventDefault();
+      const editIdx = parseInt(document.getElementById('editFinanceIndex').value);
       const type = document.getElementById('finType').value;
       const amount = parseFloat(document.getElementById('finAmount').value);
       const note = document.getElementById('finNote').value.trim();
       const today = new Date().toISOString().split('T')[0];
 
-      financeDB.unshift({ date: today, type, amount, note });
+      const record = { date: today, type, amount, note };
+
+      if (editIdx >= 0) {
+        financeDB[editIdx] = record;
+      } else {
+        financeDB.unshift(record);
+      }
+
       syncStateToStorage();
-      e.target.reset();
-      alert("Financial transaction logged!");
+      resetFinanceForm();
+    }
+
+    function editFinance(index) {
+      const f = financeDB[index];
+      if (!f) return;
+      document.getElementById('editFinanceIndex').value = index;
+      document.getElementById('finType').value = f.type;
+      document.getElementById('finAmount').value = f.amount;
+      document.getElementById('finNote').value = f.note;
+
+      document.getElementById('btnSaveFinance').innerHTML = `<span>Update Transaction</span>`;
+      document.getElementById('btnCancelFinance').classList.remove('hidden');
+    }
+
+    function resetFinanceForm() {
+      document.getElementById('editFinanceIndex').value = -1;
+      document.getElementById('finAmount').value = '';
+      document.getElementById('finNote').value = '';
+      document.getElementById('btnSaveFinance').innerHTML = `<i data-lucide="plus-circle" class="w-4 h-4"></i><span>Log Financial Record</span>`;
+      document.getElementById('btnCancelFinance').classList.add('hidden');
+      lucide.createIcons();
+    }
+
+    function deleteFinance(index) {
+      if (confirm("Delete this financial record?")) {
+        financeDB.splice(index, 1);
+        syncStateToStorage();
+      }
     }
 
     function renderFinanceTable() {
       const tbody = document.getElementById('financeTableBody');
-      tbody.innerHTML = financeDB.slice(0, 15).map(f => {
+      tbody.innerHTML = financeDB.slice(0, 15).map((f, idx) => {
         const isIncome = f.type.startsWith('Income');
         return `
           <tr class="hover:bg-slate-50">
@@ -870,29 +1254,69 @@
             <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${isIncome ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">${f.type}</span></td>
             <td class="p-2.5 text-slate-700">${f.note}</td>
             <td class="p-2.5 font-bold ${isIncome ? 'text-emerald-700' : 'text-rose-700'}">${isIncome ? '+' : '-'}₹${f.amount.toLocaleString('en-IN')}</td>
+            <td class="p-2.5 text-right space-x-1">
+              <button onclick="editFinance(${idx})" class="p-1 text-slate-400 hover:text-emerald-800" title="Edit"><i data-lucide="edit-3" class="w-3.5 h-3.5"></i></button>
+              <button onclick="deleteFinance(${idx})" class="p-1 text-slate-400 hover:text-rose-600" title="Delete"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+            </td>
           </tr>
         `;
       }).join('');
     }
 
-    // Customer CRM Engine
+    // ==================== CUSTOMER CRM (WITH EDIT/DELETE) ====================
     function handleCustomerRegistration(e) {
       e.preventDefault();
+      const editIdx = parseInt(document.getElementById('editCrmIndex').value);
       const name = document.getElementById('crmName').value.trim();
       const phone = document.getElementById('crmPhone').value.trim();
       const town = document.getElementById('crmTown').value.trim() || 'Polur';
       const interest = document.getElementById('crmInterest').value;
       const today = new Date().toISOString().split('T')[0];
 
-      const newCustomer = { name, phone, town, interest, registeredDate: today, visits: 1 };
-      customerDB.unshift(newCustomer);
-      syncStateToStorage();
-      e.target.reset();
+      if (editIdx >= 0) {
+        customerDB[editIdx] = { ...customerDB[editIdx], name, phone, town, interest };
+        syncStateToStorage();
+        resetCustomerForm();
+        alert(`Customer ${name} updated successfully!`);
+      } else {
+        const newCustomer = { name, phone, town, interest, registeredDate: today, visits: 1 };
+        customerDB.unshift(newCustomer);
+        syncStateToStorage();
+        resetCustomerForm();
 
-      // Automatic WhatsApp Welcome Trigger
-      const message = `வணக்கம் ${name}! 🌾\n\nபோளூர் D-FARM-க்கு வருகை தந்தமைக்கு மனமார்ந்த நன்றி. எங்கள் பண்ணையின் தண்ணீர் கலக்காத தூய பசும்பால், மரச்செக்கு எண்ணெய்கள் மற்றும் இயற்கை பண்ணைப் பொருட்களை இனி உங்கள் இல்லத்திற்கே நேரில் வந்து பெற்றுக் கொள்ளலாம்.\n\n📍 பண்ணை வரைபடம் (Location): https://maps.app.goo.gl/epyhsWxU1CKrnucp8\n🌐 ஆன்லைன் ஸ்டோர்: https://universalmoneymart.onrender.com/dfarm.html\n📞 உதவி & நேரடி ஆர்டர்: 7200752628\n\nஎன்றும் அன்புடன்,\nவிக்னேஷ் & தயாளன்\nD-FARM POLUR`;
+        const message = `வணக்கம் ${name}! 🌾\n\nபோளூர் D-FARM-க்கு வருகை தந்தமைக்கு மனமார்ந்த நன்றி. எங்கள் பண்ணையின் தண்ணீர் கலக்காத தூய பசும்பால், மரச்செக்கு எண்ணெய்கள் மற்றும் இயற்கை பண்ணைப் பொருட்களை இனி உங்கள் இல்லத்திற்கே நேரில் வந்து பெற்றுக் கொள்ளலாம்.\n\n📍 பண்ணை வரைபடம் (Location): https://maps.app.goo.gl/epyhsWxU1CKrnucp8\n🌐 ஆன்லைன் ஸ்டோர்: https://universalmoneymart.onrender.com/dfarm.html\n📞 உதவி & நேரடி ஆர்டர்: 7200752628\n\nஎன்றும் அன்புடன்,\nவிக்னேஷ் & தயாளன்\nD-FARM POLUR`;
+        window.open(`https://wa.me/91${phone}?text=${encodeURIComponent(message)}`, '_blank');
+      }
+    }
 
-      window.open(`https://wa.me/91${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    function editCustomer(index) {
+      const c = customerDB[index];
+      if (!c) return;
+      document.getElementById('editCrmIndex').value = index;
+      document.getElementById('crmName').value = c.name;
+      document.getElementById('crmPhone').value = c.phone;
+      document.getElementById('crmTown').value = c.town;
+      document.getElementById('crmInterest').value = c.interest;
+
+      document.getElementById('btnSaveCustomer').innerHTML = `<span>Update Customer</span>`;
+      document.getElementById('btnCancelCustomer').classList.remove('hidden');
+    }
+
+    function resetCustomerForm() {
+      document.getElementById('editCrmIndex').value = -1;
+      document.getElementById('crmName').value = '';
+      document.getElementById('crmPhone').value = '';
+      document.getElementById('crmTown').value = '';
+      document.getElementById('btnSaveCustomer').innerHTML = `<i data-lucide="user-plus" class="w-4 h-4"></i><span>Save Customer & Send WhatsApp</span>`;
+      document.getElementById('btnCancelCustomer').classList.add('hidden');
+      lucide.createIcons();
+    }
+
+    function deleteCustomer(index) {
+      if (confirm("Delete this customer from CRM?")) {
+        customerDB.splice(index, 1);
+        syncStateToStorage();
+      }
     }
 
     function renderCustomerCards() {
@@ -902,14 +1326,18 @@
         return;
       }
 
-      target.innerHTML = customerDB.map(c => `
+      target.innerHTML = customerDB.map((c, idx) => `
         <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-xs space-y-2">
           <div class="flex items-center justify-between border-b pb-2">
             <div>
               <h4 class="font-bold text-slate-900 font-sans text-xs">${c.name}</h4>
               <span class="text-[10px] text-slate-500">${c.town} • ${c.phone}</span>
             </div>
-            <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-bold">${c.interest}</span>
+            <div class="flex items-center gap-1">
+              <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 text-[10px] font-bold">${c.interest}</span>
+              <button onclick="editCustomer(${idx})" class="p-1 text-slate-400 hover:text-emerald-800" title="Edit Customer"><i data-lucide="edit-3" class="w-3.5 h-3.5"></i></button>
+              <button onclick="deleteCustomer(${idx})" class="p-1 text-slate-400 hover:text-rose-600" title="Delete"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+            </div>
           </div>
           <div class="flex items-center justify-between text-[11px] pt-1">
             <span class="text-slate-500">Joined: ${c.registeredDate}</span>
@@ -922,13 +1350,13 @@
       lucide.createIcons();
     }
 
-    // WhatsApp Biogas Reminder
+    // Biogas WhatsApp Reminder
     function triggerBiogasWhatsAppReminder() {
       const msg = `*🌾 D-FARM POLUR • WEEKLY BIOGAS REMINDER*\n----------------------------------------\nவணக்கம்! இன்று வாராந்திர சாண எரிவாயுக் கழிவு (Digested Slurry) வால்வைத் திறந்து கழனியில் உள்ள சூப்பர் நேப்பியர் தீவனப் பாசனத்திற்கு விட வேண்டிய நாள்.\n\nதயவுசெய்து வால்வு மற்றும் வாட்டர் பைப் இணைப்புகளை சரிபார்க்கவும்!\n- Shed OS Automation Desk`;
       window.open(`https://wa.me/917200752628?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // Chart.js Visuals
+    // Charts
     function renderCharts() {
       const ctxMilk = document.getElementById('milkYieldChart')?.getContext('2d');
       const ctxFin = document.getElementById('financialChart')?.getContext('2d');
@@ -981,15 +1409,18 @@
 
     // One-Click CSV Export
     function exportDataToCSV() {
-      let csv = "Category,ID,Breed_or_Name,Detail,Value\n";
+      let csv = "Category,ID_or_Date,Detail,SubDetail,Value\n";
       livestockDB.forEach(a => {
         csv += `Livestock,${a.id},${a.breed},${a.status},${a.cost}\n`;
       });
-      milkLedgerDB.forEach(m => {
-        csv += `MilkLog,${m.cowId},${m.date},${m.total} Litres,${m.value}\n`;
+      milkHarvestDB.forEach(m => {
+        csv += `MilkHarvest,${m.date},${m.cowId},${m.total} Litres,Fat: ${m.fat}%\n`;
+      });
+      milkSalesDB.forEach(s => {
+        csv += `MilkSales,${s.date},Dealer: ${s.dealerLiters}L,Cust: ${s.custLiters}L,₹${s.totalRevenue}\n`;
       });
       financeDB.forEach(f => {
-        csv += `Finance,${f.type},${f.date},${f.note},${f.amount}\n`;
+        csv += `Finance,${f.date},${f.type},${f.note},${f.amount}\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1005,7 +1436,7 @@
     // Global Stats Calculation
     function refreshAllViews() {
       const today = new Date().toISOString().split('T')[0];
-      const todayMilk = milkLedgerDB.filter(m => m.date === today).reduce((acc, i) => acc + i.total, 0);
+      const todayMilk = milkHarvestDB.filter(m => m.date === today).reduce((acc, i) => acc + i.total, 0);
       document.getElementById('statTodayMilk').textContent = todayMilk.toFixed(1);
       document.getElementById('statHerdCount').textContent = livestockDB.length;
       
@@ -1019,7 +1450,8 @@
 
       renderLivestockCards();
       populateMilkingCows();
-      renderMilkTable();
+      renderMilkHarvestTable();
+      renderMilkSalesTable();
       renderFinanceTable();
       renderCustomerCards();
       renderCharts();
@@ -1027,9 +1459,12 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      const today = new Date().toISOString().split('T')[0];
       document.getElementById('currentDateBadge').textContent = new Date().toLocaleDateString('en-IN', {
         day: 'numeric', month: 'short', year: 'numeric'
       });
+      document.getElementById('milkHarvestDate').value = today;
+      document.getElementById('saleDate').value = today;
       refreshAllViews();
     });
   </script>
