@@ -2,13 +2,15 @@
 <html lang="ta" class="h-full scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  
+  <!-- Anti-Cache Directives -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+  
   <title>D-FARM POLUR | Smart Agro Ecosystem, Dairy & Organic Store</title>
   <meta name="theme-color" content="#143627">
-  <!-- Prevents image hotlinking blocks -->
   <meta name="referrer" content="no-referrer">
   <link rel="icon" type="image/png" href="https://iili.io/nPh3Ia9.png">
 
@@ -21,18 +23,62 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
- <link rel="stylesheet" href="dfarm/css/style.css?v=2.1">
-</head>
-<body class="h-full flex flex-col antialiased relative selection:bg-emerald-900 selection:text-white">
+  <link rel="stylesheet" href="dfarm/css/style.css?v=3.0">
 
-  <!-- ==================== FLOATING BACKGROUND GLYPHS ==================== -->
-  <div class="bg-emoji-layer" aria-hidden="true">
-    <span class="floating-glyph" style="left: 8%; animation-delay: 0s;">🐄</span>
-    <span class="floating-glyph" style="left: 28%; animation-delay: 4s;">🥛</span>
-    <span class="floating-glyph" style="left: 50%; animation-delay: 9s;">🌱</span>
-    <span class="floating-glyph" style="left: 72%; animation-delay: 2s;">🍯</span>
-    <span class="floating-glyph" style="left: 90%; animation-delay: 14s;">🌾</span>
-  </div>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif-title { font-family: 'Playfair Display', serif; }
+    .font-mono-val { font-family: 'JetBrains Mono', monospace; }
+    
+    /* 16:9 Marquee Carousel Animation */
+    .carousel-container {
+      display: flex;
+      overflow: hidden;
+      user-select: none;
+      gap: 1rem;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 1rem;
+      animation: scrollMarquee 28s linear infinite;
+    }
+    .carousel-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .organic-card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      border: 1px solid rgba(20, 54, 39, 0.12);
+      transition: all 0.3s ease;
+    }
+    .organic-card:hover {
+      box-shadow: 0 10px 25px -5px rgba(20, 54, 39, 0.08);
+      border-color: rgba(20, 54, 39, 0.25);
+    }
+    .custom-scroll::-webkit-scrollbar { width: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+    /* Floating action buttons */
+    .ai-float-btn {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 1.5rem;
+      z-index: 45;
+    }
+    .wa-float-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 45;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col antialiased relative selection:bg-emerald-900 selection:text-white bg-[#FAF6EE]/50">
 
   <div id="dfarmMasterApp" class="relative z-10 flex flex-col justify-between min-h-screen">
 
@@ -52,49 +98,54 @@
     </div>
 
     <!-- ==================== MAIN HEADER ==================== -->
-   <header class="bg-[#FAF6EE]/95 backdrop-blur-md border-b border-[#143627]/10 px-4 sm:px-8 py-3.5 sticky top-[37px] z-40">
-  <div class="max-w-6xl mx-auto flex items-center justify-between">
-    
-    <!-- Left Side: Brand Logo & Title -->
-    <a href="./dfarm.html" class="flex items-center gap-3 cursor-pointer">
-      <img src="https://iili.io/nPh3Ia9.png" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/80x80/143627/FFFFFF?text=D-FARM';" class="w-11 h-11 rounded-full object-cover border-2 border-[#143627]/20 shadow-sm" alt="D-FARM Logo">
-      <div>
-        <div class="flex items-center gap-1.5">
-          <span class="font-serif-title font-bold text-xl sm:text-2xl tracking-tight text-[#143627]">D-FARM</span>
-          <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-100 text-[#143627] font-black tracking-widest uppercase font-mono-val">POLUR</span>
+    <header class="bg-[#FAF6EE]/95 backdrop-blur-md border-b border-[#143627]/10 px-4 sm:px-8 py-3.5 sticky top-[37px] z-40">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        
+        <!-- Left Side: Brand Logo & Title -->
+        <a href="./dfarm.html" class="flex items-center gap-3 cursor-pointer">
+          <img src="https://iili.io/nPh3Ia9.png" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/80x80/143627/FFFFFF?text=D-FARM';" class="w-11 h-11 rounded-full object-cover border-2 border-[#143627]/20 shadow-sm" alt="D-FARM Logo">
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-serif-title font-bold text-xl sm:text-2xl tracking-tight text-[#143627]">D-FARM</span>
+              <span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-100 text-[#143627] font-black tracking-widest uppercase font-mono-val">POLUR</span>
+            </div>
+            <p class="text-[10px] text-slate-600 font-semibold">Pure • Traditional • Honest</p>
+          </div>
+        </a>
+
+        <!-- Right Side: Lang + Admin PIN + Cart + Hamburger Drawer Menu -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Language Toggle -->
+          <button onclick="toggleAppLanguage()" class="px-2.5 py-1.5 rounded-xl bg-white border border-[#143627]/20 hover:bg-emerald-50 text-[#143627] text-xs font-bold transition flex items-center gap-1 shadow-sm font-mono-val">
+            <i data-lucide="globe" class="w-3.5 h-3.5 text-emerald-800"></i>
+            <span id="langDisplayBadge">தமிழ் / EN</span>
+          </button>
+
+          <!-- Admin Security Button (PIN HIDDEN) -->
+          <button onclick="promptAdminPin()" title="Admin Shed OS" class="px-3 py-1.5 border border-[#143627]/20 bg-stone-900 hover:bg-black text-amber-200 rounded-xl transition flex items-center gap-1.5 text-xs font-mono-val font-bold shadow-sm">
+            <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span class="hidden sm:inline">Admin</span>
+          </button>
+
+          <!-- Cart Trigger -->
+          <button onclick="toggleCartDrawer(true)" class="bg-[#143627] hover:bg-[#0D241A] text-white px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition">
+            <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-300"></i>
+            <span id="cartCountBadge" class="text-xs font-bold font-mono-val">0</span>
+          </button>
+
+          <!-- Robust SVG Hamburger Drawer Menu Button -->
+          <button onclick="toggleRightDrawer(true)" class="p-2 text-[#143627] bg-white border border-[#143627]/20 rounded-xl hover:bg-slate-100 transition shadow-sm ml-1 flex items-center justify-center cursor-pointer" aria-label="Open Navigation Menu">
+            <svg class="w-5 h-5 text-[#143627]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
         </div>
-        <p class="text-[10px] text-slate-600 font-semibold">Pure • Traditional • Honest</p>
       </div>
-    </a>
-
-    <!-- Right Side: Lang + Admin PIN + Cart + Hamburger Drawer Menu -->
-    <div class="flex items-center gap-2 sm:gap-3">
-      <!-- Language Toggle -->
-      <button onclick="toggleAppLanguage()" class="px-2.5 py-1.5 rounded-xl bg-white border border-[#143627]/20 hover:bg-emerald-50 text-[#143627] text-xs font-bold transition flex items-center gap-1 shadow-sm font-mono-val">
-        <i data-lucide="globe" class="w-3.5 h-3.5 text-emerald-800"></i>
-        <span id="langDisplayBadge">தமிழ் / EN</span>
-      </button>
-
-      <!-- Admin PIN Button -->
-      <button onclick="promptAdminPin()" title="Admin Shed OS" class="px-3 py-1.5 border border-[#143627]/20 bg-stone-900 hover:bg-black text-amber-200 rounded-xl transition flex items-center gap-1.5 text-xs font-mono-val font-bold shadow-sm">
-  <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
-  <span class="hidden sm:inline">Admin</span>
-</button>
-
-      <!-- Cart Trigger -->
-      <button onclick="toggleCartDrawer(true)" class="bg-[#143627] hover:bg-[#0D241A] text-white px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-md active:scale-95 transition">
-        <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-300"></i>
-        <span id="cartCountBadge" class="text-xs font-bold font-mono-val">0</span>
-      </button>
-
-      <!-- Right Hamburger Drawer Menu -->
-      <button onclick="toggleRightDrawer(true)" class="p-2 text-[#143627] bg-white border border-[#143627]/20 rounded-xl hover:bg-slate-100 transition shadow-sm ml-1" aria-label="Menu">
-        <i data-lucide="menu" class="w-5 h-5"></i>
-      </button>
-    </div>
-
-  </div>
-</header>
+    </header>
 
     <!-- ==================== RIGHT-SIDE SLIDE DRAWER ==================== -->
     <div id="drawerBackdrop" class="fixed inset-0 bg-black/60 z-50 hidden transition-opacity" onclick="toggleRightDrawer(false)"></div>
@@ -117,13 +168,11 @@
           <a href="./dfarm/shop.html" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">Shop Products</a>
           <a href="#livestock" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">Livestock Sales</a>
           <a href="#fodder" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">Fodder Pastures (தீவனங்கள்)</a>
-          <a href="#about-farm" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">About Farm</a>
+          <a href="#gallery" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">Farm Moments (கேலரி)</a>
           <a href="#story" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">Founders (Vignesh & Dhayalan)</a>
           <a href="#subscribe" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">Milk Subscription</a>
           <a href="#visit" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">Farm Location & Map</a>
-          <a href="#contact-form" onclick="toggleRightDrawer(false)" class="block py-2.5 px-3 hover:bg-emerald-50 rounded-xl transition">Contact Us</a>
           
-          <!-- Separate Shop View Triggers -->
           <button onclick="toggleRightDrawer(false); openFullCatalogModal();" class="w-full text-left py-2.5 px-3 bg-emerald-50 text-emerald-900 rounded-xl transition flex items-center justify-between mt-2 font-bold">
             <span>All 11+ Products (முழு கடை)</span>
             <i data-lucide="store" class="w-4 h-4 text-emerald-700"></i>
@@ -133,12 +182,12 @@
         <div class="pt-4 border-t border-slate-200 space-y-2">
           <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block font-mono-val">Protected Farm Control</span>
           <button onclick="toggleRightDrawer(false); promptAdminPin();" class="w-full py-2.5 px-3 bg-stone-900 hover:bg-black text-amber-200 rounded-xl text-xs font-bold transition flex items-center justify-between font-mono-val">
-  <div class="flex items-center gap-2">
-    <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
-    <span>Launch Shed OS</span>
-  </div>
-  <span class="text-[9px] bg-stone-800 px-2 py-0.5 rounded text-stone-400">Authorized Only</span>
-</button>
+            <div class="flex items-center gap-2">
+              <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i>
+              <span>Launch Shed OS</span>
+            </div>
+            <span class="text-[9px] bg-stone-800 px-2 py-0.5 rounded text-stone-400">Authorized Only</span>
+          </button>
         </div>
       </div>
 
@@ -151,10 +200,10 @@
     </aside>
 
     <!-- ==================== MAIN STOREFRONT CONTENT ==================== -->
-    <main class="flex-1 space-y-20 pb-16">
+    <main class="flex-1 space-y-16 pb-16">
       
       <!-- HERO SECTION -->
-      <section class="max-w-6xl mx-auto px-4 pt-10 pb-4">
+      <section class="max-w-6xl mx-auto px-4 pt-8 pb-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div class="space-y-5 text-center md:text-left">
             <span class="inline-block px-3.5 py-1 rounded-full bg-emerald-100 text-[#143627] text-xs uppercase font-extrabold tracking-wider font-mono-val">
@@ -202,31 +251,47 @@
           </span>
         </div>
 
-        <div class="carousel-track space-x-4 py-2">
-          <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPhGB5P.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/FFFFFF?text=Cold-Sealed+Raw+Milk';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
-            <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Cold-Sealed Raw Milk</div>
-          </div>
-          <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPjdrve.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/A7F3D0?text=Super+Napier+Pastures';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Super Napier">
-            <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Lush Super Napier Pastures</div>
-          </div>
-          <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPjJdHg.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/334155/FFFFFF?text=Free-Range+Country+Eggs';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Country Eggs">
-            <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Free-Range Country Eggs</div>
-          </div>
-          <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPPShba.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/0B2017/D4A373?text=Marachekku+Oils';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Wood-Pressed Oils">
-            <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Marachekku Oil Extraction</div>
-          </div>
-          <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPiN3kG.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/064E3B/FFFFFF?text=Organic+Vegetables';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Vegetables Harvest">
-            <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Daily Fresh Harvest</div>
-          </div>
-          <!-- Loop Clones -->
-          <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
-            <img src="https://iili.io/nPhGB5P.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/FFFFFF?text=Cold-Sealed+Raw+Milk';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
-            <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white">Cold-Sealed Raw Milk</div>
+        <div class="carousel-container py-2">
+          <div class="carousel-track">
+            <!-- 1: Milk -->
+            <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
+              <img src="https://iili.io/nPhGB5P.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/FFFFFF?text=Cold-Sealed+Raw+Milk';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
+              <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] font-bold text-white">Cold-Sealed Raw Milk</div>
+            </div>
+            <!-- 2: Napier -->
+            <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
+              <img src="https://iili.io/nPjdrve.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/A7F3D0?text=Super+Napier+Pastures';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Super Napier">
+              <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] font-bold text-white">Lush Super Napier Pastures</div>
+            </div>
+            <!-- 3: Eggs -->
+            <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
+              <img src="https://iili.io/nPjJdHg.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/334155/FFFFFF?text=Free-Range+Country+Eggs';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Country Eggs">
+              <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] font-bold text-white">Free-Range Country Eggs</div>
+            </div>
+            <!-- 4: Oils -->
+            <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
+              <img src="https://iili.io/nPPShba.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/0B2017/D4A373?text=Marachekku+Oils';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Wood-Pressed Oils">
+              <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] font-bold text-white">Marachekku Oil Extraction</div>
+            </div>
+            <!-- 5: Vegetables -->
+            <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
+              <img src="https://iili.io/nPiN3kG.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/064E3B/FFFFFF?text=Organic+Vegetables';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Vegetables Harvest">
+              <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] font-bold text-white">Daily Fresh Harvest</div>
+            </div>
+            
+            <!-- Duplicated loop clones for smooth infinite marquee -->
+            <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
+              <img src="https://iili.io/nPhGB5P.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/FFFFFF?text=Cold-Sealed+Raw+Milk';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Milking Bottling">
+              <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] font-bold text-white">Cold-Sealed Raw Milk</div>
+            </div>
+            <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
+              <img src="https://iili.io/nPjdrve.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/143627/A7F3D0?text=Super+Napier+Pastures';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Super Napier">
+              <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] font-bold text-white">Lush Super Napier Pastures</div>
+            </div>
+            <div class="w-72 sm:w-80 aspect-video rounded-2xl overflow-hidden shadow-md border border-slate-200 flex-shrink-0 relative group">
+              <img src="https://iili.io/nPjJdHg.jpg" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/640x360/334155/FFFFFF?text=Free-Range+Country+Eggs';" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Country Eggs">
+              <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded text-[10px] font-bold text-white">Free-Range Country Eggs</div>
+            </div>
           </div>
         </div>
       </section>
@@ -269,7 +334,7 @@
         </div>
       </section>
 
-      <!-- ==================== CURATED 4 PRODUCTS (2 COLUMNS) ==================== -->
+      <!-- ==================== CURATED 4 PRODUCTS ==================== -->
       <section id="products" class="max-w-4xl mx-auto px-4 space-y-8">
         <div class="text-center space-y-2">
           <span class="text-xs uppercase tracking-widest font-bold text-amber-700 font-mono-val">OUR FRESH RANGE</span>
@@ -347,12 +412,11 @@
 
         </div>
 
-        <!-- Direct Trigger Button to All 11+ Products -->
         <div class="text-center pt-2">
           <a href="./dfarm/shop.html" class="px-8 py-3.5 bg-white hover:bg-slate-50 border-2 border-[#143627] text-[#143627] font-bold text-xs sm:text-sm rounded-2xl transition shadow-md inline-flex items-center gap-2">
-  <span>View All 11+ Farm Products (முழு கடைக்குச் செல்க)</span>
-  <i data-lucide="arrow-right" class="w-4 h-4"></i>
-</a>
+            <span>View All 11+ Farm Products (முழு கடைக்குச் செல்க)</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
         </div>
       </section>
 
@@ -417,6 +481,7 @@
           </div>
         </div>
       </section>
+
       <!-- ==================== LIVESTOCK SALES ==================== -->
       <section id="livestock" class="max-w-6xl mx-auto px-4 space-y-8">
         <div class="bg-white rounded-3xl p-6 sm:p-10 border border-[#143627]/10 shadow-sm space-y-6">
@@ -546,7 +611,7 @@
         </div>
       </section>
 
-      <!-- ==================== MEET THE FOUNDERS (RESTORED APPA DHAYALAN) ==================== -->
+      <!-- ==================== MEET THE FOUNDERS ==================== -->
       <section id="story" class="max-w-6xl mx-auto px-4 py-4 space-y-10">
         <div class="text-center space-y-2">
           <span class="text-xs uppercase font-extrabold tracking-widest text-amber-700 font-mono-val">OUR JOURNEY</span>
@@ -660,7 +725,7 @@
         </div>
       </section>
 
-      <!-- ==================== BOOK FARM VISIT ==================== -->
+      <!-- ==================== BOOK FARM VISIT & EMBEDDED GOOGLE MAP ==================== -->
       <section id="visit" class="max-w-6xl mx-auto px-4 py-4 space-y-6">
         <div class="bg-gradient-to-br from-[#143627] to-[#0A1F16] text-white rounded-3xl p-8 sm:p-12 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div class="space-y-4">
@@ -710,6 +775,36 @@
             </form>
           </div>
         </div>
+
+        <!-- Embedded Interactive Google Map -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#143627]/10 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+            <div>
+              <span class="text-[10px] uppercase font-bold tracking-widest text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md font-mono-val">LIVE NAVIGATION</span>
+              <h3 class="font-serif-title font-bold text-xl sm:text-2xl text-[#143627] mt-1">D-FARM Location & Route Map</h3>
+            </div>
+            <a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="px-4 py-2 bg-[#143627] hover:bg-[#0D241A] text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 self-start shadow font-mono-val">
+              <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-300"></i> Open in Maps App
+            </a>
+          </div>
+
+          <div class="w-full h-72 sm:h-96 rounded-2xl overflow-hidden border border-slate-200 relative shadow-inner">
+            <iframe 
+              src="https://maps.google.com/maps?q=D-FARM+Polur+Bakmarpettai+Tamil+Nadu&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full h-full">
+            </iframe>
+          </div>
+          <p class="text-xs text-slate-500 font-mono-val flex items-center gap-1">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500 flex-shrink-0"></i> 
+            <span>Bakmarpettai, Murugapadi Road, Polur Taluk, Tiruvannamalai District, Tamil Nadu - 606902</span>
+          </p>
+        </div>
       </section>
 
       <!-- ==================== OFFICIAL D-FARM LUXURY FOOTER ==================== -->
@@ -738,10 +833,10 @@
           <div class="space-y-3 font-sans">
             <h4 class="font-bold uppercase tracking-widest text-amber-400 text-xs border-b border-emerald-800 pb-1 inline-block font-mono-val">Quick Links</h4>
             <ul class="space-y-2 text-xs text-emerald-200/80 font-medium">
+              <li><a href="./dfarm/shop.html" class="hover:text-white transition">Quick Commerce Store</a></li>
               <li><a href="#products" class="hover:text-white transition">Fresh Products Catalog</a></li>
               <li><a href="#livestock" class="hover:text-white transition">Farm Livestock Sales</a></li>
               <li><a href="#fodder" class="hover:text-white transition">Fodder Pastures (தீவனங்கள்)</a></li>
-              <li><a href="#about-farm" class="hover:text-white transition">Smart Farm Operations</a></li>
               <li><a href="#story" class="hover:text-white transition">Founders & Vision</a></li>
               <li><a href="https://maps.app.goo.gl/epyhsWxU1CKrnucp8" target="_blank" class="hover:text-white transition">Google Maps Route</a></li>
             </ul>
@@ -894,7 +989,7 @@
 
   </div>
 
-  <!-- ==================== SCRIPT ENGINE ==================== -->
+  <!-- ==================== SCRIPT ENGINE (CLEAN & BUG-FREE) ==================== -->
   <script>
     const inventoryCatalog = [
       { name: 'Raw Cow Milk (Glass Bottle 1L)', price: 60, img: 'https://iili.io/nPhGB5P.jpg', cat: 'dairy', desc: 'Cold sealed vintage bottle for purity & freshness.' },
@@ -1082,7 +1177,7 @@
           </button>
         </div>
       `).join('');
-      lucide.createIcons();
+      if (window.lucide) { lucide.createIcons(); }
     }
 
     // FORM & SUBSCRIPTIONS
@@ -1167,26 +1262,25 @@
       }
     }
 
+    // Lifecycle Init & Auto-Purge Cache Execution
     window.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
+      if (window.lucide) {
+        lucide.createIcons();
+      }
       calculateSubscriptionTotal();
-    });
- <script>
-  // Mobile Cache & Service Worker Complete Auto-Purge
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(registrations) {
-      for (let registration of registrations) {
-        registration.unregister();
+
+      // Mobile Cache & Service Worker Auto-Purge
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (let r of registrations) { r.unregister(); }
+        });
+      }
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          for (let n of names) { caches.delete(n); }
+        });
       }
     });
-  }
-  if ('caches' in window) {
-    caches.keys().then(function(names) {
-      for (let name of names) {
-        caches.delete(name);
-      }
-    });
-  }
-</script>
+  </script>
 </body>
 </html>
