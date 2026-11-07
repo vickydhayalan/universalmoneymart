@@ -467,6 +467,84 @@
     </div>
   </div>
 
+  <!-- ==================== QUICK MEDICAL & BREEDING MODAL (1-TAP SELECTION) ==================== -->
+  <div id="quickMedicalModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-white w-full max-w-md rounded-3xl p-5 shadow-2xl font-mono-val text-xs space-y-4">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+            <i data-lucide="activity" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-[#143627]">Quick Medical / Breeding Log</h3>
+            <span id="medTargetAnimalBadge" class="text-[11px] text-emerald-700 font-bold">COW-01</span>
+          </div>
+        </div>
+        <button onclick="closeQuickMedicalModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- 1-Tap Ready Selection Chips -->
+      <div class="space-y-2">
+        <label class="block font-bold text-slate-700">Select Event (1-Tap Selection):</label>
+        <div class="grid grid-cols-2 gap-2">
+          <button type="button" onclick="selectQuickTag('Deworming (பூச்சி மருந்து)', 90)" class="quick-med-chip p-2.5 rounded-xl border border-slate-200 text-left hover:border-emerald-500 hover:bg-emerald-50 transition active:scale-95">
+            <span class="block font-bold text-slate-800">💊 Deworming</span>
+            <span class="text-[10px] text-slate-500">Auto +90 Days Due</span>
+          </button>
+
+          <button type="button" onclick="selectQuickTag('AI - Semen Insemination (சினை ஊசி)', 60)" class="quick-med-chip p-2.5 rounded-xl border border-slate-200 text-left hover:border-emerald-500 hover:bg-emerald-50 transition active:scale-95">
+            <span class="block font-bold text-slate-800">💉 சினை ஊசி (AI)</span>
+            <span class="text-[10px] text-slate-500">Auto +60 Days Check</span>
+          </button>
+
+          <button type="button" onclick="selectQuickTag('FMD Vaccine (கோமாரி)', 180)" class="quick-med-chip p-2.5 rounded-xl border border-slate-200 text-left hover:border-emerald-500 hover:bg-emerald-50 transition active:scale-95">
+            <span class="block font-bold text-slate-800">🛡️ FMD தடுப்பூசி</span>
+            <span class="text-[10px] text-slate-500">Auto +180 Days Booster</span>
+          </button>
+
+          <button type="button" onclick="selectQuickTag('Pregnancy Confirmed (சினை உறுதி)', 220)" class="quick-med-chip p-2.5 rounded-xl border border-slate-200 text-left hover:border-emerald-500 hover:bg-emerald-50 transition active:scale-95">
+            <span class="block font-bold text-slate-800">🍼 சினை உறுதி</span>
+            <span class="text-[10px] text-slate-500">Calving Alert (280D)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Details Form -->
+      <form onsubmit="handleQuickMedicalSubmit(event)" class="space-y-3 pt-1">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Treatment / Medicine Name*</label>
+          <input type="text" id="quickMedTitle" required placeholder="Select chip above or type..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none font-bold text-emerald-950">
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Administered Date</label>
+            <input type="date" id="quickMedDate" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs outline-none font-bold">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">Next Follow-up Due</label>
+            <input type="date" id="quickMedNextDue" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs outline-none font-bold text-rose-700">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Doctor / Inseminator / Note</label>
+          <input type="text" id="quickMedNote" placeholder="e.g. Dr. Murugan / Gir Semen Batch #401" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none">
+        </div>
+
+        <button type="submit" class="w-full bg-[#143627] hover:bg-black text-amber-300 font-bold py-2.5 rounded-xl transition shadow flex items-center justify-center gap-2 active:scale-95">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+          <span>Save to Animal Medical Record</span>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
   <!-- ==================== SCRIPT ENGINE ==================== -->
   <script>
     // 1. Firebase Initialization with Local Fallback
@@ -502,14 +580,15 @@
     let activeSpeciesFilter = 'all';
     let chartMilkInstance = null;
     let chartFinanceInstance = null;
+    let currentMedicalAnimalId = null;
 
     // Seed Data If Empty for Instant Visual Testing
     if (!livestockDB.length) {
       livestockDB = [
-        { id: "COW-01", species: "Cattle", breed: "HF Cross", origin: "Purchased", status: "Milking", weight: 380, cost: 48000, bay: "Bay 1 (West)", motherId: "-" },
-        { id: "COW-02", species: "Cattle", breed: "Jersey", origin: "Purchased", status: "Milking", weight: 340, cost: 42000, bay: "Bay 1 (West)", motherId: "-" },
-        { id: "GT-01", species: "Goat", breed: "Thalassery", origin: "Purchased", status: "Ready for Sale", weight: 32, cost: 9500, bay: "Bay 3 (East)", motherId: "-" },
-        { id: "GT-02", species: "Goat", breed: "Salem Black", origin: "Farm Born", status: "Growing", weight: 22, cost: 5000, bay: "Bay 4 (East)", motherId: "GT-01" }
+        { id: "COW-01", species: "Cattle", breed: "HF Cross", origin: "Purchased", status: "Milking", weight: 380, cost: 48000, bay: "Bay 1 (West)", motherId: "-", medicalHistory: [] },
+        { id: "COW-02", species: "Cattle", breed: "Jersey", origin: "Purchased", status: "Milking", weight: 340, cost: 42000, bay: "Bay 1 (West)", motherId: "-", medicalHistory: [] },
+        { id: "GT-01", species: "Goat", breed: "Thalassery", origin: "Purchased", status: "Ready for Sale", weight: 32, cost: 9500, bay: "Bay 3 (East)", motherId: "-", medicalHistory: [] },
+        { id: "GT-02", species: "Goat", breed: "Salem Black", origin: "Farm Born", status: "Growing", weight: 22, cost: 5000, bay: "Bay 4 (East)", motherId: "GT-01", medicalHistory: [] }
       ];
       localStorage.setItem('dfarm_livestock', JSON.stringify(livestockDB));
     }
@@ -587,7 +666,8 @@
         status: document.getElementById('regStatus').value,
         weight: parseFloat(document.getElementById('regWeight').value) || 0,
         cost: parseFloat(document.getElementById('regCost').value) || 0,
-        bay: document.getElementById('regBay').value.trim() || 'Main Shed'
+        bay: document.getElementById('regBay').value.trim() || 'Main Shed',
+        medicalHistory: []
       };
 
       livestockDB.unshift(newAnimal);
@@ -660,11 +740,56 @@
       }
     }
 
+    // ==================== VISUAL QUICK MEDICAL MODAL SYSTEM ====================
     function recordAnimalMedical(id) {
-      const note = prompt(`Enter Deworming / Vaccination / Insemination (AI) note for ${id}:`);
-      if (note) {
-        alert(`Medical log recorded for ${id}: ${note}`);
+      currentMedicalAnimalId = id;
+      const targetBadge = document.getElementById('medTargetAnimalBadge');
+      const targetInputDate = document.getElementById('quickMedDate');
+      
+      if (targetBadge) targetBadge.textContent = id;
+      if (targetInputDate) targetInputDate.value = new Date().toISOString().split('T')[0];
+      
+      document.getElementById('quickMedTitle').value = '';
+      document.getElementById('quickMedNextDue').value = '';
+      document.getElementById('quickMedNote').value = '';
+      
+      document.getElementById('quickMedicalModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeQuickMedicalModal() {
+      document.getElementById('quickMedicalModal').classList.add('hidden');
+    }
+
+    function selectQuickTag(title, dueDays) {
+      document.getElementById('quickMedTitle').value = title;
+      
+      const today = new Date();
+      today.setDate(today.getDate() + dueDays);
+      document.getElementById('quickMedNextDue').value = today.toISOString().split('T')[0];
+    }
+
+    function handleQuickMedicalSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('quickMedTitle').value.trim();
+      const date = document.getElementById('quickMedDate').value;
+      const nextDue = document.getElementById('quickMedNextDue').value;
+      const note = document.getElementById('quickMedNote').value.trim() || 'No doctor notes';
+
+      const animal = livestockDB.find(a => a.id === currentMedicalAnimalId);
+      if (animal) {
+        if (!animal.medicalHistory) animal.medicalHistory = [];
+        animal.medicalHistory.unshift({ date, title, nextDue, note });
+        
+        // Update animal status on pregnancy confirmation
+        if (title.includes('Pregnancy') || title.includes('சினை உறுதி')) {
+          animal.status = 'Pregnant';
+        }
+        syncStateToStorage();
       }
+
+      closeQuickMedicalModal();
+      alert(`✓ Recorded for ${currentMedicalAnimalId}: ${title}\nNext Due: ${nextDue || 'N/A'}`);
     }
 
     // Milk Logging Engine
@@ -812,7 +937,6 @@
       if (chartMilkInstance) chartMilkInstance.destroy();
       if (chartFinanceInstance) chartFinanceInstance.destroy();
 
-      // Aggregate 7 days milk
       const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
       const milkValues = [24.5, 26.0, 25.0, 27.5, 28.0, 26.5, 29.0];
 
