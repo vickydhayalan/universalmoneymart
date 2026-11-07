@@ -2,8 +2,8 @@
 <html lang="ta" class="h-full">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>D-FARM POLUR | Farm Direct Quick Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>D-FARM POLUR | Farm-Gate Quick Store</title>
   <meta name="theme-color" content="#143627">
   <meta name="referrer" content="no-referrer">
   <link rel="icon" type="image/png" href="https://iili.io/nPh3Ia9.png">
@@ -18,52 +18,67 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      -webkit-tap-highlight-color: transparent;
     }
     .font-mono-val { font-family: 'JetBrains Mono', monospace; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    
-    /* Left sidebar active category highlight */
+
+    /* Active category indicator */
     .cat-rail-item.active {
-      background-color: #EBF7EE;
+      background-color: #EAF7EE;
       color: #0F5132;
       border-right: 3.5px solid #0F5132;
-      font-weight: 700;
+      font-weight: 800;
+    }
+
+    /* Product card image aspect ratio protection */
+    .img-box {
+      width: 100%;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (min-width: 640px) {
+      .img-box { height: 135px; }
     }
   </style>
 </head>
-<body class="bg-[#F4F6F8] text-slate-800 h-full flex flex-col antialiased select-none">
+<body class="bg-[#F6F8FA] text-slate-800 h-full flex flex-col antialiased selection:bg-emerald-800 selection:text-white select-none">
 
-  <!-- ==================== TOP APP HEADER (Zepto Style) ==================== -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 px-3.5 py-2.5 shadow-sm">
-    <div class="max-w-5xl mx-auto flex items-center justify-between gap-3">
+  <!-- ==================== TOP APP BAR ==================== -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 px-3 sm:px-6 py-2.5 shadow-xs">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
       
-      <!-- Back to Farm Home & Location Info -->
+      <!-- Back & Brand -->
       <div class="flex items-center gap-2.5 min-w-0">
-        <a href="../dfarm.html" class="p-2 rounded-full hover:bg-slate-100 text-slate-700 transition flex-shrink-0" title="Back to Farm Home">
+        <a href="../dfarm.html" class="p-2 rounded-xl hover:bg-slate-100 text-slate-700 transition flex-shrink-0" title="Back to Farm">
           <i data-lucide="arrow-left" class="w-5 h-5"></i>
         </a>
         <div class="min-w-0">
           <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-sm text-[#143627] tracking-tight">D-FARM DIRECT</span>
-            <span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.2 rounded font-mono-val">POLUR</span>
+            <span class="font-extrabold text-sm sm:text-base text-[#143627] tracking-tight">D-FARM DIRECT</span>
+            <span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.5 rounded font-mono-val">POLUR</span>
           </div>
           <p class="text-[11px] text-slate-500 font-medium truncate flex items-center gap-1">
-            <span>Delivering fresh in Polur</span>
-            <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400"></i>
+            <span>Fresh delivery to your home in Polur</span>
+            <i data-lucide="map-pin" class="w-3 h-3 text-emerald-700"></i>
           </p>
         </div>
       </div>
 
-      <!-- Search & Cart Trigger -->
+      <!-- Live Search & Header Cart Badge -->
       <div class="flex items-center gap-2 flex-shrink-0">
-        <button onclick="openSearchModal()" class="p-2 rounded-full hover:bg-slate-100 text-slate-600 transition" aria-label="Search">
+        <button onclick="openSearchModal()" class="p-2 rounded-xl hover:bg-slate-100 text-slate-600 transition" aria-label="Search">
           <i data-lucide="search" class="w-5 h-5"></i>
         </button>
-        <button onclick="toggleCartDrawer(true)" class="relative p-2 rounded-full bg-emerald-50 text-emerald-900 transition flex items-center justify-center">
+        <button onclick="toggleCartDrawer(true)" class="relative p-2 rounded-xl bg-emerald-50 text-emerald-900 hover:bg-emerald-100 transition flex items-center justify-center">
           <i data-lucide="shopping-bag" class="w-5 h-5"></i>
           <span id="headerCartCount" class="absolute -top-1 -right-1 bg-[#143627] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center font-mono-val">0</span>
         </button>
@@ -72,58 +87,77 @@
     </div>
   </header>
 
-  <!-- ==================== MAIN QUICK COMMERCE APP VIEW ==================== -->
-  <div class="flex-1 max-w-5xl w-full mx-auto flex overflow-hidden">
+  <!-- ==================== FREE DELIVERY NOTIFICATION BANNER ==================== -->
+  <div id="freeDeliveryBar" class="bg-amber-50 border-b border-amber-200/70 px-4 py-2 text-xs font-mono-val transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5">
+      <div class="flex items-center gap-2 text-amber-900 font-semibold truncate w-full sm:w-auto">
+        <i data-lucide="truck" class="w-4 h-4 text-amber-600 flex-shrink-0"></i>
+        <span id="freeDeliveryText">Add items worth ₹500 to unlock FREE Delivery!</span>
+      </div>
+      <!-- Progress Bar -->
+      <div class="w-full sm:w-56 bg-amber-200/80 rounded-full h-1.5 overflow-hidden">
+        <div id="deliveryProgressBar" class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== APP BODY (Rail + Grid) ==================== -->
+  <div class="flex-1 max-w-7xl w-full mx-auto flex overflow-hidden">
     
-    <!-- LEFT CATEGORY RAIL (Zepto Circular Icon Sidebar) -->
-    <aside class="w-20 sm:w-24 bg-white border-r border-slate-200 overflow-y-auto no-scrollbar py-2 flex flex-col flex-shrink-0">
+    <!-- LEFT SIDE CATEGORY RAIL (Zepto style) -->
+    <aside class="w-20 sm:w-28 bg-white border-r border-slate-200 overflow-y-auto no-scrollbar py-2 flex flex-col flex-shrink-0">
       
       <button onclick="switchCategory('all')" id="cat-all" class="cat-rail-item active py-3 px-1 flex flex-col items-center gap-1 text-center transition">
-        <div class="w-11 h-11 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-lg">🌾</div>
-        <span class="text-[10px] leading-tight">All Items</span>
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-xl">🌾</div>
+        <span class="text-[10px] sm:text-xs leading-tight">All Items</span>
       </button>
 
       <button onclick="switchCategory('dairy')" id="cat-dairy" class="cat-rail-item py-3 px-1 flex flex-col items-center gap-1 text-center transition">
-        <div class="w-11 h-11 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center text-lg">🥛</div>
-        <span class="text-[10px] leading-tight">Milk & Dairy</span>
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center text-xl">🥛</div>
+        <span class="text-[10px] sm:text-xs leading-tight">Milk & Dairy</span>
       </button>
 
       <button onclick="switchCategory('eggs')" id="cat-eggs" class="cat-rail-item py-3 px-1 flex flex-col items-center gap-1 text-center transition">
-        <div class="w-11 h-11 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-lg">🥚</div>
-        <span class="text-[10px] leading-tight">Country Eggs</span>
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-xl">🥚</div>
+        <span class="text-[10px] sm:text-xs leading-tight">Country Eggs</span>
       </button>
 
       <button onclick="switchCategory('oils')" id="cat-oils" class="cat-rail-item py-3 px-1 flex flex-col items-center gap-1 text-center transition">
-        <div class="w-11 h-11 rounded-full bg-yellow-50 border border-yellow-200 flex items-center justify-center text-lg">🛢️</div>
-        <span class="text-[10px] leading-tight">Chekku Oils</span>
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-yellow-50 border border-yellow-200 flex items-center justify-center text-xl">🛢️</div>
+        <span class="text-[10px] sm:text-xs leading-tight">Chekku Oils</span>
       </button>
 
       <button onclick="switchCategory('produce')" id="cat-produce" class="cat-rail-item py-3 px-1 flex flex-col items-center gap-1 text-center transition">
-        <div class="w-11 h-11 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-lg">🥥</div>
-        <span class="text-[10px] leading-tight">Farm Produce</span>
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-xl">🥥</div>
+        <span class="text-[10px] sm:text-xs leading-tight">Farm Harvest</span>
+      </button>
+
+      <button onclick="switchCategory('groceries')" id="cat-groceries" class="cat-rail-item py-3 px-1 flex flex-col items-center gap-1 text-center transition">
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-orange-50 border border-orange-200 flex items-center justify-center text-xl">🍯</div>
+        <span class="text-[10px] sm:text-xs leading-tight">Honey & Jaggery</span>
       </button>
 
       <button onclick="switchCategory('manures')" id="cat-manures" class="cat-rail-item py-3 px-1 flex flex-col items-center gap-1 text-center transition">
-        <div class="w-11 h-11 rounded-full bg-stone-50 border border-stone-200 flex items-center justify-center text-lg">🌱</div>
-        <span class="text-[10px] leading-tight">Manures & Fodder</span>
+        <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-stone-50 border border-stone-200 flex items-center justify-center text-xl">🌱</div>
+        <span class="text-[10px] sm:text-xs leading-tight">Manures & Fodder</span>
       </button>
 
     </aside>
 
-    <!-- RIGHT SCROLLABLE PRODUCTS GRID -->
-    <main class="flex-1 bg-[#F8FAFC] overflow-y-auto px-3 sm:px-5 py-4 pb-28">
+    <!-- RIGHT MAIN PRODUCT STREAM -->
+    <main class="flex-1 bg-[#F6F8FA] overflow-y-auto px-2.5 sm:px-6 py-4 pb-32">
       
-      <!-- Category Banner / Promo -->
-      <div id="categoryBanner" class="bg-gradient-to-r from-[#143627] to-[#1E4D38] text-white p-3.5 rounded-2xl mb-4 shadow-sm flex items-center justify-between">
+      <!-- Category Headline Banner -->
+      <div class="bg-gradient-to-r from-[#143627] to-[#1F4E38] text-white p-3.5 sm:p-5 rounded-2xl mb-4 shadow-xs flex items-center justify-between">
         <div>
-          <span class="text-[9px] font-bold uppercase tracking-wider text-amber-300 font-mono-val">100% UNADULTERATED DIRECT HARVEST</span>
-          <h2 id="currentCategoryTitle" class="text-base sm:text-lg font-extrabold leading-tight">Fresh picks at farm-gate prices</h2>
+          <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-amber-300 font-mono-val">100% UNADULTERATED DIRECT HARVEST</span>
+          <h2 id="currentCategoryTitle" class="text-sm sm:text-lg font-extrabold leading-tight">Fresh picks at farm-gate prices</h2>
         </div>
-        <span class="text-2xl">🌱</span>
+        <span class="text-2xl sm:text-3xl">🌿</span>
       </div>
 
-      <!-- 2-Column Product Cards Grid (Matching Screenshot) -->
-      <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
+      <!-- Product Cards Grid (Mobile 2-col, Tablet 3-col, Desktop 4-col) -->
+      <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3.5">
         <!-- Injected via JavaScript -->
       </div>
 
@@ -131,35 +165,35 @@
 
   </div>
 
-  <!-- ==================== STICKY BOTTOM QUICK-COMMERCE CART BAR ==================== -->
-  <div id="stickyCartBar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-4 py-2.5 z-40 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] hidden">
-    <div class="max-w-5xl mx-auto flex items-center justify-between">
+  <!-- ==================== STICKY BOTTOM CART FOOTER ==================== -->
+  <div id="stickyCartBar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-4 py-2.5 z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] hidden">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2.5">
-        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold font-mono-val">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-[#143627] flex items-center justify-center font-bold">
           <i data-lucide="shopping-bag" class="w-5 h-5"></i>
         </div>
         <div>
           <div class="flex items-center gap-1.5 font-mono-val">
             <span id="barTotalItems" class="text-xs font-bold text-slate-800">0 Items</span>
             <span class="text-slate-300">•</span>
-            <span id="barTotalPrice" class="text-sm font-extrabold text-[#143627]">₹0</span>
+            <span id="barTotalPrice" class="text-sm sm:text-base font-extrabold text-[#143627]">₹0</span>
           </div>
-          <p class="text-[10px] text-emerald-700 font-semibold">Direct Polur farm supply</p>
+          <p id="barDeliveryNote" class="text-[10px] text-emerald-700 font-semibold">FREE Delivery eligible</p>
         </div>
       </div>
 
-      <button onclick="toggleCartDrawer(true)" class="bg-[#143627] hover:bg-[#0E271C] active:scale-95 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl shadow-md transition flex items-center gap-1.5">
+      <button onclick="toggleCartDrawer(true)" class="bg-[#143627] hover:bg-[#0E271C] active:scale-95 text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl shadow-md transition flex items-center gap-1.5 font-sans">
         <span>View Cart</span>
         <i data-lucide="arrow-right" class="w-4 h-4 text-amber-300"></i>
       </button>
     </div>
   </div>
 
-  <!-- ==================== FULL CART & CHECKOUT DRAWER ==================== -->
-  <div id="cartDrawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex justify-end">
+  <!-- ==================== FULL CART DRAWER ==================== -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex justify-end">
     <div class="bg-white w-full max-w-md h-full flex flex-col justify-between shadow-2xl">
       
-      <!-- Cart Drawer Header -->
+      <!-- Drawer Header -->
       <div class="p-4 border-b border-slate-200 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <div class="w-8 h-8 rounded-lg bg-emerald-100 text-[#143627] flex items-center justify-center">
@@ -175,15 +209,20 @@
         </button>
       </div>
 
-      <!-- Cart Items Scroll List -->
-      <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- Free Delivery Status Inside Drawer -->
+      <div id="drawerDeliveryNotice" class="bg-amber-50 px-4 py-2 border-b border-amber-100 text-xs text-amber-900 font-semibold flex items-center gap-2">
+        <i data-lucide="info" class="w-4 h-4 text-amber-600 flex-shrink-0"></i>
+        <span id="drawerDeliveryNoticeText">Add ₹500 more for FREE delivery</span>
+      </div>
+
+      <!-- Items List -->
+      <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-2.5">
         <!-- Injected via JS -->
       </div>
 
-      <!-- Checkout Form & Payment Actions -->
+      <!-- Customer Form & Total Bill -->
       <div class="p-4 border-t border-slate-200 bg-slate-50 space-y-3">
         
-        <!-- Customer Details -->
         <div class="space-y-2 text-xs">
           <input type="text" id="custName" placeholder="உங்கள் பெயர் (Your Name)*" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none focus:border-emerald-700">
           <input type="tel" id="custPhone" placeholder="WhatsApp Mobile (10 Digits)*" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs outline-none focus:border-emerald-700 font-mono-val">
@@ -196,9 +235,9 @@
             <span>Item Total</span>
             <span id="billSubtotal">₹0</span>
           </div>
-          <div class="flex justify-between text-emerald-700 font-semibold">
-            <span>Farm Handling & Packaging</span>
-            <span>FREE</span>
+          <div class="flex justify-between items-center text-slate-600">
+            <span>Delivery Fee</span>
+            <span id="billDeliveryFee" class="font-bold text-emerald-800">FREE</span>
           </div>
           <div class="flex justify-between font-bold text-sm text-[#143627] pt-1.5 border-t border-slate-100">
             <span>To Pay (Grand Total)</span>
@@ -206,9 +245,9 @@
           </div>
         </div>
 
-        <!-- Order Triggers -->
+        <!-- Checkout Buttons -->
         <div class="space-y-2">
-          <button onclick="placeOrderWhatsApp()" class="w-full bg-[#143627] hover:bg-[#0E271C] active:scale-95 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2 text-xs transition">
+          <button onclick="placeOrderWhatsApp()" class="w-full bg-[#143627] hover:bg-[#0E271C] active:scale-95 text-white font-bold py-3 rounded-xl shadow flex items-center justify-center gap-2 text-xs transition font-sans">
             <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
             <span>Confirm Order via WhatsApp</span>
           </button>
@@ -224,37 +263,61 @@
   </div>
 
   <!-- ==================== SEARCH MODAL ==================== -->
-  <div id="searchModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-start justify-center pt-16 px-4">
+  <div id="searchModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden flex items-start justify-center pt-16 px-4">
     <div class="bg-white w-full max-w-lg rounded-2xl p-4 shadow-2xl space-y-3">
       <div class="flex items-center gap-2 border-b border-slate-200 pb-2">
         <i data-lucide="search" class="w-5 h-5 text-slate-400"></i>
-        <input type="text" id="storeSearchInput" oninput="handleLiveSearch()" placeholder="Search milk, coconut oil, eggs..." class="w-full text-xs sm:text-sm outline-none">
-        <button onclick="closeSearchModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-4 h-4"></i></button>
+        <input type="text" id="storeSearchInput" oninput="handleLiveSearch()" placeholder="Search milk, ghee, eggs, oil, jaggery..." class="w-full text-xs sm:text-sm outline-none">
+        <button onclick="closeSearchModal()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div id="searchResults" class="max-h-60 overflow-y-auto space-y-2 text-xs">
-        <p class="text-slate-400 text-center py-4">Type to search farm items...</p>
+      <div id="searchResults" class="max-h-64 overflow-y-auto space-y-2 text-xs">
+        <p class="text-slate-400 text-center py-4">Type to search 20+ farm items...</p>
       </div>
     </div>
   </div>
 
-  <!-- ==================== JAVASCRIPT APP LOGIC ==================== -->
+  <!-- ==================== SCRIPT ENGINE ==================== -->
   <script>
-    // D-FARM Official Product Catalog
+    // 20+ Authentic D-FARM Products
     const farmInventory = [
+      // Dairy & Eggs
       { id: 101, name: "Raw Cow Milk (Glass Bottle)", category: "dairy", weight: "1 Litre", price: 60, mrp: 70, img: "https://iili.io/nPhGB5P.jpg", badge: "Morning Batch" },
       { id: 102, name: "Raw Cow Milk (Fresh Pouch)", category: "dairy", weight: "1 Litre", price: 50, mrp: 55, img: "https://iili.io/nPh8YPI.jpg", badge: "Daily Pouch" },
-      { id: 103, name: "Free-Range Country Eggs", category: "eggs", weight: "Box of 6", price: 72, mrp: 85, img: "https://iili.io/nPjJdHg.jpg", badge: "Organic" },
-      { id: 104, name: "Marachekku Coconut Oil", category: "oils", weight: "1 Litre", price: 260, mrp: 290, img: "https://iili.io/nPPShba.jpg", badge: "Wood-Pressed" },
-      { id: 105, name: "Marachekku Groundnut Oil", category: "oils", weight: "1 Litre", price: 210, mrp: 235, img: "https://iili.io/nPinmaj.jpg", badge: "Wood-Pressed" },
-      { id: 106, name: "Fresh Farm Coconuts", category: "produce", weight: "1 Piece", price: 30, mrp: 35, img: "https://iili.io/nPPMuj9.jpg", badge: "Farm Pick" },
-      { id: 107, name: "Raw Red Groundnuts", category: "produce", weight: "1 kg Pack", price: 90, mrp: 105, img: "https://iili.io/nPPmU2n.jpg", badge: "Polur Soil" },
-      { id: 108, name: "Fresh Veggie Harvest Basket", category: "produce", weight: "Basket (~2.5kg)", price: 120, mrp: 145, img: "https://iili.io/nPiN3kG.jpg", badge: "No Chemicals" },
-      { id: 109, name: "Aged Cow Dung Compost", category: "manures", weight: "25kg Bag", price: 250, mrp: 280, img: "https://iili.io/nPjFV3B.jpg", badge: "Natural NPK" },
-      { id: 110, name: "Goat Manure Pellets", category: "manures", weight: "10kg Bag", price: 150, mrp: 175, img: "https://iili.io/nPjTtYG.jpg", badge: "Rich Fertilizer" },
-      { id: 111, name: "Super Napier Grass Stems", category: "manures", weight: "100 Stems Bundle", price: 100, mrp: 120, img: "https://iili.io/nPjdrve.jpg", badge: "High Yield" }
+      { id: 103, name: "Pure Desi Cow Ghee (பசும் நெய்)", category: "dairy", weight: "500 ml", price: 420, mrp: 480, img: "https://iili.io/nPinmaj.jpg", badge: "Bilona Method" },
+      { id: 104, name: "Fresh Farm Butter (வெண்ணெய்)", category: "dairy", weight: "250 g", price: 160, mrp: 180, img: "https://iili.io/nPhGB5P.jpg", badge: "Unsalted" },
+      { id: 105, name: "Fresh Country Paneer (பன்னீர்)", category: "dairy", weight: "200 g", price: 110, mrp: 130, img: "https://iili.io/nPh8YPI.jpg", badge: "Soft Fresh" },
+      { id: 106, name: "Free-Range Country Eggs", category: "eggs", weight: "Box of 6", price: 72, mrp: 85, img: "https://iili.io/nPjJdHg.jpg", badge: "Organic" },
+      { id: 107, name: "Country Eggs Bulk Crate", category: "eggs", weight: "Box of 30", price: 340, mrp: 390, img: "https://iili.io/nPjJdHg.jpg", badge: "Wholesale" },
+
+      // Chekku Wood-Pressed Oils
+      { id: 108, name: "Marachekku Coconut Oil", category: "oils", weight: "1 Litre", price: 260, mrp: 290, img: "https://iili.io/nPPShba.jpg", badge: "Wood-Pressed" },
+      { id: 109, name: "Marachekku Groundnut Oil", category: "oils", weight: "1 Litre", price: 210, mrp: 235, img: "https://iili.io/nPinmaj.jpg", badge: "Wood-Pressed" },
+      { id: 110, name: "Marachekku Gingelly Oil (நல்லெண்ணெய்)", category: "oils", weight: "1 Litre", price: 320, mrp: 360, img: "https://iili.io/nPPShba.jpg", badge: "Pure Sesame" },
+      { id: 111, name: "Cold-Pressed Castor Oil (விளக்கெண்ணெய்)", category: "oils", weight: "250 ml", price: 95, mrp: 115, img: "https://iili.io/nPinmaj.jpg", badge: "Traditional" },
+
+      // Farm Harvest & Produce
+      { id: 112, name: "Fresh Farm Coconuts (தேங்காய்)", category: "produce", weight: "1 Piece", price: 30, mrp: 35, img: "https://iili.io/nPPMuj9.jpg", badge: "Tree Fresh" },
+      { id: 113, name: "Raw Red Groundnuts (பச்சை கடலை)", category: "produce", weight: "1 kg Pack", price: 90, mrp: 105, img: "https://iili.io/nPPmU2n.jpg", badge: "Polur Soil" },
+      { id: 114, name: "Fresh Farm Drumstick (நாட்டு முருங்கை)", category: "produce", weight: "500 g", price: 35, mrp: 45, img: "https://iili.io/nPiN3kG.jpg", badge: "Farm Pick" },
+      { id: 115, name: "Fresh Country Brinjal (நாட்டு கத்தரி)", category: "produce", weight: "500 g", price: 25, mrp: 35, img: "https://iili.io/nPiN3kG.jpg", badge: "Chemical Free" },
+      { id: 116, name: "Fresh Veggie Harvest Basket", category: "produce", weight: "Basket (~2.5kg)", price: 120, mrp: 145, img: "https://iili.io/nPiN3kG.jpg", badge: "Combo" },
+
+      // Groceries, Honey & Jaggery
+      { id: 117, name: "Raw Forest Honey (அசல் நாட்டு தேன்)", category: "groceries", weight: "500 g", price: 280, mrp: 330, img: "https://iili.io/nPPShba.jpg", badge: "Unprocessed" },
+      { id: 118, name: "Organic Palm Jaggery (பனை வெல்லம்)", category: "groceries", weight: "500 g", price: 160, mrp: 190, img: "https://iili.io/nPPMuj9.jpg", badge: "Pure Karupatti" },
+      { id: 119, name: "Organic Country Sugar (நாட்டுச் சர்க்கரை)", category: "groceries", weight: "1 kg Pack", price: 85, mrp: 100, img: "https://iili.io/nPPmU2n.jpg", badge: "No Sulphur" },
+      { id: 120, name: "Traditional Sukku Coffee Powder", category: "groceries", weight: "200 g", price: 95, mrp: 115, img: "https://iili.io/nPiN3kG.jpg", badge: "Immunity" },
+
+      // Manures & Pastures
+      { id: 121, name: "Aged Cow Dung Compost", category: "manures", weight: "25kg Bag", price: 250, mrp: 280, img: "https://iili.io/nPjFV3B.jpg", badge: "Natural NPK" },
+      { id: 122, name: "Goat Manure Pellets", category: "manures", weight: "10kg Bag", price: 150, mrp: 175, img: "https://iili.io/nPjTtYG.jpg", badge: "Organic" },
+      { id: 123, name: "Super Napier Grass Stems", category: "manures", weight: "100 Stems Bundle", price: 100, mrp: 120, img: "https://iili.io/nPjdrve.jpg", badge: "High Yield" },
+      { id: 124, name: "Sun-Dried Cow Dung Cakes (வறட்டி)", category: "manures", weight: "Pack of 10", price: 60, mrp: 80, img: "https://iili.io/nPjFV3B.jpg", badge: "Homa / Agnihotra" }
     ];
 
-    // LocalStorage Persistent Cart
+    const FREE_DELIVERY_THRESHOLD = 500;
+    const STANDARD_DELIVERY_FEE = 40;
+
     let cart = JSON.parse(localStorage.getItem('dfarm_cart') || '{}');
     let currentCategory = 'all';
 
@@ -263,7 +326,7 @@
       updateCartUI();
     }
 
-    // Render Product Cards (Zepto Style)
+    // Render Product Cards
     function renderProductGrid(items) {
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = items.map(item => {
@@ -271,9 +334,9 @@
         const discountPct = Math.round(((item.mrp - item.price) / item.mrp) * 100);
 
         return `
-          <div class="bg-white rounded-2xl p-2.5 sm:p-3 border border-slate-200/80 shadow-sm flex flex-col justify-between relative group hover:border-emerald-300 transition">
+          <div class="bg-white rounded-2xl p-2 sm:p-3 border border-slate-200/80 shadow-xs flex flex-col justify-between hover:border-emerald-400 transition group">
             
-            <!-- Veg Icon & Discount Tag -->
+            <!-- Veg Icon & Discount -->
             <div class="flex items-center justify-between mb-1">
               <span class="w-3.5 h-3.5 border border-emerald-600 p-0.5 rounded flex items-center justify-center">
                 <span class="w-1.5 h-1.5 bg-emerald-600 rounded-full"></span>
@@ -282,17 +345,17 @@
             </div>
 
             <!-- Product Image -->
-            <div class="h-28 sm:h-36 rounded-xl flex items-center justify-center p-1.5 relative overflow-hidden">
+            <div class="img-box rounded-xl p-1 relative overflow-hidden bg-slate-50/50">
               <img src="${item.img}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://placehold.co/200x200/143627/FFFFFF?text=${encodeURIComponent(item.name)}';" class="h-full object-contain group-hover:scale-105 transition duration-300" alt="${item.name}">
             </div>
 
-            <!-- Weight & Name -->
+            <!-- Unit & Name -->
             <div class="mt-2 space-y-0.5">
               <span class="text-[10px] font-semibold text-slate-500 font-mono-val block">${item.weight}</span>
-              <h3 class="text-xs font-bold text-slate-900 leading-snug line-clamp-2 h-8">${item.name}</h3>
+              <h3 class="text-xs font-bold text-slate-900 leading-snug line-clamp-2 h-8 font-sans">${item.name}</h3>
             </div>
 
-            <!-- Price & Dynamic ADD / Stepper Button -->
+            <!-- Price & Stepper -->
             <div class="mt-2.5 flex items-center justify-between pt-1">
               <div>
                 <div class="flex items-baseline gap-1 font-mono-val">
@@ -304,7 +367,7 @@
               <!-- Button Switch: ADD vs - QTY + -->
               <div class="w-16 sm:w-20">
                 ${qty === 0 ? `
-                  <button onclick="updateItemQty(${item.id}, 1)" class="w-full bg-white hover:bg-emerald-50 text-emerald-800 border-2 border-emerald-700 font-extrabold text-[11px] py-1 rounded-xl uppercase tracking-wider shadow-sm transition active:scale-95">
+                  <button onclick="updateItemQty(${item.id}, 1)" class="w-full bg-white hover:bg-emerald-50 text-emerald-800 border-2 border-emerald-700 font-extrabold text-[11px] py-1 rounded-xl uppercase tracking-wider shadow-xs transition active:scale-95 font-sans">
                     ADD
                   </button>
                 ` : `
@@ -323,7 +386,7 @@
       lucide.createIcons();
     }
 
-    // Switch Left Categories
+    // Switch Category Tabs
     function switchCategory(cat) {
       currentCategory = cat;
       document.querySelectorAll('.cat-rail-item').forEach(el => el.classList.remove('active'));
@@ -332,11 +395,12 @@
 
       const titles = {
         all: "Fresh picks at farm-gate prices",
-        dairy: "Unadulterated Raw Cow Milk & Dairy",
+        dairy: "Pure Raw Cow Milk, Ghee & Country Dairy",
         eggs: "Free-Range Natural Country Eggs",
-        oils: "Traditional Wood-Pressed Pure Oils",
-        produce: "Organic Coconuts & Raw Harvest",
-        manures: "Aged Manures & Super Napier Pastures"
+        oils: "Wood-Pressed Pure Cold Oils",
+        produce: "Organic Coconuts & Raw Vegetables",
+        groceries: "Natural Forest Honey, Karupatti & Spices",
+        manures: "Aged Manures & Fodder Pastures"
       };
       document.getElementById('currentCategoryTitle').textContent = titles[cat] || "Farm Direct Products";
 
@@ -344,7 +408,6 @@
       renderProductGrid(filtered);
     }
 
-    // Cart Quantity Management
     function updateItemQty(id, delta) {
       const current = cart[id] || 0;
       const next = current + delta;
@@ -358,37 +421,69 @@
       renderProductGrid(currentItems);
     }
 
-    // Update Bottom Bar & Drawer
+    // Update Totals, Free Delivery Logic & UI
     function updateCartUI() {
       const entries = Object.entries(cart);
       let totalQty = 0;
-      let totalPrice = 0;
+      let itemTotal = 0;
 
       entries.forEach(([id, qty]) => {
         const product = farmInventory.find(p => p.id === parseInt(id));
         if (product) {
           totalQty += qty;
-          totalPrice += product.price * qty;
+          itemTotal += product.price * qty;
         }
       });
+
+      // Free Delivery Calculation
+      const isFreeDelivery = itemTotal >= FREE_DELIVERY_THRESHOLD;
+      const remainingForFree = FREE_DELIVERY_THRESHOLD - itemTotal;
+      const deliveryFee = (itemTotal === 0 || isFreeDelivery) ? 0 : STANDARD_DELIVERY_FEE;
+      const grandTotal = itemTotal + deliveryFee;
 
       // Header Badge
       document.getElementById('headerCartCount').textContent = totalQty;
 
-      // Bottom Bar
+      // Top Free Delivery Banner
+      const barText = document.getElementById('freeDeliveryText');
+      const progressBar = document.getElementById('deliveryProgressBar');
+      const pct = Math.min(100, Math.round((itemTotal / FREE_DELIVERY_THRESHOLD) * 100));
+      progressBar.style.width = `${pct}%`;
+
+      if (itemTotal === 0) {
+        barText.innerHTML = `Shop for <b>₹${FREE_DELIVERY_THRESHOLD}</b> or more to get <b>FREE Delivery</b> in Polur!`;
+        progressBar.classList.remove('bg-emerald-600');
+        progressBar.classList.add('bg-amber-400');
+      } else if (isFreeDelivery) {
+        barText.innerHTML = `🎉 <b>Congratulations!</b> You unlocked <b>FREE Home Delivery</b>!`;
+        progressBar.classList.remove('bg-amber-400');
+        progressBar.classList.add('bg-emerald-600');
+      } else {
+        barText.innerHTML = `Add <b>₹${remainingForFree}</b> more to get <span class="text-emerald-800 font-bold">FREE Delivery</span> (Delivery fee: ₹${STANDARD_DELIVERY_FEE})`;
+      }
+
+      // Sticky Bottom Bar
       const stickyBar = document.getElementById('stickyCartBar');
       if (totalQty > 0) {
         stickyBar.classList.remove('hidden');
         document.getElementById('barTotalItems').textContent = `${totalQty} Item${totalQty > 1 ? 's' : ''}`;
-        document.getElementById('barTotalPrice').textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
+        document.getElementById('barTotalPrice').textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
+        document.getElementById('barDeliveryNote').textContent = isFreeDelivery ? "FREE Delivery Applied" : `₹${remainingForFree} away from FREE delivery`;
       } else {
         stickyBar.classList.add('hidden');
       }
 
-      // Drawer Container
+      // Drawer Content
       document.getElementById('drawerItemsCount').textContent = `${totalQty} Items`;
-      document.getElementById('billSubtotal').textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
-      document.getElementById('billGrandTotal').textContent = `₹${totalPrice.toLocaleString('en-IN')}`;
+      document.getElementById('billSubtotal').textContent = `₹${itemTotal.toLocaleString('en-IN')}`;
+      document.getElementById('billDeliveryFee').innerHTML = isFreeDelivery ? `<span class="text-emerald-700 font-bold">FREE</span>` : `₹${STANDARD_DELIVERY_FEE}`;
+      document.getElementById('billGrandTotal').textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
+
+      // Drawer Notice
+      const drawerNotice = document.getElementById('drawerDeliveryNoticeText');
+      drawerNotice.textContent = isFreeDelivery 
+        ? "🎉 FREE Delivery unlocked for this order!" 
+        : `Add ₹${remainingForFree} more to save ₹${STANDARD_DELIVERY_FEE} on delivery!`;
 
       const drawerList = document.getElementById('cartItemsContainer');
       if (totalQty === 0) {
@@ -411,7 +506,7 @@
               <img src="${item.img}" referrerpolicy="no-referrer" class="w-10 h-10 object-contain rounded-lg bg-white border p-1" alt="${item.name}">
               <div>
                 <h4 class="font-bold text-slate-900 font-sans text-xs line-clamp-1">${item.name}</h4>
-                <span class="text-[11px] text-emerald-800 font-semibold">₹${item.price} each</span>
+                <span class="text-[11px] text-emerald-800 font-semibold">₹${item.price} x ${qty} = ₹${item.price * qty}</span>
               </div>
             </div>
             <div class="flex items-center gap-1.5 bg-white border border-slate-300 rounded-lg px-1.5 py-0.5">
@@ -434,7 +529,7 @@
       }
     }
 
-    // Place Order via WhatsApp
+    // Place Order via WhatsApp with delivery breakdown
     function placeOrderWhatsApp() {
       const entries = Object.entries(cart);
       if (!entries.length) {
@@ -451,16 +546,20 @@
       }
 
       let summary = "";
-      let grandTotal = 0;
+      let itemTotal = 0;
       entries.forEach(([id, qty]) => {
         const item = farmInventory.find(p => p.id === parseInt(id));
         if (item) {
           summary += `• ${item.name} (${item.weight}) x ${qty} = ₹${item.price * qty}\n`;
-          grandTotal += item.price * qty;
+          itemTotal += item.price * qty;
         }
       });
 
-      const message = `*🌾 D-FARM POLUR • QUICK STORE ORDER*\n----------------------------------------\n*Customer Details:*\n👤 Name: ${name}\n📱 Phone: ${phone}\n📍 Delivery Address: ${address}\n----------------------------------------\n*Order Items:*\n${summary}----------------------------------------\n*Grand Total: ₹${grandTotal}*\n\nPlease confirm availability and delivery slot in Polur!`;
+      const isFreeDelivery = itemTotal >= FREE_DELIVERY_THRESHOLD;
+      const deliveryFee = isFreeDelivery ? 0 : STANDARD_DELIVERY_FEE;
+      const grandTotal = itemTotal + deliveryFee;
+
+      const message = `*🌾 D-FARM POLUR • QUICK STORE ORDER*\n----------------------------------------\n*Customer Details:*\n👤 Name: ${name}\n📱 Phone: ${phone}\n📍 Address: ${address}\n----------------------------------------\n*Order Items:*\n${summary}----------------------------------------\n*Items Total:* ₹${itemTotal}\n*Delivery Fee:* ${isFreeDelivery ? 'FREE (Orders > ₹500)' : '₹' + STANDARD_DELIVERY_FEE}\n*Grand Total: ₹${grandTotal}*\n\nPlease confirm availability and delivery slot in Polur!`;
 
       window.open(`https://wa.me/917200752628?text=${encodeURIComponent(message)}`, '_blank');
     }
@@ -471,16 +570,18 @@
         alert("உங்கள் கூடை காலியாக உள்ளது!");
         return;
       }
-      let grandTotal = 0;
+      let itemTotal = 0;
       entries.forEach(([id, qty]) => {
         const item = farmInventory.find(p => p.id === parseInt(id));
-        if (item) grandTotal += item.price * qty;
+        if (item) itemTotal += item.price * qty;
       });
+      const deliveryFee = itemTotal >= FREE_DELIVERY_THRESHOLD ? 0 : STANDARD_DELIVERY_FEE;
+      const grandTotal = itemTotal + deliveryFee;
 
       prompt(`D-FARM Instant UPI Payment ID:\n7200752628@upi\nTotal Amount: ₹${grandTotal}\n\nCopy UPI ID to pay via GPay / PhonePe / Paytm:`, "7200752628@upi");
     }
 
-    // Search Functions
+    // Live Search
     function openSearchModal() {
       document.getElementById('searchModal').classList.remove('hidden');
       document.getElementById('storeSearchInput').focus();
@@ -493,7 +594,7 @@
       const q = document.getElementById('storeSearchInput').value.toLowerCase().trim();
       const target = document.getElementById('searchResults');
       if (!q) {
-        target.innerHTML = `<p class="text-slate-400 text-center py-4">Type to search farm items...</p>`;
+        target.innerHTML = `<p class="text-slate-400 text-center py-4">Type to search 20+ farm items...</p>`;
         return;
       }
       const matched = farmInventory.filter(i => i.name.toLowerCase().includes(q) || i.category.toLowerCase().includes(q));
@@ -502,12 +603,12 @@
         return;
       }
       target.innerHTML = matched.map(m => `
-        <div onclick="addToCartFromSearch(${m.id})" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer border border-slate-100">
+        <div onclick="addToCartFromSearch(${m.id})" class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-50 cursor-pointer border border-slate-100 font-mono-val">
           <div class="flex items-center gap-2">
             <img src="${m.img}" class="w-8 h-8 object-contain">
-            <span class="font-bold text-xs">${m.name} (${m.weight})</span>
+            <span class="font-bold text-xs font-sans">${m.name} (${m.weight})</span>
           </div>
-          <span class="font-mono-val font-bold text-emerald-800 text-xs">₹${m.price}</span>
+          <span class="font-bold text-emerald-800 text-xs">₹${m.price}</span>
         </div>
       `).join('');
     }
@@ -517,7 +618,6 @@
       closeSearchModal();
     }
 
-    // Initialize App
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       switchCategory('all');
