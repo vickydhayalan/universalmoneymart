@@ -1,0 +1,305 @@
+/* Universal Money Mart - Global Fintech Stylesheet */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+:root {
+  --bg-dark: #0B132B;
+  --bg-card-dark: #141C36;
+  --bg-surface: #1C2541;
+  --text-light: #F8FAFC;
+  --text-muted: #94A3B8;
+  --primary-blue: #2563EB;
+  --primary-hover: #1D4ED8;
+  --accent-green: #10B981;
+  --accent-gold: #F59E0B;
+  --accent-wa: #25D366;
+  --border-dark: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(0, 0, 0, 0.08);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --font-main: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 1200px;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: #FAFAFC;
+  color: #0F172A;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
+a { text-decoration: none; color: inherit; }
+
+/* Top Compliance Banner */
+.top-strip {
+  background: #060B1A;
+  color: #CBD5E1;
+  font-size: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-dark);
+}
+.top-strip-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.top-badges { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.top-badge {
+  background: rgba(255,255,255,0.08);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* Header & Nav */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-light);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+.logo-area { display: flex; align-items: center; gap: 10px; }
+.logo-img { width: 38px; height: 38px; border-radius: 8px; object-fit: cover; }
+.brand-title { font-family: var(--font-heading); font-size: 18px; font-weight: 800; color: #0B132B; }
+.brand-title span { color: var(--accent-gold); }
+
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s;
+}
+.nav-link:hover { color: var(--primary-blue); background: #EFF6FF; }
+.nav-pill-agri { color: #15803D !important; }
+.nav-pill-agri:hover { background: #ECFDF5 !important; }
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.btn-portal {
+  background: #0F172A;
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.btn-portal:hover { background: var(--primary-blue); transform: translateY(-1px); }
+
+/* Live Ticker Bar */
+.ticker-bar {
+  background: var(--bg-dark);
+  color: #FFF;
+  padding: 10px 0;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-dark);
+}
+.ticker-track {
+  display: flex;
+  gap: 36px;
+  width: max-content;
+  animation: scrollTicker 32s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes scrollTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-item { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; }
+.up { color: var(--accent-green); }
+.down { color: #F87171; }
+
+/* Hero Section */
+.hero-sec {
+  background: linear-gradient(170deg, #F0F4FF 0%, #FFFFFF 65%);
+  padding: 64px 0 72px;
+}
+.hero-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #EEF2FF;
+  border: 1px solid #C7D2FE;
+  color: var(--primary-blue);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 18px;
+}
+.hero-h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.12;
+  color: #0F172A;
+  margin-bottom: 18px;
+}
+.hero-h1 span { color: var(--primary-blue); }
+.hero-sub {
+  font-size: 16.5px;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
+.btn-primary-action {
+  background: var(--primary-blue);
+  color: #FFF;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+  transition: all 0.2s;
+}
+.btn-primary-action:hover { background: var(--primary-hover); transform: translateY(-2px); }
+.btn-secondary-action {
+  background: #FFF;
+  color: #0F172A;
+  font-weight: 600;
+  padding: 13px 24px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid #CBD5E1;
+  transition: all 0.2s;
+}
+.btn-secondary-action:hover { border-color: #94A3B8; background: #F8FAFC; }
+
+/* Interactive SIP Card (Right Hero) */
+.sip-interactive-box {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+.sip-box-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.sip-box-title { font-size: 17px; font-weight: 800; color: #0F172A; }
+.sip-range-group { margin-bottom: 20px; }
+.sip-label-row { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px; }
+.sip-val-badge { color: var(--primary-blue); font-weight: 800; font-size: 15px; font-family: var(--font-mono); }
+.sip-slider {
+  width: 100%;
+  height: 6px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  outline: none;
+  accent-color: var(--primary-blue);
+}
+.sip-result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: #F8FAFC;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  margin-top: 18px;
+}
+.sip-res-kpi { font-size: 11px; text-transform: uppercase; color: #64748B; font-weight: 700; }
+.sip-res-val { font-size: 18px; font-weight: 900; color: #0F172A; font-family: var(--font-mono); margin-top: 2px; }
+.total-green { color: var(--accent-green) !important; font-size: 21px !important; }
+
+/* Service Cards Deck */
+.services-deck { padding: 72px 0; background: #FFF; }
+.sec-title-wrap { text-align: center; max-width: 650px; margin: 0 auto 48px; }
+.deck-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.deck-card {
+  background: #FAFAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-lg);
+  padding: 32px 26px;
+  transition: all 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.deck-card:hover {
+  transform: translateY(-4px);
+  border-color: #CBD5E1;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.06);
+}
+.card-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.card-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.card-h3 { font-size: 19px; font-weight: 800; margin-bottom: 10px; color: #0F172A; }
+.card-desc { font-size: 14px; color: #475569; line-height: 1.65; flex-grow: 1; margin-bottom: 20px; }
+.card-action-link {
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+.card-action-link:hover { gap: 10px; }
+
+/* WhatsApp Floating Button */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 999;
+  width: 58px;
+  height: 58px;
+  background: var(--accent-wa);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  transition: transform 0.2s;
+}
+.wa-float:hover { transform: scale(1.1); }
+.wa-float svg { width: 30px; height: 30px; fill: #FFF; }
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .hero-split { grid-template-columns: 1fr; gap: 36px; }
+  .deck-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .top-strip-inner { justify-content: center; text-align: center; }
+}
