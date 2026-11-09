@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ta-IN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client Portal & Wealth Vault — Universal Money Mart</title>
+  <meta name="description" content="Secure client login for mutual fund portfolio tracking, 1-click ITR capital gains statement, and personal DocVault.">
+  <link rel="canonical" href="https://universalmoneymart.onrender.com/portal.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <style>
+    .portal-nav-pills { display: flex; gap: 8px; background: #E2E8F0; padding: 4px; border-radius: var(--radius-full); width: max-content; }
+    .portal-nav-pill { padding: 8px 18px; border-radius: var(--radius-full); font-size: 13px; font-weight: 700; color: #475569; cursor: pointer; transition: all 0.2s; }
+    .portal-nav-pill.active { background: #0B132B; color: #FFF; }
+    .dash-kpi-card { background: #FFF; border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: 20px; box-shadow: 0 4px 14px rgba(0,0,0,0.03); }
+    .dash-kpi-label { font-size: 11.5px; text-transform: uppercase; color: #64748B; font-weight: 700; letter-spacing: 0.05em; }
+    .dash-kpi-val { font-size: 24px; font-weight: 900; color: #0F172A; margin-top: 4px; font-family: var(--font-mono); }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(11, 19, 43, 0.7); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+  </style>
+</head>
+<body style="background:#F8FAFC">
+
+  <!-- Minimal Header -->
+  <header style="background:#FFF;border-bottom:1px solid #E2E8F0;padding:14px 0">
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
+      <a href="/index.html" style="display:flex;align-items:center;gap:10px">
+        <img src="/Logo.png" alt="UMM" style="width:34px;height:34px;border-radius:8px" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'34\' height=\'34\'><rect width=\'34\' height=\'34\' fill=\'%230B132B\' rx=\'6\'/><text x=\'50%25\' y=\'55%25\' fill=\'%23F59E0B\' font-weight=\'bold\' font-size=\'18\' dominant-baseline=\'middle\' text-anchor=\'middle\'>₹</text></svg>'">
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:16px;color:#0B132B">Universal Money Mart <span style="color:#64748B;font-size:13px;font-weight:500">| Vault</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:12px;font-family:var(--font-mono);color:#64748B">ARN-288927</span>
+        <a href="/index.html" style="font-size:13px;font-weight:600;color:var(--primary-blue)">← Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" style="padding:48px 20px">
+    <!-- 1. Authentication View -->
+    <div id="authCard" style="max-width:440px;margin:30px auto;background:#FFF;border:1px solid #E2E8F0;border-radius:var(--radius-lg);padding:36px;box-shadow:0 12px 36px rgba(15,23,42,0.06)">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="width:48px;height:48px;border-radius:12px;background:#EFF6FF;color:var(--primary-blue);display:inline-flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">🔐</div>
+        <h2 style="font-family:var(--font-heading);font-size:1.4rem;font-weight:900;color:#0F172A">Client Wealth Vault</h2>
+        <p style="font-size:13px;color:#64748B;margin-top:4px">Access your mutual fund folios, ITR tax reports, and documents.</p>
+      </div>
+
+      <!-- Step A: Identifier Input -->
+      <form id="stepInput" onsubmit="requestOTP(event)">
+        <label style="font-size:12px;font-weight:700;color:#475569;display:block;margin-bottom:6px">Mobile Number or PAN</label>
+        <input type="text" id="loginIdentifier" placeholder="9876543210 / ABCDE1234F" required style="width:100%;padding:12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:14px;outline:none;margin-bottom:18px">
+        <button type="submit" style="width:100%;padding:12px;border-radius:8px;background:var(--primary-blue);color:#FFF;font-weight:700;font-size:14px;border:none;cursor:pointer">
+          Send Verification OTP →
+        </button>
+      </form>
+
+      <!-- Step B: OTP Entry -->
+      <form id="stepOtp" style="display:none" onsubmit="verifyOTP(event)">
+        <p style="font-size:12.5px;color:#64748B;margin-bottom:12px">OTP sent to: <strong id="otpTarget" style="color:#0F172A"></strong></p>
+        <label style="font-size:12px;font-weight:700;color:#475569;display:block;margin-bottom:6px">Enter 6-Digit OTP</label>
+        <input type="text" maxlength="6" value="123456" required style="width:100%;padding:12px;border:1.5px solid #CBD5E1;border-radius:8px;font-size:18px;letter-spacing:6px;text-align:center;font-family:monospace;outline:none;margin-bottom:18px">
+        <button type="submit" style="width:100%;padding:12px;border-radius:8px;background:var(--accent-green);color:#FFF;font-weight:700;font-size:14px;border:none;cursor:pointer">
+          Verify &amp; Unlock Vault
+        </button>
+      </form>
+    </div>
+
+    <!-- 2. Dashboard View (Active Post Login) -->
+    <div id="dashboardView" style="display:none">
+      <!-- Top Action Bar -->
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:28px">
+        <div>
+          <h1 style="font-family:var(--font-heading);font-size:1.8rem;font-weight:900;color:#0F172A">Portfolio Overview</h1>
+          <p style="font-size:13px;color:#64748B">Account Anchor: <strong style="color:#0F172A">ABCDE1234F</strong> · KYC Status: <span style="color:#10B981;font-weight:700">● Verified</span></p>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button onclick="openTaxModal()" style="background:#FFF;border:1.5px solid #CBD5E1;padding:8px 16px;border-radius:var(--radius-full);font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+            📊 ITR Tax Statement
+          </button>
+          <button onclick="logout()" style="background:#F1F5F9;border:none;padding:8px 16px;border-radius:var(--radius-full);font-size:13px;font-weight:700;color:#64748B;cursor:pointer">
+            Logout
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Grid -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:32px">
+        <div class="dash-kpi-card">
+          <div class="dash-kpi-label">Current Valuation</div>
+          <div class="dash-kpi-val" id="kpiCurrent" style="color:#2563EB">₹4,82,450</div>
+        </div>
+        <div class="dash-kpi-card">
+          <div class="dash-kpi-label">Total Invested</div>
+          <div class="dash-kpi-val" id="kpiInvested">₹3,50,000</div>
+        </div>
+        <div class="dash-kpi-card">
+          <div class="dash-kpi-label">Total Gain / Loss</div>
+          <div class="dash-kpi-val" id="kpiGain" style="color:#10B981">+₹1,32,450</div>
+        </div>
+        <div class="dash-kpi-card">
+          <div class="dash-kpi-label">Portfolio XIRR</div>
+          <div class="dash-kpi-val" id="kpiXirr" style="color:#10B981">15.8%</div>
+        </div>
+      </div>
+
+      <!-- Portfolio Switcher Tabs -->
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px">
+        <div class="portal-nav-pills">
+          <div class="portal-nav-pill active" id="tabUmm" onclick="renderPortfolio('umm')">🌟 Serviced by UMM (ARN-288927)</div>
+          <div class="portal-nav-pill" id="tabAll" onclick="renderPortfolio('all')">🌐 All Holdings (External CAS)</div>
+        </div>
+        <button style="background:none;border:none;color:var(--primary-blue);font-size:13px;font-weight:700;cursor:pointer">
+          + Import eCAS PDF
+        </button>
+      </div>
+
+      <!-- Dynamic Folios List -->
+      <div id="fundsList"></div>
+
+      <!-- DocVault Section -->
+      <div style="margin-top:40px;background:#FFF;border:1px solid #E2E8F0;border-radius:var(--radius-lg);padding:24px">
+        <h3 style="font-family:var(--font-heading);font-size:16px;font-weight:800;margin-bottom:16px">🔒 Encrypted Client DocVault</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+          <div style="border:1px dashed #CBD5E1;border-radius:8px;padding:14px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:700;font-size:13px">PAN Card Copy</div>
+              <div style="font-size:11px;color:#64748B">Verified Document</div>
+            </div>
+            <span style="font-size:12px;color:var(--primary-blue);font-weight:700;cursor:pointer">View</span>
+          </div>
+          <div style="border:1px dashed #CBD5E1;border-radius:8px;padding:14px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:700;font-size:13px">Bank Mandate Acknowledgment</div>
+              <div style="font-size:11px;color:#64748B">Active E-NACH</div>
+            </div>
+            <span style="font-size:12px;color:var(--primary-blue);font-weight:700;cursor:pointer">View</span>
+          </div>
+          <div style="border:1px dashed #CBD5E1;border-radius:8px;padding:14px;display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:700;font-size:13px">ITR Acknowledgement 24-25</div>
+              <div style="font-size:11px;color:#64748B">Filed via Ramya (CS)</div>
+            </div>
+            <span style="font-size:12px;color:var(--primary-blue);font-weight:700;cursor:pointer">View</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Capital Gains Modal -->
+  <div id="taxModal" class="modal-overlay">
+    <div style="background:#FFF;width:100%;max-width:540px;border-radius:var(--radius-lg);padding:28px;position:relative">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h3 style="font-family:var(--font-heading);font-size:18px;font-weight:800;color:#0F172A">Capital Gains Statement (ITR Ready)</h3>
+        <button onclick="closeTaxModal()" style="font-size:20px;cursor:pointer;background:none;border:none">✕</button>
+      </div>
+      <p style="font-size:12.5px;color:#64748B;margin-bottom:18px">Assessment Year 2026–27 (Financial Year 2025–26) Realized Gains</p>
+      
+      <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:14px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+          <span>Short Term Capital Gains (STCG @ 20%):</span>
+          <strong>₹14,200</strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px">
+          <span>Long Term Capital Gains (LTCG @ 12.5%):</span>
+          <strong>₹82,400</strong>
+        </div>
+      </div>
+
+      <div style="background:#ECFDF5;border:1px solid #A7F3D0;border-radius:8px;padding:12px;font-size:12.5px;color:#047857;margin-bottom:20px">
+        ✅ <strong>Zero Tax Liability on LTCG:</strong> Your Long Term Gains (₹82,400) fall well within the statutory ₹1.25 Lakh tax-free exemption limit!
+      </div>
+
+      <button onclick="alert('Downloading consolidated statement...');closeTaxModal()" style="width:100%;padding:12px;border-radius:8px;background:#0F172A;color:#FFF;font-weight:700;border:none;cursor:pointer">
+        📥 Download Schedule 112A PDF
+      </button>
+    </div>
+  </div>
+
+  <script src="/assets/js/portal.js"></script>
+</body>
+</html>
