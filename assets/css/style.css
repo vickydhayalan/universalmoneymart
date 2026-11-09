@@ -602,3 +602,19 @@ footer:not(#siteFooter),
   padding: 0 !important;
   overflow: hidden !important;
 }
+/* FORCE BLOCK OLD UNSTYLED FOOTER ACROSS ENTIRE WEBSITE */
+.ft-grid,
+.ft-bottom,
+.ft-copy,
+.ft-legal,
+.ft-links,
+.ft-badges,
+.ft-col-h,
+footer:not(#siteOnlyFooter):not(#siteMasterFooter) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
