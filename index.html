@@ -15,9 +15,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5033705011229814" crossorigin="anonymous"></script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -92,23 +89,6 @@
       50% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0), 0 4px 20px rgba(37, 211, 102, .45); }
     }
     .wa-fab svg { width: 28px; height: 28px; fill: #fff; }
-    .wa-tip {
-      position: absolute;
-      right: 68px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--dark);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 7px 14px;
-      border-radius: var(--rsm);
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .18s;
-    }
-    .wa-fab:hover .wa-tip { opacity: 1; }
 
     /* ── Top Regulatory Strip ── */
     .top-reg-strip {
@@ -138,11 +118,11 @@
       color: var(--gold2);
     }
 
-    /* ── Sticky Header ── */
+    /* ── Header (Clean Minimal with Hamburger) ── */
     .hdr {
       position: sticky;
       top: 0;
-      z-index: 200;
+      z-index: 300;
       background: rgba(255, 255, 255, .96);
       backdrop-filter: blur(24px);
       border-bottom: 1px solid var(--bdr);
@@ -153,10 +133,10 @@
       padding: 0 20px;
       display: flex;
       align-items: center;
-      height: 66px;
-      gap: 12px;
+      justify-content: space-between;
+      height: 68px;
     }
-    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo { display: flex; align-items: center; gap: 10px; }
     .logo-box {
       width: 38px;
       height: 38px;
@@ -165,28 +145,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 19px;
+      font-size: 20px;
       color: #fff;
       font-weight: 900;
     }
     .logo-name { font-size: 17px; font-weight: 800; color: var(--t1); letter-spacing: -.02em; }
     .logo-name span { color: var(--gold); }
-    .hdr-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
-    .hdr-nav a {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--t2);
-      padding: 7px 12px;
-      border-radius: var(--rfull);
-      transition: all .15s;
-      white-space: nowrap;
-    }
-    .hdr-nav a:hover { color: var(--t1); background: var(--off2); }
-    .hdr-nav a.nav-dfarm { color: #15803D; font-weight: 700; }
-    .hdr-nav a.nav-dfarm:hover { background: #ECFDF5; }
-    .hdr-btns { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    
+    .hdr-actions { display: flex; align-items: center; gap: 10px; }
     .btn-portal-hdr {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       background: var(--dark);
@@ -196,11 +164,10 @@
       padding: 9px 18px;
       border-radius: var(--rfull);
       transition: all .2s;
-      white-space: nowrap;
     }
     .btn-portal-hdr:hover { background: var(--indigo); transform: translateY(-1px); }
     .btn-consult-hdr {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 7px;
       background: var(--green);
@@ -210,25 +177,74 @@
       padding: 9px 18px;
       border-radius: var(--rfull);
       transition: all .2s;
-      white-space: nowrap;
       box-shadow: 0 4px 14px rgba(16, 185, 129, .3);
     }
-    .btn-consult-hdr:hover { background: #059669; transform: translateY(-1px); }
-    .burger { display: none; flex-direction: column; gap: 5px; padding: 8px; margin-left: auto; }
-    .burger span { display: block; width: 22px; height: 2px; background: var(--t1); border-radius: 2px; }
-    .mob-menu { display: none; background: var(--white); border-bottom: 1px solid var(--bdr); }
-    .mob-menu a {
-      display: block;
-      padding: 14px 20px;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--t2);
-      border-bottom: 1px solid var(--bdr);
+    .btn-consult-hdr:hover { background: #059669; }
+    
+    /* Hamburger Menu Button */
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--off2);
+      border: 1px solid var(--bdr2);
+      padding: 8px 14px;
+      border-radius: var(--rfull);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--t1);
+      transition: all .2s;
+    }
+    .menu-btn:hover { background: #E2E8F0; }
+    .menu-icon { display: flex; flex-direction: column; gap: 4px; width: 16px; }
+    .menu-icon span { height: 2px; background: var(--t1); border-radius: 2px; }
+
+    /* Slide-Out Drawer Navigation */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 13, 20, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .drawer-overlay.active { opacity: 1; pointer-events: auto; }
+    .drawer-panel {
+      position: fixed;
+      top: 0;
+      right: -360px;
+      width: 100%;
+      max-width: 340px;
+      height: 100vh;
+      background: #FFFFFF;
+      z-index: 999;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, .2);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      transition: right .32s cubic-bezier(.4, 0, .2, 1);
+      overflow-y: auto;
+    }
+    .drawer-panel.active { right: 0; }
+    .drawer-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .drawer-title { font-family: var(--fh); font-size: 18px; font-weight: 800; }
+    .drawer-close { font-size: 24px; color: var(--t2); cursor: pointer; padding: 4px; }
+    .drawer-links { display: flex; flex-direction: column; gap: 6px; }
+    .drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--t1);
       transition: all .15s;
     }
-    .mob-menu a:hover { color: var(--t1); padding-left: 26px; }
-    .mob-menu.open { display: block; }
-    @media(max-width: 1020px) { .hdr-nav { display: none; } .btn-consult-hdr { display: none; } .burger { display: flex; } }
+    .drawer-link:hover { background: var(--off2); color: var(--indigo); transform: translateX(4px); }
+    .drawer-link.agri { color: #15803D; }
 
     /* ── Live Market Ticker ── */
     .ticker-bar {
@@ -246,14 +262,14 @@
     }
     .ticker-track:hover { animation-play-state: paused; }
     @keyframes scrollTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .ticker-item { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; font-family: var(--fm); }
+    .ticker-item { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; font-family: var(--fm); }
     .up { color: #4ADE80; }
     .down { color: #F87171; }
 
     /* ── Rich Gradient Hero ── */
     .hero {
       background: linear-gradient(160deg, #EEF5FF 0%, #E8F0FE 30%, #EDE9FE 60%, #FEF3C7 100%);
-      padding: 64px 20px 0;
+      padding: 60px 20px 0;
       position: relative;
       overflow: hidden;
     }
@@ -453,14 +469,12 @@
     .sec-eyebrow.blue { background: rgba(79, 70, 229, .08); color: var(--indigo); border-color: rgba(99, 102, 241, .2); }
     .sec-eyebrow.green { background: rgba(16, 185, 129, .08); color: var(--green); border-color: rgba(16, 185, 129, .2); }
     .sec-eyebrow.purple { background: rgba(139, 92, 246, .08); color: var(--purple); border-color: rgba(139, 92, 246, .2); }
-    .sec-eyebrow.white { background: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .85); border-color: rgba(255, 255, 255, .2); }
     .sec-title { font-family: var(--fh); font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -.03em; }
     .sec-title em { font-style: italic; color: var(--gold); }
     .sec-title.dark-em em { color: #818CF8; }
     .sec-title.white { color: var(--tw); }
     .sec-title.white em { color: var(--gold2); }
     .sec-sub { font-size: 15.5px; color: var(--t2); line-height: 1.75; max-width: 580px; margin: 12px auto 0; }
-    .sec-sub.white { color: var(--tw2); }
     .sec-head { text-align: center; margin-bottom: 48px; }
 
     /* ── Features ── */
@@ -473,8 +487,7 @@
     .ico-purple { background: rgba(139, 92, 246, .08); }
     .feat-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--t1); margin-bottom: 8px; letter-spacing: -.02em; }
     .feat-card p { font-size: 14px; color: var(--t2); line-height: 1.7; }
-    .feat-link { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: var(--indigo); margin-top: 14px; transition: gap .18s; }
-    .feat-link:hover { gap: 9px; }
+    .feat-link { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: var(--indigo); margin-top: 14px; }
 
     /* ── Route Map ── */
     .routemap-section { background: linear-gradient(135deg, #EEF5FF, #EDE9FE, #FEF3C7); padding: 84px 20px; }
@@ -485,7 +498,7 @@
     .route-card-icon { font-size: 1.8rem; flex-shrink: 0; }
     .route-card h3 { font-size: 1rem; font-weight: 700; color: var(--t1); margin-bottom: 6px; letter-spacing: -.01em; }
     .route-card p { font-size: 13.5px; color: var(--t2); line-height: 1.65; }
-    .route-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: var(--rfull); text-transform: uppercase; letter-spacing: .06em; margin-top: 10px; font-family: var(--fm); }
+    .route-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: var(--rfull); text-transform: uppercase; margin-top: 10px; font-family: var(--fm); }
     .tag-beginner { background: rgba(16, 185, 129, .1); color: #047857; }
     .tag-intermediate { background: rgba(245, 166, 35, .1); color: var(--gold3); }
     .tag-advanced { background: rgba(79, 70, 229, .1); color: var(--indigo); }
@@ -503,12 +516,6 @@
     .exam-meta { display: flex; gap: 12px; margin-bottom: 18px; font-family: var(--fm); font-size: 11px; color: var(--t3); }
     .exam-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 11px; background: var(--off2); color: var(--t1); font-size: 13.5px; font-weight: 600; border-radius: 10px; transition: all .2s; border: 1px solid var(--bdr); }
     .exam-card:hover .exam-btn { background: var(--purple); color: #fff; border-color: var(--purple); }
-    .nism-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 24px; }
-    .nism-card { background: rgba(255, 255, 255, .05); border: 1px solid var(--bdrw); border-radius: 10px; padding: 14px 16px; transition: all .2s; cursor: pointer; }
-    .nism-card:hover { background: rgba(139, 92, 246, .14); border-color: rgba(139, 92, 246, .4); transform: translateY(-2px); }
-    .nism-num { font-family: var(--fm); font-size: 10px; color: var(--gold); margin-bottom: 4px; }
-    .nism-name { font-size: 12px; font-weight: 600; color: var(--tw); line-height: 1.4; }
-    .nism-status { font-size: 10px; color: #4ade80; margin-top: 4px; font-family: var(--fm); }
 
     /* ── Orbit Wheel ── */
     .orbit-section { padding: 84px 20px; background: linear-gradient(135deg, #F0F4FF, #EDE9FE, #FEF3C7); text-align: center; overflow: hidden; }
@@ -545,8 +552,8 @@
     .lf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
     .lf-group { margin-bottom: 14px; }
     .lf-label { display: block; font-size: .72rem; color: rgba(255, 255, 255, .55); margin-bottom: 6px; letter-spacing: .3px; font-weight: 600; }
-    .lf-input, .lf-select { width: 100%; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); color: #fff; padding: 10px 14px; border-radius: 8px; font-size: .84rem; font-family: var(--fb); outline: none; transition: border-color .2s; }
-    .lf-input:focus, .lf-select:focus { border-color: var(--green); }
+    .lf-input { width: 100%; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .1); color: #fff; padding: 10px 14px; border-radius: 8px; font-size: .84rem; font-family: var(--fb); outline: none; transition: border-color .2s; }
+    .lf-input:focus { border-color: var(--green); }
     .lf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
     .lf-chip { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .6); font-size: .74rem; font-weight: 500; padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: all .2s; user-select: none; }
     .lf-chip:hover { border-color: rgba(16, 185, 129, .4); color: var(--green); }
@@ -557,8 +564,8 @@
     .lf-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(16, 185, 129, .4); }
     .lf-success { padding: 36px 24px; text-align: center; color: #fff; }
 
-    /* ── Single Master Compliance Footer ── */
-    #siteMasterFooter { background: var(--dark2); border-top: 1px solid var(--bdrw); padding: 56px 20px 28px; }
+    /* ── Single Exclusive Master Footer ── */
+    #siteOnlyFooter { background: var(--dark2); border-top: 1px solid var(--bdrw); padding: 56px 20px 28px; }
     .ft-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
     .ft-logo-name { font-size: 17px; font-weight: 800; color: var(--tw); letter-spacing: -.02em; margin-top: 10px; margin-bottom: 10px; }
     .ft-logo-name span { color: var(--gold); }
@@ -595,7 +602,6 @@
 
   <!-- Floating WhatsApp Action -->
   <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20Free%20financial%20guidance%20vennum." target="_blank" rel="noopener" class="wa-fab" aria-label="WhatsApp">
-    <span class="wa-tip">Free Financial Advice 💬</span>
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
@@ -614,44 +620,50 @@
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- Header with Clean Hamburger Menu -->
   <header class="hdr">
     <div class="hdr-inner">
       <a href="/index.html" class="logo">
         <div class="logo-box">₹</div>
         <div class="logo-name">Universal <span>Money</span> Mart</div>
       </a>
-      <nav class="hdr-nav">
-        <a href="/index.html">Home</a>
-        <a href="#wealth">Wealth</a>
-        <a href="#compliance">Compliance</a>
-        <a href="/dfarm.html" class="nav-dfarm">🌾 D-FARM</a>
-        <a href="#routemap">Route Map</a>
-        <a href="/blog/index.html">Articles</a>
-        <a href="#exams">Exams</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate</a>
-        <a href="/about.html">About</a>
-      </nav>
-      <div class="hdr-btns">
+      <div class="hdr-actions">
         <a href="/portal.html" class="btn-portal-hdr">📱 Client Portal</a>
         <a href="#consultation" class="btn-consult-hdr">🎯 Consultation</a>
+        <button class="menu-btn" onclick="toggleDrawer()" aria-label="Open Navigation">
+          <div class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span>Menu</span>
+        </button>
       </div>
-      <button class="burger" onclick="toggleNav()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="mob-menu" id="mobNav">
-      <a href="/index.html">🏠 Home</a>
-      <a href="/portal.html" style="color:var(--indigo);font-weight:700">📱 Client Portal Login</a>
-      <a href="#wealth">📊 Wealth &amp; Investments</a>
-      <a href="#compliance">📄 Compliance &amp; Documents</a>
-      <a href="/dfarm.html" style="color:#15803D;font-weight:700">🌾 D-FARM Agro Tech</a>
-      <a href="/blog/index.html">📝 Articles</a>
-      <a href="#exams">🎯 Mock Tests</a>
-      <a href="/gold-rate-today.html">🥇 Gold Rate</a>
-      <a href="#consultation" style="color:var(--green);font-weight:700">🎯 Free Consultation</a>
     </div>
   </header>
+
+  <!-- Slide-Out Drawer Navigation Panel -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <aside class="drawer-panel" id="drawerPanel">
+    <div class="drawer-head">
+      <div class="drawer-title">Navigation</div>
+      <div class="drawer-close" onclick="toggleDrawer()">✕</div>
+    </div>
+    <div class="drawer-links">
+      <a href="/index.html" class="drawer-link" onclick="toggleDrawer()">🏠 Home</a>
+      <a href="/portal.html" class="drawer-link" style="color:var(--indigo);font-weight:700">📱 Client Wealth Portal</a>
+      <a href="#wealth" class="drawer-link" onclick="toggleDrawer()">💼 Wealth &amp; Investments</a>
+      <a href="#compliance" class="drawer-link" onclick="toggleDrawer()">📋 Citizen &amp; Compliance Desk</a>
+      <a href="/dfarm.html" class="drawer-link agri">🌾 D-FARM Agro Tech</a>
+      <a href="#routemap" class="drawer-link" onclick="toggleDrawer()">🗺️ Learning Route Map</a>
+      <a href="/blog/index.html" class="drawer-link">📚 All Articles &amp; Guides</a>
+      <a href="#exams" class="drawer-link" onclick="toggleDrawer()">🎯 Exam Mock Tests (NISM/IC38)</a>
+      <a href="/gold-rate-today.html" class="drawer-link">🥇 Live Gold Rate Today</a>
+      <a href="/about.html" class="drawer-link">👤 About Founders</a>
+      <a href="#consultation" class="drawer-link" onclick="toggleDrawer()" style="color:var(--green);font-weight:700">🎯 Free Consultation</a>
+      <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="drawer-link" style="color:var(--wa);font-weight:700">💬 Chat on WhatsApp</a>
+    </div>
+  </aside>
 
   <!-- Live Accurate Market Ticker Strip -->
   <div class="ticker-bar">
@@ -1025,8 +1037,8 @@
     </div>
   </section>
 
-  <!-- SINGLE MASTER COMPLIANCE FOOTER -->
-  <footer id="siteMasterFooter">
+  <!-- ONLY SINGLE EXCLUSIVE FOOTER -->
+  <footer id="siteOnlyFooter">
     <div class="ft-grid">
       <div>
         <div class="logo" style="gap:10px">
@@ -1089,8 +1101,10 @@
   </footer>
 
   <script>
-    function toggleNav() {
-      document.getElementById('mobNav').classList.toggle('open');
+    /* Drawer Navigation Toggle */
+    function toggleDrawer() {
+      document.getElementById('drawerPanel').classList.toggle('active');
+      document.getElementById('drawerOverlay').classList.toggle('active');
     }
 
     function selectChip(el, group) {
@@ -1173,73 +1187,5 @@
 
     document.addEventListener('DOMContentLoaded', calculateSIP);
   </script>
-<footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
 </body>
 </html>
