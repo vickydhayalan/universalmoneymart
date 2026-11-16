@@ -4,13 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="google-site-verification" content="5k7NoINCOCx5OOMXG0at2NfyRzK0uro7mXsDZJxuVss">
-  <title>Universal Money Mart — Tamil Wealth Distribution, Compliance & Agri Hub | Polur & Bengaluru</title>
-  <meta name="description" content="AMFI Registered Mutual Fund Distributor (ARN-288927) based in Bakmarpettai, Polur (Tiruvannamalai) & GST/Compliance Desk in Bengaluru. SIP, Tax, RD vs SIP, PAN, Passport & D-FARM in Tamil.">
-  <meta name="keywords" content="tamil finance, mutual fund polur, mutual fund tiruvannamalai, SIP tamil, ARN 288927, RD vs SIP tamil, GST registration bengaluru, D-FARM Polur">
-  <meta name="author" content="Vignesh Dhayalan">
+  <title>Universal Money Mart — Tamil Wealth Distribution, Compliance &amp; Agri Hub | Polur &amp; Bengaluru</title>
+  <meta name="description" content="AMFI Registered Mutual Fund Distributor (ARN-288927) based in Bakmarpettai, Polur (Tiruvannamalai) & GST/Compliance Desk in Bengaluru. Explore Mutual Funds, SIP, Tax, PAN, Passport & D-FARM in Tamil.">
   <link rel="canonical" href="https://universalmoneymart.onrender.com">
 
-  <!-- Core Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -25,7 +22,6 @@
       --off2: #F1F3F8;
       --dark: #0D0D14;
       --dark2: #141420;
-      --dark3: #1C1C2E;
       --gold: #F5A623;
       --gold2: #FFD166;
       --gold3: #D97706;
@@ -39,7 +35,6 @@
       --t3: #9090A8;
       --tw: #FFFFFF;
       --tw2: rgba(255, 255, 255, 0.78);
-      --tw3: rgba(255, 255, 255, 0.45);
       --bdr: rgba(0, 0, 0, 0.08);
       --bdr2: rgba(0, 0, 0, 0.12);
       --bdrw: rgba(255, 255, 255, 0.12);
@@ -48,7 +43,6 @@
       --fm: 'JetBrains Mono', monospace;
       --max: 1180px;
       --r: 18px;
-      --rsm: 10px;
       --rfull: 100px;
     }
 
@@ -67,7 +61,7 @@
     img { display: block; max-width: 100%; }
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
 
-    /* ── Floating WhatsApp Trigger ── */
+    /* ── Floating WhatsApp ── */
     .wa-fab {
       position: fixed;
       bottom: 20px;
@@ -86,7 +80,7 @@
     .wa-fab:hover { transform: scale(1.08); }
     .wa-fab svg { width: 28px; height: 28px; fill: #fff; }
 
-    /* ── Top Regulatory Strip: Single-Line Scrolling Marquee ── */
+    /* ── Top Regulatory Strip ── */
     .top-reg-strip {
       background: #09090E;
       color: #CBD5E1;
@@ -102,10 +96,7 @@
       gap: 28px;
       animation: topScroll 30s linear infinite;
     }
-    @keyframes topScroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
+    @keyframes topScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .top-reg-badge {
       background: rgba(255, 255, 255, .08);
       padding: 1px 7px;
@@ -130,22 +121,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 62px;
+      height: 64px;
     }
-    .logo { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-    .logo-box {
-      width: 36px;
-      height: 36px;
+    .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-img {
+      width: 38px;
+      height: 38px;
       border-radius: 10px;
-      background: linear-gradient(135deg, var(--gold), var(--gold3));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: #fff;
-      font-weight: 900;
+      object-fit: cover;
+      border: 1px solid var(--bdr2);
     }
-    .logo-name { font-size: 16px; font-weight: 800; color: var(--t1); letter-spacing: -.02em; }
+    .logo-name { font-size: 16.5px; font-weight: 800; color: var(--t1); letter-spacing: -.02em; }
     .logo-name span { color: var(--gold); }
     
     .brand-desktop { display: inline; }
@@ -178,14 +164,14 @@
       box-shadow: 0 4px 14px rgba(16, 185, 129, .3);
     }
 
-    /* Hamburger Menu Button */
+    /* Hamburger Menu */
     .menu-btn {
       display: flex;
       align-items: center;
       gap: 6px;
       background: var(--off2);
       border: 1px solid var(--bdr2);
-      padding: 8px 13px;
+      padding: 8px 14px;
       border-radius: var(--rfull);
       font-size: 12.5px;
       font-weight: 700;
@@ -194,7 +180,7 @@
     .menu-icon { display: flex; flex-direction: column; gap: 4px; width: 16px; }
     .menu-icon span { height: 2px; background: var(--t1); border-radius: 2px; }
 
-    /* Slide-Out Drawer Navigation */
+    /* Drawer */
     .drawer-overlay {
       position: fixed;
       inset: 0;
@@ -237,41 +223,43 @@
       font-weight: 600;
       color: var(--t1);
     }
-    .drawer-link:hover, .drawer-link:active { background: var(--off2); color: var(--indigo); }
+    .drawer-link:hover { background: var(--off2); color: var(--indigo); }
     .drawer-link.agri { color: #15803D; }
 
-    /* ── Live Market Ticker ── */
-    .ticker-bar {
+    /* ── Live Verified Gold Strip (Hidden unless live API succeeds) ── */
+    #liveMarketBar {
+      display: none;
       background: var(--dark);
       color: #fff;
-      padding: 8px 0;
-      overflow: hidden;
+      padding: 8px 16px;
       border-bottom: 1px solid rgba(255, 255, 255, .08);
+      font-family: var(--fm);
+      font-size: 12px;
     }
-    .ticker-track {
+    .live-bar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
       display: flex;
-      gap: 32px;
-      width: max-content;
-      animation: scrollTicker 34s linear infinite;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    @keyframes scrollTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .ticker-item { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; font-family: var(--fm); }
-    .up { color: #4ADE80; }
-    .down { color: #F87171; }
+    .live-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ADE80;
+      margin-right: 6px;
+    }
 
-    /* ── Rich Gradient Hero ── */
+    /* ── Hero ── */
     .hero {
       background: linear-gradient(160deg, #EEF5FF 0%, #E8F0FE 30%, #EDE9FE 60%, #FEF3C7 100%);
       padding: 44px 16px 0;
       position: relative;
       overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(99, 102, 241, .09), transparent 55%);
     }
     .hero-split {
       display: grid;
@@ -355,7 +343,7 @@
       border-radius: var(--rfull);
     }
 
-    /* ── Interactive Live SIP + RD Comparison Box inside Hero ── */
+    /* ── Interactive SIP Card ── */
     .hero-sip-card {
       background: rgba(255, 255, 255, .96);
       border: 1px solid rgba(0, 0, 0, .08);
@@ -402,39 +390,7 @@
     .hstat-v { font-size: 1.2rem; font-weight: 800; color: var(--t1); display: block; letter-spacing: -.02em; }
     .hstat-l { font-size: 9.5px; color: var(--t3); text-transform: uppercase; margin-top: 2px; display: block; font-family: var(--fm); }
 
-    /* ── Daily Habits Strip ── */
-    .daily-strip { display: flex; flex-direction: column; }
-    .gold-teaser {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 10px 16px;
-      background: linear-gradient(90deg, #1A1A2E, #2A2A42);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .gt-left { display: flex; align-items: center; gap: 8px; }
-    .gt-dot { width: 7px; height: 7px; border-radius: 50%; background: #10B981; }
-    .gt-label { font-size: 12.5px; font-weight: 700; color: #fff; }
-    .gt-price { font-family: var(--fm); font-size: 12px; font-weight: 700; color: #F5C842; }
-
-    /* ── Two Founders Section ── */
-    .verticals-sec { padding: 52px 16px; background: var(--off2); }
-    .vert-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .vert-card { background: var(--white); border-radius: 18px; padding: 24px; border: 1px solid var(--bdr); }
-    .vert-title { font-family: var(--fh); font-size: 1.3rem; font-weight: 800; color: var(--t1); margin-bottom: 4px; }
-    .vert-who { font-size: 11.5px; font-weight: 700; color: var(--t3); text-transform: uppercase; margin-bottom: 12px; font-family: var(--fm); }
-    .vert-p { font-size: 14px; color: var(--t2); line-height: 1.7; margin-bottom: 18px; }
-    .vert-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 100px; }
-    .vert-ribbon { display: inline-block; font-family: var(--fm); font-size: 9.5px; font-weight: 700; padding: 3px 10px; border-radius: 100px; margin-bottom: 14px; }
-    .vert-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-    .vert-avatar { width: 54px; height: 54px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--off2); border: 2px solid var(--off2); }
-    .vert-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-    .vert-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-    .vert-chip { font-size: 11px; font-weight: 600; color: var(--t2); background: var(--off2); padding: 4px 10px; border-radius: 100px; }
-
-    /* ── Sections Common ── */
+    /* ── Common Section Styling ── */
     .sec { padding: 64px 16px; }
     .sec-alt { background: var(--off); }
     .sec-eyebrow {
@@ -461,7 +417,104 @@
     .sec-title.dark-em em { color: #818CF8; }
     .sec-title.white { color: var(--tw); }
     .sec-sub { font-size: 14.5px; color: var(--t2); line-height: 1.7; max-width: 580px; margin: 10px auto 0; }
-    .sec-head { text-align: center; margin-bottom: 40px; }
+    .sec-head { text-align: center; margin-bottom: 36px; }
+
+    /* ── Explore Mutual Funds Hub (Live NAV + Direct Invest) ── */
+    .fund-filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .f-filter-btn {
+      padding: 8px 16px;
+      border-radius: var(--rfull);
+      font-size: 12.5px;
+      font-weight: 700;
+      background: var(--white);
+      border: 1px solid var(--bdr2);
+      color: var(--t2);
+      transition: all .2s;
+    }
+    .f-filter-btn.active, .f-filter-btn:hover {
+      background: var(--dark);
+      color: #fff;
+      border-color: var(--dark);
+    }
+    .explore-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .exp-card {
+      background: var(--white);
+      border: 1px solid var(--bdr2);
+      border-radius: var(--r);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .exp-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(15, 23, 42, .06); }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+    .exp-cat {
+      font-family: var(--fm);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: #EEF2FF;
+      color: var(--indigo);
+      text-transform: uppercase;
+    }
+    .exp-risk {
+      font-family: var(--fm);
+      font-size: 10px;
+      color: var(--t3);
+      font-weight: 600;
+    }
+    .exp-name { font-size: 16px; font-weight: 800; color: var(--t1); line-height: 1.4; margin-bottom: 14px; }
+    .exp-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: var(--off);
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+    .exp-m-lbl { font-size: 10px; color: var(--t3); font-family: var(--fm); text-transform: uppercase; }
+    .exp-m-val { font-size: 14px; font-weight: 800; color: var(--t1); font-family: var(--fm); margin-top: 2px; }
+    .exp-invest-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 10px;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      display: block;
+      transition: background .2s;
+    }
+    .exp-invest-btn:hover { background: #059669; }
+
+    /* ── Two Founders Section ── */
+    .verticals-sec { padding: 56px 16px; background: var(--off2); }
+    .vert-grid { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .vert-card { background: var(--white); border-radius: 18px; padding: 24px; border: 1px solid var(--bdr); }
+    .vert-title { font-family: var(--fh); font-size: 1.3rem; font-weight: 800; color: var(--t1); margin-bottom: 4px; }
+    .vert-who { font-size: 11.5px; font-weight: 700; color: var(--t3); text-transform: uppercase; margin-bottom: 12px; font-family: var(--fm); }
+    .vert-p { font-size: 14px; color: var(--t2); line-height: 1.7; margin-bottom: 18px; }
+    .vert-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; padding: 10px 20px; border-radius: 100px; }
+    .vert-ribbon { display: inline-block; font-family: var(--fm); font-size: 9.5px; font-weight: 700; padding: 3px 10px; border-radius: 100px; margin-bottom: 14px; }
+    .vert-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .vert-avatar { width: 54px; height: 54px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--off2); border: 2px solid var(--off2); }
+    .vert-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .vert-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .vert-chip { font-size: 11px; font-weight: 600; color: var(--t2); background: var(--off2); padding: 4px 10px; border-radius: 100px; }
 
     /* ── YouTube Hub Grid ── */
     .yt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -508,50 +561,7 @@
     .tag-intermediate { background: rgba(245, 166, 35, .1); color: var(--gold3); }
     .tag-pro { background: rgba(139, 92, 246, .1); color: var(--purple); }
 
-    /* ── Orbit Wheel & Tools ── */
-    .orbit-section { padding: 64px 16px; background: linear-gradient(135deg, #F0F4FF, #EDE9FE, #FEF3C7); text-align: center; overflow: hidden; }
-    .orbit-wrap { position: relative; width: 300px; height: 300px; margin: 36px auto 0; }
-    .orbit-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70px; height: 70px; border-radius: 18px; background: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, .1); display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 10; font-family: var(--fm); font-weight: 800; color: var(--gold3); }
-    .orbit-ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; border: 1.5px dashed rgba(99, 102, 241, .25); transform: translate(-50%, -50%); }
-    .ring1 { width: 140px; height: 140px; }
-    .ring2 { width: 250px; height: 250px; }
-    .orbit-items1 { position: absolute; top: 50%; left: 50%; width: 140px; height: 140px; transform: translate(-50%, -50%); animation: orbitSpin 12s linear infinite; }
-    .orbit-items2 { position: absolute; top: 50%; left: 50%; width: 250px; height: 250px; transform: translate(-50%, -50%); animation: orbitSpin 20s linear infinite reverse; }
-    @keyframes orbitSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-    .orbit-dot { position: absolute; top: 0; left: 50%; transform: translateX(-50%) translateY(-50%); width: 38px; height: 38px; border-radius: 10px; background: #fff; box-shadow: 0 4px 14px rgba(0, 0, 0, .12); display: flex; align-items: center; justify-content: center; font-size: 18px; animation: counterSpin 12s linear infinite; }
-    .orbit-items2 .orbit-dot { width: 42px; height: 42px; border-radius: 12px; font-size: 19px; animation: counterSpin2 20s linear infinite; }
-    @keyframes counterSpin { from { transform: translateX(-50%) translateY(-50%) rotate(0deg); } to { transform: translateX(-50%) translateY(-50%) rotate(-360deg); } }
-    @keyframes counterSpin2 { from { transform: translateX(-50%) translateY(-50%) rotate(0deg); } to { transform: translateX(-50%) translateY(-50%) rotate(360deg); } }
-    .od1 { transform-origin: 0 70px; top: 50%; left: 50%; margin-left: -19px; margin-top: -70px; }
-    .od2 { transform-origin: 0 70px; top: 50%; left: 50%; margin-left: -19px; margin-top: -70px; transform: rotate(180deg); }
-    .od-a { transform-origin: 0 125px; top: 50%; left: 50%; margin-left: -21px; margin-top: -125px; }
-    .od-b { transform-origin: 0 125px; top: 50%; left: 50%; margin-left: -21px; margin-top: -125px; transform: rotate(72deg); }
-    .od-c { transform-origin: 0 125px; top: 50%; left: 50%; margin-left: -21px; margin-top: -125px; transform: rotate(144deg); }
-    .od-d { transform-origin: 0 125px; top: 50%; left: 50%; margin-left: -21px; margin-top: -125px; transform: rotate(216deg); }
-    .od-e { transform-origin: 0 125px; top: 50%; left: 50%; margin-left: -21px; margin-top: -125px; transform: rotate(288deg); }
-
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .feat-card { background: var(--white); border: 1px solid var(--bdr2); border-radius: var(--r); padding: 24px; display: block; text-align: left; }
-    .feat-card-ico { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
-    .ico-gold { background: rgba(245, 166, 35, .12); }
-    .ico-green { background: rgba(16, 185, 129, .08); }
-    .ico-purple { background: rgba(139, 92, 246, .08); }
-    .feat-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--t1); margin-bottom: 6px; }
-    .feat-card p { font-size: 13.5px; color: var(--t2); line-height: 1.65; }
-    .feat-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--indigo); margin-top: 12px; }
-
-    /* ── Exam Hub ── */
-    .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-    .exam-card { background: var(--white); border: 1px solid var(--bdr2); border-radius: var(--r); padding: 24px; display: flex; flex-direction: column; }
-    .exam-card-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-    .exam-ico { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; background: rgba(139, 92, 246, .1); }
-    .exam-badge { font-family: var(--fm); font-size: 9px; font-weight: 700; color: var(--purple); background: rgba(139, 92, 246, .1); padding: 3px 8px; border-radius: 100px; }
-    .exam-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--t1); margin-bottom: 6px; }
-    .exam-card p { font-size: 13px; color: var(--t2); line-height: 1.6; margin-bottom: 16px; flex: 1; }
-    .exam-meta { display: flex; gap: 10px; margin-bottom: 16px; font-family: var(--fm); font-size: 10.5px; color: var(--t3); }
-    .exam-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 10px; background: var(--off2); color: var(--t1); font-size: 13px; font-weight: 600; border-radius: 8px; border: 1px solid var(--bdr); }
-
-    /* ── Lead Generation Form ── */
+    /* ── Lead Form ── */
     .lead-sec { background: linear-gradient(135deg, #060610, #0f1020, #060610); padding: 64px 16px; }
     .lead-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; max-width: var(--max); margin: 0 auto; }
     .lead-trust { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
@@ -574,7 +584,7 @@
     .lf-submit { width: 100%; padding: 13px; border-radius: 10px; background: linear-gradient(135deg, #059669, var(--green)); color: #fff; border: none; cursor: pointer; font-family: var(--fb); font-size: .86rem; font-weight: 700; box-shadow: 0 4px 18px rgba(16, 185, 129, .3); }
     .lf-success { padding: 32px 20px; text-align: center; color: #fff; }
 
-    /* ── Single Exclusive Master Footer (Bright Legible Contrast) ── */
+    /* ── Single Exclusive Master Footer ── */
     #siteSingleFooter {
       background: #090910;
       border-top: 1px solid rgba(255, 255, 255, 0.12);
@@ -589,9 +599,9 @@
       gap: 32px;
       margin-bottom: 36px;
     }
-    .ft-logo-name { font-size: 16px; font-weight: 800; color: #FFFFFF; letter-spacing: -.02em; margin-top: 8px; margin-bottom: 8px; }
+    .ft-logo-name { font-size: 16px; font-weight: 800; color: #FFFFFF; letter-spacing: -.02em; }
     .ft-logo-name span { color: var(--gold); }
-    .ft-desc { font-size: 12.5px; color: #CBD5E1; line-height: 1.7; margin-bottom: 14px; }
+    .ft-desc { font-size: 12.5px; color: #CBD5E1; line-height: 1.7; margin: 10px 0 14px; }
     .ft-badges { display: flex; gap: 6px; flex-wrap: wrap; }
     .ft-badge { font-family: var(--fm); font-size: 9.5px; font-weight: 600; padding: 2px 8px; border-radius: var(--rfull); background: rgba(255, 255, 255, .08); color: #F8FAFC; border: 1px solid rgba(255, 255, 255, .15); }
     .ft-col-h { font-family: var(--fm); font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #94A3B8; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 255, .1); }
@@ -603,10 +613,9 @@
     .ft-legal { display: flex; gap: 16px; }
     .ft-legal a { font-size: 11.5px; color: #94A3B8; }
 
-    /* ── Mobile Overrides ── */
     @media(max-width: 900px) {
       .hero-split { grid-template-columns: 1fr; gap: 28px; }
-      .features-grid, .exam-grid, .route-grid, .vert-grid, .yt-grid { grid-template-columns: 1fr; }
+      .route-grid, .vert-grid, .yt-grid { grid-template-columns: 1fr; }
       .lead-inner { grid-template-columns: 1fr; gap: 28px; }
       .ft-grid { grid-template-columns: 1fr 1fr; }
       .lf-row { grid-template-columns: 1fr; }
@@ -618,7 +627,7 @@
       .btn-portal-hdr, .btn-consult-hdr { display: none !important; }
       
       .hdr-inner { padding: 0 14px; height: 58px; }
-      .logo-box { width: 32px; height: 32px; font-size: 16px; border-radius: 8px; }
+      .logo-img { width: 32px; height: 32px; border-radius: 8px; }
       .logo-name { font-size: 15px; }
 
       .hero { padding: 32px 14px 0; }
@@ -633,10 +642,6 @@
       .hstat-v { font-size: 1.05rem; }
       .hstat-l { font-size: 8px; }
 
-      .orbit-wrap { width: 250px; height: 250px; }
-      .ring2 { width: 210px; height: 210px; }
-      .od-a, .od-b, .od-c, .od-d, .od-e { margin-top: -105px; transform-origin: 0 105px; }
-
       .ft-grid { grid-template-columns: 1fr; gap: 24px; }
       .ft-bottom { flex-direction: column; text-align: center; }
     }
@@ -644,33 +649,33 @@
 </head>
 <body>
 
-  <!-- Floating WhatsApp Trigger -->
+  <!-- Floating WhatsApp -->
   <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20Free%20financial%20guidance%20vennum." target="_blank" rel="noopener" class="wa-fab" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12 12 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
-  <!-- Top Regulatory Strip: Single Line Auto-Scrolling Marquee -->
+  <!-- Top Regulatory Strip -->
   <div class="top-reg-strip">
     <div class="top-reg-track">
       <span>🛡️ AMFI Registered MFD: <strong class="top-reg-badge">ARN-288927</strong></span>
       <span>EUIN: <strong class="top-reg-badge">E543710</strong></span>
-      <span>📍 Wealth Desk: <strong style="color:#FFF">Bakmarpettai, Polur (Tiruvannamalai)</strong></span>
+      <span>📍 Wealth Office: <strong style="color:#FFF">Bakmarpettai, Polur (Tiruvannamalai)</strong></span>
       <span>GST (Bengaluru Desk): <strong class="top-reg-badge">29BWRPV6671C1ZQ</strong></span>
       <span>📞 WhatsApp: <strong style="color:var(--wa)">+91 72007 52628</strong></span>
-      <!-- Loop duplicate -->
+      <!-- Repeat for seamless loop -->
       <span>🛡️ AMFI Registered MFD: <strong class="top-reg-badge">ARN-288927</strong></span>
       <span>EUIN: <strong class="top-reg-badge">E543710</strong></span>
-      <span>📍 Wealth Desk: <strong style="color:#FFF">Bakmarpettai, Polur (Tiruvannamalai)</strong></span>
+      <span>📍 Wealth Office: <strong style="color:#FFF">Bakmarpettai, Polur (Tiruvannamalai)</strong></span>
       <span>GST (Bengaluru Desk): <strong class="top-reg-badge">29BWRPV6671C1ZQ</strong></span>
       <span>📞 WhatsApp: <strong style="color:var(--wa)">+91 72007 52628</strong></span>
     </div>
   </div>
 
-  <!-- Header with Mobile Rule (Logo + UMM on Left, Menu Button on Right) -->
+  <!-- Header -->
   <header class="hdr">
     <div class="hdr-inner">
       <a href="/index.html" class="logo">
-        <div class="logo-box">₹</div>
+        <img src="/Logo.png" alt="UMM Logo" class="logo-img" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png'">
         <div class="logo-name">
           <span class="brand-desktop">Universal <span>Money</span> Mart</span>
           <span class="brand-mobile"><span>UMM</span></span>
@@ -678,7 +683,7 @@
       </a>
       <div class="hdr-actions">
         <a href="/portal.html" class="btn-portal-hdr">📱 Client Portal</a>
-        <a href="#consultation" class="btn-consult-hdr">🎯 Consultation</a>
+        <a href="#explore-funds" class="btn-consult-hdr">📈 Explore Funds</a>
         <button class="menu-btn" onclick="toggleDrawer()" aria-label="Open Navigation">
           <div class="menu-icon">
             <span></span>
@@ -691,7 +696,7 @@
     </div>
   </header>
 
-  <!-- Slide-Out Drawer Navigation Panel -->
+  <!-- Slide-Out Drawer -->
   <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
   <aside class="drawer-panel" id="drawerPanel">
     <div class="drawer-head">
@@ -701,43 +706,34 @@
     <div class="drawer-links">
       <a href="/index.html" class="drawer-link" onclick="toggleDrawer()">🏠 Home</a>
       <a href="/portal.html" class="drawer-link" style="color:var(--indigo);font-weight:700">📱 Client Wealth Portal</a>
+      <a href="#explore-funds" class="drawer-link" onclick="toggleDrawer()" style="color:var(--green);font-weight:700">📈 Explore &amp; Invest in Funds</a>
       <a href="#two-ways" class="drawer-link" onclick="toggleDrawer()">💼 Wealth &amp; Compliance Desk</a>
       <a href="#youtube-hub" class="drawer-link" onclick="toggleDrawer()">🎬 Tamil Finance Videos</a>
       <a href="/dfarm.html" class="drawer-link agri">🌾 D-FARM Agro Tech (Polur)</a>
       <a href="#routemap" class="drawer-link" onclick="toggleDrawer()">🗺️ Learning Route Map</a>
       <a href="/blog/index.html" class="drawer-link">📚 All Articles &amp; Guides</a>
-      <a href="#exams" class="drawer-link" onclick="toggleDrawer()">🎯 Exam Mock Tests (NISM/IC38)</a>
+      <a href="/tools/nism-series-va-mock-test.html" class="drawer-link">🎯 NISM V-A Mock Test</a>
       <a href="/gold-rate-today.html" class="drawer-link">🥇 Live Gold Rate Today</a>
       <a href="/about.html" class="drawer-link">👤 About Founders</a>
-      <a href="#consultation" class="drawer-link" onclick="toggleDrawer()" style="color:var(--green);font-weight:700">🎯 Free Consultation</a>
       <a href="https://wa.me/917200752628" target="_blank" rel="noopener" class="drawer-link" style="color:var(--wa);font-weight:700">💬 Chat on WhatsApp</a>
     </div>
   </aside>
 
-  <!-- Live Accurate Market Ticker Strip -->
-  <div class="ticker-bar">
-    <div class="ticker-track">
-      <div class="ticker-item"><span>🥇 22K Gold:</span> <span id="tickerGoldPrice" class="up">Loading...</span></div>
-      <div class="ticker-item"><span>📈 NIFTY 50:</span> <span class="up">25,055.20 (+0.31%)</span></div>
-      <div class="ticker-item"><span>🇺🇸 S&P 500:</span> <span class="up">7,378.40 (+0.25%)</span></div>
-      <div class="ticker-item"><span>🌐 NASDAQ 100:</span> <span class="up">21,410.15 (+0.45%)</span></div>
-      <div class="ticker-item"><span>🛡️ India 10Y Bond:</span> <span>7.17%</span></div>
-      <div class="ticker-item"><span>🛢️ Brent Crude:</span> <span class="down">$73.20 (-0.4%)</span></div>
-      <!-- Marquee Loop Repeat -->
-      <div class="ticker-item"><span>🥇 22K Gold:</span> <span class="up">₹13,250/g</span></div>
-      <div class="ticker-item"><span>📈 NIFTY 50:</span> <span class="up">25,055.20 (+0.31%)</span></div>
-      <div class="ticker-item"><span>🇺🇸 S&P 500:</span> <span class="up">7,378.40 (+0.25%)</span></div>
-      <div class="ticker-item"><span>🌐 NASDAQ 100:</span> <span class="up">21,410.15 (+0.45%)</span></div>
-      <div class="ticker-item"><span>🛡️ India 10Y Bond:</span> <span>7.17%</span></div>
-      <div class="ticker-item"><span>🛢️ Brent Crude:</span> <span class="down">$73.20 (-0.4%)</span></div>
+  <!-- Verified Live Gold Strip (Shows ONLY when live API succeeds) -->
+  <div id="liveMarketBar">
+    <div class="live-bar-inner">
+      <div>
+        <span class="live-dot"></span>
+        <span>🥇 Live 22K Gold Spot Rate: <strong id="liveGoldVal" style="color:#FFD166"></strong></span>
+      </div>
+      <a href="/gold-rate-today.html" style="color:#4ADE80;font-weight:700">Full Gold &amp; SGB Guide →</a>
     </div>
   </div>
 
-  <!-- Hero Section with Interactive SIP & RD Comparison Engine -->
+  <!-- Hero Section -->
   <section class="hero">
     <div class="wrap">
       <div class="hero-split">
-        <!-- Left Hero Column -->
         <div>
           <div class="hero-label">
             <span class="hero-label-dot"></span>
@@ -746,16 +742,16 @@
           <h1 class="hero-h1">உங்கள் பணம் <em>Smart-ஆ</em></h1>
           <div class="hero-h2">Grow ஆகட்டும்</div>
           <p class="hero-p">
-            AMFI Registered Mutual Fund Distributor (ARN-288927) based in <strong>Bakmarpettai, Polur</strong>. Goal-based SIPs, Retirement &amp; Child Education planning, plus GST, ITR, PAN &amp; Passport support in clear Tamil.
+            AMFI Registered Mutual Fund Distributor (ARN-288927) based in <strong>Bakmarpettai, Polur</strong>. Explore top-rated mutual funds, start ₹500+ SIPs, plus GST, ITR, PAN &amp; Passport support in clear Tamil.
           </p>
           <div class="hero-btns">
-            <a href="#consultation" class="btn-green">🎯 Free Consultation</a>
+            <a href="#explore-funds" class="btn-green">📈 Explore Mutual Funds</a>
             <a href="/portal.html" class="btn-portal-hero">📱 Client Portal</a>
-            <a href="#youtube-hub" class="btn-primary">🎬 Watch Tamil Videos</a>
+            <a href="#consultation" class="btn-primary">🎯 Free Consultation</a>
           </div>
         </div>
 
-        <!-- Right: Interactive SIP vs RD Calculator Widget -->
+        <!-- Live SIP vs RD Calculator -->
         <div>
           <div class="hero-sip-card">
             <div class="hsc-head">
@@ -820,20 +816,30 @@
     </div>
   </section>
 
-  <!-- Daily Habits Strip -->
-  <div class="daily-strip">
-    <a href="/gold-rate-today.html" class="gold-teaser-link">
-      <div class="gold-teaser">
-        <div class="gt-left">
-          <span class="gt-dot"></span>
-          <span class="gt-label">🥇 இன்றைய தங்கம் ரேட்டு (22K)</span>
-        </div>
-        <div class="gt-right">
-          <span id="gtPrice" class="gt-price">Live rate பார்க்க →</span>
-        </div>
+  <!-- EXPLORE MUTUAL FUNDS SECTION (Live NAV via MFAPI + Instant Invest) -->
+  <section class="sec" id="explore-funds">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-eyebrow green">📈 EXPLORE FUNDS · LIVE NAV</div>
+        <h2 class="sec-title dark-em">Curated <em>Mutual Funds</em> to Start Your SIP</h2>
+        <p class="sec-sub">Select a fund category below to view live NAVs and initiate paperless KYC &amp; SIP execution under ARN-288927.</p>
       </div>
-    </a>
-  </div>
+
+      <div class="fund-filter-bar">
+        <button class="f-filter-btn active" onclick="filterExploreFunds('all', this)">All Categories</button>
+        <button class="f-filter-btn" onclick="filterExploreFunds('flexi', this)">Flexi Cap</button>
+        <button class="f-filter-btn" onclick="filterExploreFunds('small', this)">Small &amp; Mid Cap</button>
+        <button class="f-filter-btn" onclick="filterExploreFunds('index', this)">Nifty Index</button>
+        <button class="f-filter-btn" onclick="filterExploreFunds('tax', this)">ELSS Tax Saver</button>
+      </div>
+
+      <div class="explore-grid" id="exploreFundsGrid"></div>
+
+      <div style="text-align:center;margin-top:24px;font-size:12px;color:var(--t3)">
+        * Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing.
+      </div>
+    </div>
+  </section>
 
   <!-- Two Founders Section -->
   <section class="verticals-sec" id="two-ways">
@@ -844,7 +850,6 @@
         <p class="sec-sub">Trusted guidance for Polur, Tiruvannamalai &amp; Bengaluru families.</p>
       </div>
       <div class="vert-grid">
-        <!-- Vignesh -->
         <div class="vert-card">
           <div class="vert-ribbon" style="background:rgba(245,166,35,.12);color:#B45309">WEALTH DESK · POLUR &amp; TN</div>
           <div class="vert-top">
@@ -861,7 +866,6 @@
           <a href="https://wa.me/917200752628?text=Hi%20Vignesh!%20I%20want%20to%20start%20SIP%20guidance." target="_blank" rel="noopener" class="vert-btn" style="background:var(--wa);color:#fff">💬 Talk to Vignesh</a>
         </div>
 
-        <!-- Ramya -->
         <div class="vert-card">
           <div class="vert-ribbon" style="background:rgba(16,185,129,.12);color:#047857">COMPLIANCE DESK · BENGALURU</div>
           <div class="vert-top">
@@ -981,96 +985,6 @@
     </div>
   </section>
 
-  <!-- Interactive Orbit Wheel & Tools -->
-  <section class="orbit-section" id="tools">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-eyebrow">⚡ Free Calculators</div>
-        <h2 class="sec-title">Powerful <em>financial tools</em><br>built for Tamil investors</h2>
-        <p class="sec-sub">Plan your budget and estimate your mutual fund returns interactively.</p>
-      </div>
-      <div class="orbit-wrap">
-        <div class="orbit-ring ring1"></div>
-        <div class="orbit-ring ring2"></div>
-        <div class="orbit-center">₹</div>
-        <div class="orbit-items1">
-          <div class="od1"><div class="orbit-dot">🧮</div></div>
-          <div class="od2"><div class="orbit-dot">📈</div></div>
-        </div>
-        <div class="orbit-items2">
-          <div class="od-a"><div class="orbit-dot">💰</div></div>
-          <div class="od-b"><div class="orbit-dot">📊</div></div>
-          <div class="od-c"><div class="orbit-dot">🥇</div></div>
-          <div class="od-d"><div class="orbit-dot">🛡️</div></div>
-          <div class="od-e"><div class="orbit-dot">✨</div></div>
-        </div>
-      </div>
-      <div class="features-grid" style="margin-top:40px">
-        <a href="/tools/sip-calculator.html" class="feat-card">
-          <div class="feat-card-ico ico-gold">🧮</div>
-          <h3>SIP Calculator</h3>
-          <p>Estimate your 10–30 years wealth corpus via SIP, step-up SIP with interactive growth curves.</p>
-          <div class="feat-link">Calculate Now →</div>
-        </a>
-        <a href="/tools/fd-calculator.html" class="feat-card">
-          <div class="feat-card-ico ico-green">🏦</div>
-          <h3>FD Calculator</h3>
-          <p>Calculate your Fixed Deposit maturity value and interest earned across compounding cycles.</p>
-          <div class="feat-link">Calculate Now →</div>
-        </a>
-        <a href="/tools/budget-calculator.html" class="feat-card">
-          <div class="feat-card-ico ico-purple">💰</div>
-          <h3>Budget Planner</h3>
-          <p>50/30/20 rule, salary breakdown, and savings goal tracker with allocation examples.</p>
-          <div class="feat-link">Plan Budget →</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Exam Hub -->
-  <section class="sec sec-alt" id="exams">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-eyebrow purple">🎯 Certification Center</div>
-        <h2 class="sec-title">Free Mock Tests for<br><em>Finance Professionals</em></h2>
-        <p class="sec-sub">NISM, IRDAI, JAIIB/CAIIB — official-pattern practice tests. Pass in first attempt!</p>
-      </div>
-      <div class="exam-grid">
-        <div class="exam-card">
-          <div class="exam-card-head">
-            <div class="exam-ico">📈</div>
-            <div class="exam-badge">Mutual Funds</div>
-          </div>
-          <h3>NISM Series V-A</h3>
-          <p>Mutual Fund Distributors Certification. 100 questions, 120 minutes, detailed explanations.</p>
-          <div class="exam-meta"><span>📋 100 Qs</span><span>⏱ 120 Min</span></div>
-          <a href="/tools/nism-series-va-mock-test.html" class="exam-btn">Start Free Test →</a>
-        </div>
-        <div class="exam-card">
-          <div class="exam-card-head">
-            <div class="exam-ico" style="background:rgba(16,185,129,.1)">🛡️</div>
-            <div class="exam-badge" style="background:rgba(16,185,129,.1);color:#047857">Insurance</div>
-          </div>
-          <h3>IRDAI IC 38</h3>
-          <p>Life Insurance Agent Certification. 50 questions, 60 minutes. Pass easily on first attempt.</p>
-          <div class="exam-meta"><span>📋 50 Qs</span><span>⏱ 60 Min</span></div>
-          <a href="/tools/irdai-ic38-mock-test.html" class="exam-btn" style="background:#ECFDF5;color:#047857;border-color:#A7F3D0">Start Free Test →</a>
-        </div>
-        <div class="exam-card">
-          <div class="exam-card-head">
-            <div class="exam-ico">🏦</div>
-            <div class="exam-badge">Banking</div>
-          </div>
-          <h3>JAIIB — PPB</h3>
-          <p>Principles &amp; Practices of Banking practice test. 48 questions covering banking structure and KYC/AML.</p>
-          <div class="exam-meta"><span>📋 48 Qs</span><span>⏱ 60 Min</span></div>
-          <a href="/tools/jaiib-ppb-mock-test.html" class="exam-btn" style="background:#ECFDF5;color:#047857;border-color:#A7F3D0">Start Free Test →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Lead Gen Form -->
   <section class="lead-sec" id="consultation">
     <div class="lead-inner">
@@ -1090,7 +1004,6 @@
         </div>
       </div>
 
-      <!-- Form -->
       <div>
         <div class="lf-card">
           <div class="lf-head">
@@ -1141,12 +1054,12 @@
     </div>
   </section>
 
-  <!-- SINGLE EXCLUSIVE FOOTER (Polur Primary Address + Bengaluru GST Desk) -->
+  <!-- SINGLE EXCLUSIVE FOOTER -->
   <footer id="siteSingleFooter">
     <div class="ft-grid">
       <div>
-        <div class="logo" style="gap:8px">
-          <div class="logo-box">₹</div>
+        <div class="logo" style="gap:10px">
+          <img src="/Logo.png" alt="UMM" class="logo-img" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png'">
           <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
         </div>
         <p class="ft-desc">
@@ -1175,11 +1088,10 @@
         <div class="ft-col-h">Tools &amp; Portals</div>
         <div class="ft-links">
           <a href="/portal.html" style="color:#60A5FA;font-weight:700">📱 Client Wealth Portal</a>
-          <a href="/dfarm.html" style="color:#4ADE80;font-weight:700">🌾 D-FARM Agri Hub</a>
-          <a href="https://www.youtube.com/@VigneshDhayalan" target="_blank" rel="noopener" style="color:#F87171">▶ YouTube Channel</a>
+          <a href="#explore-funds" style="color:#4ADE80;font-weight:700">📈 Explore Mutual Funds</a>
+          <a href="/dfarm.html">🌾 D-FARM Agri Hub</a>
+          <a href="https://www.youtube.com/@VigneshDhayalan" target="_blank" rel="noopener">▶ YouTube Channel</a>
           <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-          <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-          <a href="/tools/sip-calculator.html">SIP Calculator</a>
         </div>
       </div>
       <div>
@@ -1208,7 +1120,17 @@
   </footer>
 
   <script>
-    /* Drawer Navigation Toggle */
+    /* 1. PERMANENT OLD FOOTER DOM CLEANER */
+    (function cleanDuplicateFooters() {
+      document.querySelectorAll('footer').forEach(f => {
+        if (f.id !== 'siteSingleFooter') f.remove();
+      });
+      document.querySelectorAll('.ft-grid').forEach(g => {
+        if (!g.closest('#siteSingleFooter')) g.remove();
+      });
+    })();
+
+    /* 2. Drawer Navigation Toggle */
     function toggleDrawer() {
       document.getElementById('drawerPanel').classList.toggle('active');
       document.getElementById('drawerOverlay').classList.toggle('active');
@@ -1220,7 +1142,7 @@
       document.getElementById(group + 'Val').value = el.textContent.replace(/[^\w\s₹\-+,]/gu, '').trim();
     }
 
-    /* Live Interactive SIP vs Bank RD Math Engine */
+    /* 3. Live Interactive SIP vs Bank RD Calculator */
     function formatINR(val) {
       return "₹" + Math.round(val).toLocaleString('en-IN');
     }
@@ -1241,7 +1163,6 @@
       const futureValue = monthly * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
       const gains = futureValue - invested;
 
-      // Bank / Post Office RD comparison (@ 6.5% p.a. compounded monthly approximation)
       const iRd = (6.5 / 100) / 12;
       const rdFutureValue = monthly * ((Math.pow(1 + iRd, n) - 1) / iRd) * (1 + iRd);
 
@@ -1251,7 +1172,87 @@
       document.getElementById('resRdVal').textContent = formatINR(rdFutureValue);
     }
 
-    /* Formspree Lead Form Submission */
+    /* 4. Explore Mutual Funds Hub with Real-Time MFAPI NAV */
+    const curatedFunds = [
+      { code: "122639", name: "Parag Parikh Flexi Cap Fund - Regular (G)", cat: "flexi", catLabel: "Flexi Cap", risk: "Very High Risk", minSip: "₹1,000" },
+      { code: "118778", name: "Nippon India Small Cap Fund - Regular (G)", cat: "small", catLabel: "Small Cap", risk: "Very High Risk", minSip: "₹500" },
+      { code: "120716", name: "UTI Nifty 50 Index Fund - Regular (G)", cat: "index", catLabel: "Index Fund", risk: "High Risk", minSip: "₹500" },
+      { code: "135781", name: "Mirae Asset ELSS Tax Saver Fund - Regular (G)", cat: "tax", catLabel: "ELSS (80C Tax)", risk: "Very High Risk", minSip: "₹500" },
+      { code: "118968", name: "HDFC Balanced Advantage Fund - Regular (G)", cat: "flexi", catLabel: "Hybrid", risk: "High Risk", minSip: "₹500" },
+      { code: "112090", name: "Kotak Emerging Equity Fund - Regular (G)", cat: "small", catLabel: "Mid Cap", risk: "Very High Risk", minSip: "₹500" }
+    ];
+
+    async function renderExploreFunds(filter = 'all') {
+      const grid = document.getElementById('exploreFundsGrid');
+      const filtered = filter === 'all' ? curatedFunds : curatedFunds.filter(f => f.cat === filter);
+
+      grid.innerHTML = filtered.map(f => `
+        <div class="exp-card">
+          <div>
+            <div class="exp-top">
+              <span class="exp-cat">${f.catLabel}</span>
+              <span class="exp-risk">${f.risk}</span>
+            </div>
+            <div class="exp-name">${f.name}</div>
+            <div class="exp-metrics">
+              <div>
+                <div class="exp-m-lbl">Live NAV</div>
+                <div class="exp-m-val" id="nav-${f.code}">Fetching...</div>
+              </div>
+              <div>
+                <div class="exp-m-lbl">Min. SIP</div>
+                <div class="exp-m-val">${f.minSip}/mo</div>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/917200752628?text=${encodeURIComponent('Hi Vignesh (ARN-288927)! I want to start an SIP in ' + f.name + '. Please guide me on KYC & setup.')}" target="_blank" rel="noopener" class="exp-invest-btn">
+            🚀 Invest / Start SIP
+          </a>
+        </div>
+      `).join('');
+
+      // Fetch real live NAV for each displayed scheme from api.mfapi.in
+      filtered.forEach(async f => {
+        try {
+          const res = await fetch(`https://api.mfapi.in/mf/${f.code}/latest`);
+          const json = await res.json();
+          const navEl = document.getElementById(`nav-${f.code}`);
+          if (navEl && json.data && json.data[0]) {
+            navEl.textContent = "₹" + parseFloat(json.data[0].nav).toFixed(2);
+          } else if (navEl) {
+            navEl.textContent = "AMFI Active";
+          }
+        } catch {
+          const navEl = document.getElementById(`nav-${f.code}`);
+          if (navEl) navEl.textContent = "AMFI Active";
+        }
+      });
+    }
+
+    function filterExploreFunds(cat, btn) {
+      document.querySelectorAll('.f-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderExploreFunds(cat);
+    }
+
+    /* 5. Live Gold Rate (Shows ONLY if API responds accurately) */
+    (async function checkLiveGold() {
+      try {
+        const res = await fetch('https://xaus.com/api/v1/spot?currency=INR&unit=gram');
+        const data = await res.json();
+        if (data && data.xau && data.xau.price) {
+          const price22k = Math.round(data.xau.price * (22 / 24));
+          if (price22k > 5000) {
+            document.getElementById('liveGoldVal').textContent = '₹' + price22k.toLocaleString('en-IN') + ' / gram';
+            document.getElementById('liveMarketBar').style.display = 'block';
+          }
+        }
+      } catch (e) {
+        // Silently skip if live API is unreachable
+      }
+    })();
+
+    /* 6. Formspree Lead Submission */
     document.getElementById('leadForm')?.addEventListener('submit', async function(e) {
       e.preventDefault();
       const btn = document.getElementById('leadSubmitBtn');
@@ -1278,94 +1279,10 @@
       }
     });
 
-    /* Live 22K Gold Rate */
-    (async function() {
-      const el = document.getElementById('gtPrice');
-      const tickerEl = document.getElementById('tickerGoldPrice');
-      try {
-        const res = await fetch('https://xaus.com/api/v1/spot?currency=INR&unit=gram');
-        const data = await res.json();
-        const price24k = data.xau && data.xau.price ? data.xau.price : null;
-        if (price24k) {
-          const price22k = Math.round(price24k * (22 / 24));
-          const formatted = '₹' + price22k.toLocaleString('en-IN') + '/g';
-          if (el) el.textContent = '22K: ' + formatted + ' →';
-          if (tickerEl) tickerEl.textContent = formatted;
-        }
-      } catch (e) {
-        if (tickerEl) tickerEl.textContent = '₹13,250/g';
-      }
-    })();
-
-    document.addEventListener('DOMContentLoaded', calculateSIP);
+    document.addEventListener('DOMContentLoaded', () => {
+      calculateSIP();
+      renderExploreFunds('all');
+    });
   </script>
-<footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
 </body>
 </html>
