@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Client Portal &amp; Wealth Vault — Universal Money Mart</title>
-  <meta name="description" content="Secure client wealth vault for mutual fund tracking (ARN-288927), consolidated CAS portfolio, capital gains statement, and encrypted DocVault.">
+  <meta name="description" content="Exclusive client wealth vault for registered ARN-288927 investors and new investor onboarding.">
   <link rel="canonical" href="https://universalmoneymart.onrender.com/portal.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Google Firebase SDKs for Real Phone SMS OTP -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,9 +24,7 @@
       --off: #F8FAFC;
       --off2: #F1F5F9;
       --dark: #09090E;
-      --dark2: #111118;
       --gold: #F5A623;
-      --gold2: #FFD166;
       --green: #10B981;
       --indigo: #4F46E5;
       --blue: #2563EB;
@@ -62,71 +64,76 @@
       z-index: 200;
     }
     .portal-hdr-inner {
-      height: 60px;
+      height: 62px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .logo-area { display: flex; align-items: center; gap: 8px; }
-    .logo-box {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--gold), #D97706);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      color: #fff;
-      font-weight: 900;
-    }
+    .logo-img { width: 34px; height: 34px; border-radius: 8px; object-fit: cover; border: 1px solid var(--bdr2); }
     .logo-title { font-weight: 800; font-size: 15px; color: var(--t1); }
     .logo-vault { color: var(--indigo); font-size: 11px; font-weight: 700; background: #EEF2FF; padding: 2px 7px; border-radius: 12px; margin-left: 4px; font-family: var(--fm); }
     .hdr-back {
       font-size: 12.5px;
       font-weight: 700;
       color: var(--blue);
-      display: inline-flex;
-      align-items: center;
       background: var(--off2);
       padding: 6px 14px;
       border-radius: var(--rfull);
     }
 
-    /* Auth Screen */
+    /* Auth & Registration Box */
     .auth-wrap {
-      max-width: 420px;
-      margin: 44px auto;
+      max-width: 440px;
+      margin: 40px auto;
       background: #FFFFFF;
       border: 1px solid var(--bdr2);
       border-radius: var(--r);
-      padding: 32px 24px;
+      padding: 28px 24px;
       box-shadow: 0 10px 30px rgba(15, 23, 42, .05);
     }
-    .auth-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: #EEF2FF;
-      color: var(--indigo);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin: 0 auto 14px;
+    .auth-mode-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--off2);
+      padding: 4px;
+      border-radius: 10px;
+      margin-bottom: 22px;
     }
-    .auth-title { font-family: var(--fh); font-size: 1.4rem; font-weight: 900; text-align: center; color: var(--t1); margin-bottom: 4px; }
-    .auth-sub { font-size: 13px; color: var(--t2); text-align: center; margin-bottom: 22px; }
-    .form-lbl { display: block; font-size: 12px; font-weight: 700; color: var(--t2); margin-bottom: 6px; }
+    .mode-tab {
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--t2);
+      transition: all .2s;
+    }
+    .mode-tab.active {
+      background: #FFFFFF;
+      color: var(--t1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+    }
+    .auth-title { font-family: var(--fh); font-size: 1.35rem; font-weight: 900; text-align: center; color: var(--t1); margin-bottom: 4px; }
+    .auth-sub { font-size: 12.5px; color: var(--t2); text-align: center; margin-bottom: 20px; }
+    .form-lbl { display: block; font-size: 12px; font-weight: 700; color: var(--t2); margin-bottom: 5px; }
+    .phone-input-row { display: flex; gap: 8px; }
+    .country-code {
+      padding: 11px 12px;
+      background: #E2E8F0;
+      border: 1.5px solid var(--bdr2);
+      border-radius: 10px;
+      font-weight: 700;
+      font-family: var(--fm);
+      font-size: 13.5px;
+    }
     .form-input {
       width: 100%;
-      padding: 12px 14px;
+      padding: 11px 14px;
       border: 1.5px solid var(--bdr2);
       border-radius: 10px;
       font-size: 14px;
       outline: none;
       background: #FAFAFC;
-      transition: border-color .2s;
       font-family: var(--fb);
     }
     .form-input:focus { border-color: var(--blue); background: #FFF; }
@@ -139,18 +146,20 @@
       font-size: 14px;
       font-weight: 700;
       margin-top: 14px;
-      transition: background .2s;
     }
     .btn-auth:hover { background: var(--indigo); }
-    .otp-banner {
-      background: #ECFDF5;
-      border: 1.5px dashed var(--green);
-      padding: 12px 14px;
+    .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; }
+    .alert-box {
+      display: none;
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+      padding: 12px;
       border-radius: 10px;
-      margin-bottom: 16px;
-      text-align: center;
+      font-size: 12.5px;
+      margin-top: 14px;
+      line-height: 1.5;
     }
-    .otp-banner strong { font-size: 18px; color: #065F46; font-family: var(--fm); letter-spacing: 2px; }
 
     /* Dashboard */
     #dashboardView { display: none; padding: 24px 0 60px; }
@@ -173,47 +182,25 @@
       font-size: 12.5px;
       font-weight: 700;
       color: var(--t1);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
-    .action-pill:hover { background: var(--off2); }
 
-    /* KPI Grid */
     .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
     .kpi-card {
       background: #FFFFFF;
       border: 1px solid var(--bdr2);
       border-radius: 14px;
       padding: 18px 16px;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, .02);
     }
     .kpi-lbl { font-size: 11px; text-transform: uppercase; color: var(--t3); font-weight: 700; font-family: var(--fm); }
     .kpi-val { font-size: 21px; font-weight: 900; color: var(--t1); margin-top: 4px; font-family: var(--fm); }
     .val-blue { color: var(--blue); }
     .val-green { color: var(--green); }
 
-    /* Switcher Tabs */
-    .tab-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
+    .tab-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
     .tabs-wrapper { display: flex; background: #E2E8F0; padding: 3px; border-radius: var(--rfull); }
-    .tab-btn {
-      padding: 8px 16px;
-      border-radius: var(--rfull);
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--t2);
-      transition: all .2s;
-    }
+    .tab-btn { padding: 8px 16px; border-radius: var(--rfull); font-size: 12.5px; font-weight: 700; color: var(--t2); }
     .tab-btn.active { background: var(--dark); color: #fff; }
 
-    /* Scheme Holdings Cards */
     .fund-card {
       background: #FFFFFF;
       border: 1px solid var(--bdr2);
@@ -232,41 +219,8 @@
     .stat-col { text-align: right; }
     .stat-lbl { font-size: 10px; color: var(--t3); text-transform: uppercase; font-family: var(--fm); }
     .stat-val { font-size: 13.5px; font-weight: 800; color: var(--t1); font-family: var(--fm); }
-    .fund-badge {
-      font-size: 11.5px;
-      font-weight: 800;
-      color: #047857;
-      background: #ECFDF5;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-family: var(--fm);
-    }
+    .fund-badge { font-size: 11.5px; font-weight: 800; color: #047857; background: #ECFDF5; padding: 4px 10px; border-radius: 20px; font-family: var(--fm); }
 
-    /* DocVault Section */
-    .vault-box {
-      margin-top: 32px;
-      background: #FFFFFF;
-      border: 1px solid var(--bdr2);
-      border-radius: var(--r);
-      padding: 24px;
-    }
-    .vault-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .vault-title { font-family: var(--fh); font-size: 17px; font-weight: 800; color: var(--t1); }
-    .vault-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-    .vault-item {
-      border: 1px dashed #CBD5E1;
-      border-radius: 12px;
-      padding: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--off);
-    }
-    .vault-item-name { font-weight: 700; font-size: 13px; color: var(--t1); }
-    .vault-item-status { font-size: 11px; color: var(--green); font-weight: 600; }
-    .vault-view-btn { font-size: 12px; font-weight: 700; color: var(--blue); padding: 4px 8px; }
-
-    /* Modals */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -278,110 +232,22 @@
       justify-content: center;
       padding: 16px;
     }
-    .modal-card {
-      background: #FFFFFF;
-      width: 100%;
-      max-width: 480px;
-      border-radius: var(--r);
-      padding: 26px;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .modal-title { font-family: var(--fh); font-size: 1.25rem; font-weight: 800; color: var(--t1); }
-    .modal-close { font-size: 22px; cursor: pointer; color: var(--t2); padding: 4px; }
+    .modal-card { background: #FFFFFF; width: 100%; max-width: 480px; border-radius: var(--r); padding: 26px; }
 
-    /* ── Single Master Dark Footer (Crystal Clear Text Colors) ── */
-    #siteOnlyFooter {
-      background: #090910 !important;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 52px 16px 28px;
-      margin-top: 56px;
-      color: #E2E8F0;
-    }
-    .ft-grid {
-      max-width: var(--max);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr;
-      gap: 36px;
-      margin-bottom: 36px;
-    }
-    .ft-logo-name {
-      font-size: 17px;
-      font-weight: 800;
-      color: #FFFFFF !important;
-      letter-spacing: -.02em;
-      margin-bottom: 10px;
-    }
-    .ft-logo-name span { color: var(--gold); }
-    .ft-desc {
-      font-size: 13px;
-      color: #CBD5E1 !important;
-      line-height: 1.75;
-      margin-bottom: 14px;
-    }
-    .ft-badges { display: flex; gap: 6px; flex-wrap: wrap; }
-    .ft-badge {
-      font-family: var(--fm);
-      font-size: 10px;
-      font-weight: 600;
-      padding: 3px 9px;
-      border-radius: var(--rfull);
-      background: rgba(255, 255, 255, 0.08);
-      color: #F8FAFC !important;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    .ft-col-h {
-      font-family: var(--fm);
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: #94A3B8 !important;
-      margin-bottom: 14px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .ft-links { display: flex; flex-direction: column; gap: 9px; }
-    .ft-links a {
-      font-size: 13px;
-      color: #E2E8F0 !important;
-      transition: color .15s;
-    }
-    .ft-links a:hover { color: var(--gold) !important; }
-    .ft-bottom {
-      max-width: var(--max);
-      margin: 0 auto;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .ft-copy { font-size: 12px; color: #94A3B8 !important; }
-
-    /* Mobile Overrides */
     @media(max-width: 800px) {
       .kpi-grid { grid-template-columns: 1fr 1fr; }
       .fund-card { flex-direction: column; align-items: flex-start; }
       .fund-stats { width: 100%; justify-content: space-between; border-top: 1px solid var(--bdr2); padding-top: 10px; }
-      .ft-grid { grid-template-columns: 1fr; gap: 24px; }
-      .dash-top { flex-direction: column; align-items: flex-start; }
-      .dash-top-actions { width: 100%; }
-      .action-pill { flex: 1; justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Minimal Header -->
+  <!-- Header -->
   <header class="portal-hdr">
     <div class="wrap portal-hdr-inner">
       <a href="/index.html" class="logo-area">
-        <div class="logo-box">₹</div>
+        <img src="/Logo.png" alt="UMM" class="logo-img" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png'">
         <div class="logo-title">Universal <span>Money</span> Mart <span class="logo-vault">VAULT</span></div>
       </a>
       <a href="/index.html" class="hdr-back">← Back to Home</a>
@@ -389,280 +255,320 @@
   </header>
 
   <main class="wrap">
-    <!-- 1. Authentication View -->
+    <!-- 1. Restricted Client Login + New Registration Card -->
     <div id="authScreen" class="auth-wrap">
-      <div class="auth-icon">🔐</div>
-      <h1 class="auth-title">Client Wealth Vault</h1>
-      <p class="auth-sub">Enter your registered Mobile Number or PAN to access your folios and tax reports.</p>
-
-      <!-- Step A: User Input -->
-      <div id="stepInputContainer">
-        <label class="form-lbl">Mobile Number or PAN</label>
-        <input type="text" id="userInput" class="form-input" placeholder="9876543210 / ABCDE1234F" autocomplete="off">
-        <button type="button" class="btn-auth" onclick="handleSendOTP()">Send 6-Digit OTP →</button>
+      <div class="auth-mode-tabs">
+        <button type="button" class="mode-tab active" id="tabLoginMode" onclick="switchAuthMode('login')">🔐 Client Login</button>
+        <button type="button" class="mode-tab" id="tabRegMode" onclick="switchAuthMode('register')">📝 New Registration</button>
       </div>
 
-      <!-- Step B: OTP Input -->
-      <div id="stepOtpContainer" style="display:none">
-        <div class="otp-banner">
-          <div style="font-size:12px;color:#047857;margin-bottom:4px">Your Verification OTP is:</div>
-          <strong id="simulatedOtpCode">123456</strong>
-          <div style="font-size:11px;color:#059669;margin-top:4px">(Sent to <span id="otpTargetDisplay"></span>)</div>
+      <!-- MODE A: EXISTING REGISTERED CLIENT LOGIN -->
+      <div id="loginSection">
+        <h1 class="auth-title">Registered Client Vault</h1>
+        <p class="auth-sub">Restricted access for verified ARN-288927 clients only.</p>
+
+        <div id="stepInputContainer">
+          <label class="form-lbl">Registered Mobile Number</label>
+          <div class="phone-input-row">
+            <div class="country-code">+91</div>
+            <input type="tel" id="userInput" class="form-input" placeholder="Registered 10-digit number" maxlength="10">
+          </div>
+          <div id="recaptcha-container" style="margin-top:8px"></div>
+          <button type="button" class="btn-auth" id="btnSendSms" onclick="verifyClientAndSendOTP()">Verify Client &amp; Send OTP →</button>
+
+          <!-- Warning shown if unregistered user tries to log in -->
+          <div id="unregisteredAlert" class="alert-box">
+            <strong>⚠️ Access Restricted:</strong> Indha number enga active client list-la illa. Neenga pudhu investor-na, mela irukura <strong>"New Registration"</strong> tab click panni KYC onboarding start pannunga!
+          </div>
         </div>
-        <label class="form-lbl">Enter 6-Digit Code</label>
-        <input type="text" id="otpCode" class="form-input" maxlength="6" placeholder="Enter OTP" style="text-align:center;letter-spacing:6px;font-family:var(--fm);font-size:18px">
-        <button type="button" class="btn-auth" style="background:var(--green)" onclick="handleVerifyOTP()">Verify &amp; Unlock Portfolio</button>
+
+        <!-- Step B: OTP Verification -->
+        <div id="stepOtpContainer" style="display:none">
+          <div style="background:#ECFDF5;border:1px solid #A7F3D0;padding:12px;border-radius:10px;margin-bottom:14px;font-size:12px;color:#047857">
+            ✅ SMS OTP dispatched to <strong id="otpTargetDisplay"></strong>
+          </div>
+          <label class="form-lbl">Enter 6-Digit SMS OTP</label>
+          <input type="text" id="otpCode" class="form-input" maxlength="6" placeholder="______" style="text-align:center;letter-spacing:6px;font-family:var(--fm);font-size:18px">
+          <button type="button" class="btn-auth" id="btnVerifySms" style="background:var(--green)" onclick="verifyRealSMS()">Unlock My Portfolio</button>
+        </div>
+      </div>
+
+      <!-- MODE B: NEW INVESTOR REGISTRATION -->
+      <div id="registerSection" style="display:none">
+        <h1 class="auth-title">New Client Onboarding</h1>
+        <p class="auth-sub">Register to open your Mutual Fund &amp; Wealth Vault account under ARN-288927.</p>
+
+        <form id="clientRegForm" action="https://formspree.io/f/xnjrgonp" method="POST">
+          <input type="hidden" name="source" value="Client Portal New Registration">
+          <div style="margin-bottom:12px">
+            <label class="form-lbl">Full Name (As per PAN) *</label>
+            <input type="text" name="name" id="regName" class="form-input" placeholder="Your Full Name" required>
+          </div>
+          <div style="margin-bottom:12px">
+            <label class="form-lbl">Mobile Number (WhatsApp) *</label>
+            <input type="tel" name="phone" id="regPhone" class="form-input" placeholder="10-digit mobile number" maxlength="10" required>
+          </div>
+          <div style="margin-bottom:12px">
+            <label class="form-lbl">PAN Number *</label>
+            <input type="text" name="pan" id="regPan" class="form-input" placeholder="ABCDE1234F" maxlength="10" style="text-transform:uppercase" required>
+          </div>
+          <div style="margin-bottom:14px">
+            <label class="form-lbl">City / Town *</label>
+            <input type="text" name="city" id="regCity" class="form-input" placeholder="e.g., Polur, Tiruvannamalai, Bengaluru" required>
+          </div>
+          <button type="submit" id="regSubmitBtn" class="btn-auth" style="background:var(--indigo)">Submit Registration &amp; Start KYC →</button>
+        </form>
+
+        <div id="regSuccessMsg" style="display:none;background:#ECFDF5;border:1px solid #A7F3D0;padding:16px;border-radius:10px;text-align:center;color:#065F46;font-size:13px">
+          <strong>🎉 Registration Received!</strong><br>
+          Vignesh Dhayalan (ARN-288927) will verify your KYC and activate your portal access within 24 hours.
+        </div>
       </div>
 
       <div style="text-align:center;font-size:11.5px;color:var(--t3);margin-top:18px">
-        🛡️ 256-Bit Encrypted · Zero-Knowledge Storage
+        🛡️ AMFI Registered MFD ARN-288927 · Strict Client Access
       </div>
     </div>
 
-    <!-- 2. Dashboard View -->
+    <!-- 2. Client Dashboard (Shown ONLY after Whitelist + OTP Verification) -->
     <div id="dashboardView">
       <div class="dash-top">
         <div>
-          <h1 class="dash-title">Portfolio Overview</h1>
+          <h1 class="dash-title" id="welcomeClientName">Portfolio Overview</h1>
           <div class="dash-meta">
-            Anchor PAN: <strong style="color:var(--t1)">ABCDE1234F</strong> · KYC Status: <span style="color:var(--green);font-weight:700">● Verified</span>
+            Anchor PAN: <strong id="clientPanDisplay" style="color:var(--t1)"></strong> · Status: <span style="color:var(--green);font-weight:700">● Verified Client</span>
           </div>
         </div>
         <div class="dash-top-actions">
           <button class="action-pill" onclick="openTaxModal()">📊 ITR Statement</button>
-          <button class="action-pill" onclick="openContactModal()">⚙️ Update Contact</button>
-          <button class="action-pill" onclick="handleLogout()" style="color:var(--t3)">Logout</button>
+          <button class="action-pill" onclick="location.reload()" style="color:var(--t3)">Logout</button>
         </div>
       </div>
 
-      <!-- KPI Summary -->
       <div class="kpi-grid">
         <div class="kpi-card">
           <div class="kpi-lbl">Current Valuation</div>
-          <div class="kpi-val val-blue" id="kpiCurrent">₹4,82,450</div>
+          <div class="kpi-val val-blue" id="kpiCurrent">₹0</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-lbl">Total Invested</div>
-          <div class="kpi-val" id="kpiInvested">₹3,50,000</div>
+          <div class="kpi-val" id="kpiInvested">₹0</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-lbl">Total Gain</div>
-          <div class="kpi-val val-green" id="kpiGain">+₹1,32,450</div>
+          <div class="kpi-val val-green" id="kpiGain">+₹0</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-lbl">Portfolio XIRR</div>
-          <div class="kpi-val val-green" id="kpiXirr">15.8%</div>
+          <div class="kpi-val val-green" id="kpiXirr">0%</div>
         </div>
       </div>
 
-      <!-- Portfolio Switcher -->
       <div class="tab-bar">
         <div class="tabs-wrapper">
           <button class="tab-btn active" id="btnUmm" onclick="switchTab('umm')">🌟 Serviced by UMM (ARN-288927)</button>
           <button class="tab-btn" id="btnAll" onclick="switchTab('all')">🌐 All Holdings (CAS)</button>
         </div>
-        <button onclick="alert('eCAS PDF Parser will scan CAMS/KFintech statement and auto-merge folios.')" style="font-size:12px;font-weight:700;color:var(--blue)">
-          + Import eCAS PDF
-        </button>
       </div>
 
-      <!-- Dynamic Folios -->
       <div id="fundListContainer"></div>
-
-      <!-- Encrypted DocVault -->
-      <div class="vault-box">
-        <div class="vault-head">
-          <div class="vault-title">🔒 Encrypted Client DocVault</div>
-          <span style="font-size:11px;font-family:var(--fm);color:var(--t3)">AES-256 Storage</span>
-        </div>
-        <div class="vault-grid">
-          <div class="vault-item">
-            <div>
-              <div class="vault-item-name">PAN Card (Masked)</div>
-              <div class="vault-item-status">● Verified KYC</div>
-            </div>
-            <button class="vault-view-btn" onclick="alert('Viewing verified PAN document')">View</button>
-          </div>
-          <div class="vault-item">
-            <div>
-              <div class="vault-item-name">E-NACH Mandate Receipt</div>
-              <div class="vault-item-status">● Active Bank Mandate</div>
-            </div>
-            <button class="vault-view-btn" onclick="alert('Viewing Mandate Acknowledgement')">View</button>
-          </div>
-          <div class="vault-item">
-            <div>
-              <div class="vault-item-name">ITR-V Acknowledgement</div>
-              <div class="vault-item-status">● AY 2025-26 Filed</div>
-            </div>
-            <button class="vault-view-btn" onclick="alert('Viewing ITR Acknowledgement PDF')">View</button>
-          </div>
-        </div>
-      </div>
     </div>
   </main>
 
-  <!-- Capital Gains ITR Modal -->
+  <!-- ITR Modal -->
   <div class="modal-overlay" id="taxModal">
     <div class="modal-card">
-      <div class="modal-head">
-        <div class="modal-title">Capital Gains (ITR Ready)</div>
-        <div class="modal-close" onclick="closeTaxModal()">✕</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="font-family:var(--fh);font-size:1.2rem;font-weight:800">Capital Gains Statement</div>
+        <button onclick="closeTaxModal()" style="font-size:22px">✕</button>
       </div>
-      <p style="font-size:12px;color:var(--t2);margin-bottom:16px">Assessment Year 2026–27 Realized P&amp;L Statement</p>
-      
-      <div style="background:var(--off2);padding:14px;border-radius:10px;margin-bottom:14px">
-        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+      <p style="font-size:12px;color:var(--t2);margin-bottom:14px">Assessment Year 2026–27 Realized P&amp;L</p>
+      <div style="background:var(--off2);padding:14px;border-radius:10px;margin-bottom:14px;font-size:13px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
           <span>Short Term Gains (STCG @ 20%):</span>
-          <strong style="font-family:var(--fm)">₹14,200</strong>
+          <strong>₹14,200</strong>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:13px">
+        <div style="display:flex;justify-content:space-between">
           <span>Long Term Gains (LTCG @ 12.5%):</span>
-          <strong style="font-family:var(--fm)">₹82,400</strong>
+          <strong>₹82,400</strong>
         </div>
       </div>
-
-      <div style="background:#ECFDF5;border:1px solid #A7F3D0;padding:12px;border-radius:10px;font-size:12px;color:#047857;margin-bottom:18px">
-        ✅ <strong>Zero LTCG Tax:</strong> Your Long-Term Gains of ₹82,400 are fully exempt under the statutory ₹1.25 Lakh limit!
+      <div style="background:#ECFDF5;padding:12px;border-radius:10px;font-size:12px;color:#047857;margin-bottom:16px">
+        ✅ Zero LTCG Tax: Gains fall within the ₹1.25 Lakh limit!
       </div>
-
-      <button onclick="alert('Downloading Schedule 112A Tax PDF...');closeTaxModal()" style="width:100%;padding:12px;border-radius:10px;background:var(--dark);color:#fff;font-weight:700">
-        📥 Download Schedule 112A PDF
-      </button>
+      <button onclick="closeTaxModal()" style="width:100%;padding:12px;border-radius:10px;background:var(--dark);color:#fff;font-weight:700">Close</button>
     </div>
   </div>
 
-  <!-- Self-Service Contact Update Modal -->
-  <div class="modal-overlay" id="contactModal">
-    <div class="modal-card">
-      <div class="modal-head">
-        <div class="modal-title">Update Contact Details</div>
-        <div class="modal-close" onclick="closeContactModal()">✕</div>
-      </div>
-      <p style="font-size:12px;color:var(--t2);margin-bottom:16px">Anchor PAN ABCDE1234F retains all historical portfolios even when contact details change.</p>
-
-      <form onsubmit="handleContactUpdate(event)">
-        <div style="margin-bottom:12px">
-          <label class="form-lbl">New Mobile Number</label>
-          <input type="tel" id="newPhone" class="form-input" placeholder="98765 43210" required>
-        </div>
-        <div style="margin-bottom:16px">
-          <label class="form-lbl">New Email ID</label>
-          <input type="email" id="newEmail" class="form-input" placeholder="client@example.com" required>
-        </div>
-        <button type="submit" style="width:100%;padding:12px;border-radius:10px;background:var(--blue);color:#fff;font-weight:700">
-          Verify via OTP &amp; Update
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Clean Unified Master Footer (Bright Legible Text) -->
-  <footer id="siteOnlyFooter">
-    <div class="ft-grid">
+  <!-- SINGLE EXCLUSIVE FOOTER -->
+  <footer id="siteSingleFooter" style="background:#090910;color:#CBD5E1;padding:48px 16px 24px;border-top:1px solid rgba(255,255,255,0.12);margin-top:48px">
+    <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-bottom:32px">
       <div>
-        <div class="logo-area" style="margin-bottom:12px">
-          <div class="logo-box">₹</div>
-          <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <img src="/Logo.png" alt="UMM" class="logo-img" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/vickydhayalan/universalmoneymart/main/Logo.png'">
+          <div style="font-size:16px;font-weight:800;color:#FFFFFF">Universal <span style="color:#F5A623">Money</span> Mart</div>
         </div>
-        <p class="ft-desc">Tamil Finance Education &amp; Business Compliance. AMFI Registered Mutual Fund Distributor ARN-288927, EUIN: E543710, GST: 29BWRPV6671C1ZQ.</p>
-        <div class="ft-badges">
-          <span class="ft-badge">ARN 288927</span>
-          <span class="ft-badge">EUIN E543710</span>
-          <span class="ft-badge">Bangalore &amp; Polur</span>
+        <p style="font-size:13px;line-height:1.7;color:#94A3B8;margin-bottom:14px">
+          AMFI Registered Mutual Fund Distributor (ARN-288927, EUIN: E543710). Wealth Office: Bakmarpettai, Polur · GST Desk: Bengaluru.
+        </p>
+      </div>
+      <div>
+        <div style="font-family:monospace;font-size:11px;font-weight:700;text-transform:uppercase;color:#94A3B8;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px">Quick Links</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
+          <a href="/index.html" style="color:#E2E8F0">Home</a>
+          <a href="/index.html#explore-funds" style="color:#4ADE80;font-weight:700">📈 Explore Mutual Funds</a>
+          <a href="/dfarm.html" style="color:#E2E8F0">🌾 D-FARM Agro Tech</a>
         </div>
       </div>
       <div>
-        <div class="ft-col-h">Vault Resources</div>
-        <div class="ft-links">
-          <a href="/index.html">← Public Homepage</a>
-          <a href="/dfarm.html">🌾 D-FARM Agro Tech</a>
-          <a href="/tools/sip-calculator.html">SIP Calculator</a>
-          <a href="/tools/nism-series-va-mock-test.html">NISM V-A Exam Hub</a>
-        </div>
-      </div>
-      <div>
-        <div class="ft-col-h">Direct Helpdesk</div>
-        <div class="ft-links">
-          <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa) !important;font-weight:700">💬 WhatsApp Support</a>
-          <a href="/privacy-policy.html">Privacy &amp; Security Policy</a>
-          <a href="/disclaimer.html">Statutory Disclaimers</a>
+        <div style="font-family:monospace;font-size:11px;font-weight:700;text-transform:uppercase;color:#94A3B8;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:6px">Helpdesk</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:13px">
+          <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:#25D366;font-weight:700">💬 WhatsApp: +91 72007 52628</a>
+          <a href="/privacy-policy.html" style="color:#E2E8F0">Privacy Policy</a>
+          <a href="/disclaimer.html" style="color:#E2E8F0">Disclaimers</a>
         </div>
       </div>
     </div>
-    <div class="ft-bottom">
-      <div class="ft-copy">© 2024–2026 Universal Money Mart · ARN 288927 · Encrypted Client Vault</div>
+    <div style="max-width:1140px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.08);padding-top:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:11.5px;color:#94A3B8">
+      <div>© 2024–2026 Universal Money Mart · ARN-288927 · Bakmarpettai, Polur &amp; Bengaluru</div>
+      <div>Mutual Fund investments are subject to market risks.</div>
     </div>
   </footer>
 
   <script>
-    let activeGeneratedOtp = "123456";
+    /* 1. PERMANENT OLD FOOTER DOM CLEANER */
+    (function cleanDuplicateFooters() {
+      document.querySelectorAll('footer').forEach(f => {
+        if (f.id !== 'siteSingleFooter') f.remove();
+      });
+      document.querySelectorAll('.ft-grid').forEach(g => {
+        if (!g.closest('#siteSingleFooter')) g.remove();
+      });
+    })();
 
-    // Demo Datasets
-    const portfolioData = {
-      umm: {
-        invested: 350000,
-        current: 482450,
-        gains: 132450,
-        xirr: "15.8%",
-        funds: [
-          { name: "Parag Parikh Flexi Cap Fund - Reg (G)", folio: "10293847/01", sip: "₹5,000", invested: 180000, current: 254200, returns: "+41.2%", tag: "ARN-288927" },
-          { name: "Nippon India Small Cap Fund - Reg (G)", folio: "88492011/92", sip: "₹3,000", invested: 110000, current: 158100, returns: "+43.7%", tag: "ARN-288927" },
-          { name: "HDFC Balanced Advantage Fund - Reg (G)", folio: "44920199/10", sip: "₹2,000", invested: 60000, current: 70150, returns: "+16.9%", tag: "ARN-288927" }
-        ]
-      },
-      all: {
-        invested: 620000,
-        current: 845200,
-        gains: 225200,
-        xirr: "14.9%",
-        funds: [
-          { name: "Parag Parikh Flexi Cap Fund - Reg (G)", folio: "10293847/01", sip: "₹5,000", invested: 180000, current: 254200, returns: "+41.2%", tag: "ARN-288927" },
-          { name: "Nippon India Small Cap Fund - Reg (G)", folio: "88492011/92", sip: "₹3,000", invested: 110000, current: 158100, returns: "+43.7%", tag: "ARN-288927" },
-          { name: "HDFC Balanced Advantage Fund - Reg (G)", folio: "44920199/10", sip: "₹2,000", invested: 60000, current: 70150, returns: "+16.9%", tag: "ARN-288927" },
-          { name: "Mirae Asset Large Cap Fund - Direct (G)", folio: "99102833/00", sip: "Paused", invested: 150000, current: 201300, returns: "+34.2%", tag: "External" },
-          { name: "UTI Nifty 50 Index Fund - Reg (G)", folio: "33948271/55", sip: "₹2,500", invested: 120000, current: 161450, returns: "+34.5%", tag: "External" }
-        ]
+    /* 2. AUTHORIZED REGISTERED CLIENTS WHITELIST (Add your clients here) */
+    const REGISTERED_CLIENTS = {
+      "7200752628": {
+        name: "Vignesh Dhayalan",
+        pan: "BWRPV6671C",
+        umm: {
+          invested: 350000, current: 482450, gains: 132450, xirr: "15.8%",
+          funds: [
+            { name: "Parag Parikh Flexi Cap Fund - Reg (G)", folio: "10293847/01", sip: "₹5,000", invested: 180000, current: 254200, returns: "+41.2%", tag: "ARN-288927" },
+            { name: "Nippon India Small Cap Fund - Reg (G)", folio: "88492011/92", sip: "₹3,000", invested: 110000, current: 158100, returns: "+43.7%", tag: "ARN-288927" }
+          ]
+        },
+        all: {
+          invested: 500000, current: 683750, gains: 183750, xirr: "15.1%",
+          funds: [
+            { name: "Parag Parikh Flexi Cap Fund - Reg (G)", folio: "10293847/01", sip: "₹5,000", invested: 180000, current: 254200, returns: "+41.2%", tag: "ARN-288927" },
+            { name: "Nippon India Small Cap Fund - Reg (G)", folio: "88492011/92", sip: "₹3,000", invested: 110000, current: 158100, returns: "+43.7%", tag: "ARN-288927" },
+            { name: "UTI Nifty 50 Index Fund - Direct (G)", folio: "99102833/00", sip: "Paused", invested: 210000, current: 271450, returns: "+29.2%", tag: "External CAS" }
+          ]
+        }
       }
     };
 
-    function formatINR(val) {
-      return "₹" + Math.round(val).toLocaleString('en-IN');
+    /* 3. Firebase Config for Real SMS OTP */
+    const firebaseConfig = {
+      apiKey: "YOUR_FIREBASE_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    let confirmationResultGlobal = null;
+    let isFirebaseReady = false;
+    let currentClient = null;
+
+    try {
+      if (firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY") {
+        firebase.initializeApp(firebaseConfig);
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { 'size': 'invisible' });
+        isFirebaseReady = true;
+      }
+    } catch (e) {}
+
+    function switchAuthMode(mode) {
+      document.getElementById('tabLoginMode').classList.toggle('active', mode === 'login');
+      document.getElementById('tabRegMode').classList.toggle('active', mode === 'register');
+      document.getElementById('loginSection').style.display = mode === 'login' ? 'block' : 'none';
+      document.getElementById('registerSection').style.display = mode === 'register' ? 'block' : 'none';
     }
 
-    function handleSendOTP() {
-      const val = document.getElementById('userInput').value.trim();
-      if (!val) {
-        alert('தயவுசெய்து உங்கள் Mobile Number அல்லது PAN உள்ளிடவும்.');
+    async function verifyClientAndSendOTP() {
+      const phone = document.getElementById('userInput').value.trim();
+      const alertBox = document.getElementById('unregisteredAlert');
+      alertBox.style.display = 'none';
+
+      if (!phone || phone.length !== 10) {
+        alert('10-digit registered mobile number-ஐ உள்ளிடவும்.');
         return;
       }
-      activeGeneratedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      document.getElementById('simulatedOtpCode').textContent = activeGeneratedOtp;
-      document.getElementById('otpTargetDisplay').textContent = val;
-      document.getElementById('otpCode').value = activeGeneratedOtp;
 
-      document.getElementById('stepInputContainer').style.display = 'none';
-      document.getElementById('stepOtpContainer').style.display = 'block';
+      // Check strict client whitelist
+      if (!REGISTERED_CLIENTS[phone]) {
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      currentClient = REGISTERED_CLIENTS[phone];
+      const fullPhone = "+91" + phone;
+      const btn = document.getElementById('btnSendSms');
+      btn.disabled = true;
+      btn.textContent = 'Sending SMS OTP...';
+
+      if (isFirebaseReady) {
+        try {
+          confirmationResultGlobal = await firebase.auth().signInWithPhoneNumber(fullPhone, window.recaptchaVerifier);
+          document.getElementById('stepInputContainer').style.display = 'none';
+          document.getElementById('stepOtpContainer').style.display = 'block';
+          document.getElementById('otpTargetDisplay').textContent = fullPhone;
+        } catch (err) {
+          alert("SMS Error: " + err.message);
+          btn.disabled = false;
+          btn.textContent = 'Verify Client & Send OTP →';
+        }
+      } else {
+        alert("Firebase API keys config panna udane real SMS pogum. Add your Firebase Web Config in portal.html.");
+        btn.disabled = false;
+        btn.textContent = 'Verify Client & Send OTP →';
+      }
     }
 
-    function handleVerifyOTP() {
-      const entered = document.getElementById('otpCode').value.trim();
-      if (entered !== activeGeneratedOtp && entered !== "123456") {
-        alert('தவறான OTP! சரியான குறியீட்டை உள்ளிடவும்.');
+    async function verifyRealSMS() {
+      const code = document.getElementById('otpCode').value.trim();
+      if (!code || code.length !== 6) {
+        alert('6-digit SMS OTP-ஐ உள்ளிடவும்.');
         return;
       }
+      const btn = document.getElementById('btnVerifySms');
+      btn.disabled = true;
+      btn.textContent = 'Verifying...';
+
+      if (confirmationResultGlobal) {
+        try {
+          await confirmationResultGlobal.confirm(code);
+          unlockDashboard();
+        } catch (err) {
+          alert('தவறான OTP! மீண்டும் சரிபார்க்கவும்.');
+          btn.disabled = false;
+          btn.textContent = 'Unlock My Portfolio';
+        }
+      }
+    }
+
+    function unlockDashboard() {
       document.getElementById('authScreen').style.display = 'none';
       document.getElementById('dashboardView').style.display = 'block';
+      document.getElementById('welcomeClientName').textContent = "Welcome, " + currentClient.name;
+      document.getElementById('clientPanDisplay').textContent = currentClient.pan;
       renderView('umm');
     }
 
-    function handleLogout() {
-      document.getElementById('dashboardView').style.display = 'none';
-      document.getElementById('authScreen').style.display = 'block';
-      document.getElementById('stepOtpContainer').style.display = 'none';
-      document.getElementById('stepInputContainer').style.display = 'block';
-      document.getElementById('userInput').value = '';
-    }
+    function formatINR(val) { return "₹" + Math.round(val).toLocaleString('en-IN'); }
 
     function switchTab(type) {
       document.getElementById('btnUmm').classList.toggle('active', type === 'umm');
@@ -671,112 +577,57 @@
     }
 
     function renderView(type) {
-      const data = portfolioData[type];
+      if (!currentClient) return;
+      const data = currentClient[type];
       document.getElementById('kpiCurrent').textContent = formatINR(data.current);
       document.getElementById('kpiInvested').textContent = formatINR(data.invested);
       document.getElementById('kpiGain').textContent = "+" + formatINR(data.gains);
       document.getElementById('kpiXirr').textContent = data.xirr;
 
-      const container = document.getElementById('fundListContainer');
-      container.innerHTML = data.funds.map(f => `
+      document.getElementById('fundListContainer').innerHTML = data.funds.map(f => `
         <div class="fund-card">
           <div>
             <div class="fund-name">${f.name}</div>
-            <div class="fund-meta">Folio: ${f.folio} · SIP: ${f.sip} <span style="background:#F1F5F9;padding:1px 6px;border-radius:4px;color:var(--t2);margin-left:4px">${f.tag}</span></div>
+            <div class="fund-meta">Folio: ${f.folio} · SIP: ${f.sip} <span style="background:#F1F5F9;padding:1px 6px;border-radius:4px;margin-left:4px">${f.tag}</span></div>
           </div>
           <div class="fund-stats">
-            <div class="stat-col">
-              <div class="stat-lbl">Invested</div>
-              <div class="stat-val">${formatINR(f.invested)}</div>
-            </div>
-            <div class="stat-col">
-              <div class="stat-lbl">Valuation</div>
-              <div class="stat-val" style="color:var(--green)">${formatINR(f.current)}</div>
-            </div>
+            <div class="stat-col"><div class="stat-lbl">Invested</div><div class="stat-val">${formatINR(f.invested)}</div></div>
+            <div class="stat-col"><div class="stat-lbl">Valuation</div><div class="stat-val" style="color:var(--green)">${formatINR(f.current)}</div></div>
             <div class="fund-badge">${f.returns}</div>
           </div>
         </div>
       `).join('');
     }
 
+    /* New Client Registration Form Handler */
+    document.getElementById('clientRegForm')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('regSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Registering...';
+      try {
+        const res = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
+        if (res.ok) {
+          this.style.display = 'none';
+          document.getElementById('regSuccessMsg').style.display = 'block';
+          const name = document.getElementById('regName').value;
+          const pan = document.getElementById('regPan').value.toUpperCase();
+          setTimeout(() => {
+            const msg = encodeURIComponent(`Hi Vignesh (ARN-288927)! 👋\n\nI submitted New Client Registration on Universal Money Mart.\n\nName: ${name}\nPAN: ${pan}\n\nPlease complete my KYC onboarding!`);
+            window.open(`https://wa.me/917200752628?text=${msg}`, '_blank');
+          }, 1200);
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Submit Registration & Start KYC →';
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Submit Registration & Start KYC →';
+      }
+    });
+
     function openTaxModal() { document.getElementById('taxModal').style.display = 'flex'; }
     function closeTaxModal() { document.getElementById('taxModal').style.display = 'none'; }
-    function openContactModal() { document.getElementById('contactModal').style.display = 'flex'; }
-    function closeContactModal() { document.getElementById('contactModal').style.display = 'none'; }
-
-    function handleContactUpdate(e) {
-      e.preventDefault();
-      alert('Verification OTP sent to new details. Portfolio anchor PAN ABCDE1234F retains all folios!');
-      closeContactModal();
-    }
   </script>
-<footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
 </body>
 </html>
