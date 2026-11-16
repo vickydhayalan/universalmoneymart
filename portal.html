@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Client Portal &amp; Wealth Vault — Universal Money Mart</title>
-  <meta name="description" content="Exclusive client wealth vault for registered ARN-288927 investors, Admin Master Desk, and NSE NMF II execution.">
+  <meta name="description" content="Exclusive client wealth vault for registered ARN-288927 investors via Passwordless Email Link, Admin Master Desk, and NSE NMF II execution.">
   <link rel="canonical" href="https://universalmoneymart.onrender.com/portal.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,16 +126,6 @@
     .auth-title { font-family: var(--fh); font-size: 1.35rem; font-weight: 900; text-align: center; color: var(--t1); margin-bottom: 4px; }
     .auth-sub { font-size: 12.5px; color: var(--t2); text-align: center; margin-bottom: 20px; }
     .form-lbl { display: block; font-size: 12px; font-weight: 700; color: var(--t2); margin-bottom: 5px; }
-    .phone-input-row { display: flex; gap: 8px; }
-    .country-code {
-      padding: 11px 12px;
-      background: #E2E8F0;
-      border: 1.5px solid var(--bdr2);
-      border-radius: 10px;
-      font-weight: 700;
-      font-family: var(--fm);
-      font-size: 13.5px;
-    }
     .form-input {
       width: 100%;
       padding: 11px 14px;
@@ -156,6 +146,7 @@
       font-size: 14px;
       font-weight: 700;
       margin-top: 14px;
+      transition: background .2s;
     }
     .btn-auth:hover { background: var(--indigo); }
     .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -169,6 +160,18 @@
       font-size: 12.5px;
       margin-top: 14px;
       line-height: 1.5;
+    }
+    .success-box {
+      display: none;
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-top: 14px;
+      line-height: 1.6;
+      text-align: center;
     }
 
     /* Dashboard */
@@ -310,7 +313,7 @@
   </header>
 
   <main class="wrap">
-    <!-- 1. Restricted Client Login + New Registration Card -->
+    <!-- 1. Zero-Captcha Email Magic Link Login + New Registration Card -->
     <div id="authScreen" class="auth-wrap">
       <div class="auth-mode-tabs">
         <button type="button" class="mode-tab active" id="tabLoginMode" onclick="switchAuthMode('login')">🔐 Client Login</button>
@@ -320,32 +323,23 @@
       <!-- MODE A: EXISTING REGISTERED CLIENT LOGIN -->
       <div id="loginSection">
         <h1 class="auth-title">Registered Client Vault</h1>
-        <p class="auth-sub">Restricted access for verified ARN-288927 clients via Real SMS OTP.</p>
+        <p class="auth-sub">Zero-Captcha instant login link sent directly to your registered Email.</p>
 
         <div id="stepInputContainer">
-          <label class="form-lbl">Registered Mobile Number</label>
-          <div class="phone-input-row">
-            <div class="country-code">+91</div>
-            <input type="tel" id="userInput" class="form-input" placeholder="Registered 10-digit number" maxlength="10">
-          </div>
-          <!-- Visible reCAPTCHA Widget -->
-          <div id="recaptcha-container" style="margin-top:14px;display:flex;justify-content:center"></div>
-          <button type="button" class="btn-auth" id="btnSendSms" onclick="verifyClientAndSendOTP()">Send Real SMS OTP →</button>
+          <label class="form-lbl">Registered Email Address</label>
+          <input type="email" id="userEmailInput" class="form-input" placeholder="e.g., yourname@gmail.com">
+          <button type="button" class="btn-auth" id="btnSendLink" onclick="sendMagicEmailLink()">Send Instant Login Link →</button>
 
           <!-- Warning shown if unregistered user tries to log in -->
           <div id="unregisteredAlert" class="alert-box">
-            <strong>⚠️ Access Restricted:</strong> Indha number enga active client list-la illa. Neenga pudhu investor-na, mela irukura <strong>"New Registration"</strong> tab click panni KYC onboarding start pannunga!
+            <strong>⚠️ Access Restricted:</strong> Indha Email ID enga active client list-la illa. Neenga pudhu investor-na, mela irukura <strong>"New Registration"</strong> tab click panni KYC onboarding start pannunga!
           </div>
-        </div>
 
-        <!-- Step B: OTP Verification -->
-        <div id="stepOtpContainer" style="display:none">
-          <div style="background:#ECFDF5;border:1px solid #A7F3D0;padding:12px;border-radius:10px;margin-bottom:14px;font-size:12px;color:#047857" id="otpTargetDisplay">
-            ✅ Real SMS OTP sent to your mobile!
+          <!-- Success box shown when Magic Link is dispatched -->
+          <div id="emailSentSuccess" class="success-box">
+            <strong>📩 Login Link Sent!</strong><br>
+            Unga Gmail / Inbox-ku (Spam folder-ayum check pannunga) oru <strong>Instant Login Link</strong> anuppirukkom. Adhai click panna direct-ah portfolio open aagum!
           </div>
-          <label class="form-lbl">Enter 6-Digit SMS OTP</label>
-          <input type="text" id="otpCode" class="form-input" maxlength="6" placeholder="______" style="text-align:center;letter-spacing:6px;font-family:var(--fm);font-size:18px">
-          <button type="button" class="btn-auth" id="btnVerifySms" style="background:var(--green)" onclick="verifyRealSMS()">Verify &amp; Unlock Portfolio</button>
         </div>
       </div>
 
@@ -361,8 +355,12 @@
             <input type="text" name="name" id="regName" class="form-input" placeholder="Your Full Name" required>
           </div>
           <div style="margin-bottom:12px">
+            <label class="form-lbl">Email Address (For Vault Login) *</label>
+            <input type="email" name="email" id="regEmail" class="form-input" placeholder="yourname@gmail.com" required>
+          </div>
+          <div style="margin-bottom:12px">
             <label class="form-lbl">Mobile Number (WhatsApp) *</label>
-            <input type="tel" name="phone" id="regPhone" class="form-input" placeholder="10-digit mobile number" maxlength="10" required>
+            <input type="tel" name="phone" id="regPhone" class="form-input" placeholder="10-digit mobile number" maxlength="10" inputmode="numeric" required>
           </div>
           <div style="margin-bottom:12px">
             <label class="form-lbl">PAN Number *</label>
@@ -377,12 +375,12 @@
 
         <div id="regSuccessMsg" style="display:none;background:#ECFDF5;border:1px solid #A7F3D0;padding:16px;border-radius:10px;text-align:center;color:#065F46;font-size:13px">
           <strong>🎉 Registration Received!</strong><br>
-          Vignesh Dhayalan (ARN-288927) will verify your KYC and activate your portal access within 24 hours.
+          Vignesh Dhayalan (ARN-288927) will verify your KYC and activate your Email Login access within 24 hours.
         </div>
       </div>
 
       <div style="text-align:center;font-size:11.5px;color:var(--t3);margin-top:18px">
-        🛡️ AMFI Registered MFD ARN-288927 · Firebase SMS Verified
+        🛡️ AMFI Registered MFD ARN-288927 · Passwordless Email Verified
       </div>
     </div>
 
@@ -398,7 +396,7 @@
         <div class="dash-top-actions">
           <a href="https://www.nsenmf.com" target="_blank" rel="noopener" class="action-pill nse">⚡ NSE NMF II Login</a>
           <button class="action-pill" onclick="openTaxModal()">📊 ITR Statement</button>
-          <button class="action-pill" onclick="location.reload()" style="color:var(--t3)">Logout</button>
+          <button class="action-pill" onclick="logoutVault()" style="color:var(--t3)">Logout</button>
         </div>
       </div>
 
@@ -443,6 +441,7 @@
           <thead>
             <tr>
               <th>Client Name</th>
+              <th>Email</th>
               <th>Mobile</th>
               <th>PAN</th>
               <th>Monthly SIP</th>
@@ -531,7 +530,7 @@
     nukeResidualFooters();
     setInterval(nukeResidualFooters, 500);
 
-    /* 2. YOUR LIVE FIREBASE CONFIG KEYS */
+    /* 2. YOUR LIVE FIREBASE CONFIG */
     const firebaseConfig = {
       apiKey: "AIzaSyClzLjt-uzuHyzNeYMd9dO1mVamoz3tDgU",
       authDomain: "universal-money-mart.firebaseapp.com",
@@ -544,20 +543,12 @@
 
     firebase.initializeApp(firebaseConfig);
 
-    // Visible reCAPTCHA widget
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-      'size': 'normal',
-      'callback': function(response) {
-        console.log("reCAPTCHA verified");
-      }
-    });
-    window.recaptchaVerifier.render();
-
-    /* 3. AUTHORIZED REGISTERED CLIENTS WHITELIST */
+    /* 3. AUTHORIZED REGISTERED CLIENTS WHITELIST (Keyed by lowercase Email ID) */
     const REGISTERED_CLIENTS = {
-      "7200752628": {
+      "vickydhayalan@gmail.com": {
         isAdmin: true,
         name: "Vignesh Dhayalan (Admin)",
+        phone: "7200752628",
         pan: "BWRPV6671C",
         sipMonthly: "₹10,000",
         iinStatus: "NSE Active",
@@ -577,10 +568,9 @@
           ]
         }
       }
-      // Add new approved clients here in the same format!
+      // Add new approved clients below using their lowercase email ID!
     };
 
-    let confirmationResultGlobal = null;
     let currentClient = null;
 
     function switchAuthMode(mode) {
@@ -590,74 +580,75 @@
       document.getElementById('registerSection').style.display = mode === 'register' ? 'block' : 'none';
     }
 
-    async function verifyClientAndSendOTP() {
-      const phone = document.getElementById('userInput').value.trim();
+    /* 4. SEND ZERO-CAPTCHA EMAIL MAGIC LINK */
+    async function sendMagicEmailLink() {
+      const email = document.getElementById('userEmailInput').value.trim().toLowerCase();
       const alertBox = document.getElementById('unregisteredAlert');
+      const successBox = document.getElementById('emailSentSuccess');
       alertBox.style.display = 'none';
+      successBox.style.display = 'none';
 
-      if (!phone || phone.length !== 10) {
-        alert('10-digit registered mobile number-ஐ உள்ளிடவும்.');
+      if (!email || !email.includes('@')) {
+        alert('சரியான Email Address-ஐ உள்ளிடவும்.');
         return;
       }
 
-      if (!REGISTERED_CLIENTS[phone]) {
+      if (!REGISTERED_CLIENTS[email]) {
         alertBox.style.display = 'block';
         return;
       }
 
-      // Check if reCAPTCHA is ticked
-      const captchaResponse = window.grecaptcha ? grecaptcha.getResponse() : '';
-      if (!captchaResponse) {
-        alert('முதலில் "I\'m not a robot" box-ஐ tick செய்யவும்!');
-        return;
-      }
-
-      currentClient = REGISTERED_CLIENTS[phone];
-      const fullPhone = "+91" + phone;
-      const btn = document.getElementById('btnSendSms');
+      const btn = document.getElementById('btnSendLink');
       btn.disabled = true;
-      btn.textContent = 'Sending SMS OTP...';
+      btn.textContent = 'Sending Login Link...';
 
-      // 12-Second Timeout Protection so button never hangs forever
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Request timed out. Check Firebase Authorized Domains!")), 12000)
-      );
+      const actionCodeSettings = {
+        url: window.location.origin + '/portal.html',
+        handleCodeInApp: true
+      };
 
       try {
-        confirmationResultGlobal = await Promise.race([
-          firebase.auth().signInWithPhoneNumber(fullPhone, window.recaptchaVerifier),
-          timeoutPromise
-        ]);
-        document.getElementById('stepInputContainer').style.display = 'none';
-        document.getElementById('stepOtpContainer').style.display = 'block';
-        document.getElementById('otpTargetDisplay').innerHTML = '✅ SMS OTP sent to <strong>' + fullPhone + '</strong>';
+        await firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings);
+        window.localStorage.setItem('ummEmailForSignIn', email);
+        successBox.style.display = 'block';
+        btn.textContent = 'Link Sent! Check Your Email ✓';
       } catch (err) {
         console.error(err);
-        alert("SMS Error: " + err.message + "\n\nFix: Firebase Console -> Authentication -> Settings -> Authorized Domains-la 'universalmoneymart.onrender.com' add pannunga.");
+        alert("Email Link Error: " + err.message + "\n\nMake sure 'Email link (passwordless sign-in)' is Enabled in Firebase Console -> Authentication -> Sign-in method -> Email/Password!");
         btn.disabled = false;
-        btn.textContent = 'Send Real SMS OTP →';
-        if (window.grecaptcha) grecaptcha.reset();
+        btn.textContent = 'Send Instant Login Link →';
       }
     }
 
-    async function verifyRealSMS() {
-      const code = document.getElementById('otpCode').value.trim();
-      if (!code || code.length !== 6) {
-        alert('6-digit SMS OTP-ஐ உள்ளிடவும்.');
-        return;
+    /* 5. AUTOMATICALLY VERIFY MAGIC LINK WHEN USER CLICKS EMAIL LINK */
+    (async function handleEmailSignInCallback() {
+      if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+        let email = window.localStorage.getItem('ummEmailForSignIn');
+        if (!email) {
+          email = window.prompt('Confirmation-க்காக உங்கள் registered Email ID-ஐ உள்ளிடவும்:');
+        }
+        if (email) {
+          email = email.trim().toLowerCase();
+          try {
+            await firebase.auth().signInWithEmailLink(email, window.location.href);
+            window.localStorage.removeItem('ummEmailForSignIn');
+            // Clean URL parameters
+            window.history.replaceState({}, document.title, window.location.pathname);
+            if (REGISTERED_CLIENTS[email]) {
+              currentClient = REGISTERED_CLIENTS[email];
+              unlockDashboard();
+            }
+          } catch (err) {
+            alert("Link expired or invalid. Please request a fresh login link.");
+          }
+        }
       }
-      const btn = document.getElementById('btnVerifySms');
-      btn.disabled = true;
-      btn.textContent = 'Verifying SMS...';
+    })();
 
-      try {
-        await confirmationResultGlobal.confirm(code);
-        unlockDashboard();
-      } catch (err) {
-        alert('தவறான SMS OTP! மீண்டும் சரிபார்க்கவும்.');
-        btn.disabled = false;
-        btn.textContent = 'Verify & Unlock Portfolio';
-      }
+    function logoutVault() {
+      firebase.auth().signOut().finally(() => {
+        location.reload();
+      });
     }
 
     function unlockDashboard() {
@@ -671,16 +662,17 @@
       if (currentClient.isAdmin) {
         document.getElementById('adminClientDirectory').style.display = 'block';
         const tbody = document.getElementById('adminClientTableBody');
-        tbody.innerHTML = Object.keys(REGISTERED_CLIENTS).map(phone => {
-          const c = REGISTERED_CLIENTS[phone];
+        tbody.innerHTML = Object.keys(REGISTERED_CLIENTS).map(emailKey => {
+          const c = REGISTERED_CLIENTS[emailKey];
           return `
             <tr>
               <td><strong>${c.name}</strong></td>
-              <td>+91 ${phone}</td>
+              <td style="font-size:12px">${emailKey}</td>
+              <td>+91 ${c.phone}</td>
               <td style="font-family:var(--fm)">${c.pan}</td>
               <td>${c.sipMonthly || '₹5,000'}</td>
               <td><span style="color:var(--green);font-weight:700">${c.iinStatus || 'Active'}</span></td>
-              <td><a href="https://wa.me/91${phone}" target="_blank" style="color:var(--blue);font-weight:700">WhatsApp</a></td>
+              <td><a href="https://wa.me/91${c.phone}" target="_blank" style="color:var(--blue);font-weight:700">WhatsApp</a></td>
             </tr>
           `;
         }).join('');
@@ -731,9 +723,10 @@
           this.style.display = 'none';
           document.getElementById('regSuccessMsg').style.display = 'block';
           const name = document.getElementById('regName').value;
+          const email = document.getElementById('regEmail').value;
           const pan = document.getElementById('regPan').value.toUpperCase();
           setTimeout(() => {
-            const msg = encodeURIComponent(`Hi Vignesh (ARN-288927)! 👋\n\nI submitted New Client Registration on Universal Money Mart.\n\nName: ${name}\nPAN: ${pan}\n\nPlease complete my KYC & NSE NMF II onboarding!`);
+            const msg = encodeURIComponent(`Hi Vignesh (ARN-288927)! 👋\n\nI submitted New Client Registration on Universal Money Mart.\n\nName: ${name}\nEmail: ${email}\nPAN: ${pan}\n\nPlease complete my KYC & activate my Email Vault login!`);
             window.open(`https://wa.me/917200752628?text=${msg}`, '_blank');
           }, 1200);
         } else {
@@ -749,73 +742,5 @@
     function openTaxModal() { document.getElementById('taxModal').style.display = 'flex'; }
     function closeTaxModal() { document.getElementById('taxModal').style.display = 'none'; }
   </script>
-<footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
 </body>
 </html>
