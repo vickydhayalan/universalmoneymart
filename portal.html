@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Client Portal &amp; Wealth Vault — Universal Money Mart</title>
-  <meta name="description" content="Exclusive client wealth vault for registered ARN-288927 investors and new investor onboarding.">
+  <meta name="description" content="Exclusive client wealth vault for registered ARN-288927 investors, Admin Master Desk, and NSE NMF II execution.">
   <link rel="canonical" href="https://universalmoneymart.onrender.com/portal.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Google Firebase SDKs for Real Phone SMS OTP -->
+  <!-- Google Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
@@ -192,6 +192,14 @@
       font-size: 12.5px;
       font-weight: 700;
       color: var(--t1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .action-pill.nse {
+      background: #EEF2FF;
+      border-color: #C7D2FE;
+      color: var(--indigo);
     }
 
     .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
@@ -225,33 +233,48 @@
     }
     .fund-name { font-weight: 700; font-size: 14.5px; color: var(--t1); }
     .fund-meta { font-size: 11.5px; color: var(--t3); margin-top: 3px; font-family: var(--fm); }
-    .fund-stats { display: flex; gap: 20px; align-items: center; }
+    .fund-stats { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
     .stat-col { text-align: right; }
     .stat-lbl { font-size: 10px; color: var(--t3); text-transform: uppercase; font-family: var(--fm); }
     .stat-val { font-size: 13.5px; font-weight: 800; color: var(--t1); font-family: var(--fm); }
     .fund-badge { font-size: 11.5px; font-weight: 800; color: #047857; background: #ECFDF5; padding: 4px 10px; border-radius: 20px; font-family: var(--fm); }
+    .btn-nse-exec {
+      background: var(--indigo);
+      color: #fff;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
 
-    /* DocVault */
-    .vault-box {
+    /* Admin Client List Table */
+    .admin-box {
       margin-top: 28px;
       background: #FFFFFF;
       border: 1px solid var(--bdr2);
       border-radius: var(--r);
       padding: 22px;
+      overflow-x: auto;
     }
-    .vault-title { font-family: var(--fh); font-size: 16.5px; font-weight: 800; color: var(--t1); margin-bottom: 14px; }
-    .vault-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-    .vault-item {
-      border: 1px dashed #CBD5E1;
-      border-radius: 12px;
-      padding: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--off);
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13px;
     }
-    .vault-item-name { font-weight: 700; font-size: 13px; color: var(--t1); }
-    .vault-item-status { font-size: 11px; color: var(--green); font-weight: 600; }
+    .admin-table th {
+      text-align: left;
+      padding: 10px;
+      background: var(--off2);
+      font-family: var(--fm);
+      font-size: 11px;
+      color: var(--t2);
+      border-bottom: 1px solid var(--bdr2);
+    }
+    .admin-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--bdr2);
+    }
 
     .modal-overlay {
       position: fixed;
@@ -297,7 +320,7 @@
       <!-- MODE A: EXISTING REGISTERED CLIENT LOGIN -->
       <div id="loginSection">
         <h1 class="auth-title">Registered Client Vault</h1>
-        <p class="auth-sub">Restricted access for verified ARN-288927 clients only.</p>
+        <p class="auth-sub">Restricted access for verified ARN-288927 clients via Real SMS OTP.</p>
 
         <div id="stepInputContainer">
           <label class="form-lbl">Registered Mobile Number</label>
@@ -306,7 +329,7 @@
             <input type="tel" id="userInput" class="form-input" placeholder="Registered 10-digit number" maxlength="10">
           </div>
           <div id="recaptcha-container" style="margin-top:8px"></div>
-          <button type="button" class="btn-auth" id="btnSendSms" onclick="verifyClientAndSendOTP()">Verify Client &amp; Send OTP →</button>
+          <button type="button" class="btn-auth" id="btnSendSms" onclick="verifyClientAndSendOTP()">Send Real SMS OTP →</button>
 
           <!-- Warning shown if unregistered user tries to log in -->
           <div id="unregisteredAlert" class="alert-box">
@@ -317,11 +340,11 @@
         <!-- Step B: OTP Verification -->
         <div id="stepOtpContainer" style="display:none">
           <div style="background:#ECFDF5;border:1px solid #A7F3D0;padding:12px;border-radius:10px;margin-bottom:14px;font-size:12px;color:#047857" id="otpTargetDisplay">
-            ✅ OTP dispatched!
+            ✅ Real SMS OTP sent to your mobile!
           </div>
-          <label class="form-lbl">Enter 6-Digit Verification OTP</label>
+          <label class="form-lbl">Enter 6-Digit SMS OTP</label>
           <input type="text" id="otpCode" class="form-input" maxlength="6" placeholder="______" style="text-align:center;letter-spacing:6px;font-family:var(--fm);font-size:18px">
-          <button type="button" class="btn-auth" id="btnVerifySms" style="background:var(--green)" onclick="verifyRealSMS()">Unlock My Portfolio</button>
+          <button type="button" class="btn-auth" id="btnVerifySms" style="background:var(--green)" onclick="verifyRealSMS()">Verify &amp; Unlock Portfolio</button>
         </div>
       </div>
 
@@ -358,11 +381,11 @@
       </div>
 
       <div style="text-align:center;font-size:11.5px;color:var(--t3);margin-top:18px">
-        🛡️ AMFI Registered MFD ARN-288927 · Strict Client Access
+        🛡️ AMFI Registered MFD ARN-288927 · Firebase SMS Verified
       </div>
     </div>
 
-    <!-- 2. Client Dashboard (Shown ONLY after Whitelist + OTP Verification) -->
+    <!-- 2. Client Dashboard -->
     <div id="dashboardView">
       <div class="dash-top">
         <div>
@@ -372,6 +395,7 @@
           </div>
         </div>
         <div class="dash-top-actions">
+          <a href="https://www.nsenmf.com" target="_blank" rel="noopener" class="action-pill nse">⚡ NSE NMF II Login</a>
           <button class="action-pill" onclick="openTaxModal()">📊 ITR Statement</button>
           <button class="action-pill" onclick="location.reload()" style="color:var(--t3)">Logout</button>
         </div>
@@ -405,25 +429,28 @@
 
       <div id="fundListContainer"></div>
 
-      <!-- DocVault -->
-      <div class="vault-box">
-        <div class="vault-title">🔒 Encrypted Client DocVault</div>
-        <div class="vault-grid">
-          <div class="vault-item">
-            <div>
-              <div class="vault-item-name">PAN &amp; KYC Status</div>
-              <div class="vault-item-status">● CVL KRA Verified</div>
-            </div>
-            <span style="font-size:12px;font-weight:700;color:var(--blue)">Active</span>
+      <!-- ADMIN CLIENT MASTER DIRECTORY (Visible ONLY when Admin logs in) -->
+      <div id="adminClientDirectory" class="admin-box" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <div>
+            <h3 style="font-family:var(--fh);font-size:1.15rem;font-weight:800">👑 MFD Admin Master Client List (ARN-288927)</h3>
+            <p style="font-size:12px;color:var(--t2)">Active whitelisted investors &amp; NSE NMF II IIN status</p>
           </div>
-          <div class="vault-item">
-            <div>
-              <div class="vault-item-name">Bank E-Mandate</div>
-              <div class="vault-item-status">● Auto-Debit Linked</div>
-            </div>
-            <span style="font-size:12px;font-weight:700;color:var(--blue)">Active</span>
-          </div>
+          <a href="https://www.nsenmf.com" target="_blank" rel="noopener" style="background:var(--dark);color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700">Open NSE NMF II Distributor Desk →</a>
         </div>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Client Name</th>
+              <th>Mobile</th>
+              <th>PAN</th>
+              <th>Monthly SIP</th>
+              <th>NSE IIN Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminClientTableBody"></tbody>
+        </table>
       </div>
     </div>
   </main>
@@ -503,11 +530,30 @@
     nukeResidualFooters();
     setInterval(nukeResidualFooters, 500);
 
-    /* 2. AUTHORIZED REGISTERED CLIENTS WHITELIST */
+    /* 2. YOUR LIVE FIREBASE CONFIG KEYS */
+    const firebaseConfig = {
+      apiKey: "AIzaSyClzLjt-uzuHyzNeYMd9dO1mVamoz3tDgU",
+      authDomain: "universal-money-mart.firebaseapp.com",
+      projectId: "universal-money-mart",
+      storageBucket: "universal-money-mart.firebasestorage.app",
+      messagingSenderId: "184846105278",
+      appId: "1:184846105278:web:90819b7dbd380a78c5fcef",
+      measurementId: "G-Z9M0GV2796"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      'size': 'invisible'
+    });
+
+    /* 3. AUTHORIZED REGISTERED CLIENTS WHITELIST */
     const REGISTERED_CLIENTS = {
       "7200752628": {
-        name: "Vignesh Dhayalan",
+        isAdmin: true,
+        name: "Vignesh Dhayalan (Admin)",
         pan: "BWRPV6671C",
+        sipMonthly: "₹10,000",
+        iinStatus: "NSE Active",
         umm: {
           invested: 350000, current: 482450, gains: 132450, xirr: "15.8%",
           funds: [
@@ -524,30 +570,11 @@
           ]
         }
       }
-    };
-
-    /* 3. Firebase Config (Optional Real SMS) */
-    const firebaseConfig = {
-      apiKey: "YOUR_FIREBASE_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      // Add new approved clients here in the same format!
     };
 
     let confirmationResultGlobal = null;
-    let isFirebaseReady = false;
-    let isDemoOtpMode = false;
     let currentClient = null;
-
-    try {
-      if (firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY") {
-        firebase.initializeApp(firebaseConfig);
-        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { 'size': 'invisible' });
-        isFirebaseReady = true;
-      }
-    } catch (e) {}
 
     function switchAuthMode(mode) {
       document.getElementById('tabLoginMode').classList.toggle('active', mode === 'login');
@@ -575,54 +602,37 @@
       const fullPhone = "+91" + phone;
       const btn = document.getElementById('btnSendSms');
       btn.disabled = true;
-      btn.textContent = 'Sending OTP...';
+      btn.textContent = 'Sending Real SMS OTP...';
 
-      if (isFirebaseReady) {
-        try {
-          confirmationResultGlobal = await firebase.auth().signInWithPhoneNumber(fullPhone, window.recaptchaVerifier);
-          document.getElementById('stepInputContainer').style.display = 'none';
-          document.getElementById('stepOtpContainer').style.display = 'block';
-          document.getElementById('otpTargetDisplay').textContent = "✅ Real SMS OTP sent to " + fullPhone;
-        } catch (err) {
-          alert("SMS Error: " + err.message);
-          btn.disabled = false;
-          btn.textContent = 'Verify Client & Send OTP →';
-        }
-      } else {
-        isDemoOtpMode = true;
+      try {
+        confirmationResultGlobal = await firebase.auth().signInWithPhoneNumber(fullPhone, window.recaptchaVerifier);
         document.getElementById('stepInputContainer').style.display = 'none';
         document.getElementById('stepOtpContainer').style.display = 'block';
-        document.getElementById('otpTargetDisplay').innerHTML = '✅ Verified Registered Client: <strong>' + fullPhone + '</strong><br><span style="font-size:11px;color:#059669">Enter Verification PIN: <strong>288927</strong></span>';
+        document.getElementById('otpTargetDisplay').innerHTML = '✅ Real SMS OTP sent to <strong>' + fullPhone + '</strong>';
+      } catch (err) {
+        alert("Firebase SMS Alert: " + err.message + "\n\n(Make sure Phone Sign-in is Enabled & universalmoneymart.onrender.com is added in Firebase Authorized Domains)");
+        btn.disabled = false;
+        btn.textContent = 'Send Real SMS OTP →';
       }
     }
 
     async function verifyRealSMS() {
       const code = document.getElementById('otpCode').value.trim();
       if (!code || code.length !== 6) {
-        alert('6-digit OTP-ஐ உள்ளிடவும்.');
+        alert('6-digit SMS OTP-ஐ உள்ளிடவும்.');
         return;
       }
       const btn = document.getElementById('btnVerifySms');
       btn.disabled = true;
-      btn.textContent = 'Verifying...';
+      btn.textContent = 'Verifying SMS...';
 
-      if (confirmationResultGlobal) {
-        try {
-          await confirmationResultGlobal.confirm(code);
-          unlockDashboard();
-        } catch (err) {
-          alert('தவறான OTP! மீண்டும் சரிபார்க்கவும்.');
-          btn.disabled = false;
-          btn.textContent = 'Unlock My Portfolio';
-        }
-      } else if (isDemoOtpMode) {
-        if (code === "288927") {
-          unlockDashboard();
-        } else {
-          alert('தவறான OTP! சரியான குறியீட்டை (288927) உள்ளிடவும்.');
-          btn.disabled = false;
-          btn.textContent = 'Unlock My Portfolio';
-        }
+      try {
+        await confirmationResultGlobal.confirm(code);
+        unlockDashboard();
+      } catch (err) {
+        alert('தவறான SMS OTP! மீண்டும் சரிபார்க்கவும்.');
+        btn.disabled = false;
+        btn.textContent = 'Verify & Unlock Portfolio';
       }
     }
 
@@ -632,6 +642,25 @@
       document.getElementById('welcomeClientName').textContent = "Welcome, " + currentClient.name;
       document.getElementById('clientPanDisplay').textContent = currentClient.pan;
       renderView('umm');
+
+      // Show Admin Master Client List if logged-in user is Admin
+      if (currentClient.isAdmin) {
+        document.getElementById('adminClientDirectory').style.display = 'block';
+        const tbody = document.getElementById('adminClientTableBody');
+        tbody.innerHTML = Object.keys(REGISTERED_CLIENTS).map(phone => {
+          const c = REGISTERED_CLIENTS[phone];
+          return `
+            <tr>
+              <td><strong>${c.name}</strong></td>
+              <td>+91 ${phone}</td>
+              <td style="font-family:var(--fm)">${c.pan}</td>
+              <td>${c.sipMonthly || '₹5,000'}</td>
+              <td><span style="color:var(--green);font-weight:700">${c.iinStatus || 'Active'}</span></td>
+              <td><a href="https://wa.me/91${phone}" target="_blank" style="color:var(--blue);font-weight:700">WhatsApp</a></td>
+            </tr>
+          `;
+        }).join('');
+      }
     }
 
     function formatINR(val) { return "₹" + Math.round(val).toLocaleString('en-IN'); }
@@ -660,6 +689,7 @@
             <div class="stat-col"><div class="stat-lbl">Invested</div><div class="stat-val">${formatINR(f.invested)}</div></div>
             <div class="stat-col"><div class="stat-lbl">Valuation</div><div class="stat-val" style="color:var(--green)">${formatINR(f.current)}</div></div>
             <div class="fund-badge">${f.returns}</div>
+            <a href="https://www.nsenmf.com" target="_blank" rel="noopener" class="btn-nse-exec">Transact via NSE NMF II</a>
           </div>
         </div>
       `).join('');
@@ -679,7 +709,7 @@
           const name = document.getElementById('regName').value;
           const pan = document.getElementById('regPan').value.toUpperCase();
           setTimeout(() => {
-            const msg = encodeURIComponent(`Hi Vignesh (ARN-288927)! 👋\n\nI submitted New Client Registration on Universal Money Mart.\n\nName: ${name}\nPAN: ${pan}\n\nPlease complete my KYC onboarding!`);
+            const msg = encodeURIComponent(`Hi Vignesh (ARN-288927)! 👋\n\nI submitted New Client Registration on Universal Money Mart.\n\nName: ${name}\nPAN: ${pan}\n\nPlease complete my KYC & NSE NMF II onboarding!`);
             window.open(`https://wa.me/917200752628?text=${msg}`, '_blank');
           }, 1200);
         } else {
@@ -695,73 +725,5 @@
     function openTaxModal() { document.getElementById('taxModal').style.display = 'flex'; }
     function closeTaxModal() { document.getElementById('taxModal').style.display = 'none'; }
   </script>
-<footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
 </body>
 </html>
