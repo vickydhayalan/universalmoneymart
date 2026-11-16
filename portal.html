@@ -4,16 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Client Portal &amp; Wealth Vault — Universal Money Mart</title>
-  <meta name="description" content="Exclusive client wealth vault for registered ARN-288927 investors via Mobile SMS & WhatsApp OTP, Admin Master Desk, and NSE NMF II execution.">
+  <meta name="description" content="Exclusive client wealth vault for registered ARN-288927 investors via Real Mobile SMS & WhatsApp OTP.">
   <link rel="canonical" href="https://universalmoneymart.onrender.com/portal.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <!-- Google Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,17 +51,12 @@
     button { font-family: var(--fb); cursor: pointer; border: none; background: none; }
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
 
-    /* Force hide any residual old footer */
     footer:not(#siteSingleFooter),
     body > .ft-grid,
     body > .ft-bottom {
       display: none !important;
-      visibility: hidden !important;
-      height: 0 !important;
-      overflow: hidden !important;
     }
 
-    /* Header */
     .portal-hdr {
       background: #FFFFFF;
       border-bottom: 1px solid var(--bdr2);
@@ -92,7 +83,6 @@
       border-radius: var(--rfull);
     }
 
-    /* Auth & Registration Box */
     .auth-wrap {
       max-width: 440px;
       margin: 40px auto;
@@ -116,7 +106,6 @@
       font-size: 12.5px;
       font-weight: 700;
       color: var(--t2);
-      transition: all .2s;
     }
     .mode-tab.active {
       background: #FFFFFF;
@@ -156,25 +145,9 @@
       font-size: 14px;
       font-weight: 700;
       margin-top: 14px;
-      transition: background .2s;
     }
     .btn-auth:hover { background: var(--indigo); }
     .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; }
-    .btn-wa-otp {
-      width: 100%;
-      padding: 11px;
-      border-radius: 10px;
-      background: #ECFDF5;
-      border: 1.5px solid #A7F3D0;
-      color: #047857;
-      font-size: 13px;
-      font-weight: 700;
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
     .alert-box {
       display: none;
       background: #FEF2F2;
@@ -187,7 +160,6 @@
       line-height: 1.5;
     }
 
-    /* Dashboard */
     #dashboardView { display: none; padding: 24px 0 60px; }
     .dash-top {
       display: flex;
@@ -263,7 +235,6 @@
       border-radius: 8px;
     }
 
-    /* Admin Client List Table */
     .admin-box {
       margin-top: 28px;
       background: #FFFFFF;
@@ -314,7 +285,6 @@
 </head>
 <body>
 
-  <!-- Header -->
   <header class="portal-hdr">
     <div class="wrap portal-hdr-inner">
       <a href="/index.html" class="logo-area">
@@ -326,17 +296,17 @@
   </header>
 
   <main class="wrap">
-    <!-- 1. Mobile SMS OTP + WhatsApp OTP Login + New Registration Card -->
+    <!-- 1. Server-Verified Real OTP Login -->
     <div id="authScreen" class="auth-wrap">
       <div class="auth-mode-tabs">
         <button type="button" class="mode-tab active" id="tabLoginMode" onclick="switchAuthMode('login')">🔐 Client Login</button>
         <button type="button" class="mode-tab" id="tabRegMode" onclick="switchAuthMode('register')">📝 New Registration</button>
       </div>
 
-      <!-- MODE A: EXISTING REGISTERED CLIENT LOGIN -->
+      <!-- MODE A: REGISTERED CLIENT LOGIN -->
       <div id="loginSection">
         <h1 class="auth-title">Registered Client Vault</h1>
-        <p class="auth-sub">Restricted access for verified ARN-288927 clients via Mobile / WhatsApp OTP.</p>
+        <p class="auth-sub">Real-time 6-digit OTP verification via secure UMM server.</p>
 
         <div id="stepInputContainer">
           <label class="form-lbl">Registered Mobile Number</label>
@@ -345,12 +315,8 @@
             <input type="tel" id="userInput" class="form-input" placeholder="Registered 10-digit number" maxlength="10" inputmode="numeric">
           </div>
 
-          <div id="recaptcha-container"></div>
+          <button type="button" class="btn-auth" id="btnSendOtp" onclick="requestRealOtp()">Send Real OTP →</button>
 
-          <button type="button" class="btn-auth" id="btnSendSms" onclick="initiateMobileOtp()">📱 Send Mobile SMS OTP →</button>
-          <button type="button" class="btn-wa-otp" onclick="initiateWhatsAppOtp()">💬 Instant WhatsApp OTP</button>
-
-          <!-- Warning shown if unregistered user tries to log in -->
           <div id="unregisteredAlert" class="alert-box">
             <strong>⚠️ Access Restricted:</strong> Indha number enga active client list-la illa. Neenga pudhu investor-na, mela irukura <strong>"New Registration"</strong> tab click panni KYC onboarding start pannunga!
           </div>
@@ -359,9 +325,9 @@
         <!-- Step B: OTP Verification -->
         <div id="stepOtpContainer" style="display:none">
           <div style="background:#ECFDF5;border:1px solid #A7F3D0;padding:12px;border-radius:10px;margin-bottom:14px;font-size:12.5px;color:#047857" id="otpTargetDisplay"></div>
-          <label class="form-lbl">Enter 6-Digit Verification OTP</label>
+          <label class="form-lbl">Enter 6-Digit OTP</label>
           <input type="text" id="otpCode" class="form-input" maxlength="6" placeholder="______" inputmode="numeric" style="text-align:center;letter-spacing:8px;font-family:var(--fm);font-size:20px">
-          <button type="button" class="btn-auth" id="btnVerifyOtp" style="background:var(--green)" onclick="verifyEnteredOtp()">Verify &amp; Unlock Portfolio</button>
+          <button type="button" class="btn-auth" id="btnVerifyOtp" style="background:var(--green)" onclick="verifyServerOtp()">Verify &amp; Unlock Portfolio</button>
           <div style="text-align:center;margin-top:12px">
             <button type="button" onclick="resetLoginStep()" style="font-size:12px;color:var(--t2);text-decoration:underline">← Change Mobile Number</button>
           </div>
@@ -405,7 +371,7 @@
       </div>
 
       <div style="text-align:center;font-size:11.5px;color:var(--t3);margin-top:18px">
-        🛡️ AMFI Registered MFD ARN-288927 · Mobile &amp; WhatsApp OTP Verified
+        🛡️ AMFI Registered MFD ARN-288927 · Node.js Real OTP Secured
       </div>
     </div>
 
@@ -453,7 +419,7 @@
 
       <div id="fundListContainer"></div>
 
-      <!-- ADMIN CLIENT MASTER DIRECTORY (Visible ONLY when Admin logs in) -->
+      <!-- ADMIN CLIENT MASTER DIRECTORY -->
       <div id="adminClientDirectory" class="admin-box" style="display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
           <div>
@@ -469,7 +435,6 @@
               <th>Mobile</th>
               <th>Email</th>
               <th>PAN</th>
-              <th>WhatsApp OTP</th>
               <th>Monthly SIP</th>
               <th>NSE IIN</th>
               <th>Action</th>
@@ -542,66 +507,8 @@
   </footer>
 
   <script>
-    /* 1. ULTRA-STRICT OLD FOOTER CLEANER */
-    function nukeResidualFooters() {
-      const validFooter = document.getElementById('siteSingleFooter');
-      if (!validFooter) return;
-      let nextEl = validFooter.nextElementSibling;
-      while (nextEl) {
-        const toRemove = nextEl;
-        nextEl = nextEl.nextElementSibling;
-        if (toRemove.tagName !== 'SCRIPT') toRemove.remove();
-      }
-    }
-    nukeResidualFooters();
-    setInterval(nukeResidualFooters, 500);
-
-    /* 2. YOUR LIVE FIREBASE CONFIG */
-    const firebaseConfig = {
-      apiKey: "AIzaSyClzLjt-uzuHyzNeYMd9dO1mVamoz3tDgU",
-      authDomain: "universal-money-mart.firebaseapp.com",
-      projectId: "universal-money-mart",
-      storageBucket: "universal-money-mart.firebasestorage.app",
-      messagingSenderId: "184846105278",
-      appId: "1:184846105278:web:90819b7dbd380a78c5fcef",
-      measurementId: "G-Z9M0GV2796"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-
-    /* 3. AUTHORIZED REGISTERED CLIENTS WHITELIST */
-    const REGISTERED_CLIENTS = {
-      "7200752628": {
-        isAdmin: true,
-        waOtp: "288927",
-        name: "Vignesh Dhayalan (Admin)",
-        email: "vickydhayalan2000@gmail.com",
-        pan: "BWRPV6671C",
-        sipMonthly: "₹10,000",
-        iinStatus: "NSE Active",
-        umm: {
-          invested: 350000, current: 482450, gains: 132450, xirr: "15.8%",
-          funds: [
-            { name: "Parag Parikh Flexi Cap Fund - Reg (G)", folio: "10293847/01", sip: "₹5,000", invested: 180000, current: 254200, returns: "+41.2%", tag: "ARN-288927" },
-            { name: "Nippon India Small Cap Fund - Reg (G)", folio: "88492011/92", sip: "₹3,000", invested: 110000, current: 158100, returns: "+43.7%", tag: "ARN-288927" }
-          ]
-        },
-        all: {
-          invested: 500000, current: 683750, gains: 183750, xirr: "15.1%",
-          funds: [
-            { name: "Parag Parikh Flexi Cap Fund - Reg (G)", folio: "10293847/01", sip: "₹5,000", invested: 180000, current: 254200, returns: "+41.2%", tag: "ARN-288927" },
-            { name: "Nippon India Small Cap Fund - Reg (G)", folio: "88492011/92", sip: "₹3,000", invested: 110000, current: 158100, returns: "+43.7%", tag: "ARN-288927" },
-            { name: "UTI Nifty 50 Index Fund - Direct (G)", folio: "99102833/00", sip: "Paused", invested: 210000, current: 271450, returns: "+29.2%", tag: "External CAS" }
-          ]
-        }
-      }
-      // Add new approved clients below using their 10-digit mobile number!
-    };
-
     let currentClient = null;
-    let currentPhone = "";
-    let confirmationResultGlobal = null;
-    let activeOtpChannel = "sms";
+    let activePhone = "";
 
     function switchAuthMode(mode) {
       document.getElementById('tabLoginMode').classList.toggle('active', mode === 'login');
@@ -613,13 +520,13 @@
     function resetLoginStep() {
       document.getElementById('stepOtpContainer').style.display = 'none';
       document.getElementById('stepInputContainer').style.display = 'block';
-      const btn = document.getElementById('btnSendSms');
+      const btn = document.getElementById('btnSendOtp');
       btn.disabled = false;
-      btn.textContent = '📱 Send Mobile SMS OTP →';
+      btn.textContent = 'Send Real OTP →';
     }
 
-    /* 4. MOBILE SMS OTP (With 6-Second Timeout Guard -> Auto-Fallback to WhatsApp OTP) */
-    async function initiateMobileOtp() {
+    /* 1. CALL NODE.JS BACKEND TO SEND REAL RANDOM OTP */
+    async function requestRealOtp() {
       const phone = document.getElementById('userInput').value.trim();
       const alertBox = document.getElementById('unregisteredAlert');
       alertBox.style.display = 'none';
@@ -629,134 +536,97 @@
         return;
       }
 
-      if (!REGISTERED_CLIENTS[phone]) {
-        alertBox.style.display = 'block';
-        return;
-      }
-
-      currentClient = REGISTERED_CLIENTS[phone];
-      currentPhone = phone;
-      activeOtpChannel = "sms";
-      const fullPhone = "+91" + phone;
-
-      const btn = document.getElementById('btnSendSms');
+      const btn = document.getElementById('btnSendOtp');
       btn.disabled = true;
-      btn.textContent = 'Sending Mobile SMS OTP...';
+      btn.textContent = 'Sending Real OTP...';
 
       try {
-        if (!window.recaptchaVerifier) {
-          window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { 'size': 'invisible' });
+        const res = await fetch('/api/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          if (res.status === 403) {
+            alertBox.style.display = 'block';
+          } else {
+            alert(data.message || 'Error sending OTP');
+          }
+          btn.disabled = false;
+          btn.textContent = 'Send Real OTP →';
+          return;
         }
 
-        const timeoutPromise = new Promise((_, reject) =>
-          setTimeout(() => reject(new Error("SMS_TIMEOUT")), 6000)
-        );
-
-        confirmationResultGlobal = await Promise.race([
-          firebase.auth().signInWithPhoneNumber(fullPhone, window.recaptchaVerifier),
-          timeoutPromise
-        ]);
-
+        activePhone = phone;
         document.getElementById('stepInputContainer').style.display = 'none';
         document.getElementById('stepOtpContainer').style.display = 'block';
-        document.getElementById('otpTargetDisplay').innerHTML = '✅ SMS OTP sent to <strong>' + fullPhone + '</strong>';
+        document.getElementById('otpTargetDisplay').innerHTML = `✅ <strong>${data.message}</strong>`;
         document.getElementById('otpCode').focus();
       } catch (err) {
-        // Automatic instant fallback to WhatsApp OTP if SMS network/captcha delays
-        initiateWhatsAppOtp(true);
+        alert('Server Error: Make sure Render is deployed as a Node.js Web Service (node server.js).');
+        btn.disabled = false;
+        btn.textContent = 'Send Real OTP →';
       }
     }
 
-    /* 5. INSTANT WHATSAPP OTP (Zero Captcha / Zero Delay) */
-    function initiateWhatsAppOtp(isAutoFallback = false) {
-      const phone = document.getElementById('userInput').value.trim();
-      const alertBox = document.getElementById('unregisteredAlert');
-      alertBox.style.display = 'none';
-
-      if (!phone || phone.length !== 10) {
-        alert('10-digit registered mobile number-ஐ உள்ளிடவும்.');
-        return;
-      }
-
-      if (!REGISTERED_CLIENTS[phone]) {
-        alertBox.style.display = 'block';
-        return;
-      }
-
-      currentClient = REGISTERED_CLIENTS[phone];
-      currentPhone = phone;
-      activeOtpChannel = "whatsapp";
-
-      document.getElementById('stepInputContainer').style.display = 'none';
-      document.getElementById('stepOtpContainer').style.display = 'block';
-
-      const waLink = `https://wa.me/917200752628?text=${encodeURIComponent('Hi Vignesh! Send my Client Vault WhatsApp OTP for mobile: +91 ' + phone)}`;
-      document.getElementById('otpTargetDisplay').innerHTML = `
-        💬 <strong>WhatsApp OTP Mode:</strong> +91 ${phone}<br>
-        <a href="${waLink}" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;background:#25D366;color:#fff;padding:4px 10px;border-radius:6px;font-weight:700;font-size:11.5px">📲 Tap Here to Request OTP on WhatsApp</a>
-      `;
-      document.getElementById('otpCode').focus();
-    }
-
-    /* 6. VERIFY ENTERED OTP */
-    async function verifyEnteredOtp() {
-      const code = document.getElementById('otpCode').value.trim();
-      if (!code || code.length !== 6) {
+    /* 2. VERIFY OTP WITH NODE.JS BACKEND */
+    async function verifyServerOtp() {
+      const otp = document.getElementById('otpCode').value.trim();
+      if (!otp || otp.length !== 6) {
         alert('6-digit OTP-ஐ உள்ளிடவும்.');
         return;
       }
 
       const btn = document.getElementById('btnVerifyOtp');
       btn.disabled = true;
-      btn.textContent = 'Verifying...';
+      btn.textContent = 'Verifying OTP...';
 
-      if (activeOtpChannel === "sms" && confirmationResultGlobal) {
-        try {
-          await confirmationResultGlobal.confirm(code);
-          unlockDashboard();
-        } catch (err) {
-          alert('தவறான SMS OTP! மீண்டும் சரிபார்க்கவும்.');
+      try {
+        const res = await fetch('/api/verify-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: activePhone, otp })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          alert(data.message || 'Invalid OTP!');
           btn.disabled = false;
           btn.textContent = 'Verify & Unlock Portfolio';
+          return;
         }
-      } else {
-        // Verify WhatsApp OTP code assigned to registered client
-        if (currentClient && code === currentClient.waOtp) {
-          unlockDashboard();
-        } else {
-          alert('தவறான WhatsApp OTP! சரியான 6-இலக்க OTP-ஐ உள்ளிடவும்.');
-          btn.disabled = false;
-          btn.textContent = 'Verify & Unlock Portfolio';
-        }
+
+        currentClient = data.client;
+        unlockDashboard(data.adminClientList);
+      } catch (err) {
+        alert('Verification error. Try again.');
+        btn.disabled = false;
+        btn.textContent = 'Verify & Unlock Portfolio';
       }
     }
 
-    function unlockDashboard() {
+    function unlockDashboard(adminClientList) {
       document.getElementById('authScreen').style.display = 'none';
       document.getElementById('dashboardView').style.display = 'block';
       document.getElementById('welcomeClientName').textContent = "Welcome, " + currentClient.name;
       document.getElementById('clientPanDisplay').textContent = currentClient.pan;
       renderView('umm');
 
-      // Show Admin Master Client List if logged-in user is Admin
-      if (currentClient.isAdmin) {
+      if (currentClient.isAdmin && adminClientList && adminClientList.length > 0) {
         document.getElementById('adminClientDirectory').style.display = 'block';
-        const tbody = document.getElementById('adminClientTableBody');
-        tbody.innerHTML = Object.keys(REGISTERED_CLIENTS).map(phoneKey => {
-          const c = REGISTERED_CLIENTS[phoneKey];
-          return `
-            <tr>
-              <td><strong>${c.name}</strong></td>
-              <td>+91 ${phoneKey}</td>
-              <td style="font-size:12px">${c.email || '-'}</td>
-              <td style="font-family:var(--fm)">${c.pan}</td>
-              <td style="font-family:var(--fm);color:var(--indigo);font-weight:700">${c.waOtp}</td>
-              <td>${c.sipMonthly || '₹5,000'}</td>
-              <td><span style="color:var(--green);font-weight:700">${c.iinStatus || 'Active'}</span></td>
-              <td><a href="https://wa.me/91${phoneKey}?text=${encodeURIComponent('Hi ' + c.name + ', your Universal Money Mart Client Vault OTP is: ' + c.waOtp)}" target="_blank" style="color:var(--blue);font-weight:700">Send OTP</a></td>
-            </tr>
-          `;
-        }).join('');
+        document.getElementById('adminClientTableBody').innerHTML = adminClientList.map(c => `
+          <tr>
+            <td><strong>${c.name}</strong></td>
+            <td>+91 ${c.phone}</td>
+            <td style="font-size:12px">${c.email || '-'}</td>
+            <td style="font-family:var(--fm)">${c.pan}</td>
+            <td>${c.sipMonthly || '₹5,000'}</td>
+            <td><span style="color:var(--green);font-weight:700">${c.iinStatus || 'Active'}</span></td>
+            <td><a href="https://wa.me/91${c.phone}" target="_blank" style="color:var(--blue);font-weight:700">WhatsApp</a></td>
+          </tr>
+        `).join('');
       }
     }
 
@@ -807,7 +677,7 @@
           const phone = document.getElementById('regPhone').value;
           const pan = document.getElementById('regPan').value.toUpperCase();
           setTimeout(() => {
-            const msg = encodeURIComponent(`Hi Vignesh (ARN-288927)! 👋\n\nI submitted New Client Registration on Universal Money Mart.\n\nName: ${name}\nMobile: ${phone}\nPAN: ${pan}\n\nPlease complete my KYC & activate my Client Vault OTP!`);
+            const msg = encodeURIComponent(`Hi Vignesh (ARN-288927)! 👋\n\nI submitted New Client Registration on Universal Money Mart.\n\nName: ${name}\nMobile: ${phone}\nPAN: ${pan}\n\nPlease complete my KYC & activate my Client Vault!`);
             window.open(`https://wa.me/917200752628?text=${msg}`, '_blank');
           }, 1200);
         } else {
@@ -823,73 +693,5 @@
     function openTaxModal() { document.getElementById('taxModal').style.display = 'flex'; }
     function closeTaxModal() { document.getElementById('taxModal').style.display = 'none'; }
   </script>
-<footer>
-  <div class="ft-grid">
-    <div>
-      <div class="logo" style="gap:10px">
-        <div class="logo-box"><img src="/Logo.png" alt="UMM" style="width:36px;height:36px;border-radius:8px;object-fit:cover" onerror="this.parentElement.innerHTML='₹'"></div>
-        <div class="ft-logo-name">Universal <span>Money</span> Mart</div>
-      </div>
-      <p class="ft-desc">Tamil Finance Education & Business Compliance. SIP, Tax, GST, Documentation & Free Investment Consultation — Vignesh Dhayalan & Ramya, Bangalore.</p>
-      <div class="ft-badges">
-        <span class="ft-badge">AMFI MFD</span>
-        <span class="ft-badge">ARN 288927</span>
-        <span class="ft-badge">EUIN E543710</span>
-        <span class="ft-badge">GST 29BWRPV6671C1ZQ</span>
-        <span class="ft-badge">Bangalore</span>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Finance Guides</div>
-      <div class="ft-links">
-        <a href="/blog/what-is-mutual-fund.html">Mutual Fund Basics</a>
-        <a href="/blog/what-is-sip.html">SIP Guide</a>
-        <a href="/blog/new-vs-old-tax-regime.html">New vs Old Tax Regime</a>
-        <a href="/blog/epf-vs-ppf-difference.html">EPF vs PPF</a>
-        <a href="/blog/credit-score-guide.html">Credit Score 750+</a>
-        <a href="/blog/index.html" style="color:var(--gold)">→ All Articles</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Tools & Services</div>
-      <div class="ft-links">
-        <a href="/tools/nism-series-va-mock-test.html">NISM V-A Mock Test</a>
-        <a href="/daily-quiz.html">🧠 Daily Finance Quiz</a>
-        <a href="/gold-rate-today.html">🥇 Gold Rate Today</a>
-        <a href="/tools/irdai-ic38-mock-test.html">IRDAI IC38 Mock Test</a>
-        <a href="/tools/sip-calculator.html">SIP Calculator</a>
-        <a href="/tools/fd-calculator.html">FD Calculator</a>
-        <a href="/tools/rd-calculator.html">RD Calculator</a>
-        <a href="/tools/budget-calculator.html">Budget Planner</a>
-        <a href="#consultation" style="color:var(--green)">🎯 Free Consultation</a>
-        <a href="/prompt-library.html">AI Prompt Library</a>
-      </div>
-    </div>
-    <div>
-      <div class="ft-col-h">Quick Links</div>
-      <div class="ft-links">
-        <a href="/about.html">About Us</a>
-        <a href="/contact.html">Contact Us</a>
-        <a href="/privacy-policy.html">Privacy Policy</a>
-        <a href="/disclaimer.html">Disclaimer</a>
-        <a href="/terms-and-conditions.html">Terms & Rules</a>
-        <a href="https://wa.me/917200752628" target="_blank" rel="noopener" style="color:var(--wa)">💬 WhatsApp</a>
-      </div>
-      <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,.05);border-radius:10px;border:1px solid var(--bdrw)">
-        <div style="font-family:var(--fm);font-size:10px;color:var(--tw3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Disclaimer</div>
-        <div style="font-size:11px;color:var(--tw3);line-height:1.6">Mutual Fund investments are subject to market risks. Universal Money Mart is a private business consultancy and financial services facilitation platform — not a government body or affiliated with any government agency. GST: 29BWRPV6671C1ZQ</div>
-      </div>
-    </div>
-  </div>
-  <div class="ft-bottom">
-    <div class="ft-copy">© 2024–2026 Universal Money Mart · Vignesh Dhayalan & Ramya · ARN 288927 · Bangalore, India</div>
-    <div class="ft-legal">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/disclaimer.html">Disclaimer</a>
-      <a href="/terms-and-conditions.html">Terms & Rules</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
 </body>
 </html>
