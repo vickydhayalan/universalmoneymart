@@ -1,14 +1,14 @@
 const express = require('express');
-const path = require('path');
+const nodemailer = require('nodemailer');
 const app = express();
 
 app.use(express.json());
-app.use(express.static(__dirname)); // Serves index.html, portal.html, Logo.png, etc.
+app.use(express.static(__dirname));
 
 // Temporary in-memory OTP store (Expires in 5 minutes)
 const otpStore = new Map();
 
-// Registered Clients Database (Add new clients here)
+// Registered Clients Database
 const REGISTERED_CLIENTS = {
   "7200752628": {
     isAdmin: true,
@@ -35,93 +35,77 @@ const REGISTERED_CLIENTS = {
   }
 };
 
-// 1. SEND REAL RANDOM 6-DIGIT OTP API
+// Configure Gmail SMTP Transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASS
+  }
+});
+
+// 1. SEND REAL 6-DIGIT OTP TO REGISTERED CLIENT'S GMAIL
 app.post('/api/send-otp', async (req, res) => {
   const { phone } = req.body;
+  const client = REGISTERED_CLIENTS[phone];
 
-  if (!phone || !REGISTERED_CLIENTS[phone]) {
+  if (!phone || !client) {
     return res.status(403).json({ success: false, message: "Unregistered mobile number." });
   }
 
-  // Generate random 6-digit OTP
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
   otpStore.set(phone, { otp, expiresAt: Date.now() + 5 * 60 * 1000 });
 
   try {
-    // OPTION 1: Send via Fast2SMS (Set FAST2SMS_API_KEY in Render Environment Variables)
-    if (process.env.FAST2SMS_API_KEY) {
-      const response = await fetch('https://www.fast2sms.com/dev/bulkV2', {
-        method: 'POST',
-        headers: {
-          'authorization': process.env.FAST2SMS_API_KEY,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          route: 'otp',
-          variables_values: otp,
-          numbers: phone
-        })
+    if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASS) {
+      await transporter.sendMail({
+        from: `"Universal Money Mart Vault" <${process.env.GMAIL_USER}>`,
+        to: client.email,
+        subject: `${otp} is your Universal Money Mart Client Vault OTP`,
+        html: `
+          <div style="font-family:Arial,sans-serif;max-width:480px;margin:auto;padding:24px;border:1px solid #e2e8f0;border-radius:12px">
+            <h2 style="color:#0f172a;margin-bottom:8px">Universal Money Mart</h2>
+            <p style="color:#475569;font-size:14px">Hi <strong>${client.name}</strong>,</p>
+            <p style="color:#475569;font-size:14px">Your 6-digit Client Wealth Vault verification OTP is:</p>
+            <div style="background:#f1f5f9;padding:16px;text-align:center;border-radius:10px;font-size:28px;font-weight:bold;letter-spacing:8px;color:#4f46e5;margin:18px 0">
+              ${otp}
+            </div>
+            <p style="color:#94a3b8;font-size:12px">Valid for 5 minutes. Do not share this OTP with anyone.<br>AMFI Registered MFD (ARN-288927)</p>
+          </div>
+        `
       });
-      const data = await response.json();
-      if (!data.return) throw new Error(data.message || "Fast2SMS error");
-      return res.json({ success: true, channel: "SMS", message: "Real SMS OTP sent to +91 " + phone });
+
+      const maskedEmail = client.email.replace(/(.{3})(.*)(@.*)/, "$1***$3");
+      return res.json({
+        success: true,
+        message: `6-Digit OTP sent to your registered Gmail (${maskedEmail})!`
+      });
     }
 
-    // OPTION 2: Send via Meta WhatsApp Cloud API (Set WA_TOKEN & WA_PHONE_ID in Render)
-    if (process.env.WA_TOKEN && process.env.WA_PHONE_ID) {
-      const waRes = await fetch(`https://graph.facebook.com/v19.0/${process.env.WA_PHONE_ID}/messages`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${process.env.WA_TOKEN}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          messaging_product: "whatsapp",
-          to: "91" + phone,
-          type: "template",
-          template: {
-            name: "umm_otp", // Your approved WhatsApp OTP template name
-            language: { code: "en" },
-            components: [{ type: "body", parameters: [{ type: "text", text: otp }] }]
-          }
-        })
-      });
-      const waData = await waRes.json();
-      if (waData.error) throw new Error(waData.error.message);
-      return res.json({ success: true, channel: "WhatsApp", message: "WhatsApp OTP sent to +91 " + phone });
-    }
-
-    // If API keys not yet added in Render, log OTP in Render Server Logs for testing
     console.log(`[UMM OTP LOG] Phone: +91${phone} | Generated OTP: ${otp}`);
     return res.json({
       success: true,
-      channel: "Server Log (Add FAST2SMS_API_KEY in Render for live SMS)",
-      message: "OTP generated! Check Render Logs or configure FAST2SMS_API_KEY."
+      message: "OTP generated! Add GMAIL_USER & GMAIL_APP_PASS in Render Environment."
     });
-
   } catch (err) {
-    console.error("OTP Dispatch Error:", err);
-    return res.status(500).json({ success: false, message: "OTP delivery failed: " + err.message });
+    console.error("Gmail OTP Error:", err);
+    return res.status(500).json({ success: false, message: "Email OTP failed: " + err.message });
   }
 });
 
-// 2. VERIFY OTP & RETURN CLIENT PORTFOLIO DATA
+// 2. VERIFY 6-DIGIT OTP & UNLOCK PORTFOLIO
 app.post('/api/verify-otp', (req, res) => {
   const { phone, otp } = req.body;
   const record = otpStore.get(phone);
 
-  if (!record) {
-    return res.status(400).json({ success: false, message: "OTP expired or not requested." });
-  }
-  if (Date.now() > record.expiresAt) {
+  if (!record || Date.now() > record.expiresAt) {
     otpStore.delete(phone);
     return res.status(400).json({ success: false, message: "OTP expired. Please request a new one." });
   }
   if (record.otp !== otp) {
-    return res.status(401).json({ success: false, message: "Invalid OTP. Please try again." });
+    return res.status(401).json({ success: false, message: "Invalid 6-digit OTP!" });
   }
 
-  // OTP Matched! Clear OTP and send client portfolio + admin directory if Admin
   otpStore.delete(phone);
   const clientData = REGISTERED_CLIENTS[phone];
   const adminList = clientData.isAdmin
@@ -135,11 +119,7 @@ app.post('/api/verify-otp', (req, res) => {
       }))
     : [];
 
-  return res.json({
-    success: true,
-    client: clientData,
-    adminClientList: adminList
-  });
+  return res.json({ success: true, client: clientData, adminClientList: adminList });
 });
 
 const PORT = process.env.PORT || 3000;
