@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>UMM Vault CRM | ARN-288927 Wealth Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F1F5F9;
+  --white:#FFFFFF;
+  --sidebar:#0B1120;
+  --sidebar-hover:#1E293B;
+  --gold:#F5A623;
+  --indigo:#4F46E5;
+  --indigo-soft:#EEF2FF;
+  --green:#10B981;
+  --red:#EF4444;
+  --amber:#F59E0B;
+  --wa:#25D366;
+  --t1:#0F172A;
+  --t2:#334155;
+  --t3:#64748B;
+  --bdr:#E2E8F0;
+  --fb:'Inter',system-ui,sans-serif;
+  --fm:'JetBrains Mono',monospace;
+}
+body{font-family:var(--fb);background:var(--bg);color:var(--t1);font-size:14px;line-height:1.5;overflow-x:hidden}
+button,input,select,textarea{font-family:inherit}
+a{color:inherit;text-decoration:none}
+
+/* VAULT LOCK SCREEN */
+#lockScreen{position:fixed;inset:0;background:linear-gradient(145deg,#090910,#1E1B4B);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.lock-card{background:#fff;border-radius:20px;padding:34px;max-width:410px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.lock-badge{display:inline-block;background:#FEF3C7;color:#92400E;font-family:var(--fm);font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;margin-bottom:12px}
+.lock-card h1{font-size:22px;font-weight:800;margin-bottom:6px}
+.lock-card p{color:var(--t3);font-size:13px;margin-bottom:20px}
+.lock-input{width:100%;padding:12px 14px;border:1.5px solid var(--bdr);border-radius:12px;font-family:var(--fm);font-size:16px;text-align:center;letter-spacing:4px;margin-bottom:14px}
+.lock-input:focus{outline:none;border-color:var(--indigo)}
+.btn-primary{background:var(--indigo);color:#fff;border:none;padding:11px 18px;border-radius:10px;font-weight:700;cursor:pointer;font-size:13.5px;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn-primary:hover{background:#4338CA}
+.btn-outline{background:#fff;color:var(--t1);border:1px solid var(--bdr);padding:9px 14px;border-radius:10px;font-weight:600;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.btn-outline:hover{background:#F8FAFC}
+.btn-wa{background:var(--wa);color:#fff;border:none;padding:7px 12px;border-radius:8px;font-weight:700;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+
+/* APP SHELL */
+.app{display:flex;min-height:100vh}
+.sidebar{width:255px;background:var(--sidebar);color:#CBD5E1;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:200;transition:transform .2s}
+.sb-brand{padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-brand .title{color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px}
+.sb-brand .title span{color:var(--gold)}
+.sb-brand .sub{font-family:var(--fm);font-size:10.5px;color:#94A3B8;margin-top:4px}
+.sb-nav{padding:12px 10px;flex:1;overflow-y:auto}
+.nav-sec{font-family:var(--fm);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#64748B;padding:12px 10px 6px}
+.nav-item{width:100%;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;color:#CBD5E1;font-weight:600;font-size:13.5px;border:none;background:none;cursor:pointer;text-align:left;margin-bottom:3px}
+.nav-item:hover{background:var(--sidebar-hover);color:#fff}
+.nav-item.active{background:var(--indigo);color:#fff}
+.nav-pill{background:var(--red);color:#fff;font-family:var(--fm);font-size:10.5px;padding:1px 7px;border-radius:100px}
+.sb-foot{padding:14px;border-top:1px solid rgba(255,255,255,.08);font-size:11.5px;color:#94A3B8}
+
+.main{margin-left:255px;flex:1;display:flex;flex-direction:column;min-width:0}
+.topbar{background:#fff;border-bottom:1px solid var(--bdr);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:100}
+.menu-btn{display:none;background:none;border:1px solid var(--bdr);border-radius:8px;padding:6px 10px;font-size:16px;cursor:pointer}
+.global-search{flex:1;max-width:440px;position:relative}
+.global-search input{width:100%;padding:9px 14px;border:1px solid var(--bdr);border-radius:10px;background:#F8FAFC;font-size:13.5px}
+.global-search input:focus{outline:none;border-color:var(--indigo);background:#fff}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+.content{padding:22px;max-width:1360px;width:100%;margin:0 auto}
+.view{display:none}
+.view.active{display:block}
+
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.kpi{background:#fff;border:1px solid var(--bdr);border-radius:16px;padding:18px}
+.kpi .lbl{font-size:12px;color:var(--t3);font-weight:600;margin-bottom:6px}
+.kpi .val{font-size:23px;font-weight:800;color:var(--t1);font-family:var(--fm)}
+.kpi .sub{font-size:12px;margin-top:6px;font-weight:600}
+.up{color:var(--green)}
+.warn{color:var(--amber)}
+
+/* PANELS & TABLES */
+.grid-2{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;margin-bottom:20px}
+.card{background:#fff;border:1px solid var(--bdr);border-radius:16px;padding:20px;margin-bottom:18px}
+.card-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.card-hdr h2{font-size:16px;font-weight:800}
+
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+th{background:#F8FAFC;color:var(--t3);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--bdr);white-space:nowrap}
+td{padding:11px 12px;border-bottom:1px solid var(--bdr);vertical-align:middle}
+tr:hover td{background:#F8FAFC}
+.clickable{color:var(--indigo);font-weight:700;cursor:pointer}
+.clickable:hover{text-decoration:underline}
+
+.badge{padding:3px 8px;border-radius:100px;font-size:11px;font-weight:700;white-space:nowrap}
+.b-green{background:#D1FAE5;color:#065F46}
+.b-amber{background:#FEF3C7;color:#92400E}
+.b-red{background:#FEE2E2;color:#991B1B}
+.b-blue{background:#EEF2FF;color:#3730A3}
+
+/* FORMS */
+.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;font-weight:700;color:var(--t2)}
+.fg input,.fg select,.fg textarea{padding:9px 12px;border:1px solid var(--bdr);border-radius:10px;font-size:13.5px;background:#fff}
+
+/* CLIENT 360 DRAWER */
+#clientDrawer{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:500;display:none;justify-content:flex-end}
+.drawer-panel{background:#fff;width:100%;max-width:740px;height:100%;overflow-y:auto;padding:24px;box-shadow:-12px 0 40px rgba(0,0,0,.2)}
+.drawer-tabs{display:flex;gap:6px;border-bottom:1px solid var(--bdr);padding-bottom:10px;margin:16px 0;flex-wrap:wrap}
+.d-tab{padding:6px 12px;border-radius:8px;border:1px solid var(--bdr);background:#F8FAFC;font-size:12.5px;font-weight:700;cursor:pointer}
+.d-tab.active{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.note-item{background:#F8FAFC;border-left:3px solid var(--indigo);padding:10px 12px;border-radius:8px;margin-bottom:8px}
+
+/* PRINT PDF REPORT */
+@media print{
+  body *{visibility:hidden}
+  #printArea,#printArea *{visibility:visible}
+  #printArea{position:fixed;left:0;top:0;width:100%;background:#fff;padding:24px}
+}
+
+@media(max-width:960px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-btn{display:inline-block}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-2,.form-grid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .kpi-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- VAULT LOCK SCREEN -->
+<div id="lockScreen">
+  <div class="lock-card">
+    <span class="lock-badge">🔒 PRIVATE MFD VAULT · ARN-288927</span>
+    <h1>Universal Money Mart CRM</h1>
+    <p>Authorized Access Only · Vignesh Dhayalan (Member ID: 1007852)</p>
+    <input type="password" id="pinInput" class="lock-input" placeholder="••••••" maxlength="10" onkeydown="if(event.key==='Enter')unlockVault()">
+    <button class="btn-primary" style="width:100%" onclick="unlockVault()">Unlock Command Center →</button>
+    <p style="margin-top:12px;font-size:11.5px">Default Vault PIN: <strong>288927</strong> (Change anytime in Settings)</p>
+  </div>
+</div>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="title">UMM <span>Vault CRM</span></div>
+      <div class="sub">ARN-288927 · NSE 1007852</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="nav-sec">Command Center</div>
+      <button class="nav-item active" onclick="switchView('overview',this)">📊 Executive Overview</button>
+      <button class="nav-item" onclick="switchView('clients',this)">👥 All Clients <span id="clientCountPill" style="font-family:var(--fm);font-size:11px">0</span></button>
+      <button class="nav-item" onclick="switchView('tasks',this)">⚡ NSE Pending Tasks <span class="nav-pill" id="taskCountPill">0</span></button>
+
+      <div class="nav-sec">Transactions &amp; Advisory</div>
+      <button class="nav-item" onclick="switchView('orders',this)">🔄 Order Desk (SIP/STP/SWP)</button>
+      <button class="nav-item" onclick="switchView('allocator',this)">🎯 ₹10K / Goal Allocator</button>
+
+      <div class="nav-sec">Analytics &amp; Feeds</div>
+      <button class="nav-item" onclick="switchView('holdings',this)">🏛️ AMC &amp; Scheme Holdings</button>
+      <button class="nav-item" onclick="switchView('brokerage',this)">💰 Brokerage &amp; GST Ledger</button>
+      <button class="nav-item" onclick="switchView('sync',this)">🔌 NSE / CAMS / Karvy Sync</button>
+    </nav>
+    <div class="sb-foot">
+      <div>EUIN: E543710 · DPDP Protected</div>
+      <button class="btn-outline" style="width:100%;margin-top:8px;justify-content:center;font-size:12px" onclick="lockVault()">🔒 Lock Vault</button>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <div class="main">
+    <header class="topbar">
+      <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+      <div class="global-search">
+        <input type="text" id="globalSearchInput" placeholder="Search Client Name, Code (IIN), PAN, or Mobile..." oninput="handleGlobalSearch(this.value)">
+      </div>
+      <div class="top-actions">
+        <button class="btn-outline" onclick="loadSampleData()">⚡ Load Sample Data</button>
+        <button class="btn-primary" onclick="openAddClientModal()">+ Add Client</button>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- 1. EXECUTIVE OVERVIEW -->
+      <section id="view-overview" class="view active">
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="lbl">TOTAL LIVE AUM</div>
+            <div class="val" id="kpiAum">₹0</div>
+            <div class="sub up" id="kpiGain">Unrealized Gain: ₹0</div>
+          </div>
+          <div class="kpi">
+            <div class="lbl">ACTIVE MONTHLY SIP BOOK</div>
+            <div class="val" id="kpiSip">₹0/mo</div>
+            <div class="sub" style="color:var(--indigo)" id="kpiClients">0 Active Investors</div>
+          </div>
+          <div class="kpi">
+            <div class="lbl">PENDING NSE / KYC TASKS</div>
+            <div class="val" id="kpiTasks">0</div>
+            <div class="sub warn">Requires Action Today</div>
+          </div>
+          <div class="kpi">
+            <div class="lbl">GROSS TRAIL BROKERAGE (YTD)</div>
+            <div class="val" id="kpiBrok">₹0</div>
+            <div class="sub" id="kpiGst">Incl. 18% GST: ₹0</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-hdr">
+              <h2>🏆 Top Investors by AUM</h2>
+              <button class="btn-outline" onclick="switchView('clients')">View All Clients →</button>
+            </div>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th>Client</th><th>Code</th><th>Invested</th><th>Current AUM</th><th>Gain %</th><th>Action</th></tr></thead>
+                <tbody id="topClientsBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-hdr">
+              <h2>⚡ Urgent NSE &amp; RTA Pending Tasks</h2>
+              <button class="btn-outline" onclick="switchView('tasks')">All Tasks →</button>
+            </div>
+            <div id="overviewTasksList"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-hdr">
+            <h2>🏛️ AMC-Wise AUM &amp; Trail Commission Summary</h2>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>AMC Name</th><th>Schemes Count</th><th>Total AUM</th><th>Share %</th><th>Est. Trail Brokerage</th></tr></thead>
+              <tbody id="overviewAmcBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ALL CLIENTS DIRECTORY -->
+      <section id="view-clients" class="view">
+        <div class="card">
+          <div class="card-hdr">
+            <h2>👥 All Clients Directory (Zoho-Style 360° View)</h2>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <select id="kycFilter" onchange="renderClientsTable()" style="padding:8px 12px;border:1px solid var(--bdr);border-radius:10px">
+                <option value="ALL">All KYC Status</option>
+                <option value="Validated">KYC Validated</option>
+                <option value="Registered">KYC Registered</option>
+                <option value="On-Hold">KYC On-Hold</option>
+              </select>
+              <button class="btn-outline" onclick="exportClientsCSV()">⬇ Export CSV</button>
+            </div>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Client Name</th>
+                  <th>Code (IIN)</th>
+                  <th>PAN</th>
+                  <th>Phone</th>
+                  <th>City</th>
+                  <th>KYC Status</th>
+                  <th>Status</th>
+                  <th>AUM</th>
+                  <th>Quick Connect</th>
+                </tr>
+              </thead>
+              <tbody id="allClientsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. PENDING TASKS -->
+      <section id="view-tasks" class="view">
+        <div class="card">
+          <div class="card-hdr">
+            <h2>⚡ NSE NMF II &amp; RTA Pending Action Tasks</h2>
+            <button class="btn-primary" onclick="addManualTask()">+ Create Task</button>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Client</th><th>Source</th><th>Pending Issue</th><th>Due Date</th><th>Status</th><th>WhatsApp Nudge / Complete</th></tr></thead>
+              <tbody id="tasksTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. TRANSACTION & ORDER DESK -->
+      <section id="view-orders" class="view">
+        <div class="card">
+          <div class="card-hdr">
+            <h2>🔄 NSE NMF II Order Desk (Purchase, Redemption, Switch, SIP, STP, SWP)</h2>
+          </div>
+          <form onsubmit="submitOrder(event)" class="form-grid">
+            <div class="fg">
+              <label>Select Client</label>
+              <select id="ordClient" required></select>
+            </div>
+            <div class="fg">
+              <label>Transaction Type</label>
+              <select id="ordType" required>
+                <option value="Purchase">Fresh / Additional Purchase</option>
+                <option value="SIP">New SIP Registration</option>
+                <option value="STP">STP (Liquid to Equity)</option>
+                <option value="SWP">SWP (Systematic Withdrawal)</option>
+                <option value="Switch">Scheme Switch</option>
+                <option value="Redemption">Redemption</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>Scheme Name</label>
+              <input type="text" id="ordScheme" placeholder="e.g., Parag Parikh Flexi Cap Fund - Regular" required>
+            </div>
+            <div class="fg">
+              <label>Amount (₹)</label>
+              <input type="number" id="ordAmount" placeholder="10000" required>
+            </div>
+            <div class="fg">
+              <label>Folio / NSE Order Ref</label>
+              <input type="text" id="ordFolio" placeholder="New Folio / Existing Folio">
+            </div>
+            <div class="fg" style="justify-content:flex-end">
+              <button type="submit" class="btn-primary">Log Order &amp; Notify Client on WhatsApp →</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-hdr"><h2>📋 Recent Order &amp; SIP/STP/SWP Log</h2></div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Date</th><th>Client</th><th>Type</th><th>Scheme</th><th>Amount</th><th>Status</th></tr></thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SMART ₹10K / GOAL ALLOCATOR -->
+      <section id="view-allocator" class="view">
+        <div class="card">
+          <div class="card-hdr">
+            <h2>🎯 Smart Additional Purchase / SIP Goal Allocator (AMFI Compliant)</h2>
+          </div>
+          <div class="form-grid">
+            <div class="fg">
+              <label>Client</label>
+              <select id="allocClient"></select>
+            </div>
+            <div class="fg">
+              <label>Investment Amount (₹)</label>
+              <input type="number" id="allocAmount" value="10000">
+            </div>
+            <div class="fg">
+              <label>Goal &amp; Time Horizon</label>
+              <select id="allocHorizon">
+                <option value="short">Emergency / Short Term (0–2 Years)</option>
+                <option value="medium">Medium Term Goal (3–5 Years)</option>
+                <option value="long" selected>Long-Term Wealth / Retirement (7+ Years)</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-top:14px">
+            <button class="btn-primary" onclick="generateAllocation()">Generate Allocation &amp; Rebalancing Plan →</button>
+          </div>
+          <div id="allocOutput" style="margin-top:18px"></div>
+        </div>
+      </section>
+
+      <!-- 6. AMC & SCHEME HOLDINGS -->
+      <section id="view-holdings" class="view">
+        <div class="card">
+          <div class="card-hdr"><h2>🏛️ Scheme-Wise Portfolio Breakdown</h2></div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>AMC</th><th>Scheme Name</th><th>Category</th><th>Investors</th><th>Total Invested</th><th>Current Value</th><th>Net Gain</th></tr></thead>
+              <tbody id="schemesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. BROKERAGE & GST LEDGER -->
+      <section id="view-brokerage" class="view">
+        <div class="card">
+          <div class="card-hdr"><h2>💰 Trail Brokerage, Client-Wise Commission &amp; 18% GST Reconciliation</h2></div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>Month</th><th>AMC</th><th>Scheme</th><th>Client</th><th>Base Brokerage</th><th>18% GST</th><th>Gross Payout</th></tr></thead>
+              <tbody id="brokerageTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. NSE / CAMS / KFINTECH SYNC -->
+      <section id="view-sync" class="view">
+        <div class="card">
+          <div class="card-hdr"><h2>🔌 NSE NMF II API &amp; CAMS / KFintech Feed Integration</h2></div>
+          <p style="color:var(--t2);margin-bottom:14px">
+            <strong>NSE Member ID:</strong> <code>1007852</code> &nbsp;|&nbsp;
+            <strong>Login ID:</strong> <code>MFS288927</code> &nbsp;|&nbsp;
+            <strong>ARN:</strong> <code>ARN-288927</code>
+          </p>
+          <div style="background:#FFFBEB;border:1px solid #FDE68A;padding:14px;border-radius:12px;margin-bottom:16px;font-size:13px">
+            <strong>🔒 Security Architecture:</strong> Your NSE API Secret and Member API Key are never stored inside GitHub HTML files. In <strong>Step 2 &amp; Step 3</strong>, we connect your encrypted Supabase + Google Apps Script / Cloudflare Worker backend here so live NSE orders and CAMS/KFintech daily emails sync automatically.
+          </div>
+          <div class="fg" style="max-width:460px;margin-bottom:14px">
+            <label>Backend Sync Webhook URL (Google Apps Script / Supabase Edge URL)</label>
+            <input type="url" id="webhookUrl" placeholder="https://script.google.com/macros/s/.../exec">
+          </div>
+          <button class="btn-primary" onclick="saveWebhook()">Save Sync Endpoint</button>
+          <button class="btn-outline" style="margin-left:8px" onclick="changeVaultPin()">🔑 Change Vault PIN</button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- 360° CLIENT PROFILE DRAWER -->
+<div id="clientDrawer" onclick="if(event.target===this)closeDrawer()">
+  <div class="drawer-panel" id="drawerContent"></div>
+</div>
+
+<!-- HIDDEN PRINT AREA FOR CLIENT PDF REPORT -->
+<div id="printArea" style="display:none"></div>
+
+<script>
+const STORAGE_KEY = 'umm_vault_db_v1';
+const PIN_KEY = 'umm_vault_pin_v1';
+
+let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || {
+  clients: [],
+  holdings: [],
+  orders: [],
+  tasks: [],
+  brokerage: [],
+  notes: {}
+};
+
+function saveDB() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+  renderAll();
+}
+
+function unlockVault() {
+  const savedPin = localStorage.getItem(PIN_KEY) || '288927';
+  const entered = document.getElementById('pinInput').value.trim();
+  if (entered === savedPin) {
+    document.getElementById('lockScreen').style.display = 'none';
+    renderAll();
+  } else {
+    alert('Invalid Vault PIN. Default PIN is 288927.');
+  }
+}
+
+function lockVault() {
+  document.getElementById('pinInput').value = '';
+  document.getElementById('lockScreen').style.display = 'flex';
+}
+
+function changeVaultPin() {
+  const np = prompt('Enter new 6-digit Vault PIN:');
+  if (np && np.length >= 4) {
+    localStorage.setItem(PIN_KEY, np.trim());
+    alert('Vault PIN updated securely on this device.');
+  }
+}
+
+function switchView(viewId, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + viewId).classList.add('active');
+  if (btn) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+function fmtINR(n) {
+  return '₹' + Math.round(Number(n || 0)).toLocaleString('en-IN');
+}
+
+function waLink(phone, msg) {
+  const clean = String(phone || '').replace(/\D/g, '');
+  const num = clean.length === 10 ? '91' + clean : clean;
+  return `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+}
+
+/* SAMPLE DATA LOADER FOR INSTANT TESTING */
+function loadSampleData() {
+  db = {
+    clients: [
+      { id: 'C1', name: 'Karthik Subramanian', code: 'IIN8841201', pan: 'ABCPS4321K', phone: '9840112233', city: 'Bengaluru', kyc: 'Validated', status: 'Active', sip: 25000, goal: 'Retirement ₹3 Cr (2042)', risk: 'Aggressive' },
+      { id: 'C2', name: 'Priya Venkatesh', code: 'IIN8841209', pan: 'DEFPP7890M', phone: '9884556677', city: 'Chennai', kyc: 'Validated', status: 'Active', sip: 15000, goal: 'Daughter Higher Ed (2036)', risk: 'Moderate' },
+      { id: 'C3', name: 'Aravindhan R', code: 'IIN8841245', pan: 'GHIPA1122R', phone: '9443221100', city: 'Polur', kyc: 'On-Hold', status: 'Pending KYC', sip: 5000, goal: 'Wealth Creation (10 Yrs)', risk: 'Moderate' },
+      { id: 'C4', name: 'Meenakshi Sundaram', code: 'IIN8841290', pan: 'JKLPM9988S', phone: '9940987654', city: 'Bengaluru', kyc: 'Validated', status: 'Active', sip: 40000, goal: 'SWP Retirement Income', risk: 'Conservative' }
+    ],
+    holdings: [
+      { clientId: 'C1', amc: 'PPFAS Mutual Fund', scheme: 'Parag Parikh Flexi Cap Fund - Regular (G)', category: 'Flexi Cap', invested: 650000, current: 842000, stcg: 12000, ltcg: 180000 },
+      { clientId: 'C1', amc: 'ICICI Prudential MF', scheme: 'ICICI Pru Nifty 50 Index Fund - Regular (G)', category: 'Index', invested: 400000, current: 495000, stcg: 5000, ltcg: 90000 },
+      { clientId: 'C2', amc: 'HDFC Mutual Fund', scheme: 'HDFC Balanced Advantage Fund - Regular (G)', category: 'Hybrid', invested: 420000, current: 518000, stcg: 8000, ltcg: 90000 },
+      { clientId: 'C3', amc: 'SBI Mutual Fund', scheme: 'SBI Large & Midcap Fund - Regular (G)', category: 'Large & Mid', invested: 90000, current: 104500, stcg: 14500, ltcg: 0 },
+      { clientId: 'C4', amc: 'Nippon India MF', scheme: 'Nippon India Liquid Fund - Regular (G)', category: 'Liquid', invested: 1500000, current: 1612000, stcg: 112000, ltcg: 0 }
+    ],
+    tasks: [
+      { id: 'T1', clientId: 'C3', source: 'NSE NMF II', issue: 'KRA KYC Modification Pending (Aadhaar-PAN Sync)', due: '2026-11-28', status: 'Pending' },
+      { id: 'T2', clientId: 'C2', source: 'NSE NMF II', sourceRef: 'ORD9921', issue: 'SIP Mandate e-NACH Authorization Link Pending', due: '2026-11-29', status: 'Pending' }
+    ],
+    orders: [
+      { date: '2026-11-26', clientId: 'C1', type: 'Purchase', scheme: 'Parag Parikh Flexi Cap Fund - Regular (G)', amount: 25000, status: 'Allotted (CAMS)' },
+      { date: '2026-11-25', clientId: 'C4', type: 'SWP', scheme: 'Nippon India Liquid Fund - Regular (G)', amount: 15000, status: 'Active' }
+    ],
+    brokerage: [
+      { month: 'Nov 2026', amc: 'PPFAS Mutual Fund', scheme: 'Parag Parikh Flexi Cap', client: 'Karthik Subramanian', base: 680, gst: 122.4 },
+      { month: 'Nov 2026', amc: 'HDFC Mutual Fund', scheme: 'HDFC Balanced Advantage', client: 'Priya Venkatesh', base: 430, gst: 77.4 },
+      { month: 'Nov 2026', amc: 'Nippon India MF', scheme: 'Nippon India Liquid Fund', client: 'Meenakshi Sundaram', base: 390, gst: 70.2 }
+    ],
+    notes: {
+      'C1': [{ time: '2026-11-20 11:15 AM', text: 'Discussed ₹10K additional top-up in Flexi Cap for 2042 retirement corpus.' }]
+    }
+  };
+  saveDB();
+}
+
+function getClientAum(cid) {
+  return db.holdings.filter(h => h.clientId === cid).reduce((s, h) => s + Number(h.current), 0);
+}
+function getClientInvested(cid) {
+  return db.holdings.filter(h => h.clientId === cid).reduce((s, h) => s + Number(h.invested), 0);
+}
+
+function renderAll() {
+  const totalAum = db.holdings.reduce((s, h) => s + Number(h.current), 0);
+  const totalInv = db.holdings.reduce((s, h) => s + Number(h.invested), 0);
+  const totalSip = db.clients.reduce((s, c) => s + Number(c.sip || 0), 0);
+  const pendingTasks = db.tasks.filter(t => t.status === 'Pending');
+  const baseBrok = db.brokerage.reduce((s, b) => s + Number(b.base), 0);
+  const gstBrok = db.brokerage.reduce((s, b) => s + Number(b.gst), 0);
+
+  document.getElementById('kpiAum').textContent = fmtINR(totalAum);
+  document.getElementById('kpiGain').textContent = `Unrealized Gain: ${fmtINR(totalAum - totalInv)}`;
+  document.getElementById('kpiSip').textContent = fmtINR(totalSip) + '/mo';
+  document.getElementById('kpiClients').textContent = `${db.clients.length} Active Investors`;
+  document.getElementById('kpiTasks').textContent = pendingTasks.length;
+  document.getElementById('kpiBrok').textContent = fmtINR(baseBrok + gstBrok);
+  document.getElementById('kpiGst').textContent = `Base: ${fmtINR(baseBrok)} | 18% GST: ${fmtINR(gstBrok)}`;
+  document.getElementById('clientCountPill').textContent = db.clients.length;
+  document.getElementById('taskCountPill').textContent = pendingTasks.length;
+
+  // Populate client dropdowns
+  const opts = db.clients.map(c => `<option value="${c.id}">${c.name} (${c.code})</option>`).join('');
+  document.getElementById('ordClient').innerHTML = opts;
+  document.getElementById('allocClient').innerHTML = opts;
+
+  // Top Clients
+  const ranked = [...db.clients].map(c => ({ ...c, aum: getClientAum(c.id), inv: getClientInvested(c.id) })).sort((a, b) => b.aum - a.aum);
+  document.getElementById('topClientsBody').innerHTML = ranked.slice(0, 5).map(c => {
+    const pct = c.inv > 0 ? (((c.aum - c.inv) / c.inv) * 100).toFixed(1) : '0.0';
+    return `<tr>
+      <td><span class="clickable" onclick="openClient360('${c.id}')">${c.name}</span></td>
+      <td style="font-family:var(--fm)">${c.code}</td>
+      <td>${fmtINR(c.inv)}</td>
+      <td><strong>${fmtINR(c.aum)}</strong></td>
+      <td class="up">+${pct}%</td>
+      <td><button class="btn-outline" style="padding:4px 9px;font-size:11.5px" onclick="printClientReport('${c.id}')">📄 PDF</button></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="6">Click "Load Sample Data" or "+ Add Client" to begin.</td></tr>';
+
+  // Overview Pending Tasks
+  document.getElementById('overviewTasksList').innerHTML = pendingTasks.map(t => {
+    const c = db.clients.find(x => x.id === t.clientId) || { name: 'Client', phone: '' };
+    const msg = `Hi ${c.name}, greetings from Universal Money Mart (AMFI ARN-288927). Reminder regarding your pending action: ${t.issue}. Please complete this so your Mutual Fund transaction processes smoothly.`;
+    return `<div style="padding:12px;border:1px solid var(--bdr);border-radius:12px;margin-bottom:10px;background:#FFFBEB">
+      <div style="font-weight:700;font-size:13px">${c.name} · <span style="color:var(--indigo)">${t.source}</span></div>
+      <div style="font-size:12.5px;color:var(--t2);margin:4px 0 8px">${t.issue}</div>
+      <div style="display:flex;gap:8px">
+        <a href="${waLink(c.phone, msg)}" target="_blank" class="btn-wa">💬 WhatsApp Client</a>
+        <button class="btn-outline" style="padding:5px 10px;font-size:11.5px" onclick="completeTask('${t.id}')">✓ Mark Done</button>
+      </div>
+    </div>`;
+  }).join('') || '<p style="color:var(--t3)">No pending NSE/RTA tasks.</p>';
+
+  // AMC Summary
+  const amcMap = {};
+  db.holdings.forEach(h => {
+    if (!amcMap[h.amc]) amcMap[h.amc] = { schemes: new Set(), aum: 0 };
+    amcMap[h.amc].schemes.add(h.scheme);
+    amcMap[h.amc].aum += Number(h.current);
+  });
+  document.getElementById('overviewAmcBody').innerHTML = Object.entries(amcMap).map(([amc, d]) => {
+    const share = totalAum > 0 ? ((d.aum / totalAum) * 100).toFixed(1) : 0;
+    return `<tr>
+      <td><strong>${amc}</strong></td>
+      <td>${d.schemes.size}</td>
+      <td><strong>${fmtINR(d.aum)}</strong></td>
+      <td>${share}%</td>
+      <td>${fmtINR(d.aum * 0.0075)} / yr (Est.)</td>
+    </tr>`;
+  }).join('');
+
+  renderClientsTable();
+  renderTasksTable();
+  renderOrdersTable();
+  renderHoldingsTable();
+  renderBrokerageTable();
+}
+
+function renderClientsTable(query = '') {
+  const q = (query || document.getElementById('globalSearchInput').value || '').toLowerCase();
+  const kycF = document.getElementById('kycFilter').value;
+  const filtered = db.clients.filter(c => {
+    const matchQ = !q || c.name.toLowerCase().includes(q) || c.code.toLowerCase().includes(q) || c.pan.toLowerCase().includes(q) || c.phone.includes(q);
+    const matchK = kycF === 'ALL' || c.kyc === kycF;
+    return matchQ && matchK;
+  });
+
+  document.getElementById('allClientsBody').innerHTML = filtered.map(c => {
+    const aum = getClientAum(c.id);
+    const kycBadge = c.kyc === 'Validated' ? 'b-green' : (c.kyc === 'On-Hold' ? 'b-red' : 'b-amber');
+    const msg = `Hi ${c.name}, greetings from Vignesh Dhayalan — Universal Money Mart (AMFI ARN-288927). Your current Mutual Fund portfolio valuation is ${fmtINR(aum)}. Let me know if you'd like to review your SIPs or goals.`;
+    return `<tr>
+      <td><span class="clickable" onclick="openClient360('${c.id}')">${c.name}</span></td>
+      <td style="font-family:var(--fm)">${c.code}</td>
+      <td style="font-family:var(--fm)">${c.pan}</td>
+      <td>${c.phone}</td>
+      <td>${c.city}</td>
+      <td><span class="badge ${kycBadge}">${c.kyc}</span></td>
+      <td><span class="badge b-blue">${c.status}</span></td>
+      <td><strong>${fmtINR(aum)}</strong></td>
+      <td style="white-space:nowrap">
+        <a href="${waLink(c.phone, msg)}" target="_blank" class="btn-wa">💬 WA</a>
+        <button class="btn-outline" style="padding:5px 9px;font-size:11.5px" onclick="printClientReport('${c.id}')">📄 PDF</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function handleGlobalSearch(val) {
+  if (val.trim().length > 0) switchView('clients');
+  renderClientsTable(val);
+}
+
+function renderTasksTable() {
+  document.getElementById('tasksTableBody').innerHTML = db.tasks.map(t => {
+    const c = db.clients.find(x => x.id === t.clientId) || { name: 'Unknown', phone: '' };
+    const msg = `Hi ${c.name}, reminder from Universal Money Mart (ARN-288927): Please complete "${t.issue}" at your earliest convenience.`;
+    return `<tr>
+      <td><strong>${c.name}</strong></td>
+      <td>${t.source}</td>
+      <td>${t.issue}</td>
+      <td style="font-family:var(--fm)">${t.due}</td>
+      <td><span class="badge ${t.status==='Pending'?'b-amber':'b-green'}">${t.status}</span></td>
+      <td>
+        <a href="${waLink(c.phone, msg)}" target="_blank" class="btn-wa">💬 Remind</a>
+        ${t.status==='Pending' ? `<button class="btn-outline" style="padding:5px 9px;font-size:11.5px" onclick="completeTask('${t.id}')">✓ Resolve</button>` : ''}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function completeTask(tid) {
+  const t = db.tasks.find(x => x.id === tid);
+  if (t) { t.status = 'Completed'; saveDB(); }
+}
+
+function addManualTask() {
+  if (!db.clients.length) return alert('Add a client first.');
+  const issue = prompt('Enter pending task description (e.g., Bank Mandate Signature Mismatch):');
+  if (!issue) return;
+  db.tasks.unshift({ id: 'T' + Date.now(), clientId: db.clients[0].id, source: 'Manual / NSE', issue, due: new Date().toISOString().slice(0,10), status: 'Pending' });
+  saveDB();
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  const cid = document.getElementById('ordClient').value;
+  const type = document.getElementById('ordType').value;
+  const scheme = document.getElementById('ordScheme').value;
+  const amount = Number(document.getElementById('ordAmount').value);
+  const c = db.clients.find(x => x.id === cid);
+
+  db.orders.unshift({ date: new Date().toISOString().slice(0,10), clientId: cid, type, scheme, amount, status: 'Submitted to NSE' });
+  saveDB();
+  const msg = `Hi ${c.name}, we have initiated your Mutual Fund ${type} order of ${fmtINR(amount)} in ${scheme} via NSE NMF II (ARN-288927). Kindly approve the payment/authorization link sent to your email/SMS.`;
+  window.open(waLink(c.phone, msg), '_blank');
+  e.target.reset();
+}
+
+function renderOrdersTable() {
+  document.getElementById('ordersTableBody').innerHTML = db.orders.map(o => {
+    const c = db.clients.find(x => x.id === o.clientId) || { name: 'Client' };
+    return `<tr>
+      <td style="font-family:var(--fm)">${o.date}</td>
+      <td><strong>${c.name}</strong></td>
+      <td><span class="badge b-blue">${o.type}</span></td>
+      <td>${o.scheme}</td>
+      <td><strong>${fmtINR(o.amount)}</strong></td>
+      <td><span class="badge b-green">${o.status}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function generateAllocation() {
+  const cid = document.getElementById('allocClient').value;
+  const amt = Number(document.getElementById('allocAmount').value || 10000);
+  const hor = document.getElementById('allocHorizon').value;
+  const c = db.clients.find(x => x.id === cid) || { name: 'Investor', phone: '', goal: 'Wealth Creation' };
+
+  let split = [];
+  if (hor === 'short') {
+    split = [
+      { cat: 'Liquid / Overnight Fund', pct: 70, val: amt * 0.7, reason: 'Capital stability & T+1 liquidity' },
+      { cat: 'Arbitrage Fund', pct: 30, val: amt * 0.3, reason: 'Tax-efficient low volatility parking' }
+    ];
+  } else if (hor === 'medium') {
+    split = [
+      { cat: 'Balanced Advantage / Aggressive Hybrid', pct: 60, val: amt * 0.6, reason: 'Dynamic equity-debt rebalancing' },
+      { cat: 'Nifty 50 Index Fund', pct: 40, val: amt * 0.4, reason: 'Core large-cap growth' }
+    ];
+  } else {
+    split = [
+      { cat: 'Flexi Cap Fund', pct: 50, val: amt * 0.5, reason: 'All-cap compounding across market cycles' },
+      { cat: 'Nifty 50 Index / Large & Midcap', pct: 30, val: amt * 0.3, reason: 'Core portfolio anchor' },
+      { cat: 'Midcap / Smallcap Allocation', pct: 20, val: amt * 0.2, reason: 'Long-term alpha booster (7+ yrs)' }
+    ];
+  }
+
+  const waText = `Hi ${c.name}, based on your goal (${c.goal}) & time horizon, here is an illustrative allocation for your ${fmtINR(amt)} investment:\n` +
+    split.map(s => `• ${s.cat}: ${fmtINR(s.val)} (${s.pct}%)`).join('\n') +
+    `\n\nShall I initiate this via NSE NMF II? — Vignesh Dhayalan (AMFI ARN-288927). Mutual fund investments are subject to market risks.`;
+
+  document.getElementById('allocOutput').innerHTML = `
+    <div style="background:#EEF2FF;border:1px solid #C7D2FE;border-radius:14px;padding:18px">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+        <strong>Suggested Asset Allocation for ${c.name} (${fmtINR(amt)})</strong>
+        <a href="${waLink(c.phone, waText)}" target="_blank" class="btn-wa">💬 Send Proposal on WhatsApp</a>
+      </div>
+      <table>
+        <thead><tr><th>Scheme Category</th><th>Allocation %</th><th>Amount (₹)</th><th>Rationale</th></tr></thead>
+        <tbody>${split.map(s => `<tr><td><strong>${s.cat}</strong></td><td>${s.pct}%</td><td><strong>${fmtINR(s.val)}</strong></td><td>${s.reason}</td></tr>`).join('')}</tbody>
+      </table>
+      <p style="font-size:11.5px;color:var(--t3);margin-top:10px">Note: Category allocation is educational &amp; subject to scheme suitability review. Mutual fund investments are subject to market risks.</p>
+    </div>`;
+}
+
+function renderHoldingsTable() {
+  document.getElementById('schemesTableBody').innerHTML = db.holdings.map(h => {
+    const gain = Number(h.current) - Number(h.invested);
+    return `<tr>
+      <td><strong>${h.amc}</strong></td>
+      <td>${h.scheme}</td>
+      <td><span class="badge b-blue">${h.category}</span></td>
+      <td>1</td>
+      <td>${fmtINR(h.invested)}</td>
+      <td><strong>${fmtINR(h.current)}</strong></td>
+      <td class="up">+${fmtINR(gain)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderBrokerageTable() {
+  document.getElementById('brokerageTableBody').innerHTML = db.brokerage.map(b => `<tr>
+    <td style="font-family:var(--fm)">${b.month}</td>
+    <td><strong>${b.amc}</strong></td>
+    <td>${b.scheme}</td>
+    <td>${b.client}</td>
+    <td>${fmtINR(b.base)}</td>
+    <td>${fmtINR(b.gst)}</td>
+    <td><strong>${fmtINR(Number(b.base) + Number(b.gst))}</strong></td>
+  </tr>`).join('');
+}
+
+/* 360° CLIENT DRAWER (ZOHO STYLE) */
+function openClient360(cid) {
+  const c = db.clients.find(x => x.id === cid);
+  if (!c) return;
+  const holdings = db.holdings.filter(h => h.clientId === cid);
+  const inv = holdings.reduce((s, h) => s + Number(h.invested), 0);
+  const cur = holdings.reduce((s, h) => s + Number(h.current), 0);
+  const stcg = holdings.reduce((s, h) => s + Number(h.stcg || 0), 0);
+  const ltcg = holdings.reduce((s, h) => s + Number(h.ltcg || 0), 0);
+  const cNotes = db.notes[cid] || [];
+
+  document.getElementById('drawerContent').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <div>
+        <span class="badge b-blue">${c.code} · PAN: ${c.pan}</span>
+        <h2 style="font-size:21px;margin:6px 0">${c.name}</h2>
+        <div style="color:var(--t3);font-size:13px">📱 ${c.phone} · 📍 ${c.city} · KYC: <strong>${c.kyc}</strong> · Risk: <strong>${c.risk}</strong></div>
+      </div>
+      <button class="btn-outline" onclick="closeDrawer()">✕ Close</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0">
+      <div class="kpi" style="padding:12px"><div class="lbl">CURRENT AUM</div><div class="val" style="font-size:17px">${fmtINR(cur)}</div></div>
+      <div class="kpi" style="padding:12px"><div class="lbl">UNREALIZED GAIN</div><div class="val up" style="font-size:17px">+${fmtINR(cur - inv)}</div></div>
+      <div class="kpi" style="padding:12px"><div class="lbl">STCG / LTCG EST.</div><div class="val" style="font-size:14px">${fmtINR(stcg)} / ${fmtINR(ltcg)}</div></div>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+      <a href="${waLink(c.phone, `Hi ${c.name}, here is your portfolio update from Universal Money Mart (ARN-288927). Current AUM: ${fmtINR(cur)}.`)}" target="_blank" class="btn-wa">💬 WhatsApp Client</a>
+      <button class="btn-primary" onclick="printClientReport('${c.id}')">📄 Generate Client PDF Report</button>
+    </div>
+
+    <h3 style="margin-bottom:8px">Scheme Holdings &amp; Capital Gains</h3>
+    <div class="tbl-wrap" style="margin-bottom:18px">
+      <table>
+        <thead><tr><th>Scheme</th><th>Invested</th><th>Current</th><th>STCG</th><th>LTCG</th></tr></thead>
+        <tbody>${holdings.map(h => `<tr><td>${h.scheme}</td><td>${fmtINR(h.invested)}</td><td><strong>${fmtINR(h.current)}</strong></td><td>${fmtINR(h.stcg)}</td><td>${fmtINR(h.ltcg)}</td></tr>`).join('') || '<tr><td colspan="5">No holdings recorded yet.</td></tr>'}</tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-bottom:8px">📝 Zoho-Style Activity &amp; Call Notes</h3>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <input type="text" id="newNoteInput" placeholder="Log call summary, SIP step-up discussion, or follow-up..." style="flex:1;padding:9px 12px;border:1px solid var(--bdr);border-radius:10px">
+      <button class="btn-primary" onclick="addClientNote('${c.id}')">Add Note</button>
+    </div>
+    <div>${cNotes.map(n => `<div class="note-item"><div style="font-family:var(--fm);font-size:11px;color:var(--t3)">${n.time}</div><div>${n.text}</div></div>`).join('') || '<p style="color:var(--t3)">No activity notes logged yet.</p>'}</div>
+  `;
+  document.getElementById('clientDrawer').style.display = 'flex';
+}
+
+function closeDrawer() {
+  document.getElementById('clientDrawer').style.display = 'none';
+}
+
+function addClientNote(cid) {
+  const inp = document.getElementById('newNoteInput');
+  if (!inp.value.trim()) return;
+  if (!db.notes[cid]) db.notes[cid] = [];
+  db.notes[cid].unshift({ time: new Date().toLocaleString('en-IN'), text: inp.value.trim() });
+  saveDB();
+  openClient360(cid);
+}
+
+function openAddClientModal() {
+  const name = prompt('Client Full Name:');
+  if (!name) return;
+  const code = prompt('NSE Client Code (IIN / UCC):', 'IIN' + Math.floor(1000000 + Math.random() * 9000000));
+  const pan = prompt('PAN Number (10 Characters):', 'ABCPS1234K').toUpperCase();
+  const phone = prompt('Mobile Number (10 digits):', '9840000000');
+  const city = prompt('City:', 'Bengaluru');
+  db.clients.push({ id: 'C' + Date.now(), name, code, pan, phone, city, kyc: 'Validated', status: 'Active', sip: 0, goal: 'Wealth Creation', risk: 'Moderate' });
+  saveDB();
+}
+
+function exportClientsCSV() {
+  const rows = [['Name','Code','PAN','Phone','City','KYC','Status','AUM'], ...db.clients.map(c => [c.name, c.code, c.pan, c.phone, c.city, c.kyc, c.status, getClientAum(c.id)])];
+  const csv = rows.map(r => r.join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'UMM_Clients_Vault.csv';
+  a.click();
+}
+
+function saveWebhook() {
+  const url = document.getElementById('webhookUrl').value.trim();
+  localStorage.setItem('umm_vault_webhook', url);
+  alert('Sync endpoint saved. Ready for Step 2 & Step 3 live feed connection!');
+}
+
+/* BRANDED CLIENT PDF VALUATION & CAPITAL GAIN REPORT */
+function printClientReport(cid) {
+  const c = db.clients.find(x => x.id === cid);
+  if (!c) return;
+  const holdings = db.holdings.filter(h => h.clientId === cid);
+  const inv = holdings.reduce((s, h) => s + Number(h.invested), 0);
+  const cur = holdings.reduce((s, h) => s + Number(h.current), 0);
+  const stcg = holdings.reduce((s, h) => s + Number(h.stcg || 0), 0);
+  const ltcg = holdings.reduce((s, h) => s + Number(h.ltcg || 0), 0);
+
+  const pa = document.getElementById('printArea');
+  pa.style.display = 'block';
+  pa.innerHTML = `
+    <div style="border-bottom:2px solid #090910;padding-bottom:12px;margin-bottom:18px;display:flex;justify-content:space-between">
+      <div>
+        <h1 style="font-size:20px;margin:0">Universal Money Mart</h1>
+        <div style="font-size:12px;color:#475569">Vignesh Dhayalan · AMFI Registered Mutual Fund Distributor (ARN-288927 · EUIN: E543710)</div>
+      </div>
+      <div style="text-align:right;font-size:12px">
+        <strong>Portfolio &amp; Capital Gains Statement</strong><br>Generated: ${new Date().toLocaleDateString('en-IN')}
+      </div>
+    </div>
+    <p style="margin-bottom:14px"><strong>Investor:</strong> ${c.name} &nbsp;|&nbsp; <strong>Code:</strong> ${c.code} &nbsp;|&nbsp; <strong>PAN:</strong> ${c.pan} &nbsp;|&nbsp; <strong>Goal:</strong> ${c.goal}</p>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:18px;font-size:12.5px" border="1" cellpadding="8">
+      <tr style="background:#090910;color:#fff"><th>Scheme Name</th><th>Invested (₹)</th><th>Current Value (₹)</th><th>Unrealized Gain (₹)</th><th>Est. STCG</th><th>Est. LTCG</th></tr>
+      ${holdings.map(h => `<tr><td>${h.scheme}</td><td>${fmtINR(h.invested)}</td><td>${fmtINR(h.current)}</td><td>${fmtINR(h.current - h.invested)}</td><td>${fmtINR(h.stcg)}</td><td>${fmtINR(h.ltcg)}</td></tr>`).join('')}
+      <tr style="font-weight:bold;background:#F1F5F9"><td>TOTAL</td><td>${fmtINR(inv)}</td><td>${fmtINR(cur)}</td><td>${fmtINR(cur - inv)}</td><td>${fmtINR(stcg)}</td><td>${fmtINR(ltcg)}</td></tr>
+    </table>
+    <p style="font-size:11px;color:#475569"><strong>Disclaimer:</strong> Mutual Fund investments are subject to market risks, read all scheme related documents carefully. Capital gains figures shown above are indicative; please refer to official CAMS/KFintech CAS for income tax filing.</p>
+  `;
+  window.print();
+  pa.style.display = 'none';
+}
+</script>
+</body>
+</html>
